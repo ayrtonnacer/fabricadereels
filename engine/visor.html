@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Visor de reels</title>
+<style>
+  /* Herramienta de trabajo (no es parte del video): reproduce un reel en vivo llamando a __render(t). */
+  :root{--bg:#0B111C;--panel:#111A28;--line:#24344B;--acc:#9FEF00;--text:#E8EEF7;--muted:#8A9BB8}
+  *{box-sizing:border-box;margin:0}
+  body{background:var(--bg);color:var(--text);font:14px/1.4 system-ui,sans-serif;height:100vh;display:flex;flex-direction:column;align-items:center;overflow:hidden}
+  #escenario{flex:1;min-height:0;width:100%;display:flex;justify-content:center;align-items:center;padding:12px}
+  #marco{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:10px;background:#000}
+  iframe{position:absolute;left:0;top:0;width:1080px;height:1920px;border:0;transform-origin:0 0}
+  #ctl{width:min(720px,100%);padding:10px 16px 16px;display:flex;flex-direction:column;gap:8px}
+  #fila{display:flex;align-items:center;gap:10px}
+  button{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:7px 12px;font:inherit;cursor:pointer}
+  button:hover{border-color:var(--acc)}
+  #tiempo{font:13px ui-monospace,monospace;color:var(--muted);margin-left:auto;white-space:nowrap}
+  #barra{position:relative;height:28px}
+  #barra input{position:absolute;inset:0;width:100%;margin:0;accent-color:var(--acc)}
+  #marcas{position:absolute;left:0;right:0;top:0;height:6px;pointer-events:none}
+  #marcas i{position:absolute;top:0;width:1px;height:6px;background:var(--muted)}
+  #escenas{display:flex;flex-wrap:wrap;gap:6px}
+  #escenas button{padding:3px 9px;font-size:12px}
+  #escenas button.on{border-color:var(--acc);color:var(--acc)}
+  #aviso{color:var(--muted);font-size:12px}
+  select{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:6px}
+</style>
+</head>
+<body>
+<div id="escenario"><div id="marco"><iframe id="v" title="reel"></iframe></div></div>
+<div id="ctl">
+  <div id="barra"><div id="marcas"></div><input id="t" type="range" min="0" step="0.0333" value="0" aria-label="tiempo"></div>
+  <div id="fila">
+    <button id="play" title="espacio">▶</button>
+    <button id="atras" title="← un cuadro">◀ 1</button><button id="adelante" title="→ un cuadro">1 ▶</button>
+    <select id="vel" aria-label="velocidad"><option value="0.25">0,25×</option><option value="0.5">0,5×</option><option value="1" selected>1×</option></select>
+    <span id="tiempo">0.00 / 0.00 s</span>
+  </div>
+  <div id="escenas"></div>
+  <div id="aviso"></div>
+  <a href="/engine/visor.html" style="color:var(--muted);font-size:12px">← todos los videos</a>
+</div>
+<script>
+const q = new URLSearchParams(location.search), V = (q.get('v') || '').replace(/^\/|\/$/g, '');
+const ifr = document.getElementById('v'), marco = document.getElementById('marco'), rango = document.getElementById('t');
+const aviso = document.getElementById('aviso'), lbl = document.getElementById('tiempo'), btn = document.getElementById('play');
+if (!V) {   // sin ?v=: lista de videos del repo
+  document.body.innerHTML = '<div style="padding:24px;max-width:640px;width:100%"><h2 style="margin-bottom:14px">Reels</h2><div id="lista" style="display:flex;flex-direction:column;gap:8px"></div></div>';
+  fetch('/__videos').then(r => r.json()).then(vs => { document.getElementById('lista').innerHTML = vs.map(x =>
+    `<a href="?v=${x.v}" style="color:var(--text);text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px">${x.titulo}<br><span style="color:var(--muted);font-size:12px">${x.v}${x.final ? ' · final.mp4 listo' : ''}</span></a>`).join(''); });
+  throw new Error('sin video');
+}
+ifr.src = `/${V}/index.html`;
+let W, total = 0, escenas = [], t = 0, jugando = false, t0 = 0, r0 = 0, audio = null;
+function ajustar() {   // el reel es 1080×1920: lo escalo para que entre en la ventana
+  const H = document.getElementById('escenario').clientHeight - 24, Wd = document.getElementById('escenario').clientWidth - 24;
+  const k = Math.min(H / 1920, Wd / 1080); marco.style.width = 1080 * k + 'px'; marco.style.height = 1920 * k + 'px'; ifr.style.transform = `scale(${k})`;
+}
+addEventListener('resize', ajustar); ajustar();
+function dibujar(x) {
+  t = Math.max(0, Math.min(total - 1e-3, x)); W.__render(t); rango.value = t;
+  lbl.textContent = `${t.toFixed(2)} / ${total.toFixed(2)} s · cuadro ${Math.round(t * 30)}`;
+  for (const b of document.querySelectorAll('#escenas button')) { const s = escenas[+b.dataset.i]; b.classList.toggle('on', t >= s.t0 && t < s.t0 + s.d); }
+}
+function bucle(now) {
+  if (!jugando) return;
+  const vel = +document.getElementById('vel').value, x = t0 + (now - r0) / 1000 * vel;
+  if (x >= total) { pausa(); dibujar(total); return; }
+  dibujar(x); requestAnimationFrame(bucle);
+}
+function play() {
+  if (t >= total - 0.05) t = 0;
+  jugando = true; t0 = t; r0 = performance.now(); btn.textContent = '❚❚';
+  const vel = +document.getElementById('vel').value;
+  if (audio && vel === 1) { audio.currentTime = t; audio.play().catch(() => {}); }
+  requestAnimationFrame(bucle);
+}
+function pausa() { jugando = false; btn.textContent = '▶'; if (audio) audio.pause(); }
+btn.onclick = () => jugando ? pausa() : play();
+rango.oninput = () => { pausa(); dibujar(+rango.value); };
+document.getElementById('atras').onclick = () => { pausa(); dibujar(t - 1 / 30); };
+document.getElementById('adelante').onclick = () => { pausa(); dibujar(t + 1 / 30); };
+addEventListener('keydown', e => {
+  if (e.key === ' ') { e.preventDefault(); btn.click(); }
+  if (e.key === 'ArrowLeft') document.getElementById('atras').click();
+  if (e.key === 'ArrowRight') document.getElementById('adelante').click();
+});
+ifr.onload = async () => {
+  W = ifr.contentWindow;
+  for (let i = 0; i < 600 && !W.__ready; i++) await new Promise(r => setTimeout(r, 100));
+  if (!W.__ready) { aviso.textContent = 'El video no terminó de cargar (¿error en index.html? mirá la consola).'; return; }
+  total = W.__total; escenas = W.__scenes; rango.max = total;
+  const marcas = document.getElementById('marcas'), cont = document.getElementById('escenas');
+  escenas.forEach((s, i) => {
+    if (i) { const m = document.createElement('i'); m.style.left = (s.t0 / total * 100) + '%'; marcas.appendChild(m); }
+    const b = document.createElement('button'); b.textContent = `${s.id} · ${s.t0.toFixed(1)} s`; b.dataset.i = i;
+    b.onclick = () => { pausa(); dibujar(s.t0); }; cont.appendChild(b);
+  });
+  // audio de la mezcla si ya existe (solo suena a velocidad 1×)
+  const a = new Audio(`/${V}/audio/mezcla.wav`);
+  a.addEventListener('canplay', () => { audio = a; aviso.textContent = 'Con audio de audio/mezcla.wav · espacio = reproducir, ←/→ = un cuadro'; }, { once: true });
+  a.addEventListener('error', () => { aviso.textContent = 'Sin audio (todavía no hay audio/mezcla.wav) · espacio = reproducir, ←/→ = un cuadro'; }, { once: true });
+  dibujar(+(q.get('t') || 0));
+};
+</script>
+</body>
+</html>

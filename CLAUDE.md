@@ -5,24 +5,23 @@ Flujo: **el usuario pega una fuente (link o tema) → Claude escribe el guion �
 
 Cuando el usuario diga "hacé un reel de <fuente>" (o `/reel`), seguí `docs/FLUJO.md` paso a paso. Leé antes `docs/ESTILO.md`, `docs/DINAMISMO.md` (ritmo, animaciones y subtítulos), `docs/GUION.md` (estructura Hook→Payoff→CTA/bucle, 2,3 palabras/s; investigación completa en `docs/INVESTIGACION-GUIONES.md`; plantilla `videos/_plantilla/guion.md`), `docs/AUDIO.md` y `engine/audio/pronunciacion.json`. Cámara 3D (recorridos de dron, órbita, cenital, latigazo, zoom through): `docs/CAMARA-3D.md` + `engine/camara3d.js`, demo `videos/_demo-camara3d/`. Movimiento y transiciones (ley del vector, costuras, señales de video generado): `docs/MOVIMIENTO.md` + `engine/costuras.js`. Videos de referencia: `docs/ANALISIS-REFERENCIAS.md` (`python engine/analizar_video.py` → un documento por video en `referencias/`). Marco mental: `docs/PARTES.md` (el video como un auto), plantilla `docs/SHOOTING-SCRIPT.md` y `docs/GLOSARIO-EDICION.md`. Mirá `docs/DECISIONES.md`: ahí está cada corrección que el usuario hizo; no repitas esos errores.
 
-## Estructura
-- `engine/` — motor compartido: `themes/` (cada video elige el suyo en su `<link>`: `cyber.css` = HackTheBox (azul-negro + lima), el elegido por Ayrton y el POR DEFECTO (`estados.css` se suma para los chips ok/aviso/error de la plantilla); `redteam.css` = rojo, opcional, no gustó en Parrot; `anduril.css` = descartado), `lib.js` (timeline, animaciones, `__render(t)`), `render.mjs` (preview/scenes/join), `audio/` (`voz.py`, `sfx.py`, `sfxlib.py`, `mezcla.py`, `pronunciacion.json`).
-- `videos/<AAAA-MM-tema>/` — un video: `video.json` (única fuente de verdad: escenas, duraciones, líneas de voz con su tiempo, audio), `index.html` (visual), `sfx_events.py` (efectos), `out/`, `audio/`, `final.mp4` (ignorados por git).
-- `videos/_plantilla/` — punto de partida; copiarla para un video nuevo. `videos/2026-11-parrot-usb/` — video DEFINITIVO y de referencia (cyber/HackTheBox, voz Daniela normal, con 3D: USB y notebook; tag `parrot-final`).
-- `assets/voces/` (modelo Piper) y `assets/musica/` — NO van a git; ver sus `LEEME.md`.
+## Estructura (es un framework propio: `docs/FRAMEWORK.md`)
+- `engine/` — el motor: `lib.js` (tiempo, escenas, `data-a`, `__render(t)`), `costuras.js` (transiciones), `camara3d.js` (cámara 3D), `dinamismo.js` (capa opcional), `themes/` (`cyber.css` = HackTheBox, el POR DEFECTO, + `estados.css` para chips ok/aviso/error; `redteam.css` opcional, no gustó en Parrot), `render.mjs` + `servidor.mjs` (render con Chromium/FFmpeg), `visor.html` (reproductor), `revisar.py` (chequeos), `analizar_video.py` (referencias), `audio/` (`voz.py`, `sfx.py`, `sfxlib.py`, `mezcla.py`, `pronunciacion.json`), `cli.mjs` (= `./reel`).
+- `videos/<AAAA-MM-tema>/` — un video: `video.json` (única fuente de verdad; esquema en docs/FRAMEWORK.md), `index.html` (visual), `sfx_events.py` (efectos); `out/`, `audio/`, `frames/`, `final.mp4` no van a git.
+- `videos/_plantilla/` — punto de partida (`./reel nuevo <tema>`). `videos/2026-11-parrot-usb/` — video DEFINITIVO y de referencia (tag `parrot-final`). `videos/_demo-camara3d/` — demo de cámara.
+- `assets/voces/` (modelo Piper), `assets/musica/`, `assets/referencias/` — NO van a git; ver sus `LEEME.md`.
 
-## Comandos (desde la raíz)
+## Comandos (desde la raíz; `./reel ayuda`)
 ```
-python engine/revisar.py videos/X [--quietud]            # chequeos antes de renderizar (determinismo, firma, voz, colores, costuras, tramos quietos)
-node engine/render.mjs videos/X preview 1 12 30        # frames sueltos → videos/X/frames/ (mirarlos SIEMPRE antes de renderizar)
-node engine/render.mjs videos/X scenes [s1 s2…]        # un mp4 por escena (WORKERS=2; GPU=1 si hay GPU)
-node engine/render.mjs videos/X join                   # → out/mudo.mp4
-python engine/audio/voz.py videos/X                    # voz + chequeo de tiempos y palabras prohibidas
-python engine/audio/sfx.py videos/X                    # efectos desde sfx_events.py
-python engine/audio/mezcla.py videos/X                 # mezcla (−14 LUFS) y, si existe out/mudo.mp4, final.mp4
-python engine/analizar_video.py ref.mp4 --nombre x     # analiza un video de referencia → referencias/x/analisis.md (cortes, cámara, ritmo, sonido)
+./reel nuevo <tema> [--titulo "…"]     # copia la plantilla a videos/AAAA-MM-<tema>
+./reel revisar <video> [--quietud]     # chequeos antes de renderizar: esquema, determinismo, firma, voz, colores, costuras, tramos quietos
+./reel preview <video> 1 12 30         # cuadros sueltos → <video>/frames/ (mirarlos SIEMPRE antes de renderizar)
+./reel ver <video>                     # visor en el navegador (puerto 8080): reproducir, escenas, cuadro a cuadro
+./reel render <video> [s1 s2…]         # revisar → voz → efectos → escenas → unir → mezcla → final.mp4
+./reel voz | efectos | mezcla <video>  # un paso suelto del audio
+./reel analizar ref.mp4 --nombre x     # video de referencia → referencias/x/analisis.md
 ```
-Render completo en CPU sin GPU: ~18 min; con `GPU=1` mucho menos. Probar con `preview` y renderizar solo las escenas cambiadas.
+Render sin GPU: ~175 ms/cuadro en HTML, ~320 ms en 3D (más con desenfoque de movimiento); `GPU=1` si hay GPU. Renderizar solo las escenas cambiadas.
 
 ## Reglas que nunca se rompen (detalle en docs/)
 1. Estética: por defecto `themes/cyber.css` (HackTheBox: azul-negro + lima; lo que Ayrton eligió para Parrot). `themes/redteam.css` (negro con brasas rojas) solo si Ayrton lo pide. **Color = significado**: énfasis = acento del tema, verde+✓ ok, ámbar+⚠ aviso, error = bloque rojo relleno+✕. IBM Plex Sans/Mono, cajas con borde fino y esquinas suaves. Sin scanlines, sin HUD/esquinas, sin etiquetas en mayúsculas espaciadas, sin texto de fuente al final. Paso = "Paso 1 de 7" en sans. Usar siempre variables CSS (`var(--acc)`), nunca colores fijos. Firma `@ayrtonnacer` SIN punto ni adornos al lado.

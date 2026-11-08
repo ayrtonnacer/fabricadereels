@@ -130,6 +130,9 @@ class Track:
         if ks: self.put(t, max(ks, key=lambda a: float(np.sum(a ** 2))), 0.9 * REAL_KEY_GAIN)   # la tecla más 'pesada' del lote
         self.put(t, thunk(), 0.5 if ks else 0.9)
     def line(self, t): self.put(t, tick(), 0.25)
+    def ambient(self, t0=0, lvl=0.05):
+        """Colchón de ambiente desde t0 hasta el final (que nunca suene vacío)."""
+        self.put(t0, ambient(len(self.buf) / SR - t0, lvl=lvl), 1.0)
     def save(self, path):
         b = self.buf / np.max(np.abs(self.buf)) * 0.7
         with wave.open(str(path), 'wb') as w:

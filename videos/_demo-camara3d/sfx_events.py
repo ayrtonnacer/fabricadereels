@@ -3,7 +3,7 @@ from sfxlib import *
 
 
 def build(T, S, lib=None):
-    T.put(0, ambient(len(T.buf) / SR, lvl=0.06), 1.0)   # zumbido de sala de servidores
+    T.ambient(0, lvl=0.06)                                   # zumbido de sala de servidores
     T.put(0.0, boom(), 0.7); T.put(0.1, pop(1100), 0.35)      # gancho + firma
     T.put(3.95, whoosh(0.5), 0.8)                            # latigazo 3.9→4.45 (pico ≈4.17)
     T.put(4.4, hit(), 0.45)

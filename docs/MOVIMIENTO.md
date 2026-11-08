@@ -64,7 +64,7 @@ En 3D (`camara3d.js`) vale lo mismo: el latigazo entre tomas, el zoom through co
 Ya aprendido con Ayrton (DECISIONES.md): mayúsculas espaciadas, HUD/esquinas, scanlines.
 
 ## 7. Revisión antes de renderizar
-1. `python engine/revisar.py videos/X` (estático) y `--quietud` (busca tramos de más de 3 s sin cambios y el primer cuadro vacío, que es la miniatura).
+1. `./reel revisar videos/X` (estático) y `--quietud` (busca tramos de más de 3 s sin cambios y el primer cuadro vacío, que es la miniatura).
 2. `preview` en el cuadro de cada costura (−0,1 / +0,05 s) y en el pico de cada movimiento.
 3. Mirar los cuadros como un extraño: describir cada uno en una frase nombrando todo lo que hay; si algo hay que explicarlo, es un problema.
 4. Anotar cada problema en una línea: `t=4,2 s · dónde · problema → cambio exacto · qué queda igual`, con prioridad **P0** (no se entiende / rompe una regla), **P1** (debilita: tramo muerto, payoff flojo, costura que salta), **P2** (detalle). Arreglar todos los P0 y los P1 que valgan la pena; texto primero, después tiempos, después detalles. Si se siente cargado: sacar un tercio del movimiento y quedarse con lo que guía la mirada.

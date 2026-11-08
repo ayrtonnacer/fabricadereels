@@ -66,7 +66,7 @@ Lo que es IGUAL en todos los reels: la voz (Daniela), la música de fondo y la e
 - 9:16 es angosto: probar el encuadre con `preview`; los objetos tienden a quedar cortados a los costados.
 - El texto que se tiene que leer va en HTML (nítido, encima) o en un `cartel` quieto/lento; nunca leer texto durante un latigazo.
 - Motion blur cuesta: `max` 8–12 muestras, `umbral` alto para que solo actúe en movimientos rápidos.
-- Probar SIEMPRE con `node engine/render.mjs videos/X preview t1 t2…` en el pico de cada transición antes de renderizar.
+- Probar SIEMPRE con `./reel preview videos/X t1 t2…` en el pico de cada transición antes de renderizar.
 - Colores: `colorTema('--acc')`, nunca hex fijos de acento.
 
 ## Esqueleto mínimo

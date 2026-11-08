@@ -17,6 +17,27 @@ def err(c, m): R.append(('ERROR', c, m))
 def av(c, m): R.append(('AVISO', c, m))
 def linea(i): return html[:i].count('\n') + 1
 
+# --- esquema de video.json (la única fuente de verdad del video)
+CLAVES = {'titulo', 'fecha', 'fuente', 'steps', 'scenes', 'voz', 'audio', 'bucle', 'ev', 'notas'}
+for k in cfg:
+    if k not in CLAVES: av('clave_desconocida', f'video.json: clave "{k}" no la usa el motor (¿typo? válidas: {", ".join(sorted(CLAVES))})')
+if not isinstance(cfg.get('titulo'), str): err('esquema', 'video.json: falta "titulo"')
+if not isinstance(cfg.get('scenes'), list) or not cfg['scenes']: err('esquema', 'video.json: "scenes" tiene que ser una lista con al menos una escena'); cfg['scenes'] = cfg.get('scenes') or [{'id': '?', 'd': 1}]
+vistos = set()
+for s in cfg['scenes']:
+    if not isinstance(s.get('id'), str) or not isinstance(s.get('d'), (int, float)) or s['d'] <= 0: err('esquema', f'escena {s}: necesita "id" (texto) y "d" (segundos > 0)')
+    if s.get('id') in vistos: err('esquema', f'escena "{s.get("id")}" repetida')
+    vistos.add(s.get('id'))
+    for k in s:
+        if k not in {'id', 'd', 'gl', 'plano', 'salida'}: av('clave_desconocida', f'escena {s.get("id")}: clave "{k}" no la usa el motor')
+    if s.get('salida'):
+        x = s['salida']; tipo = x.get('tipo') if isinstance(x, dict) else ('zoom-inverso' if x == 'zoom-inverso' else x.split('-')[0])
+        if tipo not in {'curva', 'zoom', 'zoom-inverso', 'foco', 'latigazo', 'oscuro', 'corte'}: err('salida_invalida', f'escena {s["id"]}: salida "{x}" no existe (curva-izq/der/arriba/abajo, zoom, zoom-inverso, foco, latigazo-izq/der, oscuro, corte)')
+ids_l = [l.get('id') for l in cfg.get('voz', {}).get('lineas', [])]
+for l in cfg.get('voz', {}).get('lineas', []):
+    if not all(k in l for k in ('id', 'escena', 't', 'texto')): err('esquema', f'línea de voz {l.get("id")}: necesita id, escena, t y texto')
+for i in {x for x in ids_l if ids_l.count(x) > 1}: err('esquema', f'línea de voz "{i}" repetida')
+
 SC = cfg['scenes']; dur = sum(s['d'] for s in SC); t0 = {}; acc = 0
 for s in SC: t0[s['id']] = acc; acc += s['d']
 ids = set(re.findall(r'<section[^>]*\bid="([^"]+)"', html))

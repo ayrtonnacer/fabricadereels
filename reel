@@ -1,0 +1,3 @@
+#!/bin/sh
+# Atajo: ./reel <comando> (ver ./reel ayuda)
+exec node "$(dirname "$0")/engine/cli.mjs" "$@"
