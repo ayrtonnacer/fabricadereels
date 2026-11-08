@@ -1,3 +1,4 @@
 piper-tts
 numpy
 scipy
+opencv-python-headless

@@ -17,3 +17,8 @@ assets/sfx/*
 !assets/sfx/propios/
 !assets/sfx/propios/**
 package-lock.json
+
+# videos de referencia ajenos y hojas de cuadros (el documento de análisis .md/.json sí se guarda)
+assets/referencias/*
+!assets/referencias/LEEME.md
+referencias/*/*.jpg

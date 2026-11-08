@@ -3,7 +3,7 @@
 Repo de @ayrtonnacer para producir reels verticales (1080×1920, ~45–60 s) explicativos de programación, matemática, ciberseguridad y Linux.
 Flujo: **el usuario pega una fuente (link o tema) → Claude escribe el guion → el usuario lo aprueba → se anima en HTML/three.js → voz Piper (Daniela es_AR) + efectos + música → mp4.**
 
-Cuando el usuario diga "hacé un reel de <fuente>" (o `/reel`), seguí `docs/FLUJO.md` paso a paso. Leé antes `docs/ESTILO.md`, `docs/DINAMISMO.md` (ritmo, animaciones y subtítulos), `docs/GUION.md` (estructura Hook→Payoff→CTA/bucle, 2,3 palabras/s; investigación completa en `docs/INVESTIGACION-GUIONES.md`; plantilla `videos/_plantilla/guion.md`), `docs/AUDIO.md` y `engine/audio/pronunciacion.json`. Cámara 3D (recorridos de dron, órbita, cenital, latigazo, zoom through): `docs/CAMARA-3D.md` + `engine/camara3d.js`, demo `videos/_demo-camara3d/`. Marco mental: `docs/PARTES.md` (el video como un auto), plantilla `docs/SHOOTING-SCRIPT.md` y `docs/GLOSARIO-EDICION.md`. Mirá `docs/DECISIONES.md`: ahí está cada corrección que el usuario hizo; no repitas esos errores.
+Cuando el usuario diga "hacé un reel de <fuente>" (o `/reel`), seguí `docs/FLUJO.md` paso a paso. Leé antes `docs/ESTILO.md`, `docs/DINAMISMO.md` (ritmo, animaciones y subtítulos), `docs/GUION.md` (estructura Hook→Payoff→CTA/bucle, 2,3 palabras/s; investigación completa en `docs/INVESTIGACION-GUIONES.md`; plantilla `videos/_plantilla/guion.md`), `docs/AUDIO.md` y `engine/audio/pronunciacion.json`. Cámara 3D (recorridos de dron, órbita, cenital, latigazo, zoom through): `docs/CAMARA-3D.md` + `engine/camara3d.js`, demo `videos/_demo-camara3d/`. Videos de referencia: `docs/ANALISIS-REFERENCIAS.md` (`python engine/analizar_video.py` → un documento por video en `referencias/`). Marco mental: `docs/PARTES.md` (el video como un auto), plantilla `docs/SHOOTING-SCRIPT.md` y `docs/GLOSARIO-EDICION.md`. Mirá `docs/DECISIONES.md`: ahí está cada corrección que el usuario hizo; no repitas esos errores.
 
 ## Estructura
 - `engine/` — motor compartido: `themes/` (cada video elige el suyo en su `<link>`: `cyber.css` = HackTheBox (azul-negro + lima), el elegido por Ayrton y el POR DEFECTO (`estados.css` se suma para los chips ok/aviso/error de la plantilla); `redteam.css` = rojo, opcional, no gustó en Parrot; `anduril.css` = descartado), `lib.js` (timeline, animaciones, `__render(t)`), `render.mjs` (preview/scenes/join), `audio/` (`voz.py`, `sfx.py`, `sfxlib.py`, `mezcla.py`, `pronunciacion.json`).
@@ -19,6 +19,7 @@ node engine/render.mjs videos/X join                   # → out/mudo.mp4
 python engine/audio/voz.py videos/X                    # voz + chequeo de tiempos y palabras prohibidas
 python engine/audio/sfx.py videos/X                    # efectos desde sfx_events.py
 python engine/audio/mezcla.py videos/X                 # mezcla (−14 LUFS) y, si existe out/mudo.mp4, final.mp4
+python engine/analizar_video.py ref.mp4 --nombre x     # analiza un video de referencia → referencias/x/analisis.md (cortes, cámara, ritmo, sonido)
 ```
 Render completo en CPU sin GPU: ~18 min; con `GPU=1` mucho menos. Probar con `preview` y renderizar solo las escenas cambiadas.
 

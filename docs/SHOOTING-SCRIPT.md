@@ -1,4 +1,5 @@
-# Shooting script (guion de rodaje) — plantilla
+# Shooting script (guion técnico / guion de rodaje) — plantilla
+_También se llama shot list. Para hacerlo al revés, a partir de un video ya hecho, ver `docs/ANALISIS-REFERENCIAS.md`._
 
 Un guion dice QUÉ se cuenta; el shooting script dice CÓMO se ve y suena, segundo a segundo. Copiá la tabla para cada video.
 
