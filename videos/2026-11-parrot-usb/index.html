@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Parrot OS con persistencia en USB</title>
+<link rel="stylesheet" href="/engine/themes/cyber.css">
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+</head>
+<body>
+
+
+<!-- S1 HOOK -->
+<section class="scene" id="s1">
+  <div class="abs" style="top:250px">
+    <div style="display:inline-block;font:700 40px SG,sans-serif;color:var(--acc)" data-a="pop:0.05:0.4">@ayrtonnacer</div>
+    <h1 style="margin-top:36px;font-size:104px"><span data-a="up:0.1" style="display:inline-block">Parrot OS</span><br><span data-a="up:0.22" style="display:inline-block">en un USB que</span><br><span id="glitch" class="hl" data-a="up:0.38" style="display:inline-block">no olvida nada</span></h1>
+  </div>
+  <div class="abs center" style="top:1440px" data-a="up:1.1">
+    <div class="chip">Persistencia en <b class="cy">&nbsp;7 pasos</b>
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#9FEF00" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M5 13l7 7 7-7"/></svg></div>
+  </div>
+</section>
+
+<!-- S2 WHY -->
+<section class="scene" id="s2">
+  <div class="abs" style="top:230px"><h2 data-a="up:0"><span class="cy">¿Por qué</span> persistencia?</h2></div>
+  <div class="panel" id="pA" style="top:470px" data-a="up:0.2">
+    <div class="ph"><span>Live USB común</span><span class="badge" id="pwrA" style="background:var(--panel2);color:var(--muted)">⏻ APAGÁS</span></div>
+    <div class="files" id="filesA"></div>
+    <div class="res rd" id="resA" data-a="up:1.9:0.35">→ se borra todo</div>
+  </div>
+  <div class="panel" id="pB" style="top:1000px;border-color:rgba(184,255,60,.4)" data-a="up:2.5">
+    <div class="ph"><span>Con persistencia</span><span class="badge" id="pwrB" style="background:var(--panel2);color:var(--muted)">⏻ APAGÁS</span></div>
+    <div class="files" id="filesB"></div>
+    <div class="res" id="resB" style="color:var(--green)" data-a="up:3.9:0.35">→ todo queda guardado</div>
+  </div>
+</section>
+
+<!-- S3 NEEDS -->
+<section class="scene" id="s3">
+  <div class="abs" style="top:230px"><h2 data-a="up:0">Qué <span class="cy">necesitás</span></h2></div>
+  <div class="abs" style="top:430px;display:flex;flex-direction:column;gap:26px">
+    <div class="card" data-a="left:0.35"><div class="num" id="n31">1</div><div><div class="t">La ISO de Parrot OS</div><div class="s">parrotsec.org/download</div></div></div>
+    <div class="card" data-a="left:0.85"><div class="num" id="n32">2</div><div><div class="t">Un USB de 4 GB o más</div><div class="s">más grande = más espacio para tus cosas</div></div></div>
+    <div class="card" data-a="left:1.35"><div class="num" id="n33">3</div><div><div class="t">Una PC con Linux</div><div class="s">Parrot, Debian o Ubuntu (usa apt)</div></div></div>
+  </div>
+  <div class="abs" style="top:1230px" data-a="pop:3.0:0.45">
+    <div class="chip warn" style="width:100%;font-size:46px;padding:30px 34px">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#FF3E5E" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17.2v.1"/></svg>
+      <div><b class="rd">Se borra TODO el USB.</b><br><span style="color:var(--muted)">Hacé backup antes.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- S4 deps -->
+<section class="scene" id="s4" data-step="1">
+  <div class="abs" style="top:360px"><h2 data-a="up:0">Instalá <span class="cy">dependencias</span></h2></div>
+  <div class="term" style="top:640px" data-a="up:0.15">
+    <div class="bar"><i></i><i></i><i></i><span>user@parrot: ~</span></div>
+    <div class="body"><div class="ln" data-show="0.5"><span class="ps">$ </span><span data-type="0.55" data-text="sudo apt update"></span></div><div class="ln out" data-show="1.25">Reading package lists... Done</div><div class="ln" data-show="1.5"><span class="ps">$ </span><span data-type="1.55" data-text="sudo apt install gdisk dialog zenity -y"></span></div><div class="ln out" data-show="3.25">Setting up gdisk ...</div><div class="ln out" data-show="3.45">Setting up dialog ...</div><div class="ln out" data-show="3.65">Setting up zenity ...</div><div class="ln" data-show="3.9"><span class="ps">$ </span><span data-type="3.9" data-text=""></span></div></div>
+  </div>
+  <div class="abs" style="top:1250px" data-a="up:2.2"><div class="chip"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#9FEF00" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.1" stroke-linecap="round"/></svg>gdisk, dialog y zenity las usa la herramienta</div></div>
+</section>
+
+<!-- S5 clone -->
+<section class="scene" id="s5" data-step="2">
+  <div class="abs" style="top:360px"><h2 data-a="up:0">Descargá <span class="cy">mkusb</span></h2></div>
+  <div class="term" style="top:640px" data-a="up:0.15">
+    <div class="bar"><i></i><i></i><i></i><span>user@parrot: ~</span></div>
+    <div class="body"><div class="ln" data-show="0.45"><span class="ps">$ </span><span data-type="0.5" data-text="git clone https://github.com/sudodus/tarballs.git"></span></div><div class="ln out" data-show="2.5">Cloning into 'tarballs'...</div><div class="ln out" data-show="2.8">Receiving objects: 100%, done.</div><div class="ln" data-show="3.1"><span class="ps">$ </span><span data-type="3.1" data-text=""></span></div></div>
+  </div>
+  <div class="abs" style="top:1250px" data-a="up:1.6"><div class="chip"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#9FEF00" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="9" rx="1"/><rect x="5" y="11" width="14" height="11" rx="2"/></svg><span>mkusb (<b class="cy">dus</b>) es la herramienta que arma el USB persistente</span></div></div>
+</section>
+
+<!-- S6 extract -->
+<section class="scene" id="s6" data-step="3">
+  <div class="abs" style="top:360px"><h2 data-a="up:0">Extraé <span class="cy">dus-plus</span></h2></div>
+  <div class="term" style="top:640px" data-a="up:0.15">
+    <div class="bar"><i></i><i></i><i></i><span>user@parrot: ~</span></div>
+    <div class="body"><div class="ln" data-show="0.45"><span class="ps">$ </span><span data-type="0.5" data-text="cd tarballs"></span></div><div class="ln" data-show="1.05"><span class="ps">$ </span><span data-type="1.1" data-text="tar -xf dus-plus.tar.xz"></span></div><div class="ln" data-show="2.1"><span class="ps">$ </span><span data-type="2.15" data-text="ls -d dus*/"></span></div><div class="ln dir" data-show="2.7" style="font-weight:700">dus-tplus/</div><div class="ln" data-show="2.9"><span class="ps">$ </span><span data-type="2.9" data-text=""></span></div></div>
+  </div>
+  <div class="abs" style="top:1250px" data-a="up:3.0"><div class="chip ok"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#9FEF00" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg><span>Incluye <b class="hl">usb-pack-efi</b>, lo que hace que el USB arranque</span></div></div>
+</section>
+
+<!-- S7 install -->
+<section class="scene" id="s7" data-step="4">
+  <div class="abs" style="top:360px"><h2 data-a="up:0">Instalá <span class="cy">dus</span></h2></div>
+  <div class="term" style="top:640px" data-a="up:0.15">
+    <div class="bar"><i></i><i></i><i></i><span>user@parrot: ~</span></div>
+    <div class="body"><div class="ln" data-show="0.45"><span class="ps">$ </span><span data-type="0.5" data-text="cd dus-tplus"></span></div><div class="ln" data-show="1.15"><span class="ps">$ </span><span data-type="1.2" data-text="sudo ./dus-installer i"></span></div><div class="ln out" data-show="2.25">[sudo] password for user: ••••••</div><div class="ln" data-show="2.7"><span class="ps">$ </span><span data-type="2.7" data-text=""></span></div></div>
+  </div>
+  <div class="abs" style="top:1250px" data-a="pop:2.5:0.45"><div class="chip warn"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#FF3E5E" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17.2v.1"/></svg><span>La carpeta se llama <b class="rd">dus-<u>t</u>plus</b>, con “t”</span></div></div>
+</section>
+
+<!-- S8 dus menu -->
+<section class="scene" id="s8" data-step="5">
+  <div class="abs" style="top:360px"><h2 data-a="up:0">Abrí <span class="cy">dus</span> y elegí</h2></div>
+  <div class="abs" style="top:500px;display:flex;align-items:center;gap:14px;font:700 34px JB,monospace;color:var(--muted)" data-a="up:0.2">
+    <span class="key" id="k1" style="height:84px;min-width:84px;font-size:40px">i</span>→
+    <span class="key" id="k2" style="height:84px;min-width:84px;font-size:40px">p</span>→
+    <span class="key" id="k3" style="height:84px;min-width:84px;font-size:40px">p</span>
+    <span id="kl" style="margin-left:14px;color:var(--text);font:700 38px SG,sans-serif"></span>
+  </div>
+  <div class="term" style="top:660px" data-a="up:0.15">
+    <div class="bar"><i></i><i></i><i></i><span>user@parrot: ~</span></div>
+    <div class="body" style="padding-bottom:30px"><div class="ln" data-show="0.4"><span class="ps">$ </span><span data-type="0.45" data-text="dus"></span></div><div id="tuiwrap" class="ln" data-show="0.85"></div></div>
+  </div>
+</section>
+
+<!-- S9 iso/usb/go -->
+<section class="scene" id="s9" data-step="6">
+  <div class="abs" style="top:360px"><h2 data-a="up:0">ISO <span class="cy">→</span> USB <span class="cy">→</span> Go</h2></div>
+  <div class="abs" style="top:540px;display:flex;flex-direction:column;gap:28px">
+    <div class="card" data-a="left:0.3"><div class="num" id="n91">1</div><div><div class="t">Elegí la ISO</div><div class="s"><span class="pill">Parrot-security-*.iso</span></div></div></div>
+    <div class="card" id="c92" data-a="left:1.5"><div class="num" id="n92">2</div><div style="flex:1"><div class="t">Elegí tu USB</div><div class="s"><span class="pill">/dev/sdb · USB · 32 GB</span></div><div class="s" id="w92" style="color:var(--red);font-weight:700;margin-top:12px">¡Revisá que sea el USB y no tu disco!</div></div></div>
+    <div class="card" data-a="left:3.4" style="flex-direction:column;align-items:stretch;gap:22px">
+      <div style="display:flex;align-items:center;gap:28px"><div class="num" id="n93">3</div><div class="t" style="flex:1">Confirmá</div><span class="go" id="go">Go</span></div>
+      <div class="prog"><i id="pg"></i></div>
+      <div style="display:flex;justify-content:space-between;font:400 30px JB,monospace;color:var(--muted)"><span id="pgl">Creando persistencia… (tarda unos minutos)</span><span id="pgp">0%</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- S10 boot -->
+<section class="scene" id="s10" data-step="7">
+  <div class="abs" style="top:360px"><h2 data-a="up:0">Reiniciá y <span class="cy">booteá</span> desde el USB</h2></div>
+  <div class="abs" id="bootkeys" style="top:1420px" data-a="up:0.3">
+    <div style="font:500 38px SG,sans-serif;color:var(--muted);margin-bottom:22px">Tecla del menú de arranque (según tu PC)</div>
+    <div style="display:flex;gap:20px"><span class="key" id="b1">F12</span><span class="key" id="b2">F11</span><span class="key" id="b3">F8</span><span class="key" id="b4">Esc</span></div>
+  </div>
+  <div class="abs center" style="top:1440px" data-a="pop:3.2:0.45"><div class="chip ok" style="font-size:48px"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9FEF00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg>Lo que guardes, queda</div></div>
+</section>
+
+<!-- S11 CTA -->
+<section class="scene" id="s11">
+  <div class="abs center" style="top:260px">
+    <h1 data-a="up:0" style="font-size:112px">Dale like</h1>
+    <div class="sub" data-a="up:0.15" style="margin-top:20px;color:var(--text)">si te gustó el video</div>
+  </div>
+  <div class="abs center" style="top:1360px" data-a="up:0.5">
+    <div class="sub" style="font-size:46px">Seguime para aprender más de Linux</div>
+    <div style="margin-top:22px;font:700 60px SG,sans-serif;color:var(--acc);text-shadow:0 0 36px rgba(159,239,0,.35)">@ayrtonnacer</div>
+  </div>
+</section>
+
+<script type="module">
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import {clamp,eo,eio,eb,hash,loadConfig,mountShell,setupSteps,timeline,installRender} from '/engine/lib.js';
+mountShell();
+const CFG=await loadConfig();           // tiempos de escena y guion en video.json (única fuente de verdad)
+const SC=CFG.scenes.map(s=>({...s}));
+const TOTAL=timeline(SC);
+setupSteps(CFG.steps);
+
+
+
+// icons
+const ICON={
+ doc:`<svg width="74" height="74" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M6 2h8l5 5v15H6z"/><path d="M14 2v5h5M9 13h7M9 17h7"/></svg>`,
+ folder:`<svg width="74" height="74" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 6h6l2 2h10v11H3z"/></svg>`,
+ term:`<svg width="74" height="74" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="16" rx="2"/><path d="m7 10 3 2.5L7 15M12.5 15h4"/></svg>`,
+ key:`<svg width="74" height="74" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3M15 8l2 2"/></svg>`
+};
+for(const id of ['filesA','filesB']){
+  document.getElementById(id).innerHTML=['doc','folder','term','key'].map(k=>`<div class="file" style="color:var(--cyan)">${ICON[k]}</div>`).join('');
+}
+
+// TUI menus (labels copied from the dus script)
+const MENUS=[
+ {t1:'Install / Backup / Restore / Wipe',rows:[['i','Install (make a boot device)'],['s','restore to a Standard storage device'],['w','Wipe a device (drive)'],['b','Backup persistent live home'],['r','Restore persistent live home'],['q','Quit']],path:[0],key:'k1',lbl:'Install'},
+ {t1:'Cloning, live linux, windows / Persistent live',rows:[['c','Cloning iso file, [compressed] image ...'],['l',"'Live-only' or linux installer ..."],['p',"'Persistent live' - only Debian and Ubuntu"],['w','extracting Windows installer'],['q','Quit']],path:[0,1,2],key:'k2',lbl:'Persistent live'},
+ {t1:'Select method/tool',rows:[['i',"'dus-Iso2usb', grub-n-iso method"],['p',"'dus-Persistent', classic dus method"],['q','Quit']],path:[0,1],key:'k3',lbl:'dus-Persistent'}
+];
+const MT=[[0.9,2.9],[2.9,5.2],[5.2,7.6]]; // menu windows (local time)
+const tuiwrap=document.getElementById('tuiwrap');
+function drawTui(lt){
+  let m=0;for(let i=0;i<3;i++)if(lt>=MT[i][0])m=i;
+  const M=MENUS[m],[a,b]=MT[m];
+  const span=b-a, chooseAt=a+span*0.72;
+  // highlight walks along path
+  const walk=clamp((lt-a-0.25)/(span*0.45));
+  const idx=M.path[Math.min(M.path.length-1,Math.floor(walk*M.path.length))];
+  const pressed=lt>=chooseAt;
+  const flash=pressed&&lt<chooseAt+0.18;
+  let h=`<div class="tui"><div class="tt"> ${M.t1} </div><div class="t2">Move between items with the arrow keys</div>`;
+  M.rows.forEach((r,i)=>{h+=`<div class="row${i===idx?' sel':''}"${i===idx&&flash?' style="background:#C8FF4D"':''}><b>${r[0]}</b>  ${r[1].replace(/&/g,'&amp;').replace(/</g,'&lt;')}</div>`});
+  h+='</div>';
+  if(tuiwrap._h!==h){tuiwrap.innerHTML=h;tuiwrap._h=h}
+  // keys
+  MENUS.forEach((MM,i)=>{
+    const k=document.getElementById(MM.key);
+    const ca=MT[i][0]+(MT[i][1]-MT[i][0])*0.72;
+    k.className='key'+(lt>=ca?' done':(lt>=MT[i][0]&&lt>=0.9?' on':''));
+  });
+  document.getElementById('kl').textContent=lt>=0.9?MENUS[m].lbl:'';
+}
+
+/* ---------- three.js USB ---------- */
+const canvas=document.getElementById('gl');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,preserveDrawingBuffer:true});
+renderer.setPixelRatio(1);renderer.setSize(1080,1920,false);
+renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.outputColorSpace=THREE.SRGBColorSpace;
+const scene=new THREE.Scene();
+scene.environment=new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(),0.04).texture;
+const cam=new THREE.PerspectiveCamera(30,1080/1920,0.1,100);cam.position.set(0,0,10);
+scene.add(new THREE.AmbientLight(0xffffff,0.35));
+const key=new THREE.DirectionalLight(0xffffff,2.2);key.position.set(3,5,6);scene.add(key);
+const rimC=new THREE.PointLight(0x9FEF00,26,20);rimC.position.set(-3,1,-2);scene.add(rimC);
+const rimL=new THREE.PointLight(0x3BC9FF,34,20);rimL.position.set(3,-2,-2);scene.add(rimL);
+
+await document.fonts.load('700 100px SG');await document.fonts.load('400 40px JB');await document.fonts.load('700 34px JB');await document.fonts.ready;
+
+function labelTex(){
+  const c=document.createElement('canvas');c.width=1024;c.height=300;const x=c.getContext('2d');
+  x.fillStyle='#0C121C';x.fillRect(0,0,1024,300);
+  x.strokeStyle='rgba(159,239,0,.25)';x.lineWidth=2;for(let i=0;i<1024;i+=32){x.beginPath();x.moveTo(i,0);x.lineTo(i,300);x.stroke()}
+  x.fillStyle='#0C121C';x.fillRect(30,40,960,220);
+  x.fillStyle='#9FEF00';x.fillRect(0,0,10,300);
+  x.font='700 118px SG';x.fillStyle='#E8EEF7';x.fillText('PARROT OS',52,160);
+  x.fillStyle='#9FEF00';x.fillRect(52,200,250,52);x.font='700 34px JB';x.fillStyle='#0B111C';x.fillText('PERSISTENT',70,237);
+  x.fillStyle='#8A9BB8';x.fillText('LIVE USB // 4GB+',326,237);
+  const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;return t;
+}
+const usb=new THREE.Group();scene.add(usb);
+const inner=new THREE.Group();usb.add(inner);
+// matte black body (like the reference Kingston), slider seam, label, lime stripe, activity LED
+const bodyMat=new THREE.MeshPhysicalMaterial({color:0x15181F,metalness:.1,roughness:.42,clearcoat:.5,clearcoatRoughness:.3});
+inner.add(new THREE.Mesh(new RoundedBoxGeometry(2.2,0.78,0.34,6,0.14),bodyMat));
+const stripeMat=new THREE.MeshStandardMaterial({color:0x9FEF00,emissive:0x9FEF00,emissiveIntensity:.6,metalness:.2,roughness:.4});
+const stripe=new THREE.Mesh(new RoundedBoxGeometry(2.0,0.05,0.36,3,0.02),stripeMat);stripe.position.y=-0.30;inner.add(stripe);
+const seam=new THREE.Mesh(new THREE.BoxGeometry(0.012,0.70,0.346),new THREE.MeshStandardMaterial({color:0x05070A,roughness:.6}));seam.position.x=0.62;inner.add(seam);
+const lab=new THREE.Mesh(new THREE.PlaneGeometry(1.5,0.44),new THREE.MeshStandardMaterial({map:labelTex(),roughness:.5,metalness:0}));lab.position.set(-0.22,0.08,0.172);inner.add(lab);
+const lab2=lab.clone();lab2.rotation.y=Math.PI;lab2.position.z=-0.172;inner.add(lab2);
+const ledMat=new THREE.MeshStandardMaterial({color:0x1A2410,emissive:0x9FEF00,emissiveIntensity:0});
+const led=new THREE.Mesh(new RoundedBoxGeometry(0.1,0.05,0.02,2,0.01),ledMat);led.position.set(0.85,0.24,0.172);inner.add(led);
+const led2=led.clone();led2.position.z=-0.172;inner.add(led2);
+// USB-A plug: hollow metal shell + black tongue with 4 gold contacts
+const metal=new THREE.MeshStandardMaterial({color:0xFFFFFF,metalness:.85,roughness:.22,envMapIntensity:2.6});
+const rr=(sh,w,h,r)=>{const x=-w/2,y=-h/2;sh.moveTo(x+r,y);sh.lineTo(x+w-r,y);sh.quadraticCurveTo(x+w,y,x+w,y+r);sh.lineTo(x+w,y+h-r);sh.quadraticCurveTo(x+w,y+h,x+w-r,y+h);sh.lineTo(x+r,y+h);sh.quadraticCurveTo(x,y+h,x,y+h-r);sh.lineTo(x,y+r);sh.quadraticCurveTo(x,y,x+r,y)};
+const sh=new THREE.Shape();rr(sh,0.19,0.5,0.03);const hole=new THREE.Path();rr(hole,0.14,0.45,0.02);sh.holes.push(hole);
+const shellG=new THREE.ExtrudeGeometry(sh,{depth:0.62,bevelEnabled:false,curveSegments:6});shellG.rotateY(Math.PI/2);shellG.translate(1.05,0,0);
+inner.add(new THREE.Mesh(shellG,metal));
+const tongue=new THREE.Mesh(new THREE.BoxGeometry(0.42,0.40,0.05),new THREE.MeshStandardMaterial({color:0x0A0C10,roughness:.5}));tongue.position.set(1.41,0,-0.02);inner.add(tongue);
+const goldM=new THREE.MeshStandardMaterial({color:0xE8B341,metalness:1,roughness:.25,envMapIntensity:2});
+for(const yy of [-0.15,-0.05,0.05,0.15]){const c=new THREE.Mesh(new THREE.BoxGeometry(0.26,0.05,0.012),goldM);c.position.set(1.50,yy,0.011);inner.add(c)}
+const collar=new THREE.Mesh(new THREE.BoxGeometry(0.1,0.6,0.26),new THREE.MeshStandardMaterial({color:0x05070A,roughness:.5}));collar.position.x=1.12;inner.add(collar);
+const ring=new THREE.Mesh(new THREE.TorusGeometry(0.11,0.032,16,40),metal);ring.position.set(-1.2,0,0);inner.add(ring);
+inner.position.x=-0.185;
+
+// scan beam (hook)
+const beamTex=(()=>{const c=document.createElement('canvas');c.width=256;c.height=4;const x=c.getContext('2d');const g=x.createLinearGradient(0,0,256,0);
+  g.addColorStop(0,'rgba(159,239,0,0)');g.addColorStop(.82,'rgba(159,239,0,.25)');g.addColorStop(.97,'rgba(210,255,120,1)');g.addColorStop(1,'rgba(159,239,0,0)');x.fillStyle=g;x.fillRect(0,0,256,4);
+  const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t})();
+const beam=new THREE.Mesh(new THREE.PlaneGeometry(0.9,1.25),new THREE.MeshBasicMaterial({map:beamTex,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,depthTest:false}));
+scene.add(beam);
+
+// notebook with a USB-A port on its left side (step 7)
+const stage=new THREE.Group();scene.add(stage);
+const pc=new THREE.Group();stage.add(pc);
+const PF=0.99;                        // x of the port face = where the collar stops
+const W=14.7,D=10.0,TH=0.8,Z0=-6.0;   // ~320 x 218 x 17 mm    // base width (x), depth (z), thickness, back edge z
+const alu=new THREE.MeshStandardMaterial({color:0x2B3548,metalness:.75,roughness:.32});
+const base=new THREE.Mesh(new RoundedBoxGeometry(W,TH,D,4,0.08),alu);base.position.set(PF+W/2,0,Z0+D/2);pc.add(base);
+// keyboard (instanced keys) + touchpad
+const keyM=new THREE.MeshStandardMaterial({color:0x0D1118,roughness:.6});
+const KC=14,KR=6,kw=0.69,gap=0.15;const keys=new THREE.InstancedMesh(new RoundedBoxGeometry(kw,0.06,kw,2,0.05),keyM,KC*KR);
+{const m=new THREE.Matrix4();let n=0;const x0=PF+W/2-(KC*(kw+gap))/2+kw/2;
+ for(let r=0;r<KR;r++)for(let c=0;c<KC;c++){m.makeTranslation(x0+c*(kw+gap),TH/2+0.02,Z0+1.3+r*(kw+gap));keys.setMatrixAt(n++,m)}}
+pc.add(keys);
+const pad=new THREE.Mesh(new RoundedBoxGeometry(5.0,0.02,3.0,2,0.15),new THREE.MeshStandardMaterial({color:0x222B3B,metalness:.5,roughness:.45}));pad.position.set(PF+W/2,TH/2+0.005,Z0+D-1.9);pc.add(pad);
+const kbGlow=new THREE.Mesh(new THREE.BoxGeometry(KC*(kw+gap),0.005,KR*(kw+gap)),new THREE.MeshBasicMaterial({color:0x9FEF00,transparent:true,opacity:0}));kbGlow.position.set(PF+W/2,TH/2+0.005,Z0+0.45+(KR-1)*(kw+gap)/2);pc.add(kbGlow);
+// lid with live screen
+const SW=1024,SH=640;const scr=document.createElement('canvas');scr.width=SW;scr.height=SH;const sx=scr.getContext('2d');
+const scrTex=new THREE.CanvasTexture(scr);scrTex.colorSpace=THREE.SRGBColorSpace;
+const lid=new THREE.Group();lid.position.set(PF+W/2,TH/2,Z0+0.15);lid.rotation.x=-0.28;pc.add(lid);
+const LH=9.4;
+const lidBody=new THREE.Mesh(new RoundedBoxGeometry(W,LH,0.28,4,0.12),alu);lidBody.position.set(0,LH/2,-0.14);lid.add(lidBody);
+const bezel=new THREE.Mesh(new THREE.PlaneGeometry(W-0.3,LH-0.3),new THREE.MeshBasicMaterial({color:0x05070A}));bezel.position.set(0,LH/2,0.002);lid.add(bezel);
+const screen=new THREE.Mesh(new THREE.PlaneGeometry(W-1.4,(W-1.4)*SH/SW),new THREE.MeshBasicMaterial({map:scrTex,toneMapped:false}));screen.position.set(0,LH/2+0.15,0.004);lid.add(screen);
+// port: metal frame + dark cavity + activity led on the side
+const portSh=new THREE.Shape();rr(portSh,0.6,0.29,0.03);const portH=new THREE.Path();rr(portH,0.52,0.21,0.02);portSh.holes.push(portH);
+const frameG=new THREE.ExtrudeGeometry(portSh,{depth:0.03,bevelEnabled:false});frameG.rotateY(Math.PI/2);
+const frame=new THREE.Mesh(frameG,metal);frame.position.set(PF-0.02,0,0);pc.add(frame);
+const cav=new THREE.Mesh(new THREE.BoxGeometry(0.02,0.21,0.52),new THREE.MeshBasicMaterial({color:0x020304}));cav.position.set(PF-0.005,0,0);pc.add(cav);
+const pled=new THREE.Mesh(new THREE.BoxGeometry(0.01,0.05,0.14),new THREE.MeshBasicMaterial({color:0x3A4A60}));pled.position.set(PF-0.006,0.05,1.0);pc.add(pled);
+
+function drawScreen(lt){
+  const x=sx;x.fillStyle='#03060B';x.fillRect(0,0,SW,SH);
+  if(lt<1.15){ // asleep / black with faint reflection
+    const g=x.createLinearGradient(0,0,SW,SH);g.addColorStop(0,'rgba(255,255,255,.05)');g.addColorStop(.5,'rgba(255,255,255,0)');x.fillStyle=g;x.fillRect(0,0,SW,SH);
+  }else if(lt<1.45){ // reboot flash
+    x.fillStyle='#8A9BB8';x.font='400 34px JB';x.fillText('Reiniciando...',60,90);
+  }else if(lt<2.85){ // boot menu, highlight walks to the USB entry
+    x.fillStyle='#0A1424';x.fillRect(0,0,SW,SH);
+    x.fillStyle='#9FEF00';x.fillRect(0,0,SW,84);x.fillStyle='#0B111C';x.font='700 44px JB';x.fillText('BOOT MENU',40,58);
+    const items=['Internal SSD (NVMe)','USB: PARROT PERSISTENT','Network boot (PXE)','Enter Setup'];
+    const sel=lt<2.2?0:1;
+    items.forEach((t,i)=>{const y=150+i*92;if(i===sel){x.fillStyle='#9FEF00';x.fillRect(30,y-56,SW-60,78);x.fillStyle='#0B111C'}else x.fillStyle='#C9D6E6';x.font='700 44px JB';x.fillText((i===sel?'> ':'  ')+t,50,y)});
+    x.fillStyle='#8A9BB8';x.font='400 28px JB';x.fillText('↑↓ select   ENTER boot',50,SH-36);
+  }else{ // booting the live system with persistence
+    x.fillStyle='#0B111C';x.fillRect(0,0,SW,SH);
+    x.fillStyle='#9FEF00';x.font='700 76px SG';x.fillText('PARROT OS',60,190);
+    x.fillStyle='#E8EEF7';x.font='400 36px JB';x.fillText('live + persistence',64,250);
+    const p=clamp((lt-2.9)/1.6);x.strokeStyle='#24344B';x.lineWidth=4;x.strokeRect(62,320,SW-124,40);x.fillStyle='#9FEF00';x.fillRect(66,324,(SW-132)*p,32);
+    x.fillStyle='#8A9BB8';x.font='400 30px JB';
+    const log=['[ OK ] mounting persistence','[ OK ] /home restored','[ OK ] tools & configs loaded'];
+    log.forEach((l,i)=>{if(lt>3.1+i*0.4){x.fillStyle=l.startsWith('[ OK ]')?'#9FEF00':'#8A9BB8';x.fillText(l,64,430+i*52)}});
+  }
+  scrTex.needsUpdate=true;
+}
+
+// data packets that flow into the stick (step 7)
+const packets=[];
+for(let i=0;i<14;i++){const m=new THREE.Mesh(new THREE.BoxGeometry(0.28,0.28,0.28),new THREE.MeshBasicMaterial({color:i%3?0x9FEF00:0x3BC9FF,transparent:true}));stage.add(m);packets.push(m)}
+// orbit dots (CTA)
+const dots=new THREE.Group();scene.add(dots);
+for(let i=0;i<40;i++){const d=new THREE.Mesh(new THREE.BoxGeometry(0.035,0.035,0.035),new THREE.MeshBasicMaterial({color:i%4?0x9FEF00:0x3BC9FF}));const a=i/40*Math.PI*2;d.position.set(Math.cos(a)*1.9,0,Math.sin(a)*1.9);dots.add(d)}
+
+const PX=2*10*Math.tan(15*Math.PI/180)/1920; // world units per px at z=0
+const sy=y=>-(y-960)*PX;
+const LIME=new THREE.Color(0x9FEF00), DIM=new THREE.Color(0x3A4A60);
+
+function pose(id,lt,T){
+  beam.visible=false;stage.visible=false;dots.visible=false;packets.forEach(p=>p.visible=false);
+  scene.add(usb);usb.position.set(0,0,0);
+  stripeMat.color.copy(LIME);stripeMat.emissive.copy(LIME);stripeMat.emissiveIntensity=.6;
+  let ledOn=0;
+  if(id==='s1'){
+    // flies in, settles, gets scanned
+    const p=eo(clamp(lt/1.0));
+    usb.scale.setScalar(0.78);
+    usb.position.set(0.9*(1-p),sy(1030)-1.6*(1-p)+Math.sin(T*2)*0.03,0);
+    usb.rotation.set(0.30+0.4*(1-p),-2.9+p*2.25+lt*0.05,0.10+0.5*(1-p));
+    const sp=clamp((lt-1.05)/1.15);
+    ledOn=(lt>1.05&&lt<2.3)?(Math.floor(lt*14)%2):(lt>=2.3?1:0);
+  }else if(id==='s10'){const bk=document.getElementById('bootkeys');bk.style.opacity=Math.min(+bk.style.opacity||1,1-clamp((lt-2.9)/0.25));
+    // slides into a port, LED wakes up, data flows in
+    stage.visible=true;stage.add(usb);
+    stage.scale.setScalar(0.148);stage.position.set(-0.74,sy(1300),0);stage.rotation.set(0.36,0.66,0);drawScreen(lt);
+    const ins=eio(clamp((lt-0.2)/0.9));
+    const bump=lt>1.1&&lt<1.25?Math.sin((lt-1.1)/0.15*Math.PI)*0.02:0;
+    usb.rotation.set(-Math.PI/2,0,0);usb.scale.setScalar(1);usb.position.set(-1.1*(1-ins)-bump,0,0);
+    const on=lt>=1.12;
+    pled.material.color.copy(on?LIME:DIM);
+    ledOn=on?((lt>2.9&&lt<4.4)?(Math.floor(lt*16)%2):1):0;
+    const full=clamp((lt-2.9)/1.5);
+    stripeMat.emissiveIntensity=.4+full*(1.0+0.4*Math.sin(lt*10));
+    packets.forEach((m,i)=>{
+      const st=2.9+i*0.1,q=clamp((lt-st)/0.7);if(q<=0||q>=1)return;m.visible=true;
+      const a=i*2.39996;const px=PF+2.5+(i%7)*1.6, py=2.0+(i%4)*1.7, pz=Z0+0.1-py*0.29;
+      const e=eio(q);m.position.set(px*(1-e)+(-0.9+(i%5)*0.12)*e, py*(1-e)+0.15*e, pz*(1-e)+0.0*e);
+      m.rotation.set(lt*3+i,lt*2,0);m.material.opacity=q<0.8?1:(1-q)/0.2;m.scale.setScalar(1-0.6*e);
+    });
+  }else if(id==='s11'){
+    // turntable that ends showing the connector opening
+    usb.scale.setScalar(0.74);usb.position.set(0,sy(900)+Math.sin(T*2)*0.03,0);
+    const r=eio(clamp(lt/2.6));
+    usb.rotation.set(0.26+0.1*r,-0.35-0.75*r,0.06);
+    ledOn=1;
+    dots.visible=true;dots.position.copy(usb.position);dots.rotation.set(0.35,lt*0.6,0.12);dots.scale.setScalar(eo(clamp(lt/0.8)));
+  }
+  ledMat.emissiveIntensity=ledOn?3.2:0;ledMat.color.set(ledOn?0x9FEF00:0x1A2410);
+}
+
+/* ---------- per-scene custom ---------- */
+function custom(id,lt){
+  if(id==='s1'){
+    const g=document.getElementById('glitch');
+    const on=(lt>0.55&&lt<0.8)||(lt>1.9&&lt<2.02)||(lt>2.9&&lt<3.0);
+    const dx=on?(hash(Math.floor(lt*30))*16-8):0;
+    g.style.textShadow=on?`${dx}px 0 #FF3E5E, ${-dx}px 0 #3BC9FF`:'0 0 36px rgba(159,239,0,.35)';
+  }
+  if(id==='s2'){
+    const fA=document.querySelectorAll('#filesA .file'),fB=document.querySelectorAll('#filesB .file');
+    const pA=document.getElementById('pwrA'),pB=document.getElementById('pwrB');
+    const offA=lt>=1.4,offB=lt>=3.4;
+    pA.style.background=offA?'#FF3E5E':'var(--panel2)';pA.style.color=offA?'#0B111C':'var(--muted)';
+    pB.style.background=offB?'#9FEF00':'var(--panel2)';pB.style.color=offB?'#0B111C':'var(--muted)';
+    fA.forEach((f,i)=>{
+      const p=clamp((lt-1.5-i*0.08)/0.35);
+      const gl=p>0&&p<1?(hash(i+Math.floor(lt*30))*30-15):0;
+      f.style.opacity=1-p;f.style.transform=`translate(${gl}px,${p*30}px) scale(${1-p*0.3})`;
+      f.style.color=p>0?'#FF3E5E':'var(--sky)';f.style.borderColor=p>0?'#FF3E5E':'';
+    });
+    fB.forEach((f,i)=>{
+      const p=clamp((lt-3.5-i*0.08)/0.3);const pulse=p>0?Math.max(0,1-Math.abs(lt-3.6-i*0.08)*3):0;
+      f.style.color=p>0?'#9FEF00':'var(--sky)';f.style.borderColor=p>0?'#9FEF00':'';
+      f.style.boxShadow=p>0?`0 0 ${20+40*pulse}px rgba(159,239,0,${.2+.35*pulse})`:'none';
+      f.style.transform=`scale(${1+0.08*pulse})`;
+    });
+  }
+  if(id==='s3'){['n31','n32','n33'].forEach((n,i)=>{const e=document.getElementById(n);const ok=lt>=1.0+i*0.5;e.className='num'+(ok?' ok':'');e.textContent=ok?'✓':String(i+1)})}
+  if(id==='s8')drawTui(lt);
+  if(id==='s9'){
+    const set=(n,t,lbl)=>{const e=document.getElementById(n);const ok=lt>=t;e.className='num'+(ok?' ok':'');e.textContent=ok?'✓':lbl};
+    set('n91',1.2,'1');set('n92',3.1,'2');set('n93',7.1,'3');
+    const w=document.getElementById('w92');w.style.opacity=lt<1.9?0:((lt<3.1)?(0.55+0.45*Math.abs(Math.sin(lt*7))):1);
+    document.getElementById('c92').style.borderColor=lt>=1.9&&lt<3.1?'#FF3E5E':'';
+    const go=document.getElementById('go');const pr=lt>=4.2&&lt<4.4;
+    go.style.transform=`scale(${pr?0.9:1})`;go.style.boxShadow=lt>=4.2?'0 0 40px rgba(159,239,0,.55)':'none';
+    const p=eio(clamp((lt-4.4)/2.5));
+    document.getElementById('pg').style.width=(p*100)+'%';
+    document.getElementById('pgp').textContent=Math.round(p*100)+'%';
+    const done=lt>=7.0;
+    const l=document.getElementById('pgl');l.textContent=done?'Work done ✓':'Creando persistencia… (tarda unos minutos)';l.style.color=done?'#9FEF00':'';l.style.fontWeight=done?'700':'400';
+  }
+  if(id==='s10'){
+    ['b1','b2','b3','b4'].forEach((b,i)=>{const e=document.getElementById(b);e.className='key'+(i===0?(lt>=1.3&&lt<1.6?' on':(lt>=1.6?' done':'')):'')});
+  }
+}
+
+installRender({SC,TOTAL,custom,pose,gl:{renderer,scene,cam}});
+</script>
+</body>
+</html>

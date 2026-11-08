@@ -1,0 +1,15 @@
+/* Estados ok / aviso / error para usar JUNTO a cyber.css (plantilla). El Parrot definitivo NO lo usa. */
+/* ---- semántica de estado (ok / aviso / error), copiada de redteam.css para la plantilla (2026-11-07) ---- */
+:root{--ok:#2EE08C;--warn:#FFB020;--err:#FF3E5E;--bone:#E8EEF7}
+.t-ok{color:var(--ok)}.t-warn{color:var(--warn)}.t-err{color:var(--err)}
+.chip.ok{border-color:rgba(46,224,140,.55);background:linear-gradient(180deg,rgba(46,224,140,.14),rgba(46,224,140,.06));color:var(--bone)}
+.chip.ok svg{stroke:var(--ok)}
+.chip.warn{border-color:rgba(255,176,32,.6);background:linear-gradient(180deg,rgba(255,176,32,.14),rgba(255,176,32,.05))}
+.chip.warn svg{stroke:var(--warn)}
+.chip.err{border-color:var(--err);background:var(--err);color:#fff;font-weight:700}
+.chip.err svg{stroke:#fff}
+.card .num.ok{background:var(--ok);color:#06140D;border-color:var(--ok);box-shadow:0 0 24px rgba(46,224,140,.4)}
+.card .num.err{background:var(--err);color:#fff;border-color:var(--err);box-shadow:0 0 24px rgba(255,62,94,.45)}
+.key.done{border-color:var(--ok);color:var(--ok)}
+.badge.ok{background:var(--ok);color:#06140D}.badge.warn{background:var(--warn);color:#1A1000}.badge.err{background:var(--err);color:#fff}
+.panel.alert,.card.alert{border-color:rgba(255,62,94,.55);background:linear-gradient(180deg,rgba(255,62,94,.10),rgba(17,26,40,.94))}

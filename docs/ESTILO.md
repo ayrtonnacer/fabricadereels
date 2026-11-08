@@ -1,0 +1,16 @@
+# Estilo visual
+- Formato 1080×1920, 30 fps, márgenes ~70 px. Zona segura: nada importante en los 250 px superiores ni en los 380 inferiores (UI de las apps).
+- **Tema por defecto: `themes/cyber.css` (HackTheBox)**. Ayrton volvió a él (2026-11-07) tras probar red team en Parrot. `themes/redteam.css` queda opcional; fue pedido por Ayrton (referencia: "Ghosts of Russia" en Behance). Negro frío con brasas rojas, blanco hueso, acero. NO es dúo-tono: el color significa algo (ver semántica).
+- **Semántica de color (red team)**: rojo = identidad/énfasis (palabra clave, firma, progreso) · verde `#2EE08C` + ✓ = OK / correcto / flag capturada · ámbar `#FFB020` + ⚠ = aviso · ERROR = bloque rojo RELLENO con ✕ blanco (`.chip.err`, `.card.alert` + `.num.err`) · acero `#8FA6BF` = dato neutro. Nunca usar el mismo color para lo bueno y lo malo (error de la versión Anduril, donde todo era naranja). Verde y ámbar solo en estados, nunca como decoración.
+- Tema de Parrot / HackTheBox clásico: **cyber / HackTheBox** (`engine/themes/cyber.css`). Inspiración: hackthebox.com (y /red-teams). Existe `themes/anduril.css` (negro puro, blanco, acento naranja, Inter Tight) como alternativa, pero Ayrton prefirió HackTheBox.
+- Paleta: fondo `#0B111C`, paneles `#111A28`, filetes `#24344B`, texto `#E8EEF7`, secundario `#8A9BB8`, acento lima `#9FEF00` (resalte, firma, progreso), cian `#3BC9FF` (secundario), rojo `#FF3E5E` (error/peligro).
+- Tipografía: IBM Plex Sans (títulos 700, texto) y IBM Plex Mono (terminal, código). Nada serif ni genérico.
+- Titulares: máx. 3 líneas, la clave resaltada en verde. Una idea por escena.
+- Barra de progreso: "Paso N de M" en Plex Sans + segmentos. No usar etiquetas en mayúsculas con espaciado.
+- Prohibido: líneas de escaneo, marcos HUD/esquinas en L, "// TUTORIAL", "[ GRATIS ]", texto de fuente al final.
+- Se mantiene el glitch en la frase gancho.
+- Ritmo, subtítulos y animaciones "con vida": ver `docs/DINAMISMO.md` (referencia @aprendeiadecero, 2026-11-07).
+- Animaciones: `up`, `left`, `pop`, `fade` por atributo `data-a="tipo:inicio:duración"`; escritura de terminal 30 caracteres/s (`data-type`).
+- 3D (three.js): escala real entre objetos, materiales con RoomEnvironment, nada flotando sin apoyo. Ver el video de referencia.
+- Cada video termina en CTA con la firma en verde.
+- Firma: solo `@ayrtonnacer`, sin punto, icono ni adorno al lado.

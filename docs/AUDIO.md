@@ -1,0 +1,49 @@
+# Audio
+Referencias: video "15 efectos de sonido que debes usar" (Mirko Vigna, 2026-11) y la experiencia de los videos anteriores.
+
+## Las 4 capas
+1. **Voz** (esqueleto del video): Piper `es_AR-daniela-high` (CC BY-SA 4.0; acreditar). Parámetros en `video.json`: length_scale 0.92, noise_scale 0.6, noise_w_scale 0.7.
+2. **Música**: define el tono y el ritmo. Siempre debajo de la voz.
+3. **Efectos**: ambiente (base), foley (acciones en pantalla), creativos (whoosh, impact, hit, riser, bass drop, braam, silencio) y de UI/texto (click, pop, bell, electric, mechanic, glitch, keyboard).
+4. Los efectos son "actores secundarios": **un buen SFX no se nota, se siente**. Nunca al mismo nivel que la voz ni que la música.
+
+## Niveles (referencia)
+- Voz −1 a −6 dB (en la mezcla final queda a −14 LUFS integrado; pico real ≤ −1,5 dBTP).
+- Efectos 12–18 dB por debajo de la voz; música 22–24 dB por debajo de la voz mientras habla. `mezcla.py` lo logra con ganancias + sidechain: efectos ×1,25 bajan cuando habla la voz; música −8 dB con compresión sidechain más fuerte.
+- Ayrton prefiere efectos informáticos/de radio bien audibles: subirlos sin pisar la voz (usar `sfx_gain` en `video.json`).
+- Música: fade in 1,5 s, fade out 3,5 s, recortada al largo del video; elegir `musica_desde` en un tramo sin silencios (la pista actual tiene un hueco en 22,6–24,1 s → 24,5).
+
+## Reglas de colocación
+- **Whoosh**: en el momento de máximo movimiento (la entrada de un elemento/transición), no antes ni después. Transiciones: 0,12 s antes de cada escena.
+- **Impact/hit**: remarcan una acción importante o un momento de tensión; el hit es más corto y suave. A veces van juntos.
+- **Riser**: genera tensión antes de algo importante. Variar: usar `reverse(riser)` como "succión" antes de un impact. Patrón fuerte: **riser → impact → un instante de silencio → frase clave → whoosh**.
+- **Bass drop**: pocas veces por video (cámaras lentas, revelación). **Braam**: entrada dramática, con mesura.
+- **Silencio**: parar en seco después de una secuencia frenética hace que la frase siguiente pese más. No silencio absoluto: dejar el ambiente.
+- **Ambiente** (`T.ambient`): base baja en todo el video para que nunca suene vacío cuando se corta la música o la voz.
+- **UI/texto**: click/tick al escribir, pop cuando aparece algo, bell/ding de éxito, glitch (sin abusar: está quemado), keyboard para terminal.
+- **No ser literal**: el sonido no tiene que describir exactamente lo que se ve (una luz que parpadea puede llevar un trueno, no una bombilla).
+- **Efectos de filtro**: pasa-bajos = sensación de "bajo el agua"/abstracción; pasa-altos = énfasis, como oído por auriculares; reverb = profundidad (impact/riser/ambiente).
+- Errores a evitar: volumen demasiado alto, sonidos fuera de tiempo, ser demasiado literal, no organizar la biblioteca (una subcarpeta por tipo, ver `assets/sfx/LEEME.md`).
+
+## Significado fijo de los sonidos (usar siempre igual)
+whoosh=transición · pop=aparece algo · ding/chime=éxito · alert=aviso · buzz/powerdown=error o pérdida · powerup=algo se activa · thunk=Enter/enchufar · tick=tecla/dato · glitch=texto que tiembla · riser=progreso · boom/impact=golpe de apertura o remarque · sparkle=cierre/logro.
+
+## Efecto de radio en la voz (militar / walkie-talkie)
+En `video.json`: `"voz": {"efecto": "radio", "radio_fuerza": 0.6, ...}`. Lo aplica `voz.py` línea por línea (`engine/audio/radio.py`): banda telefónica 380–3100 Hz, saturación, estática de fondo solo mientras habla, clic de apertura y "squelch" (golpe de ruido) al soltar el botón. Fuerza 0.3 = radio limpia · 0.6 = walkie · 0.9 = radio rota. Uso pensado para videos de CTF/red team; en tutoriales largos cansa: usar fuerza baja o solo en el gancho. Probar suelto: `python engine/audio/radio.py in.wav out.wav 0.6`. Ojo: la voz queda más angosta, así que revisar inteligibilidad con palabras técnicas.
+
+## Sonidos reales (preferirlos cuando suenen mejor que los sintéticos)
+- **Tipeo**: los ticks sintéticos sonaban artificiales (feedback de Ayrton, 2026-11-04). Ahora `Track.typing()` usa teclas **reales** cortadas de `assets/sfx/propios/typing-keyboard.mp3` (de su repo code-reel-studio, `public/sounds/`) con `engine/audio/cortar_teclas.py` → `assets/sfx/propios/teclas/kNN.wav` (104 teclas). Reglas: nunca la misma tecla dos veces seguidas, variación de nivel (±2 dB) y de tiempo (±8 ms); Enter usa la tecla más pesada del lote. Sin esas teclas, cae a los ticks sintéticos.
+- **Otros propios** (`sfxlib.propio('intro-whoosh' | 'mouse-click' | 'zoom-click')`): disponibles para whoosh de apertura y clics de interfaz.
+- **Banco opcional** de Adobe Audition en `assets/sfx/<tipo>/` (ver LEEME) y `sfxlib.sample(tipo)`.
+
+## Principios tomados de earshot (Leonxlnx/earshot, MIT; solo lectura de sus notas, no se ejecuta su código)
+- Un buen efecto tiene 2–4 capas (transitorio, cuerpo, grave, cola) y cada capa ocupa su banda; una sola capa suena amateur.
+- Todo efecto tiene movimiento (filtro, tono y nivel cambian); un whoosh de espectro fijo suena barato.
+- Efectos sincronizados al cuadro (un cuadro corrido rompe la ilusión) y usados con mesura: la música ya mueve la imagen, los acentos grandes son pocos.
+- Una "paleta": los sonidos de interfaz de un video comparten timbre y registro; variar solo tono y envolvente.
+- Variación (round robin): varias versiones elegidas al azar; jitter de nivel ±1–2 dB y tiempo ±10 %.
+- Tipeo de motion graphics: toques cortos (50–80 ms) y agudos, ~11 teclas por segundo (separación mediana ≈ 87 ms).
+- Reverb solo en cuerpo y cola, el grave seco; pasa-altos a 20–25 Hz y limitador a −1 dBTP al final.
+
+## Herramientas
+`sfxlib.py` (sintéticos + tipeo real + `sample()`/`propio()` para sonidos reales de `assets/sfx/`), `cortar_teclas.py`, `sfx.py` (ejecuta `sfx_events.py`), `mezcla.py` (cadena de voz, ducking, música, loudnorm −14 LUFS). Referencia lograda en el video de Parrot: −14,2 LUFS.

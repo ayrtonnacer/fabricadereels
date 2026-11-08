@@ -1,0 +1,107 @@
+/* Tema "RED TEAM" (CTF / ciberseguridad ofensiva): negro frío con brasas rojas, blanco hueso, acero y SEMÁNTICA de estado propia.
+   Inspiración: "Ghosts of Russia" (Behance, Abdalla Hassan): paneles translúcidos con borde rojo fino, triángulos de alerta, profundidad roja desenfocada.
+   Color = significado (NO usar el rojo para "ok"): rojo = identidad/énfasis y peligro · verde = OK/correcto (✓) · ámbar = aviso (⚠) · acero = dato neutro.
+   El error se distingue del énfasis por su FORMA: bloque relleno + ✕ (ver .chip.err). Base original (cyber):
+   Reglas de uso en docs/ESTILO.md. Tipografía: IBM Plex Sans (texto) + IBM Plex Mono (código).
+   NO agregar: esquinas en L, líneas de escaneo, mono en mayúsculas con espaciado. */
+@font-face{font-family:SG;src:url(/node_modules/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-500-normal.woff2) format('woff2');font-weight:500}
+@font-face{font-family:SG;src:url(/node_modules/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-700-normal.woff2) format('woff2');font-weight:700}
+@font-face{font-family:JB;src:url(/node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2) format('woff2');font-weight:400}
+@font-face{font-family:JB;src:url(/node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-700-normal.woff2) format('woff2');font-weight:700}
+:root{
+  --bg:#07080B; --panel:#120D0F; --panel2:#1B1215; --line:#3A1A1F;
+  --acc:#FF2D3A; --cyan:#FF2D3A; --lime:#FF2D3A; --sky:#8FA6BF; --red:#FF2D3A; --amber:#FFB020;
+  --text:#F2EFEA; --muted:#A39C9C; --green:#FF2D3A; --navy:#07080B;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:var(--text);font-family:SG,sans-serif}
+#bg{position:absolute;inset:0;overflow:hidden;background:radial-gradient(1300px 1000px at 50% 18%,#3B0D14 0%,#16090C 50%,#060608 100%)}
+#dots{position:absolute;inset:-80px;background-image:radial-gradient(rgba(255,45,58,.09) 2px,transparent 2.6px);background-size:44px 44px}
+#glowA,#glowB{position:absolute;width:1300px;height:1300px;border-radius:50%;filter:blur(40px)}
+#glowA{background:radial-gradient(circle,rgba(255,45,58,.10),transparent 62%)}
+#glowB{background:radial-gradient(circle,rgba(120,150,190,.09),transparent 62%)}
+#scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.022) 0 2px,transparent 2px 4px)}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,transparent 50%,rgba(0,0,0,.7) 100%)}
+#gl{position:absolute;inset:0;width:1080px;height:1920px}
+.scene{position:absolute;inset:0;display:none}
+.abs{position:absolute;left:70px;right:70px}
+.center{text-align:center}
+
+/* plain frame for cards, panels, chips */
+.chip,.card,.panel{background:linear-gradient(180deg,rgba(30,18,22,.94),rgba(16,11,13,.94));border:1.5px solid var(--line);border-radius:14px}
+#stepbar{position:absolute;top:210px;left:70px;right:70px;display:none}
+#stepbar .lbl{font:500 40px SG,sans-serif;color:var(--muted)}
+#stepbar .lbl b{color:var(--acc);font-weight:700}
+#stepbar .segs{display:flex;gap:8px;margin-top:16px}
+#stepbar .seg{flex:1;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+#stepbar .seg i{display:block;height:100%;width:0;background:var(--acc);}
+
+h1{font-weight:700;font-size:104px;line-height:1.0;letter-spacing:-.025em}
+h2{font-weight:700;font-size:84px;line-height:1.04;letter-spacing:-.02em}
+.hl{color:var(--acc);text-shadow:0 0 36px rgba(255,45,58,.35)}
+.cy{color:var(--acc)}
+.rd{color:var(--red)}
+.sub{font-weight:500;font-size:48px;line-height:1.25;color:var(--muted)}
+.chip{display:inline-flex;align-items:center;gap:18px;padding:24px 32px;font-weight:500;font-size:42px;line-height:1.2}
+.chip.warn{--c:var(--red);border-color:rgba(255,45,58,.45)}
+.chip.ok{--c:var(--acc);border-color:rgba(255,45,58,.45)}
+.chip svg{flex:none}
+
+.term{position:absolute;left:50px;right:50px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6);background:#050507;border:1.5px solid var(--line);border-radius:14px}
+.term .bar{height:66px;display:flex;align-items:center;gap:12px;padding:0 28px;background:#120D0F;border-bottom:1.5px solid var(--line)}
+.term .bar i{width:16px;height:16px;border-radius:50%;background:#3A2A2E}
+.term .bar i:nth-child(1){background:var(--red)}.term .bar i:nth-child(2){background:var(--amber)}.term .bar i:nth-child(3){background:var(--acc)}
+.term .bar span{margin-left:18px;font:400 28px JB,monospace;color:var(--muted)}
+.term .body{padding:32px 36px 36px;font:400 36px/1.55 JB,monospace;min-height:452px;white-space:pre-wrap;word-break:break-all}
+.ln{visibility:hidden}
+.ps{color:var(--acc);font-weight:700}
+.dir{color:var(--sky)}
+.out{color:var(--muted)}
+.cur::after{content:"";display:inline-block;width:.6em;height:1.05em;background:var(--acc);vertical-align:-.18em;margin-left:2px}
+.cur.off::after{opacity:0}
+
+.tui{margin-top:10px;border:1.5px solid #5A2228;background:#08090C;font:400 28px/1.6 JB,monospace;white-space:pre;overflow:hidden}
+.tui .tt{background:#2A1216;color:#F2EFEA;padding:8px 16px;font-weight:700}
+.tui .t2{color:var(--muted);padding:6px 16px 8px}
+.tui .row{padding:2px 16px;color:#E4DFD9}
+.tui .row.sel{background:var(--acc);color:#07080B;font-weight:700}
+.tui .row b{color:var(--amber);font-weight:700}
+.tui .row.sel b{color:#07080B}
+
+.key{display:inline-flex;align-items:center;justify-content:center;min-width:96px;height:96px;padding:0 22px;border-radius:8px;background:#120D0F;border:1.5px solid var(--line);border-bottom-width:7px;font:700 44px JB,monospace;color:var(--muted)}
+.key.on{background:var(--acc);border-color:#8A111A;color:#07080B;box-shadow:0 0 30px rgba(255,45,58,.45)}
+.key.done{border-color:var(--acc);color:var(--acc)}
+
+.card{display:flex;align-items:center;gap:28px;padding:30px 34px}
+.card .num{flex:none;width:76px;height:76px;border-radius:6px;display:flex;align-items:center;justify-content:center;font:700 38px JB,monospace;background:#07080B;color:var(--acc);border:1.5px solid var(--line)}
+.card .num.ok{background:var(--acc);color:#07080B;border-color:var(--acc);box-shadow:0 0 24px rgba(255,45,58,.4)}
+.card .t{font-weight:700;font-size:48px;line-height:1.1}
+.card .s{font:400 30px/1.35 JB,monospace;color:var(--muted);margin-top:8px}
+.pill{display:inline-block;padding:6px 16px;border-radius:4px;background:#07080B;border:1.5px solid var(--line);color:var(--text)}
+
+.files{display:flex;gap:26px;justify-content:center}
+.file{width:150px;height:170px;border-radius:8px;background:#07080B;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center}
+.panel{position:absolute;left:70px;right:70px;padding:40px}
+.panel .ph{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:50px;margin-bottom:34px}
+.panel .res{margin-top:34px;font-weight:700;font-size:52px}
+.badge{font:700 28px JB,monospace;padding:10px 18px;border-radius:8px}
+
+.prog{height:24px;background:#07080B;border:1.5px solid var(--line);overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:repeating-linear-gradient(115deg,rgba(0,0,0,.25) 0 12px,transparent 12px 24px),var(--acc);box-shadow:0 0 20px rgba(255,45,58,.6)}
+.go{display:inline-block;padding:18px 60px;border-radius:6px;background:var(--acc);color:#07080B;font:700 44px JB,monospace}
+.sticker{position:absolute;padding:12px 24px;border:2px solid var(--acc);background:rgba(255,45,58,.1);color:var(--acc);font:700 36px JB,monospace;letter-spacing:.12em}
+
+/* ---- semántica de estado (red team) ---- */
+:root{--ok:#2EE08C;--warn:#FFB020;--err:#FF2D3A;--steel:#8FA6BF;--bone:#F2EFEA}
+.t-ok{color:var(--ok)}.t-warn{color:var(--warn)}.t-err{color:var(--err)}
+.chip.ok{border-color:rgba(46,224,140,.55);background:linear-gradient(180deg,rgba(46,224,140,.14),rgba(46,224,140,.06));color:var(--bone)}
+.chip.ok svg{stroke:var(--ok)}
+.chip.warn{border-color:rgba(255,176,32,.6);background:linear-gradient(180deg,rgba(255,176,32,.14),rgba(255,176,32,.05))}
+.chip.warn svg{stroke:var(--warn)}
+.chip.err{border-color:var(--err);background:var(--err);color:#fff;font-weight:700}
+.chip.err svg{stroke:#fff}
+.card .num.ok{background:var(--ok);color:#06140D;border-color:var(--ok);box-shadow:0 0 24px rgba(46,224,140,.4)}
+.card .num.err{background:var(--err);color:#fff;border-color:var(--err);box-shadow:0 0 24px rgba(255,45,58,.45)}
+.key.done{border-color:var(--ok);color:var(--ok)}
+.badge.ok{background:var(--ok);color:#06140D}.badge.warn{background:var(--warn);color:#1A1000}.badge.err{background:var(--err);color:#fff}
+.panel.alert,.card.alert{border-color:rgba(255,45,58,.55);background:linear-gradient(180deg,rgba(255,45,58,.10),rgba(18,13,15,.94))}
