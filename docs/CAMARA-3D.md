@@ -29,7 +29,9 @@ El **3D Camera Tracker** de AE es otra cosa: analiza un video filmado para pegar
   - Hueco corto (0,4–0,6 s) + mucho giro + `latigazo` = **whip pan** (con el motion blur queda el barrido).
   - Hueco largo (1,5–2 s) + `suave` desde una órbita a un cenital = **grúa**.
 
-## Recetario de transiciones "virales"
+## Recetario de transiciones "virales" (catálogo para ELEGIR, no una secuencia fija)
+Es un menú. Cada reel usa solo 2–4 de estos recursos, elegidos por lo que pide SU idea; la demo `_demo-camara3d` los junta todos a propósito para mostrarlos y NO es una plantilla.
+
 1. **Latigazo (whip pan)**: hueco de 0,5 s con ease `latigazo` + MotionBlur + whoosh en el pico (mitad del hueco). Se puede cortar de escena justo en el pico: el desenfoque tapa el corte.
 2. **Zoom through (atravesar)**: `mover` con ease `entrada` hacia un objeto (fov que se cierra: 50→28), `destello` en el instante en que lo atraviesa, corte al set nuevo del otro lado. Impacto + riser antes.
 3. **Grúa a cenital**: de un plano a la altura de los ojos a mirar desde arriba; ideal para "mostrar el mapa" (red, arquitectura, árbol de directorios). Dibujar algo en el piso mientras sube.
@@ -38,6 +40,24 @@ El **3D Camera Tracker** de AE es otra cosa: analiza un video filmado para pegar
 6. **Travelling con paralaje**: carteles a distintas profundidades; lo cercano pasa rápido y lo lejano lento. Para cierres y listas.
 7. **Match cut**: terminar una toma con una forma (círculo de un nodo, pantalla) y empezar la siguiente con la misma forma en el mismo lugar del cuadro.
 8. **Speed ramp**: `rampa()` para cámara lenta en el momento clave y aceleración hacia el corte.
+
+## Variedad entre reels (regla de la fábrica)
+Lo que es IGUAL en todos los reels: la voz (Daniela), la música de fondo y la estética visual (tema, tipografía, firma). Todo lo demás cambia de un reel a otro:
+- **El mundo 3D** lo dicta el tema (pasillo de servidores, placa madre, árbol de carpetas, plano cartesiano, ciudad de datos, un objeto único sobre fondo limpio…). Nunca reutilizar el mismo set en dos reels seguidos.
+- **El plan de cámara** se elige por intención, no por posición en el guion. Guía de elección (opciones, no obligaciones):
+
+| Si la idea es… | Conviene… |
+|---|---|
+| un lugar o recorrido ("qué hay adentro") | dron FPV |
+| un objeto físico | órbita + push-in |
+| un mapa, red, estructura, árbol | cenital / grúa |
+| un cambio de estado o un giro | latigazo o zoom through |
+| una lista o comparación | travelling con paralaje, o cámara casi quieta con cortes |
+| algo abstracto (matemática) | cámara casi fija, el movimiento lo hacen los objetos |
+
+- **Un reel puede no tener casi movimiento de cámara.** El movimiento es una herramienta, no un requisito; si la idea se entiende mejor quieta, queda quieta.
+- Antes de armar el plan, mirar el del reel anterior (`rig.toma` en su `index.html`) y **no repetir la misma secuencia de tomas ni el mismo tipo de transición de salida**.
+- Variar también el ritmo: un reel puede ser pausado (2 tomas largas) y otro vertiginoso (6 tomas cortas).
 
 ## Reglas (además de las de CLAUDE.md)
 - **Una intención por movimiento**; cada toma acompaña UNA frase de la voz. El latigazo/corte cae entre frases.

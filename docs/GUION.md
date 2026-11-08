@@ -37,6 +37,10 @@ Hook-promesa (0–3 s) → Contexto mínimo (3–7) → Cuerpo A (7–20) → Mi
 - **Versión bucle** (shorts/reels): sin CTA hablado; la última frase desemboca en el hook y el último cuadro vuelve al primero (ver `videos/2026-11-parrot-loop`). Para contenido educativo funciona mejor como *desafío* ("¿te animás a descifrar el mensaje del principio?") que como truco de edición.
 - En humor: el CTA mata el remate; solo texto en pantalla o nada.
 
+## Qué es fijo y qué varía entre reels
+- **Fijo (identidad de @ayrtonnacer):** voz Piper Daniela, música de fondo, estética visual (tema `cyber.css`, IBM Plex, color = significado), firma al inicio y al final.
+- **Varía en cada reel:** tipo de reel (concepto, mito, tutorial, historia, CTF, matemática visual…), tipo de hook, analogía visual, mundo 3D, plan de cámara y transiciones, ritmo, duración. Las reglas de este documento fijan la *arquitectura* del guion, no la apariencia ni la coreografía. Antes de planear un reel, revisar el anterior y elegir algo distinto en hook, analogía y cámara.
+
 ## Originalidad (riesgo de "contenido no auténtico" en YouTube)
 La plantilla fija la **arquitectura** (bloques, tiempos, campos), no las frases, hooks ni animaciones. Variar tipo de hook, analogía visual y música entre videos. Poner marca personal en cada guion (primera persona, anécdota de la cursada, un error real, un callejón sin salida). Material propio en pantalla; nada de capturas ajenas sin transformar. Fuente primaria en la descripción para historias de hackeos; nunca flags de máquinas activas de HTB.
 
