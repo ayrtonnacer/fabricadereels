@@ -58,7 +58,7 @@ export function bg(T){
 }
 
 // Registra window.__render/__scenes/__ready. `custom(id,lt)` anima elementos propios de la escena;
-// `pose(id,lt,T)` + `gl:{renderer,scene,cam}` solo si el video usa 3D (escena con gl:true).
+// `pose(id,lt,T)` (si devuelve true, ya renderizó él mismo) + `gl:{renderer,scene,cam}` solo si el video usa 3D (escena con gl:true).
 export function installRender({SC,TOTAL,custom=()=>{},pose=null,gl=null}){
   const canvas=document.getElementById('gl');
   window.__render=(T)=>{
@@ -73,7 +73,8 @@ export function installRender({SC,TOTAL,custom=()=>{},pose=null,gl=null}){
     else sb.style.display='none';
     anim(cur.el,lt);custom(cur.id,lt);
     canvas.style.display=(cur.gl&&gl)?'block':'none';
-    if(cur.gl&&gl&&pose){pose(cur.id,lt,T);gl.renderer.render(gl.scene,gl.cam)}
+    const mb=document.getElementById('glmb');if(mb&&!(cur.gl&&gl))mb.style.display='none';
+    if(cur.gl&&gl&&pose){if(pose(cur.id,lt,T)!==true)gl.renderer.render(gl.scene,gl.cam)}  // pose()→true: ya renderizó (p. ej. MotionBlur)
   };
   window.__scenes=SC.map(s=>({id:s.id,t0:s.t0,d:s.d}));window.__total=TOTAL;
   window.__render(0);window.__ready=true;

@@ -19,6 +19,7 @@ Pensar la escena como un set continuo: una cámara (`PerspectiveCamera`) que se 
 - **Estaciones**: posiciones del mundo donde ocurre cada idea.
 - **Camino**: dolly, orbit, crane, push-in entre estaciones; easing suave (ease-in-out).
 - **Profundidad**: primer plano / plano medio / fondo con paralaje y desenfoque.
+- **Implementación**: `engine/camara3d.js` (tomas `fpv`, `orbita`, `cenital`, `mover`, transiciones automáticas, motion blur). Guía y recetario en `docs/CAMARA-3D.md`.
 - **Reglas**: una intención por movimiento; el whoosh va en el pico de velocidad; no mover cámara y objeto principal a la vez sin motivo.
 
 ## Chequeo

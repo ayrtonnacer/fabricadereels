@@ -41,3 +41,8 @@
 - Bucle: la última frase desemboca en el hook, el último cuadro vuelve al primero (corte oculto en un movimiento), música en silencio en el empalme, sin "dale me gusta" ni firma al final.
 - Medido: Piper Daniela da ≈ 2,3 palabras/s en el video completo (no 2,5).
 - yt-dlp instalado, pero el proxy de la sesión bloquea YouTube: las referencias se pasan como transcripción o archivos adjuntos.
+
+## 2026-11-08 — Cámara 3D estilo After Effects
+- Ayrton pidió recorridos en 3D con cambios de plano (cenital, órbita, dron en primera persona como en el artefacto del dron) y transiciones de reel viral, hechos con Claude en vez de After Effects. Se creó `engine/camara3d.js` (Rig de tomas con tiempo global, transiciones automáticas entre tomas, motion blur real por sub-cuadros, temblor, speed ramp, carteles 3D) y la demo `videos/_demo-camara3d/`. Guía: `docs/CAMARA-3D.md`.
+- Los videos de referencia de YouTube no se pudieron mirar desde la sesión (proxy bloquea YouTube); se usó el conocimiento de la técnica de AE. Falta que Ayrton vea la demo y diga qué movimientos le gustan.
+

@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Demo cámara 3D</title>
+<link rel="stylesheet" href="/engine/themes/cyber.css">
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+<style>
+  .mov{position:absolute;left:0;right:0;top:1470px;text-align:center}
+  #flash{position:absolute;inset:0;background:var(--text);opacity:0;pointer-events:none}
+  #vin{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 48%,transparent 55%,rgba(0,0,0,.55) 100%)}
+</style>
+</head>
+<body>
+<!-- Cada escena es un PLANO de la misma cámara continua (engine/camara3d.js). El HTML solo pone el rótulo del movimiento. -->
+<section class="scene" id="s1">
+  <div class="abs" style="top:250px"><div style="display:inline-block;font:700 44px SG,sans-serif;color:var(--acc)" data-a="pop:0.1:0.4">@ayrtonnacer</div></div>
+  <div class="mov" data-a="up:0.4"><div class="chip">Dron en <b class="cy">&nbsp;primera persona</b></div></div>
+</section>
+<section class="scene" id="s2"><div class="mov" data-a="up:0.15"><div class="chip">Órbita <b class="cy">&nbsp;+ acercamiento</b></div></div></section>
+<section class="scene" id="s3"><div class="mov" data-a="up:0.15"><div class="chip">Grúa → <b class="cy">&nbsp;plano cenital</b></div></div></section>
+<section class="scene" id="s4"><div class="mov" data-a="up:0.1"><div class="chip"><b class="cy">Zoom through</b>&nbsp;(atravesar)</div></div></section>
+<section class="scene" id="s5"><div class="mov" style="top:1560px" data-a="up:0.5"><div class="chip">Travelling con <b class="cy">&nbsp;paralaje</b></div></div></section>
+<div id="vin"></div><div id="flash"></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { clamp, eo, eio, hash, loadConfig, mountShell, timeline, installRender } from '/engine/lib.js';
+import { Rig, MotionBlur, temblor, cartel, colorTema, destello } from '/engine/camara3d.js';
+mountShell();
+const CFG = await loadConfig();
+const SC = CFG.scenes.map(s => ({ ...s }));
+const TOTAL = timeline(SC);
+await document.fonts.load('700 100px SG'); await document.fonts.load('500 100px SG'); await document.fonts.load('400 40px JB'); await document.fonts.ready;
+
+const ACC = new THREE.Color(colorTema('--acc')), SKY = new THREE.Color(colorTema('--sky', '#3BC9FF')), BG = new THREE.Color(colorTema('--bg', '#0B111C'));
+
+/* ---------- renderer, escena, luces ---------- */
+const canvas = document.getElementById('gl');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(1080, 1920, false);
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.outputColorSpace = THREE.SRGBColorSpace;
+const scene = new THREE.Scene();
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+scene.fog = new THREE.Fog(BG, 6, 34);
+const cam = new THREE.PerspectiveCamera(60, 1080 / 1920, 0.05, 200);
+scene.add(new THREE.AmbientLight(0xffffff, 0.25));
+const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(4, 9, 6); scene.add(key);
+
+/* ---------- set: piso, pasillo de racks (medidas reales en metros: rack 0,6 × 2 m) ---------- */
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(200, 200), new THREE.MeshStandardMaterial({ color: 0x0A1019, roughness: .55, metalness: .3 }));
+floor.rotation.x = -Math.PI / 2; scene.add(floor);
+const grid = new THREE.GridHelper(200, 200, 0x1B2A40, 0x14202F); grid.position.y = 0.002; scene.add(grid);
+
+const rackG = new RoundedBoxGeometry(0.6, 2.0, 0.86, 2, 0.03), rackM = new THREE.MeshStandardMaterial({ color: 0x141B26, metalness: .6, roughness: .45 });
+const RZ = []; for (let z = 10; z >= -8.2; z -= 0.9) RZ.push(z);
+const racks = new THREE.InstancedMesh(rackG, rackM, RZ.length * 2), dm = new THREE.Object3D();
+const ledG = new THREE.BoxGeometry(0.02, 0.025, 0.09), LPR = 7;
+const leds = new THREE.InstancedMesh(ledG, new THREE.MeshBasicMaterial({ toneMapped: false }), RZ.length * 2 * LPR);
+let ri = 0, li = 0;
+for (const side of [-1, 1]) for (const z of RZ) {
+  dm.position.set(side * 1.7, 1.0, z); dm.rotation.set(0, 0, 0); dm.updateMatrix(); racks.setMatrixAt(ri++, dm.matrix);
+  for (let k = 0; k < LPR; k++) { dm.position.set(side * 1.7 - side * 0.305, 0.35 + k * 0.24, z + (hash(li) - .5) * 0.5); dm.updateMatrix(); leds.setMatrixAt(li, dm.matrix); leds.setColorAt(li, ACC); li++; }
+}
+scene.add(racks, leds);
+// franja de luz en el techo del pasillo (guía la mirada del dron)
+for (const side of [-1, 1]) { const s = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.04, 19), new THREE.MeshBasicMaterial({ color: SKY, toneMapped: false })); s.position.set(side * 1.36, 2.02, 0.9); scene.add(s); }
+
+/* ---------- servidor central (la órbita gira alrededor) ---------- */
+const CORE = [7, 0, -14];
+const core = new THREE.Group(); core.position.set(...CORE); scene.add(core);
+{ const b = new THREE.Mesh(new RoundedBoxGeometry(1.4, 2.4, 1.4, 4, 0.08), new THREE.MeshPhysicalMaterial({ color: 0x10151E, metalness: .5, roughness: .35, clearcoat: .6 })); b.position.y = 1.2; core.add(b); }
+const scr = (() => { const c = document.createElement('canvas'); c.width = 512; c.height = 768; const x = c.getContext('2d');
+  x.fillStyle = '#070B12'; x.fillRect(0, 0, 512, 768); x.font = '400 30px JB'; x.textBaseline = 'top';
+  const L = ['$ ssh root@nucleo', 'conectado ✓', '$ uptime', ' 412 días', '$ ls /srv', ' web  db  vpn', '$ _'];
+  L.forEach((l, i) => { x.fillStyle = l.startsWith('$') ? colorTema('--acc') : colorTema('--muted', '#8A9BB8'); x.fillText(l, 34, 40 + i * 52); });
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; })();
+for (const r of [0, Math.PI / 2, Math.PI, -Math.PI / 2]) {
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(1.0, 1.5), new THREE.MeshBasicMaterial({ map: scr, toneMapped: false }));
+  m.position.set(Math.sin(r) * 0.705, 1.45, Math.cos(r) * 0.705); m.rotation.y = r; core.add(m);
+}
+const halo = new THREE.Mesh(new THREE.RingGeometry(1.15, 1.25, 64), new THREE.MeshBasicMaterial({ color: ACC, toneMapped: false, side: THREE.DoubleSide }));
+halo.rotation.x = -Math.PI / 2; halo.position.y = 0.01; core.add(halo);
+const coreLight = new THREE.PointLight(ACC, 18, 9); coreLight.position.set(0, 2.8, 0); core.add(coreLight);
+
+/* ---------- red dibujada en el piso (se ve desde el cenital) ---------- */
+const NODOS = [[0, -11.5], [0, 11], [-3.5, 4], [-3.5, -6], [4, 6], [4, -6], [7, -6], [7, -14], [10, -2], [10, 8]];
+const RUTAS = [[1, 0], [0, 7], [3, 0], [2, 3], [4, 9], [5, 6], [6, 7], [8, 6], [9, 8], [0, 5]];  // trazado en L (tipo plano de red)
+const segs = [];
+const segM = new THREE.MeshBasicMaterial({ color: ACC, toneMapped: false, transparent: true });
+RUTAS.forEach(([a, b], i) => {
+  const A = NODOS[a], B = NODOS[b], C = [B[0], A[1]];
+  for (const [p, q, o] of [[A, C, 0], [C, B, 0.5]]) {
+    const len = Math.hypot(q[0] - p[0], q[1] - p[1]); if (len < 0.01) continue;
+    const g = new THREE.PlaneGeometry(1, 0.1); g.translate(0.5, 0, 0);
+    const m = new THREE.Mesh(g, segM); m.rotation.x = -Math.PI / 2; m.rotation.z = Math.atan2(-(q[1] - p[1]), q[0] - p[0]);
+    m.position.set(p[0], 0.012, p[1]); m.userData = { len, t: 8.5 + i * 0.16 + o * 0.35 }; m.scale.x = 0.0001; scene.add(m); segs.push(m);
+  }
+});
+const nodos = NODOS.map(([x, z]) => { const m = new THREE.Mesh(new THREE.CircleGeometry(0.32, 40), new THREE.MeshBasicMaterial({ color: SKY, toneMapped: false })); m.rotation.x = -Math.PI / 2; m.position.set(x, 0.014, z); scene.add(m); return m; });
+
+/* ---------- set del final: carteles 3D a distintas profundidades (paralaje) ---------- */
+const FIN = new THREE.Group(); FIN.position.set(40, 0, 0); scene.add(FIN);
+const C = [
+  [[{ t: 'Dron FPV', px: 120 }], -4.0, 2.4, -2.5, 2.6],
+  [[{ t: 'Latigazo', px: 120 }], -1.8, 0.9, -6, 2.8],
+  [[{ t: 'Órbita', px: 120 }], 0.6, 2.9, -9, 2.8],
+  [[{ t: 'Cenital', px: 120 }], 0.4, 0.5, -3.5, 2.4],
+  [[{ t: 'Zoom through', px: 120 }], 3.4, 3.6, -10, 3.6],
+];
+for (const [l, x, y, z, w] of C) { const m = cartel(THREE, l, { ancho: w }); m.position.set(x, y, z); FIN.add(m); }
+const firma = cartel(THREE, [{ t: 'Así se mueve', px: 92, c: '--text', peso: 700 }, { t: 'la cámara en 3D', px: 92, c: '--text', peso: 700 }, { t: '@ayrtonnacer', px: 104, c: '--acc', peso: 700 }], { ancho: 2.3 });
+firma.position.set(4.0, 1.75, -1.2); FIN.add(firma);
+// polvo flotante: puntos cerca y lejos que delatan la profundidad
+const pg = new THREE.BufferGeometry(), PP = [];
+for (let i = 0; i < 260; i++) PP.push(-8 + hash(i) * 22, 0.2 + hash(i + 99) * 4, -14 + hash(i + 7) * 16);
+pg.setAttribute('position', new THREE.Float32BufferAttribute(PP, 3));
+FIN.add(new THREE.Points(pg, new THREE.PointsMaterial({ color: ACC, size: 0.035, transparent: true, opacity: .7, toneMapped: false })));
+
+/* ---------- la cámara: tomas con tiempo GLOBAL (la cámara es una sola, continua, como en After Effects) ---------- */
+const rig = new Rig(THREE, cam);
+rig.toma({ t0: 0, t1: 3.9, tipo: 'fpv', banking: 0.7, fov: 64, ease: x => x,       // dron: velocidad constante
+  curva: [[0.4, 1.0, 13], [-0.5, 0.9, 8], [0.5, 1.2, 3], [-0.4, 1.0, -2], [0.3, 1.25, -6], [0, 1.3, -9.5]] });
+rig.transicion(0, 'latigazo');                                                      // 3.9→4.45: whip pan a la derecha
+rig.toma({ t0: 4.45, t1: 7.9, tipo: 'orbita', centro: [CORE[0], 1.4, CORE[2]], radio: 5.2, radioFin: 5.6, desde: -62, hasta: 38, alto: 0.4, altoFin: 0.9, fov: 46, fovFin: 40, ease: 'salida' });
+// 7.9→9.9 la transición suave ES la grúa: sube y gira la mirada hacia el piso
+rig.toma({ t0: 9.9, t1: 11.6, tipo: 'cenital', centro: [3, 0, -2], alto: 31, altoFin: 29, giro: [0, 12], fov: 50, ease: 'lineal' });
+rig.toma({ t0: 11.6, t1: 13.36, tipo: 'mover', ease: 'entrada',                     // picada que acelera hasta atravesar el nodo
+  de: { pos: [3, 29, -2 + 0.06], look: [3, 0, -2], fov: 50 },
+  a: { pos: [0, 0.25, -11.45], look: [0, 0, -11.5], fov: 28 } });
+rig.toma({ t0: 13.4, t1: 17, tipo: 'mover', ease: 'salida',                         // travelling lateral del final
+  de: { pos: [34.2, 1.9, 5.5], look: [36.5, 1.5, -4], fov: 40 },
+  a: { pos: [43.6, 1.8, 6.6], look: [44.0, 1.75, -1.2], fov: 36 } });
+rig.extra = (T, p) => {                                                             // cámara viva: temblor de dron/cámara en mano
+  const a = T < 4 ? 0.035 : T < 9.9 ? 0.012 : T > 13.4 ? 0.01 : 0, d = temblor(T, a, T < 4 ? 1.6 : 0.8);
+  return { ...p, pos: [p.pos[0] + d[0], p.pos[1] + d[1], p.pos[2] + d[2]] };
+};
+const blur = new MotionBlur(renderer, scene, cam, { obturador: 0.5, max: 12, umbral: 2.5 });
+
+// anima el set en el tiempo t (también dentro de los sub-cuadros del desenfoque)
+function mundo(T) {
+  li = 0; for (const side of [-1, 1]) for (let r = 0; r < RZ.length; r++) for (let k = 0; k < LPR; k++) {
+    const on = hash(li * 3.1 + Math.floor(T * (3 + hash(li) * 6))) > 0.35; leds.setColorAt(li, on ? (hash(li + 5) > .8 ? SKY : ACC) : BG); li++;
+  }
+  leds.instanceColor.needsUpdate = true;
+  for (const m of segs) m.scale.x = Math.max(0.0001, eo(clamp((T - m.userData.t) / 0.45)) * m.userData.len);
+  nodos.forEach((n, i) => { const k = clamp((T - 8.4 - i * 0.12) / 0.3); n.scale.setScalar(Math.max(0.001, eo(k) * (1 + 0.12 * Math.sin(T * 5 + i)))); });
+  halo.scale.setScalar(1 + 0.05 * Math.sin(T * 3)); core.rotation.y = 0;
+  const y = cam.position.y; scene.fog.near = 6 + y; scene.fog.far = 30 + y * 1.3;
+}
+function colocar(t) { mundo(t); return rig.aplicar(t); }
+
+const flash = document.getElementById('flash');
+function custom(id, lt) { const T = SC.find(s => s.id === id).t0 + lt; flash.style.opacity = 0.9 * destello(T, 13.4, 0.14, 0.3); }
+function pose(id, lt, T) { return blur.render(T, colocar); }
+installRender({ SC, TOTAL, custom, pose, gl: { renderer, scene, cam } });
+</script>
+</body>
+</html>

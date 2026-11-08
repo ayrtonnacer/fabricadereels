@@ -1,0 +1,14 @@
+{
+ "titulo": "Demo de cámara 3D (recorrido, latigazo, cenital, zoom through)",
+ "fecha": "2026-11",
+ "fuente": "Demo técnica del motor engine/camara3d.js (sin voz)",
+ "steps": 0,
+ "scenes": [
+  {"id": "s1", "d": 4.4, "gl": true, "plano": "dron FPV por el pasillo de servidores + latigazo de salida"},
+  {"id": "s2", "d": 3.6, "gl": true, "plano": "órbita con push-in alrededor del servidor central"},
+  {"id": "s3", "d": 3.4, "gl": true, "plano": "grúa que sube hasta plano cenital; la red se dibuja en el piso"},
+  {"id": "s4", "d": 2.0, "gl": true, "plano": "zoom through: picada desde el cenital hacia un nodo + destello"},
+  {"id": "s5", "d": 3.6, "gl": true, "plano": "truck lateral con paralaje entre carteles 3D + firma"}
+ ],
+ "voz": {"lineas": []}
+}
