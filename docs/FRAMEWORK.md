@@ -1,9 +1,9 @@
-# El framework (cómo funciona por dentro)
+# Claqueta: cómo funciona por dentro
 
-Este repo es un **framework propio para hacer reels**: el mismo modelo que HyperFrames y Remotion (una página web que Chrome dibuja cuadro por cuadro y FFmpeg convierte en video), pero hecho a medida de los reels educativos de @ayrtonnacer: formato 1080×1920, voz Piper en español rioplatense, estética HackTheBox, 3D con three.js, reglas de guion y de movimiento, y un revisor que conoce las correcciones de Ayrton.
+Claqueta es un **framework propio para hacer reels**: el mismo modelo que HyperFrames y Remotion (una página web que Chrome dibuja cuadro por cuadro y FFmpeg convierte en video), pero hecho a medida de los reels educativos de @ayrtonnacer: formato 1080×1920, voz Piper en español rioplatense, estética HackTheBox, 3D con three.js, reglas de guion y de movimiento, y un revisor que conoce las correcciones de Ayrton.
 
 ## Comparación
-| | Remotion | HyperFrames | Este framework |
+| | Remotion | HyperFrames | Claqueta |
 |---|---|---|---|
 | Qué se escribe | componentes React | HTML + timeline GSAP | HTML + `video.json` + funciones de `t` (`custom`, `pose`) |
 | Cómo se mueve el tiempo | la función lee el número de cuadro | el motor pausa y "salta" la animación | el motor llama `__render(t)` con `t = cuadro / 30` |

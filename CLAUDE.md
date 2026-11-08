@@ -1,6 +1,6 @@
-# Fábrica de reels — manual de operación
+# Claqueta — manual de operación
 
-Repo de @ayrtonnacer para producir reels verticales (1080×1920, ~45–60 s) explicativos de programación, matemática, ciberseguridad y Linux.
+Claqueta es el framework propio de @ayrtonnacer para producir reels verticales (1080×1920, ~45–60 s) explicativos de programación, matemática, ciberseguridad y Linux: código HTML/three.js → mp4, con voz, efectos y música.
 Flujo: **el usuario pega una fuente (link o tema) → Claude escribe el guion → el usuario lo aprueba → se anima en HTML/three.js → voz Piper (Daniela es_AR) + efectos + música → mp4.**
 
 Cuando el usuario diga "hacé un reel de <fuente>" (o `/reel`), seguí `docs/FLUJO.md` paso a paso. Leé antes `docs/ESTILO.md`, `docs/DINAMISMO.md` (ritmo, animaciones y subtítulos), `docs/GUION.md` (estructura Hook→Payoff→CTA/bucle, 2,3 palabras/s; investigación completa en `docs/INVESTIGACION-GUIONES.md`; plantilla `videos/_plantilla/guion.md`), `docs/AUDIO.md` y `engine/audio/pronunciacion.json`. Cámara 3D (recorridos de dron, órbita, cenital, latigazo, zoom through): `docs/CAMARA-3D.md` + `engine/camara3d.js`, demo `videos/_demo-camara3d/`. Movimiento y transiciones (ley del vector, costuras, señales de video generado): `docs/MOVIMIENTO.md` + `engine/costuras.js`. Videos de referencia: `docs/ANALISIS-REFERENCIAS.md` (`python engine/analizar_video.py` → un documento por video en `referencias/`). Marco mental: `docs/PARTES.md` (el video como un auto), plantilla `docs/SHOOTING-SCRIPT.md` y `docs/GLOSARIO-EDICION.md`. Mirá `docs/DECISIONES.md`: ahí está cada corrección que el usuario hizo; no repitas esos errores.

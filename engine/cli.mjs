@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-// reel — la herramienta de línea de comandos de la fábrica. Un solo punto de entrada para todo el flujo.
+// reel — la herramienta de línea de comandos de Claqueta. Un solo punto de entrada para todo el flujo.
 //   npx reel <comando> …      (o: node engine/cli.mjs <comando> …)
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { REPO, servir } from './servidor.mjs';
 
-const AYUDA = `reel — fábrica de reels de @ayrtonnacer
+const AYUDA = `Claqueta — framework para crear reels (comando: reel)
 
   reel nuevo <tema> [--titulo "…"]     copia la plantilla a videos/AAAA-MM-<tema>
   reel revisar <video> [--quietud]     chequeos antes de renderizar (reglas, determinismo, tramos quietos)

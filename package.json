@@ -1,8 +1,8 @@
 {
-  "name": "reels",
+  "name": "claqueta",
   "version": "1.0.0",
   "private": true,
-  "description": "Framework propio para crear reels verticales (1080x1920) de @ayrtonnacer: composiciones HTML/three.js renderizadas cuadro a cuadro de forma determinística + voz Piper + efectos + música.",
+  "description": "Claqueta: framework para crear reels verticales (1080×1920) con código. Cada video es una página HTML/three.js que se dibuja cuadro por cuadro de forma determinística y se convierte en mp4, con voz en off Piper, efectos y música.",
   "type": "module",
   "scripts": {
     "reel": "node engine/cli.mjs",
@@ -16,5 +16,14 @@
   },
   "bin": {
     "reel": "engine/cli.mjs"
-  }
+  },
+  "keywords": [
+    "reels",
+    "video",
+    "html-to-video",
+    "three.js",
+    "piper-tts",
+    "ffmpeg",
+    "playwright"
+  ]
 }
