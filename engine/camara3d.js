@@ -6,6 +6,7 @@
 //   rig.toma({t0:4.4, t1:8, tipo:'orbita', centro:[0,1,0], radio:6, desde:-40, hasta:60, alto:2});
 //   rig.toma({t0:8, t1:11, tipo:'mover', de:{pos,look}, a:{pos,look}});   // dolly / grúa / push-in / truck
 //   rig.toma({t0:11, t1:13, tipo:'cenital', centro:[0,0,0], alto:14, giro:[0,30]});
+//   rig.toma({t0:13, t1:15, tipo:'vertigo', centro:[0,1,0], de:4, a:12, fov:45});   // dolly zoom: el sujeto quieto, el fondo se estira
 //   Entre el t1 de una toma y el t0 de la siguiente la cámara viaja sola (transición): hueco corto + distancia larga = latigazo.
 //   const vel = rig.aplicar(T);           // posiciona la cámara; devuelve la velocidad (para el desenfoque de movimiento)
 //   blur.render(T, t => rig.aplicar(t));  // render con desenfoque de movimiento real (sub-cuadros promediados)
@@ -19,6 +20,12 @@ export const EASE = {
   salida: eo,                                   // arranca rápido y frena
   entrada: x => x * x * x,                      // arranca lento y acelera (antes de un latigazo)
   latigazo: x => x < .5 ? 16 * x ** 5 : 1 - (-2 * x + 2) ** 5 / 2,   // casi quieto → pico violento → casi quieto
+  llegada: x => x >= 1 ? 1 : 1 - 2 ** (-10 * x),   // expo.out: aterriza con cola larga (llegadas)
+  acelera: x => x ** 4,                          // power4.in: la mitad que SALE de un corte
+  frena: x => 1 - (1 - x) ** 4,                  // power4.out: la mitad que ENTRA (mismo pico de velocidad que 'acelera')
+  // "empujón" (nudge curve): rampa lenta 20 % del tiempo/10 % del recorrido → ráfaga lineal 18 %/65 % → cola larga 62 %/25 %.
+  // Para reacomodar o desplazar sin el golpe seco de un ease-in-out.
+  empujon: x => x < .2 ? .1 * (x / .2) ** 3 : x < .38 ? .1 + .65 * (x - .2) / .18 : .75 + .25 * (1 - (1 - (x - .38) / .62) ** 4),
 };
 const ease = e => typeof e === 'function' ? e : (EASE[e] || eio);
 
@@ -84,6 +91,13 @@ function poseToma(s, k) {
       const g = (s.giro ? lerp(s.giro[0], s.giro[1], e) : 0) * Math.PI / 180, c = s.centro, h = lerp(s.alto, s.altoFin ?? s.alto, e);
       const eps = 0.002 * h;  // evita el lookAt degenerado mirando justo hacia abajo
       return { pos: [c[0] + Math.sin(g) * eps, c[1] + h, c[2] + Math.cos(g) * eps], look: c, fov: s.fov ?? 40, roll: 0 };
+    }
+    case 'vertigo': { // dolly zoom (Hitchcock): la cámara avanza o retrocede y el fov compensa → el sujeto queda igual, el fondo se estira
+      // distancia·tan(fov/2) = constante. de/a: distancias al sujeto; fov: el fov inicial.
+      const c = s.centro, dir = s.direccion || [0, 0, 1], f0 = s.fov ?? 40, d0 = s.de, d = lerp(s.de, s.a, e);
+      const fov = 2 * Math.atan(Math.tan(f0 * Math.PI / 360) * d0 / d) * 180 / Math.PI;
+      const n = Math.hypot(...dir) || 1;
+      return { pos: [c[0] + dir[0] / n * d, c[1] + dir[1] / n * d, c[2] + dir[2] / n * d], look: c, fov, roll: s.roll ?? 0 };
     }
     default: {        // 'mover': dolly / truck / grúa / push-in entre dos poses (opcional: puntos intermedios 'via')
       const P = [s.de.pos, ...(s.via || []), s.a.pos];

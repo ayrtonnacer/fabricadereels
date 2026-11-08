@@ -11,9 +11,11 @@ Un guion dice QUÉ se cuenta; el shooting script dice CÓMO se ve y suena, segun
 - Cierre: CTA multiplataforma o bucle
 
 ## Tabla de planos
-| Esc | t (s) | Voz (texto exacto) | Plano y cámara | En pantalla | Movimiento / 3D | SFX | Música | Transición salida |
-|-----|-------|--------------------|----------------|-------------|-----------------|-----|--------|-------------------|
-| s1  | 0–3   |                    |                |             |                 |     |        |                   |
+| Esc | t (s) | Voz (texto exacto) | Plano y cámara | En pantalla | Qué tiene que entender y cuándo | Movimiento / 3D | SFX | Música | Transición salida (`salida`) |
+|-----|-------|--------------------|----------------|-------------|---------------------------------|-----------------|-----|--------|------------------------------|
+| s1  | 0–3   |                    |                |             | ej.: el cursor encuentra el botón (0,4–1,2 s); "Exportar" (1,2–2,6 s) |                 |     |        | curva-izq               |
+
+Cabecera extra: **corriente** del reel (dirección dominante de las transiciones) y qué vectores reservados se gastan y dónde (docs/MOVIMIENTO.md §2).
 
 ## Cámara en espacio 3D (estilo After Effects)
 Pensar la escena como un set continuo: una cámara (`PerspectiveCamera`) que se mueve entre "estaciones" en vez de cortar entre láminas.

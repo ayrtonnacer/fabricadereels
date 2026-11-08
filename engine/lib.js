@@ -1,3 +1,4 @@
+import { costura } from './costuras.js';
 // Motor de animación determinístico: la página no usa reloj; render.mjs llama window.__render(t) cuadro a cuadro.
 export const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
 export const eo=x=>1-Math.pow(1-x,3);
@@ -75,6 +76,12 @@ export function installRender({SC,TOTAL,custom=()=>{},pose=null,gl=null}){
     canvas.style.display=(cur.gl&&gl)?'block':'none';
     const mb=document.getElementById('glmb');if(mb&&!(cur.gl&&gl))mb.style.display='none';
     if(cur.gl&&gl&&pose){if(pose(cur.id,lt,T)!==true)gl.renderer.render(gl.scene,gl.cam)}  // pose()→true: ya renderizó (p. ej. MotionBlur)
+    // costuras entre escenas (video.json → "salida"); usa translate/scale sueltos para no pisar el transform/filter propios de la escena
+    const cs=costura(SC,cur,lt), capas=[cur.el];
+    if(cur.gl&&gl){capas.push(canvas);const m=document.getElementById('glmb');if(m)capas.push(m)}
+    for(const s of SC){if(s.el._cost&&(s!==cur||!cs)){for(const e of [s.el,canvas,document.getElementById('glmb')]){if(!e)continue;e.style.translate='';e.style.scale='';e.style.opacity='';if(e._costF){e.style.filter='';e._costF=false}}s.el._cost=false}}
+    if(cs){cur.el._cost=true;for(const e of capas){const m=cs.transform.match(/translate\(([^,]+),([^)]+)\) scale\(([^)]+)\)/);
+      e.style.translate=m?`${m[1]} ${m[2]}`:'';e.style.scale=m?m[3]:'';e.style.opacity=cs.opacity;if(cs.filter){e.style.filter=cs.filter;e._costF=true}}}
   };
   window.__scenes=SC.map(s=>({id:s.id,t0:s.t0,d:s.d}));window.__total=TOTAL;
   window.__render(0);window.__ready=true;

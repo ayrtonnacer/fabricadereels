@@ -240,6 +240,19 @@ def hojas(path, V, planos, out):
     for k in range(0, len(filas), 8):
         blk = [np.pad(f, ((0, 0), (0, wmax - f.shape[1]), (0, 0))) for f in filas[k:k + 8]]
         nom = f'hoja-planos-{k // 8 + 1}.jpg'; cv2.imwrite(str(out / nom), np.vstack(blk), [cv2.IMWRITE_JPEG_QUALITY, 85]); res.append(nom)
+    # tira alrededor de cada corte (−0,2 s … +0,2 s, cuadros casi consecutivos): cómo está hecha la transición
+    filas = []
+    for P in planos[1:]:
+        tc = P['t0']; fr = []
+        for o in (-0.2, -0.1, -1.5 / V['fps'], 0.5 / V['fps'], 0.1, 0.2):
+            f = frame_en(cap, V['fps'], tc + o, 240)
+            if f is not None: fr.append(etiqueta(f, f'{o:+.2f}'))
+        if fr: etiqueta(fr[0], f'corte {tc:.2f}s'); filas.append(np.hstack(fr))
+    if filas:
+        wm = max(f.shape[1] for f in filas)
+        for k in range(0, len(filas), 10):
+            blk = [np.pad(f, ((0, 0), (0, wm - f.shape[1]), (0, 0))) for f in filas[k:k + 10]]
+            nom = f'hoja-cortes-{k // 10 + 1}.jpg'; cv2.imwrite(str(out / nom), np.vstack(blk), [cv2.IMWRITE_JPEG_QUALITY, 85]); res.append(nom)
     dur = V['t1'] - V['t0']; nc = min(60, max(12, int(dur))); cel = []
     for k in range(nc):
         t = V['t0'] + dur * (k + 0.5) / nc; f = frame_en(cap, V['fps'], t, 240)

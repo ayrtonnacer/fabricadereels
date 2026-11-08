@@ -12,7 +12,7 @@ El **3D Camera Tracker** de AE es otra cosa: analiza un video filmado para pegar
 | Composición 3D | `THREE.Scene` con el "set" (racks, piso, objetos a escala real) |
 | Capa 3D de texto | `cartel(THREE, lineas, {ancho})` — plano con texto en las fuentes y colores del tema |
 | Cámara + null + keyframes | `Rig` con `toma()`s en tiempo GLOBAL: una sola cámara continua para todo el video |
-| Easy Ease / gráfico de velocidad | `ease`: `suave`, `salida`, `entrada`, `latigazo`, `lineal` o una función |
+| Easy Ease / gráfico de velocidad | `ease`: `suave`, `salida`, `entrada`, `latigazo`, `lineal`, `llegada` (expo.out), `acelera`/`frena` (las dos mitades de un corte), `empujon` o una función. Qué curva para qué rol: `docs/MOVIMIENTO.md` §5 |
 | Auto Bézier del camino | curvas Catmull-Rom con velocidad constante (`fpv`, `mover` con `via`) |
 | Motion blur (obturador 180°) | `MotionBlur`: promedia sub-cuadros reales, solo cuando la cámara va rápido |
 | Wiggle de cámara en mano | `temblor(T, amp, frec)` en `rig.extra` |
@@ -24,6 +24,7 @@ El **3D Camera Tracker** de AE es otra cosa: analiza un video filmado para pegar
 - **`fpv`** (dron en primera persona): `curva:[[x,y,z],...]`, mira hacia adelante sobre la curva y se **inclina en las curvas** (`banking`). Es el efecto del artefacto del dron. Ease `lineal` = velocidad de crucero.
 - **`orbita`** (arc shot): `centro`, `radio→radioFin` (acercamiento mientras gira), `desde/hasta` en grados, `alto→altoFin`, `fov→fovFin`.
 - **`cenital`** (top-down): `centro`, `alto→altoFin`, `giro:[a,b]` (rotación lenta, muy de reel). En formato 9:16 el ancho visible es chico: con `fov 50` y alto 30 entran ≈16 m de ancho.
+- **`vertigo`** (dolly zoom, Hitchcock): `centro`, `de`→`a` (distancia al sujeto), `fov` inicial, `direccion`. El fov compensa la distancia (d·tan(fov/2) constante): el sujeto queda igual y el fondo se estira o se aplasta. Necesita fondo con profundidad.
 - **`mover`**: dolly, truck, grúa, push-in, picada… de una pose `de:{pos,look,fov,roll}` a otra `a:{...}`, opcional `via:[...]` para curvar el camino.
 - **Hueco entre tomas = transición automática**: la cámara viaja sola desde el final de una toma al comienzo de la siguiente con el ease de `rig.transicion(i, ease)`.
   - Hueco corto (0,4–0,6 s) + mucho giro + `latigazo` = **whip pan** (con el motion blur queda el barrido).
