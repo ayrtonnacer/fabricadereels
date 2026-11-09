@@ -1,64 +1,49 @@
-<!-- ETHERNET (4,6 s): detalle de profesional. Para la red, el WiFi es Ethernet sin cable: el cable se corta,
-     el tramo pasa a ondas y los paquetes son los mismos. La cámara se acerca a la línea durante el cambio. -->
+<!-- ETHERNET (4,6 s) — 3D. Detalle de profesional: para la red, el WiFi es Ethernet sin cable. El cable se corta, el tramo pasa a
+     ondas y los paquetes son los mismos. La cámara se acerca a la línea durante el cambio. Texto HTML sobre el 3D. -->
 <template>
   <style>
     #root { position: absolute; inset: 0; }
-    #root .w { display: inline-block; }
-    #e-titulo { width: 960px; }
-    #e-tag { font-weight: 700; }
+    #e-titulo { width: 960px; text-align: center; }
+    #e-tag, #e-tag2 { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
   </style>
   <div id="root" data-composition-id="ethernet" data-width="1080" data-height="1920">
     <div class="fondo" data-layout-ignore></div>
-    <div class="vista" data-layout-allow-overflow>
-      <div class="cam"><div class="mundo">
-        <div id="e-piso" class="piso" data-y="560" data-rx="90"></div>
-        <h2 id="e-titulo" class="titular chico" data-y="-430" data-z="80"><span class="w">WiFi</span> <span class="w">es</span> <span class="w">Ethernet</span><br /><span class="w acc">sin</span> <span class="w acc">cable</span></h2>
-        <div id="e-pc" class="laptop" data-x="-335" data-y="9" data-s="0.55"><div class="pantalla"></div><div class="base"></div></div>
-        <div id="e-rt" class="router" data-x="335" data-y="-29" data-s="0.6"><div class="ant a"></div><div class="ant b"></div><div class="cuerpo"></div></div>
-        <svg id="e-linea" width="440" height="140" viewBox="0 0 440 140" data-y="0" data-layout-ignore>
-          <path id="e-cable" class="trazo" pathLength="1" d="M0 70 H440" stroke="var(--sky)" stroke-width="12" />
-          <path id="e-onda" class="trazo" pathLength="1" stroke="var(--acc)" stroke-width="8" />
-        </svg>
-        <div id="e-p1" class="paquete" data-x="-200" data-y="0"></div><div id="e-p2" class="paquete" data-x="-200" data-y="0"></div><div id="e-p3" class="paquete" data-x="-200" data-y="0"></div>
-        <div id="e-t1" class="chip" data-y="-150"><span id="e-t1a">Ethernet</span></div>
-        <div id="e-t2" class="chip" data-y="-150" style="border-color: var(--acc); color: var(--acc)">WiFi</div>
-        <div id="e-mismos" class="chip ok" data-y="260" data-z="120"><b>✓</b> mismos paquetes</div>
-        <div id="e-b0" class="bit" data-x="-450" data-y="-240" data-z="520">0</div>
-        <div id="e-b1" class="bit" data-x="450" data-y="-330" data-z="650">1</div>
-        <div id="e-b2" class="bit" data-x="-440" data-y="230" data-z="600">1</div>
-        <div id="e-b3" class="bit" data-x="450" data-y="200" data-z="540">0</div>
-      </div></div>
+    <canvas id="e-cv" class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="hud" data-layout-ignore>
+      <div class="ancla" style="top: 400px"><h2 id="e-titulo" class="titular chico"><span class="w">WiFi</span> <span class="w">es</span> <span class="w">Ethernet</span><br /><span class="w acc">sin</span> <span class="w acc">cable</span></h2></div>
+      <div id="e-lb" class="ancla" style="width: 0; height: 0"><div id="e-tag" class="chip">Ethernet</div><div id="e-tag2" class="chip" style="border-color: var(--acc); color: var(--acc)">WiFi</div></div>
+      <div class="ancla" style="top: 930px"><div id="e-mismos" class="chip ok"><b>✓</b> mismos paquetes</div></div>
     </div>
     <div class="vineta" data-layout-ignore></div>
   </div>
   <script>
     const root = document.querySelector('[data-composition-id="ethernet"]');
     const tl = gsap.timeline({ paused: true });
-    const cam = Camara(root, tl);
-    let d = 'M0 70';
-    for (let x = 0; x <= 440; x += 5) d += ` L${x} ${(70 - 34 * Math.sin(x / 440 * Math.PI * 9)).toFixed(1)}`;
-    root.querySelector('#e-onda').setAttribute('d', d);
-
-    cam.poner({ z: 320, rx: 0, ry: -7 });
-    cam.ir(0, { z: 0, ry: -6 }, 0.9, 'expo.out');
-    cam.ir(1.7, { z: 110, ry: 0 }, 1.3, 'power2.inOut');                 // zoom a la línea mientras el cable pasa a ondas
-    cam.ir(3.3, { z: 40, y: -40, ry: 5 }, 1.2, 'power2.inOut');
-
     tl.fromTo('#e-titulo .w', { opacity: 0.4, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.18, ease: 'power4.out', stagger: 0.06 }, 0);
-    tl.fromTo('#e-pc, #e-rt', { opacity: 0.4, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.25, stagger: 0.08 }, 0.05);
-    tl.fromTo('#e-cable', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.5 }, 0.6);
-    tl.fromTo('#e-t1', { opacity: 0 }, { opacity: 1, duration: 0.2 }, 0.8);
-    // paquetes: pasan por el cable (0,9–2,0) y siguen pasando igual por las ondas (2,3–4,0)
-    const paq = (t0) => ['#e-p1', '#e-p2', '#e-p3'].forEach((s, i) => tl.fromTo(s, { x: -200, opacity: 1 }, { x: 200, duration: 0.9, ease: 'none' }, t0 + i * 0.3));
-    paq(1.0); paq(2.5);
-    tl.set('#e-p1, #e-p2, #e-p3', { opacity: 0 }, 0);
-    tl.set('#e-p1, #e-p2, #e-p3', { opacity: 1 }, 1.0);
-    // el cable se corta y el tramo pasa a ondas
-    tl.to('#e-cable', { strokeDashoffset: -1, duration: 0.5, ease: 'power2.in' }, 2.0);
-    tl.fromTo('#e-onda', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.5, ease: 'power2.out' }, 2.3);
-    tl.to('#e-t1', { opacity: 0, duration: 0.15 }, 2.2);
-    tl.fromTo('#e-t2', { opacity: 0 }, { opacity: 1, duration: 0.2 }, 2.4);
+    tl.set('#e-tag2', { opacity: 0 }, 0);
+    tl.to('#e-tag', { opacity: 0, duration: 0.15 }, 2.2);
+    tl.fromTo('#e-tag2', { opacity: 0 }, { opacity: 1, duration: 0.2 }, 2.4);
     tl.fromTo('#e-mismos', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'back.out(1.6)' }, 3.2);
-    window.__timelines["ethernet"] = tl;
+    import('./assets/escena3d.js').then(async (M) => {
+      const E = await M.crear(root), { P, V, clamp, EASE } = E;
+      const lap = E.laptop(); lap.position.set(-0.3, 0, 0.5); lap.rotation.y = 0.45; E.scene.add(lap);
+      const rt = E.router(); rt.position.set(0.42, 0, -0.6); rt.rotation.y = -0.45; E.scene.add(rt);
+      const A = new V(-0.08, 0.07, 0.34), B = new V(0.24, 0.07, -0.42);
+      const cab = E.cable(A, B), onda = E.onda({ A, B, amp: 0.04, lambda: 0.17, color: P.acc });
+      const pk = [0, 1, 2, 3, 4, 5].map(() => { const m = E.paquete(P.acc, 0.04); m.visible = false; E.scene.add(m); return m; });
+      E.animar(tl, 4.6, (t) => {
+        E.ruta(t, [
+          { t: 0, p: [-0.3, 1.1, 4.2], l: [0, 0.1, -0.05] },
+          { t: 0.9, p: [0.1, 1.0, 3.5], l: [0, 0.1, -0.05], e: 'expo' },
+          { t: 1.7, p: [0.1, 1.0, 3.5], l: [0, 0.1, -0.05], e: 'lin' },
+          { t: 3.0, p: [-0.05, 0.6, 2.4], l: [0.02, 0.08, -0.05], e: 'io' },
+          { t: 4.6, p: [0.5, 0.9, 3.1], l: [0, 0.1, -0.05], e: 'io' }]);
+        cab.set(t < 2.0 ? EASE.out(clamp((t - 0.6) / 0.5)) : 1 - EASE.in(clamp((t - 2.0) / 0.5)));
+        onda.set(EASE.out(clamp((t - 2.3) / 0.5)));
+        pk.forEach((m, i) => { const t0 = i < 3 ? 1.0 + 0.3 * i : 2.5 + 0.3 * (i - 3), p = (t - t0) / 0.9; m.visible = p > 0 && p < 1; if (m.visible) m.position.lerpVectors(A, B, p).y += 0.0; });
+        E.label(root.querySelector('#e-lb'), A.clone().lerp(B, 0.5).add(new V(0, 0.14, 0)));
+      });
+      window.__timelines['ethernet'] = tl;
+    });
   </script>
 </template>

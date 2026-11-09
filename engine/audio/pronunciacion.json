@@ -68,8 +68,9 @@
   },
   {
    "de": "WiFi",
-   "a": "guifi",
-   "estado": "sin_verificar"
+   "a": "uaifai",
+   "estado": "sin_verificar",
+   "nota": "\"guifi\" se leía \"gifi\" (gui = /gi/). Variantes en docs/material/pronunciacion/wifi-variantes.mp3: 1 uaifai, 2 güifi, 3 uifi"
   },
   {
    "de": "Ethernet",

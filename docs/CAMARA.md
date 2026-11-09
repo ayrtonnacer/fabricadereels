@@ -1,4 +1,7 @@
-# Cámara 2.5D: profundidad sin 3D
+# Profundidad: cámara y 3D
+> **Estándar actual (2026-11-09 noche): todos los objetos van en three.js** con la librería `assets/escena3d.js` (ver "Librería 3D" abajo). El sistema CSS 2.5D (`camara.js`) queda como alternativa para piezas puramente tipográficas, pero ya no se usa en los reels. Pedido de Ayrton: aprovechar el eje z y la perspectiva de los objetos 3D, siempre que el render no se vuelva lento (medido abajo).
+
+## (histórico) Cámara 2.5D sin 3D
 
 Decisión de 2026-11-09: el estilo es **motion graphics 2D**; la profundidad la da **el movimiento de cámara** (paralaje), no modelos three.js. Renderiza en CPU ~9× más rápido que el motor 3D anterior (15 s de video en ~36 s).
 
@@ -70,6 +73,15 @@ El motor anterior tardaba ~20 s por segundo: no era por three.js sino por escena
 - Canvas 1080×1920 con `alpha: true` detrás del `.vista` (chips y bits siguen siendo HTML). Todo es función del tiempo local `t` (`tl.to(st, { t: D, duration: D, ease: 'none', onUpdate: draw })`); sin `Math.random` ni reloj.
 - Colores del tema leídos de las variables CSS (`getComputedStyle`), nunca fijos.
 - Composición: en retrato la profundidad va "hacia arriba" de la pantalla (cámara cenital inclinada); ubicar el plano arriba de y 1100 (franja de subtítulos) apuntando la cámara a un punto más cercano que el centro del plano.
+
+## Librería 3D (`assets/escena3d.js`) — cómo se arma una escena
+- Cada escena: `<canvas class="canvas3d">` + `.hud` (texto HTML) + `import('./assets/escena3d.js').then(async M => { const E = await M.crear(root); ... })`; el timeline se registra **al final**.
+- Objetos listos: `E.laptop()` (pantalla con texto: `.userData.pantalla.texto('1011')`), `E.router()`, `E.antena()`, `E.globo()`, `E.pared(w,h,d)`, `E.paquete()`, `E.cable(A,B)` (crece con `.set(p)`), `E.onda({A,B,amp,lambda,s0,s1})` (senoide con brillo; **fase global**: tramos distintos empalman), `E.anillo(color, normal)` (`.emitir(p, rmax, centro)`, trazo de grosor constante). Piso de líneas con ancho real que convergen en perspectiva (automático).
+- Cámara: `E.ruta(t, [{ t, p:[x,y,z], l:[x,y,z], e:'io'|'out'|'expo'|'lin'|'in' }, ...])`. Dibujo por cuadro: `E.animar(tl, duración, (t) => {...})`; todo es función del tiempo local.
+- Texto sobre objetos 3D: `E.label(elemento, punto3D)` ubica un `.ancla` (HTML) sobre un punto del 3D; **actualiza la matriz de cámara antes de proyectar** (ya lo hace). El texto animado va en el hijo del `.ancla`, nunca en el `.ancla` mismo.
+- Zona segura: la librería sube la imagen 170 px (`dy`) para dejar libre la franja de subtítulos (y 1120–1320).
+- Composición en retrato: la profundidad va "hacia arriba" de la pantalla; cadenas de objetos en el eje z (notebook cerca → router → internet lejos) con la cámara siguiendo los datos; piezas conectadas en el mismo trazo.
+- Costo: reel de WiFi 100 % en 3D = 66 s de render para 33 s (≈ 2 s por segundo de video, CPU). Regla: ≤ ~3 s por segundo; si pasa, simplificar (menos mallas, sin sombras ni postproceso).
 
 ## Rendimiento
 - Lo caro en CPU es el área enorme de capas con máscara o `filter`: piso ≤ 3000×3000, fondo de puntos ≤ 2200×3000. Si crece el tiempo de render, achicar esas capas antes que nada.

@@ -3,7 +3,6 @@ from sfxlib import *
 
 
 def build(T, S, lib=None):
-    T.ambient(0, lvl=0.05)
     # gancho: golpe de apertura; zoom through (cam 2,6→3,2 s, pico al final)
     bm = propio('boom-cinematico')   # sonido grave de Ayrton (al inicio y al final); si falta, el sintético
     T.put(0.0, bm * 0.9 if bm is not None else boom(), 0.6); T.put(0.05, pop(1100), 0.3)
@@ -23,7 +22,7 @@ def build(T, S, lib=None):
     # ethernet: el cable pasa a ondas (detalle de profesional)
     t = S['ethernet']
     T.put(t - 0.12, whoosh(0.4), 0.45); T.put(t + 0.4, pop(1000), 0.3); T.put(t + 0.7, thunk(), 0.4)
-    T.put(t + 2.0, glitch(), 0.3); T.put(t + 2.35, whoosh(0.4), 0.4); T.put(t + 3.3, ding(1760, 0.4), 0.3)
+    T.put(t + 2.35, whoosh(0.4), 0.4); T.put(t + 3.3, ding(1760, 0.4), 0.3)
     # bandas
     t = S['bandas']
     T.put(t - 0.12, whoosh(0.4), 0.45); T.put(t + 0.4, pop(1100), 0.3); T.put(t + 1.5, pop(900), 0.3)

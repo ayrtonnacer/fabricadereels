@@ -20,3 +20,11 @@ Todo lo que Ayrton dice y pasa se guarda acá (y el material en `docs/material/`
 - **Fondo**: le gustan las **líneas que dan perspectiva** (el piso de grilla) y el **gradiente**. Los **puntitos verdes** de fondo no le encontraba sentido: **sacados**. → `docs/ESTILO.md`.
 - **Eje z / three.js**: siente que no se aprovecha la profundidad (z). Se puede usar three.js **si no demora mucho el render**; si demora, no lo quiere. Medido: ver `docs/CAMARA.md` (≈ +1 s de render por segundo de video para una escena simple). Se hizo un piloto en el payoff.
 - **Guardar todo en el repo**: indicaciones, materiales, cómo dibujar/graficar, sonido. → esta bitácora y `docs/material/`.
+
+## 2026-11-09 (noche) — segunda tanda de correcciones sobre el reel de WiFi
+- **Sonido limpio**: preguntó si la voz tenía efecto de radio (no: `efecto: "ninguno"`). Causas probables del aire "sucio": zumbido de 50 Hz con ruido de fondo (ambiente), `glitch()` (estática), normalización dinámica que comprimía la voz dos veces y el ancho de banda propio de Piper (22 kHz). Quedó: sin ambiente ni glitch por defecto, voz con compresión leve y ganancia lineal, nivel final lineal + limitador. → `docs/AUDIO.md`.
+- **Un "1" sin sentido** (captura `docs/material/2026-11-09-wifi-correcciones/4-uno-sin-sentido.png`): los bits desenfocados de fondo se sacaron todos. Regla: nada decorativo sin significado. → `docs/PREFERENCIAS.md`.
+- **Todo con three.js**: le gustó la perspectiva de los teléfonos; quiere la explicación de la compu, la antena, etc. también en three.js, "como venimos trabajando en otros proyectos". Hecho: librería `assets/escena3d.js` y todas las escenas en 3D (notebook, router, globo, cable, ondas, pared). Render del reel completo: ~66 s para 33 s. → `docs/CAMARA.md`.
+- **"WiFi" mal pronunciado**: "guifi" se leía "gifi". Se cambió a "uaifai" y se dejaron 3 variantes para elegir de oído (`docs/material/pronunciacion/wifi-variantes.mp3`: 1 uaifai, 2 güifi, 3 uifi).
+- **Texto del cierre ≠ voz**: el texto debe decir lo mismo que la voz: "Dale like y seguime para aprender más de redes". → `docs/GUION.md`.
+- **Guardar notas siempre y sin que se lo pida**: pidió confirmación. Respuesta: la bitácora ya existía; se agregó `docs/PREFERENCIAS.md` (resumen de gustos y errores) que se repasa antes de cada video, y la regla 10 de `CLAUDE.md` pide actualizar ambos en cada tanda.

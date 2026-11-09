@@ -1,49 +1,39 @@
-<!-- GANCHO (0–3,2 s): "Tu WiFi es una radio". Ondas de radio salen detrás del titular (la idea ya está en el cuadro 0).
-     La cámara aterriza y al final atraviesa el titular (zoom through) hacia "envia". -->
+<!-- GANCHO (3,2 s) — 3D: un router emite ondas por el piso (eje z hacia la cámara) detrás del titular; el cuadro 0 ya muestra la idea.
+     Al final la cámara avanza y el titular se agranda y atraviesa la pantalla (zoom through) hacia "envia". -->
 <template>
   <style>
     #root { position: absolute; inset: 0; }
     #root .w { display: inline-block; }
-    #g-titular { width: 980px; }
+    #g-titular { width: 980px; text-align: center; }
     #g-firma { position: absolute; left: 0; right: 0; top: 250px; text-align: center; }
   </style>
   <div id="root" data-composition-id="gancho" data-width="1080" data-height="1920">
     <div class="fondo" data-layout-ignore></div>
-    <div class="vista" data-layout-allow-overflow>
-      <div class="cam"><div class="mundo">
-        <div id="g-piso" class="piso" data-y="620" data-rx="90"></div>
-        <svg id="g-r1" class="anillo" data-z="-200" width="2" height="2" viewBox="-1 -1 2 2" data-y="-40"><circle r="30" fill="none" stroke="var(--acc)" stroke-width="5" /></svg>
-        <svg id="g-r2" class="anillo" data-z="-200" width="2" height="2" viewBox="-1 -1 2 2" data-y="-40"><circle r="30" fill="none" stroke="var(--acc)" stroke-width="5" /></svg>
-        <svg id="g-r3" class="anillo" data-z="-200" width="2" height="2" viewBox="-1 -1 2 2" data-y="-40"><circle r="30" fill="none" stroke="var(--acc)" stroke-width="5" /></svg>
-        <h1 id="g-titular" class="titular" data-y="-40">
-          <span class="w">Tu</span> <span class="w">WiFi</span> <span class="w">es</span><br />
-          <span class="w">una</span> <span class="w acc">radio</span>
-        </h1>
-        <div id="g-b0" class="bit" data-x="-430" data-y="-380" data-z="520">1</div>
-        <div id="g-b1" class="bit" data-x="420" data-y="-210" data-z="640">0</div>
-        <div id="g-b2" class="bit" data-x="-400" data-y="160" data-z="600">1</div>
-        <div id="g-b3" class="bit" data-x="430" data-y="330" data-z="520">0</div>
-      </div></div>
-    </div>
+    <canvas id="g-cv" class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="hud" data-layout-ignore><div class="ancla" style="top: 640px"><h1 id="g-titular" class="titular"><span class="w">Tu</span> <span class="w">WiFi</span> <span class="w">es</span><br /><span class="w">una</span> <span class="w acc">radio</span></h1></div></div>
     <div class="vineta" data-layout-ignore></div>
     <div id="g-firma" class="firma">@ayrtonnacer</div>
   </div>
   <script>
     const root = document.querySelector('[data-composition-id="gancho"]');
     const tl = gsap.timeline({ paused: true });
-    const cam = Camara(root, tl);
-
-    cam.poner({ z: -520, rx: 18, y: 70 });                  // el cuadro 0 ya muestra el titular
-    cam.ir(0, { z: 0, rx: 4, y: 0 }, 1.5, 'expo.out');
-    cam.ir(2.6, { z: 1500, rx: 0 }, 0.6, 'power3.in');      // zoom through → envia (whoosh en el pico, ~3,1 s)
-
     tl.fromTo('#g-titular .w', { opacity: 0.9, filter: 'blur(2px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.18, ease: 'power4.out', stagger: 0.07 }, 0);
     tl.fromTo('#g-firma', { opacity: 0.6 }, { opacity: 1, duration: 0.25 }, 0);
     tl.to('#g-firma', { opacity: 0, duration: 0.2 }, 2.55);
-    tl.set('#g-r1 circle, #g-r2 circle, #g-r3 circle', { opacity: 0 }, 0);
-    // ondas que salen de detrás del titular (3 anillos, finitos)
-    ['#g-r1', '#g-r2', '#g-r3'].forEach((s, i) => tl.fromTo(s + ' circle', { attr: { r: 40 }, opacity: 0.7 }, { attr: { r: 620 }, opacity: 0, duration: 1.5, ease: 'power1.out' }, 0.05 + i * 0.5));
-
-    window.__timelines["gancho"] = tl;
+    tl.to('#g-titular', { scale: 14, opacity: 0, filter: 'blur(10px)', duration: 0.6, ease: 'power3.in' }, 2.6);   // zoom through
+    import('./assets/escena3d.js').then(async (M) => {
+      const E = await M.crear(root), { P, V, clamp, EASE } = E;
+      const rt = E.router(); rt.position.set(0, 0, -0.2); rt.scale.setScalar(1.4); E.scene.add(rt);
+      const anillos = [0, 1, 2, 3].map(() => E.anillo(P.acc, new V(0, 1, 0), 0.016));
+      E.animar(tl, 3.2, (t) => {
+        E.ruta(t, [
+          { t: 0, p: [0, 3.2, 5.2], l: [0, 0.2, -0.5] },
+          { t: 1.5, p: [0, 1.25, 3.0], l: [0, 0.35, -0.3], e: 'expo' },
+          { t: 2.6, p: [0, 1.15, 2.8], l: [0, 0.35, -0.3], e: 'lin' },
+          { t: 3.2, p: [0, 0.8, 0.9], l: [0, 0.35, -0.8], e: 'in' }]);
+        anillos.forEach((r, i) => r.emitir(((t + 0.9 - 0.7 * i) % 2.8) / 2.8, 4.5, new V(0, 0.02, -0.2)));
+      });
+      window.__timelines['gancho'] = tl;
+    });
   </script>
 </template>

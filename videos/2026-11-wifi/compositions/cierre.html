@@ -1,42 +1,34 @@
-<!-- CIERRE / CTA: el FOCO es el llamado ("Dale like / Seguime…"). La cámara aterriza sobre el CTA y queda quieta;
-     la firma aparece después, debajo y más chica, con el acento. Nunca zoom sobre la firma (DECISIONES 2026-11-09).
-     Al aterrizar el CTA suena el chinn (sfx_events.py). Para un video en bucle, ver docs/GUION.md. -->
+<!-- CIERRE / CTA: el FOCO es el llamado, y el texto coincide con la voz ("Dale like y seguime para aprender más de <tema>").
+     La firma aparece después, chica, debajo. Fondo: piso 3D en perspectiva; la cámara aterriza y queda casi quieta. -->
 <template>
   <style>
     #root { position: absolute; inset: 0; }
     #root .w { display: inline-block; }
-    #c-cta { width: 1000px; font-size: 118px; }
+    #c-cta { width: 1000px; font-size: 118px; text-align: center; }
     #c-firma { font-size: 58px; }
   </style>
   <div id="root" data-composition-id="cierre" data-width="1080" data-height="1920">
     <div class="fondo" data-layout-ignore></div>
-    <div class="vista" data-layout-allow-overflow>
-      <div class="cam"><div class="mundo">
-        <div id="c-piso" class="piso" data-y="700" data-rx="90"></div>
-        <h2 id="c-cta" class="titular" data-y="-150">
-          <span class="w">Dale</span> <span class="w acc">like</span><br />
-          <span class="w">Seguime</span> <span class="w">para</span><br />
-          <span class="w">aprender</span> <span class="w">más</span><br />
-          <span class="w">de</span> <span class="w acc">redes</span>
-        </h2>
-        <div id="c-firma" class="firma" data-y="240">@ayrtonnacer</div>
-      </div></div>
+    <canvas id="c-cv" class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="hud" data-layout-ignore>
+      <div class="ancla" style="top: 600px"><h2 id="c-cta" class="titular">
+        <span class="w">Dale</span> <span class="w acc">like</span> <span class="w">y</span><br />
+        <span class="w">seguime</span> <span class="w">para</span><br />
+        <span class="w">aprender</span> <span class="w">más</span><br />
+        <span class="w">de</span> <span class="w acc">redes</span></h2></div>
+      <div class="ancla" style="top: 1030px"><div id="c-firma" class="firma">@ayrtonnacer</div></div>
     </div>
     <div class="vineta" data-layout-ignore></div>
   </div>
   <script>
     const root = document.querySelector('[data-composition-id="cierre"]');
     const tl = gsap.timeline({ paused: true });
-    const cam = Camara(root, tl);
-
-    // Llega inclinada desde atrás y aterriza de frente sobre el CTA; después, quieta (el CTA se lee).
-    cam.poner({ y: -120, z: -700, rx: 14 });
-    cam.ir(0, { y: 30, z: 0, rx: 5 }, 1.1, 'expo.out');
-
-    tl.fromTo('#c-cta .w', { opacity: 0, filter: 'blur(10px)' },
-      { opacity: 1, filter: 'blur(0px)', duration: 0.18, ease: 'power4.out', stagger: 0.06 }, 0.1);
-    tl.fromTo('#c-firma', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 1.2);
-
-    window.__timelines["cierre"] = tl;
+    tl.fromTo('#c-cta .w', { opacity: 0, filter: 'blur(10px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.18, ease: 'power4.out', stagger: 0.06 }, 0.1);
+    tl.fromTo('#c-firma', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 1.3);
+    import('./assets/escena3d.js').then(async (M) => {
+      const E = await M.crear(root);
+      E.animar(tl, 4.0, (t) => E.ruta(t, [{ t: 0, p: [0, 3.4, 5.6], l: [0, 0.2, -0.5] }, { t: 1.2, p: [0, 1.1, 3.2], l: [0, 0.6, -0.5], e: 'expo' }, { t: 4.0, p: [0, 1.0, 3.0], l: [0, 0.6, -0.5], e: 'lin' }]));
+      window.__timelines['cierre'] = tl;
+    });
   </script>
 </template>

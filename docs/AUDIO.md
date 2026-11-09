@@ -60,3 +60,8 @@ HyperFrames renderiza el video **mudo** (`out/mudo.mp4`); la voz, los efectos y 
 
 ## Cómo verificar el audio sin escucharlo
 Dibujar la onda de `voz.wav` y `sfx.wav` con los inicios de palabra de `audio/palabras.json` (ver `docs/SUBTITULOS.md`): la voz debe quedar sobre el efecto cuando habla, el grave de apertura/cierre no tapa las primeras/últimas palabras y cada whoosh cae en el pico de su movimiento de cámara. Medir también `mezcla.py` (−14 LUFS, pico ≤ −1,5 dB).
+
+## Sonido limpio (2026-11-09)
+- La voz **no** lleva efecto de radio (`voz.efecto: "ninguno"`). Si suena "de radio": revisar (1) ambiente/zumbido, (2) efectos de estática (`glitch()`: evitarlo), (3) procesamiento dinámico. `mezcla.py` ya no usa `loudnorm` (comprimía y bombeaba): voz con `highpass 70 Hz` + compresión leve (2:1) y ganancia lineal a −16 LUFS; la mezcla se lleva a −14 LUFS con **ganancia lineal + limitador** (pico −1,5 dBTP).
+- Piper entrega 22 kHz: no hay contenido sobre ~11 kHz; es propio del modelo y no es un efecto.
+- Pronunciación: ver `engine/audio/pronunciacion.json`; "gui" se lee /gi/ ("guifi" suena "gifi"): para "WiFi" se usa "uaifai".

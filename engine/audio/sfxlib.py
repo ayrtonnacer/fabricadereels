@@ -115,8 +115,9 @@ class Track:
         i = int(t * SR)
         if i < 0: return
         x = x[:max(0, len(self.buf) - i)]; self.buf[i:i + len(x)] += x * g
-    def ambient(self, t0=0, lvl=0.05):
-        """Base de ambiente desde t0 hasta el final (que nunca suene vacío)."""
+    def ambient(self, t0=0, lvl=0.0):
+        """Base de ambiente (zumbido + ruido). DESACTIVADA por defecto (Ayrton 2026-11-09: sonido limpio); pasar lvl > 0 para usarla."""
+        if lvl <= 0: return
         self.put(t0, ambient(len(self.buf) / SR - t0, lvl))
     def typing(self, t0, n, rate=30, g=0.55):
         """Tipeo. Con teclas reales en assets/sfx/propios/teclas/ (cortar_teclas.py) usa tipeo grabado; si no, ticks sintéticos."""

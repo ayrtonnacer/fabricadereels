@@ -5,9 +5,9 @@ from sfxlib import *
 
 
 def build(T, S, lib=None):
-    T.ambient(0, lvl=0.05)                                   # base: que nunca suene vacío
     # gancho: golpe de apertura con el aterrizaje de la cámara; zoom through al final
-    T.put(0.0, boom(), 0.8); T.put(0.05, pop(1100), 0.35)
+    bm = propio('boom-cinematico')   # sonido grave de Ayrton al inicio y al final
+    T.put(0.0, bm * 0.9 if bm is not None else boom(), 0.6); T.put(0.05, pop(1100), 0.3)
     T.put(S['explica'] - 0.35, whoosh(0.45), 0.6)              # pico del zoom through (cam.ir 2.85 → 3.45)
     # explica: un pop por estación cuando aparece; whoosh en cada viaje de cámara
     t = S['explica']
@@ -18,5 +18,5 @@ def build(T, S, lib=None):
     T.typing(t + 5.45, 17)
     T.put(t + 5.95, ding(1760, 0.4), 0.3)                      # ✓ resultado correcto
     # cierre: succión → golpe → CTA; chinn (sonido propio de Ayrton) cuando aterriza el CTA
-    t = S['cierre']; T.put(t - 0.9, reverse(riser(0.8)), 0.35); T.put(t, impact(), 0.5)
+    t = S['cierre']; T.put(t - 0.9, reverse(riser(0.8)), 0.35); T.put(t - 0.05, bm if bm is not None else impact(), 0.55)
     ch = propio('chinn'); T.put(t + 0.55, ch if ch is not None else sparkle(9), 0.5)

@@ -1,57 +1,43 @@
-<!-- ROUTER (5,2 s): la onda llega al router, éste la decodifica y la manda a internet por cable; y de vuelta, igual. -->
+<!-- ROUTER (5,2 s) — 3D: la onda llega al router, éste la decodifica y la manda a internet por cable (hacia el fondo); y de vuelta, igual.
+     La cadena notebook → router → internet se extiende en profundidad (eje z): la cámara avanza con los datos y vuelve. -->
 <template>
-  <style>
-    #root { position: absolute; inset: 0; }
-    #r-net { width: 520px; padding: 30px 40px; display: flex; align-items: center; justify-content: center; gap: 24px; font-weight: 700; font-size: 56px; }
-    #r-bits { font: 700 40px var(--mono); color: var(--acc); }
-  </style>
+  <style>#root { position: absolute; inset: 0; }</style>
   <div id="root" data-composition-id="router" data-width="1080" data-height="1920">
     <div class="fondo" data-layout-ignore></div>
-    <div class="vista" data-layout-allow-overflow>
-      <div class="cam"><div class="mundo">
-        <div id="r-piso" class="piso" data-y="560" data-rx="90"></div>
-        <div id="r-net" class="tarjeta" data-y="-480"><svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="var(--sky)" stroke-width="4"><circle cx="32" cy="32" r="26"/><ellipse cx="32" cy="32" rx="11" ry="26"/><path d="M6 32h52M10 18h44M10 46h44"/></svg>Internet</div>
-        <svg id="r-cable" width="40" height="290" viewBox="0 0 40 290" data-y="-281"><path id="r-cable-p" class="trazo" pathLength="1" d="M20 290 V0" stroke="var(--sky)" stroke-width="12" /></svg>
-        <div id="r-router" class="router" data-y="-120"><div class="ant a"></div><div class="ant b"></div><div class="cuerpo"><span id="r-bits">10110100</span></div></div>
-        <svg id="r-onda" width="240" height="200" viewBox="0 0 240 200" data-y="70" data-layout-ignore><path id="r-onda-p" class="trazo" pathLength="1" stroke="var(--acc)" stroke-width="9" /></svg>
-        <div id="r-pk1" class="paquete" data-y="-150"></div><div id="r-pk2" class="paquete" data-y="-150"></div><div id="r-pk3" class="paquete" data-y="-150"></div>
-        <div id="r-lap" class="laptop" data-y="260" data-s="0.7"><div class="pantalla"></div><div class="base"></div></div>
-        <div id="r-b0" class="bit" data-x="-440" data-y="-330" data-z="520">1</div>
-        <div id="r-b1" class="bit" data-x="440" data-y="-460" data-z="650">0</div>
-        <div id="r-b2" class="bit" data-x="-430" data-y="120" data-z="600">0</div>
-        <div id="r-b3" class="bit" data-x="450" data-y="60" data-z="540">1</div>
-        <div id="r-b4" class="bit" data-x="-450" data-y="-60" data-z="700">1</div>
-      </div></div>
-    </div>
+    <canvas id="r-cv" class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="hud" data-layout-ignore><div id="r-lb" class="ancla"><div id="r-net" class="chip">Internet</div></div></div>
     <div class="vineta" data-layout-ignore></div>
   </div>
   <script>
     const root = document.querySelector('[data-composition-id="router"]');
     const tl = gsap.timeline({ paused: true });
-    const cam = Camara(root, tl);
-    let d = 'M120 200';   // onda vertical del dispositivo al router
-    for (let y = 200; y >= 0; y -= 5) d += ` L${(120 + 44 * Math.sin((200 - y) / 200 * Math.PI * 5)).toFixed(1)} ${y}`;
-    root.querySelector('#r-onda-p').setAttribute('d', d);
-
-    cam.poner({ y: 120, z: -250, rx: 10 });
-    cam.ir(0, { y: 30, z: 0, rx: 4, ry: -6 }, 1.3, 'expo.out');
-    cam.ir(2.1, { y: -170, z: 20, rx: 0, ry: 3 }, 1.5, 'power2.inOut');     // sigue el cable hacia internet
-    cam.ir(3.9, { y: 30, z: 0, rx: 4, ry: -4 }, 1.1, 'power2.inOut');       // "y de vuelta": regresa al dispositivo
-
-    tl.set('#r-pk1, #r-pk2, #r-pk3', { y: -150, opacity: 0 }, 0);
-    tl.set('#r-onda-p', { strokeDashoffset: 1 }, 0);
-    tl.fromTo('#r-router, #r-lap', { opacity: 0.4, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.25, ease: 'power4.out', stagger: 0.08 }, 0);
-    tl.fromTo('#r-net', { opacity: 0.4, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.25 }, 0);
-    tl.fromTo('#r-onda-p', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.8, ease: 'power2.out' }, 0.5);     // la onda llega
-    tl.fromTo('#r-bits', { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 0.6, ease: 'steps(8)' }, 1.3);  // decodifica
-    tl.fromTo('#r-cable-p', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.5, ease: 'power2.out' }, 2.2);
-    ['#r-pk1', '#r-pk2', '#r-pk3'].forEach((s, i) => tl.fromTo(s, { y: -150, opacity: 1 }, { y: -405, duration: 0.6, ease: 'power1.in' }, 2.7 + i * 0.16));
-    tl.set('#r-pk1, #r-pk2, #r-pk3', { opacity: 0 }, 3.65);
-    // de vuelta: paquetes bajan por el cable y la onda sale del router al dispositivo
-    ['#r-pk1', '#r-pk2', '#r-pk3'].forEach((s, i) => tl.fromTo(s, { y: -405, opacity: 1 }, { y: -150, duration: 0.5, ease: 'power1.inOut' }, 3.9 + i * 0.12));
-    tl.set('#r-pk1, #r-pk2, #r-pk3', { opacity: 0 }, 4.7);
-    tl.fromTo('#r-onda-p', { strokeDashoffset: 0 }, { strokeDashoffset: 1, duration: 0.01 }, 3.85);
-    tl.fromTo('#r-onda-p', { strokeDashoffset: -1 }, { strokeDashoffset: 0, duration: 0.8, ease: 'power2.out' }, 4.3);
-    window.__timelines["router"] = tl;
+    tl.fromTo('#r-net', { opacity: 0.3, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.3 }, 0);
+    import('./assets/escena3d.js').then(async (M) => {
+      const E = await M.crear(root), { P, V, clamp, EASE } = E;
+      const lap = E.laptop(); lap.position.set(0, 0, 1.3); E.scene.add(lap);
+      const ant = E.antena(); ant.position.set(0.13, 0.016, -0.12); lap.add(ant);
+      const rt = E.router(); rt.position.set(0, 0, -0.5); E.scene.add(rt);
+      const gl = E.globo(); gl.position.set(0, 0.55, -2.7); E.scene.add(gl);
+      const tip = new V(0.13, 0.221, 1.18), rin = new V(0, 0.14, -0.3);
+      const ida = E.onda({ A: tip, B: rin, amp: 0.05, lambda: 0.3, up: new V(1, 0, 0) });
+      const vuelta = E.onda({ A: rin, B: tip, amp: 0.05, lambda: 0.3, up: new V(1, 0, 0) });
+      const cab = E.cable(new V(0, 0.07, -0.66), new V(0, 0.36, -2.43));
+      const pk = [0, 1, 2].map(() => { const m = E.paquete(); m.visible = false; E.scene.add(m); return m; });
+      E.animar(tl, 5.2, (t) => {
+        E.ruta(t, [
+          { t: 0, p: [0.45, 0.7, 2.9], l: [0, 0.15, 0.4] },
+          { t: 2.0, p: [0.4, 0.75, 2.4], l: [0, 0.2, -0.3], e: 'lin' },
+          { t: 3.5, p: [0.3, 1.05, 1.0], l: [0, 0.4, -2.0], e: 'io' },
+          { t: 5.2, p: [0.55, 0.8, 2.7], l: [0, 0.15, 0.3], e: 'io' }]);
+        ida.set(EASE.out(clamp((t - 0.5) / 0.9)));
+        const n = Math.floor(clamp((t - 1.3) / 0.6) * 8); rt.userData.pantalla.texto('10110100'.slice(0, n));
+        cab.set(EASE.out(clamp((t - 2.2) / 0.5)));
+        pk.forEach((m, i) => { const a = (t - (2.7 + 0.16 * i)) / 0.6, b = (t - (3.9 + 0.12 * i)) / 0.5; const p = a < 1 ? a : 1 - b;   // ida (0→1) y vuelta (1→0)
+          m.visible = (a > 0 && a < 1) || (b > 0 && b < 1); if (m.visible) m.position.copy(cab.at(clamp(p))); });
+        vuelta.set(EASE.out(clamp((t - 4.3) / 0.8)));
+        E.label(root.querySelector('#r-lb'), new V(0, 1.0, -2.7));
+      });
+      window.__timelines['router'] = tl;
+    });
   </script>
 </template>

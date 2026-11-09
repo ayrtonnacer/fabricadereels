@@ -12,5 +12,5 @@
 - **Ritmo**: un cambio visual cada 1,5–3 s (entra algo, viaja la cámara, se dibuja un resalte). Nada quieto más de 3 s.
 - **Prohibido**: líneas de escaneo, marcos HUD / esquinas en L, "// TUTORIAL", "[ GRATIS ]", texto de fuente al final, loops de "flotar/respirar", rebote en interfaz, todas las escenas entrando igual.
 - **Subtítulos**: SÍ, siempre (Ayrton, 2026-11-09: se ve mucho en silencio). Ver `docs/SUBTITULOS.md`. Zona segura: imagen entre y 200 y 1100; subtítulos en y 1120–1320; debajo de 1320 solo el piso.
-- **Fondo**: degradé azul-negro + **piso de líneas en perspectiva** (le gustan a Ayrton). **Sin puntitos verdes** (no tenían sentido; sacados). La profundidad extra se logra con paralaje y unos y ceros en primer plano (`docs/CAMARA.md`).
+- **Fondo**: degradé azul-negro + **piso de líneas en perspectiva** (le gustan a Ayrton). **Sin puntitos verdes** (no tenían sentido; sacados). **Nada decorativo sin significado** (tampoco unos y ceros desenfocados de fondo: Ayrton marcó un "1" sin sentido). La profundidad sale del 3D real y de la cámara (`docs/CAMARA.md`).
 - **Texto**: nada de palabras sueltas en la última línea (`docs/TIPOGRAFIA.md`).

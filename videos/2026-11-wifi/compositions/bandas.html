@@ -1,65 +1,52 @@
-<!-- BANDAS (7,6 s): 2,4 GHz (onda larga: llega lejos) vs 5 GHz (onda corta: más datos, la frena la pared). -->
+<!-- BANDAS (7,6 s) — 3D: 2,4 GHz (onda larga: llega lejos) vs 5 GHz (onda corta: más datos, la frena la pared). Dos carriles en profundidad.
+     Las ondas se dibujan en dos tramos (antes/después de la pared) con FASE GLOBAL: empalman sin cortes. -->
 <template>
   <style>
     #root { position: absolute; inset: 0; }
-    .b-nota { font-weight: 500; font-size: 44px; color: var(--muted); white-space: nowrap; }
+    .b-nota { font-weight: 500; font-size: 44px; color: var(--muted); }
   </style>
   <div id="root" data-composition-id="bandas" data-width="1080" data-height="1920">
     <div class="fondo" data-layout-ignore></div>
-    <div class="vista" data-layout-allow-overflow>
-      <div class="cam"><div class="mundo">
-        <div id="b-piso" class="piso" data-y="560" data-rx="90"></div>
-        <div id="b-rt" class="router" data-x="-420" data-y="-30" data-s="0.4"><div class="ant a"></div><div class="ant b"></div><div class="cuerpo"></div></div>
-        <div id="b-c24" class="chip" data-x="-170" data-y="-300" data-z="120" style="border-color: var(--acc); color: var(--acc); font-weight: 700">2,4 GHz</div>
-        <div id="b-c5" class="chip" data-x="-190" data-y="20" data-z="120" style="font-weight: 700">5 GHz</div>
-        <svg id="b-w24" width="800" height="140" viewBox="0 0 800 140" data-x="70" data-y="-190" data-layout-ignore>
-          <path id="b-w24a" class="trazo" pathLength="1" stroke="var(--acc)" stroke-width="9" />
-          <path id="b-w24b" class="trazo" pathLength="1" stroke="var(--acc)" stroke-width="9" />
-        </svg>
-        <svg id="b-w5" width="800" height="140" viewBox="0 0 800 140" data-x="70" data-y="130" data-layout-ignore>
-          <path id="b-w5a" class="trazo" pathLength="1" stroke="var(--sky)" stroke-width="7" />
-          <path id="b-w5b" class="trazo" pathLength="1" stroke="var(--sky)" stroke-width="7" />
-        </svg>
-        <div id="b-pared" class="pared" data-x="70" data-y="-40" data-z="60" style="height: 540px"></div>
-        <p id="b-pl" class="bajada" data-x="70" data-y="270" style="font-size: 40px">pared</p>
-        <p id="b-n24" class="b-nota" data-x="255" data-y="-90">llega más lejos</p>
-        <p id="b-n5" class="b-nota" data-x="-90" data-y="215">más datos</p>
-        <div id="b-frena" class="chip warn" data-x="265" data-y="55" data-z="140" style="font-size: 38px; padding: 16px 24px"><b>⚠</b> se frena</div>
-        <div id="b-b0" class="bit" data-x="-450" data-y="-420" data-z="520">1</div>
-        <div id="b-b1" class="bit" data-x="440" data-y="-440" data-z="650">0</div>
-        <div id="b-b2" class="bit" data-x="-440" data-y="260" data-z="600">1</div>
-        <div id="b-b3" class="bit" data-x="450" data-y="250" data-z="540">0</div>
-      </div></div>
+    <canvas id="b-cv" class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="hud" data-layout-ignore>
+      <div id="b-l24" class="ancla"><div class="chip" id="b-c24" style="border-color: var(--acc); color: var(--acc); font-weight: 700">2,4 GHz</div></div>
+      <div id="b-l5" class="ancla"><div class="chip" id="b-c5" style="font-weight: 700">5 GHz</div></div>
+      <div id="b-ln24" class="ancla"><p id="b-n24" class="b-nota">llega más lejos</p></div>
+      <div id="b-ln5" class="ancla"><p id="b-n5" class="b-nota">más datos</p></div>
+      <div id="b-lpared" class="ancla"><p id="b-pl" class="b-nota">pared</p></div>
+      <div id="b-lfrena" class="ancla"><div id="b-frena" class="chip warn" style="font-size: 38px; padding: 16px 24px"><b>⚠</b> se frena</div></div>
     </div>
     <div class="vineta" data-layout-ignore></div>
   </div>
   <script>
     const root = document.querySelector('[data-composition-id="bandas"]');
     const tl = gsap.timeline({ paused: true });
-    const cam = Camara(root, tl);
-    // ondas: 2,4 GHz = longitud de onda larga; 5 GHz = corta (más ciclos = más datos). Dos tramos: antes y después de la pared (x = 400).
-    const onda = (x0, x1, amp, lam) => { let d = ''; for (let x = x0; x <= x1; x += 4) d += (d ? ' L' : 'M') + `${x} ${(70 - amp * Math.sin(x / lam * Math.PI * 2)).toFixed(1)}`; return d; };   // fase global: los dos tramos empalman
-    const set = (id, d) => root.querySelector(id).setAttribute('d', d);
-    set('#b-w24a', onda(0, 400, 52, 190)); set('#b-w24b', onda(400, 800, 52, 190));
-    set('#b-w5a', onda(0, 400, 40, 70));  set('#b-w5b', onda(400, 800, 40, 70));
-
-    cam.poner({ x: -150, z: 220, ry: 9 });
-    cam.ir(0, { x: -80, z: 0, ry: 6 }, 0.9, 'expo.out');
-    cam.ir(1.0, { x: 0, z: 40, ry: 0 }, 3.2, 'none');
-    cam.ir(4.4, { x: 0, z: 90, ry: -7 }, 1.5, 'power2.inOut');   // mira la pared
-
-    tl.fromTo('#b-rt', { opacity: 0.4, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.25 }, 0);
-    tl.fromTo('#b-c24', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.2 }, 0.4);   // "2,4"
-    tl.fromTo('#b-w24a, #b-w24b', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.1, ease: 'power1.inOut', stagger: 0.55 }, 0.6);
-    tl.fromTo('#b-c5', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.2 }, 1.5);    // "5"
-    tl.fromTo('#b-w5a, #b-w5b', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.1, ease: 'power1.inOut', stagger: 0.55 }, 1.7);
-    tl.fromTo('#b-n5', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 3.4);        // "más frecuencia, más datos"
-    tl.fromTo('#b-pared', { scaleY: 0, opacity: 0 }, { scaleY: 1, opacity: 1, duration: 0.5, ease: 'power3.out' }, 4.6);   // "las paredes…"
-    tl.fromTo('#b-pl', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 4.9);
-    tl.to('#b-w5b', { opacity: 0.12, duration: 0.4 }, 5.2);                        // 5 GHz se frena
+    const ent = (s, t, d = 0.25) => tl.fromTo(s, { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: d }, t);
+    ent('#b-c24', 0.4); ent('#b-c5', 1.5); ent('#b-n5', 3.4); ent('#b-pl', 4.9); ent('#b-n24', 6.0);
     tl.fromTo('#b-frena', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(1.6)' }, 5.3);
-    tl.to('#b-w24b', { opacity: 0.7, duration: 0.4 }, 5.2);                        // 2,4 GHz la atraviesa
-    tl.fromTo('#b-n24', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 6.0);       // "…y la de 2,4 llega más lejos"
-    window.__timelines["bandas"] = tl;
+    import('./assets/escena3d.js').then(async (M) => {
+      const E = await M.crear(root), { P, V, clamp, EASE } = E;
+      const rt = E.router(); rt.position.set(-0.78, 0, -0.02); rt.scale.setScalar(0.5); E.scene.add(rt);
+      const X0 = -0.55, X1 = 1.1, XW = 0.3, Z24 = -0.5, Z5 = 0.4, Y = 0.22, sw = (XW - X0) / (X1 - X0);
+      const lane = (z, lam, amp, color) => { const A = new V(X0, Y, z), B = new V(X1, Y, z); return { pre: E.onda({ A, B, amp, lambda: lam, s0: 0, s1: sw, color }), post: E.onda({ A, B, amp, lambda: lam, s0: sw, s1: 1, color }) }; };
+      const w24 = lane(Z24, 0.5, 0.075, P.acc), w5 = lane(Z5, 0.22, 0.05, P.sky);
+      const pared = E.pared(0.06, 0.55, 1.6); pared.position.set(XW, 0, (Z24 + Z5) / 2); E.scene.add(pared);
+      E.animar(tl, 7.6, (t) => {
+        E.ruta(t, [
+          { t: 0, p: [-1.0, 0.9, 3.6], l: [-0.35, 0.2, 0], e: 'io' },
+          { t: 1.0, p: [-0.5, 1.15, 4.6], l: [0.0, 0.2, 0], e: 'expo' },
+          { t: 4.4, p: [-0.1, 1.3, 5.0], l: [0.05, 0.2, 0], e: 'lin' },
+          { t: 5.9, p: [0.8, 1.15, 4.4], l: [0.25, 0.2, 0], e: 'io' },
+          { t: 7.6, p: [0.9, 1.2, 4.6], l: [0.25, 0.2, 0], e: 'lin' }]);
+        const a = EASE.io(clamp((t - 0.6) / 1.2)), b = EASE.io(clamp((t - 1.7) / 1.2)), dibuja = (w, p) => { w.pre.set(clamp(p / sw)); w.post.set(clamp((p - sw) / (1 - sw))); };
+        dibuja(w24, a); dibuja(w5, b);
+        pared.visible = t > 4.6; pared.scale.y = Math.max(1e-3, EASE.out(clamp((t - 4.6) / 0.5)));
+        const frena = EASE.io(clamp((t - 5.2) / 0.4)); w5.post.opacity(1 - 0.88 * frena); w24.post.opacity(1 - 0.3 * frena);
+        const L = (id, v, dx = 0, dyp = 0) => E.label(root.querySelector(id), v, dx, dyp);
+        L('#b-l24', new V(X0 + 0.2, Y + 0.3, Z24)); L('#b-l5', new V(X0 + 0.2, Y - 0.06, Z5 + 0.25)); L('#b-ln24', new V(X1 - 0.3, Y + 0.3, Z24)); L('#b-ln5', new V(X0 + 0.5, 0.0, Z5 + 0.3));
+        L('#b-lpared', new V(XW, 0.0, Z5 + 0.55)); L('#b-lfrena', new V(XW + 0.42, 0.04, Z5 + 0.3));
+      });
+      window.__timelines['bandas'] = tl;
+    });
   </script>
 </template>

@@ -13,8 +13,13 @@ music = a.musica or au['musica']; ofs = a.desde if a.desde is not None else au.g
 mdb = a.db if a.db is not None else au.get('musica_db', -8); sg = a.sfx if a.sfx is not None else au.get('sfx_gain', 1.25)
 LUFS = au.get('loudness', -14); A = V / 'audio'
 def ff(*x): subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', *x], check=True)
-# 1) cadena de voz: pasa-altos, compresión suave, normalización
-ff('-i', A / 'voz.wav', '-af', f'aformat=sample_rates=48000:channel_layouts=stereo,highpass=f=70,acompressor=threshold=-20dB:ratio=3:attack=5:release=80,loudnorm=I={LUFS}:TP=-1.5:LRA=9,aresample=48000', A / 'voz_norm.wav')
+def lufs(path):
+    r = subprocess.run(['ffmpeg', '-hide_banner', '-i', path, '-af', 'ebur128=peak=true', '-f', 'null', '-'], capture_output=True, text=True).stderr
+    return float([l for l in r.splitlines() if l.strip().startswith('I:')][-1].split()[1])
+# 1) cadena de voz LIMPIA (Ayrton, 2026-11-09: "quiero un sonido limpio"): pasa-altos suave + compresión leve y una ganancia lineal.
+#    Sin loudnorm dinámico (comprimía y "bombeaba": sonaba a radio). La voz queda en -16 LUFS; el nivel final se ajusta abajo con ganancia lineal.
+ff('-i', A / 'voz.wav', '-af', 'aformat=sample_rates=48000:channel_layouts=stereo,highpass=f=70,acompressor=threshold=-24dB:ratio=2:attack=10:release=120', A / 'voz_pre.wav')
+ff('-i', A / 'voz_pre.wav', '-af', f'volume={-16 - lufs(str(A / "voz_pre.wav"))}dB,aresample=48000', A / 'voz_norm.wav')
 # música: completa (fade in 1.5 / out 3.5) o, en videos en bucle, solo en la ventana musica_ventana=[ini,fin] (silencio en el empalme)
 if au.get('musica_ventana'):
     mi, mf = au['musica_ventana']; ml = mf - mi
@@ -27,8 +32,10 @@ g = f"""[0]aformat=sample_rates=48000:channel_layouts=stereo,asplit=3[v][vk1][vk
 [2]aformat=sample_rates=48000:channel_layouts=stereo,{MCHAIN}[m];
 [s][vk1]sidechaincompress=threshold=0.05:ratio=2.5:attack=5:release=200[sd];
 [m][vk2]sidechaincompress=threshold=0.03:ratio=4:attack=20:release=400[md];
-[v][sd][md]amix=inputs=3:normalize=0:duration=first,loudnorm=I={LUFS}:TP=-1.5:LRA=11,aresample=48000[o]"""
-ff('-i', A / 'voz_norm.wav', '-i', A / 'sfx.wav', '-i', music, '-filter_complex', g, '-map', '[o]', '-ac', '2', '-c:a', 'pcm_s16le', A / 'mezcla.wav')
+[v][sd][md]amix=inputs=3:normalize=0:duration=first,aresample=48000[o]"""
+ff('-i', A / 'voz_norm.wav', '-i', A / 'sfx.wav', '-i', music, '-filter_complex', g, '-map', '[o]', '-ac', '2', '-c:a', 'pcm_s16le', A / 'premezcla.wav')
+# 3) nivel final: ganancia lineal a -14 LUFS y limitador de picos (-1,5 dBTP); sin compresión dinámica
+ff('-i', A / 'premezcla.wav', '-af', f'volume={LUFS - lufs(str(A / "premezcla.wav"))}dB,alimiter=limit=0.84:attack=3:release=60:level=0,aresample=48000', '-ac', '2', '-c:a', 'pcm_s16le', A / 'mezcla.wav')
 r = subprocess.run(['ffmpeg', '-hide_banner', '-i', A / 'mezcla.wav', '-af', 'ebur128=peak=true', '-f', 'null', '-'], capture_output=True, text=True).stderr
 print('\n'.join(l.strip() for l in r.splitlines() if l.strip().startswith(('I:','Peak:'))))
 mudo = V / 'out/mudo.mp4'
