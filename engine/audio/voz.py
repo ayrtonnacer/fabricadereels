@@ -14,7 +14,13 @@ ap = argparse.ArgumentParser(); ap.add_argument('video'); ap.add_argument('--mod
 a = ap.parse_args()
 V = Path(a.video); cfg = json.loads((V / 'video.json').read_text())
 dic = json.loads((HERE / 'pronunciacion.json').read_text())
-if not Path(a.modelo).exists(): sys.exit(f'Falta el modelo de voz: {a.modelo}\nVer assets/voces/LEEME.md')
+_mp = Path(a.modelo)
+if not _mp.exists():  # el .onnx va partido en el repo (GitHub limita a 100 MB)
+    _partes = sorted(_mp.parent.glob(_mp.name + '.parte*'))
+    if _partes:
+        with open(_mp, 'wb') as _o:
+            for _p in _partes: _o.write(_p.read_bytes())
+if not _mp.exists(): sys.exit(f'Falta el modelo de voz: {a.modelo}\nVer assets/voces/LEEME.md')
 from piper import PiperVoice, SynthesisConfig
 voice = PiperVoice.load(a.modelo); vc = cfg['voz']
 syn = SynthesisConfig(length_scale=vc.get('length_scale', .92), noise_scale=vc.get('noise_scale', .6), noise_w_scale=vc.get('noise_w_scale', .7))
