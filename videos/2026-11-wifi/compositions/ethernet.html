@@ -10,7 +10,7 @@
     <div class="fondo" data-layout-ignore></div>
     <canvas id="e-cv" class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
     <div class="hud" data-layout-ignore>
-      <div class="ancla" style="top: 400px"><h2 id="e-titulo" class="titular chico"><span class="w">WiFi</span> <span class="w">es</span> <span class="w">Ethernet</span><br /><span class="w acc">sin</span> <span class="w acc">cable</span></h2></div>
+      <div class="ancla" style="top: 340px"><h2 id="e-titulo" class="titular chico"><span class="w">WiFi</span> <span class="w">es</span> <span class="w">Ethernet</span><br /><span class="w acc">sin</span> <span class="w acc">cable</span></h2></div>
       <div id="e-lb" class="ancla" style="width: 0; height: 0"><div id="e-tag" class="chip">Ethernet</div><div id="e-tag2" class="chip" style="border-color: var(--acc); color: var(--acc)">WiFi</div></div>
       <div class="ancla" style="top: 930px"><div id="e-mismos" class="chip ok"><b>✓</b> mismos paquetes</div></div>
     </div>
@@ -26,22 +26,25 @@
     tl.fromTo('#e-mismos', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'back.out(1.6)' }, 3.2);
     import('./assets/escena3d.js').then(async (M) => {
       const E = await M.crear(root), { P, V, clamp, EASE } = E;
-      const lap = E.laptop(); lap.position.set(-0.3, 0, 0.5); lap.rotation.y = 0.45; E.scene.add(lap);
+      const lap = E.laptop(); lap.position.set(-0.22, 0, 0.5); lap.rotation.y = 0.45; E.scene.add(lap);
       const rt = E.router(); rt.position.set(0.42, 0, -0.6); rt.rotation.y = -0.45; E.scene.add(rt);
-      const A = new V(-0.08, 0.07, 0.34), B = new V(0.24, 0.07, -0.42);
-      const cab = E.cable(A, B), onda = E.onda({ A, B, amp: 0.04, lambda: 0.17, color: P.acc });
+      E.scene.updateMatrixWorld(true);
+      // el cable va de un puerto a otro (toca los dos objetos); la señal de radio no necesita encajar justo: de la tapa a la antena
+      const A = lap.localToWorld(new V(0.17, 0.012, 0.02)), B = rt.localToWorld(rt.userData.puertoLado.clone());
+      const cab = E.cable(A, B), onda = E.onda({ A: lap.localToWorld(lap.userData.emisor.clone()), B: rt.localToWorld(rt.userData.puntaAntena.clone()), amp: 0.04, lambda: 0.17, color: P.acc });
+      const mid = A.clone().lerp(B, 0.5);
       const pk = [0, 1, 2, 3, 4, 5].map(() => { const m = E.paquete(P.acc, 0.04); m.visible = false; E.scene.add(m); return m; });
       E.animar(tl, 4.6, (t) => {
         E.ruta(t, [
           { t: 0, p: [-0.3, 1.1, 4.2], l: [0, 0.1, -0.05] },
           { t: 0.9, p: [0.1, 1.0, 3.5], l: [0, 0.1, -0.05], e: 'expo' },
           { t: 1.7, p: [0.1, 1.0, 3.5], l: [0, 0.1, -0.05], e: 'lin' },
-          { t: 3.0, p: [-0.05, 0.6, 2.4], l: [0.02, 0.08, -0.05], e: 'io' },
+          { t: 3.0, p: [-0.05, 0.75, 3.1], l: [0.02, 0.08, -0.05], e: 'io' },
           { t: 4.6, p: [0.5, 0.9, 3.1], l: [0, 0.1, -0.05], e: 'io' }]);
         cab.set(t < 2.0 ? EASE.out(clamp((t - 0.6) / 0.5)) : 1 - EASE.in(clamp((t - 2.0) / 0.5)));
         onda.set(EASE.out(clamp((t - 2.3) / 0.5)));
-        pk.forEach((m, i) => { const t0 = i < 3 ? 1.0 + 0.3 * i : 2.5 + 0.3 * (i - 3), p = (t - t0) / 0.9; m.visible = p > 0 && p < 1; if (m.visible) m.position.lerpVectors(A, B, p).y += 0.0; });
-        E.label(root.querySelector('#e-lb'), A.clone().lerp(B, 0.5).add(new V(0, 0.14, 0)));
+        pk.forEach((m, i) => { const t0 = i < 3 ? 1.0 + 0.3 * i : 2.5 + 0.3 * (i - 3), p = (t - t0) / 0.9; m.visible = p > 0 && p < 1; if (m.visible) { if (t < 2.4) m.position.lerpVectors(A, B, p); else m.position.copy(onda.at(p)); } });   // por el cable… y luego por la onda: los mismos paquetes
+        E.label(root.querySelector('#e-lb'), mid.clone().add(new V(0, 0.16, 0)));
       });
       window.__timelines['ethernet'] = tl;
     });

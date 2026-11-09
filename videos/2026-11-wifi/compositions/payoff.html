@@ -23,7 +23,7 @@
       borde(2.4, 1.7, 0, 0.7); borde(2.4, 1.7, 0, -1.05);
       const pared = E.pared(2.5, 0.5, 0.09); pared.position.set(0, 0, -0.18); E.scene.add(pared);
       const rt = E.router(); rt.position.set(0, 0, 1.55); E.scene.add(rt);
-      const tel = (z) => { const m = new THREE.MeshStandardMaterial({ color: 0xc3cee2, roughness: 0.35, metalness: 0.3, emissive: 0x000000 }); const t = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.02, 0.3), m); t.position.set(0, 0.02, z); E.scene.add(t); return m; };
+      const tel = (z) => { const m = new THREE.MeshStandardMaterial({ color: 0xc3cee2, roughness: 0.35, metalness: 0.3, emissive: 0x000000 }); const t = E.caja(0.16, 0.02, 0.3, m, 0.01); t.position.set(0, 0.02, z); E.scene.add(t); return m; };
       const mCerca = tel(0.45), mLejos = tel(-1.1), C = new V(0, 0.03, 1.55);
       const r5 = [E.anillo(P.sky, new V(0, 1, 0), 0.016), E.anillo(P.sky, new V(0, 1, 0), 0.016)], r24 = [E.anillo(P.acc, new V(0, 1, 0), 0.016), E.anillo(P.acc, new V(0, 1, 0), 0.016)];
       E.animar(tl, 3.9, (t) => {

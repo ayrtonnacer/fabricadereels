@@ -69,8 +69,8 @@
   {
    "de": "WiFi",
    "a": "uaifai",
-   "estado": "sin_verificar",
-   "nota": "\"guifi\" se leía \"gifi\" (gui = /gi/). Variantes en docs/material/pronunciacion/wifi-variantes.mp3: 1 uaifai, 2 güifi, 3 uifi"
+   "estado": "ok",
+   "nota": "Ayrton aprobó \"uaifai\" (2026-11-09). \"guifi\" se leía \"gifi\"."
   },
   {
    "de": "Ethernet",
@@ -79,8 +79,9 @@
   },
   {
    "de": "router",
-   "a": "rúter",
-   "estado": "sin_verificar"
+   "a": "ráuter",
+   "estado": "sin_verificar",
+   "nota": "\"rúter\" sonaba \"RRUter\" (r inicial muy vibrada); probando \"ráuter\"."
   },
   {
    "de": "gigahertz",

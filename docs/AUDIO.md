@@ -61,6 +61,18 @@ HyperFrames renderiza el video **mudo** (`out/mudo.mp4`); la voz, los efectos y 
 ## Cómo verificar el audio sin escucharlo
 Dibujar la onda de `voz.wav` y `sfx.wav` con los inicios de palabra de `audio/palabras.json` (ver `docs/SUBTITULOS.md`): la voz debe quedar sobre el efecto cuando habla, el grave de apertura/cierre no tapa las primeras/últimas palabras y cada whoosh cae en el pico de su movimiento de cámara. Medir también `mezcla.py` (−14 LUFS, pico ≤ −1,5 dB).
 
+## Sonidos propios y dónde se usan (assets/sfx/propios/)
+| Archivo | Uso |
+|---|---|
+| `chinn.mp3` | aterriza el CTA |
+| `boom-cinematico.mp3` | grave al inicio y antes del CTA |
+| `hit-metal.mp3` | acento metálico justo antes del grave final (reemplaza el whoosh suave de succión; Ayrton, 2026-11-09) |
+| `interface-texto-digital.mp3` | tipeo de **0 y 1** / texto digital en pantallas (1,5 s: se recorta con `tramo()` en `sfx_events.py`) |
+| `typing-keyboard.mp3` (+ `teclas/`) | tipeo de **código** (terminal), no de bits |
+| `modem-conexion.mp3` | guiño de "conectándose a internet"; el tramo 3,3–5,1 s es el handshake reconocible (0–3,4 s marcado, 5–17 s ruido) |
+| `zoom-click`, `mouse-click`, `intro-whoosh` | zoom sobre código, clics, whoosh de apertura |
+`tramo(nombre, a, b, fade_in, fade_out, gain)` (en `sfx_events.py` del reel de WiFi) recorta y hace fundidos; moverlo a `sfxlib.py` si se repite.
+
 ## Sonido limpio (2026-11-09)
 - La voz **no** lleva efecto de radio (`voz.efecto: "ninguno"`). Si suena "de radio": revisar (1) ambiente/zumbido, (2) efectos de estática (`glitch()`: evitarlo), (3) procesamiento dinámico. `mezcla.py` ya no usa `loudnorm` (comprimía y bombeaba): voz con `highpass 70 Hz` + compresión leve (2:1) y ganancia lineal a −16 LUFS; la mezcla se lleva a −14 LUFS con **ganancia lineal + limitador** (pico −1,5 dBTP).
 - Piper entrega 22 kHz: no hay contenido sobre ~11 kHz; es propio del modelo y no es un efecto.

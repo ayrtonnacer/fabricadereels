@@ -13,7 +13,6 @@
       <div id="b-l5" class="ancla"><div class="chip" id="b-c5" style="font-weight: 700">5 GHz</div></div>
       <div id="b-ln24" class="ancla"><p id="b-n24" class="b-nota">llega más lejos</p></div>
       <div id="b-ln5" class="ancla"><p id="b-n5" class="b-nota">más datos</p></div>
-      <div id="b-lpared" class="ancla"><p id="b-pl" class="b-nota">pared</p></div>
       <div id="b-lfrena" class="ancla"><div id="b-frena" class="chip warn" style="font-size: 38px; padding: 16px 24px"><b>⚠</b> se frena</div></div>
     </div>
     <div class="vineta" data-layout-ignore></div>
@@ -22,7 +21,7 @@
     const root = document.querySelector('[data-composition-id="bandas"]');
     const tl = gsap.timeline({ paused: true });
     const ent = (s, t, d = 0.25) => tl.fromTo(s, { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: d }, t);
-    ent('#b-c24', 0.4); ent('#b-c5', 1.5); ent('#b-n5', 3.4); ent('#b-pl', 4.9); ent('#b-n24', 6.0);
+    ent('#b-c24', 0.4); ent('#b-c5', 1.5); ent('#b-n5', 3.4); ent('#b-n24', 6.0);
     tl.fromTo('#b-frena', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(1.6)' }, 5.3);
     import('./assets/escena3d.js').then(async (M) => {
       const E = await M.crear(root), { P, V, clamp, EASE } = E;
@@ -43,8 +42,8 @@
         pared.visible = t > 4.6; pared.scale.y = Math.max(1e-3, EASE.out(clamp((t - 4.6) / 0.5)));
         const frena = EASE.io(clamp((t - 5.2) / 0.4)); w5.post.opacity(1 - 0.88 * frena); w24.post.opacity(1 - 0.3 * frena);
         const L = (id, v, dx = 0, dyp = 0) => E.label(root.querySelector(id), v, dx, dyp);
-        L('#b-l24', new V(X0 + 0.2, Y + 0.3, Z24)); L('#b-l5', new V(X0 + 0.2, Y - 0.06, Z5 + 0.25)); L('#b-ln24', new V(X1 - 0.3, Y + 0.3, Z24)); L('#b-ln5', new V(X0 + 0.5, 0.0, Z5 + 0.3));
-        L('#b-lpared', new V(XW, 0.0, Z5 + 0.55)); L('#b-lfrena', new V(XW + 0.42, 0.04, Z5 + 0.3));
+        L('#b-l24', new V(X0 + 0.2, Y + 0.3, Z24)); L('#b-l5', new V(X0 + 0.15, Y - 0.15, Z5 + 0.3)); L('#b-ln24', new V(X1 - 0.3, Y + 0.3, Z24)); L('#b-ln5', new V(X0 + 0.5, 0.0, Z5 + 0.3));
+        L('#b-lfrena', new V(XW + 0.42, 0.04, Z5 + 0.3));
       });
       window.__timelines['bandas'] = tl;
     });

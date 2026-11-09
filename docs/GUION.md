@@ -40,6 +40,7 @@ Hook-promesa (0–3 s) → Contexto mínimo (3–7) → Cuerpo A (7–20) → Mi
 
 ## Cierre
 - **El texto del cierre en pantalla coincide con la voz** (Ayrton, 2026-11-09): "Dale like y seguime para aprender más de <tema>" (en voz: "dale me gusta y seguime…").
+- "aprender más **de** <tema>" para temas de una palabra (redes, Linux); "**sobre** <tema>" para temas largos o frases ("sobre cómo funciona internet").
 - Fórmula multiplataforma: "Dale me gusta y seguime para aprender más de <área concreta>." (variar el área; nunca "guardalo"). En pantalla, la firma `@ayrtonnacer`.
 - **Versión bucle** (shorts/reels): sin CTA hablado; la última frase desemboca en el hook y el último cuadro vuelve al primero (cámara en la misma pose al final y al principio; el corte se esconde en un movimiento; música en silencio en el empalme; ver el video Parrot en bucle en el historial de git, commit `ae9a888`). Para contenido educativo funciona mejor como *desafío* ("¿te animás a descifrar el mensaje del principio?") que como truco de edición.
 - En humor: el CTA mata el remate; solo texto en pantalla o nada.

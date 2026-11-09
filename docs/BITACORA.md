@@ -28,3 +28,12 @@ Todo lo que Ayrton dice y pasa se guarda acá (y el material en `docs/material/`
 - **"WiFi" mal pronunciado**: "guifi" se leía "gifi". Se cambió a "uaifai" y se dejaron 3 variantes para elegir de oído (`docs/material/pronunciacion/wifi-variantes.mp3`: 1 uaifai, 2 güifi, 3 uifi).
 - **Texto del cierre ≠ voz**: el texto debe decir lo mismo que la voz: "Dale like y seguime para aprender más de redes". → `docs/GUION.md`.
 - **Guardar notas siempre y sin que se lo pida**: pidió confirmación. Respuesta: la bitácora ya existía; se agregó `docs/PREFERENCIAS.md` (resumen de gustos y errores) que se repasa antes de cada video, y la regla 10 de `CLAUDE.md` pide actualizar ambos en cada tanda.
+
+## 2026-11-09 (noche, 3) — tercera tanda sobre el reel de WiFi + investigación de three.js
+- Pasó una **guía de three.js** (r187, `docs/material/2026-11-threejs-guia-profesional-r187.md`) y el artículo de Utsubo (100 consejos de rendimiento) + el link de la doc oficial (bloqueado desde la nube). Pidió investigar por mi cuenta, guardar los consejos en el repo y mejorar los objetos y la lógica **siempre dentro de la estética HackTheBox**. → `docs/THREEJS.md`; la librería pasó a r187 con tone mapping Neutral, entorno procedural, biseles, sombras de contacto y contraluz.
+- **"uaifai" aprobado** para WiFi. **"router" sonaba "RRUter"** → se prueba "ráuter" (todas las grafías empiezan con la r vibrada del español; "ráuter" da el diptongo "au").
+- **Notebook sin antena**: las notebooks no tienen una antena literal; la onda sale de la tapa y se expande por el piso. **Bits más chicos** y dentro de la pantalla. (Capturas 5 a 8 en `docs/material/2026-11-09-wifi-correcciones/`.)
+- **Los cables tocan los objetos**: en internet el cable debe ir al centro del globo (no quedar al borde), y salir del router; en ethernet, de la notebook al router. Las señales de radio no necesitan encajar justo.
+- **Etiqueta "pared" sobra**: "el espectador no es idiota". Regla: rótulos solo si aportan.
+- **Sonidos nuevos** (guardados en `assets/sfx/propios/`): `interface-texto-digital` (tipeo de 0 y 1; el teclado queda para tipear código), `modem-conexion` (handshake de módem al conectarse a internet), `hit-metal` (en vez del whoosh suave antes del cierre, ~0:28; "probemos, tenés oídos").
+- **CTA**: duda entre "aprender más DE X" y "SOBRE X" → se usa "de" para temas de una palabra (más corto y natural en rioplatense) y "sobre" para temas largos o frases ("sobre cómo funciona internet").

@@ -1,5 +1,5 @@
 # Profundidad: cámara y 3D
-> **Estándar actual (2026-11-09 noche): todos los objetos van en three.js** con la librería `assets/escena3d.js` (ver "Librería 3D" abajo). El sistema CSS 2.5D (`camara.js`) queda como alternativa para piezas puramente tipográficas, pero ya no se usa en los reels. Pedido de Ayrton: aprovechar el eje z y la perspectiva de los objetos 3D, siempre que el render no se vuelva lento (medido abajo).
+> **Estándar actual (2026-11-09 noche): todos los objetos van en three.js (r187)** con la librería `assets/escena3d.js` (ver "Librería 3D" abajo y la guía completa en `docs/THREEJS.md`). El sistema CSS 2.5D (`camara.js`) queda como alternativa para piezas puramente tipográficas, pero ya no se usa en los reels. Pedido de Ayrton: aprovechar el eje z y la perspectiva de los objetos 3D, siempre que el render no se vuelva lento (medido abajo).
 
 ## (histórico) Cámara 2.5D sin 3D
 
@@ -76,7 +76,7 @@ El motor anterior tardaba ~20 s por segundo: no era por three.js sino por escena
 
 ## Librería 3D (`assets/escena3d.js`) — cómo se arma una escena
 - Cada escena: `<canvas class="canvas3d">` + `.hud` (texto HTML) + `import('./assets/escena3d.js').then(async M => { const E = await M.crear(root); ... })`; el timeline se registra **al final**.
-- Objetos listos: `E.laptop()` (pantalla con texto: `.userData.pantalla.texto('1011')`), `E.router()`, `E.antena()`, `E.globo()`, `E.pared(w,h,d)`, `E.paquete()`, `E.cable(A,B)` (crece con `.set(p)`), `E.onda({A,B,amp,lambda,s0,s1})` (senoide con brillo; **fase global**: tramos distintos empalman), `E.anillo(color, normal)` (`.emitir(p, rmax, centro)`, trazo de grosor constante). Piso de líneas con ancho real que convergen en perspectiva (automático).
+- Objetos listos: `E.laptop()` (sin antena; pantalla con texto de varias líneas: `.userData.pantalla.texto('1011\n0110')`; `.userData.emisor` = de dónde sale la onda), `E.router()` (con `.userData.puertoTrasero/puertoLado/puntaAntena` para conectar cables), `E.caja()` (caja biselada), `E.sombra()`, `E.antena()`, `E.globo()`, `E.pared(w,h,d)`, `E.paquete()`, `E.cable(A,B)` (crece con `.set(p)`), `E.onda({A,B,amp,lambda,s0,s1})` (senoide con brillo; **fase global**: tramos distintos empalman), `E.anillo(color, normal)` (`.emitir(p, rmax, centro)`, trazo de grosor constante). Piso de líneas con ancho real que convergen en perspectiva (automático).
 - Cámara: `E.ruta(t, [{ t, p:[x,y,z], l:[x,y,z], e:'io'|'out'|'expo'|'lin'|'in' }, ...])`. Dibujo por cuadro: `E.animar(tl, duración, (t) => {...})`; todo es función del tiempo local.
 - Texto sobre objetos 3D: `E.label(elemento, punto3D)` ubica un `.ancla` (HTML) sobre un punto del 3D; **actualiza la matriz de cámara antes de proyectar** (ya lo hace). El texto animado va en el hijo del `.ancla`, nunca en el `.ancla` mismo.
 - Zona segura: la librería sube la imagen 170 px (`dy`) para dejar libre la franja de subtítulos (y 1120–1320).

@@ -35,7 +35,7 @@ g = f"""[0]aformat=sample_rates=48000:channel_layouts=stereo,asplit=3[v][vk1][vk
 [v][sd][md]amix=inputs=3:normalize=0:duration=first,aresample=48000[o]"""
 ff('-i', A / 'voz_norm.wav', '-i', A / 'sfx.wav', '-i', music, '-filter_complex', g, '-map', '[o]', '-ac', '2', '-c:a', 'pcm_s16le', A / 'premezcla.wav')
 # 3) nivel final: ganancia lineal a -14 LUFS y limitador de picos (-1,5 dBTP); sin compresión dinámica
-ff('-i', A / 'premezcla.wav', '-af', f'volume={LUFS - lufs(str(A / "premezcla.wav"))}dB,alimiter=limit=0.84:attack=3:release=60:level=0,aresample=48000', '-ac', '2', '-c:a', 'pcm_s16le', A / 'mezcla.wav')
+ff('-i', A / 'premezcla.wav', '-af', f'volume={LUFS - lufs(str(A / "premezcla.wav"))}dB,alimiter=limit=0.8:attack=3:release=60:level=0,aresample=48000', '-ac', '2', '-c:a', 'pcm_s16le', A / 'mezcla.wav')
 r = subprocess.run(['ffmpeg', '-hide_banner', '-i', A / 'mezcla.wav', '-af', 'ebur128=peak=true', '-f', 'null', '-'], capture_output=True, text=True).stderr
 print('\n'.join(l.strip() for l in r.splitlines() if l.strip().startswith(('I:','Peak:'))))
 mudo = V / 'out/mudo.mp4'

@@ -2,6 +2,16 @@
 from sfxlib import *
 
 
+def tramo(nombre, a, b, fade_in=0.02, fade_out=0.08, gain=1.0):
+    """Recorte [a, b] s de un sonido propio (assets/sfx/propios/<nombre>) con fundidos; None si falta."""
+    x = propio(nombre)
+    if x is None: return None
+    y = x[int(a * SR):int(b * SR)].copy(); fi, fo = int(fade_in * SR), int(fade_out * SR)
+    if fi: y[:fi] *= np.linspace(0, 1, fi)
+    if fo: y[-fo:] *= np.linspace(1, 0, fo)
+    return y * gain
+
+
 def build(T, S, lib=None):
     # gancho: golpe de apertura; zoom through (cam 2,6→3,2 s, pico al final)
     bm = propio('boom-cinematico')   # sonido grave de Ayrton (al inicio y al final); si falta, el sintético
@@ -9,14 +19,14 @@ def build(T, S, lib=None):
     T.put(S['envia'] - 0.3, whoosh(0.45), 0.6)
     # envía: aparece el notebook, se tipean los bits, antena, la onda se dibuja, salen las ondas
     t = S['envia']
-    T.put(t + 0.3, pop(1000), 0.35); T.typing(t + 0.45, 8)
+    T.put(t + 0.3, pop(1000), 0.35); dg = tramo('interface-texto-digital', 0.0, 0.95); T.put(t + 0.4, dg if dg is not None else tick(), 0.55)
     T.put(t + 1.2, pop(1300), 0.35); T.put(t + 1.7, whoosh(0.5), 0.35)
     for k in range(3): T.put(t + 2.7 + 0.5 * k, pop(900 - 60 * k), 0.22)
     # router: la onda llega, decodifica (tipeo), cable (thunk), paquetes, y de vuelta
     t = S['router']
     T.put(t - 0.12, whoosh(0.4), 0.45); T.put(t + 0.3, pop(1000), 0.3)
-    T.put(t + 0.7, whoosh(0.4), 0.3); T.typing(t + 1.3, 8)
-    T.put(t + 2.3, thunk(), 0.5); T.put(t + 2.6, whoosh(0.4), 0.4)
+    T.put(t + 0.7, whoosh(0.4), 0.3); dg = tramo('interface-texto-digital', 0.0, 0.7); T.put(t + 1.3, dg if dg is not None else tick(), 0.5)
+    T.put(t + 2.3, thunk(), 0.5); md = tramo('modem-conexion', 3.3, 5.1, 0.05, 0.5); T.put(t + 2.35, md if md is not None else whoosh(0.4), 0.38)
     for k in range(3): T.put(t + 2.8 + 0.16 * k, tick(), 0.3)
     T.put(t + 4.2, whoosh(0.4), 0.45)
     # ethernet: el cable pasa a ondas (detalle de profesional)
@@ -31,5 +41,5 @@ def build(T, S, lib=None):
     t = S['payoff']
     T.put(t + 0.6, whoosh(0.5), 0.5); T.put(t + 1.55, ding(1568, 0.4), 0.3); T.put(t + 2.15, ding(2093, 0.5), 0.3)
     # cierre: succión → golpe → CTA; chinn de Ayrton cuando aterriza el CTA
-    t = S['cierre']; T.put(t - 0.9, reverse(riser(0.8)), 0.35); T.put(t - 0.05, bm if bm is not None else impact(), 0.55)
+    hm = propio('hit-metal'); t = S['cierre']; T.put(t - 0.55, hm if hm is not None else reverse(riser(0.8)), 0.55); T.put(t - 0.05, bm if bm is not None else impact(), 0.55)
     ch = propio('chinn'); T.put(t + 0.55, ch if ch is not None else sparkle(9), 0.5)

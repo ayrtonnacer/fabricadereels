@@ -22,3 +22,11 @@ Destilado de `docs/BITACORA.md` (cronológico, con el detalle) y `docs/DECISIONE
 
 ## Flujo acordado
 Link + indicaciones → guion (público: técnicos, principiantes, reclutadores) → **su OK** → script técnico (planos, cámara, sfx) → video → entrega. A futuro: publicar automáticamente en sus redes (no hacerlo sin que lo pida).
+
+## Agregado 2026-11-09 (noche, 3)
+- **Realismo con sentido**: las notebooks no llevan antena a la vista; los **cables tocan los objetos** (puertos, centro del globo); las ondas de radio no necesitan encajar justo.
+- **Cero etiquetas obvias**: no rotular lo que se ve ("pared"); el espectador no es tonto.
+- **Bits chicos y dentro de la pantalla**; sonido digital de interfaz para tipear 0 y 1 (el teclado solo para código); módem como guiño de "conexión"; hit metálico mejor que un whoosh suave en el cierre.
+- **"WiFi" = "uaifai"** (aprobado). "router" = "ráuter" (a confirmar).
+- CTA: "de <tema>" para temas de una palabra; "sobre <tema>" para frases largas.
+- Pasa **investigación propia** (guías, artículos) para que la use y la deje documentada: `docs/THREEJS.md`.
