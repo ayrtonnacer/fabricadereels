@@ -19,8 +19,8 @@
     <div style="display:inline-block;font:700 40px SG,sans-serif;color:var(--acc)" data-a="pop:0.05:0.4">@ayrtonnacer</div>
     <h1 style="margin-top:30px;font-size:96px">
       <span data-a="up:0.25" style="display:inline-block">Switch</span><br>
-      <span data-a="up:1.0" style="display:inline-block">Router</span><br>
-      <span data-a="up:1.7" style="display:inline-block">Punto de acceso</span></h1>
+      <span data-a="up:0.85" style="display:inline-block">Router</span><br>
+      <span data-a="up:1.45" style="display:inline-block">Punto de acceso</span></h1>
   </div>
 </section>
 
@@ -32,8 +32,8 @@
   <div class="tit" style="top:290px"><h2 data-a="up:0.2"><span class="cy">Switch</span></h2>
     <div class="sub" data-a="up:1.0">Controlador de la red local</div></div>
   <div class="chips" style="top:1330px">
-    <div class="chip" data-a="up:7.5">Administrado en sitio</div>
-    <div class="chip" data-a="up:8.3">Administrado en la nube</div>
+    <div class="chip" data-a="up:8.2">Administrado en sitio</div>
+    <div class="chip" data-a="up:8.8">Administrado en la nube</div>
   </div>
 </section>
 
@@ -41,9 +41,9 @@
   <div class="tit" style="top:290px"><h2 data-a="up:0.2"><span class="cy">Router</span></h2>
     <div class="sub" data-a="up:1.0">Conecta redes · despacha datos</div></div>
   <div class="chips" style="top:1330px;flex-direction:row;flex-wrap:wrap">
-    <div class="chip" data-a="up:11">Firewall</div>
-    <div class="chip" data-a="up:11.6">VPN</div>
-    <div class="chip" data-a="up:12.2">Telefonía IP</div>
+    <div class="chip" data-a="up:10.4">Firewall</div>
+    <div class="chip" data-a="up:10.9">VPN</div>
+    <div class="chip" data-a="up:11.4">Telefonía IP</div>
   </div>
 </section>
 
@@ -51,8 +51,8 @@
   <div class="tit" style="top:290px"><h2 data-a="up:0.2">Punto de <span class="cy">acceso</span></h2>
     <div class="sub" data-a="up:1.0">Amplifica el ancho de banda del router</div></div>
   <div class="chips" style="top:1330px">
-    <div class="chip" data-a="up:8">Estándares IEEE</div>
-    <div class="chip" data-a="up:8.8">Frecuencia · ancho de banda · canales</div>
+    <div class="chip" data-a="up:9.4">Estándares IEEE</div>
+    <div class="chip" data-a="up:10.1">Frecuencia · ancho de banda · canales</div>
   </div>
 </section>
 
@@ -201,7 +201,7 @@ const cPC = addCable(cable([portP(3), [-.12, .02, .28], [-.3, .02, .4], [-.5, .0
 const cSV = addCable(cable([portP(19), [.14, .02, .3], [.45, .02, .36], [.66, .03, .43], [.72, .05, .45]]));
 const cPR = addCable(cable([portP(9), [.03, .02, .5], [.04, .02, .95], [.04, .04, 1.18]]));
 const LAN = frame(-1.2, -.45, 1.2, 1.6); LAN.visible = false;
-const swLabels = [['PC', [-.62, .72, .5], 2.4], ['Servidor', [.72, .86, .45], 3.8], ['Impresora', [0, .36, 1.25], 5.2], ['Switch', [0, .46, -.02], .8]];
+const swLabels = [['PC', [-.62, .72, .5], 4.0], ['Servidor', [.72, .86, .45], 5.2], ['Impresora', [0, .36, 1.25], 5.8], ['Switch', [0, .46, -.02], .6]];
 const swLab = swLabels.map(([t, p, t0]) => { const m = lab(t, t === 'Switch' ? .22 : .2); m.position.set(...p); m.userData.t0 = t0; scene.add(m); labels.push(m); return m; });
 const lanLab = lab('Edificio · campus', .46, '--acc'); lanLab.position.set(0, .015, 1.95); lanLab.rotation.x = -Math.PI / 2; lanLab.visible = false; scene.add(lanLab);
 const swPulse = [pkt(), pkt(), pkt(), pkt()];
@@ -219,7 +219,7 @@ const frA = frame(-1.3, ZR - .25, -.3, ZR + 1.05); frA.visible = false; const fr
 const rtLab = lab('Router', .26); rtLab.position.set(0, .26, ZR + .08); rtLab.userData.t0 = .8; scene.add(rtLab); labels.push(rtLab);
 const redA = lab('Red A', .3, '--acc'); redA.position.set(-.8, .01, ZR + 1.35); redA.rotation.x = -Math.PI / 2; redA.visible = false; scene.add(redA);
 const redB = lab('Red B', .3, '--acc'); redB.position.set(.85, .01, ZR + 1.45); redB.rotation.x = -Math.PI / 2; redB.visible = false; scene.add(redB);
-const netLab = lab('Internet', .34); netLab.position.set(GLOBE[0], GLOBE[1] + .5, GLOBE[2]); netLab.userData.t0 = 6.4; scene.add(netLab); labels.push(netLab);
+const netLab = lab('Internet', .34); netLab.position.set(GLOBE[0], GLOBE[1] + .5, GLOBE[2]); netLab.userData.t0 = 3.0; scene.add(netLab); labels.push(netLab);
 const analyze = new THREE.Mesh(new THREE.RingGeometry(.96, 1, 48), new THREE.MeshBasicMaterial({ color: ACC, transparent: true, opacity: .8, side: THREE.DoubleSide, toneMapped: false, depthWrite: false })); analyze.rotation.x = -Math.PI / 2; analyze.position.set(0, .012, ZR); scene.add(analyze);
 const rtPkt = [pkt(), pkt(), pkt()];
 
@@ -241,9 +241,9 @@ const DEVS = [[1.0, 35, 'p'], [1.55, 150, 'l'], [2.0, 245, 'p'], [2.45, 100, 'l'
   const halo = new THREE.Mesh(new THREE.RingGeometry(.2, .24, 40), new THREE.MeshBasicMaterial({ color: ACC, transparent: true, opacity: 0, side: THREE.DoubleSide, toneMapped: false, depthWrite: false })); halo.rotation.x = -Math.PI / 2; halo.position.set(g.position.x, .013, g.position.z); scene.add(halo);
   return { g, r, halo }; });
 const rt2Lab = lab('Router', .26); rt2Lab.position.set(-1.0, .26, ZA + .6); rt2Lab.userData.t0 = .4; scene.add(rt2Lab); labels.push(rt2Lab);
-const apLab = lab('Punto de acceso', .56); apLab.position.set(AP0[0] + .5, AP0[1] - .05, AP0[2]); apLab.userData.t0 = 2.0; scene.add(apLab); labels.push(apLab);
-const bwLab = lab('Ancho de banda', .56, '--acc'); bwLab.position.set(-.35, .24, ZA + .35); bwLab.userData.t0 = 1.0; scene.add(bwLab); labels.push(bwLab);
-const acLab = lab('Más alcance', .46, '--acc'); acLab.position.set(AP0[0] + 1.9, .01, AP0[2] - 2.4); acLab.rotation.x = -Math.PI / 2; acLab.userData.t0 = 7.5; acLab.visible = false; scene.add(acLab);
+const apLab = lab('Punto de acceso', .56); apLab.position.set(AP0[0] + .5, AP0[1] - .05, AP0[2]); apLab.userData.t0 = 1.0; scene.add(apLab); labels.push(apLab);
+const bwLab = lab('Ancho de banda', .56, '--acc'); bwLab.position.set(-.35, .24, ZA + .35); bwLab.userData.t0 = 4.6; scene.add(bwLab); labels.push(bwLab);
+const acLab = lab('Más alcance', .46, '--acc'); acLab.position.set(AP0[0] + 1.9, .01, AP0[2] - 2.4); acLab.rotation.x = -Math.PI / 2; acLab.userData.t0 = 8.2; acLab.visible = false; scene.add(acLab);
 
 /* ---------- contexto: enlaces entre los puestos e internet (se ven desde arriba y en oblicuo) ---------- */
 const links = [cable([[0, .03, -.6], [0, .03, ZR / 2], [0, .03, ZR + .55]], .02), cable([[0, .03, ZR - .6], [.1, .03, (ZR + ZA) / 2], [.2, .03, ZA + .7]], .02), cable([[.15, .03, ZR - .3], [.9, .03, ZR - .9], [GLOBE[0] - .2, GLOBE[1] - .3, GLOBE[2] + .3]], .02)];
@@ -295,55 +295,55 @@ function mundo(T) {
   { const t = lt('s1'); vSw.userData.ports.forEach((p, i) => p.led.material.color.copy(t > .4 && (i % 3 === 0) ? ACC : OFF));
     vRt.userData.leds.forEach((l, i) => l.material.color.copy(t > 1.2 + i * .06 ? ACC : OFF)); vAp.userData.led.color.copy(t > 2.0 ? ACC : OFF); }
   // contexto: los puestos se enlazan entre sí y con internet
-  { const t = lt('s2'); links.forEach((c, i) => c.set(ramp(t, 1.0 + i * .7, .8)));
+  { const t = lt('s2'); links.forEach((c, i) => c.set(ramp(t, .6 + i * .5, .7)));
     nodeHalos.forEach((h, i) => { const u = eo(ramp(t, .4 + i * .3, .5)); h.material.opacity = .8 * u; h.scale.setScalar(.5 + .5 * u); });
     ctxPkt.forEach(p => p.visible = false);
-    if (t > 3.2) { const k = (t - 3.2) / 1.6; place(ctxPkt[0], links[0], k % 1); place(ctxPkt[1], links[1], (k + .4) % 1); place(ctxPkt[2], links[2], (k + .7) % 1); }
+    if (t > 2.2) { const k = (t - 2.2) / 1.4; place(ctxPkt[0], links[0], k % 1); place(ctxPkt[1], links[1], (k + .4) % 1); place(ctxPkt[2], links[2], (k + .7) % 1); }
     if (T > S.s2 + D.s2 + .1) { nodeHalos.forEach(h => { if (T < S.s6) h.material.opacity = 0; }); }
   }
   // switch
   { const t = lt('s3');
-    const u1 = ramp(t, 2.4, 1.1), u2 = ramp(t, 3.8, 1.1), u3 = ramp(t, 5.2, 1.1);
+    const u1 = ramp(t, 4.0, .9), u2 = ramp(t, 5.2, .8), u3 = ramp(t, 5.8, .8);
     cPC.set(u1); cSV.set(u2); cPR.set(u3);
     P.forEach((p, i) => { const on = (i === 3 && u1 >= 1) || (i === 19 && u2 >= 1) || (i === 9 && u3 >= 1); const idle = (i % 5 === 0) && hash(i + Math.floor(t * 6)) > .55 && u3 >= 1;
       p.led.material.color.copy(on ? ACC : (idle ? SKY : OFF)); });
     screenOn(pc.userData.screen, u1 >= 1);
     srv.userData.leds.forEach((m, i) => m.color.copy(u2 >= 1 ? (hash(i + Math.floor(t * 8)) > .3 ? ACC : OFF) : OFF)); prn.userData.led.color.copy(u3 >= 1 ? ACC : OFF);
-    LAN.visible = t > 7.0; { const u = ramp(t, 7.0, 1.0); LAN.scale.set(Math.max(.001, eo(u)), 1, Math.max(.001, eo(u))); } lanLab.visible = t > 7.8 && t < D.s3 + .6; lanLab.scale.setScalar(Math.max(.001, eo(ramp(t, 7.8, .5))));
-    const per = 2.4, k = (t - 6.4); const cyc = [[cPC, cSV], [cSV, cPR], [cPR, cPC], [cSV, cPC]];
+    LAN.visible = t > 6.6; { const u = ramp(t, 6.6, .9); LAN.scale.set(Math.max(.001, eo(u)), 1, Math.max(.001, eo(u))); } lanLab.visible = t > 7.2 && t < D.s3 + .6; lanLab.scale.setScalar(Math.max(.001, eo(ramp(t, 7.2, .5))));
+    const per = 2.4, k = (t - 7.4); const cyc = [[cPC, cSV], [cSV, cPR], [cPR, cPC], [cSV, cPC]];
     swPulse.forEach(p => p.visible = false);
     if (k > 0) { const n = Math.floor(k / (per / 2)), ph = (k % (per / 2)) / (per / 2); const [a, b] = cyc[n % 4]; const p = swPulse[0]; if (ph < .5) place(p, a, 1 - ph * 2); else place(p, b, (ph - .5) * 2); }
-    if (k > 4.8 && t < 12.2) { const n = Math.floor((k - 4.8) / 1.2); const ph = ((k - 4.8) % 1.2) / 1.2; const [a, b] = cyc[(n + 2) % 4]; const p = swPulse[2]; if (ph < .5) place(p, a, 1 - ph * 2); else place(p, b, (ph - .5) * 2); }
+    if (k > 1.2 && t < D.s3 + .4) { const n = Math.floor((k - 1.2) / 1.2); const ph = ((k - 1.2) % 1.2) / 1.2; const [a, b] = cyc[(n + 2) % 4]; const p = swPulse[2]; if (ph < .5) place(p, a, 1 - ph * 2); else place(p, b, (ph - .5) * 2); }
   }
   // router
   { const t = lt('s4');
-    frA.visible = t > .5; frB.visible = t > 1.0; redA.visible = t > .5 && t < D.s4 + .6; redB.visible = t > 1.0 && t < D.s4 + .6;
-    { const u = eo(ramp(t, .5, .7)); frA.scale.set(Math.max(.001, u), 1, Math.max(.001, u)); redA.scale.setScalar(Math.max(.001, u)); const v = eo(ramp(t, 1.0, .7)); frB.scale.set(Math.max(.001, v), 1, Math.max(.001, v)); redB.scale.setScalar(Math.max(.001, v)); }
-    rt.userData.leds.forEach((l, i) => l.material.color.copy(t > 1.4 + i * .1 ? ACC : OFF));
-    cA.set(ramp(t, 1.8, .9)); cB.set(ramp(t, 2.8, .9));
-    screenOn(aPC.userData.screen, t > 2.7); bLP.userData.screen.color.copy(t > 3.7 ? GREEN : BLACK);
+    frA.visible = t > .7; frB.visible = t > 1.2; redA.visible = t > .7 && t < D.s4 + .6; redB.visible = t > 1.2 && t < D.s4 + .6;
+    { const u = eo(ramp(t, .7, .7)); frA.scale.set(Math.max(.001, u), 1, Math.max(.001, u)); redA.scale.setScalar(Math.max(.001, u)); const v = eo(ramp(t, 1.2, .7)); frB.scale.set(Math.max(.001, v), 1, Math.max(.001, v)); redB.scale.setScalar(Math.max(.001, v)); }
+    rt.userData.leds.forEach((l, i) => l.material.color.copy(t > .8 + i * .1 ? ACC : OFF));
+    cA.set(ramp(t, 1.5, .7)); cB.set(ramp(t, 2.2, .7));
+    screenOn(aPC.userData.screen, t > 2.2); bLP.userData.screen.color.copy(t > 2.9 ? GREEN : BLACK);
     rtPkt.forEach(p => p.visible = false);
-    place(rtPkt[0], cA, ramp(t, 4.4, 1.1));
-    const ua = ramp(t, 5.5, 1.6); analyze.visible = ua > 0 && ua < 1; analyze.scale.setScalar(.12 + ua * .5); analyze.material.opacity = .8 * (1 - ua) * Math.sin(Math.min(1, ua * 3) * Math.PI / 2);
-    ROUTES.forEach((c, i) => c.set(ramp(t, 6.4 + i * .35, .9))); ROUTES.forEach((c, i) => { c.act.material.color.copy(i === 1 ? (t > 8.6 ? ACC : DIM) : DIM); });
-    place(rtPkt[1], ROUTES[1], ramp(t, 9.4, 2.4));
-    const g = ramp(t, 11.8, .8); globe.userData.wm.opacity = .55 + .35 * Math.sin(g * Math.PI); globe.userData.w.rotation.y = t * .3; globe.scale.setScalar(1 + .06 * Math.sin(g * Math.PI));
-    place(rtPkt[2], cB, ramp(t, 13.4, 1.0));
+    place(rtPkt[0], cA, ramp(t, 3.9, 1.0));
+    const ua = ramp(t, 5.9, 1.4); analyze.visible = ua > 0 && ua < 1; analyze.scale.setScalar(.12 + ua * .5); analyze.material.opacity = .8 * (1 - ua) * Math.sin(Math.min(1, ua * 3) * Math.PI / 2);
+    ROUTES.forEach((c, i) => c.set(ramp(t, 7.4 + i * .3, .8))); ROUTES.forEach((c, i) => { c.act.material.color.copy(i === 1 ? (t > 8.7 ? ACC : DIM) : DIM); });
+    place(rtPkt[1], ROUTES[1], ramp(t, 9.3, 2.0));
+    const g = ramp(t, 11.2, .8); globe.userData.wm.opacity = .55 + .35 * Math.sin(g * Math.PI); globe.userData.w.rotation.y = t * .3; globe.scale.setScalar(1 + .06 * Math.sin(g * Math.PI));
+    place(rtPkt[2], cB, ramp(t, 11.3, .8));
   }
   // punto de acceso (se esconden internet y las rutas para que no estorben)
   { const t = lt('s5'); const inS5 = T >= S.s5 - .5 && T < S.s6 - .2; globe.visible = !inS5; ROUTES.forEach(c => { c.base.visible = !inS5; c.act.visible = !inS5 && c.act.visible; }); links.forEach(c => { c.base.visible = !inS5; });
-    const u = eo(ramp(t, .8, 1.0)); pipe.visible = u > .001; pipe.scale.x = Math.max(.001, u * pipe.userData.len);
+    const u = eo(ramp(t, 4.0, 1.0)); pipe.visible = u > .001; pipe.scale.x = Math.max(.001, u * pipe.userData.len);
     flow.forEach((f, i) => { const k = ((t * .5 + i / flow.length) % 1); f.visible = u >= 1; const a = pipeBase.position, ang = pipe.userData.ang, L = pipe.userData.len; f.position.set(a.x + Math.cos(ang) * (k - .5) * L, .05, a.z - Math.sin(ang) * (k - .5) * L); f.rotation.y = ang; });
     rt2.userData.leds.forEach((l, i) => l.material.color.copy(t > .3 + i * .1 ? ACC : OFF));
-    ap.userData.led.color.copy(t > 2.0 ? ACC : OFF);
-    WAVES.forEach((w, i) => { const k = ((t - 2.6 - i * 1.4) / 4.2); w.visible = k > 0; const kk = k % 1; const r = .2 + eo(kk) * (RMAX + .2); w.scale.set(r, r, 1); w.material.opacity = k > 0 ? .55 * (1 - kk) : 0; });
-    const rad = .2 + eo(clamp((t - 2.6) / 4.2)) * (RMAX + .2);
-    DEVS.forEach(d => { const on = t > 2.6 && rad >= d.r; d.halo.material.opacity = on ? .8 : 0; d.g.userData.screen.color.copy(on ? GREEN : BLACK); });
-    acLab.visible = t > 7.5 && t < D.s5 + .6; acLab.scale.setScalar(Math.max(.001, eo(ramp(t, 7.5, .5))));
+    ap.userData.led.color.copy(t > 1.0 ? ACC : OFF);
+    WAVES.forEach((w, i) => { const k = ((t - 5.8 - i * 1.0) / 3.2); w.visible = k > 0; const kk = k % 1; const r = .2 + eo(kk) * (RMAX + .2); w.scale.set(r, r, 1); w.material.opacity = k > 0 ? .55 * (1 - kk) : 0; });
+    const rad = .2 + eo(clamp((t - 5.8) / 3.0)) * (RMAX + .2);
+    DEVS.forEach(d => { const on = t > 5.8 && rad >= d.r; d.halo.material.opacity = on ? .8 : 0; d.g.userData.screen.color.copy(on ? GREEN : BLACK); });
+    acLab.visible = t > 8.2 && t < D.s5 + .6; acLab.scale.setScalar(Math.max(.001, eo(ramp(t, 8.2, .5))));
   }
   // payoff
   { const t = lt('s6'); if (T >= S.s6 - .5) { globe.visible = true; links.forEach(c => { c.base.visible = true; }); }
-    verbs.forEach((v, i) => { const u = ramp(t, .9 + i * .8, .5); v.visible = u > 0; v.scale.setScalar(Math.max(.001, eo(u))); if (t > -1) stationHalos[i].material.opacity = .7 * eo(u); });
+    verbs.forEach((v, i) => { const u = ramp(t, 1.5 + i * 1.25, .5); v.visible = u > 0; v.scale.setScalar(Math.max(.001, eo(u))); if (t > -1) stationHalos[i].material.opacity = .7 * eo(u); });
     WAVES.forEach(w => { if (t > 0) w.visible = false; }); }
 }
 // carteles con billboard y pop según la escena a la que pertenecen

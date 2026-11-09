@@ -68,7 +68,8 @@ switch (cmd) {
     const modelo = path.join(REPO, 'assets/voces/es_AR-daniela-high.onnx');
     if (cfg.voz?.lineas?.length) {
       paso('voz');
-      if (fs.existsSync(modelo)) correr(PY, ['engine/audio/voz.py', v]);
+      const hayModelo = fs.existsSync(modelo) || fs.readdirSync(path.dirname(modelo)).some(f => f.startsWith(path.basename(modelo) + '.parte'));   // el .onnx va partido en el repo
+      if (hayModelo) correr(PY, ['engine/audio/voz.py', v]);
       else console.log(`· falta el modelo de voz (${path.relative(REPO, modelo)}): ${fs.existsSync(path.join(v, 'audio/voz.wav')) ? 'uso la voz.wav que ya estaba' : 'el video sale sin voz'}`);
     }
     if (fs.existsSync(path.join(v, 'sfx_events.py'))) { paso('efectos'); correr(PY, ['engine/audio/sfx.py', v]); }
