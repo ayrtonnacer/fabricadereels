@@ -1,6 +1,6 @@
 # Síntesis de las referencias de motion graphics
 
-Qué se repite en los videos analizados (2026-11-09). Fuente: los cinco desgloses de esta carpeta. Es la «biblioteca» de la que se elige al armar la estructura técnica de un reel (docs/FLUJO.md, paso 3). Se amplía con cada referencia nueva.
+Qué se repite en los videos analizados (2026-11-09; 10 referencias). Fuente: los desgloses de esta carpeta. Es la «biblioteca» de la que se elige al armar la estructura técnica de un reel (docs/FLUJO.md, paso 3). Se amplía con cada referencia nueva.
 
 | Video | Duración | Planos | Cortes/min | LUFS | Golpes medidos | Qué enseña |
 |---|---|---|---|---|---|---|
@@ -9,6 +9,11 @@ Qué se repite en los videos analizados (2026-11-09). Fuente: los cinco desglose
 | [Instagram strategy](motion-inspiration-frames/analisis.md) | 18 s | 15 | 47 | −14,5 | 9 | una frase por beat; oscuro/claro; una palabra en el acento; sonido escaso |
 | [Nokia collage](motion-inspiration-nokia/analisis.md) | 20 s | 13 | 36 | −14,7 | 14 | cortes en la grilla del ritmo (≈125 BPM); barridos y formas como transición; disco giratorio |
 | [Glitch cyber](pinterest-999095498641347187/analisis.md) | 9 s | 11 | 69 | −9,7 | 0 | POV caminando + interfaz de error; mosaico de píxeles; duotono; teselas |
+| [Sting ilustrado](motion-ref-1/analisis.md) | 9 s | 8 | 45 | −14,2 | 0 | objeto portador (estrella) entre cortes; parpadeo A/B; destello como puente; color = significado |
+| [Lente explosionada 3D](motion-ref-2/analisis.md) | 20 s (16:9) | 1 | 0 | −16,0 | 4 | **vista explosionada con etiquetas y tooltip al hover; cámara mover-retener-mover; cierre en bucle** |
+| [Anuncio con tarjetas de vidrio](motion-ref-3/analisis.md) | 25 s | 1 | 0 | −14,2 | 6 | un solo plano continuo; texto cinético por palabra; tarjetas de vidrio 3D; contadores; silencio final |
+| [Miedo y codicia](motion-ref-4/analisis.md) | 32 s | 6 | 10 | −14,2 | 36 | rojo/verde con significado; una palabra por tic de sonido; objeto que cruza como transición |
+| [Explicador largo (agentes de IA)](motion-ref-5/analisis.md) | 104 s | 6 | 3 | −11,7 | 46+ | mascota-guía, tarjetas de producto, subtítulos por palabra; ejemplo de lo que hay que partir en serie |
 
 ## Lo que todos tienen en común
 1. **Una sola idea por video** y una frase corta por beat (4–6 palabras, 1–1,5 s). Nada se explica con párrafos.
@@ -48,5 +53,34 @@ Qué se repite en los videos analizados (2026-11-09). Fuente: los cinco desglose
 5. **Contadores y olas** (`data-count`, `clip-path` ondulado) para cifras de un reel.
 Todo esto es para ELEGIR por reel (regla de variedad de `docs/CAMARA-3D.md`), no para usar junto.
 
+## Patrones nuevos (referencias 6 a 10)
+1. **Explicación técnica en 3D = vista explosionada + etiquetas + hover** (la referencia «Lente»). Es el patrón más cercano a lo que Ayrton quiere para reels técnicos: un solo plano de cámara 3D, la pieza se abre en capas a lo largo de un eje, cada parte lleva un cartel con línea guía, y una frase de definición aparece al resaltar una pieza con el cursor. La frase del tooltip es la que dice la voz. En un reel de redes, el switch o el router abiertos mostrarían puertos, controlador y memoria; en un reel de redes en capas, las capas del modelo separándose.
+2. **La cámara «mueve–retiene–mueve».** En la lente: retenciones de 2 a 4 s para leer, reencuadres de 0,5 a 0,7 s con pico de velocidad ≈2,2. En los 25 s del anuncio, 7 reencuadres rápidos (pico 2,3–3,9) entre retenciones. Regla: **cada movimiento tiene un motivo (cambiar de pieza) y cada retención deja leer**; nunca movimiento constante. En Claqueta: `rig.toma` cortas con ease `suave` y `MotionBlur`, separadas por retenciones largas.
+3. **Un plano continuo es posible sin cortes.** Dos de las diez referencias (lente, anuncio) no tienen un solo corte: la cámara se reencuadra y los elementos entran y salen. Ahorra transiciones y se ve más «3D».
+4. **Una palabra por tic de sonido** (miedo y codicia, explicador): cada palabra del texto entra con un clic corto, y el espectador lee al ritmo del sonido. En el 4 se miden 36 tics en 25 s.
+5. **Color con un solo significado** (miedo y codicia: rojo = miedo, verde = codicia; sting: azul = calma, rojo = peligro). Coincide con la regla 1 de CLAUDE.md.
+6. **Un objeto portador cruza los cortes** (la estrella del sting, la cápsula de miedo y codicia, la mascota del explicador): el ojo sigue al objeto, no a la escena.
+7. **Cierre en bucle** (la lente termina en el cuadro con el que empieza; el sting vuelve a un cuadro parecido al inicial).
+8. **Silencio de cierre** (anuncio: 1,2 s sin música en el logo).
+9. **Lo largo se parte.** El explicador de 104 s, con una sola idea por tramo, serían dos o tres reels.
+
+## Transiciones y recursos nuevos del catálogo
+| Recurso (dónde) | En Claqueta |
+|---|---|
+| Vista explosionada de un grupo 3D (lente) | **A armar:** grupo con piezas en posición «ensamblada» y «explosionada», `lerp` escalonado; helper `explosionar(g, t0, dur)` |
+| Etiqueta con línea guía + tooltip al hover (lente) | **Hay en parte:** `cartel()` y el billboard del reel de redes; falta la línea guía y la tarjeta de dos líneas con resalte |
+| Rayos/haces de luz atravesando piezas (lente) | **Hay en parte:** paquetes y tubos con `drawRange`; falta un helper de haces |
+| Flicker A/B (sting) | `visible` alternando cada 9 cuadros |
+| Estrella/objeto portador (sting) | un paquete o llave que cruza las escenas |
+| Cápsula que cruza a toda velocidad (miedo y codicia) | costura `latigazo` con objeto |
+| Contador y anillo de progreso (anuncio) | `custom(id, lt)` con `eo()` |
+| Tarjetas de vidrio con perspectiva (anuncio, explicador) | `MeshPhysicalMaterial` con transmisión o plano con borde/brillo |
+| Texto por palabra con tic (miedo y codicia, explicador, anuncio) | `data-a` escalonado + `tick()` en `sfx_events.py` |
+
+## Qué agregar al motor ahora (orden de utilidad)
+1. **`explosionar()` + etiquetas con línea guía + tooltip** (patrón 1): sirve a cualquier reel técnico con un objeto físico (USB, notebook, switch, router).
+2. **Helper `retener(rig, [...])`** para armar la secuencia mover-retener-mover sin calcular tiempos a mano.
+3. **`iris` y `forma`**, **`glitch`/`teselas`** y la **cuadrícula de beats** (lista anterior).
+
 ## Lo que NO sirve de estos videos para nosotros
-Fotos de stock y marcas de terceros, retratos de personas, paletas ajenas (rojo/blanco, amarillo/rojo/crema, azul eléctrico), tono publicitario («Download», KPIs de marketing), formato 1:1 con barras negras (Nokia) y loudness de −9,7 LUFS que ahoga una voz.
+Fotos de stock y marcas de terceros (incluidos productos y empresas de las referencias nuevas: lente de cámara, trading, Glasser.AI), retratos de personas, paletas ajenas (rojo/blanco, amarillo/rojo/crema, azul eléctrico), tono publicitario («Download», KPIs de marketing), formato 1:1 con barras negras (Nokia) y 16:9 horizontal (lente: hay que reencuadrar en 9:16), loudness de −9,7 o −11,7 LUFS que ahoga una voz, CTAs de «guardá/comentá la palabra» (nuestra regla 3) y promesas de ganancias.
