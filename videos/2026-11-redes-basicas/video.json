@@ -1,0 +1,65 @@
+{
+ "titulo": "Redes: switch, router y punto de acceso",
+ "fecha": "2026-11",
+ "fuente": "URL o tema de origen",
+ "steps": 2,
+ "scenes": [
+  {
+   "id": "s1",
+   "d": 3.6
+  },
+  {
+   "id": "s2",
+   "d": 6
+  },
+  {
+   "id": "s3",
+   "d": 6
+  },
+  {
+   "id": "s4",
+   "d": 4
+  }
+ ],
+ "voz": {
+  "modelo": "assets/voces/es_AR-daniela-high.onnx",
+  "length_scale": 0.92,
+  "noise_scale": 0.6,
+  "noise_w_scale": 0.7,
+  "lineas": [
+   {
+    "id": "l01",
+    "escena": "s1",
+    "t": 0.15,
+    "texto": "Gancho: una frase corta que prometa algo."
+   },
+   {
+    "id": "l02",
+    "escena": "s2",
+    "t": 3.8,
+    "texto": "Primer paso explicado con palabras simples."
+   },
+   {
+    "id": "l03",
+    "escena": "s3",
+    "t": 9.8,
+    "texto": "Segundo paso explicado con palabras simples."
+   },
+   {
+    "id": "l04",
+    "escena": "s4",
+    "t": 15.9,
+    "texto": "Si te gustó el video, dale me gusta, y seguime para aprender más."
+   }
+  ],
+  "efecto": "ninguno",
+  "radio_fuerza": 0.6
+ },
+ "audio": {
+  "musica": "assets/musica/fondo.mp3",
+  "musica_desde": 0,
+  "musica_db": -8,
+  "sfx_gain": 1.25,
+  "loudness": -14
+ }
+}
