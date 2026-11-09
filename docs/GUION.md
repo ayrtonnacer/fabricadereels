@@ -5,7 +5,7 @@ Base: `docs/INVESTIGACION-GUIONES.md` (investigación completa, con fuentes y pl
 - Voz en español rioplatense (voseo): "Necesitás", "elegí", "seguime". Escribir como se habla ("ojo", "pensalo así", "posta").
 - Frases cortas (≤ 12 palabras). Un paso = una o dos frases.
 - NO leer: comandos, rutas, texto de carteles/tarjetas. La voz explica el porqué; la pantalla muestra el qué.
-- Evitar tecnicismos; si es imprescindible, nombrarlo y explicar en una palabra ("herramienta", "memoria", "descomprimir").
+- Público técnico que quiere aprender (como Platzi): usar los términos reales y definir cada uno en una frase; no simplificar de más ni inventar analogías que cambien el sentido. Ser fiel a la fuente: cada afirmación técnica sale de ella o se marca como no verificada.
 - Cero palabras prohibidas (ver `pronunciacion.json`): pendrive→memoria, like→me gusta, dev, guardalo.
 - Sin muletillas de IA: "¿Sabías que…?", "En el mundo de…", "Imaginá…", "Sumérgete", "Desbloqueá", "Aquí está la clave", "y lo mejor de todo". Ni hooks vacíos ("No vas a creer…", "Esto cambia todo", "El 99% no sabe esto").
 - Advertencias importantes (p. ej. "se borra todo") van en pantalla, no en la voz.
