@@ -1,0 +1,84 @@
+<!-- EXPLICA: un set continuo con 3 estaciones en fila. La cámara viaja de una a otra (pan con leve órbita);
+     el fondo lejano y el primer plano se mueven a distinta velocidad (paralaje) → profundidad sin 3D real. -->
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    #root .w { display: inline-block; }
+    .e-est { width: 860px; padding: 56px 56px 60px; }
+    .e-num { font: 700 150px/1 var(--mono); color: var(--acc); letter-spacing: -.04em; }
+    .e-t { font-weight: 700; font-size: 76px; line-height: 1.02; letter-spacing: -.025em; margin-top: 26px; }
+    .e-s { font-weight: 500; font-size: 42px; line-height: 1.3; color: var(--muted); margin-top: 22px; }
+    .e-glifo { font: 700 120px var(--mono); color: var(--acc); opacity: .22; }
+    #e-term { width: 900px; }
+    #e-pasos { position: absolute; left: 70px; top: 230px; }
+    #e-ok { margin-top: 30px; }
+  </style>
+  <div id="root" data-composition-id="explica" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <div class="vista" data-layout-allow-overflow>
+      <div class="cam"><div class="mundo">
+        <!-- fondo lejano: se mueve poco -->
+        <div id="e-puntos" class="puntos" data-x="1300" data-z="-1600" data-s="1.6"></div>
+        <div id="e-piso" class="piso" data-x="1300" data-y="760" data-rx="90"></div>
+        <!-- estaciones (plano z = 0) -->
+        <div id="e-a" class="tarjeta e-est" data-x="0" data-y="40">
+          <div class="e-num">1</div>
+          <div class="e-t">Primer <span class="acc">concepto</span></div>
+          <div class="e-s">Una frase corta que lo explica.</div>
+        </div>
+        <div id="e-b" class="tarjeta e-est" data-x="1300" data-y="40">
+          <div class="e-num">2</div>
+          <div class="e-t">Segundo <span class="acc">concepto</span></div>
+          <div class="e-s">La pantalla muestra el qué; la voz, el porqué.</div>
+        </div>
+        <div id="e-c" data-x="2600" data-y="40">
+          <div id="e-term" class="terminal">
+            <div class="barra"><i></i><i></i><i></i></div>
+            <div class="cuerpo"><span class="ps">$</span> <span id="e-cmd">comando --ejemplo</span></div>
+          </div>
+          <div id="e-ok" class="chip ok"><b>✓</b> Resultado correcto</div>
+        </div>
+        <!-- primer plano: pasa rápido delante de la cámara -->
+        <div id="e-g1" class="e-glifo" data-x="560" data-y="-620" data-z="520">{ }</div>
+        <div id="e-g2" class="e-glifo" data-x="1900" data-y="640" data-z="600">#</div>
+        <div id="e-g3" class="e-glifo" data-x="3150" data-y="-560" data-z="480">$</div>
+      </div></div>
+    </div>
+    <div class="vineta" data-layout-ignore></div>
+    <!-- "Paso N de M": fuera del mundo, fijo en pantalla -->
+    <div id="e-pasos" class="pasos">
+      <div class="lbl">Paso <b id="e-paso-n">1</b> de 3</div>
+      <div class="segs"><div class="seg"><i id="e-s1"></i></div><div class="seg"><i id="e-s2"></i></div><div class="seg"><i id="e-s3"></i></div></div>
+    </div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="explica"]');
+    const tl = gsap.timeline({ paused: true });
+    const cam = Camara(root, tl);
+
+    // Llega del zoom through del gancho: arranca cerca y se asienta (misma dirección y velocidad en el corte)
+    cam.poner({ x: 0, z: 900, rx: 0 });
+    cam.ir(0, { z: 0, ry: 0 }, 0.9, 'expo.out');
+    cam.ir(0.9, { z: 70 }, 1.7, 'none');                          // deriva mientras se lee la estación 1
+    cam.mirar(2.6, '#e-b', { z: 40, ry: -7 }, 1.0, 'power3.inOut'); // viaje con órbita leve
+    cam.ir(3.6, { x: 1300, z: 90, ry: 0 }, 1.6, 'none');
+    cam.mirar(5.2, '#e-c', { z: 120, ry: -7, rx: 3 }, 1.0, 'power3.inOut');
+    cam.ir(6.2, { x: 2600, z: 190, ry: 0, rx: 0 }, 1.8, 'power1.out');
+
+    // Contenido: cada estación se arma cuando la voz la nombra
+    const entra = (sel, t) => tl.fromTo(sel, { opacity: 0, filter: 'blur(10px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.22, ease: 'power4.out', stagger: 0.08 }, t);
+    entra('#e-a > *', 0.25);
+    entra('#e-b > *', 3.0);
+    entra('#e-term', 5.3);
+    tl.fromTo('#e-cmd', { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 0.7, ease: 'steps(17)' }, 5.45);
+    tl.fromTo('#e-ok', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'back.out(1.6)' }, 5.95);
+
+    // Barra de pasos
+    tl.fromTo('#e-pasos', { opacity: 0 }, { opacity: 1, duration: 0.25 }, 0.1);
+    ['#e-s1', '#e-s2', '#e-s3'].forEach((s, i) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: 'power2.out' }, [0.3, 3.0, 5.6][i]));
+    tl.set('#e-paso-n', { textContent: '2' }, 3.0);
+    tl.set('#e-paso-n', { textContent: '3' }, 5.6);
+
+    window.__timelines["explica"] = tl;
+  </script>
+</template>

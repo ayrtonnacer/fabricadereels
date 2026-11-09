@@ -1,60 +1,25 @@
 <!doctype html>
 <html lang="es">
-<head>
-<meta charset="utf-8">
-<title>Plantilla</title>
-<link rel="stylesheet" href="/engine/themes/cyber.css">
-<link rel="stylesheet" href="/engine/themes/estados.css">
-</head>
-<body>
-<!-- S1 GANCHO: firma @ayrtonnacer en verde + titular de 3 líneas, la última resaltada -->
-<section class="scene" id="s1">
-  <div class="abs" style="top:250px">
-    <div style="display:inline-block;font:700 40px SG,sans-serif;color:var(--acc)" data-a="pop:0.05:0.4">@ayrtonnacer</div>
-    <h1 style="margin-top:36px;font-size:104px"><span data-a="up:0.1" style="display:inline-block">Línea uno</span><br><span data-a="up:0.22" style="display:inline-block">línea dos</span><br><span class="hl" data-a="up:0.38" style="display:inline-block">idea clave</span></h1>
-  </div>
-</section>
-
-<!-- S2 PASO 1 (data-step="1" muestra "Paso 1 de N") -->
-<section class="scene" id="s2" data-step="1">
-  <div class="abs" style="top:360px"><h2 data-a="up:0">Primer <span class="cy">paso</span></h2></div>
-  <div class="term" style="top:640px" data-a="up:0.15">
-    <div class="bar"><i></i><i></i><i></i><span>user@host: ~</span></div>
-    <div class="body"><div class="ln" data-show="0.5"><span class="ps">$ </span><span data-type="0.55" data-text="comando de ejemplo"></span></div><div class="ln out" data-show="1.4">salida del comando</div></div>
-  </div>
-  <div class="abs" style="top:1250px" data-a="up:2.2"><div class="chip">Nota breve (no se lee en voz)</div></div>
-</section>
-
-<!-- S3 PASO 2 con tarjetas -->
-<section class="scene" id="s3" data-step="2">
-  <div class="abs" style="top:360px"><h2 data-a="up:0">Segundo <span class="cy">paso</span></h2></div>
-  <div class="abs" style="top:600px">
-    <div class="card" data-a="left:0.35"><div class="num ok">✓</div><div><div class="t">Tarjeta con check (ok)</div><div class="s">verde = salió bien</div></div></div>
-    <div class="card alert" data-a="left:0.85" style="margin-top:22px"><div class="num err">✕</div><div><div class="t">Tarjeta de error</div><div class="s">bloque rojo relleno + ✕</div></div></div>
-  </div>
-  <div class="abs" style="top:1100px;display:flex;flex-direction:column;gap:22px;align-items:flex-start">
-    <div class="chip ok" data-a="up:1.4"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>Flag capturada: acceso correcto</div>
-    <div class="chip warn" data-a="up:1.9"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 21h20L12 3zM12 10v5M12 18v.1"/></svg>Cuidado: esto hace ruido en la red</div>
-    <div class="chip err" data-a="up:2.4"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>Acceso denegado</div>
-  </div>
-</section>
-
-<!-- S4 CIERRE / CTA: el usuario en verde (lo que debe recordarse) -->
-<section class="scene" id="s4">
-  <div class="abs center" style="top:620px">
-    <h1 style="font-size:96px"><span data-a="up:0.1" style="display:inline-block">Dale <span class="cy">like</span></span><br><span data-a="up:0.25" style="display:inline-block">Seguime para aprender</span><br><span data-a="up:0.4" style="display:inline-block">más de <span class="cy">tema</span></span></h1>
-    <div style="margin-top:60px;font:700 56px SG,sans-serif;color:var(--acc)" data-a="pop:0.9:0.45">@ayrtonnacer</div>
-  </div>
-</section>
-
-<script type="module">
-import {mountShell,loadConfig,timeline,setupSteps,installRender} from '/engine/lib.js';
-mountShell();
-const CFG=await loadConfig();
-const SC=CFG.scenes.map(s=>({...s}));
-const TOTAL=timeline(SC);
-setupSteps(CFG.steps);
-installRender({SC,TOTAL});
-</script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <!-- Todo local (sin CDN): el render no depende de la red. -->
+    <script src="assets/gsap.min.js"></script>
+    <script src="assets/camara.js"></script>
+    <link rel="stylesheet" href="assets/marca.css" />
+  </head>
+  <body>
+    <!-- Duraciones: las escribe `python engine/tiempos.py videos/X` desde video.json (única fuente de verdad). -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1080" data-height="1920">
+      <div id="gancho" data-composition-id="gancho" data-composition-src="compositions/gancho.html"
+        data-start="0" data-duration="3.6" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="explica" data-composition-id="explica" data-composition-src="compositions/explica.html"
+        data-start="3.6" data-duration="8" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="cierre" data-composition-id="cierre" data-composition-src="compositions/cierre.html"
+        data-start="11.6" data-duration="3.4" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+    </div>
+    <script>
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
 </html>

@@ -34,7 +34,7 @@ Hook-promesa (0–3 s) → Contexto mínimo (3–7) → Cuerpo A (7–20) → Mi
 
 ## Cierre
 - Fórmula multiplataforma: "Dale me gusta y seguime para aprender más de <área concreta>." (variar el área; nunca "guardalo"). En pantalla, la firma `@ayrtonnacer`.
-- **Versión bucle** (shorts/reels): sin CTA hablado; la última frase desemboca en el hook y el último cuadro vuelve al primero (ver `videos/2026-11-parrot-loop`). Para contenido educativo funciona mejor como *desafío* ("¿te animás a descifrar el mensaje del principio?") que como truco de edición.
+- **Versión bucle** (shorts/reels): sin CTA hablado; la última frase desemboca en el hook y el último cuadro vuelve al primero (cámara en la misma pose al final y al principio; el corte se esconde en un movimiento; música en silencio en el empalme; ver el video Parrot en bucle en el historial de git, commit `ae9a888`). Para contenido educativo funciona mejor como *desafío* ("¿te animás a descifrar el mensaje del principio?") que como truco de edición.
 - En humor: el CTA mata el remate; solo texto en pantalla o nada.
 
 ## Originalidad (riesgo de "contenido no auténtico" en YouTube)
@@ -49,5 +49,5 @@ La plantilla fija la **arquitectura** (bloques, tiempos, campos), no las frases,
 - [ ] Concepto en ≤ 12 palabras. [ ] Hook ≤ 3 s, promesa que se cumple. [ ] Primer cuadro concreto.
 - [ ] Un loop abierto en el hook y cerrado en el payoff, antes del CTA. [ ] Palabras pronunciadas ≤ duración × 2,3.
 - [ ] Sin muletillas de IA ni términos sin explicar. [ ] Al menos una marca personal. [ ] Cifras y comandos verificados/ejecutados.
-- [ ] Cada bloque con visual sincronizado a una palabra; nada quieto > 3 s. [ ] Otro tipo de hook y de analogía que el video anterior.
+- [ ] Cada bloque con visual sincronizado a una palabra y su movimiento de cámara (`docs/CAMARA.md`); nada quieto > 3 s. [ ] Otro tipo de hook y de analogía que el video anterior.
 Plantilla de guion: `videos/_plantilla/guion.md`.

@@ -34,4 +34,4 @@ print('\n'.join(l.strip() for l in r.splitlines() if l.strip().startswith(('I:',
 mudo = V / 'out/mudo.mp4'
 if mudo.exists():
     ff('-i', mudo, '-i', A / 'mezcla.wav', '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', V / 'final.mp4'); print('->', V / 'final.mp4')
-else: print('(falta out/mudo.mp4: renderizar con engine/render.mjs … scenes y … join)')
+else: print('(falta out/mudo.mp4: en la carpeta del video, npx hyperframes render -o out/mudo.mp4)')

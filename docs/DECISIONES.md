@@ -41,3 +41,11 @@
 - Bucle: la última frase desemboca en el hook, el último cuadro vuelve al primero (corte oculto en un movimiento), música en silencio en el empalme, sin "dale me gusta" ni firma al final.
 - Medido: Piper Daniela da ≈ 2,3 palabras/s en el video completo (no 2,5).
 - yt-dlp instalado, pero el proxy de la sesión bloquea YouTube: las referencias se pasan como transcripción o archivos adjuntos.
+
+## 2026-11-09 — Replanteo: HyperFrames + motion graphics con cámara 2.5D
+- Pedido de Ayrton: el render 3D tardaba mucho (~18 min un reel en CPU) y quiere sacar reels rápidos; usar HyperFrames (heygen-com/hyperframes), más probado que el motor propio; el estilo que le interesa es **motion graphics 2D donde la profundidad la da el movimiento de cámara** (pasó referencias de movimientos de cámara).
+- Hecho: cada video es un proyecto HyperFrames (`index.html` + `compositions/` + `assets/`); cámara 2.5D propia en `assets/camara.js` (capas HTML a distinta z + perspectiva, GSAP) documentada en `docs/CAMARA.md`. Render de la plantilla (15 s): 36 s en CPU con `--workers 4` (≈ 9× más rápido).
+- Esto reemplaza la regla anterior "3D sí (three.js)": ya no es la base. 3D real solo para un plano puntual si Ayrton lo pide.
+- Se mantiene: tema cyber/HackTheBox (ahora en `assets/marca.css`), color = significado, IBM Plex, firma, CTA, voz Daniela, audio propio (`voz.py`/`sfx.py`/`mezcla.py`, −14 LUFS). HyperFrames renderiza mudo.
+- Se borró (queda en git, commit `ae9a888`): motor `render.mjs`/`lib.js`/`dinamismo.js`, temas redteam/anduril, los 3 videos de Parrot, y docs redundantes (PARTES, SHOOTING-SCRIPT, GLOSARIO, DINAMISMO, PRONUNCIACION → fusionados en ESTILO/CAMARA/AUDIO/plantilla de guion).
+- Técnico: GSAP y fuentes van locales en `assets/` (el CDN está bloqueado en la nube y el render no debe depender de la red). Capas grandes con máscara (piso, puntos) encarecen mucho el render en CPU: piso ≤ 3000 px. El `check` de HyperFrames toma la viñeta y el fondo como opacos: llevan `data-layout-ignore`.

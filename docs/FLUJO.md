@@ -1,12 +1,18 @@
 # Flujo para hacer un reel
 
-1. **Fuente**: leer el link/tema completo (WebFetch/WebSearch). Extraer: objetivo, pasos o ideas clave, comandos o fórmulas, advertencias. Verificar contra la fuente oficial.
-2. **Guion** (ver GUION.md): 5–8 pasos; frase por escena; texto de voz natural; qué se muestra en pantalla por escena. Duración objetivo 45–60 s.
-3. **✋ Checkpoint**: mostrar el guion al usuario y esperar OK. Pasar luego del texto aprobado a `video.json`.
-4. **Crear el video**: `cp -r videos/_plantilla videos/AAAA-MM-tema`; completar `video.json` (escenas con duración, `voz.lineas`, `audio`).
-5. **Voz primero**: `python engine/audio/voz.py videos/X`. Ajustar texto/tiempos hasta que no haya avisos. Las duraciones de las escenas se acomodan a la voz (voz ≤ fin de escena − 0,1 s; ≥ 0,15 s entre líneas).
-6. **Visual**: editar `index.html` (secciones `.scene`, `data-a`, `data-step`). `preview` en momentos clave (inicio, medio, CTA), mirar cada imagen, corregir desbordes de texto.
-7. **Efectos**: `sfx_events.py` con la tabla de significados (AUDIO.md).
-8. **Render**: `scenes` → `join` → `mezcla`. Revisar `final.mp4` (−14 LUFS, pico ≤ −1,5 dB).
-9. **Entrega**: enviar mp4 + descripción (con créditos de la voz: Piper es_AR-daniela, CC BY-SA 4.0, y de la fuente).
-10. **Cierre**: registrar correcciones en DECISIONES.md y palabras nuevas en pronunciacion.json; commit.
+Comandos desde la raíz del repo, salvo donde dice "en la carpeta del video".
+
+1. **Fuente**: leer el link/tema completo (WebFetch/WebSearch). Extraer objetivo, ideas clave, comandos o fórmulas, advertencias. Verificar contra la fuente oficial.
+2. **Guion** (`docs/GUION.md`, plantilla `videos/_plantilla/guion.md`): una idea, Hook → Payoff → CTA/bucle, ≤ duración × 2,3 palabras. Por escena: voz, texto en pantalla y **movimiento de cámara** (`docs/CAMARA.md`).
+3. **✋ Checkpoint**: mostrar el guion (texto de voz + una línea por escena con su cámara) y esperar OK.
+4. **Crear el video**: `bash engine/nuevo.sh AAAA-MM-tema` (copia la plantilla). Completar `video.json`: escenas (`id` = nombre de la composición, `d` = segundos) y `voz.lineas`.
+5. **Voz primero**: `python engine/audio/voz.py videos/X`. Ajustar texto y tiempos hasta que no haya avisos; las escenas duran lo que pide la voz (voz ≤ fin de escena − 0,1 s; ≥ 0,15 s entre líneas). Luego `python engine/tiempos.py videos/X` copia las duraciones a `index.html`.
+6. **Visual**: una composición por escena en `compositions/` (copiar las de la plantilla). Cada parte aparece cuando la voz la nombra (tiempos locales de la escena = tiempo de la línea − inicio de la escena).
+7. **Revisar** (en la carpeta del video): `npx hyperframes check` (sin errores) y `npx hyperframes snapshot --at 0,1.5,…` → **mirar las imágenes** antes de renderizar. Ojo con: cuadro 0 (es la miniatura), textos chicos, cortes entre escenas.
+8. **Efectos**: `sfx_events.py` con los significados fijos (`docs/AUDIO.md`); whoosh en el pico de cada movimiento de cámara. `python engine/audio/sfx.py videos/X`.
+9. **Render** (en la carpeta del video): `npx hyperframes render --workers 4 -o out/mudo.mp4` (~2,5 s por segundo de video en CPU).
+10. **Mezcla**: `python engine/audio/mezcla.py videos/X` → `final.mp4` (−14 LUFS, pico ≤ −1,5 dB).
+11. **Entrega**: mp4 + descripción con créditos (voz: Piper es_AR-daniela, CC BY-SA 4.0; y la fuente).
+12. **Cierre**: registrar correcciones en `docs/DECISIONES.md` y palabras nuevas en `engine/audio/pronunciacion.json`; commit.
+
+Cambios chicos: tocar solo la escena afectada, `snapshot --composition <id>` y volver a renderizar.

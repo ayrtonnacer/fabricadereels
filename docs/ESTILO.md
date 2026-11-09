@@ -1,16 +1,14 @@
-# Estilo visual
-- Formato 1080×1920, 30 fps, márgenes ~70 px. Zona segura: nada importante en los 250 px superiores ni en los 380 inferiores (UI de las apps).
-- **Tema por defecto: `themes/cyber.css` (HackTheBox)**. Ayrton volvió a él (2026-11-07) tras probar red team en Parrot. `themes/redteam.css` queda opcional; fue pedido por Ayrton (referencia: "Ghosts of Russia" en Behance). Negro frío con brasas rojas, blanco hueso, acero. NO es dúo-tono: el color significa algo (ver semántica).
-- **Semántica de color (red team)**: rojo = identidad/énfasis (palabra clave, firma, progreso) · verde `#2EE08C` + ✓ = OK / correcto / flag capturada · ámbar `#FFB020` + ⚠ = aviso · ERROR = bloque rojo RELLENO con ✕ blanco (`.chip.err`, `.card.alert` + `.num.err`) · acero `#8FA6BF` = dato neutro. Nunca usar el mismo color para lo bueno y lo malo (error de la versión Anduril, donde todo era naranja). Verde y ámbar solo en estados, nunca como decoración.
-- Tema de Parrot / HackTheBox clásico: **cyber / HackTheBox** (`engine/themes/cyber.css`). Inspiración: hackthebox.com (y /red-teams). Existe `themes/anduril.css` (negro puro, blanco, acento naranja, Inter Tight) como alternativa, pero Ayrton prefirió HackTheBox.
-- Paleta: fondo `#0B111C`, paneles `#111A28`, filetes `#24344B`, texto `#E8EEF7`, secundario `#8A9BB8`, acento lima `#9FEF00` (resalte, firma, progreso), cian `#3BC9FF` (secundario), rojo `#FF3E5E` (error/peligro).
-- Tipografía: IBM Plex Sans (títulos 700, texto) y IBM Plex Mono (terminal, código). Nada serif ni genérico.
-- Titulares: máx. 3 líneas, la clave resaltada en verde. Una idea por escena.
-- Barra de progreso: "Paso N de M" en Plex Sans + segmentos. No usar etiquetas en mayúsculas con espaciado.
-- Prohibido: líneas de escaneo, marcos HUD/esquinas en L, "// TUTORIAL", "[ GRATIS ]", texto de fuente al final.
-- Se mantiene el glitch en la frase gancho.
-- Ritmo, subtítulos y animaciones "con vida": ver `docs/DINAMISMO.md` (referencia @aprendeiadecero, 2026-11-07).
-- Animaciones: `up`, `left`, `pop`, `fade` por atributo `data-a="tipo:inicio:duración"`; escritura de terminal 30 caracteres/s (`data-type`).
-- 3D (three.js): escala real entre objetos, materiales con RoomEnvironment, nada flotando sin apoyo. Ver el video de referencia.
-- Cada video termina en CTA con la firma en verde.
-- Firma: solo `@ayrtonnacer`, sin punto, icono ni adorno al lado.
+# Estilo visual: motion graphics
+
+- Formato 1080×1920, 30 fps. Zona segura: todo lo que se lee entre los 200 y los 1330 px de alto (arriba y abajo tapa la interfaz de las apps; nunca texto bajo la barra de botones de la derecha). Debajo de 1330 px solo textura (piso, fondo).
+- **Lenguaje**: motion graphics 2D (tipografía grande, tarjetas, terminal, diagramas que se arman) con **cámara que se mueve en un set con profundidad** (`docs/CAMARA.md`). Sin modelos 3D salvo un plano puntual que lo pida.
+- **Identidad**: `assets/marca.css` de cada video (copiada de la plantilla). Tema cyber / HackTheBox: fondo `--bg #0B111C`, tarjetas `--panel`, filetes `--line`, texto `--text`, secundario `--muted`, acento lima `--acc #9FEF00`. Siempre `var(--…)`, nunca colores fijos.
+- **Color = significado**: énfasis (palabra clave, firma, progreso) = `--acc` · ✓ correcto = `--ok` verde · ⚠ aviso = `--warn` ámbar · ✕ error = bloque rojo RELLENO (`.chip.err`). Nunca el mismo color para lo bueno y lo malo; verde y ámbar solo en estados.
+- **Tipografía**: IBM Plex Sans 500/700 (`--sans`) y IBM Plex Mono (`--mono`), locales en `assets/fonts/`. Espaciado normal o apretado (titulares −0,02 a −0,03 em); **nunca** mayúsculas con espaciado amplio.
+- **Titulares**: 1–3 líneas, una idea por escena, la palabra clave con `.acc`. Un titular que aterrizó queda quieto: el movimiento lo pone la cámara o el elemento siguiente.
+- **Entradas de texto**: palabra por palabra con desenfoque (blur 10 → 0, ~0,18 s, 60–120 ms entre palabras), sin deslizar. Variar la entrada entre escenas (ver `/hyperframes` → `references/motion.md`).
+- **Paso**: "Paso 1 de 7" en Plex Sans + segmentos (`.pasos`), fijo en pantalla (fuera de la cámara).
+- **Firma**: `@ayrtonnacer` al inicio y al final, con `--acc`, sola (sin punto, ícono ni adorno). Lo resaltado es lo que se debe recordar.
+- **Ritmo**: un cambio visual cada 1,5–3 s (entra algo, viaja la cámara, se dibuja un resalte). Nada quieto más de 3 s.
+- **Prohibido**: líneas de escaneo, marcos HUD / esquinas en L, "// TUTORIAL", "[ GRATIS ]", texto de fuente al final, loops de "flotar/respirar", rebote en interfaz, todas las escenas entrando igual.
+- **Subtítulos**: no, salvo que Ayrton los pida (si los pide: bloque de captions del registro de HyperFrames, adaptado a la marca).

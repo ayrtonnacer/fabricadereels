@@ -47,3 +47,12 @@ En `video.json`: `"voz": {"efecto": "radio", "radio_fuerza": 0.6, ...}`. Lo apli
 
 ## Herramientas
 `sfxlib.py` (sintéticos + tipeo real + `sample()`/`propio()` para sonidos reales de `assets/sfx/`), `cortar_teclas.py`, `sfx.py` (ejecuta `sfx_events.py`), `mezcla.py` (cadena de voz, ducking, música, loudnorm −14 LUFS). Referencia lograda en el video de Parrot: −14,2 LUFS.
+
+## Pronunciación
+Piper lee mal siglas y palabras en inglés. Se corrige con `engine/audio/pronunciacion.json`:
+- `reemplazos`: palabra → escritura fonética ("Parrot" → "Párrot"); `estado: sin_verificar` hasta que Ayrton la escuche y confirme (→ `ok`).
+- `prohibidas`: palabras que no van en la voz; `voz.py` avisa y propone alternativa.
+Se escribe el texto natural en `video.json`; `voz.py` aplica el diccionario. Si algo suena mal, se agrega al diccionario en el mismo commit. Tips: acento escrito para marcar la sílaba tónica; siglas separadas por letras ("u ese be").
+
+## Audio y HyperFrames
+HyperFrames renderiza el video **mudo** (`out/mudo.mp4`); la voz, los efectos y la música los hace y mezcla este repo (`voz.py` → `sfx.py` → `mezcla.py`), que ya cumple −14 LUFS con ducking. No poner `<audio>` en las composiciones (se mezclaría dos veces). La skill `/media-use` de HyperFrames ofrece voces y música propias; Ayrton eligió Daniela (Piper): no cambiarla sin que lo pida.

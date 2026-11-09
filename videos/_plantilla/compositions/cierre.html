@@ -1,0 +1,41 @@
+<!-- CIERRE / CTA: arranca pegado a la firma y se aleja (pull-back) para revelar el llamado.
+     Lo que hay que recordar (@ayrtonnacer) lleva el acento. Para un video en bucle, ver docs/GUION.md. -->
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    #root .w { display: inline-block; }
+    #c-cta { width: 980px; }
+    #c-firma { font-size: 92px; }
+  </style>
+  <div id="root" data-composition-id="cierre" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <div class="vista" data-layout-allow-overflow>
+      <div class="cam"><div class="mundo">
+        <div id="c-piso" class="piso" data-y="700" data-rx="90"></div>
+        <div id="c-puntos" class="puntos" data-z="-1500"></div>
+        <h2 id="c-cta" class="titular chico" data-y="-230">
+          <span class="w">Dale</span> <span class="w acc">like</span><br />
+          <span class="w">Seguime</span> <span class="w">para</span> <span class="w">aprender</span><br />
+          <span class="w">más</span> <span class="w">de</span> <span class="w acc">tema</span>
+        </h2>
+        <div id="c-firma" class="firma" data-y="190">@ayrtonnacer</div>
+      </div></div>
+    </div>
+    <div class="vineta" data-layout-ignore></div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="cierre"]');
+    const tl = gsap.timeline({ paused: true });
+    const cam = Camara(root, tl);
+
+    cam.poner({ y: 190, z: 700, rx: -4 });                       // pegado a la firma
+    cam.ir(0.5, { y: 0, z: 30, rx: 8 }, 1.5, 'power2.inOut');     // se aleja e inclina: revela el CTA y el piso
+    cam.ir(2.0, { y: 0, z: 0, rx: 9 }, 1.4, 'none');
+
+    tl.fromTo('#c-firma', { opacity: 0, filter: 'blur(12px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.3, ease: 'power4.out' }, 0.05);
+    tl.fromTo('#c-cta .w', { opacity: 0, filter: 'blur(10px)' },
+      { opacity: 1, filter: 'blur(0px)', duration: 0.18, ease: 'power4.out', stagger: 0.07 }, 0.9);
+
+    window.__timelines["cierre"] = tl;
+  </script>
+</template>

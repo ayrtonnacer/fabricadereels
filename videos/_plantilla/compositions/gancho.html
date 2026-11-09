@@ -1,0 +1,47 @@
+<!-- GANCHO (0–3 s): el cuadro 0 ya muestra la idea (sirve de miniatura). La cámara llega desde lejos e inclinada
+     y aterriza; el titular entra palabra por palabra; al final la cámara atraviesa el titular (zoom through) → explica. -->
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    #g-titular { width: 960px; }
+    #g-firma { top: 250px; }
+    #root .w { display: inline-block; }
+  </style>
+  <div id="root" data-composition-id="gancho" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <div class="vista" data-layout-allow-overflow>
+      <div class="cam"><div class="mundo">
+        <div id="g-piso" class="piso" data-y="620" data-rx="90"></div>
+        <div id="g-puntos" class="puntos" data-z="-1400"></div>
+        <h1 id="g-titular" class="titular">
+          <span class="w">Título</span> <span class="w">con</span> <span class="w">la</span><br />
+          <span class="w acc">palabra</span> <span class="w acc">clave</span>
+        </h1>
+        <p id="g-bajada" class="bajada" data-y="300">Una idea por reel</p>
+      </div></div>
+    </div>
+    <div class="vineta" data-layout-ignore></div>
+    <!-- Firma al inicio, resaltada con el acento (regla 2). Fuera del mundo: no se mueve con la cámara. -->
+    <div id="g-firma" class="firma" style="position: absolute; left: 0; right: 0; text-align: center">@ayrtonnacer</div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="gancho"]');
+    const tl = gsap.timeline({ paused: true });
+    const cam = Camara(root, tl);
+
+    // Cámara: lejos e inclinada → aterriza (llegada lenta, cola larga) → atraviesa el titular
+    cam.poner({ z: -520, rx: 20, y: 80 });                  // el cuadro 0 ya muestra el titular (miniatura)
+    cam.ir(0, { z: 0, rx: 6, y: 0 }, 1.6, 'expo.out');
+    cam.ir(1.6, { z: 60, rx: 4 }, 1.25, 'none');           // deriva mínima mientras se lee
+    cam.ir(2.85, { z: 1500, rx: 0 }, 0.6, 'power3.in');    // zoom through: el whoosh va en el pico (~3.35 s)
+
+    // Titular: palabra por palabra con desenfoque (sin deslizar)
+    tl.fromTo('#g-titular .w', { opacity: 0.75, filter: 'blur(3px)' },
+      { opacity: 1, filter: 'blur(0px)', duration: 0.18, ease: 'power4.out', stagger: 0.07 }, 0);
+    tl.fromTo('#g-bajada', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.2 }, 0.9);
+    tl.fromTo('#g-firma', { opacity: 0.6 }, { opacity: 1, duration: 0.25 }, 0);
+    tl.to('#g-firma', { opacity: 0, duration: 0.2 }, 2.9);
+
+    window.__timelines["gancho"] = tl;
+  </script>
+</template>

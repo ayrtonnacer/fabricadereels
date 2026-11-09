@@ -1,13 +1,14 @@
 node_modules/
+__pycache__/
+.DS_Store
+# salidas de cada video (se regeneran)
 videos/*/out/
-videos/*/frames/
 videos/*/audio/
+videos/*/frames/
+videos/*/.hyperframes/
 videos/*/*.mp4
 videos/*/*.wav
-.DS_Store
-__pycache__/
-videos/*/audio/
-videos/*/frames/
+# assets pesados o con licencia
 assets/sfx/*
 !assets/sfx/LEEME.md
 !assets/sfx/propios/

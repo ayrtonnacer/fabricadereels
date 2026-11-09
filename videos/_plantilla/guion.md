@@ -14,6 +14,7 @@ verificado: false         # cifras y comandos chequeados?
 - VOZ: ""
 - TEXTO_PANTALLA: ""      # 2-4 palabras, 1 keyword resaltada
 - VISUAL: ""              # qué se ve en el cuadro 1, sincronizado con qué palabra
+- CAMARA: ""              # aterrizaje / push-in / pan a estación / órbita / zoom through / pull-back (docs/CAMARA.md)
 - ANIMACION: ""
 - SFX: ""                 # opcional; solo si marca algo
 ### CONTEXTO · 3-7 s · 8-10 pal

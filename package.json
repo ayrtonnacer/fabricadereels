@@ -1,18 +1,12 @@
 {
-  "name": "reels",
-  "version": "1.0.0",
+  "name": "fabricadereels",
+  "version": "2.0.0",
   "private": true,
-  "description": "Fábrica de reels educativos verticales (1080x1920) de @ayrtonnacer: animación HTML/Three.js determinística + voz en off + efectos + música.",
-  "type": "module",
+  "description": "Fábrica de reels educativos verticales (1080x1920) de @ayrtonnacer: motion graphics con HyperFrames (HTML + GSAP, cámara 2.5D) + voz Piper + efectos + música.",
   "scripts": {
-    "preview": "node engine/render.mjs",
-    "setup": "npm install && npx playwright install chromium && pip install -r requirements.txt"
+    "setup": "npm install && pip install -r requirements.txt"
   },
-  "dependencies": {
-    "@fontsource/ibm-plex-mono": "5.0.8",
-    "@fontsource/ibm-plex-sans": "5.0.8",
-    "@fontsource/inter-tight": "5.0.8",
-    "playwright": "^1.48.0",
-    "three": "0.160.0"
+  "devDependencies": {
+    "hyperframes": "0.9.26"
   }
 }

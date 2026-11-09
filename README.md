@@ -1,15 +1,17 @@
 # fabricadereels — fábrica de reels de @ayrtonnacer
-Reels verticales animados con HTML + three.js, voz Piper (Daniela es_AR), efectos sintéticos y música.
+Reels verticales de motion graphics hechos con [HyperFrames](https://github.com/heygen-com/hyperframes) (HTML + GSAP renderizado a video), con una cámara 2.5D que da profundidad sin 3D, voz Piper (Daniela es_AR), efectos y música.
 
 ## Instalación
 ```
-npm install && npx playwright install chromium
-pip install -r requirements.txt        # y tener ffmpeg instalado
+npm install                       # HyperFrames 0.9.26 (Node ≥ 22)
+pip install -r requirements.txt   # voz y audio; también hace falta ffmpeg
 ```
-Copiar el modelo de voz a `assets/voces/` y la música a `assets/musica/fondo.mp3` (ver sus LEEME.md).
+El modelo de voz está partido en `assets/voces/` y `voz.py` lo arma solo. Música en `assets/musica/fondo.mp3`.
 
 ## Uso con Claude Code
-Se trabaja desde Claude Code en la web (sin instalar nada local): abrí una sesión sobre este repo, que carga `CLAUDE.md` y el comando `/reel`. Pegá una fuente: `/reel https://…` o "hacé un reel sobre …". Claude escribe el guion, espera tu OK, y genera el video. Docs en `docs/`; empezá por `docs/PARTES.md`.
+Abrí una sesión sobre este repo: carga `CLAUDE.md`, el comando `/reel` y las skills de HyperFrames (`.claude/skills/`). Pegá una fuente: `/reel https://…` o "hacé un reel sobre …". Claude escribe el guion, espera tu OK y genera el video.
+
+Para editar a mano con vista previa en vivo: `cd videos/X && npx hyperframes preview` (o la app de escritorio de HyperFrames).
 
 ## Manual
-Un video nuevo: `cp -r videos/_plantilla videos/AAAA-MM-tema`. Comandos en `CLAUDE.md`.
+`CLAUDE.md` (reglas y comandos) → `docs/FLUJO.md` (paso a paso) → `docs/CAMARA.md` (movimientos de cámara).
