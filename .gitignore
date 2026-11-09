@@ -4,10 +4,6 @@ videos/*/frames/
 videos/*/audio/
 videos/*/*.mp4
 videos/*/*.wav
-assets/musica/*
-assets/voces/*
-!assets/**/LEEME.md
-*.onnx
 .DS_Store
 __pycache__/
 videos/*/audio/
@@ -20,3 +16,4 @@ package-lock.json
 
 # videos de referencia: se guardan en el repo (pedido de Ayrton, 2026-11-09); las hojas de cuadros se regeneran con ./reel analizar
 referencias/*/*.jpg
+assets/voces/*.onnx
