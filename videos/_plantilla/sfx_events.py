@@ -17,6 +17,6 @@ def build(T, S, lib=None):
     T.put(t + 5.7, whoosh(0.4), 0.45)                          # viaje a la terminal (5.2 → 6.2)
     T.typing(t + 5.45, 17)
     T.put(t + 5.95, ding(1760, 0.4), 0.3)                      # ✓ resultado correcto
-    # cierre: succión → golpe → firma
-    t = S['cierre']; T.put(t - 0.9, reverse(riser(0.8)), 0.35); T.put(t, impact(), 0.55)
-    T.put(t + 0.9, sparkle(9), 0.4)
+    # cierre: succión → golpe → CTA; chinn (sonido propio de Ayrton) cuando aterriza el CTA
+    t = S['cierre']; T.put(t - 0.9, reverse(riser(0.8)), 0.35); T.put(t, impact(), 0.5)
+    ch = propio('chinn'); T.put(t + 0.55, ch if ch is not None else sparkle(9), 0.5)

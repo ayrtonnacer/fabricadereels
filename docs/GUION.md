@@ -1,11 +1,14 @@
 # Cómo escribir el guion
 Base: `docs/INVESTIGACION-GUIONES.md` (investigación completa, con fuentes y plantillas por tipo de reel). Acá va lo que se aplica siempre. Donde la investigación choca con una decisión de Ayrton, gana Ayrton (ver "Conflictos").
 
+## Público
+**Técnico** (Ayrton, 2026-11-09): gente que programa, estudia sistemas o hace ciberseguridad. Se puede usar el vocabulario del área (hash, proceso, puerto, kernel, función) sin explicarlo como a un principiante; el valor está en el porqué, el detalle que no es obvio y el error real, no en definiciones básicas. Nada de simplificaciones que un técnico note como incorrectas.
+
 ## Reglas de siempre
 - Voz en español rioplatense (voseo): "Necesitás", "elegí", "seguime". Escribir como se habla ("ojo", "pensalo así", "posta").
 - Frases cortas (≤ 12 palabras). Un paso = una o dos frases.
 - NO leer: comandos, rutas, texto de carteles/tarjetas. La voz explica el porqué; la pantalla muestra el qué.
-- Evitar tecnicismos; si es imprescindible, nombrarlo y explicar en una palabra ("herramienta", "memoria", "descomprimir").
+- Términos técnicos sí (público técnico), pero dichos como se hablan: siglas y palabras en inglés por el diccionario de pronunciación. Explicar solo lo que no es de uso común en el área.
 - Cero palabras prohibidas (ver `pronunciacion.json`): pendrive→memoria, like→me gusta, dev, guardalo.
 - Sin muletillas de IA: "¿Sabías que…?", "En el mundo de…", "Imaginá…", "Sumérgete", "Desbloqueá", "Aquí está la clave", "y lo mejor de todo". Ni hooks vacíos ("No vas a creer…", "Esto cambia todo", "El 99% no sabe esto").
 - Advertencias importantes (p. ej. "se borra todo") van en pantalla, no en la voz.

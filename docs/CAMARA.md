@@ -33,7 +33,9 @@ Pose: `x`, `y` (px del mundo; 0,0 = centro), `z` (+ acerca / − aleja), `rx` (i
 | **Órbita** | `ry` ±6–12 alrededor de una estación | mostrar que algo es un objeto, revelar un costado |
 | **Inclinar (tilt)** | `rx` 6–20 | mostrar el piso, sensación de "mirar desde arriba" |
 | **Zoom through** | `z` hasta +1500 en 0,6 s, `power3.in` | transición: atravesar un objeto; la escena siguiente arranca en `z:900` y se asienta |
-| **Pull-back (revelar)** | de `z:+700` pegado a un detalle a `z:0` | el cierre: de la firma al CTA completo |
+| **Pull-back (revelar)** | de `z:+700` pegado a un detalle a `z:0` | revelar el contexto de un dato (no en el cierre: ahí el foco es el CTA) |
+| **Recorrido de código** | estación = bloque de código; zoom `z:+400…600`, después `y` = alto de línea × n.º de línea, pausa de lectura por línea, y vuelta a `z:0` | explicar un fragmento línea por línea (de code-reel-studio, `docs/referencias/`) con `zoom-click` en el zoom in/out |
+| **Aterrizaje en el CTA** | desde `z:-700, rx:14` a `z:0, rx:5`, expo.out 1,1 s, y queda quieta | cierre: el foco es el llamado; la firma aparece después, chica, sin zoom |
 
 Reglas: un movimiento = una intención. Llegadas lentas con cola larga (`expo.out`), viajes `power2/3.inOut`, salidas que aceleran (`power3.in`). En el corte entre escenas, misma dirección y velocidad a ambos lados. **El whoosh va en el pico de velocidad** (la mitad de un `inOut`, el final de un `in`). Nada de "flotar/respirar" en loop ni temblores sin motivo.
 
@@ -42,6 +44,9 @@ Reglas: un movimiento = una intención. Llegadas lentas con cola larga (`expo.ou
 2. Piso de grilla acostado (`data-rx="90"`): con cualquier `rx` se ve la perspectiva.
 3. Sombras largas en tarjetas (`.tarjeta`) y viñeta.
 4. Desenfoque: en entradas de texto (blur → 0). Para un rack focus real entre dos planos, usar el bloque del registro (`npx hyperframes catalog --tag camera`).
+
+## Referencias
+Scripts técnicos de reels de referencia en `docs/referencias/` (Ayrton los va pasando). Cuando una referencia trae un movimiento nuevo, se agrega a la tabla de arriba.
 
 ## Rendimiento
 - Lo caro en CPU es el área enorme de capas con máscara o `filter`: piso ≤ 3000×3000, fondo de puntos ≤ 2200×3000. Si crece el tiempo de render, achicar esas capas antes que nada.

@@ -26,7 +26,7 @@ Referencias: video "15 efectos de sonido que debes usar" (Mirko Vigna, 2026-11) 
 - Errores a evitar: volumen demasiado alto, sonidos fuera de tiempo, ser demasiado literal, no organizar la biblioteca (una subcarpeta por tipo, ver `assets/sfx/LEEME.md`).
 
 ## Significado fijo de los sonidos (usar siempre igual)
-whoosh=transición · pop=aparece algo · ding/chime=éxito · alert=aviso · buzz/powerdown=error o pérdida · powerup=algo se activa · thunk=Enter/enchufar · tick=tecla/dato · glitch=texto que tiembla · riser=progreso · boom/impact=golpe de apertura o remarque · sparkle=cierre/logro.
+whoosh=transición · pop=aparece algo · ding/chime=éxito · alert=aviso · buzz/powerdown=error o pérdida · powerup=algo se activa · thunk=Enter/enchufar · tick=tecla/dato · glitch=texto que tiembla · riser=progreso · boom/impact=golpe de apertura o remarque · **chinn** (`propio("chinn")`, de Ayrton) = cierre/CTA (preferido sobre el sparkle sintético) · zoom-click = zoom de cámara sobre código.
 
 ## Efecto de radio en la voz (militar / walkie-talkie)
 En `video.json`: `"voz": {"efecto": "radio", "radio_fuerza": 0.6, ...}`. Lo aplica `voz.py` línea por línea (`engine/audio/radio.py`): banda telefónica 380–3100 Hz, saturación, estática de fondo solo mientras habla, clic de apertura y "squelch" (golpe de ruido) al soltar el botón. Fuerza 0.3 = radio limpia · 0.6 = walkie · 0.9 = radio rota. Uso pensado para videos de CTF/red team; en tutoriales largos cansa: usar fuerza baja o solo en el gancho. Probar suelto: `python engine/audio/radio.py in.wav out.wav 0.6`. Ojo: la voz queda más angosta, así que revisar inteligibilidad con palabras técnicas.

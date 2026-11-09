@@ -49,3 +49,10 @@
 - Se mantiene: tema cyber/HackTheBox (ahora en `assets/marca.css`), color = significado, IBM Plex, firma, CTA, voz Daniela, audio propio (`voz.py`/`sfx.py`/`mezcla.py`, −14 LUFS). HyperFrames renderiza mudo.
 - Se borró (queda en git, commit `ae9a888`): motor `render.mjs`/`lib.js`/`dinamismo.js`, temas redteam/anduril, los 3 videos de Parrot, y docs redundantes (PARTES, SHOOTING-SCRIPT, GLOSARIO, DINAMISMO, PRONUNCIACION → fusionados en ESTILO/CAMARA/AUDIO/plantilla de guion).
 - Técnico: GSAP y fuentes van locales en `assets/` (el CDN está bloqueado en la nube y el render no debe depender de la red). Capas grandes con máscara (piso, puntos) encarecen mucho el render en CPU: piso ≤ 3000 px. El `check` de HyperFrames toma la viñeta y el fondo como opacos: llevan `data-layout-ignore`.
+- 2026-11-09 (tarde), sobre la demo de la plantilla:
+  - **CTA en foco**: la demo hacía zoom sobre `@ayrtonnacer` y después mostraba el "Dale like". Mal: el foco es el CTA. Ahora la cámara aterriza sobre el CTA (grande) y queda quieta; la firma aparece después, debajo y más chica, sin zoom.
+  - Sonido final: el **chinn** de Ayrton (`assets/sfx/propios/chinn.mp3`), no un "cristal"/sparkle sintético; suena cuando aterriza el CTA.
+  - El inicio y el CTA final se mantienen entre reels; lo que cambia es el medio.
+  - **Público técnico**: se puede usar vocabulario del área; no explicar lo básico (antes la regla era "nada técnico duro").
+  - Flujo: link (+ breve indicación de lo que quiere) → guion → OK → **script técnico** (planos, cámara, sfx; plantilla `videos/_plantilla/script-tecnico.md`) → video. Referencias de cámara en `docs/referencias/` (Ayrton va a pasar más). A futuro: publicar automáticamente en sus redes.
+  - code-reel-studio: sus 4 sonidos ya estaban en `assets/sfx/propios/`; se tomó el "recorrido de código" (zoom + paneo línea por línea) como movimiento de cámara. Su música (5 pistas en `public/music/`) no se copió: falta confirmar licencia.

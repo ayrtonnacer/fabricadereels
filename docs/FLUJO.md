@@ -3,8 +3,9 @@
 Comandos desde la raíz del repo, salvo donde dice "en la carpeta del video".
 
 1. **Fuente**: leer el link/tema completo (WebFetch/WebSearch). Extraer objetivo, ideas clave, comandos o fórmulas, advertencias. Verificar contra la fuente oficial.
-2. **Guion** (`docs/GUION.md`, plantilla `videos/_plantilla/guion.md`): una idea, Hook → Payoff → CTA/bucle, ≤ duración × 2,3 palabras. Por escena: voz, texto en pantalla y **movimiento de cámara** (`docs/CAMARA.md`).
-3. **✋ Checkpoint**: mostrar el guion (texto de voz + una línea por escena con su cámara) y esperar OK.
+2. **Guion** (`docs/GUION.md`, plantilla `videos/_plantilla/guion.md`): una idea, Hook → Payoff → CTA/bucle, ≤ duración × 2,3 palabras. Por escena: voz y texto en pantalla (la cámara va en el script técnico, paso 3b).
+3. **✋ Checkpoint**: mostrar el guion (texto de voz + una línea por escena) y esperar OK.
+3b. **Script técnico** (`script-tecnico.md` del video): planos, set y profundidades, movimiento de cámara con ease y duración, entradas, SFX y transiciones (`docs/CAMARA.md`, `docs/referencias/`). Se lo muestro a Ayrton junto con los primeros cuadros.
 4. **Crear el video**: `bash engine/nuevo.sh AAAA-MM-tema` (copia la plantilla). Completar `video.json`: escenas (`id` = nombre de la composición, `d` = segundos) y `voz.lineas`.
 5. **Voz primero**: `python engine/audio/voz.py videos/X`. Ajustar texto y tiempos hasta que no haya avisos; las escenas duran lo que pide la voz (voz ≤ fin de escena − 0,1 s; ≥ 0,15 s entre líneas). Luego `python engine/tiempos.py videos/X` copia las duraciones a `index.html`.
 6. **Visual**: una composición por escena en `compositions/` (copiar las de la plantilla). Cada parte aparece cuando la voz la nombra (tiempos locales de la escena = tiempo de la línea − inicio de la escena).
@@ -14,5 +15,7 @@ Comandos desde la raíz del repo, salvo donde dice "en la carpeta del video".
 10. **Mezcla**: `python engine/audio/mezcla.py videos/X` → `final.mp4` (−14 LUFS, pico ≤ −1,5 dB).
 11. **Entrega**: mp4 + descripción con créditos (voz: Piper es_AR-daniela, CC BY-SA 4.0; y la fuente).
 12. **Cierre**: registrar correcciones en `docs/DECISIONES.md` y palabras nuevas en `engine/audio/pronunciacion.json`; commit.
+
+**A futuro**: publicar automáticamente en las redes de Ayrton (pendiente; no publicar nada sin que lo pida).
 
 Cambios chicos: tocar solo la escena afectada, `snapshot --composition <id>` y volver a renderizar.
