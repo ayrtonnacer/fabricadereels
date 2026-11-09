@@ -13,7 +13,10 @@
   {"de": "tarballs", "a": "tárbols", "estado": "sin_verificar"},
   {"de": "install", "a": "ínstol", "estado": "sin_verificar"},
   {"de": "boot", "a": "but", "estado": "sin_verificar"},
-  {"de": "Go", "a": "gou", "estado": "sin_verificar"}
+  {"de": "Go", "a": "gou", "estado": "sin_verificar"},
+  {"de": "switch", "a": "suich", "estado": "sin_verificar"},
+  {"de": "router", "a": "rúter", "estado": "sin_verificar"},
+  {"de": "internet", "a": "internét", "estado": "sin_verificar"}
  ],
  "prohibidas": [
   {"palabra": "pendrive", "usar": "memoria", "motivo": "Piper la pronuncia mal (Ayrton, 2026-11-02)"},

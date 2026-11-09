@@ -1,25 +1,16 @@
 {
  "titulo": "Redes: switch, router y punto de acceso",
  "fecha": "2026-11",
- "fuente": "URL o tema de origen",
- "steps": 2,
+ "fuente": "https://www.cisco.com/site/us/en/learn/topics/small-business/networking-basics.html",
+ "steps": 0,
  "scenes": [
-  {
-   "id": "s1",
-   "d": 3.6
-  },
-  {
-   "id": "s2",
-   "d": 6
-  },
-  {
-   "id": "s3",
-   "d": 6
-  },
-  {
-   "id": "s4",
-   "d": 4
-  }
+  {"id": "s1", "d": 4.0, "gl": true, "plano": "tres equipos en pedestales, órbita corta"},
+  {"id": "s2", "d": 5.0, "gl": true, "plano": "cenital del mapa con los tres puestos"},
+  {"id": "s3", "d": 13.0, "gl": true, "plano": "switch: puertos que se encienden, cables a PC, impresora y servidor"},
+  {"id": "s4", "d": 16.0, "gl": true, "plano": "router: dos redes, elige la mejor ruta hacia internet"},
+  {"id": "s5", "d": 13.0, "gl": true, "plano": "punto de acceso: extiende el ancho de banda del router"},
+  {"id": "s6", "d": 4.0, "gl": true, "plano": "grúa a cenital: una función por equipo", "salida": "curva-izq"},
+  {"id": "s7", "d": 6.0, "plano": "CTA quieto"}
  ],
  "voz": {
   "modelo": "assets/voces/es_AR-daniela-high.onnx",
@@ -27,39 +18,15 @@
   "noise_scale": 0.6,
   "noise_w_scale": 0.7,
   "lineas": [
-   {
-    "id": "l01",
-    "escena": "s1",
-    "t": 0.15,
-    "texto": "Gancho: una frase corta que prometa algo."
-   },
-   {
-    "id": "l02",
-    "escena": "s2",
-    "t": 3.8,
-    "texto": "Primer paso explicado con palabras simples."
-   },
-   {
-    "id": "l03",
-    "escena": "s3",
-    "t": 9.8,
-    "texto": "Segundo paso explicado con palabras simples."
-   },
-   {
-    "id": "l04",
-    "escena": "s4",
-    "t": 15.9,
-    "texto": "Si te gustó el video, dale me gusta, y seguime para aprender más."
-   }
+   {"id": "l01", "escena": "s1", "t": 0.15, "texto": "Switch, router y punto de acceso: tres trabajos distintos."},
+   {"id": "l02", "escena": "s2", "t": 4.3, "texto": "Con ellos tus equipos se hablan entre sí y con internet."},
+   {"id": "l03", "escena": "s3", "t": 9.6, "texto": "El switch es la base de casi toda red de empresa. Actúa como controlador: conecta computadoras, impresoras y servidores dentro de un edificio o un campus."},
+   {"id": "l04", "escena": "s4", "t": 22.6, "texto": "El router conecta varias redes entre sí, y a tus equipos con internet, para que todos compartan una sola conexión. Funciona como un despachador: analiza los datos, elige la mejor ruta y los envía."},
+   {"id": "l05", "escena": "s5", "t": 38.6, "texto": "El punto de acceso permite conectarse sin cables. Funciona como amplificador: el router da el ancho de banda y él lo extiende, para soportar más dispositivos y llegar más lejos."},
+   {"id": "l06", "escena": "s6", "t": 51.9, "texto": "El switch une adentro, el router conecta hacia afuera, el punto de acceso extiende."},
+   {"id": "l07", "escena": "s7", "t": 55.3, "texto": "Si te gustó el video, dale me gusta, y seguime para aprender más de redes."}
   ],
-  "efecto": "ninguno",
-  "radio_fuerza": 0.6
+  "efecto": "ninguno"
  },
- "audio": {
-  "musica": "assets/musica/fondo.mp3",
-  "musica_desde": 0,
-  "musica_db": -8,
-  "sfx_gain": 1.25,
-  "loudness": -14
- }
+ "audio": {"sfx_gain": 1.25, "loudness": -14}
 }

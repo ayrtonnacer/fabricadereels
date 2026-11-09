@@ -4,57 +4,355 @@
 <meta charset="utf-8">
 <title>Redes: switch, router y punto de acceso</title>
 <link rel="stylesheet" href="/engine/themes/cyber.css">
-<link rel="stylesheet" href="/engine/themes/estados.css">
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+<style>
+  .tit{position:absolute;left:70px;right:70px}
+  .sub{margin-top:14px}
+  .chips{position:absolute;left:70px;right:70px;display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+  .chip{font-size:38px;padding:18px 28px}
+</style>
 </head>
 <body>
-<!-- S1 GANCHO: firma @ayrtonnacer en verde + titular de 3 líneas, la última resaltada -->
+<!-- Zona segura: nada importante en los 250 px de arriba ni en los 380 de abajo. Los chips llevan lo del artículo que no entra en la voz. -->
 <section class="scene" id="s1">
-  <div class="abs" style="top:250px">
+  <div class="tit" style="top:250px">
     <div style="display:inline-block;font:700 40px SG,sans-serif;color:var(--acc)" data-a="pop:0.05:0.4">@ayrtonnacer</div>
-    <h1 style="margin-top:36px;font-size:104px"><span data-a="up:0.1" style="display:inline-block">Línea uno</span><br><span data-a="up:0.22" style="display:inline-block">línea dos</span><br><span class="hl" data-a="up:0.38" style="display:inline-block">idea clave</span></h1>
+    <h1 style="margin-top:30px;font-size:96px">
+      <span data-a="up:0.25" style="display:inline-block">Switch</span><br>
+      <span data-a="up:1.0" style="display:inline-block">Router</span><br>
+      <span data-a="up:1.7" style="display:inline-block">Punto de acceso</span></h1>
   </div>
 </section>
 
-<!-- S2 PASO 1 (data-step="1" muestra "Paso 1 de N") -->
-<section class="scene" id="s2" data-step="1">
-  <div class="abs" style="top:360px"><h2 data-a="up:0">Primer <span class="cy">paso</span></h2></div>
-  <div class="term" style="top:640px" data-a="up:0.15">
-    <div class="bar"><i></i><i></i><i></i><span>user@host: ~</span></div>
-    <div class="body"><div class="ln" data-show="0.5"><span class="ps">$ </span><span data-type="0.55" data-text="comando de ejemplo"></span></div><div class="ln out" data-show="1.4">salida del comando</div></div>
-  </div>
-  <div class="abs" style="top:1250px" data-a="up:2.2"><div class="chip">Nota breve (no se lee en voz)</div></div>
+<section class="scene" id="s2">
+  <div class="tit" style="top:290px"><h2 data-a="up:0.1">Se comunican <span class="cy">entre sí</span><br>y con <span class="cy">otras redes</span></h2></div>
 </section>
 
-<!-- S3 PASO 2 con tarjetas -->
-<section class="scene" id="s3" data-step="2">
-  <div class="abs" style="top:360px"><h2 data-a="up:0">Segundo <span class="cy">paso</span></h2></div>
-  <div class="abs" style="top:600px">
-    <div class="card" data-a="left:0.35"><div class="num ok">✓</div><div><div class="t">Tarjeta con check (ok)</div><div class="s">verde = salió bien</div></div></div>
-    <div class="card alert" data-a="left:0.85" style="margin-top:22px"><div class="num err">✕</div><div><div class="t">Tarjeta de error</div><div class="s">bloque rojo relleno + ✕</div></div></div>
-  </div>
-  <div class="abs" style="top:1100px;display:flex;flex-direction:column;gap:22px;align-items:flex-start">
-    <div class="chip ok" data-a="up:1.4"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>Flag capturada: acceso correcto</div>
-    <div class="chip warn" data-a="up:1.9"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 21h20L12 3zM12 10v5M12 18v.1"/></svg>Cuidado: esto hace ruido en la red</div>
-    <div class="chip err" data-a="up:2.4"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>Acceso denegado</div>
+<section class="scene" id="s3">
+  <div class="tit" style="top:290px"><h2 data-a="up:0.2"><span class="cy">Switch</span></h2>
+    <div class="sub" data-a="up:1.0">Controlador de la red local</div></div>
+  <div class="chips" style="top:1330px">
+    <div class="chip" data-a="up:7.5">Administrado en sitio</div>
+    <div class="chip" data-a="up:8.3">Administrado en la nube</div>
   </div>
 </section>
 
-<!-- S4 CIERRE / CTA: el usuario en verde (lo que debe recordarse) -->
 <section class="scene" id="s4">
+  <div class="tit" style="top:290px"><h2 data-a="up:0.2"><span class="cy">Router</span></h2>
+    <div class="sub" data-a="up:1.0">Conecta redes · despacha datos</div></div>
+  <div class="chips" style="top:1330px;flex-direction:row;flex-wrap:wrap">
+    <div class="chip" data-a="up:11">Firewall</div>
+    <div class="chip" data-a="up:11.6">VPN</div>
+    <div class="chip" data-a="up:12.2">Telefonía IP</div>
+  </div>
+</section>
+
+<section class="scene" id="s5">
+  <div class="tit" style="top:290px"><h2 data-a="up:0.2">Punto de <span class="cy">acceso</span></h2>
+    <div class="sub" data-a="up:1.0">Amplifica el ancho de banda del router</div></div>
+  <div class="chips" style="top:1330px">
+    <div class="chip" data-a="up:8">Estándares IEEE</div>
+    <div class="chip" data-a="up:8.8">Frecuencia · ancho de banda · canales</div>
+  </div>
+</section>
+
+<section class="scene" id="s6">
+  <div class="tit" style="top:270px"><h2 style="font-size:64px" data-a="up:0.1">Tres equipos, tres <span class="cy">funciones</span></h2></div>
+</section>
+
+<section class="scene" id="s7">
   <div class="abs center" style="top:620px">
-    <h1 style="font-size:96px"><span data-a="up:0.1" style="display:inline-block">Dale <span class="cy">like</span></span><br><span data-a="up:0.25" style="display:inline-block">Seguime para aprender</span><br><span data-a="up:0.4" style="display:inline-block">más de <span class="cy">tema</span></span></h1>
+    <h1 style="font-size:96px"><span data-a="up:0.1" style="display:inline-block">Dale <span class="cy">like</span></span><br><span data-a="up:0.25" style="display:inline-block">Seguime para aprender</span><br><span data-a="up:0.4" style="display:inline-block">más de <span class="cy">redes</span></span></h1>
     <div style="margin-top:60px;font:700 56px SG,sans-serif;color:var(--acc)" data-a="pop:0.9:0.45">@ayrtonnacer</div>
   </div>
 </section>
 
 <script type="module">
-import {mountShell,loadConfig,timeline,setupSteps,installRender} from '/engine/lib.js';
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { clamp, eo, eio, hash, loadConfig, mountShell, timeline, installRender } from '/engine/lib.js';
+import { Rig, MotionBlur, cartel, colorTema, temblor } from '/engine/camara3d.js';
 mountShell();
-const CFG=await loadConfig();
-const SC=CFG.scenes.map(s=>({...s}));
-const TOTAL=timeline(SC);
-setupSteps(CFG.steps);
-installRender({SC,TOTAL});
+const CFG = await loadConfig();
+const SC = CFG.scenes.map(s => ({ ...s }));
+const TOTAL = timeline(SC);
+const S = Object.fromEntries(SC.map(s => [s.id, s.t0])), D = Object.fromEntries(SC.map(s => [s.id, s.d]));
+await document.fonts.load('700 100px SG'); await document.fonts.load('500 100px SG'); await document.fonts.load('400 40px JB'); await document.fonts.ready;
+
+const ACC = new THREE.Color(colorTema('--acc')), SKY = new THREE.Color(colorTema('--sky', '#3BC9FF')), BG = new THREE.Color(colorTema('--bg', '#0B111C'));
+const DIM = new THREE.Color(0x2a3547), OFF = new THREE.Color(0x1d2530);
+const ramp = (t, a, d) => clamp((t - a) / d);
+
+/* ---------- renderer, escena, luces ---------- */
+const canvas = document.getElementById('gl');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(1080, 1920, false);
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.outputColorSpace = THREE.SRGBColorSpace;
+const scene = new THREE.Scene();
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+scene.fog = new THREE.Fog(BG, 14, 46);
+const cam = new THREE.PerspectiveCamera(40, 1080 / 1920, 0.02, 120);
+scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+const sun = new THREE.DirectionalLight(0xffffff, 1.6); sun.position.set(3, 8, 6); scene.add(sun);
+
+// piso: puntos tenues (distinto del pasillo de la demo)
+const dotTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 128; const x = c.getContext('2d');
+  x.fillStyle = '#0c121c'; x.fillRect(0, 0, 128, 128); x.fillStyle = 'rgba(120,150,190,.28)'; x.beginPath(); x.arc(64, 64, 2.2, 0, 7); x.fill();
+  const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(220, 220); t.anisotropy = 8; t.colorSpace = THREE.SRGBColorSpace; return t; })();
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(220, 220), new THREE.MeshStandardMaterial({ map: dotTex, roughness: .8, metalness: .1 }));
+floor.rotation.x = -Math.PI / 2; scene.add(floor);
+
+/* ---------- piezas (medidas reales en metros) ---------- */
+const mat = (c, o = {}) => new THREE.MeshStandardMaterial({ color: c, roughness: .45, metalness: .5, ...o });
+const BODY = mat(0x1b2230), BODY2 = mat(0x2a3446), DARK = mat(0x07090d, { roughness: .8, metalness: .1 }), WHITE = mat(0xc4cfdc, { roughness: .35, metalness: .15 });
+const glowM = c => new THREE.MeshBasicMaterial({ color: c, toneMapped: false });
+const rb = (w, h, d, m = BODY, r = .008) => new THREE.Mesh(new RoundedBoxGeometry(w, h, d, 3, Math.min(r, w / 2 - 1e-3, h / 2 - 1e-3, d / 2 - 1e-3)), m);
+const at = (o, x, y, z) => { o.position.set(x, y, z); return o; };
+const lab = (txt, ancho, c = '--text', px = 100) => { const m = cartel(THREE, [{ t: txt, c, px, peso: 700 }], { ancho, pad: 36 }); m.userData.ancho = ancho; return m; };
+const labels = [];                     // carteles que miran a la cámara
+
+function makeSwitch() {            // 24 puertos en 1U: 44 × 4,4 × 25 cm
+  const g = new THREE.Group(), ports = [];
+  g.add(at(rb(.44, .044, .25, BODY, .004), 0, .022, 0));
+  g.add(at(rb(.436, .006, .002, BODY2, .001), 0, .041, .126));
+  for (let r = 0; r < 2; r++) for (let i = 0; i < 12; i++) {
+    const x = -.19 + i * .0345 + (i >= 6 ? .012 : 0), y = .0285 - r * .0175;
+    g.add(at(rb(.0115, .008, .006, DARK, .001), x, y, .1255));
+    const l = new THREE.Mesh(new THREE.BoxGeometry(.0042, .0022, .002), new THREE.MeshBasicMaterial({ color: OFF.clone(), toneMapped: false }));
+    g.add(at(l, x, y + .0058, .1268)); ports.push({ led: l, x, y, z: .126 });
+  }
+  g.userData.ports = ports; return g;
+}
+function makeRouter() {            // ≈ 26 × 4,5 × 18 cm con dos antenas
+  const g = new THREE.Group(), leds = [];
+  g.add(at(rb(.26, .045, .18, BODY, .008), 0, .0225, 0));
+  for (let i = 0; i < 4; i++) { const l = new THREE.Mesh(new THREE.BoxGeometry(.012, .004, .003), new THREE.MeshBasicMaterial({ color: OFF.clone(), toneMapped: false })); g.add(at(l, -.07 + i * .035, .03, .0915)); leds.push(l); }
+  for (const s of [-1, 1]) { const a = new THREE.Mesh(new THREE.CylinderGeometry(.006, .006, .2, 10), BODY2); a.position.set(s * .1, .13, -.06); a.rotation.z = -s * .18; g.add(a); }
+  g.userData.leds = leds; return g;
+}
+function makeAP() {                // disco de techo ≈ 20 cm de diámetro
+  const g = new THREE.Group();
+  const disc = new THREE.Mesh(new THREE.CylinderGeometry(.1, .1, .032, 48), WHITE); g.add(at(disc, 0, .016, 0));
+  const lm = new THREE.MeshBasicMaterial({ color: OFF.clone(), toneMapped: false });
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(.055, .004, 8, 40), lm); ring.rotation.x = Math.PI / 2; g.add(at(ring, 0, -.001, 0));
+  g.userData.led = lm; return g;
+}
+const screenTex = (() => { const c = document.createElement('canvas'); c.width = 256; c.height = 160; const x = c.getContext('2d');
+  x.fillStyle = '#05080d'; x.fillRect(0, 0, 256, 160); x.fillStyle = colorTema('--acc'); x.font = '14px JB'; ['$ ping 10.0.0.1', '64 bytes ok', '64 bytes ok', '$ _'].forEach((t, i) => x.fillText(t, 12, 28 + i * 24));
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; })();
+function makePC() {                // monitor 55 cm + torre
+  const g = new THREE.Group(), sm = new THREE.MeshBasicMaterial({ color: 0x0a0e14, toneMapped: false, map: null });
+  g.add(at(rb(.56, .33, .03, BODY, .01), 0, .34, 0)); g.add(at(rb(.05, .17, .04, BODY2, .01), 0, .085, -.01)); g.add(at(rb(.22, .01, .16, BODY2, .004), 0, .005, -.01));
+  const scr = new THREE.Mesh(new THREE.PlaneGeometry(.5, .28), sm); scr.position.set(0, .34, .0155); g.add(scr);
+  g.add(at(rb(.2, .43, .42, BODY, .01), 0, .215, -.3));
+  g.userData.screen = sm; return g;
+}
+function makePrinter() { const g = new THREE.Group(); g.add(at(rb(.42, .17, .34, BODY, .02), 0, .085, 0)); g.add(at(rb(.3, .004, .2, mat(0x6f7c8c, { roughness: .6 }), .001), 0, .172, -.02)); g.add(at(rb(.3, .005, .002, DARK, .001), 0, .06, .171));
+  const l = new THREE.Mesh(new THREE.BoxGeometry(.014, .006, .003), new THREE.MeshBasicMaterial({ color: OFF.clone(), toneMapped: false })); g.add(at(l, .17, .13, .171)); g.userData.led = l.material; return g; }
+function makeServer() { const g = new THREE.Group(); g.add(at(rb(.22, .62, .56, BODY, .012), 0, .31, 0)); const ls = [];
+  for (let i = 0; i < 5; i++) { const l = new THREE.Mesh(new THREE.BoxGeometry(.16, .008, .003), new THREE.MeshBasicMaterial({ color: OFF.clone(), toneMapped: false })); g.add(at(l, 0, .5 - i * .06, .281)); ls.push(l.material); }
+  g.userData.leds = ls; return g; }
+function makeLaptop() { const g = new THREE.Group(); g.add(at(rb(.32, .016, .22, BODY, .006), 0, .008, 0)); const s = rb(.32, .21, .008, BODY, .004); s.position.set(0, .115, -.1); s.rotation.x = -.28; g.add(s);
+  const sm = new THREE.MeshBasicMaterial({ color: 0x0a0e14, toneMapped: false }); const sc = new THREE.Mesh(new THREE.PlaneGeometry(.29, .18), sm); sc.position.set(0, .115, -.0955); sc.rotation.x = -.28; g.add(sc); g.userData.screen = sm; return g; }
+function makePhone() { const g = new THREE.Group(); g.add(at(rb(.072, .008, .15, BODY, .006), 0, .004, 0)); const sm = new THREE.MeshBasicMaterial({ color: 0x0a0e14, toneMapped: false }); const sc = new THREE.Mesh(new THREE.PlaneGeometry(.064, .14), sm); sc.rotation.x = -Math.PI / 2; sc.position.set(0, .0085, 0); g.add(sc); g.userData.screen = sm; return g; }
+function makeGlobe() { const g = new THREE.Group(); const core = new THREE.Mesh(new THREE.SphereGeometry(.34, 28, 20), mat(0x0b1320, { metalness: .2 })); g.add(core);
+  const wm = new THREE.MeshBasicMaterial({ color: SKY, wireframe: true, transparent: true, opacity: .55, toneMapped: false }); const w = new THREE.Mesh(new THREE.SphereGeometry(.345, 18, 12), wm); g.add(w); g.userData.wm = wm; g.userData.w = w; return g; }
+
+/* cables: tubo oscuro completo + tubo de acento que se «dibuja» (drawRange) */
+const TUB = 64, RAD = 6;
+function cable(pts, r = .0045) {
+  const curve = new THREE.CatmullRomCurve3(pts.map(p => new THREE.Vector3(...p)));
+  const base = new THREE.Mesh(new THREE.TubeGeometry(curve, TUB, r, RAD, false), mat(0x161c27, { roughness: .6 }));
+  const geo = new THREE.TubeGeometry(curve, TUB, r * 1.3, RAD, false);
+  const act = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: ACC.clone(), toneMapped: false })); act.userData.geo = geo;
+  const o = { curve, base, act, set(u) { geo.setDrawRange(0, Math.round(clamp(u) * TUB) * RAD * 6); act.visible = u > 0.001; } }; o.set(0); return o;
+}
+const addCable = (c) => { scene.add(c.base, c.act); return c; };
+const pkt = (() => { const mk = (c = ACC) => { const g = new THREE.Group(); g.add(new THREE.Mesh(new THREE.SphereGeometry(.014, 14, 10), glowM(c)));
+  g.add(new THREE.Mesh(new THREE.SphereGeometry(.036, 14, 10), new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: .22, toneMapped: false, depthWrite: false }))); g.visible = false; scene.add(g); return g; }; return mk; })();
+const place = (p, c, u) => { p.visible = u > 0 && u < 1; if (p.visible) p.position.copy(c.curve.getPointAt(clamp(u))); };
+// marco en el piso (rectángulo de acento que crece desde el centro)
+function frame(x0, z0, x1, z1, th = .012) { const g = new THREE.Group(); const m = glowM(ACC); const w = x1 - x0, d = z1 - z0;
+  for (const [sx, sz, px, pz] of [[w, th, 0, -d / 2], [w, th, 0, d / 2], [th, d, -w / 2, 0], [th, d, w / 2, 0]]) { const b = new THREE.Mesh(new THREE.BoxGeometry(sx, .004, sz), m); b.position.set(px, 0, pz); g.add(b); }
+  g.position.set((x0 + x1) / 2, .006, (z0 + z1) / 2); scene.add(g); return g; }
+const pop = (o, u) => { o.visible = u > 0.001; o.scale.setScalar(Math.max(.001, eo(u))); };
+
+/* ---------- puesto 0: vitrina del hook (tres equipos en estantes finos) ---------- */
+const SHOW = [-30, 0, 0];
+{ const shelf = (y, z) => { const p = rb(.56, .02, .42, mat(0x131a26), .006); p.position.set(SHOW[0], y - .01, z); scene.add(p); };
+  shelf(.9, 0); shelf(.55, .06); shelf(.2, .12);
+  for (const sx of [-.27, .27]) { const post = new THREE.Mesh(new THREE.BoxGeometry(.02, .92, .02), BODY2); post.position.set(SHOW[0] + sx, .46, -.18); scene.add(post); } }
+const vSw = makeSwitch(); vSw.position.set(SHOW[0], .9, 0); scene.add(vSw);
+const vRt = makeRouter(); vRt.position.set(SHOW[0], .55, .06); scene.add(vRt);
+const vAp = makeAP(); vAp.position.set(SHOW[0], .2, .12); scene.add(vAp);
+const showLight = new THREE.PointLight(ACC, 1.2, 4); showLight.position.set(SHOW[0] + .5, .7, 1.4); scene.add(showLight);
+
+/* puestos sobre una línea (z): switch 0, router ZR, punto de acceso ZA */
+const ZR = -3.0, ZA = -6.0, GLOBE = [2.0, .95, -4.9];
+
+/* ---------- puesto 1: switch en (0,0,0) ---------- */
+const sw = makeSwitch(); scene.add(sw);
+const pc = at(makePC(), -.62, 0, .5), srv = at(makeServer(), .72, 0, .45), prn = at(makePrinter(), 0, 0, 1.25);
+pc.rotation.y = .45; srv.rotation.y = -.4; prn.rotation.y = .08; scene.add(pc, srv, prn);
+const P = sw.userData.ports;
+const portP = i => [P[i].x, P[i].y, P[i].z + .004];
+const cPC = addCable(cable([portP(3), [-.12, .02, .28], [-.3, .02, .4], [-.5, .03, .5], [-.62, .045, .5]]));
+const cSV = addCable(cable([portP(19), [.14, .02, .3], [.45, .02, .36], [.66, .03, .43], [.72, .05, .45]]));
+const cPR = addCable(cable([portP(9), [.03, .02, .5], [.04, .02, .95], [.04, .04, 1.18]]));
+const LAN = frame(-1.2, -.45, 1.2, 1.6); LAN.visible = false;
+const swLabels = [['PC', [-.62, .72, .5], 2.4], ['Servidor', [.72, .86, .45], 3.8], ['Impresora', [0, .36, 1.25], 5.2], ['Switch', [0, .46, -.02], .8]];
+const swLab = swLabels.map(([t, p, t0]) => { const m = lab(t, t === 'Switch' ? .22 : .2); m.position.set(...p); m.userData.t0 = t0; scene.add(m); labels.push(m); return m; });
+const lanLab = lab('Edificio · campus', .46, '--acc'); lanLab.position.set(0, .015, 1.95); lanLab.rotation.x = -Math.PI / 2; lanLab.visible = false; scene.add(lanLab);
+const swPulse = [pkt(), pkt(), pkt(), pkt()];
+
+/* ---------- puesto 2: router en (0,0,ZR), dos redes e internet ---------- */
+const rt = at(makeRouter(), 0, 0, ZR); scene.add(rt);
+const aPC = at(makePC(), -.8, 0, ZR + .35), bSRV = at(makeServer(), .85, 0, ZR + .25), bLP = at(makeLaptop(), .85, 0, ZR + .85);
+aPC.rotation.y = .4; bSRV.rotation.y = -.35; bLP.rotation.y = -.3; scene.add(aPC, bSRV, bLP);
+const globe = makeGlobe(); globe.position.set(...GLOBE); scene.add(globe);
+const cA = addCable(cable([[-.8, .03, ZR + .2], [-.55, .02, ZR + .1], [-.3, .02, ZR + .02], [-.14, .03, ZR]]));
+const cB = addCable(cable([[.14, .03, ZR], [.4, .02, ZR + .05], [.65, .02, ZR + .2], [.85, .03, ZR + .3]]));
+const ROUTES = [-1.1, 0.2, 1.3].map((bx, i) => cable([[0, .03, ZR - .12], [bx * .55, .02, ZR - .9], [bx + 1.0, .2 + (i === 1 ? .05 : .12), ZR - 1.6], [GLOBE[0] - .08, GLOBE[1] - .24, GLOBE[2] + .3]], .004));
+ROUTES.forEach((c, i) => { c.base.material = mat(0x242e40, { roughness: .6 }); scene.add(c.base, c.act); c.act.material = new THREE.MeshBasicMaterial({ color: i === 1 ? ACC.clone() : DIM.clone(), toneMapped: false }); c.set(0); });
+const frA = frame(-1.3, ZR - .25, -.3, ZR + 1.05); frA.visible = false; const frB = frame(.35, ZR - .25, 1.35, ZR + 1.15); frB.visible = false;
+const rtLab = lab('Router', .26); rtLab.position.set(0, .26, ZR + .08); rtLab.userData.t0 = .8; scene.add(rtLab); labels.push(rtLab);
+const redA = lab('Red A', .3, '--acc'); redA.position.set(-.8, .01, ZR + 1.35); redA.rotation.x = -Math.PI / 2; redA.visible = false; scene.add(redA);
+const redB = lab('Red B', .3, '--acc'); redB.position.set(.85, .01, ZR + 1.45); redB.rotation.x = -Math.PI / 2; redB.visible = false; scene.add(redB);
+const netLab = lab('Internet', .34); netLab.position.set(GLOBE[0], GLOBE[1] + .5, GLOBE[2]); netLab.userData.t0 = 6.4; scene.add(netLab); labels.push(netLab);
+const analyze = new THREE.Mesh(new THREE.RingGeometry(.96, 1, 48), new THREE.MeshBasicMaterial({ color: ACC, transparent: true, opacity: .8, side: THREE.DoubleSide, toneMapped: false, depthWrite: false })); analyze.rotation.x = -Math.PI / 2; analyze.position.set(0, .012, ZR); scene.add(analyze);
+const rtPkt = [pkt(), pkt(), pkt()];
+
+/* ---------- puesto 3: punto de acceso en (0.3,·,ZA) ---------- */
+const AP0 = [.3, 2.45, ZA];
+const rt2 = at(makeRouter(), -1.0, 0, ZA + .55); rt2.rotation.y = .45; scene.add(rt2);
+const pole = new THREE.Mesh(new THREE.CylinderGeometry(.014, .014, 2.4, 10), BODY2); pole.position.set(AP0[0], 1.2, AP0[2]); scene.add(pole);
+const base = new THREE.Mesh(new THREE.CylinderGeometry(.14, .16, .02, 24), BODY); base.position.set(AP0[0], .01, AP0[2]); scene.add(base);
+const ap = at(makeAP(), AP0[0], AP0[1] - .03, AP0[2]); scene.add(ap);
+const pipeBase = new THREE.Mesh(new THREE.BoxGeometry(1, .03, .06), mat(0x161c27)); scene.add(pipeBase);
+const pipe = new THREE.Mesh(new THREE.BoxGeometry(1, .035, .07), glowM(ACC)); scene.add(pipe);
+{ const a = new THREE.Vector3(-1.0 + .14, .03, ZA + .5), b = new THREE.Vector3(AP0[0] - .14, .03, AP0[2]); const m = a.clone().add(b).multiplyScalar(.5); pipeBase.position.copy(m); pipe.position.copy(m);
+  const ang = Math.atan2(-(b.z - a.z), b.x - a.x); pipeBase.rotation.y = pipe.rotation.y = ang; pipe.userData.len = a.distanceTo(b); pipeBase.scale.x = pipe.userData.len; pipe.userData.ang = ang; }
+const flow = Array.from({ length: 4 }, () => { const m = new THREE.Mesh(new THREE.BoxGeometry(.09, .05, .09), glowM(SKY)); scene.add(m); return m; });
+const RMAX = 3.0;
+const WAVES = [0, 1, 2].map(() => { const m = new THREE.Mesh(new THREE.RingGeometry(.965, 1, 96), new THREE.MeshBasicMaterial({ color: ACC, transparent: true, opacity: 0, side: THREE.DoubleSide, toneMapped: false, depthWrite: false })); m.rotation.x = -Math.PI / 2; m.position.set(AP0[0], .014, AP0[2]); scene.add(m); return m; });
+const DEVS = [[1.0, 35, 'p'], [1.55, 150, 'l'], [2.0, 245, 'p'], [2.45, 100, 'l'], [2.8, 205, 'p'], [2.9, 320, 'l']].map(([r, deg, k]) => {
+  const g = k === 'p' ? makePhone() : makeLaptop(); const a = deg * Math.PI / 180; g.position.set(AP0[0] + Math.sin(a) * r, 0, AP0[2] + Math.cos(a) * r); g.rotation.y = a + Math.PI; scene.add(g);
+  const halo = new THREE.Mesh(new THREE.RingGeometry(.2, .24, 40), new THREE.MeshBasicMaterial({ color: ACC, transparent: true, opacity: 0, side: THREE.DoubleSide, toneMapped: false, depthWrite: false })); halo.rotation.x = -Math.PI / 2; halo.position.set(g.position.x, .013, g.position.z); scene.add(halo);
+  return { g, r, halo }; });
+const rt2Lab = lab('Router', .26); rt2Lab.position.set(-1.0, .26, ZA + .6); rt2Lab.userData.t0 = .4; scene.add(rt2Lab); labels.push(rt2Lab);
+const apLab = lab('Punto de acceso', .56); apLab.position.set(AP0[0] + .5, AP0[1] - .05, AP0[2]); apLab.userData.t0 = 2.0; scene.add(apLab); labels.push(apLab);
+const bwLab = lab('Ancho de banda', .56, '--acc'); bwLab.position.set(-.35, .24, ZA + .35); bwLab.userData.t0 = 1.0; scene.add(bwLab); labels.push(bwLab);
+const acLab = lab('Más alcance', .46, '--acc'); acLab.position.set(AP0[0] + 1.9, .01, AP0[2] - 2.4); acLab.rotation.x = -Math.PI / 2; acLab.userData.t0 = 7.5; acLab.visible = false; scene.add(acLab);
+
+/* ---------- contexto: enlaces entre los puestos e internet (se ven desde arriba y en oblicuo) ---------- */
+const links = [cable([[0, .03, -.6], [0, .03, ZR / 2], [0, .03, ZR + .55]], .02), cable([[0, .03, ZR - .6], [.1, .03, (ZR + ZA) / 2], [.2, .03, ZA + .7]], .02), cable([[.15, .03, ZR - .3], [.9, .03, ZR - .9], [GLOBE[0] - .2, GLOBE[1] - .3, GLOBE[2] + .3]], .02)];
+links.forEach(c => { c.base.material = mat(0x1d2736, { roughness: .6 }); scene.add(c.base, c.act); c.set(0); });
+const nodeHalos = [[0, .5], [0, ZR], [.3, ZA]].map(([x, z]) => { const m = new THREE.Mesh(new THREE.RingGeometry(1.0, 1.05, 64), new THREE.MeshBasicMaterial({ color: ACC, transparent: true, opacity: 0, side: THREE.DoubleSide, toneMapped: false, depthWrite: false })); m.rotation.x = -Math.PI / 2; m.position.set(x, .016, z); scene.add(m); return m; });
+const ctxLabs = [['Switch', [0, 1.5, .5]], ['Router', [0, 1.5, ZR]], ['Punto de acceso', [.3, 1.2, ZA + 1.1]]].map(([t, p], i) => { const m = lab(t, t.length > 8 ? 1.5 : 1.1, '--text', 100); m.position.set(...p); m.userData.t0 = .6 + i * .6; scene.add(m); labels.push(m); return m; });
+const ctxPkt = [pkt(), pkt(), pkt()];
+
+/* ---------- payoff: una función por equipo (carteles planos en el piso, se leen desde arriba) ---------- */
+const verbs = [['Une', 2.4, 0.015, .5], ['Conecta', 2.4, 0.015, ZR + .1], ['Extiende', 2.4, 0.015, ZA]].map(([t, x, y, z]) => { const m = lab(t, 1.5, '--acc', 120); m.position.set(x, y, z); m.rotation.x = -Math.PI / 2; m.rotation.z = Math.PI; m.visible = false; scene.add(m); return m; });
+const stationHalos = nodeHalos;
+
+/* cada puesto en su grupo: durante la explicación solo se ve el que corresponde (se ven todos en las vistas generales) */
+const gSW = new THREE.Group(), gRT = new THREE.Group(), gAP = new THREE.Group(), gLK = new THREE.Group(); scene.add(gSW, gRT, gAP, gLK);
+gSW.add(sw, pc, srv, prn, cPC.base, cPC.act, cSV.base, cSV.act, cPR.base, cPR.act, LAN, lanLab, ...swLab, ...swPulse);
+gRT.add(rt, aPC, bSRV, bLP, globe, cA.base, cA.act, cB.base, cB.act, ...ROUTES.flatMap(c => [c.base, c.act]), frA, frB, rtLab, redA, redB, netLab, analyze, ...rtPkt);
+gAP.add(rt2, pole, base, ap, pipe, pipeBase, ...flow, ...WAVES, ...DEVS.flatMap(d => [d.g, d.halo]), rt2Lab, apLab, bwLab, acLab);
+gLK.add(...links.flatMap(c => [c.base, c.act]), ...nodeHalos, ...ctxLabs, ...ctxPkt);
+
+/* luces de puesto (acento suave) */
+for (const [x, z] of [[0, .6], [0, ZR + .2], [0, ZA + .2]]) { const l = new THREE.PointLight(ACC, .9, 5); l.position.set(x, 1.2, z); scene.add(l); }
+
+/* ---------- la cámara: una sola, continua. Tiempos globales a partir de video.json ---------- */
+const CZ = -2.2;                     // centro de los dos cenitales
+const rig = new Rig(THREE, cam);
+rig.toma({ t0: S.s1, t1: S.s1 + D.s1 - .45, tipo: 'orbita', centro: [SHOW[0], .55, .1], mira: [SHOW[0], .7, .1], radio: 2.1, radioFin: 1.8, desde: -24, hasta: 10, alto: .35, altoFin: .3, fov: 41, ease: 'salida' });
+rig.transicion(0, 'latigazo');
+rig.toma({ t0: S.s2, t1: S.s2 + D.s2 - .5, tipo: 'mover', ease: 'suave', de: { pos: [3.6, 8.8, 7.6], look: [0, 0, CZ + .1], fov: 46 }, a: { pos: [2.4, 7.6, 6.4], look: [0, 0, CZ + .1], fov: 46 } });
+rig.transicion(1, 'suave');
+rig.toma({ t0: S.s3 + .5, t1: S.s3 + D.s3 - .5, tipo: 'mover', ease: 'suave', de: { pos: [.3, 3.3, 5.6], look: [0, .05, .45], fov: 38 }, a: { pos: [0, 2.5, 4.2], look: [0, .05, .3], fov: 36 } });
+rig.transicion(2, 'entrada');
+rig.toma({ t0: S.s4 + .5, t1: S.s4 + D.s4 - .5, tipo: 'mover', ease: 'suave', de: { pos: [-1.3, 3.3, ZR + 4.4], look: [0, .1, ZR - .2], fov: 42 }, a: { pos: [-.4, 4.2, ZR + 2.2], look: [1.15, 0, ZR - 1.6], fov: 43 } });
+rig.transicion(3, 'suave');
+rig.toma({ t0: S.s5 + .5, t1: S.s5 + D.s5 - .5, tipo: 'orbita', centro: [.1, 1.0, ZA], mira: [.1, 1.7, ZA], radio: 6.4, radioFin: 4.9, desde: -32, hasta: 18, alto: 3.2, altoFin: 2.5, fov: 44, ease: 'suave' });
+rig.transicion(4, 'suave');
+rig.toma({ t0: S.s6 + .7, t1: S.s6 + D.s6, tipo: 'cenital', centro: [0, 0, CZ], alto: 13.7, altoFin: 13.2, giro: [180, 183], fov: 50, ease: 'lineal' });
+rig.extra = (T, p) => { const d = temblor(T, .005, .7); return { ...p, pos: [p.pos[0] + d[0], p.pos[1] + d[1], p.pos[2] + d[2]] }; };
+const blur = new MotionBlur(renderer, scene, cam, { obturador: .5, max: 8, umbral: 3 });
+
+/* ---------- el mundo en el tiempo T (determinístico) ---------- */
+const GREEN = new THREE.Color(0x0e2a14), BLACK = new THREE.Color(0x0a0e14);
+const screenOn = (m, on) => { m.color.set(on ? 0xffffff : 0x0a0e14); const mp = on ? screenTex : null; if (m.map !== mp) { m.map = mp; m.needsUpdate = true; } };
+function mundo(T) {
+  const lt = id => T - S[id];
+  { const ov = T < S.s3 + .5 || T > S.s6 - 1.6;                                   // vistas generales: todo visible
+    gSW.visible = ov || T < S.s4 + .9; gRT.visible = ov || (T > S.s3 + D.s3 - 1.4 && T < S.s5 + .9); gAP.visible = ov || T > S.s4 + D.s4 - 1.4; gLK.visible = ov;
+    const pay = T > S.s6 - .6; DEVS.forEach(d => { d.g.visible = !pay; }); }
+  // hook: los tres equipos se encienden de a uno
+  { const t = lt('s1'); vSw.userData.ports.forEach((p, i) => p.led.material.color.copy(t > .4 && (i % 3 === 0) ? ACC : OFF));
+    vRt.userData.leds.forEach((l, i) => l.material.color.copy(t > 1.2 + i * .06 ? ACC : OFF)); vAp.userData.led.color.copy(t > 2.0 ? ACC : OFF); }
+  // contexto: los puestos se enlazan entre sí y con internet
+  { const t = lt('s2'); links.forEach((c, i) => c.set(ramp(t, 1.0 + i * .7, .8)));
+    nodeHalos.forEach((h, i) => { const u = eo(ramp(t, .4 + i * .3, .5)); h.material.opacity = .8 * u; h.scale.setScalar(.5 + .5 * u); });
+    ctxPkt.forEach(p => p.visible = false);
+    if (t > 3.2) { const k = (t - 3.2) / 1.6; place(ctxPkt[0], links[0], k % 1); place(ctxPkt[1], links[1], (k + .4) % 1); place(ctxPkt[2], links[2], (k + .7) % 1); }
+    if (T > S.s2 + D.s2 + .1) { nodeHalos.forEach(h => { if (T < S.s6) h.material.opacity = 0; }); }
+  }
+  // switch
+  { const t = lt('s3');
+    const u1 = ramp(t, 2.4, 1.1), u2 = ramp(t, 3.8, 1.1), u3 = ramp(t, 5.2, 1.1);
+    cPC.set(u1); cSV.set(u2); cPR.set(u3);
+    P.forEach((p, i) => { const on = (i === 3 && u1 >= 1) || (i === 19 && u2 >= 1) || (i === 9 && u3 >= 1); const idle = (i % 5 === 0) && hash(i + Math.floor(t * 6)) > .55 && u3 >= 1;
+      p.led.material.color.copy(on ? ACC : (idle ? SKY : OFF)); });
+    screenOn(pc.userData.screen, u1 >= 1);
+    srv.userData.leds.forEach((m, i) => m.color.copy(u2 >= 1 ? (hash(i + Math.floor(t * 8)) > .3 ? ACC : OFF) : OFF)); prn.userData.led.color.copy(u3 >= 1 ? ACC : OFF);
+    LAN.visible = t > 7.0; { const u = ramp(t, 7.0, 1.0); LAN.scale.set(Math.max(.001, eo(u)), 1, Math.max(.001, eo(u))); } lanLab.visible = t > 7.8 && t < D.s3 + .6; lanLab.scale.setScalar(Math.max(.001, eo(ramp(t, 7.8, .5))));
+    const per = 2.4, k = (t - 6.4); const cyc = [[cPC, cSV], [cSV, cPR], [cPR, cPC], [cSV, cPC]];
+    swPulse.forEach(p => p.visible = false);
+    if (k > 0) { const n = Math.floor(k / (per / 2)), ph = (k % (per / 2)) / (per / 2); const [a, b] = cyc[n % 4]; const p = swPulse[0]; if (ph < .5) place(p, a, 1 - ph * 2); else place(p, b, (ph - .5) * 2); }
+    if (k > 4.8 && t < 12.2) { const n = Math.floor((k - 4.8) / 1.2); const ph = ((k - 4.8) % 1.2) / 1.2; const [a, b] = cyc[(n + 2) % 4]; const p = swPulse[2]; if (ph < .5) place(p, a, 1 - ph * 2); else place(p, b, (ph - .5) * 2); }
+  }
+  // router
+  { const t = lt('s4');
+    frA.visible = t > .5; frB.visible = t > 1.0; redA.visible = t > .5 && t < D.s4 + .6; redB.visible = t > 1.0 && t < D.s4 + .6;
+    { const u = eo(ramp(t, .5, .7)); frA.scale.set(Math.max(.001, u), 1, Math.max(.001, u)); redA.scale.setScalar(Math.max(.001, u)); const v = eo(ramp(t, 1.0, .7)); frB.scale.set(Math.max(.001, v), 1, Math.max(.001, v)); redB.scale.setScalar(Math.max(.001, v)); }
+    rt.userData.leds.forEach((l, i) => l.material.color.copy(t > 1.4 + i * .1 ? ACC : OFF));
+    cA.set(ramp(t, 1.8, .9)); cB.set(ramp(t, 2.8, .9));
+    screenOn(aPC.userData.screen, t > 2.7); bLP.userData.screen.color.copy(t > 3.7 ? GREEN : BLACK);
+    rtPkt.forEach(p => p.visible = false);
+    place(rtPkt[0], cA, ramp(t, 4.4, 1.1));
+    const ua = ramp(t, 5.5, 1.6); analyze.visible = ua > 0 && ua < 1; analyze.scale.setScalar(.12 + ua * .5); analyze.material.opacity = .8 * (1 - ua) * Math.sin(Math.min(1, ua * 3) * Math.PI / 2);
+    ROUTES.forEach((c, i) => c.set(ramp(t, 6.4 + i * .35, .9))); ROUTES.forEach((c, i) => { c.act.material.color.copy(i === 1 ? (t > 8.6 ? ACC : DIM) : DIM); });
+    place(rtPkt[1], ROUTES[1], ramp(t, 9.4, 2.4));
+    const g = ramp(t, 11.8, .8); globe.userData.wm.opacity = .55 + .35 * Math.sin(g * Math.PI); globe.userData.w.rotation.y = t * .3; globe.scale.setScalar(1 + .06 * Math.sin(g * Math.PI));
+    place(rtPkt[2], cB, ramp(t, 13.4, 1.0));
+  }
+  // punto de acceso (se esconden internet y las rutas para que no estorben)
+  { const t = lt('s5'); const inS5 = T >= S.s5 - .5 && T < S.s6 - .2; globe.visible = !inS5; ROUTES.forEach(c => { c.base.visible = !inS5; c.act.visible = !inS5 && c.act.visible; }); links.forEach(c => { c.base.visible = !inS5; });
+    const u = eo(ramp(t, .8, 1.0)); pipe.visible = u > .001; pipe.scale.x = Math.max(.001, u * pipe.userData.len);
+    flow.forEach((f, i) => { const k = ((t * .5 + i / flow.length) % 1); f.visible = u >= 1; const a = pipeBase.position, ang = pipe.userData.ang, L = pipe.userData.len; f.position.set(a.x + Math.cos(ang) * (k - .5) * L, .05, a.z - Math.sin(ang) * (k - .5) * L); f.rotation.y = ang; });
+    rt2.userData.leds.forEach((l, i) => l.material.color.copy(t > .3 + i * .1 ? ACC : OFF));
+    ap.userData.led.color.copy(t > 2.0 ? ACC : OFF);
+    WAVES.forEach((w, i) => { const k = ((t - 2.6 - i * 1.4) / 4.2); w.visible = k > 0; const kk = k % 1; const r = .2 + eo(kk) * (RMAX + .2); w.scale.set(r, r, 1); w.material.opacity = k > 0 ? .55 * (1 - kk) : 0; });
+    const rad = .2 + eo(clamp((t - 2.6) / 4.2)) * (RMAX + .2);
+    DEVS.forEach(d => { const on = t > 2.6 && rad >= d.r; d.halo.material.opacity = on ? .8 : 0; d.g.userData.screen.color.copy(on ? GREEN : BLACK); });
+    acLab.visible = t > 7.5 && t < D.s5 + .6; acLab.scale.setScalar(Math.max(.001, eo(ramp(t, 7.5, .5))));
+  }
+  // payoff
+  { const t = lt('s6'); if (T >= S.s6 - .5) { globe.visible = true; links.forEach(c => { c.base.visible = true; }); }
+    verbs.forEach((v, i) => { const u = ramp(t, .9 + i * .8, .5); v.visible = u > 0; v.scale.setScalar(Math.max(.001, eo(u))); if (t > -1) stationHalos[i].material.opacity = .7 * eo(u); });
+    WAVES.forEach(w => { if (t > 0) w.visible = false; }); }
+}
+// carteles con billboard y pop según la escena a la que pertenecen
+const labScene = new Map([...swLab.map(m => [m, 's3']), [rtLab, 's4'], [netLab, 's4'], [rt2Lab, 's5'], [apLab, 's5'], [bwLab, 's5'], ...ctxLabs.map(m => [m, 's2'])]);
+function billboard(T) { labels.forEach(m => { const id = labScene.get(m); if (!id) return; const u = ramp(T - S[id], m.userData.t0, .45); const vis = u > 0 && T < S[id] + D[id] + .6; m.visible = vis; m.scale.setScalar(Math.max(.001, eo(u))); m.quaternion.copy(cam.quaternion); }); }
+function colocar(t) { const v = rig.aplicar(t); mundo(t); billboard(t); return v; }
+
+function pose(id, lt, T) { return blur.render(T, colocar); }
+installRender({ SC, TOTAL, custom: () => {}, pose, gl: { renderer, scene, cam } });
 </script>
 </body>
 </html>
