@@ -18,7 +18,5 @@ assets/sfx/*
 !assets/sfx/propios/**
 package-lock.json
 
-# videos de referencia ajenos y hojas de cuadros (el documento de análisis .md/.json sí se guarda)
-assets/referencias/*
-!assets/referencias/LEEME.md
+# videos de referencia: se guardan en el repo (pedido de Ayrton, 2026-11-09); las hojas de cuadros se regeneran con ./reel analizar
 referencias/*/*.jpg

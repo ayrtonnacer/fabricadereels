@@ -15,6 +15,9 @@
 5. **Guardar**: commit del `.md`/`.json` (los jpg y el video no van a git). Resumir a Ayrton en pocas líneas qué se aprendió y qué proponemos.
 6. Si una técnica entra al motor o a las reglas, anotarla en `docs/CAMARA-3D.md` / `docs/DECISIONES.md`.
 
+## Motion graphics 2D vs. cámara
+En motion graphics 2D (tipografía, tarjetas, formas) lo que se mueve son los elementos, no una cámara: las etiquetas automáticas de movimiento (paneo, giro, zoom) salen ruidosas y no sirven. Lo confiable es lo medido: cortes, ritmo, volumen y golpes de sonido. El desglose de planos se escribe mirando `hoja-planos`, `hoja-cortes` y `hoja-tiempo`. Ejemplos ya hechos: `referencias/motion-*/` y `referencias/pinterest-*/`; patrones comunes en `referencias/SINTESIS.md`.
+
 ## Reglas
 - De una referencia se toma **la técnica** (tiempos, tipo de movimiento, easing, ritmo de cortes, momento del sonido), no el look: la estética, la voz y la música son las de @ayrtonnacer. No se copian textos, gráficos ni identidad del otro creador.
 - Cada análisis termina con al menos una idea que sirva a un reel distinto de los anteriores (regla de variedad en `docs/CAMARA-3D.md`).

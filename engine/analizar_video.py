@@ -308,7 +308,7 @@ def md(meta, planos, R, A, hjs, nombre):
           '## 7. Qué NO copiar (completar)', 'La voz (Daniela), la música de fondo y la estética (cyber/HackTheBox) son nuestras; de la referencia se toma la técnica, no el look. Anotar acá lo que se descarta y por qué.', '',
           '## 8. Ideas para nuestros reels (completar)', '', '## Datos crudos', f"- `referencias/{nombre}/planos.json` (series de velocidad por plano) y `audio.json`.", '',
           '## Límites de este análisis', '- El movimiento es una estimación 2D: no distingue un dolly de un zoom ni mide profundidad. Funciona bien en push-in, travelling lateral y zoom through; **falla o se equivoca** en latigazos (desenfoque), órbitas alrededor de un objeto centrado, grúas combinadas con inclinación y escenas con poca textura. Por eso cada movimiento se confirma mirando las hojas de cuadros.',
-          '- No separa voz de música: los golpes del audio son candidatos; confirmar escuchando.', '- Las transiciones suaves (disolvencias) pueden no detectarse como corte.']
+          '- En motion graphics 2D (se mueven los elementos, no una cámara) las etiquetas de movimiento no sirven: escribir el desglose mirando los cuadros; lo medido confiable son cortes, ritmo y sonido.', '- No separa voz de música: los golpes del audio son candidatos; confirmar escuchando.', '- Las transiciones suaves (disolvencias) pueden no detectarse como corte.']
     return '\n'.join(s) + '\n'
 
 
