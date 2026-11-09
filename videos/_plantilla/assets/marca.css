@@ -73,3 +73,16 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--
 .pasos .segs { display: flex; gap: 10px; margin-top: 16px; }
 .pasos .seg { flex: 1; height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; }
 .pasos .seg i { display: block; height: 100%; width: 100%; background: var(--acc); transform-origin: left center; }
+
+/* ---- Objetos reutilizables de redes (notebook, router, trazos) ---- */
+.trazo { fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; }
+.laptop { width: 380px; height: 232px; }
+.laptop .pantalla { position: absolute; left: 30px; top: 0; width: 320px; height: 200px; border: 7px solid var(--line); border-radius: 16px 16px 6px 6px; background: #070B12; display: flex; align-items: center; justify-content: center; font: 700 44px var(--mono); color: var(--acc); }
+.laptop .base { position: absolute; left: 0; top: 206px; width: 380px; height: 22px; border-radius: 4px 4px 20px 20px; background: linear-gradient(180deg, #2A3A52, #1B2840); }
+.router { width: 420px; height: 160px; }
+.router .cuerpo { position: absolute; left: 0; top: 64px; width: 420px; height: 96px; border-radius: 20px; background: linear-gradient(180deg, #1C2A42, #111A28); border: 2px solid var(--line); display: flex; align-items: center; justify-content: center; font: 700 42px var(--mono); color: var(--text); box-shadow: 0 30px 70px rgba(0, 0, 0, .55); }
+.router .ant { position: absolute; top: 0; width: 14px; height: 80px; border-radius: 7px; background: #33445E; }
+.router .ant.a { left: 64px; } .router .ant.b { right: 64px; }
+.anillo { overflow: visible; }   /* svg de 2x2 px: el círculo interno crece con attr r y el trazo queda fijo */
+.paquete { width: 30px; height: 30px; border-radius: 7px; background: var(--acc); box-shadow: 0 0 22px var(--acc-glow); }
+.pared { width: 54px; border-radius: 8px; background: repeating-linear-gradient(0deg, #2A3A52 0 46px, #1B2840 46px 50px); border: 2px solid var(--line); }

@@ -1,0 +1,49 @@
+<!-- ENVÍA (4,6 s): el dispositivo convierte unos y ceros en una onda y la emite por la antena.
+     Llega del zoom through del gancho (cámara cerca que se asienta). -->
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    #n-ant { width: 60px; height: 130px; }
+    #n-bits { letter-spacing: .06em; }
+  </style>
+  <div id="root" data-composition-id="envia" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <div class="vista" data-layout-allow-overflow>
+      <div class="cam"><div class="mundo">
+        <div id="n-piso" class="piso" data-y="560" data-rx="90"></div>
+        <div id="n-puntos" class="puntos" data-z="-1400"></div>
+        <svg id="n-onda" width="880" height="200" viewBox="0 0 880 200" data-y="-300" data-layout-ignore><path id="n-onda-p" class="trazo" pathLength="1" stroke="var(--acc)" stroke-width="9" /></svg>
+        <p id="n-et" class="bajada" data-y="-460">ondas de radio</p>
+        <svg id="n-r1" class="anillo" width="2" height="2" viewBox="-1 -1 2 2" data-y="-54"><circle r="30" fill="none" stroke="var(--acc)" stroke-width="5" /></svg>
+        <svg id="n-r2" class="anillo" width="2" height="2" viewBox="-1 -1 2 2" data-y="-54"><circle r="30" fill="none" stroke="var(--acc)" stroke-width="5" /></svg>
+        <svg id="n-r3" class="anillo" width="2" height="2" viewBox="-1 -1 2 2" data-y="-54"><circle r="30" fill="none" stroke="var(--acc)" stroke-width="5" /></svg>
+        <svg id="n-ant" viewBox="0 0 60 130" data-y="0" data-s="1.2"><path class="trazo" pathLength="1" id="n-ant-p" d="M30 130 V28" stroke="var(--muted)" stroke-width="8" /><circle id="n-ant-b" cx="30" cy="20" r="14" fill="var(--acc)" /></svg>
+        <div id="n-lap" class="laptop" data-y="215" data-s="1.25"><div class="pantalla"><span id="n-bits">10110100</span></div><div class="base"></div></div>
+      </div></div>
+    </div>
+    <div class="vineta" data-layout-ignore></div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="envia"]');
+    const tl = gsap.timeline({ paused: true });
+    const cam = Camara(root, tl);
+    // onda senoidal (determinística)
+    let d = 'M0 100';
+    for (let x = 0; x <= 880; x += 8) d += ` L${x} ${(100 - 62 * Math.sin(x / 880 * Math.PI * 7)).toFixed(1)}`;
+    root.querySelector('#n-onda-p').setAttribute('d', d);
+
+    cam.poner({ z: 800, y: 90 });                              // llega del zoom through y se asienta
+    cam.ir(0, { z: 0, y: 60 }, 1.0, 'expo.out');
+    cam.ir(1.2, { z: 60, y: 0 }, 3.2, 'none');               // sube siguiendo la onda
+
+    tl.set('#n-r1 circle, #n-r2 circle, #n-r3 circle', { opacity: 0 }, 0);
+    tl.fromTo('#n-lap', { opacity: 0.4, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.25, ease: 'power4.out' }, 0);
+    tl.fromTo('#n-bits', { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 0.7, ease: 'steps(8)' }, 0.4);   // unos y ceros
+    tl.fromTo('#n-ant-p', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.3 }, 1.0);
+    tl.fromTo('#n-ant-b', { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.3, ease: 'back.out(2)' }, 1.2);
+    tl.fromTo('#n-onda-p', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut' }, 1.5);   // bits → onda
+    tl.fromTo('#n-et', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.25 }, 2.3);
+    ['#n-r1', '#n-r2', '#n-r3'].forEach((s, i) => tl.fromTo(s + ' circle', { attr: { r: 30 }, opacity: 0.8 }, { attr: { r: 440 }, opacity: 0, duration: 1.5, ease: 'power1.out' }, 2.7 + i * 0.5));
+    window.__timelines["envia"] = tl;
+  </script>
+</template>

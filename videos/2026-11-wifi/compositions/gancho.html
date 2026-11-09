@@ -1,0 +1,48 @@
+<!-- GANCHO (0–3,2 s): "Tu WiFi es una radio". Ondas de radio salen detrás del titular (la idea ya está en el cuadro 0).
+     La cámara aterriza y al final atraviesa el titular (zoom through) hacia "envia". -->
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    #root .w { display: inline-block; }
+    #g-titular { width: 980px; }
+    #g-firma { position: absolute; left: 0; right: 0; top: 250px; text-align: center; }
+  </style>
+  <div id="root" data-composition-id="gancho" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <div class="vista" data-layout-allow-overflow>
+      <div class="cam"><div class="mundo">
+        <div id="g-piso" class="piso" data-y="620" data-rx="90"></div>
+        <div id="g-puntos" class="puntos" data-z="-1400"></div>
+        <svg id="g-r1" class="anillo" data-z="-200" width="2" height="2" viewBox="-1 -1 2 2" data-y="-40"><circle r="30" fill="none" stroke="var(--acc)" stroke-width="5" /></svg>
+        <svg id="g-r2" class="anillo" data-z="-200" width="2" height="2" viewBox="-1 -1 2 2" data-y="-40"><circle r="30" fill="none" stroke="var(--acc)" stroke-width="5" /></svg>
+        <svg id="g-r3" class="anillo" data-z="-200" width="2" height="2" viewBox="-1 -1 2 2" data-y="-40"><circle r="30" fill="none" stroke="var(--acc)" stroke-width="5" /></svg>
+        <h1 id="g-titular" class="titular" data-y="-40">
+          <span class="w">Tu</span> <span class="w">WiFi</span> <span class="w">es</span><br />
+          <span class="w">una</span> <span class="w acc">radio</span>
+        </h1>
+        <p id="g-bajada" class="bajada" data-y="250">Por eso a veces no llega</p>
+      </div></div>
+    </div>
+    <div class="vineta" data-layout-ignore></div>
+    <div id="g-firma" class="firma">@ayrtonnacer</div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="gancho"]');
+    const tl = gsap.timeline({ paused: true });
+    const cam = Camara(root, tl);
+
+    cam.poner({ z: -520, rx: 18, y: 70 });                  // el cuadro 0 ya muestra el titular
+    cam.ir(0, { z: 0, rx: 4, y: 0 }, 1.5, 'expo.out');
+    cam.ir(2.6, { z: 1500, rx: 0 }, 0.6, 'power3.in');      // zoom through → envia (whoosh en el pico, ~3,1 s)
+
+    tl.fromTo('#g-titular .w', { opacity: 0.9, filter: 'blur(2px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.18, ease: 'power4.out', stagger: 0.07 }, 0);
+    tl.fromTo('#g-bajada', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.22 }, 1.1);
+    tl.fromTo('#g-firma', { opacity: 0.6 }, { opacity: 1, duration: 0.25 }, 0);
+    tl.to('#g-firma', { opacity: 0, duration: 0.2 }, 2.55);
+    tl.set('#g-r1 circle, #g-r2 circle, #g-r3 circle', { opacity: 0 }, 0);
+    // ondas que salen de detrás del titular (3 anillos, finitos)
+    ['#g-r1', '#g-r2', '#g-r3'].forEach((s, i) => tl.fromTo(s + ' circle', { attr: { r: 40 }, opacity: 0.7 }, { attr: { r: 620 }, opacity: 0, duration: 1.5, ease: 'power1.out' }, 0.05 + i * 0.5));
+
+    window.__timelines["gancho"] = tl;
+  </script>
+</template>

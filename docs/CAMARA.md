@@ -55,3 +55,9 @@ Scripts técnicos de reels de referencia en `docs/referencias/` (Ayrton los va p
 
 ## Registro de HyperFrames (bloques listos)
 Antes de construir un efecto a mano: `npx hyperframes catalog --tag camera --json` (push-in, pull-back-reveal, pan-stations, focus-rack, camera-shake, parallax-device-dive…), `--tag transition`, `--tag motion-primitive`. Se instalan como código editable con `npx hyperframes add <nombre>` y hay que adaptarlos a `marca.css`.
+
+## Errores a no repetir al armar piezas
+- **Una clase de pieza NO debe poner `position`** (ni `relative`): `.mundo > *` ya las pone `absolute` y la cámara las ubica con `data-x/y/z`. Una clase con `position: relative` definida después gana y la pieza cae al flujo normal, desalineada (pasó con `.laptop`/`.router` en el reel de WiFi).
+- **Anillos y ondas expansivas**: no escalar un div con borde (el trazo se engorda con el zoom); usar un `<svg>` de 2×2 px con `overflow: visible` y animar `attr: { r }` del círculo.
+- **Primer cuadro de cada escena**: el contenido tiene que estar ya a medias visible (opacity ≥ 0,4 y blur) en t = 0; si no, el corte muestra el fondo vacío 0,2 s y parpadea.
+- **Zona segura**: todo lo que se lee entre 200 y 1330 px de alto; con la cámara en `y` positivo las piezas de abajo bajan: verificar con `snapshot`.

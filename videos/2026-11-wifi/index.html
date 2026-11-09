@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <!-- Todo local (sin CDN): el render no depende de la red. -->
+    <script src="assets/gsap.min.js"></script>
+    <script src="assets/camara.js"></script>
+    <link rel="stylesheet" href="assets/marca.css" />
+  </head>
+  <body>
+    <!-- Duraciones: las escribe `python engine/tiempos.py videos/X` desde video.json (única fuente de verdad). -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="33.1" data-width="1080" data-height="1920">
+      <div id="gancho" data-composition-id="gancho" data-composition-src="compositions/gancho.html"
+        data-start="0" data-duration="3.2" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="envia" data-composition-id="envia" data-composition-src="compositions/envia.html"
+        data-start="3.2" data-duration="4.6" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="router" data-composition-id="router" data-composition-src="compositions/router.html"
+        data-start="7.8" data-duration="5.2" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="ethernet" data-composition-id="ethernet" data-composition-src="compositions/ethernet.html"
+        data-start="13" data-duration="4.6" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="bandas" data-composition-id="bandas" data-composition-src="compositions/bandas.html"
+        data-start="17.6" data-duration="7.6" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="payoff" data-composition-id="payoff" data-composition-src="compositions/payoff.html"
+        data-start="25.2" data-duration="3.9" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="cierre" data-composition-id="cierre" data-composition-src="compositions/cierre.html"
+        data-start="29.1" data-duration="4" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+    </div>
+    <script>
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

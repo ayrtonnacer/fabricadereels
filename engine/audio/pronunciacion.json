@@ -1,24 +1,112 @@
 {
  "_leeme": "Diccionario de pronunciación para la voz es_AR (Piper). 'reemplazos' se aplican a TODO texto de voz antes de sintetizar (palabra completa, sin distinguir mayúsculas). 'prohibidas' son palabras que NO deben estar en la voz: voz.py avisa y propone alternativa. Agregar acá cada palabra nueva que suene mal; 'estado' = ok (verificado de oído por Ayrton) | sin_verificar.",
  "reemplazos": [
-  {"de": "Parrot", "a": "Párrot", "estado": "ok"},
-  {"de": "Linux", "a": "Línux", "estado": "ok"},
-  {"de": "USB", "a": "u ese be", "estado": "sin_verificar"},
-  {"de": "GB", "a": "gigas", "estado": "sin_verificar"},
-  {"de": "ISO", "a": "ái es ó", "estado": "sin_verificar"},
-  {"de": "PC", "a": "pe ce", "estado": "sin_verificar"},
-  {"de": "gdisk", "a": "gue disk", "estado": "sin_verificar"},
-  {"de": "zenity", "a": "zéniti", "estado": "sin_verificar"},
-  {"de": "mkusb", "a": "em ka u ese be", "estado": "sin_verificar"},
-  {"de": "tarballs", "a": "tárbols", "estado": "sin_verificar"},
-  {"de": "install", "a": "ínstol", "estado": "sin_verificar"},
-  {"de": "boot", "a": "but", "estado": "sin_verificar"},
-  {"de": "Go", "a": "gou", "estado": "sin_verificar"}
+  {
+   "de": "Parrot",
+   "a": "Párrot",
+   "estado": "ok"
+  },
+  {
+   "de": "Linux",
+   "a": "Línux",
+   "estado": "ok"
+  },
+  {
+   "de": "USB",
+   "a": "u ese be",
+   "estado": "sin_verificar"
+  },
+  {
+   "de": "GB",
+   "a": "gigas",
+   "estado": "sin_verificar"
+  },
+  {
+   "de": "ISO",
+   "a": "ái es ó",
+   "estado": "sin_verificar"
+  },
+  {
+   "de": "PC",
+   "a": "pe ce",
+   "estado": "sin_verificar"
+  },
+  {
+   "de": "gdisk",
+   "a": "gue disk",
+   "estado": "sin_verificar"
+  },
+  {
+   "de": "zenity",
+   "a": "zéniti",
+   "estado": "sin_verificar"
+  },
+  {
+   "de": "mkusb",
+   "a": "em ka u ese be",
+   "estado": "sin_verificar"
+  },
+  {
+   "de": "tarballs",
+   "a": "tárbols",
+   "estado": "sin_verificar"
+  },
+  {
+   "de": "install",
+   "a": "ínstol",
+   "estado": "sin_verificar"
+  },
+  {
+   "de": "boot",
+   "a": "but",
+   "estado": "sin_verificar"
+  },
+  {
+   "de": "Go",
+   "a": "gou",
+   "estado": "sin_verificar"
+  },
+  {
+   "de": "WiFi",
+   "a": "guifi",
+   "estado": "sin_verificar"
+  },
+  {
+   "de": "Ethernet",
+   "a": "ísernet",
+   "estado": "sin_verificar"
+  },
+  {
+   "de": "router",
+   "a": "rúter",
+   "estado": "sin_verificar"
+  },
+  {
+   "de": "gigahertz",
+   "a": "gigaérts",
+   "estado": "sin_verificar"
+  }
  ],
  "prohibidas": [
-  {"palabra": "pendrive", "usar": "memoria", "motivo": "Piper la pronuncia mal (Ayrton, 2026-11-02)"},
-  {"palabra": "like", "usar": "me gusta", "motivo": "se lee en inglés; en pantalla sí puede decir 'like' (2026-11-02)"},
-  {"palabra": "dev", "usar": "(evitar)", "motivo": "ambigua para el público; decir 'programación' (2026-11-02)"},
-  {"palabra": "guardalo", "usar": "dale me gusta", "motivo": "la CTA debe funcionar en todas las plataformas; YouTube no tiene 'guardar' (2026-11-02)"}
+  {
+   "palabra": "pendrive",
+   "usar": "memoria",
+   "motivo": "Piper la pronuncia mal (Ayrton, 2026-11-02)"
+  },
+  {
+   "palabra": "like",
+   "usar": "me gusta",
+   "motivo": "se lee en inglés; en pantalla sí puede decir 'like' (2026-11-02)"
+  },
+  {
+   "palabra": "dev",
+   "usar": "(evitar)",
+   "motivo": "ambigua para el público; decir 'programación' (2026-11-02)"
+  },
+  {
+   "palabra": "guardalo",
+   "usar": "dale me gusta",
+   "motivo": "la CTA debe funcionar en todas las plataformas; YouTube no tiene 'guardar' (2026-11-02)"
+  }
  ]
 }

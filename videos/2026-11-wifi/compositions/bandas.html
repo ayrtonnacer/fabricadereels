@@ -1,0 +1,62 @@
+<!-- BANDAS (7,6 s): 2,4 GHz (onda larga: llega lejos) vs 5 GHz (onda corta: más datos, la frena la pared). -->
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    .b-nota { font-weight: 500; font-size: 44px; color: var(--muted); white-space: nowrap; }
+  </style>
+  <div id="root" data-composition-id="bandas" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <div class="vista" data-layout-allow-overflow>
+      <div class="cam"><div class="mundo">
+        <div id="b-piso" class="piso" data-y="560" data-rx="90"></div>
+        <div id="b-puntos" class="puntos" data-z="-1400"></div>
+        <div id="b-rt" class="router" data-x="-420" data-y="-30" data-s="0.4"><div class="ant a"></div><div class="ant b"></div><div class="cuerpo"></div></div>
+        <div id="b-c24" class="chip" data-x="-170" data-y="-300" style="border-color: var(--acc); color: var(--acc); font-weight: 700">2,4 GHz</div>
+        <div id="b-c5" class="chip" data-x="-190" data-y="20" style="font-weight: 700">5 GHz</div>
+        <svg id="b-w24" width="800" height="140" viewBox="0 0 800 140" data-x="70" data-y="-190" data-layout-ignore>
+          <path id="b-w24a" class="trazo" pathLength="1" stroke="var(--acc)" stroke-width="9" />
+          <path id="b-w24b" class="trazo" pathLength="1" stroke="var(--acc)" stroke-width="9" />
+        </svg>
+        <svg id="b-w5" width="800" height="140" viewBox="0 0 800 140" data-x="70" data-y="130" data-layout-ignore>
+          <path id="b-w5a" class="trazo" pathLength="1" stroke="var(--sky)" stroke-width="7" />
+          <path id="b-w5b" class="trazo" pathLength="1" stroke="var(--sky)" stroke-width="7" />
+        </svg>
+        <div id="b-pared" class="pared" data-x="70" data-y="-30" style="height: 640px"></div>
+        <p id="b-pl" class="bajada" data-x="70" data-y="325" style="font-size: 40px">pared</p>
+        <p id="b-n24" class="b-nota" data-x="255" data-y="-90">llega más lejos</p>
+        <p id="b-n5" class="b-nota" data-x="-90" data-y="215">más datos</p>
+        <div id="b-frena" class="chip warn" data-x="265" data-y="55" style="font-size: 38px; padding: 16px 24px"><b>⚠</b> se frena</div>
+      </div></div>
+    </div>
+    <div class="vineta" data-layout-ignore></div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="bandas"]');
+    const tl = gsap.timeline({ paused: true });
+    const cam = Camara(root, tl);
+    // ondas: 2,4 GHz = longitud de onda larga; 5 GHz = corta (más ciclos = más datos). Dos tramos: antes y después de la pared (x = 400).
+    const onda = (x0, x1, amp, lam) => { let d = ''; for (let x = x0; x <= x1; x += 4) d += (d ? ' L' : 'M') + `${x} ${(70 - amp * Math.sin((x - x0) / lam * Math.PI * 2)).toFixed(1)}`; return d; };
+    const set = (id, d) => root.querySelector(id).setAttribute('d', d);
+    set('#b-w24a', onda(0, 400, 52, 190)); set('#b-w24b', onda(400, 800, 52, 190));
+    set('#b-w5a', onda(0, 400, 40, 70));  set('#b-w5b', onda(400, 800, 40, 70));
+
+    cam.poner({ x: -150, z: 220, ry: 9 });
+    cam.ir(0, { x: -80, z: 0, ry: 6 }, 0.9, 'expo.out');
+    cam.ir(1.0, { x: 0, z: 40, ry: 0 }, 3.2, 'none');
+    cam.ir(4.4, { x: 0, z: 90, ry: -7 }, 1.5, 'power2.inOut');   // mira la pared
+
+    tl.fromTo('#b-rt', { opacity: 0.4, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.25 }, 0);
+    tl.fromTo('#b-c24', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.2 }, 0.4);   // "2,4"
+    tl.fromTo('#b-w24a, #b-w24b', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.1, ease: 'power1.inOut', stagger: 0.55 }, 0.6);
+    tl.fromTo('#b-c5', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.2 }, 1.5);    // "5"
+    tl.fromTo('#b-w5a, #b-w5b', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.1, ease: 'power1.inOut', stagger: 0.55 }, 1.7);
+    tl.fromTo('#b-n5', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 3.4);        // "más frecuencia, más datos"
+    tl.fromTo('#b-pared', { scaleY: 0, opacity: 0 }, { scaleY: 1, opacity: 1, duration: 0.5, ease: 'power3.out' }, 4.6);   // "las paredes…"
+    tl.fromTo('#b-pl', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 4.9);
+    tl.to('#b-w5b', { opacity: 0.12, duration: 0.4 }, 5.2);                        // 5 GHz se frena
+    tl.fromTo('#b-frena', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(1.6)' }, 5.3);
+    tl.to('#b-w24b', { opacity: 0.7, duration: 0.4 }, 5.2);                        // 2,4 GHz la atraviesa
+    tl.fromTo('#b-n24', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 6.0);       // "…y la de 2,4 llega más lejos"
+    window.__timelines["bandas"] = tl;
+  </script>
+</template>
