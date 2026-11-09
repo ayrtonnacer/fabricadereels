@@ -1,3 +1,4 @@
 piper-tts
 numpy
 scipy
+onnx   # tiempos por palabra para subtítulos (piper include_alignments)

@@ -1,6 +1,6 @@
 # Estilo visual: motion graphics
 
-- Formato 1080×1920, 30 fps. Zona segura: todo lo que se lee entre los 200 y los 1330 px de alto (arriba y abajo tapa la interfaz de las apps; nunca texto bajo la barra de botones de la derecha). Debajo de 1330 px solo textura (piso, fondo).
+- Formato 1080×1920, 30 fps. Zona segura: todo lo que se lee entre los 200 y los 1330 px de alto (arriba y abajo tapa la interfaz de las apps; nunca texto bajo la barra de botones de la derecha). Debajo de 1330 px solo textura (piso, fondo). Con subtítulos, la imagen termina en y ≈ 1100.
 - **Lenguaje**: motion graphics 2D (tipografía grande, tarjetas, terminal, diagramas que se arman) con **cámara que se mueve en un set con profundidad** (`docs/CAMARA.md`). Sin modelos 3D salvo un plano puntual que lo pida.
 - **Identidad**: `assets/marca.css` de cada video (copiada de la plantilla). Tema cyber / HackTheBox: fondo `--bg #0B111C`, tarjetas `--panel`, filetes `--line`, texto `--text`, secundario `--muted`, acento lima `--acc #9FEF00`. Siempre `var(--…)`, nunca colores fijos.
 - **Color = significado**: énfasis (palabra clave, firma, progreso) = `--acc` · ✓ correcto = `--ok` verde · ⚠ aviso = `--warn` ámbar · ✕ error = bloque rojo RELLENO (`.chip.err`). Nunca el mismo color para lo bueno y lo malo; verde y ámbar solo en estados.
@@ -11,4 +11,6 @@
 - **Firma**: `@ayrtonnacer` al inicio y al final, con `--acc`, sola (sin punto, ícono ni adorno). Lo resaltado es lo que se debe recordar.
 - **Ritmo**: un cambio visual cada 1,5–3 s (entra algo, viaja la cámara, se dibuja un resalte). Nada quieto más de 3 s.
 - **Prohibido**: líneas de escaneo, marcos HUD / esquinas en L, "// TUTORIAL", "[ GRATIS ]", texto de fuente al final, loops de "flotar/respirar", rebote en interfaz, todas las escenas entrando igual.
-- **Subtítulos**: no, salvo que Ayrton los pida (si los pide: bloque de captions del registro de HyperFrames, adaptado a la marca).
+- **Subtítulos**: SÍ, siempre (Ayrton, 2026-11-09: se ve mucho en silencio). Ver `docs/SUBTITULOS.md`. Zona segura: imagen entre y 200 y 1100; subtítulos en y 1120–1320; debajo de 1320 solo el piso.
+- **Fondo**: degradé azul-negro + **piso de líneas en perspectiva** (le gustan a Ayrton). **Sin puntitos verdes** (no tenían sentido; sacados). La profundidad extra se logra con paralaje y unos y ceros en primer plano (`docs/CAMARA.md`).
+- **Texto**: nada de palabras sueltas en la última línea (`docs/TIPOGRAFIA.md`).

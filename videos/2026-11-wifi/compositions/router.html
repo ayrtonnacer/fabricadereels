@@ -10,13 +10,17 @@
     <div class="vista" data-layout-allow-overflow>
       <div class="cam"><div class="mundo">
         <div id="r-piso" class="piso" data-y="560" data-rx="90"></div>
-        <div id="r-puntos" class="puntos" data-z="-1400"></div>
         <div id="r-net" class="tarjeta" data-y="-480"><svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="var(--sky)" stroke-width="4"><circle cx="32" cy="32" r="26"/><ellipse cx="32" cy="32" rx="11" ry="26"/><path d="M6 32h52M10 18h44M10 46h44"/></svg>Internet</div>
-        <svg id="r-cable" width="40" height="220" viewBox="0 0 40 220" data-y="-315"><path id="r-cable-p" class="trazo" pathLength="1" d="M20 220 V0" stroke="var(--sky)" stroke-width="12" /></svg>
+        <svg id="r-cable" width="40" height="290" viewBox="0 0 40 290" data-y="-281"><path id="r-cable-p" class="trazo" pathLength="1" d="M20 290 V0" stroke="var(--sky)" stroke-width="12" /></svg>
         <div id="r-router" class="router" data-y="-120"><div class="ant a"></div><div class="ant b"></div><div class="cuerpo"><span id="r-bits">10110100</span></div></div>
         <svg id="r-onda" width="240" height="200" viewBox="0 0 240 200" data-y="70" data-layout-ignore><path id="r-onda-p" class="trazo" pathLength="1" stroke="var(--acc)" stroke-width="9" /></svg>
-        <div id="r-pk1" class="paquete" data-y="-215"></div><div id="r-pk2" class="paquete" data-y="-215"></div><div id="r-pk3" class="paquete" data-y="-215"></div>
+        <div id="r-pk1" class="paquete" data-y="-150"></div><div id="r-pk2" class="paquete" data-y="-150"></div><div id="r-pk3" class="paquete" data-y="-150"></div>
         <div id="r-lap" class="laptop" data-y="260" data-s="0.7"><div class="pantalla"></div><div class="base"></div></div>
+        <div id="r-b0" class="bit" data-x="-440" data-y="-330" data-z="520">1</div>
+        <div id="r-b1" class="bit" data-x="440" data-y="-460" data-z="650">0</div>
+        <div id="r-b2" class="bit" data-x="-430" data-y="120" data-z="600">0</div>
+        <div id="r-b3" class="bit" data-x="450" data-y="60" data-z="540">1</div>
+        <div id="r-b4" class="bit" data-x="-450" data-y="-60" data-z="700">1</div>
       </div></div>
     </div>
     <div class="vineta" data-layout-ignore></div>
@@ -30,21 +34,21 @@
     root.querySelector('#r-onda-p').setAttribute('d', d);
 
     cam.poner({ y: 120, z: -250, rx: 10 });
-    cam.ir(0, { y: 30, z: 0, rx: 4 }, 1.3, 'expo.out');
-    cam.ir(2.1, { y: -170, z: 20, rx: 0 }, 1.5, 'power2.inOut');     // sigue el cable hacia internet
-    cam.ir(3.9, { y: 30, z: 0, rx: 4 }, 1.1, 'power2.inOut');       // "y de vuelta": regresa al dispositivo
+    cam.ir(0, { y: 30, z: 0, rx: 4, ry: -6 }, 1.3, 'expo.out');
+    cam.ir(2.1, { y: -170, z: 20, rx: 0, ry: 3 }, 1.5, 'power2.inOut');     // sigue el cable hacia internet
+    cam.ir(3.9, { y: 30, z: 0, rx: 4, ry: -4 }, 1.1, 'power2.inOut');       // "y de vuelta": regresa al dispositivo
 
-    tl.set('#r-pk1, #r-pk2, #r-pk3', { y: -215, opacity: 0 }, 0);
+    tl.set('#r-pk1, #r-pk2, #r-pk3', { y: -150, opacity: 0 }, 0);
     tl.set('#r-onda-p', { strokeDashoffset: 1 }, 0);
     tl.fromTo('#r-router, #r-lap', { opacity: 0.4, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.25, ease: 'power4.out', stagger: 0.08 }, 0);
     tl.fromTo('#r-net', { opacity: 0.4, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.25 }, 0);
     tl.fromTo('#r-onda-p', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.8, ease: 'power2.out' }, 0.5);     // la onda llega
     tl.fromTo('#r-bits', { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 0.6, ease: 'steps(8)' }, 1.3);  // decodifica
     tl.fromTo('#r-cable-p', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.5, ease: 'power2.out' }, 2.2);
-    ['#r-pk1', '#r-pk2', '#r-pk3'].forEach((s, i) => tl.fromTo(s, { y: -215, opacity: 1 }, { y: -415, duration: 0.6, ease: 'power1.in' }, 2.7 + i * 0.16));
+    ['#r-pk1', '#r-pk2', '#r-pk3'].forEach((s, i) => tl.fromTo(s, { y: -150, opacity: 1 }, { y: -405, duration: 0.6, ease: 'power1.in' }, 2.7 + i * 0.16));
     tl.set('#r-pk1, #r-pk2, #r-pk3', { opacity: 0 }, 3.65);
     // de vuelta: paquetes bajan por el cable y la onda sale del router al dispositivo
-    ['#r-pk1', '#r-pk2', '#r-pk3'].forEach((s, i) => tl.fromTo(s, { y: -415, opacity: 1 }, { y: -215, duration: 0.5, ease: 'power1.inOut' }, 3.9 + i * 0.12));
+    ['#r-pk1', '#r-pk2', '#r-pk3'].forEach((s, i) => tl.fromTo(s, { y: -405, opacity: 1 }, { y: -150, duration: 0.5, ease: 'power1.inOut' }, 3.9 + i * 0.12));
     tl.set('#r-pk1, #r-pk2, #r-pk3', { opacity: 0 }, 4.7);
     tl.fromTo('#r-onda-p', { strokeDashoffset: 0 }, { strokeDashoffset: 1, duration: 0.01 }, 3.85);
     tl.fromTo('#r-onda-p', { strokeDashoffset: -1 }, { strokeDashoffset: 0, duration: 0.8, ease: 'power2.out' }, 4.3);

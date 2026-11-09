@@ -85,6 +85,11 @@
    "de": "gigahertz",
    "a": "gigaérts",
    "estado": "sin_verificar"
+  },
+  {
+   "de": "2,4",
+   "a": "dos coma cuatro",
+   "estado": "sin_verificar"
   }
  ],
  "prohibidas": [

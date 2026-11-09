@@ -33,6 +33,7 @@ En `video.json`: `"voz": {"efecto": "radio", "radio_fuerza": 0.6, ...}`. Lo apli
 
 ## Sonidos reales (preferirlos cuando suenen mejor que los sintéticos)
 - **Tipeo**: los ticks sintéticos sonaban artificiales (feedback de Ayrton, 2026-11-04). Ahora `Track.typing()` usa teclas **reales** cortadas de `assets/sfx/propios/typing-keyboard.mp3` (de su repo code-reel-studio, `public/sounds/`) con `engine/audio/cortar_teclas.py` → `assets/sfx/propios/teclas/kNN.wav` (104 teclas). Reglas: nunca la misma tecla dos veces seguidas, variación de nivel (±2 dB) y de tiempo (±8 ms); Enter usa la tecla más pesada del lote. Sin esas teclas, cae a los ticks sintéticos.
+- **Sonido grave de apertura y cierre** (Ayrton, 2026-11-09): `assets/sfx/propios/boom-cinematico.mp3` ("cinematic impact boom 05", archivo de Universfield, ~2 s). Va **al inicio** (`propio('boom-cinematico')` en t = 0, nivel ~0,6) y **al final** (justo antes del CTA, ~0,55, junto con el chinn). El ducking lo baja cuando habla la voz. Si falta el archivo cae al `boom()` sintético.
 - **Otros propios** (`sfxlib.propio('intro-whoosh' | 'mouse-click' | 'zoom-click')`): disponibles para whoosh de apertura y clics de interfaz.
 - **Banco opcional** de Adobe Audition en `assets/sfx/<tipo>/` (ver LEEME) y `sfxlib.sample(tipo)`.
 
@@ -56,3 +57,6 @@ Se escribe el texto natural en `video.json`; `voz.py` aplica el diccionario. Si 
 
 ## Audio y HyperFrames
 HyperFrames renderiza el video **mudo** (`out/mudo.mp4`); la voz, los efectos y la música los hace y mezcla este repo (`voz.py` → `sfx.py` → `mezcla.py`), que ya cumple −14 LUFS con ducking. No poner `<audio>` en las composiciones (se mezclaría dos veces). La skill `/media-use` de HyperFrames ofrece voces y música propias; Ayrton eligió Daniela (Piper): no cambiarla sin que lo pida.
+
+## Cómo verificar el audio sin escucharlo
+Dibujar la onda de `voz.wav` y `sfx.wav` con los inicios de palabra de `audio/palabras.json` (ver `docs/SUBTITULOS.md`): la voz debe quedar sobre el efecto cuando habla, el grave de apertura/cierre no tapa las primeras/últimas palabras y cada whoosh cae en el pico de su movimiento de cámara. Medir también `mezcla.py` (−14 LUFS, pico ≤ −1,5 dB).

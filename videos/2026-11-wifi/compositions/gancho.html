@@ -12,7 +12,6 @@
     <div class="vista" data-layout-allow-overflow>
       <div class="cam"><div class="mundo">
         <div id="g-piso" class="piso" data-y="620" data-rx="90"></div>
-        <div id="g-puntos" class="puntos" data-z="-1400"></div>
         <svg id="g-r1" class="anillo" data-z="-200" width="2" height="2" viewBox="-1 -1 2 2" data-y="-40"><circle r="30" fill="none" stroke="var(--acc)" stroke-width="5" /></svg>
         <svg id="g-r2" class="anillo" data-z="-200" width="2" height="2" viewBox="-1 -1 2 2" data-y="-40"><circle r="30" fill="none" stroke="var(--acc)" stroke-width="5" /></svg>
         <svg id="g-r3" class="anillo" data-z="-200" width="2" height="2" viewBox="-1 -1 2 2" data-y="-40"><circle r="30" fill="none" stroke="var(--acc)" stroke-width="5" /></svg>
@@ -20,7 +19,10 @@
           <span class="w">Tu</span> <span class="w">WiFi</span> <span class="w">es</span><br />
           <span class="w">una</span> <span class="w acc">radio</span>
         </h1>
-        <p id="g-bajada" class="bajada" data-y="250">Por eso a veces no llega</p>
+        <div id="g-b0" class="bit" data-x="-430" data-y="-380" data-z="520">1</div>
+        <div id="g-b1" class="bit" data-x="420" data-y="-210" data-z="640">0</div>
+        <div id="g-b2" class="bit" data-x="-400" data-y="160" data-z="600">1</div>
+        <div id="g-b3" class="bit" data-x="430" data-y="330" data-z="520">0</div>
       </div></div>
     </div>
     <div class="vineta" data-layout-ignore></div>
@@ -36,7 +38,6 @@
     cam.ir(2.6, { z: 1500, rx: 0 }, 0.6, 'power3.in');      // zoom through → envia (whoosh en el pico, ~3,1 s)
 
     tl.fromTo('#g-titular .w', { opacity: 0.9, filter: 'blur(2px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.18, ease: 'power4.out', stagger: 0.07 }, 0);
-    tl.fromTo('#g-bajada', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.22 }, 1.1);
     tl.fromTo('#g-firma', { opacity: 0.6 }, { opacity: 1, duration: 0.25 }, 0);
     tl.to('#g-firma', { opacity: 0, duration: 0.2 }, 2.55);
     tl.set('#g-r1 circle, #g-r2 circle, #g-r3 circle', { opacity: 0 }, 0);

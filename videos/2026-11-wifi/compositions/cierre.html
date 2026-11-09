@@ -13,14 +13,13 @@
     <div class="vista" data-layout-allow-overflow>
       <div class="cam"><div class="mundo">
         <div id="c-piso" class="piso" data-y="700" data-rx="90"></div>
-        <div id="c-puntos" class="puntos" data-z="-1500"></div>
-        <h2 id="c-cta" class="titular" data-y="-120">
+        <h2 id="c-cta" class="titular" data-y="-150">
           <span class="w">Dale</span> <span class="w acc">like</span><br />
           <span class="w">Seguime</span> <span class="w">para</span><br />
           <span class="w">aprender</span> <span class="w">más</span><br />
           <span class="w">de</span> <span class="w acc">redes</span>
         </h2>
-        <div id="c-firma" class="firma" data-y="330">@ayrtonnacer</div>
+        <div id="c-firma" class="firma" data-y="240">@ayrtonnacer</div>
       </div></div>
     </div>
     <div class="vineta" data-layout-ignore></div>
@@ -32,7 +31,7 @@
 
     // Llega inclinada desde atrás y aterriza de frente sobre el CTA; después, quieta (el CTA se lee).
     cam.poner({ y: -120, z: -700, rx: 14 });
-    cam.ir(0, { y: -40, z: 0, rx: 5 }, 1.1, 'expo.out');
+    cam.ir(0, { y: 30, z: 0, rx: 5 }, 1.1, 'expo.out');
 
     tl.fromTo('#c-cta .w', { opacity: 0, filter: 'blur(10px)' },
       { opacity: 1, filter: 'blur(0px)', duration: 0.18, ease: 'power4.out', stagger: 0.06 }, 0.1);

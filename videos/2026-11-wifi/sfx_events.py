@@ -5,7 +5,8 @@ from sfxlib import *
 def build(T, S, lib=None):
     T.ambient(0, lvl=0.05)
     # gancho: golpe de apertura; zoom through (cam 2,6→3,2 s, pico al final)
-    T.put(0.0, boom(), 0.8); T.put(0.05, pop(1100), 0.35)
+    bm = propio('boom-cinematico')   # sonido grave de Ayrton (al inicio y al final); si falta, el sintético
+    T.put(0.0, bm * 0.9 if bm is not None else boom(), 0.6); T.put(0.05, pop(1100), 0.3)
     T.put(S['envia'] - 0.3, whoosh(0.45), 0.6)
     # envía: aparece el notebook, se tipean los bits, antena, la onda se dibuja, salen las ondas
     t = S['envia']
@@ -31,5 +32,5 @@ def build(T, S, lib=None):
     t = S['payoff']
     T.put(t + 0.6, whoosh(0.5), 0.5); T.put(t + 1.55, ding(1568, 0.4), 0.3); T.put(t + 2.15, ding(2093, 0.5), 0.3)
     # cierre: succión → golpe → CTA; chinn de Ayrton cuando aterriza el CTA
-    t = S['cierre']; T.put(t - 0.9, reverse(riser(0.8)), 0.35); T.put(t, impact(), 0.5)
+    t = S['cierre']; T.put(t - 0.9, reverse(riser(0.8)), 0.35); T.put(t - 0.05, bm if bm is not None else impact(), 0.55)
     ch = propio('chinn'); T.put(t + 0.55, ch if ch is not None else sparkle(9), 0.5)

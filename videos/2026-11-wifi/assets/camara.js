@@ -18,15 +18,18 @@
    rx inclina (mirar desde arriba/abajo), ry gira (órbita alrededor del plano z = 0), rz rola. */
 (function () {
   function n(v, d) { return v === undefined || v === '' ? d : +v; }
+  // DY: todo el set sube DY px para dejar libre la franja de subtítulos (y 1120–1320). Se ajusta con Camara(root, tl, { dy }).
+  var DY = 170;
   function pose(p) {
     p = p || {};
     return {
       cam: { z: n(p.z, 0), rotationX: n(p.rx, 0), rotationY: n(p.ry, 0), rotationZ: n(p.rz, 0) },
-      mundo: { x: -n(p.x, 0), y: -n(p.y, 0) },
+      mundo: { x: -n(p.x, 0), y: -n(p.y, 0) - DY },
     };
   }
   window.Camara = function (root, tl, opts) {
     opts = opts || {};
+    DY = opts.dy === undefined ? 170 : opts.dy;
     var vista = root.querySelector('.vista'), cam = root.querySelector('.cam'), mundo = root.querySelector('.mundo');
     gsap.set(vista, { perspective: opts.perspectiva || 1600 });
     gsap.set(cam, { transformOrigin: '50% 50% 0', transformPerspective: 0 });

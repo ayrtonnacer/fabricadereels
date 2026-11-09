@@ -2,13 +2,14 @@
 
 Comandos desde la raíz del repo, salvo donde dice "en la carpeta del video".
 
+0. **Guardar el material**: todo lo que Ayrton pase (PDF, imágenes, sonidos, texto) se copia al repo (`docs/material/`, `assets/sfx/propios/`, `videos/X/fuentes/`) y sus indicaciones se anotan en `docs/BITACORA.md`.
 1. **Fuente**: leer el link/tema completo (WebFetch/WebSearch). Extraer objetivo, ideas clave, comandos o fórmulas, advertencias. Verificar contra la fuente oficial.
 2. **Guion** (`docs/GUION.md`, plantilla `videos/_plantilla/guion.md`): una idea, Hook → Payoff → CTA/bucle, ≤ duración × 2,3 palabras. Por escena: voz y texto en pantalla (la cámara va en el script técnico, paso 3b).
 3. **✋ Checkpoint**: mostrar el guion (texto de voz + una línea por escena) y esperar OK.
 3b. **Script técnico** (`script-tecnico.md` del video): planos, set y profundidades, movimiento de cámara con ease y duración, entradas, SFX y transiciones (`docs/CAMARA.md`, `docs/referencias/`). Se lo muestro a Ayrton junto con los primeros cuadros.
 4. **Crear el video**: `bash engine/nuevo.sh AAAA-MM-tema` (copia la plantilla). Completar `video.json`: escenas (`id` = nombre de la composición, `d` = segundos) y `voz.lineas`.
-5. **Voz primero**: `python engine/audio/voz.py videos/X`. Ajustar texto y tiempos hasta que no haya avisos; las escenas duran lo que pide la voz (voz ≤ fin de escena − 0,1 s; ≥ 0,15 s entre líneas). Luego `python engine/tiempos.py videos/X` copia las duraciones a `index.html`.
-6. **Visual**: una composición por escena en `compositions/` (copiar las de la plantilla). Cada parte aparece cuando la voz la nombra (tiempos locales de la escena = tiempo de la línea − inicio de la escena).
+5. **Voz primero**: `python engine/audio/voz.py videos/X`. Ajustar texto y tiempos hasta que no haya avisos; las escenas duran lo que pide la voz (voz ≤ fin de escena − 0,1 s; ≥ 0,15 s entre líneas). Luego `python engine/tiempos.py videos/X` copia las duraciones a `index.html` y `python engine/subtitulos.py videos/X` arma los subtítulos con los tiempos exactos por palabra (`docs/SUBTITULOS.md`).
+6. **Visual**: la imagen no pasa de y ≈ 1100 (subtítulos en 1120–1320). una composición por escena en `compositions/` (copiar las de la plantilla). Cada parte aparece cuando la voz la nombra (tiempos locales de la escena = tiempo de la línea − inicio de la escena).
 7. **Revisar** (en la carpeta del video): `npx hyperframes check` (sin errores) y `npx hyperframes snapshot --at 0,1.5,…` → **mirar las imágenes** antes de renderizar. Ojo con: cuadro 0 (es la miniatura), textos chicos, cortes entre escenas.
 8. **Efectos**: `sfx_events.py` con los significados fijos (`docs/AUDIO.md`); whoosh en el pico de cada movimiento de cámara. `python engine/audio/sfx.py videos/X`.
 9. **Render** (en la carpeta del video): `npx hyperframes render --workers 4 -o out/mudo.mp4` (~2,5 s por segundo de video en CPU).

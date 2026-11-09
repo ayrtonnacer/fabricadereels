@@ -40,11 +40,10 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--
   background-image: linear-gradient(var(--grilla) 3px, transparent 3px), linear-gradient(90deg, var(--grilla) 3px, transparent 3px);
   background-size: 160px 160px;
   -webkit-mask-image: radial-gradient(closest-side, #000 35%, transparent 100%); mask-image: radial-gradient(closest-side, #000 35%, transparent 100%); }
-.puntos { width: 2200px; height: 3000px; background-image: radial-gradient(rgba(159, 239, 0, .22) 3px, transparent 3.6px); background-size: 90px 90px;
-  -webkit-mask-image: radial-gradient(closest-side, #000 30%, transparent 100%); mask-image: radial-gradient(closest-side, #000 30%, transparent 100%); }
 .vineta { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 45%, transparent 52%, rgba(0, 0, 0, .65) 100%); }
 
 /* Tipografía: espaciado normal o apretado, nunca abierto */
+.titular, .bajada, .tarjeta p { text-wrap: balance; }   /* sin palabras sueltas en la última línea (docs/TIPOGRAFIA.md) */
 .titular { font-weight: 700; font-size: 124px; line-height: .98; letter-spacing: -.03em; text-align: center; }
 .titular.chico { font-size: 92px; }
 .bajada { font-weight: 500; font-size: 50px; line-height: 1.25; color: var(--muted); text-align: center; }
@@ -86,3 +85,6 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--
 .anillo { overflow: visible; }   /* svg de 2x2 px: el círculo interno crece con attr r y el trazo queda fijo */
 .paquete { width: 30px; height: 30px; border-radius: 7px; background: var(--acc); box-shadow: 0 0 22px var(--acc-glow); }
 .pared { width: 54px; border-radius: 8px; background: repeating-linear-gradient(0deg, #2A3A52 0 46px, #1B2840 46px 50px); border: 2px solid var(--line); }
+
+/* Bits en primer plano (data-z 450–700): dan profundidad por paralaje y desenfoque; siempre en los bordes, nunca sobre lo que se lee. */
+.bit { font: 700 140px var(--mono); color: var(--acc); opacity: .2; filter: blur(5px); }
