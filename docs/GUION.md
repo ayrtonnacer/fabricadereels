@@ -2,7 +2,10 @@
 Base: `docs/INVESTIGACION-GUIONES.md` (investigación completa, con fuentes y plantillas por tipo de reel). Acá va lo que se aplica siempre. Donde la investigación choca con una decisión de Ayrton, gana Ayrton (ver "Conflictos").
 
 ## Público
-**Técnico** (Ayrton, 2026-11-09): gente que programa, estudia sistemas o hace ciberseguridad. Se puede usar el vocabulario del área (hash, proceso, puerto, kernel, función) sin explicarlo como a un principiante; el valor está en el porqué, el detalle que no es obvio y el error real, no en definiciones básicas. Nada de simplificaciones que un técnico note como incorrectas.
+**Mixto** (Ayrton, 2026-11-09): gente técnica, **principiantes que están aprendiendo** y **reclutadores** que buscan perfiles técnicos. Los reels son también el portfolio de Ayrton: tienen que **demostrar que sabe**. Entonces:
+- Explicar bien y con precisión, sin tratar a nadie de tonto ni simplificar de más (un técnico nota lo incorrecto). Vocabulario del área sí, pero cada término nuevo se ancla con una imagen o una frase corta para que el principiante no se pierda.
+- Cada reel lleva **un detalle de profesional**: algo preciso que no está en la explicación típica (por ejemplo, que en 2,4 GHz solo los canales 1, 6 y 11 no se pisan). Es lo que diferencia "lo copié" de "lo entiendo". Si no sale de la fuente, se marca como tal en el checkpoint y se verifica.
+- Mostrar el mecanismo (el porqué), no solo el nombre de las cosas.
 
 ## Reglas de siempre
 - Voz en español rioplatense (voseo): "Necesitás", "elegí", "seguime". Escribir como se habla ("ojo", "pensalo así", "posta").
