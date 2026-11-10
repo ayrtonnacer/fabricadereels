@@ -34,3 +34,7 @@ Link + indicaciones → guion (público: técnicos, principiantes, reclutadores)
 ## Agregado 2026-11-10
 - **Medir en vez de opinar**: prefiere parámetros técnicos replicables a percepciones subjetivas; quiere analizar videos de referencia (transiciones, cámara, planos, sonido) para tener parámetros de inspiración. Se le pasa el .mp4 a Claude y se mide (`docs/MEDICION.md`).
 - Renderizamos a **30 fps** (estándar; alcanza para nuestro movimiento).
+
+## Agregado 2026-11-10 (2)
+- **Una sola rama (`main`)**: no quiere ramas ni PR; todo directo a `main`. Explicarle GitHub en simple y evitar jerga.
+- Referencias suyas que le gustan (10 videos en `assets/referencias/`): las **contemplativas/oscuras** con cámara que mueve–retiene–mueve y planos continuos; patrón favorito para reels técnicos: **vista explosionada 3D con etiquetas y tooltip** (`referencias/SINTESIS.md`).

@@ -1,0 +1,191 @@
+{
+ "archivo": "motion-ref-1.mp4",
+ "fps": 30.0,
+ "segundos": 9.33,
+ "cuadros": 280,
+ "resolucion": "720×1278",
+ "imagen": {
+  "brillo_medio": 0.247,
+  "contraste_medio": 0.202,
+  "saturacion_media": 0.577,
+  "colores_dominantes": [
+   {
+    "hex": "#0A0000",
+    "pct": 9.6
+   },
+   {
+    "hex": "#2A2B22",
+    "pct": 4.6
+   },
+   {
+    "hex": "#1A2118",
+    "pct": 4.5
+   }
+  ]
+ },
+ "cortes": {
+  "n": 6,
+  "por_minuto": 38.6,
+  "plano_medio_s": 1.33,
+  "plano_mediano_s": 1.47,
+  "plano_max_s": 2.33,
+  "tipos": {
+   "corte seco": 3,
+   "transición + corte (movimiento fuerte antes)": 3
+  }
+ },
+ "camara": {
+  "pct_cuadros_en_movimiento": 85.4,
+  "pct_cuadros_con_zoom": 82.9,
+  "zoom_neto_pct_por_s": -13.03,
+  "velocidad_media_px_s": 699,
+  "velocidad_mediana_px_s": 305,
+  "pct_movimiento_lento": 19.2,
+  "velocidad_p95_px_s": 2660,
+  "n_movimientos": 7,
+  "duracion_mediana_movimiento_s": 1.4,
+  "jerk_mediano_px_s3": 10396,
+  "jerk_p95_px_s3": 228295
+ },
+ "audio": {
+  "lufs_integrado": -14.3,
+  "rango_dinamico_lu": 1.2,
+  "pico_real_dbtp": -1.2,
+  "silencio_pct": 1.6,
+  "silencios_largos": 0,
+  "onsets_por_s": 2.33,
+  "golpes_graves": 3,
+  "voz_activa_pct": 98.1
+ },
+ "cortes_detalle": [
+  {
+   "cuadro": 44,
+   "seg": 1.47,
+   "tipo": "corte seco",
+   "dif": 154.11
+  },
+  {
+   "cuadro": 59,
+   "seg": 1.97,
+   "tipo": "corte seco",
+   "dif": 60.01
+  },
+  {
+   "cuadro": 72,
+   "seg": 2.4,
+   "tipo": "transición + corte (movimiento fuerte antes)",
+   "dif": 70.44
+  },
+  {
+   "cuadro": 140,
+   "seg": 4.67,
+   "tipo": "transición + corte (movimiento fuerte antes)",
+   "dif": 34.96
+  },
+  {
+   "cuadro": 208,
+   "seg": 6.93,
+   "tipo": "corte seco",
+   "dif": 31.03
+  },
+  {
+   "cuadro": 278,
+   "seg": 9.27,
+   "tipo": "transición + corte (movimiento fuerte antes)",
+   "dif": 49.31
+  }
+ ],
+ "movimientos": [
+  {
+   "desde_s": 0.03,
+   "hasta_s": 1.4,
+   "seg": 1.4,
+   "tipo": "acercamiento",
+   "desplazamiento_px": [
+    67,
+    -504
+   ],
+   "zoom_total_pct": 17.8,
+   "vel_max_px_s": 3489,
+   "pico_en_pct_del_tramo": 0
+  },
+  {
+   "desde_s": 1.53,
+   "hasta_s": 1.9,
+   "seg": 0.4,
+   "tipo": "alejamiento",
+   "desplazamiento_px": [
+    -5,
+    22
+   ],
+   "zoom_total_pct": -15.8,
+   "vel_max_px_s": 622,
+   "pico_en_pct_del_tramo": 0
+  },
+  {
+   "desde_s": 2.03,
+   "hasta_s": 2.3,
+   "seg": 0.3,
+   "tipo": "alejamiento",
+   "desplazamiento_px": [
+    -2,
+    22
+   ],
+   "zoom_total_pct": -26.2,
+   "vel_max_px_s": 236,
+   "pico_en_pct_del_tramo": 100
+  },
+  {
+   "desde_s": 2.47,
+   "hasta_s": 4.6,
+   "seg": 2.17,
+   "tipo": "alejamiento",
+   "desplazamiento_px": [
+    -164,
+    373
+   ],
+   "zoom_total_pct": -119.0,
+   "vel_max_px_s": 5753,
+   "pico_en_pct_del_tramo": 78
+  },
+  {
+   "desde_s": 4.77,
+   "hasta_s": 6.87,
+   "seg": 2.13,
+   "tipo": "paneo/deriva",
+   "desplazamiento_px": [
+    -53,
+    826
+   ],
+   "zoom_total_pct": 1.4,
+   "vel_max_px_s": 2900,
+   "pico_en_pct_del_tramo": 79
+  },
+  {
+   "desde_s": 7.07,
+   "hasta_s": 7.43,
+   "seg": 0.4,
+   "tipo": "alejamiento",
+   "desplazamiento_px": [
+    -192,
+    109
+   ],
+   "zoom_total_pct": -9.5,
+   "vel_max_px_s": 2613,
+   "pico_en_pct_del_tramo": 18
+  },
+  {
+   "desde_s": 7.7,
+   "hasta_s": 9.07,
+   "seg": 1.4,
+   "tipo": "acercamiento",
+   "desplazamiento_px": [
+    44,
+    4
+   ],
+   "zoom_total_pct": 47.5,
+   "vel_max_px_s": 794,
+   "pico_en_pct_del_tramo": 0
+  }
+ ]
+}

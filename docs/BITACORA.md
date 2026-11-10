@@ -43,3 +43,7 @@ Todo lo que Ayrton dice y pasa se guarda acá (y el material en `docs/material/`
 - Lo que él quería desde el principio: **analizar videos de referencia de motion graphics** (transiciones, movimientos de cámara, planos, sonido) para usarlos de inspiración con parámetros; no sabía cómo pasarlos: por eso había pensado en el shooting script. → `docs/MEDICION.md`: se adjunta el .mp4 y se mide; sale un script técnico medido.
 - Duda: "¿grabamos a 30 FPS?": sí, es el estándar; medido que alcanza para nuestro movimiento (p95 ≈ 4,7 px/cuadro). → `docs/MEDICION.md`.
 - Hecho: `engine/analisis/medir.py` (propio, calibrado con autotest) y `comparar.py`; primer análisis del reel de WiFi y del ejemplo del repo en `docs/referencias/medidas/`; `docs/referencias/PARAMETROS.md`.
+
+## 2026-11-10 (2) — una sola rama
+- Ayrton: **quiere trabajar con una sola rama** (`main`); no conoce bien GitHub y se le mezclan las ramas. → todo se commitea y sube **directo a `main`**; no se crean ramas ni pull requests salvo que él lo pida (regla 13 de `CLAUDE.md`).
+- Al revisar el repo apareció una rama de otra sesión (`claude/3d-camera-video-effects-9j1wwx`, 14 commits del 9/11 sobre el motor viejo) con **10 referencias de motion graphics que él había pasado** + análisis + un guion de "redes". Una unión directa daba 16 conflictos; se **rescató a `main`** el contenido útil (`referencias/`, `assets/referencias/`, 4 docs, el guion) y se midieron las 10 referencias con `medir.py` → `docs/referencias/PARAMETROS.md`.

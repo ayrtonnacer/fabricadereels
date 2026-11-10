@@ -16,7 +16,7 @@ Para todo lo de HyperFrames (contrato de las composiciones, CLI, bloques del reg
 - `videos/_plantilla/` — punto de partida (3 escenas de ejemplo: gancho, explica, cierre). Se copia con `engine/nuevo.sh`.
 - `engine/` — lo nuestro alrededor de HyperFrames: `nuevo.sh`, `tiempos.py` y `audio/` (`voz.py`, `sfx.py`, `sfxlib.py`, `mezcla.py`, `radio.py`, `cortar_teclas.py`, `pronunciacion.json`).
 - `docs/material/` — archivos que pasa Ayrton (artículos, capturas con correcciones, referencias); `docs/BITACORA.md` — registro de sus indicaciones.
-- `docs/referencias/` — scripts técnicos de reels de referencia (movimientos de cámara); Ayrton los va pasando.
+- `docs/referencias/` — referencias medidas (`medidas/`) y tabla de parámetros (`PARAMETROS.md`); `referencias/` + `assets/referencias/` — los 10 videos de referencia que ya pasó Ayrton, con su análisis y `SINTESIS.md` (leer antes de armar el script técnico).
 - `assets/voces/` (modelo Piper partido en 3), `assets/musica/`, `assets/sfx/propios/` (tipeo real, chinn, clicks).
 - El motor anterior (three.js propio) y los videos de Parrot quedaron en el historial de git: commit `ae9a888`.
 
@@ -49,4 +49,5 @@ Instalación: `npm install` (HyperFrames fijado en 0.9.26) y `pip install -r req
 9. Contrato HyperFrames (`/hyperframes`): timeline pausado registrado en `window.__timelines`, nada de `Date.now()`/`Math.random()`/red, `fromTo` en escenas, ids únicos con prefijo por escena, posiciones de cámara por `data-x/y/z` (nunca `transform` en CSS).
 10. **Guardar todo en el repo, siempre y sin que Ayrton lo pida**: cada indicación va a `docs/BITACORA.md` (detalle) y se destila en `docs/PREFERENCIAS.md` (gustos y errores); cada archivo que pase va a `docs/material/` (o `assets/`, `videos/X/fuentes/`). **Repasar `docs/PREFERENCIAS.md` al empezar y antes de entregar cada video.**
 11. **Medir en vez de opinar** (`docs/MEDICION.md`): ante un video de referencia que pase Ayrton, primero `medir.py` y recién después proponer; antes de entregar un reel, medirlo y contrastarlo con `docs/referencias/PARAMETROS.md`. Render a **30 fps**.
-12. Terminar cada video agregando a `docs/DECISIONES.md` lo que el usuario corrigió y a `pronunciacion.json` cada palabra nueva.
+12. **Una sola rama: `main`.** Ayrton no usa ramas ni pull requests: commitear y subir **directo a `main`** (`git push origin main`); no crear ramas ni PR salvo que él lo pida. Hablarle de GitHub en palabras simples.
+13. Terminar cada video agregando a `docs/DECISIONES.md` lo que el usuario corrigió y a `pronunciacion.json` cada palabra nueva.

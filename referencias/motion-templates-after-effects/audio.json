@@ -1,0 +1,164 @@
+{
+ "LUFS": -13.4,
+ "LRA": 10.9,
+ "pico_dBFS": 2.7,
+ "rango_dB": 81.4,
+ "golpes": [
+  {
+   "t": 0.37,
+   "tipo": "brillante (whoosh / chasquido)",
+   "nivel_dB": -13.7,
+   "centroide_Hz": 2842
+  },
+  {
+   "t": 0.66,
+   "tipo": "brillante (whoosh / chasquido)",
+   "nivel_dB": -12.8,
+   "centroide_Hz": 2798
+  },
+  {
+   "t": 1.02,
+   "tipo": "brillante (whoosh / chasquido)",
+   "nivel_dB": -13.6,
+   "centroide_Hz": 2832
+  },
+  {
+   "t": 1.33,
+   "tipo": "brillante (whoosh / chasquido)",
+   "nivel_dB": -11.3,
+   "centroide_Hz": 2796
+  },
+  {
+   "t": 2.16,
+   "tipo": "brillante (whoosh / chasquido)",
+   "nivel_dB": -26.8,
+   "centroide_Hz": 4196
+  },
+  {
+   "t": 3.11,
+   "tipo": "medio (impacto / pop)",
+   "nivel_dB": -40.0,
+   "centroide_Hz": 2138
+  },
+  {
+   "t": 3.65,
+   "tipo": "medio (impacto / pop)",
+   "nivel_dB": -1.4,
+   "centroide_Hz": 1452
+  },
+  {
+   "t": 4.0,
+   "tipo": "medio (impacto / pop)",
+   "nivel_dB": -12.5,
+   "centroide_Hz": 2445
+  },
+  {
+   "t": 4.41,
+   "tipo": "brillante (whoosh / chasquido)",
+   "nivel_dB": -12.7,
+   "centroide_Hz": 2711
+  },
+  {
+   "t": 4.95,
+   "tipo": "brillante (whoosh / chasquido)",
+   "nivel_dB": -13.1,
+   "centroide_Hz": 2646
+  },
+  {
+   "t": 5.26,
+   "tipo": "medio (impacto / pop)",
+   "nivel_dB": -1.3,
+   "centroide_Hz": 1652
+  },
+  {
+   "t": 5.69,
+   "tipo": "medio (impacto / pop)",
+   "nivel_dB": -13.8,
+   "centroide_Hz": 2348
+  },
+  {
+   "t": 6.02,
+   "tipo": "brillante (whoosh / chasquido)",
+   "nivel_dB": -16.7,
+   "centroide_Hz": 2766
+  },
+  {
+   "t": 6.66,
+   "tipo": "medio (impacto / pop)",
+   "nivel_dB": -1.4,
+   "centroide_Hz": 1686
+  },
+  {
+   "t": 6.98,
+   "tipo": "medio (impacto / pop)",
+   "nivel_dB": -12.9,
+   "centroide_Hz": 2424
+  },
+  {
+   "t": 7.41,
+   "tipo": "brillante (whoosh / chasquido)",
+   "nivel_dB": -12.3,
+   "centroide_Hz": 3351
+  },
+  {
+   "t": 7.73,
+   "tipo": "brillante (whoosh / chasquido)",
+   "nivel_dB": -15.9,
+   "centroide_Hz": 2799
+  },
+  {
+   "t": 8.16,
+   "tipo": "medio (impacto / pop)",
+   "nivel_dB": -17.3,
+   "centroide_Hz": 2114
+  },
+  {
+   "t": 8.48,
+   "tipo": "brillante (whoosh / chasquido)",
+   "nivel_dB": -11.3,
+   "centroide_Hz": 2815
+  },
+  {
+   "t": 9.12,
+   "tipo": "medio (impacto / pop)",
+   "nivel_dB": -3.4,
+   "centroide_Hz": 1746
+  },
+  {
+   "t": 9.44,
+   "tipo": "medio (impacto / pop)",
+   "nivel_dB": -2.5,
+   "centroide_Hz": 1821
+  },
+  {
+   "t": 9.87,
+   "tipo": "brillante (whoosh / chasquido)",
+   "nivel_dB": -12.4,
+   "centroide_Hz": 2529
+  },
+  {
+   "t": 12.09,
+   "tipo": "medio (impacto / pop)",
+   "nivel_dB": -37.2,
+   "centroide_Hz": 2307
+  },
+  {
+   "t": 12.58,
+   "tipo": "brillante (whoosh / chasquido)",
+   "nivel_dB": -30.9,
+   "centroide_Hz": 3398
+  },
+  {
+   "t": 13.17,
+   "tipo": "brillante (whoosh / chasquido)",
+   "nivel_dB": -34.4,
+   "centroide_Hz": 4855
+  }
+ ],
+ "silencios": [
+  [
+   1.71,
+   2.16
+  ]
+ ]
+}

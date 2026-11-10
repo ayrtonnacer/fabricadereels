@@ -12,3 +12,6 @@ Ahora no hace falta describir los planos a mano: Ayrton adjunta el **.mp4** y se
 ## Índice
 - `medidas/` — informes medidos (`propios/` y `externos/`); `PARAMETROS.md` — tabla viva de parámetros.
 - `2026-11-code-reel-studio.md` — recorrido de código (repo propio de Ayrton).
+
+## Referencias que ya pasó Ayrton (10 videos)
+Análisis cualitativo y síntesis: `referencias/` (raíz del repo; ver `referencias/LEEME-MIGRACION.md`). Números medidos: `medidas/externos/` y `PARAMETROS.md`. Videos originales: `assets/referencias/`.
