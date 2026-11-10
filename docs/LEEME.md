@@ -8,8 +8,8 @@
 | Guion | `GUION.md`, `INVESTIGACION-GUIONES.md` |
 | Subtítulos y texto | `SUBTITULOS.md`, `TIPOGRAFIA.md` |
 | Audio y voz | `AUDIO.md` (+ `../engine/audio/pronunciacion.json`) |
-| Medir videos | `MEDICION.md`, `referencias/PARAMETROS.md` |
-| Referencias (10 videos de Ayrton) | `referencias/` (carpeta única: `SINTESIS.md`, `externos/`, `propios/`), `ANALISIS-REFERENCIAS.md` |
+| Medir videos y qué números buscar | `MEDICION.md`, `referencias/BIBLIA-DE-ESTILO.md`, `referencias/metas.json` |
+| Referencias (10 videos de Ayrton + 1) y nuestros reels, medidos | `referencias/` (carpeta única: `externos/`, `propios/`) |
 | Registro de lo que dijo Ayrton | `BITACORA.md`; archivos que pasó: `material/` |
 | Vocabulario de edición | `GLOSARIO-EDICION.md` |
 | Archivo histórico (motor anterior, no usar) | `historial/` |

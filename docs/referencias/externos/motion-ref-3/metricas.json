@@ -31,7 +31,9 @@
   "plano_max_s": 14.54,
   "tipos": {
    "corte seco": 2
-  }
+  },
+  "pct_sobre_golpe_100ms": 50.0,
+  "pct_con_movimiento_previo": 0.0
  },
  "camara": {
   "pct_cuadros_en_movimiento": 86.4,
@@ -44,7 +46,15 @@
   "n_movimientos": 5,
   "duracion_mediana_movimiento_s": 1.71,
   "jerk_mediano_px_s3": 605,
-  "jerk_p95_px_s3": 36770
+  "jerk_p95_px_s3": 36770,
+  "movimientos_notorios": 4,
+  "movimientos_notorios_por_10s": 1.6,
+  "pico_notorio_mediano_px_s": 2995,
+  "duracion_notorio_mediana_s": 4.0,
+  "retenciones": 1,
+  "retencion_mediana_s": 0.63,
+  "ataque_mediano_s": 0.29,
+  "liberacion_mediana_s": 0.44
  },
  "audio": {
   "lufs_integrado": -14.2,
@@ -61,13 +71,19 @@
    "cuadro": 349,
    "seg": 14.54,
    "tipo": "corte seco",
-   "dif": 12.68
+   "dif": 12.68,
+   "vel_previa_px_s": 179,
+   "plano_siguiente_s": 6.42,
+   "golpe_cercano_s": 0.0
   },
   {
    "cuadro": 503,
    "seg": 20.96,
    "tipo": "corte seco",
-   "dif": 12.91
+   "dif": 12.91,
+   "vel_previa_px_s": 238,
+   "plano_siguiente_s": 3.79,
+   "golpe_cercano_s": 0.15
   }
  ],
  "movimientos": [
@@ -82,7 +98,9 @@
    ],
    "zoom_total_pct": 28.2,
    "vel_max_px_s": 1918,
-   "pico_en_pct_del_tramo": 38
+   "pico_en_pct_del_tramo": 38,
+   "ataque_s": 0.42,
+   "liberacion_s": 0.21
   },
   {
    "desde_s": 2.46,
@@ -95,7 +113,9 @@
    ],
    "zoom_total_pct": -122.4,
    "vel_max_px_s": 4833,
-   "pico_en_pct_del_tramo": 73
+   "pico_en_pct_del_tramo": 73,
+   "ataque_s": 0.29,
+   "liberacion_s": 0.46
   },
   {
    "desde_s": 14.62,
@@ -108,7 +128,9 @@
    ],
    "zoom_total_pct": -51.0,
    "vel_max_px_s": 4072,
-   "pico_en_pct_del_tramo": 63
+   "pico_en_pct_del_tramo": 63,
+   "ataque_s": 0.29,
+   "liberacion_s": 0.42
   },
   {
    "desde_s": 21.04,
@@ -121,7 +143,9 @@
    ],
    "zoom_total_pct": 5.8,
    "vel_max_px_s": 1148,
-   "pico_en_pct_del_tramo": 0
+   "pico_en_pct_del_tramo": 0,
+   "ataque_s": 0.04,
+   "liberacion_s": 0.67
   },
   {
    "desde_s": 22.38,
@@ -134,7 +158,9 @@
    ],
    "zoom_total_pct": 2.0,
    "vel_max_px_s": 84,
-   "pico_en_pct_del_tramo": 67
+   "pico_en_pct_del_tramo": 67,
+   "ataque_s": 0.21,
+   "liberacion_s": 0.17
   }
  ]
 }

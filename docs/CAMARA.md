@@ -37,7 +37,7 @@ Pose: `x`, `y` (px del mundo; 0,0 = centro), `z` (+ acerca / − aleja), `rx` (i
 | **Inclinar (tilt)** | `rx` 6–20 | mostrar el piso, sensación de "mirar desde arriba" |
 | **Zoom through** | `z` hasta +1500 en 0,6 s, `power3.in` | transición: atravesar un objeto; la escena siguiente arranca en `z:900` y se asienta |
 | **Pull-back (revelar)** | de `z:+700` pegado a un detalle a `z:0` | revelar el contexto de un dato (no en el cierre: ahí el foco es el CTA) |
-| **Recorrido de código** | estación = bloque de código; zoom `z:+400…600`, después `y` = alto de línea × n.º de línea, pausa de lectura por línea, y vuelta a `z:0` | explicar un fragmento línea por línea (de code-reel-studio, `docs/referencias/`) con `zoom-click` en el zoom in/out |
+| **Recorrido de código** | estación = bloque de código; zoom `z:+400…600`, después `y` = alto de línea × n.º de línea, pausa de lectura por línea, y vuelta a `z:0` | explicar un fragmento línea por línea (de code-reel-studio, `docs/material/2026-11-code-reel-studio.md`) con `zoom-click` en el zoom in/out |
 | **Aterrizaje en el CTA** | desde `z:-700, rx:14` a `z:0, rx:5`, expo.out 1,1 s, y queda quieta | cierre: el foco es el llamado; la firma aparece después, chica, sin zoom |
 
 Reglas: un movimiento = una intención. Llegadas lentas con cola larga (`expo.out`), viajes `power2/3.inOut`, salidas que aceleran (`power3.in`). En el corte entre escenas, misma dirección y velocidad a ambos lados. **El whoosh va en el pico de velocidad** (la mitad de un `inOut`, el final de un `in`). Nada de "flotar/respirar" en loop ni temblores sin motivo.

@@ -9,12 +9,46 @@
 ## Cortes y planos
 - 28 cortes (33.6 por minuto); plano medio 1.72 s, mediano 1.3 s, más largo 5.54 s.
 - Tipos: corte seco: 22, transición + corte (movimiento fuerte antes): 6
-- En segundos: 1.07, 1.67, 2.1, 3.1, 3.6, 7.97, 9.78, 10.28, 15.82, 16.65, 19.02, 20.32, 22.39, 23.46, 24.99, 25.63, 28.53, 30.2, 34.3, 35.27, 35.7, 37.24, 37.67, 38.14, 39.17, 41.54, 42.84, 46.01
+
+- 21.4 % de los cortes llegan después de un movimiento fuerte de cámara (transición); el resto son cortes secos.
+- 78.6 % de los cortes caen a ±0,1 s de un golpe de sonido.
+
+| # | seg | tipo | vel. cámara antes | plano que sigue | golpe más cercano |
+|---|---|---|---|---|---|
+| 1 | 1.07 | corte seco | 28 px/s | 0.6 s | 0.07 s |
+| 2 | 1.67 | corte seco | 2 px/s | 0.43 s | 0.09 s |
+| 3 | 2.1 | corte seco | 3 px/s | 1.0 s | 0.07 s |
+| 4 | 3.1 | corte seco | 2 px/s | 0.5 s | 0.05 s |
+| 5 | 3.6 | transición + corte (movimiento fuerte antes) | 471 px/s | 4.37 s | 0.06 s |
+| 6 | 7.97 | corte seco | 2 px/s | 1.8 s | 0.05 s |
+| 7 | 9.78 | corte seco | 5 px/s | 0.5 s | 0.01 s |
+| 8 | 10.28 | corte seco | 6 px/s | 5.54 s | 0.01 s |
+| 9 | 15.82 | corte seco | 879 px/s | 0.83 s | 0.05 s |
+| 10 | 16.65 | corte seco | 11 px/s | 2.37 s | 0.12 s |
+| 11 | 19.02 | corte seco | 26 px/s | 1.3 s | 0.01 s |
+| 12 | 20.32 | corte seco | 1 px/s | 2.07 s | 0.18 s |
+| 13 | 22.39 | corte seco | 11 px/s | 1.07 s | 0.12 s |
+| 14 | 23.46 | corte seco | 11 px/s | 1.53 s | 0.05 s |
+| 15 | 24.99 | corte seco | 291 px/s | 0.63 s | 0.02 s |
+| 16 | 25.63 | transición + corte (movimiento fuerte antes) | 37 px/s | 2.9 s | 0.12 s |
+| 17 | 28.53 | transición + corte (movimiento fuerte antes) | 384 px/s | 1.67 s | 0.02 s |
+| 18 | 30.2 | corte seco | 243 px/s | 4.1 s | 0.06 s |
+| 19 | 34.3 | corte seco | 2 px/s | 0.97 s | 0.09 s |
+| 20 | 35.27 | corte seco | 2 px/s | 0.43 s | 0.19 s |
+| 21 | 35.7 | transición + corte (movimiento fuerte antes) | 0 px/s | 1.53 s | 0.03 s |
+| 22 | 37.24 | transición + corte (movimiento fuerte antes) | 36 px/s | 0.43 s | 0.02 s |
+| 23 | 37.67 | corte seco | 21 px/s | 0.47 s | 0.09 s |
+| 24 | 38.14 | corte seco | 255 px/s | 1.03 s | 0.07 s |
+| 25 | 39.17 | corte seco | 4 px/s | 2.37 s | 0.04 s |
+| 26 | 41.54 | corte seco | 667 px/s | 1.3 s | 0.03 s |
+| 27 | 42.84 | corte seco | 2 px/s | 3.17 s | 0.33 s |
+| 28 | 46.01 | transición + corte (movimiento fuerte antes) | 15 px/s | 4.0 s | 0.03 s |
 
 ## Cámara
 - Se mueve en el **59.5 %** de los cuadros (49.1 % con zoom); zoom neto -4.63 % por segundo (+ acerca).
 - Velocidad mediana 64 px/s (media 663, p95 2116); 56.5 % del movimiento es lento (< 100 px/s: deriva casi imperceptible). A 1080 de ancho. 44 movimientos, mediana 0.58 s.
 - **Tirón (jerk)**: mediano 1661 px/s³, p95 170108 px/s³ (menos = más suave).
+- **Mover–retener–mover**: 36 movimientos notorios (pico ≥ 100 px/s; 7.2 cada 10 s), pico mediano 1492 px/s, duran 0.75 s; 11 retenciones ≥ 0,5 s (mediana 0.87 s); el pico cae a mitad del movimiento (ease simétrico) en 23.8 % de los movimientos.
 
 | desde | hasta | seg | tipo | desplaz. px | zoom % | vel. máx px/s | pico en |
 |---|---|---|---|---|---|---|---|

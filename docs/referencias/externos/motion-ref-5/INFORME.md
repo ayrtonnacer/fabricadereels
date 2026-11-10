@@ -9,12 +9,41 @@
 ## Cortes y planos
 - 23 cortes (13.2 por minuto); plano medio 4.35 s, mediano 4.22 s, más largo 7.97 s.
 - Tipos: corte seco: 23
-- En segundos: 5.37, 8.1, 11.73, 16.1, 20.17, 23.23, 24.13, 25.6, 28.27, 34.33, 38.93, 40.77, 44.53, 50.57, 56.23, 60.07, 64.6, 70.7, 78.67, 82.6, 86.27, 90.8, 97.83
+
+- 0.0 % de los cortes llegan después de un movimiento fuerte de cámara (transición); el resto son cortes secos.
+- 95.7 % de los cortes caen a ±0,1 s de un golpe de sonido.
+
+| # | seg | tipo | vel. cámara antes | plano que sigue | golpe más cercano |
+|---|---|---|---|---|---|
+| 1 | 5.37 | corte seco | 351 px/s | 2.73 s | 0.04 s |
+| 2 | 8.1 | corte seco | 11 px/s | 3.63 s | 0.01 s |
+| 3 | 11.73 | corte seco | 292 px/s | 4.37 s | 0.11 s |
+| 4 | 16.1 | corte seco | 293 px/s | 4.07 s | 0.04 s |
+| 5 | 20.17 | corte seco | 56 px/s | 3.07 s | 0.01 s |
+| 6 | 23.23 | corte seco | 347 px/s | 0.9 s | 0.05 s |
+| 7 | 24.13 | corte seco | 158 px/s | 1.47 s | 0.02 s |
+| 8 | 25.6 | corte seco | 536 px/s | 2.67 s | 0.04 s |
+| 9 | 28.27 | corte seco | 288 px/s | 6.07 s | 0.04 s |
+| 10 | 34.33 | corte seco | 289 px/s | 4.6 s | 0.03 s |
+| 11 | 38.93 | corte seco | 60 px/s | 1.83 s | 0.04 s |
+| 12 | 40.77 | corte seco | 12 px/s | 3.77 s | 0.07 s |
+| 13 | 44.53 | corte seco | 355 px/s | 6.03 s | 0.04 s |
+| 14 | 50.57 | corte seco | 292 px/s | 5.67 s | 0.07 s |
+| 15 | 56.23 | corte seco | 348 px/s | 3.83 s | 0.02 s |
+| 16 | 60.07 | corte seco | 41 px/s | 4.53 s | 0.0 s |
+| 17 | 64.6 | corte seco | 322 px/s | 6.1 s | 0.03 s |
+| 18 | 70.7 | corte seco | 345 px/s | 7.97 s | 0.01 s |
+| 19 | 78.67 | corte seco | 30 px/s | 3.93 s | 0.04 s |
+| 20 | 82.6 | corte seco | 292 px/s | 3.67 s | 0.07 s |
+| 21 | 86.27 | corte seco | 345 px/s | 4.53 s | 0.04 s |
+| 22 | 90.8 | corte seco | 294 px/s | 7.03 s | 0.04 s |
+| 23 | 97.83 | corte seco | 10 px/s | 6.63 s | 0.04 s |
 
 ## Cámara
 - Se mueve en el **89.5 %** de los cuadros (78.0 % con zoom); zoom neto -0.78 % por segundo (+ acerca).
 - Velocidad mediana 30 px/s (media 107, p95 487); 72.7 % del movimiento es lento (< 100 px/s: deriva casi imperceptible). A 1080 de ancho. 42 movimientos, mediana 2.13 s.
 - **Tirón (jerk)**: mediano 336 px/s³, p95 9445 px/s³ (menos = más suave).
+- **Mover–retener–mover**: 35 movimientos notorios (pico ≥ 100 px/s; 3.4 cada 10 s), pico mediano 968 px/s, duran 2.67 s; 3 retenciones ≥ 0,5 s (mediana 0.56 s); el pico cae a mitad del movimiento (ease simétrico) en 10.0 % de los movimientos.
 
 | desde | hasta | seg | tipo | desplaz. px | zoom % | vel. máx px/s | pico en |
 |---|---|---|---|---|---|---|---|

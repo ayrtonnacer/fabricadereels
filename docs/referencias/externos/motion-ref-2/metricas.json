@@ -32,7 +32,9 @@
   "tipos": {
    "transición + corte (movimiento fuerte antes)": 2,
    "corte seco": 1
-  }
+  },
+  "pct_sobre_golpe_100ms": 100.0,
+  "pct_con_movimiento_previo": 66.7
  },
  "camara": {
   "pct_cuadros_en_movimiento": 63.2,
@@ -45,7 +47,15 @@
   "n_movimientos": 14,
   "duracion_mediana_movimiento_s": 0.67,
   "jerk_mediano_px_s3": 516,
-  "jerk_p95_px_s3": 16106
+  "jerk_p95_px_s3": 16106,
+  "movimientos_notorios": 6,
+  "movimientos_notorios_por_10s": 3.0,
+  "pico_notorio_mediano_px_s": 872,
+  "duracion_notorio_mediana_s": 1.21,
+  "retenciones": 2,
+  "retencion_mediana_s": 1.87,
+  "ataque_mediano_s": 0.03,
+  "liberacion_mediana_s": 0.4
  },
  "audio": {
   "lufs_integrado": -16.0,
@@ -62,19 +72,28 @@
    "cuadro": 299,
    "seg": 9.97,
    "tipo": "transición + corte (movimiento fuerte antes)",
-   "dif": 13.23
+   "dif": 13.23,
+   "vel_previa_px_s": 1,
+   "plano_siguiente_s": 4.13,
+   "golpe_cercano_s": 0.06
   },
   {
    "cuadro": 423,
    "seg": 14.1,
    "tipo": "transición + corte (movimiento fuerte antes)",
-   "dif": 10.95
+   "dif": 10.95,
+   "vel_previa_px_s": 188,
+   "plano_siguiente_s": 4.47,
+   "golpe_cercano_s": 0.07
   },
   {
    "cuadro": 557,
    "seg": 18.57,
    "tipo": "corte seco",
-   "dif": 19.28
+   "dif": 19.28,
+   "vel_previa_px_s": 7,
+   "plano_siguiente_s": 1.47,
+   "golpe_cercano_s": 0.04
   }
  ],
  "movimientos": [
@@ -89,7 +108,9 @@
    ],
    "zoom_total_pct": -0.0,
    "vel_max_px_s": 3,
-   "pico_en_pct_del_tramo": 20
+   "pico_en_pct_del_tramo": 20,
+   "ataque_s": 0.07,
+   "liberacion_s": 0.43
   },
   {
    "desde_s": 0.9,
@@ -102,7 +123,9 @@
    ],
    "zoom_total_pct": -0.0,
    "vel_max_px_s": 5,
-   "pico_en_pct_del_tramo": 60
+   "pico_en_pct_del_tramo": 60,
+   "ataque_s": 0.2,
+   "liberacion_s": 0.13
   },
   {
    "desde_s": 1.7,
@@ -115,7 +138,9 @@
    ],
    "zoom_total_pct": -0.0,
    "vel_max_px_s": 4,
-   "pico_en_pct_del_tramo": 100
+   "pico_en_pct_del_tramo": 100,
+   "ataque_s": 0.3,
+   "liberacion_s": 0.03
   },
   {
    "desde_s": 2.23,
@@ -128,7 +153,9 @@
    ],
    "zoom_total_pct": -51.3,
    "vel_max_px_s": 1999,
-   "pico_en_pct_del_tramo": 0
+   "pico_en_pct_del_tramo": 0,
+   "ataque_s": 0.03,
+   "liberacion_s": 0.5
   },
   {
    "desde_s": 3.43,
@@ -141,7 +168,9 @@
    ],
    "zoom_total_pct": -0.1,
    "vel_max_px_s": 3,
-   "pico_en_pct_del_tramo": 75
+   "pico_en_pct_del_tramo": 75,
+   "ataque_s": 0.1,
+   "liberacion_s": 0.03
   },
   {
    "desde_s": 3.73,
@@ -154,7 +183,9 @@
    ],
    "zoom_total_pct": -3.6,
    "vel_max_px_s": 58,
-   "pico_en_pct_del_tramo": 20
+   "pico_en_pct_del_tramo": 20,
+   "ataque_s": 1.37,
+   "liberacion_s": 0.6
   },
   {
    "desde_s": 6.3,
@@ -167,7 +198,9 @@
    ],
    "zoom_total_pct": -0.1,
    "vel_max_px_s": 5,
-   "pico_en_pct_del_tramo": 22
+   "pico_en_pct_del_tramo": 22,
+   "ataque_s": 0.17,
+   "liberacion_s": 0.43
   },
   {
    "desde_s": 7.43,
@@ -180,7 +213,9 @@
    ],
    "zoom_total_pct": -52.4,
    "vel_max_px_s": 323,
-   "pico_en_pct_del_tramo": 24
+   "pico_en_pct_del_tramo": 24,
+   "ataque_s": 0.33,
+   "liberacion_s": 0.4
   },
   {
    "desde_s": 10.03,
@@ -193,7 +228,9 @@
    ],
    "zoom_total_pct": 21.4,
    "vel_max_px_s": 161,
-   "pico_en_pct_del_tramo": 0
+   "pico_en_pct_del_tramo": 0,
+   "ataque_s": 0.03,
+   "liberacion_s": 0.3
   },
   {
    "desde_s": 13.9,
@@ -206,7 +243,9 @@
    ],
    "zoom_total_pct": -36.3,
    "vel_max_px_s": 1186,
-   "pico_en_pct_del_tramo": 0
+   "pico_en_pct_del_tramo": 0,
+   "ataque_s": 0.03,
+   "liberacion_s": 0.1
   },
   {
    "desde_s": 14.17,
@@ -219,7 +258,9 @@
    ],
    "zoom_total_pct": -4.2,
    "vel_max_px_s": 38,
-   "pico_en_pct_del_tramo": 0
+   "pico_en_pct_del_tramo": 0,
+   "ataque_s": 0.03,
+   "liberacion_s": 0.17
   },
   {
    "desde_s": 14.93,
@@ -232,7 +273,9 @@
    ],
    "zoom_total_pct": 50.9,
    "vel_max_px_s": 559,
-   "pico_en_pct_del_tramo": 30
+   "pico_en_pct_del_tramo": 30,
+   "ataque_s": 0.43,
+   "liberacion_s": 0.47
   },
   {
    "desde_s": 16.6,
@@ -245,7 +288,9 @@
    ],
    "zoom_total_pct": 6.6,
    "vel_max_px_s": 68,
-   "pico_en_pct_del_tramo": 35
+   "pico_en_pct_del_tramo": 35,
+   "ataque_s": 0.43,
+   "liberacion_s": 1.1
   },
   {
    "desde_s": 18.63,
@@ -258,7 +303,9 @@
    ],
    "zoom_total_pct": 41.8,
    "vel_max_px_s": 1604,
-   "pico_en_pct_del_tramo": 0
+   "pico_en_pct_del_tramo": 0,
+   "ataque_s": 0.03,
+   "liberacion_s": 0.4
   }
  ]
 }

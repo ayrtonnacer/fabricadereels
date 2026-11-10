@@ -9,7 +9,7 @@ pip install -r requirements.txt   # voz, audio y medición; también hace falta 
 El modelo de voz está partido en `assets/voces/`; `voz.py` lo arma solo.
 
 ## Cómo se trabaja
-Abrí una sesión de Claude Code sobre este repo: carga `CLAUDE.md`. Pegá una fuente (`/reel https://…` o "hacé un reel sobre …"). Claude escribe el guion, espera tu OK, arma el script técnico y genera el video.
+Abrí una sesión de Claude Code sobre este repo: carga `CLAUDE.md`. Pegá una fuente (`/reel https://…` o "hacé un reel sobre …"). Claude escribe el guion, espera tu OK, arma el plan con números de la biblia de estilo y genera el video.
 Vista previa a mano: `cd videos/X && npx hyperframes preview`.
 
 ## Mapa del repo

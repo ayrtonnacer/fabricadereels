@@ -31,7 +31,9 @@
   "plano_max_s": 2.5,
   "tipos": {
    "transición + corte (movimiento fuerte antes)": 8
-  }
+  },
+  "pct_sobre_golpe_100ms": 62.5,
+  "pct_con_movimiento_previo": 100.0
  },
  "camara": {
   "pct_cuadros_en_movimiento": 66.4,
@@ -44,7 +46,14 @@
   "n_movimientos": 10,
   "duracion_mediana_movimiento_s": 0.55,
   "jerk_mediano_px_s3": 2437,
-  "jerk_p95_px_s3": 75955
+  "jerk_p95_px_s3": 75955,
+  "movimientos_notorios": 9,
+  "movimientos_notorios_por_10s": 9.2,
+  "pico_notorio_mediano_px_s": 1535,
+  "duracion_notorio_mediana_s": 0.57,
+  "retenciones": 2,
+  "retencion_mediana_s": 0.68,
+  "pico_a_mitad_pct": 0.0
  },
  "audio": {
   "lufs_integrado": -14.6,
@@ -61,49 +70,73 @@
    "cuadro": 27,
    "seg": 0.9,
    "tipo": "transición + corte (movimiento fuerte antes)",
-   "dif": 67.11
+   "dif": 67.11,
+   "vel_previa_px_s": 557,
+   "plano_siguiente_s": 0.7,
+   "golpe_cercano_s": 0.09
   },
   {
    "cuadro": 48,
    "seg": 1.6,
    "tipo": "transición + corte (movimiento fuerte antes)",
-   "dif": 69.98
+   "dif": 69.98,
+   "vel_previa_px_s": 155,
+   "plano_siguiente_s": 2.5,
+   "golpe_cercano_s": 0.0
   },
   {
    "cuadro": 123,
    "seg": 4.1,
    "tipo": "transición + corte (movimiento fuerte antes)",
-   "dif": 68.42
+   "dif": 68.42,
+   "vel_previa_px_s": 71,
+   "plano_siguiente_s": 2.27,
+   "golpe_cercano_s": 0.18
   },
   {
    "cuadro": 191,
    "seg": 6.37,
    "tipo": "transición + corte (movimiento fuerte antes)",
-   "dif": 66.89
+   "dif": 66.89,
+   "vel_previa_px_s": 6,
+   "plano_siguiente_s": 0.67,
+   "golpe_cercano_s": 0.25
   },
   {
    "cuadro": 211,
    "seg": 7.03,
    "tipo": "transición + corte (movimiento fuerte antes)",
-   "dif": 66.44
+   "dif": 66.44,
+   "vel_previa_px_s": 0,
+   "plano_siguiente_s": 0.53,
+   "golpe_cercano_s": 0.05
   },
   {
    "cuadro": 227,
    "seg": 7.57,
    "tipo": "transición + corte (movimiento fuerte antes)",
-   "dif": 73.21
+   "dif": 73.21,
+   "vel_previa_px_s": 0,
+   "plano_siguiente_s": 0.47,
+   "golpe_cercano_s": 0.13
   },
   {
    "cuadro": 241,
    "seg": 8.03,
    "tipo": "transición + corte (movimiento fuerte antes)",
-   "dif": 71.71
+   "dif": 71.71,
+   "vel_previa_px_s": 0,
+   "plano_siguiente_s": 0.67,
+   "golpe_cercano_s": 0.1
   },
   {
    "cuadro": 261,
    "seg": 8.7,
    "tipo": "transición + corte (movimiento fuerte antes)",
-   "dif": 74.31
+   "dif": 74.31,
+   "vel_previa_px_s": 91,
+   "plano_siguiente_s": 1.13,
+   "golpe_cercano_s": 0.03
   }
  ],
  "movimientos": [

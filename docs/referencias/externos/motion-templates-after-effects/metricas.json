@@ -32,7 +32,9 @@
   "tipos": {
    "transición + corte (movimiento fuerte antes)": 2,
    "corte seco": 7
-  }
+  },
+  "pct_sobre_golpe_100ms": 77.8,
+  "pct_con_movimiento_previo": 22.2
  },
  "camara": {
   "pct_cuadros_en_movimiento": 64.2,
@@ -45,7 +47,14 @@
   "n_movimientos": 14,
   "duracion_mediana_movimiento_s": 0.53,
   "jerk_mediano_px_s3": 7075,
-  "jerk_p95_px_s3": 449450
+  "jerk_p95_px_s3": 449450,
+  "movimientos_notorios": 12,
+  "movimientos_notorios_por_10s": 8.0,
+  "pico_notorio_mediano_px_s": 2064,
+  "duracion_notorio_mediana_s": 0.51,
+  "retenciones": 1,
+  "retencion_mediana_s": 0.62,
+  "pico_a_mitad_pct": 16.7
  },
  "audio": {
   "lufs_integrado": -13.4,
@@ -62,55 +71,82 @@
    "cuadro": 290,
    "seg": 4.84,
    "tipo": "transición + corte (movimiento fuerte antes)",
-   "dif": 130.88
+   "dif": 130.88,
+   "vel_previa_px_s": 1515,
+   "plano_siguiente_s": 0.75,
+   "golpe_cercano_s": 0.08
   },
   {
    "cuadro": 335,
    "seg": 5.59,
    "tipo": "corte seco",
-   "dif": 42.87
+   "dif": 42.87,
+   "vel_previa_px_s": 22,
+   "plano_siguiente_s": 0.72,
+   "golpe_cercano_s": 0.03
   },
   {
    "cuadro": 378,
    "seg": 6.31,
    "tipo": "transición + corte (movimiento fuerte antes)",
-   "dif": 83.54
+   "dif": 83.54,
+   "vel_previa_px_s": 1057,
+   "plano_siguiente_s": 1.85,
+   "golpe_cercano_s": 0.11
   },
   {
    "cuadro": 489,
    "seg": 8.16,
    "tipo": "corte seco",
-   "dif": 204.45
+   "dif": 204.45,
+   "vel_previa_px_s": 764,
+   "plano_siguiente_s": 0.8,
+   "golpe_cercano_s": 0.03
   },
   {
    "cuadro": 537,
    "seg": 8.96,
    "tipo": "corte seco",
-   "dif": 56.04
+   "dif": 56.04,
+   "vel_previa_px_s": 188,
+   "plano_siguiente_s": 0.48,
+   "golpe_cercano_s": 0.03
   },
   {
    "cuadro": 566,
    "seg": 9.44,
    "tipo": "corte seco",
-   "dif": 72.59
+   "dif": 72.59,
+   "vel_previa_px_s": 107,
+   "plano_siguiente_s": 0.5,
+   "golpe_cercano_s": 0.02
   },
   {
    "cuadro": 596,
    "seg": 9.94,
    "tipo": "corte seco",
-   "dif": 189.08
+   "dif": 189.08,
+   "vel_previa_px_s": 78,
+   "plano_siguiente_s": 0.42,
+   "golpe_cercano_s": 0.01
   },
   {
    "cuadro": 621,
    "seg": 10.36,
    "tipo": "corte seco",
-   "dif": 67.17
+   "dif": 67.17,
+   "vel_previa_px_s": 4,
+   "plano_siguiente_s": 1.63,
+   "golpe_cercano_s": 0.08
   },
   {
    "cuadro": 719,
    "seg": 12.0,
    "tipo": "corte seco",
-   "dif": 224.42
+   "dif": 224.42,
+   "vel_previa_px_s": 15,
+   "plano_siguiente_s": 3.02,
+   "golpe_cercano_s": 0.91
   }
  ],
  "movimientos": [

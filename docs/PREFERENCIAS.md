@@ -21,7 +21,7 @@ Destilado de `docs/BITACORA.md` (cronológico, con el detalle) y `docs/DECISIONE
 - Pronunciación mal: "WiFi" escrito "guifi" sonaba "gifi" → usar "uaifai" (pendiente que Ayrton elija de oído entre 3 variantes en `docs/material/pronunciacion/`).
 
 ## Flujo acordado
-Link + indicaciones → guion (público: técnicos, principiantes, reclutadores) → **su OK** → script técnico (planos, cámara, sfx) → video → entrega. A futuro: publicar automáticamente en sus redes (no hacerlo sin que lo pida).
+Link + indicaciones → guion (público: técnicos, principiantes, reclutadores) → **su OK** → plan numérico (metas de la biblia de estilo) → video → entrega. A futuro: publicar automáticamente en sus redes (no hacerlo sin que lo pida).
 
 ## Agregado 2026-11-09 (noche, 3)
 - **Realismo con sentido**: las notebooks no llevan antena a la vista; los **cables tocan los objetos** (puertos, centro del globo); las ondas de radio no necesitan encajar justo.
@@ -37,4 +37,4 @@ Link + indicaciones → guion (público: técnicos, principiantes, reclutadores)
 
 ## Agregado 2026-11-10 (2)
 - **Una sola rama (`main`)**: no quiere ramas ni PR; todo directo a `main`. Explicarle GitHub en simple y evitar jerga.
-- Referencias suyas que le gustan (10 videos en `assets/referencias/`): las **contemplativas/oscuras** con cámara que mueve–retiene–mueve y planos continuos; patrón favorito para reels técnicos: **vista explosionada 3D con etiquetas y tooltip** (`referencias/SINTESIS.md`).
+- Referencias suyas que le gustan (10 videos en `assets/referencias/`): las **contemplativas/oscuras** con cámara que mueve–retiene–mueve y planos continuos; patrón favorito para reels técnicos: **vista explosionada 3D con etiquetas y tooltip** (`docs/referencias/BIBLIA-DE-ESTILO.md`).

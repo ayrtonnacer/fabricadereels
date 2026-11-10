@@ -9,12 +9,30 @@
 ## Cortes y planos
 - 12 cortes (82.4 por minuto); plano medio 0.67 s, mediano 0.58 s, más largo 1.18 s.
 - Tipos: corte seco: 9, transición + corte (movimiento fuerte antes): 3
-- En segundos: 1.18, 2.35, 3.18, 3.75, 4.33, 4.82, 5.18, 5.4, 6.13, 6.38, 7.25, 7.57
+
+- 25.0 % de los cortes llegan después de un movimiento fuerte de cámara (transición); el resto son cortes secos.
+- 100.0 % de los cortes caen a ±0,1 s de un golpe de sonido.
+
+| # | seg | tipo | vel. cámara antes | plano que sigue | golpe más cercano |
+|---|---|---|---|---|---|
+| 1 | 1.18 | corte seco | 334 px/s | 1.17 s | 0.05 s |
+| 2 | 2.35 | corte seco | 12 px/s | 0.83 s | 0.04 s |
+| 3 | 3.18 | corte seco | 116 px/s | 0.57 s | 0.05 s |
+| 4 | 3.75 | corte seco | 274 px/s | 0.58 s | 0.02 s |
+| 5 | 4.33 | transición + corte (movimiento fuerte antes) | 450 px/s | 0.48 s | 0.07 s |
+| 6 | 4.82 | corte seco | 138 px/s | 0.37 s | 0.09 s |
+| 7 | 5.18 | transición + corte (movimiento fuerte antes) | 194 px/s | 0.22 s | 0.02 s |
+| 8 | 5.4 | transición + corte (movimiento fuerte antes) | 579 px/s | 0.73 s | 0.0 s |
+| 9 | 6.13 | corte seco | 27 px/s | 0.25 s | 0.06 s |
+| 10 | 6.38 | corte seco | 19 px/s | 0.87 s | 0.02 s |
+| 11 | 7.25 | corte seco | 114 px/s | 0.32 s | 0.02 s |
+| 12 | 7.57 | corte seco | 57 px/s | 1.17 s | 0.01 s |
 
 ## Cámara
 - Se mueve en el **77.5 %** de los cuadros (69.5 % con zoom); zoom neto 3.07 % por segundo (+ acerca).
 - Velocidad mediana 122 px/s (media 209, p95 629); 46.6 % del movimiento es lento (< 100 px/s: deriva casi imperceptible). A 1080 de ancho. 13 movimientos, mediana 0.5 s.
 - **Tirón (jerk)**: mediano 4837 px/s³, p95 48818 px/s³ (menos = más suave).
+- **Mover–retener–mover**: 12 movimientos notorios (pico ≥ 100 px/s; 13.7 cada 10 s), pico mediano 438 px/s, duran 0.59 s; 0 retenciones ≥ 0,5 s (mediana 0.0 s); el pico cae a mitad del movimiento (ease simétrico) en 14.3 % de los movimientos.
 
 | desde | hasta | seg | tipo | desplaz. px | zoom % | vel. máx px/s | pico en |
 |---|---|---|---|---|---|---|---|

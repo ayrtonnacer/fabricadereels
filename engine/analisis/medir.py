@@ -129,7 +129,7 @@ def camara(filas, cortes, fps):
         tipo = 'acercamiento' if z.sum() > 0.5 and abs(z.sum()) * 10 > np.hypot(sx, sy) * 0.3 else 'alejamiento' if z.sum() < -0.5 else 'paneo/deriva'
         fuerza = np.maximum(vel[a:b + 1], np.abs(z) * 10); pico = int(np.argmax(fuerza))
         movs.append(dict(desde_s=round(a / fps, 2), hasta_s=round(b / fps, 2), seg=round((b - a + 1) / fps, 2), tipo=tipo, desplazamiento_px=[round(float(sx)), round(float(sy))], zoom_total_pct=round(float(z.sum()), 1),
-                         vel_max_px_s=round(float(vel[a:b + 1].max() * fps)), pico_en_pct_del_tramo=round(100 * pico / max(1, b - a))))
+                         vel_max_px_s=round(float(vel[a:b + 1].max() * fps)), pico_en_pct_del_tramo=round(100 * pico / max(1, b - a)), **ataque_liberacion(fuerza, pico, fps)))
     # tirón (jerk): tercera derivada de la posición acumulada, solo dentro de tramos de movimiento, con suavizado Savitzky–Golay
     jerks = []
     for a, b in tramos:
@@ -143,7 +143,46 @@ def camara(filas, cortes, fps):
                 zoom_neto_pct_por_s=round(float(vz[mov].sum() / max(1, mov.sum()) * fps), 2) if mov.any() else 0.0,
                 velocidad_media_px_s=round(float(vel[mov].mean() * fps)) if mov.any() else 0, velocidad_mediana_px_s=round(float(np.median(vel[mov] * fps))) if mov.any() else 0, pct_movimiento_lento=round(100 * float((vel[mov] * fps < 100).mean()), 1) if mov.any() else 0.0, velocidad_p95_px_s=round(float(np.percentile(vel[mov] * fps, 95))) if mov.any() else 0,
                 n_movimientos=len(movs), duracion_mediana_movimiento_s=round(float(np.median([m['seg'] for m in movs])), 2) if movs else 0.0,
-                jerk_mediano_px_s3=round(float(np.median(jr))), jerk_p95_px_s3=round(float(np.percentile(jr, 95)))), movs
+                jerk_mediano_px_s3=round(float(np.median(jr))), jerk_p95_px_s3=round(float(np.percentile(jr, 95))),
+                **ritmo_camara(movs, n, fps)), movs
+
+
+def ataque_liberacion(fuerza, pico, fps):
+    """Segundos que tarda la velocidad en subir del 10 % al pico (ataque) y en bajar del pico al 10 % (liberación), con la velocidad suavizada."""
+    v = np.convolve(fuerza, np.ones(3) / 3, 'same'); pk = int(np.argmax(v)); u = 0.1 * v[pk]
+    i = pk
+    while i > 0 and v[i - 1] > u: i -= 1
+    j = pk
+    while j < len(v) - 1 and v[j + 1] > u: j += 1
+    return dict(ataque_s=round((pk - i) / fps, 2), liberacion_s=round((j - pk) / fps, 2))
+
+
+def ritmo_camara(movs, n, fps):
+    """Gramática 'mover–retener–mover' y forma del movimiento, en números (docs/MEDICION.md)."""
+    dur = n / fps; fuertes = [m for m in movs if m['vel_max_px_s'] >= 100]                       # los que se notan (no deriva)
+    huecos = [movs[i + 1]['desde_s'] - movs[i]['hasta_s'] for i in range(len(movs) - 1)]
+    ret = [h for h in huecos if h >= 0.5]
+    lar = [m for m in fuertes if m['seg'] >= 0.5]
+    return dict(movimientos_notorios=len(fuertes), movimientos_notorios_por_10s=round(len(fuertes) / dur * 10, 1),
+                pico_notorio_mediano_px_s=round(float(np.median([m['vel_max_px_s'] for m in fuertes]))) if fuertes else 0,
+                duracion_notorio_mediana_s=round(float(np.median([m['seg'] for m in fuertes])), 2) if fuertes else 0.0,
+                retenciones=len(ret), retencion_mediana_s=round(float(np.median(ret)), 2) if ret else 0.0,
+                ataque_mediano_s=round(float(np.median([m['ataque_s'] for m in lar])), 2) if lar else None,
+                liberacion_mediana_s=round(float(np.median([m['liberacion_s'] for m in lar])), 2) if lar else None)
+
+
+def enriquecer_cortes(cortes, filas, fps, ons, m):
+    """Por cada corte: velocidad de cámara en los 0,3 s previos, duración del plano que sigue y distancia al golpe de sonido más cercano."""
+    lim = [c['cuadro'] for c in cortes] + [len(filas)]; t_on = np.array([t for t, _ in ons])
+    for k, c in enumerate(cortes):
+        a = max(0, c['cuadro'] - 9); v = [np.hypot(f['dx'], f['dy']) * fps for f in filas[a:c['cuadro'] - 1]]
+        c['vel_previa_px_s'] = round(float(np.median(v))) if v else 0
+        c['plano_siguiente_s'] = round((lim[k + 1] - c['cuadro']) / fps, 2)
+        c['golpe_cercano_s'] = round(float(np.min(np.abs(t_on - c['seg']))), 2) if len(t_on) else None
+    if cortes and len(t_on):
+        m['cortes']['pct_sobre_golpe_100ms'] = round(100 * float(np.mean([c['golpe_cercano_s'] <= 0.1 for c in cortes])), 1)
+    if cortes:
+        m['cortes']['pct_con_movimiento_previo'] = round(100 * float(np.mean([c['tipo'].startswith('transición') for c in cortes])), 1)
 
 
 def audio(ruta, inf, transcripcion):
@@ -185,40 +224,32 @@ def color_fondo(px):
     return res
 
 
+def _tabla_cortes(m, cortes):
+    c = m['cortes']
+    L = []
+    if 'pct_con_movimiento_previo' in c: L.append(f"- {c['pct_con_movimiento_previo']} % de los cortes llegan después de un movimiento fuerte de cámara (transición); el resto son cortes secos.")
+    if 'pct_sobre_golpe_100ms' in c: L.append(f"- {c['pct_sobre_golpe_100ms']} % de los cortes caen a ±0,1 s de un golpe de sonido.")
+    if cortes:
+        L += ['', '| # | seg | tipo | vel. cámara antes | plano que sigue | golpe más cercano |', '|---|---|---|---|---|---|']
+        L += [f"| {i + 1} | {x['seg']} | {x['tipo']} | {x.get('vel_previa_px_s', '—')} px/s | {x.get('plano_siguiente_s', '—')} s | {x.get('golpe_cercano_s', '—')} s |" for i, x in enumerate(cortes)]
+    return L
+
+
 def informe(m, cortes, movs):
     c, cam, a, im = m['cortes'], m['camara'], m.get('audio'), m['imagen']
     L = [f"# Informe de medición: {m['archivo']}", '', f"{m['resolucion']} · {m['fps']} fps · {m['segundos']} s · {m['cuadros']} cuadros", '',
          '## Imagen', f"- Brillo medio {im['brillo_medio']} · contraste {im['contraste_medio']} · saturación {im['saturacion_media']}", '- Colores dominantes: ' + ', '.join(f"{x['hex']} ({x['pct']} %)" for x in im['colores_dominantes']), '',
          '## Cortes y planos', f"- {c['n']} cortes ({c['por_minuto']} por minuto); plano medio {c['plano_medio_s']} s, mediano {c['plano_mediano_s']} s, más largo {c['plano_max_s']} s.",
-         '- Tipos: ' + (', '.join(f"{k}: {v}" for k, v in c['tipos'].items()) or 'ninguno'), '- En segundos: ' + (', '.join(str(x['seg']) for x in cortes) or '—'), '',
+         '- Tipos: ' + (', '.join(f"{k}: {v}" for k, v in c['tipos'].items()) or 'ninguno'), '', *_tabla_cortes(m, cortes), '',
          '## Cámara', f"- Se mueve en el **{cam['pct_cuadros_en_movimiento']} %** de los cuadros ({cam['pct_cuadros_con_zoom']} % con zoom); zoom neto {cam['zoom_neto_pct_por_s']} % por segundo (+ acerca).",
          f"- Velocidad mediana {cam['velocidad_mediana_px_s']} px/s (media {cam['velocidad_media_px_s']}, p95 {cam['velocidad_p95_px_s']}); {cam['pct_movimiento_lento']} % del movimiento es lento (< 100 px/s: deriva casi imperceptible). A 1080 de ancho. {cam['n_movimientos']} movimientos, mediana {cam['duracion_mediana_movimiento_s']} s.",
-         f"- **Tirón (jerk)**: mediano {cam['jerk_mediano_px_s3']} px/s³, p95 {cam['jerk_p95_px_s3']} px/s³ (menos = más suave).", '', '| desde | hasta | seg | tipo | desplaz. px | zoom % | vel. máx px/s | pico en |', '|---|---|---|---|---|---|---|---|']
-    L += [f"| {x['desde_s']} | {x['hasta_s']} | {x['seg']} | {x['tipo']} | {x['desplazamiento_px']} | {x['zoom_total_pct']} | {x['vel_max_px_s']} | {x['pico_en_pct_del_tramo']} % |" for x in movs[:40]]
+         f"- **Tirón (jerk)**: mediano {cam['jerk_mediano_px_s3']} px/s³, p95 {cam['jerk_p95_px_s3']} px/s³ (menos = más suave).",
+         f"- **Mover–retener–mover**: {cam['movimientos_notorios']} movimientos notorios (pico ≥ 100 px/s; {cam['movimientos_notorios_por_10s']} cada 10 s), pico mediano {cam['pico_notorio_mediano_px_s']} px/s, duran {cam['duracion_notorio_mediana_s']} s; {cam['retenciones']} retenciones ≥ 0,5 s (mediana {cam['retencion_mediana_s']} s); ataque (10 % → pico) mediano {cam['ataque_mediano_s']} s, liberación (pico → 10 %) {cam['liberacion_mediana_s']} s (parecidos = ease simétrico).", '', '| desde | hasta | seg | tipo | desplaz. px | zoom % | vel. máx px/s | ataque s | liberación s |', '|---|---|---|---|---|---|---|---|---|']
+    L += [f"| {x['desde_s']} | {x['hasta_s']} | {x['seg']} | {x['tipo']} | {x['desplazamiento_px']} | {x['zoom_total_pct']} | {x['vel_max_px_s']} | {x['ataque_s']} | {x['liberacion_s']} |" for x in movs[:40]]
     if a:
         L += ['', '## Audio', f"- {a['lufs_integrado']} LUFS, rango {a['rango_dinamico_lu']} LU, pico {a['pico_real_dbtp']} dBTP", f"- Silencio {a['silencio_pct']} % ({a['silencios_largos']} silencios > 0,25 s), voz activa {a['voz_activa_pct']} %",
               f"- {a['onsets_por_s']} ataques por segundo; {a['golpes_graves']} golpes graves; voz activa = tiempo en que se oye hablar"]
         if 'palabras_por_s_total' in a: L.append(f"- Con transcripción: {a['palabras']} palabras → **{a['palabras_por_s_total']} palabras/s** en total, {a['palabras_por_s_hablando']} mientras se habla (sin transcripción no se puede medir: el ritmo de voz no se estima)")
-    return '\n'.join(L) + '\n'
-
-
-def script_tecnico(m, cortes, movs, filas, ons):
-    """Un renglón por plano: lo que haría un shooting script, pero medido (docs/MEDICION.md)."""
-    fps = m['fps']; lim = [0] + [c['cuadro'] for c in cortes] + [len(filas)]; ent = ['inicio'] + [c['tipo'] for c in cortes]
-    L = [f"# Script técnico medido de {m['archivo']}", '', f"{m['segundos']} s · {m['fps']} fps · {m['resolucion']} · {len(lim) - 1} planos. Generado por `engine/analisis/medir.py`: cada renglón es una MEDICIÓN, no una opinión.", '',
-         '| # | Desde | Dura | Entra por | Cámara en el plano | Brillo | Sonido (ataques; graves en s) |', '|---|---|---|---|---|---|---|']
-    for k in range(len(lim) - 1):
-        a, b = lim[k], lim[k + 1]; t0, t1 = a / fps, b / fps
-        sol = [(min(x['hasta_s'], t1) - max(x['desde_s'], t0), x) for x in movs if x['hasta_s'] > t0 and x['desde_s'] < t1]
-        sol = [(o, x) for o, x in sol if o > 0.2]
-        if sol:
-            tot_z = sum(x['zoom_total_pct'] for _, x in sol); tipos = {x['tipo'] for _, x in sol}; vmax = max(x['vel_max_px_s'] for _, x in sol)
-            cam = f"{'/'.join(sorted(tipos))}; zoom {tot_z:+.0f} %; vel. máx {vmax} px/s; {sum(o for o, _ in sol):.1f} s en movimiento de {t1 - t0:.1f}"
-        else: cam = 'quieta'
-        br = float(np.mean([f['brillo'] for f in filas[a:b]])) if b > a else 0
-        ev = [(t, g) for t, g in ons if t0 <= t < t1]; gr = [f'{t:.1f}' for t, g in ev if g]
-        L.append(f"| {k + 1} | {t0:.1f} s | {t1 - t0:.1f} s | {ent[k]} | {cam} | {br:.2f} | {len(ev)}; {', '.join(gr) or '—'} |")
-    L += ['', '## Cómo usarlo', '- Para inspirarse: copiar la **estructura** (duración de planos, tipo y velocidad de cámara, cuándo caen los golpes), no el contenido.', '- Para replicar un movimiento: la columna "Cámara" da tipo, zoom total y velocidad máxima; en `escena3d.js` se traduce con `E.ruta` (px/s ≈ metros/s × ~540 a 4 m de distancia).']
     return '\n'.join(L) + '\n'
 
 
@@ -253,8 +284,8 @@ def main():
              cortes=dict(n=len(cortes), por_minuto=round(len(cortes) / (len(filas) / fps / 60), 1), plano_medio_s=round(float(np.mean(planos)), 2), plano_mediano_s=round(float(np.median(planos)), 2), plano_max_s=round(float(np.max(planos)), 2), tipos=tipos),
              camara=cam, audio=audio(a.video, inf, trans))
     ons = (m['audio'] or {}).pop('_onsets', []) if m['audio'] else []
+    enriquecer_cortes(cortes, filas, fps, ons, m)
     json.dump(dict(**m, cortes_detalle=cortes, movimientos=movs), open(os.path.join(a.salida, 'metricas.json'), 'w'), ensure_ascii=False, indent=1)
-    open(os.path.join(a.salida, 'SCRIPT-TECNICO-REFERENCIA.md'), 'w').write(script_tecnico(m, cortes, movs, filas, ons))
     open(os.path.join(a.salida, 'INFORME.md'), 'w').write(informe(m, cortes, movs))
     print(open(os.path.join(a.salida, 'INFORME.md')).read())
 
