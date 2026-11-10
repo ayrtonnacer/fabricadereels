@@ -4,16 +4,16 @@ Qué se repite en los videos analizados (2026-11-09; 10 referencias). Fuente: lo
 
 | Video | Duración | Planos | Cortes/min | LUFS | Golpes medidos | Qué enseña |
 |---|---|---|---|---|---|---|
-| [Motion Templates](motion-templates-after-effects/analisis.md) | 15 s | 16 | 60 | −13,4 | 25 | cursor que dispara, tarjetas 3D con paralaje, montaje sobre el ritmo, pila de capas, silencio antes del clic |
-| [Promo de marca (50 s)](pinterest-791437334567656517/analisis.md) | 50 s | 14 | 16 | −14,5 | 75 | estructura problema→solución→prueba→CTA; fondo rojo líquido; rojo↔blanco; wipe con forma de objeto |
-| [Instagram strategy](motion-inspiration-frames/analisis.md) | 18 s | 15 | 47 | −14,5 | 9 | una frase por beat; oscuro/claro; una palabra en el acento; sonido escaso |
-| [Nokia collage](motion-inspiration-nokia/analisis.md) | 20 s | 13 | 36 | −14,7 | 14 | cortes en la grilla del ritmo (≈125 BPM); barridos y formas como transición; disco giratorio |
-| [Glitch cyber](pinterest-999095498641347187/analisis.md) | 9 s | 11 | 69 | −9,7 | 0 | POV caminando + interfaz de error; mosaico de píxeles; duotono; teselas |
-| [Sting ilustrado](motion-ref-1/analisis.md) | 9 s | 8 | 45 | −14,2 | 0 | objeto portador (estrella) entre cortes; parpadeo A/B; destello como puente; color = significado |
-| [Lente explosionada 3D](motion-ref-2/analisis.md) | 20 s (16:9) | 1 | 0 | −16,0 | 4 | **vista explosionada con etiquetas y tooltip al hover; cámara mover-retener-mover; cierre en bucle** |
-| [Anuncio con tarjetas de vidrio](motion-ref-3/analisis.md) | 25 s | 1 | 0 | −14,2 | 6 | un solo plano continuo; texto cinético por palabra; tarjetas de vidrio 3D; contadores; silencio final |
-| [Miedo y codicia](motion-ref-4/analisis.md) | 32 s | 6 | 10 | −14,2 | 36 | rojo/verde con significado; una palabra por tic de sonido; objeto que cruza como transición |
-| [Explicador largo (agentes de IA)](motion-ref-5/analisis.md) | 104 s | 6 | 3 | −11,7 | 46+ | mascota-guía, tarjetas de producto, subtítulos por palabra; ejemplo de lo que hay que partir en serie |
+| [Motion Templates](externos/motion-templates-after-effects/ANALISIS.md) | 15 s | 16 | 60 | −13,4 | 25 | cursor que dispara, tarjetas 3D con paralaje, montaje sobre el ritmo, pila de capas, silencio antes del clic |
+| [Promo de marca (50 s)](externos/pinterest-791437334567656517/ANALISIS.md) | 50 s | 14 | 16 | −14,5 | 75 | estructura problema→solución→prueba→CTA; fondo rojo líquido; rojo↔blanco; wipe con forma de objeto |
+| [Instagram strategy](externos/motion-inspiration-frames/ANALISIS.md) | 18 s | 15 | 47 | −14,5 | 9 | una frase por beat; oscuro/claro; una palabra en el acento; sonido escaso |
+| [Nokia collage](externos/motion-inspiration-nokia/ANALISIS.md) | 20 s | 13 | 36 | −14,7 | 14 | cortes en la grilla del ritmo (≈125 BPM); barridos y formas como transición; disco giratorio |
+| [Glitch cyber](externos/pinterest-999095498641347187/ANALISIS.md) | 9 s | 11 | 69 | −9,7 | 0 | POV caminando + interfaz de error; mosaico de píxeles; duotono; teselas |
+| [Sting ilustrado](externos/motion-ref-1/ANALISIS.md) | 9 s | 8 | 45 | −14,2 | 0 | objeto portador (estrella) entre cortes; parpadeo A/B; destello como puente; color = significado |
+| [Lente explosionada 3D](externos/motion-ref-2/ANALISIS.md) | 20 s (16:9) | 1 | 0 | −16,0 | 4 | **vista explosionada con etiquetas y tooltip al hover; cámara mover-retener-mover; cierre en bucle** |
+| [Anuncio con tarjetas de vidrio](externos/motion-ref-3/ANALISIS.md) | 25 s | 1 | 0 | −14,2 | 6 | un solo plano continuo; texto cinético por palabra; tarjetas de vidrio 3D; contadores; silencio final |
+| [Miedo y codicia](externos/motion-ref-4/ANALISIS.md) | 32 s | 6 | 10 | −14,2 | 36 | rojo/verde con significado; una palabra por tic de sonido; objeto que cruza como transición |
+| [Explicador largo (agentes de IA)](externos/motion-ref-5/ANALISIS.md) | 104 s | 6 | 3 | −11,7 | 46+ | mascota-guía, tarjetas de producto, subtítulos por palabra; ejemplo de lo que hay que partir en serie |
 
 ## Lo que todos tienen en común
 1. **Una sola idea por video** y una frase corta por beat (4–6 palabras, 1–1,5 s). Nada se explica con párrafos.
