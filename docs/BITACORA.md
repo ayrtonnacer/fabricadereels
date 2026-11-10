@@ -37,3 +37,9 @@ Todo lo que Ayrton dice y pasa se guarda acá (y el material en `docs/material/`
 - **Etiqueta "pared" sobra**: "el espectador no es idiota". Regla: rótulos solo si aportan.
 - **Sonidos nuevos** (guardados en `assets/sfx/propios/`): `interface-texto-digital` (tipeo de 0 y 1; el teclado queda para tipear código), `modem-conexion` (handshake de módem al conectarse a internet), `hit-metal` (en vez del whoosh suave antes del cierre, ~0:28; "probemos, tenés oídos").
 - **CTA**: duda entre "aprender más DE X" y "SOBRE X" → se usa "de" para temas de una palabra (más corto y natural en rioplatense) y "sobre" para temas largos o frases ("sobre cómo funciona internet").
+
+## 2026-11-10 — medición de videos (de "se siente" a números)
+- Ayrton vio un video de *Crea con LuisPa* sobre medir en vez de opinar ("una opinión no la puedes recrear, un número sí") y pasó el repo `luispablovillasenor-afk/shorts-animados-claude` (MIT; no le gusta su estética, sí su **enfoque de medir**): hojas de contacto de 60 cuadros, correlación de fase para la cámara, cortes, brillo/contraste/saturación, tirón (*jerk*), 2,77 palabras/s en la referencia.
+- Lo que él quería desde el principio: **analizar videos de referencia de motion graphics** (transiciones, movimientos de cámara, planos, sonido) para usarlos de inspiración con parámetros; no sabía cómo pasarlos: por eso había pensado en el shooting script. → `docs/MEDICION.md`: se adjunta el .mp4 y se mide; sale un script técnico medido.
+- Duda: "¿grabamos a 30 FPS?": sí, es el estándar; medido que alcanza para nuestro movimiento (p95 ≈ 4,7 px/cuadro). → `docs/MEDICION.md`.
+- Hecho: `engine/analisis/medir.py` (propio, calibrado con autotest) y `comparar.py`; primer análisis del reel de WiFi y del ejemplo del repo en `docs/referencias/medidas/`; `docs/referencias/PARAMETROS.md`.

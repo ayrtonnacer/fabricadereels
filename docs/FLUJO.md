@@ -13,6 +13,7 @@ Comandos desde la raíz del repo, salvo donde dice "en la carpeta del video".
 7. **Revisar** (en la carpeta del video): `npx hyperframes check` (sin errores) y `npx hyperframes snapshot --at 0,1.5,…` → **mirar las imágenes** antes de renderizar. Ojo con: cuadro 0 (es la miniatura), textos chicos, cortes entre escenas.
 8. **Efectos**: `sfx_events.py` con los significados fijos (`docs/AUDIO.md`); whoosh en el pico de cada movimiento de cámara. `python engine/audio/sfx.py videos/X`.
 9. **Render** (en la carpeta del video): `npx hyperframes render --workers 4 -o out/mudo.mp4` (~2,5 s por segundo de video en CPU).
+9b. **Medir** (`docs/MEDICION.md`): `python engine/analisis/medir.py videos/X/out/mudo.mp4 videos/X/analisis` (con `--transcripcion` sobre `final.mp4` para palabras/s); revisar cortes, tirón de cámara y ritmo contra `docs/referencias/PARAMETROS.md`. Si Ayrton pasó una referencia: medirla antes de proponer y comparar con `comparar.py`.
 10. **Mezcla**: `python engine/audio/mezcla.py videos/X` → `final.mp4` (−14 LUFS, pico ≤ −1,5 dB).
 11. **Entrega**: mp4 + descripción con créditos (voz: Piper es_AR-daniela, CC BY-SA 4.0; y la fuente).
 12. **Cierre**: registrar correcciones en `docs/DECISIONES.md` y palabras nuevas en `engine/audio/pronunciacion.json`; commit.

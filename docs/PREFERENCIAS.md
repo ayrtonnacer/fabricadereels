@@ -30,3 +30,7 @@ Link + indicaciones → guion (público: técnicos, principiantes, reclutadores)
 - **"WiFi" = "uaifai"** (aprobado). "router" = "ráuter" (a confirmar).
 - CTA: "de <tema>" para temas de una palabra; "sobre <tema>" para frases largas.
 - Pasa **investigación propia** (guías, artículos) para que la use y la deje documentada: `docs/THREEJS.md`.
+
+## Agregado 2026-11-10
+- **Medir en vez de opinar**: prefiere parámetros técnicos replicables a percepciones subjetivas; quiere analizar videos de referencia (transiciones, cámara, planos, sonido) para tener parámetros de inspiración. Se le pasa el .mp4 a Claude y se mide (`docs/MEDICION.md`).
+- Renderizamos a **30 fps** (estándar; alcanza para nuestro movimiento).

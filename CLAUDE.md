@@ -3,7 +3,7 @@
 Repo de @ayrtonnacer para producir reels verticales (1080×1920, ~30–60 s) explicativos de programación, matemática, ciberseguridad y Linux.
 Flujo: **el usuario pega una fuente (link o tema, a veces con lo que quiere o no) → Claude escribe el guion → el usuario lo aprueba → Claude arma el script técnico (planos, cámara, sfx) → se anima con HyperFrames (motion graphics 2D + cámara 2.5D) → voz Piper (Daniela es_AR) + efectos + música → mp4.**
 
-Cuando el usuario diga "hacé un reel de <fuente>" (o `/reel`), seguí `docs/FLUJO.md` paso a paso. Leé antes: `docs/PREFERENCIAS.md`, `docs/ESTILO.md`, `docs/CAMARA.md` (cómo la cámara da profundidad), `docs/THREEJS.md` (criterios y costos de three.js), `docs/SUBTITULOS.md`, `docs/TIPOGRAFIA.md`, `docs/BITACORA.md` (todo lo que dijo Ayrton), `docs/GUION.md` (Hook→Payoff→CTA/bucle, 2,3 palabras/s; investigación en `docs/INVESTIGACION-GUIONES.md`), `docs/AUDIO.md`, `engine/audio/pronunciacion.json` y **`docs/DECISIONES.md`** (cada corrección de Ayrton; no repetir esos errores).
+Cuando el usuario diga "hacé un reel de <fuente>" (o `/reel`), seguí `docs/FLUJO.md` paso a paso. Leé antes: `docs/PREFERENCIAS.md`, `docs/ESTILO.md`, `docs/CAMARA.md` (cómo la cámara da profundidad), `docs/THREEJS.md` (criterios y costos de three.js), `docs/SUBTITULOS.md`, `docs/TIPOGRAFIA.md`, `docs/BITACORA.md` (todo lo que dijo Ayrton), `docs/GUION.md` (Hook→Payoff→CTA/bucle, 2,3 palabras/s; investigación en `docs/INVESTIGACION-GUIONES.md`), `docs/MEDICION.md`, `docs/AUDIO.md`, `engine/audio/pronunciacion.json` y **`docs/DECISIONES.md`** (cada corrección de Ayrton; no repetir esos errores).
 Para todo lo de HyperFrames (contrato de las composiciones, CLI, bloques del registro) usá las skills `/hyperframes`, `/hyperframes-cli`, `/hyperframes-registry` y `/media-use` que están en `.claude/skills/`. Donde choquen con este manual (voz, audio, estética), gana este manual.
 
 ## Estructura
@@ -31,6 +31,8 @@ python engine/subtitulos.py videos/X                  # subtítulos con tiempos 
 python engine/audio/sfx.py videos/X                   # efectos desde sfx_events.py
 (cd videos/X && npx hyperframes render --workers 4 -o out/mudo.mp4)   # ~2,5 s por segundo de video en CPU
 python engine/audio/mezcla.py videos/X                # mezcla −14 LUFS + out/mudo.mp4 → final.mp4
+python engine/analisis/medir.py video.mp4 salida/ [--transcripcion t.txt]   # mide cámara, cortes, color, audio → números + script técnico medido
+python engine/analisis/comparar.py ref/metricas.json propio/metricas.json  # qué parámetro se aleja de la referencia
 ```
 Instalación: `npm install` (HyperFrames fijado en 0.9.26) y `pip install -r requirements.txt`; requiere Node ≥ 22 y ffmpeg.
 
@@ -46,4 +48,5 @@ Instalación: `npm install` (HyperFrames fijado en 0.9.26) y `pip install -r req
 8. Cambiar UNA cosa por vez y mostrar cuadros (`snapshot`) antes de renderizar. **Subtítulos siempre** (se ve mucho en silencio): `docs/SUBTITULOS.md`; zona segura: imagen hasta y ≈ 1100, subtítulos en 1120–1320. Nada de palabras sueltas en la última línea (`docs/TIPOGRAFIA.md`).
 9. Contrato HyperFrames (`/hyperframes`): timeline pausado registrado en `window.__timelines`, nada de `Date.now()`/`Math.random()`/red, `fromTo` en escenas, ids únicos con prefijo por escena, posiciones de cámara por `data-x/y/z` (nunca `transform` en CSS).
 10. **Guardar todo en el repo, siempre y sin que Ayrton lo pida**: cada indicación va a `docs/BITACORA.md` (detalle) y se destila en `docs/PREFERENCIAS.md` (gustos y errores); cada archivo que pase va a `docs/material/` (o `assets/`, `videos/X/fuentes/`). **Repasar `docs/PREFERENCIAS.md` al empezar y antes de entregar cada video.**
-11. Terminar cada video agregando a `docs/DECISIONES.md` lo que el usuario corrigió y a `pronunciacion.json` cada palabra nueva.
+11. **Medir en vez de opinar** (`docs/MEDICION.md`): ante un video de referencia que pase Ayrton, primero `medir.py` y recién después proponer; antes de entregar un reel, medirlo y contrastarlo con `docs/referencias/PARAMETROS.md`. Render a **30 fps**.
+12. Terminar cada video agregando a `docs/DECISIONES.md` lo que el usuario corrigió y a `pronunciacion.json` cada palabra nueva.

@@ -14,3 +14,6 @@ assets/sfx/*
 !assets/sfx/propios/
 !assets/sfx/propios/**
 assets/voces/*.onnx
+# análisis: lo pesado se regenera
+videos/*/analisis/medidas.csv
+videos/*/analisis/hojas/

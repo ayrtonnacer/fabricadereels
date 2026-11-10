@@ -6,5 +6,9 @@ Por archivo: de dónde sale (link o descripción), y por plano: segundos, qué s
 
 Si la referencia es un video: YouTube está bloqueado en la nube; pasarlo como archivo adjunto o describir los planos. Con el archivo, `npx hyperframes snapshot --against ref.mp4` o extraer cuadros con ffmpeg para analizarlo plano por plano.
 
+## Cómo se analiza una referencia
+Ahora no hace falta describir los planos a mano: Ayrton adjunta el **.mp4** y se corre `python engine/analisis/medir.py` (ver `docs/MEDICION.md`). Sale un script técnico **medido** (`SCRIPT-TECNICO-REFERENCIA.md`) y números comparables; se guardan en `docs/referencias/medidas/` y se resumen en `PARAMETROS.md`.
+
 ## Índice
+- `medidas/` — informes medidos (`propios/` y `externos/`); `PARAMETROS.md` — tabla viva de parámetros.
 - `2026-11-code-reel-studio.md` — recorrido de código (repo propio de Ayrton).

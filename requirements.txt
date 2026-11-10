@@ -2,3 +2,4 @@ piper-tts
 numpy
 scipy
 onnx   # tiempos por palabra para subtítulos (piper include_alignments)
+opencv-python-headless   # análisis de video (engine/analisis/medir.py)
