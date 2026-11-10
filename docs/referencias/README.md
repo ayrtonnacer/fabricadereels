@@ -1,24 +1,16 @@
-# Referencias y mediciones — todo en esta carpeta
-Acá está TODO lo que analizamos: videos de referencia que pasó Ayrton y nuestros propios reels.
-
+# Referencias y mediciones — todo con números, en esta carpeta
 | Qué | Dónde |
 |---|---|
-| Patrones aprendidos (leer antes de armar un script técnico) | `SINTESIS.md` |
-| Tabla de parámetros y metas (cámara, ritmo, audio) | `PARAMETROS.md` |
-| Índice de las 10 referencias | `INDICE.md` |
-| Una carpeta por referencia | `externos/<video>/` |
-| Una carpeta por reel nuestro | `propios/<reel>/` (+ comparaciones) |
-| Recorrido de código de un repo de Ayrton | `2026-11-code-reel-studio.md` |
+| **Biblia de estilo**: qué funciona, con cifras, y las tablas de todos los videos | `BIBLIA-DE-ESTILO.md` |
+| Rangos objetivo para nuestros reels (los usan la biblia y `comparar.py`) | `metas.json` |
+| Una carpeta por video de referencia | `externos/<video>/` |
+| Una carpeta por reel nuestro | `propios/<reel>/` |
 | Videos originales (mp4) | `../../assets/referencias/` |
 
-Cada carpeta `externos/<video>/` o `propios/<reel>/` tiene lo mismo:
-- `INFORME.md` — lectura en español de las medidas (cámara, cortes, ritmo, voz, volumen).
-- `SCRIPT-TECNICO-REFERENCIA.md` — un renglón por plano, medido.
-- `ANALISIS.md` — lo cualitativo (qué técnica usa y qué copiar; lo escribe Claude mirando los cuadros). Solo en las 10 referencias de Ayrton.
-- `metricas.json` + `hoja_resumen.jpg` — números y hoja de cuadros.
+Cada carpeta de video tiene: `INFORME.md` (lectura en español: cortes y transiciones, cámara, audio), `metricas.json` (los números), `hoja_resumen.jpg` (un cuadro por segundo).
 
-## Cómo se combinan (no se superponen)
-1. **`medir.py`** (única herramienta de medición) → genera `INFORME`, `SCRIPT-TECNICO-REFERENCIA` y `metricas.json`.
-2. **`ANALISIS.md`** → interpreta qué patrón sirve. Las cifras vigentes son las de `INFORME.md`/`metricas.json`; las que pudieran quedar escritas en `ANALISIS.md` son aproximadas, de un método anterior.
-3. **Script técnico del reel** (`videos/X/script-tecnico.md`) → decide planos, cámara y efectos de NUESTRO reel, usando `PARAMETROS.md` y `SINTESIS.md`.
-Ciclo: medir referencia → elegir parámetros → script técnico → render → `medir.py` sobre nuestro video (se guarda en `propios/`) → `comparar.py`.
+## Flujo (una sola herramienta, una sola fuente de verdad)
+1. `python engine/analisis/medir.py <video> docs/referencias/externos/<slug>` (o `propios/<reel>` con `--transcripcion`).
+2. `python engine/analisis/biblia.py` regenera las tablas de `BIBLIA-DE-ESTILO.md`.
+3. Se ajusta `metas.json` si las referencias nuevas lo piden.
+4. Para un reel nuestro: `python engine/analisis/comparar.py videos/X/analisis/metricas.json` dice qué número cae fuera de la meta.

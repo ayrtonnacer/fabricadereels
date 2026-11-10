@@ -28,20 +28,20 @@
 - Se mueve en el **66.4 %** de los cuadros (65.8 % con zoom); zoom neto -2.44 % por segundo (+ acerca).
 - Velocidad mediana 110 px/s (media 450, p95 1485); 48.5 % del movimiento es lento (< 100 px/s: deriva casi imperceptible). A 1080 de ancho. 10 movimientos, mediana 0.55 s.
 - **Tirón (jerk)**: mediano 2437 px/s³, p95 75955 px/s³ (menos = más suave).
-- **Mover–retener–mover**: 9 movimientos notorios (pico ≥ 100 px/s; 9.2 cada 10 s), pico mediano 1535 px/s, duran 0.57 s; 2 retenciones ≥ 0,5 s (mediana 0.68 s); el pico cae a mitad del movimiento (ease simétrico) en 0.0 % de los movimientos.
+- **Mover–retener–mover**: 9 movimientos notorios (pico ≥ 100 px/s; 9.2 cada 10 s), pico mediano 1535 px/s, duran 0.57 s; 2 retenciones ≥ 0,5 s (mediana 0.68 s); ataque (10 % → pico) mediano 0.13 s, liberación (pico → 10 %) 0.17 s (parecidos = ease simétrico).
 
-| desde | hasta | seg | tipo | desplaz. px | zoom % | vel. máx px/s | pico en |
-|---|---|---|---|---|---|---|---|
-| 0.03 | 0.8 | 0.8 | acercamiento | [150, -248] | 39.4 | 2114 | 100 % |
-| 0.97 | 1.53 | 0.6 | acercamiento | [230, 1] | 37.2 | 1417 | 18 % |
-| 1.8 | 4.0 | 2.23 | alejamiento | [229, 628] | -47.6 | 1535 | 0 % |
-| 4.2 | 4.67 | 0.5 | alejamiento | [274, 53] | -0.5 | 1821 | 0 % |
-| 5.2 | 5.7 | 0.53 | alejamiento | [-3, 4] | -48.5 | 692 | 0 % |
-| 5.83 | 6.3 | 0.5 | alejamiento | [0, 1] | -1.2 | 34 | 100 % |
-| 6.43 | 6.8 | 0.4 | paneo/deriva | [-228, -8] | 0.8 | 1230 | 0 % |
-| 7.13 | 7.27 | 0.17 | paneo/deriva | [-91, -4] | 0.3 | 1300 | 75 % |
-| 8.1 | 8.63 | 0.57 | paneo/deriva | [-153, -16] | 2.5 | 1868 | 100 % |
-| 8.83 | 9.8 | 1.0 | alejamiento | [-466, 57] | -14.1 | 3066 | 0 % |
+| desde | hasta | seg | tipo | desplaz. px | zoom % | vel. máx px/s | ataque s | liberación s |
+|---|---|---|---|---|---|---|---|---|
+| 0.03 | 0.8 | 0.8 | acercamiento | [150, -248] | 39.4 | 2114 | 0.17 | 0.03 |
+| 0.97 | 1.53 | 0.6 | acercamiento | [230, 1] | 37.2 | 1417 | 0.23 | 0.13 |
+| 1.8 | 4.0 | 2.23 | alejamiento | [229, 628] | -47.6 | 1535 | 0.13 | 0.57 |
+| 4.2 | 4.67 | 0.5 | alejamiento | [274, 53] | -0.5 | 1821 | 0.13 | 0.17 |
+| 5.2 | 5.7 | 0.53 | alejamiento | [-3, 4] | -48.5 | 692 | 0.03 | 0.27 |
+| 5.83 | 6.3 | 0.5 | alejamiento | [0, 1] | -1.2 | 34 | 0.4 | 0.03 |
+| 6.43 | 6.8 | 0.4 | paneo/deriva | [-228, -8] | 0.8 | 1230 | 0.1 | 0.1 |
+| 7.13 | 7.27 | 0.17 | paneo/deriva | [-91, -4] | 0.3 | 1300 | 0.1 | 0.03 |
+| 8.1 | 8.63 | 0.57 | paneo/deriva | [-153, -16] | 2.5 | 1868 | 0.07 | 0.03 |
+| 8.83 | 9.8 | 1.0 | alejamiento | [-466, 57] | -14.1 | 3066 | 0.03 | 0.27 |
 
 ## Audio
 - -14.6 LUFS, rango 1.4 LU, pico -1.5 dBTP

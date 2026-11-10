@@ -38,3 +38,6 @@ Link + indicaciones → guion (público: técnicos, principiantes, reclutadores)
 ## Agregado 2026-11-10 (2)
 - **Una sola rama (`main`)**: no quiere ramas ni PR; todo directo a `main`. Explicarle GitHub en simple y evitar jerga.
 - Referencias suyas que le gustan (10 videos en `assets/referencias/`): las **contemplativas/oscuras** con cámara que mueve–retiene–mueve y planos continuos; patrón favorito para reels técnicos: **vista explosionada 3D con etiquetas y tooltip** (`docs/referencias/BIBLIA-DE-ESTILO.md`).
+
+## Agregado 2026-11-10 (3)
+- **Todo análisis con números** (como el repo de LuisPa): nada de "se siente", nada de script técnico cualitativo. Un solo lugar (`docs/referencias/`), una sola herramienta (`medir.py`), comparar siempre contra las metas. **Borrar lo que no se usa.**

@@ -1,25 +1,27 @@
 # Medición: de "se siente" a números que se pueden repetir
-**Idea** (video de *Crea con LuisPa*, repo MIT `luispablovillasenor-afk/shorts-animados-claude`): no le preguntes a la IA qué opina de un video, **ponela a medir**. *"Una opinión no la puedes recrear, un número sí."* Nuestra herramienta propia (`engine/analisis/medir.py`) toma esa idea y la adapta a motion graphics, con audio y script técnico automático.
+**Idea** (video de *Crea con LuisPa*, repo MIT `luispablovillasenor-afk/shorts-animados-claude`): no le preguntes a la IA qué opina de un video, **ponela a medir**. *"Una opinión no la puedes recrear, un número sí."* Nuestra herramienta propia (`engine/analisis/medir.py`) toma esa idea y la adapta a motion graphics, con audio, transiciones y ritmo de cámara medidos.
 
 ## Para qué sirve (tres usos)
-1. **Analizar videos de referencia** que pase Ayrton (transiciones, movimientos de cámara, planos, sonido) y convertirlos en parámetros y en un **script técnico medido**, sin que él tenga que describirlos.
-2. **Verificar nuestros reels** antes de entregarlos (¿la cámara se mueve de forma suave?, ¿el ritmo de palabras es el que queremos?, ¿los cortes caen donde pensamos?).
-3. **Comparar** un reel propio contra una referencia y ver qué número se aleja (`comparar.py`).
+1. **Analizar videos de referencia** que pase Ayrton (transiciones, movimientos de cámara, planos, sonido) y convertirlos en **números** (cortes, transiciones, cámara, ritmo, sonido) que se suman a la biblia de estilo, sin que él tenga que describirlos.
+2. **Verificar nuestros reels** antes de entregarlos (¿la cámara se mueve de forma suave?, ¿el ritmo de palabras es el que queremos?, ¿los cortes caen donde pensamos?) con `comparar.py` contra las metas.
+3. **Comparar** un reel propio contra la biblia de estilo (`docs/referencias/BIBLIA-DE-ESTILO.md`) o contra un video puntual, y ver qué número se aleja.
 
 ## Cómo pasarme un video de referencia
 - **Adjuntá el .mp4** en el chat (arrastrar el archivo). Eso es todo: lo leo como archivo, no hace falta ningún "lenguaje de código".
 - Mejor un **recorte de 20–60 s** (alcanza y pesa poco). Con audio original si querés medir sonido.
 - YouTube/TikTok **no se pueden abrir desde la nube** (bloqueados). En tu compu: `yt-dlp -f "bv*[height<=1080]+ba/b" --merge-output-format mp4 "<link>"` o una grabación de pantalla, y lo adjuntás.
 - Si querés medir también el ritmo de la voz, pegá la **transcripción** (los subtítulos del video sirven).
-- Yo corro `medir.py`, guardo el informe y el script técnico en `docs/referencias/externos/<nombre>/ (o `propios/<reel>/`)`, agrego los números a `docs/referencias/PARAMETROS.md` y te cuento qué aprendí. **Se toma la estructura (ritmo, cámara, sonido), nunca el contenido.**
+- Yo corro `medir.py`, guardo el informe en `docs/referencias/externos/<nombre>/` (o `propios/<reel>/`), regenero las tablas con `python engine/analisis/biblia.py` y te cuento qué aprendí. **Se toma la estructura (ritmo, cámara, sonido), nunca el contenido.**
 
 ## Comandos
 ```
 python engine/analisis/medir.py video.mp4 salida/ [--transcripcion texto.txt] [--hojas]
-python engine/analisis/comparar.py referencia/metricas.json propio/metricas.json [--tolerancia 25]
+python engine/analisis/comparar.py propio/metricas.json                       # contra las metas (metas.json) y las referencias afines
+python engine/analisis/comparar.py referencia/metricas.json propio/metricas.json [--tolerancia 25]   # contra un video puntual
+python engine/analisis/biblia.py                                          # regenera las tablas de la biblia de estilo
 python engine/analisis/medir.py --autotest      # verifica el método con movimientos sintéticos conocidos
 ```
-Salida en `salida/`: `INFORME.md` (lectura en español), `SCRIPT-TECNICO-REFERENCIA.md` (un renglón por plano), `metricas.json`, `medidas.csv` (por cuadro), `hoja_resumen.jpg` (1 cuadro por segundo) y, con `--hojas`, hojas de 60 cuadros con su número. Un reel de 33 s se mide en ~14 s.
+Salida en `salida/`: `INFORME.md` (lectura en español, con tabla de cortes/transiciones y de movimientos de cámara), `metricas.json`, `medidas.csv` (por cuadro), `hoja_resumen.jpg` (1 cuadro por segundo) y, con `--hojas`, hojas de 60 cuadros con su número. Un reel de 33 s se mide en ~14 s.
 
 ## Qué se mide y cómo leerlo
 | Métrica | Qué es | Cómo se mide |
@@ -32,6 +34,8 @@ Salida en `salida/`: `INFORME.md` (lectura en español), `SCRIPT-TECNICO-REFEREN
 | **Tirón (jerk)** (px/s³) | qué tan bruscamente cambia la aceleración; **menos = más suave** | 3.ª derivada de la posición de la cámara (Savitzky–Golay) dentro de los tramos de movimiento. Es lo que delata un movimiento "mecánico" frente a uno con ease |
 | Brillo, contraste, saturación, colores dominantes | el look medido | media de luminancia, su desvío, saturación HSV, moda de colores cuantizados |
 | Audio | LUFS, rango dinámico, pico, % de silencio, ataques por segundo, golpes graves, % de voz activa | EBU R128 (ffmpeg) + análisis espectral propio |
+| Transiciones | por cada corte: velocidad de cámara en los 0,3 s previos, plano que sigue, distancia al golpe de sonido más cercano; % de cortes con movimiento fuerte antes y % sobre un golpe (±0,1 s) | de la misma detección de cortes y de los ataques de audio |
+| Mover–retener–mover | movimientos notorios (pico ≥ 100 px/s) cada 10 s, su pico y duración, retención entre movimientos (≥ 0,5 s), ataque y liberación (tiempo del 10 % al pico y del pico al 10 %) | tramos de movimiento de la cámara; ataque y liberación sobre la velocidad suavizada |
 | Palabras por segundo | ritmo de la narración | **solo con transcripción** (palabras ÷ segundos). Sin ella no se estima: el intento de estimarlo por sílabas del audio resultó engañoso (daba 6,0 cuando el real es ~8,6) y se descartó |
 
 ## Calibración y límites (cómo sabemos que no miente)
@@ -43,12 +47,8 @@ Salida en `salida/`: `INFORME.md` (lectura en español), `SCRIPT-TECNICO-REFEREN
 ## 30 fps: ¿grabamos a 30? Sí
 30 fps es el estándar de contenido explicativo en redes (cine 24; web/redes 30; 60 para acción rápida o gaming). Reels, TikTok y Shorts aceptan hasta 60. Nuestros reels se renderizan a **30 fps** (HyperFrames por defecto) y está medido que alcanza: la cámara va a una velocidad mediana de **13 px/s** y su p95 es **141 px/s ≈ 4,7 px por cuadro**; el parpadeo por saltos recién aparece cuando el movimiento pasa de ~15 px por cuadro. 60 fps duplicaría el tiempo de render sin ganancia visible; solo valdría para movimientos muy rápidos. El analizador mide cada cuadro a la tasa nativa del video (si una referencia está a 60 fps, mide a 60).
 
-## Primeros hallazgos (reel de WiFi v4 vs ejemplo externo del repo)
-- Cámara en movimiento en **67 %** de los cuadros (el ejemplo externo: 66 %; el video que vio Ayrton hablaba de 65 %): coincidencia con la "cámara que nunca se queda quieta".
-- Nuestra cámara es **mucho más lenta** que la del ejemplo (mediana 13 vs 110 px/s; 93 % de movimiento lento vs 49 %) y **mucho más suave** (jerk mediano ~450 vs ~2.400 px/s³): es el estilo de dolly lento y orbitas con ease que queremos.
-- Ritmo: 6 cortes (plano mediano 4,6 s) contra 8 cortes en 9,8 s del ejemplo (plano mediano 0,7 s): somos mucho más calmos. Es una decisión de estilo, no un error.
-- **Voz: 3,11 palabras por segundo** en total (3,9 mientras se habla). La referencia que cita el video de LuisPa (canal de referencia *Zack D. Films*) es **2,77**: vamos ~12 % más rápido, y por encima de la regla de planificación de `docs/GUION.md` (2,3). Para público que está aprendiendo conviene bajar a ~2,8: `voz.length_scale` ≈ 1,0 o ~10 % menos palabras.
-- Audio: −14,0 LUFS, 0,3 % de silencio (casi no hay aire entre frases); la referencia externa tiene 0 %.
+## Hallazgos
+Van en un solo lugar, con números y comparados con las referencias: `docs/referencias/BIBLIA-DE-ESTILO.md`. (Voz del WiFi v4: 3,11 palabras/s contra una meta de 2,6–2,9; ver la biblia.)
 
 ## Regla de uso
-Antes de entregar un reel: `medir.py` sobre `final.mp4` con la transcripción, mirar el **tirón**, el **ritmo de palabras** y que los **cortes** caigan donde dice el script técnico; guardar el informe en `videos/X/analisis/` y sumar la fila a `docs/referencias/PARAMETROS.md`. Cuando Ayrton pase una referencia: medirla primero y recién después proponer.
+Antes de entregar un reel: `medir.py` sobre `final.mp4` con la transcripción, mirar el **tirón**, el **ritmo de palabras** y que los **cortes** caigan donde dice el `plan.md`; correr `comparar.py videos/X/analisis/metricas.json`, guardar el informe en `docs/referencias/propios/<reel>/` y correr `biblia.py`. Cuando Ayrton pase una referencia: medirla primero y recién después proponer.
