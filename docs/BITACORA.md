@@ -59,3 +59,8 @@ Todo lo que Ayrton dice y pasa se guarda acá (y el material en `docs/material/`
   2. **Sonido de la sección del router** ("el router las recibe, las decodifica y las manda a internet"): que sea el **sonido de router/módem**, no el tipeo digital sobre los 0/1 del router. El **tipeo digital queda solo cuando se escriben los 0 y 1 en la computadora**.
 - Pidió que el proceso a futuro sea **más dinámico y gaste menos tokens**: solo pasar el material y que se generen los videos bien (se gastó ~50 % del cupo semanal en esta serie de cambios).
 - Hecho: `envia`, `router` y `ethernet` usan anillos (`E.anillo`); ondas sinusoidales solo en `bandas`; `sfx_events.py`: módem en todo el router.
+
+## 2026-11-10 — Prueba A/B: estética hairline vs HackTheBox (reel del WiFi)
+- Ayrton pasó `@lucasmarkes/hairline` (npm, MIT, 33 figuras isométricas SVG de línea fina, responden al puntero) para ver si le gusta más que HackTheBox en el reel del WiFi.
+- Hecho: copia `videos/2026-11-wifi-hairline/` (el original no se toca). El paquete en sí no se usa en el render (son SVG interactivos por puntero, no se pueden buscar por tiempo); se replicó el **look** en three.js: placas planas del color del fondo + aristas finas (LineSegments2, 2,2 px), gris sobre casi negro, lima solo para señal/énfasis, sin luces/IBL/glow. Se activa con `--estilo: hairline` en `marca.css` (`escena3d.js` lo lee).
+- Render mudo 63 s para 33 s (≈1,9 s/s; el original con IBL ≈ 2 min). Pendiente: que Ayrton elija.
