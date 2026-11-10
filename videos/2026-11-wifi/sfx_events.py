@@ -20,13 +20,15 @@ def build(T, S, lib=None):
     # envía: aparece el notebook, se tipean los bits, antena, la onda se dibuja, salen las ondas
     t = S['envia']
     T.put(t + 0.3, pop(1000), 0.35); dg = tramo('interface-texto-digital', 0.0, 0.95); T.put(t + 0.4, dg if dg is not None else tick(), 0.55)
-    T.put(t + 1.2, pop(1300), 0.35); T.put(t + 1.7, whoosh(0.5), 0.35)
-    for k in range(3): T.put(t + 2.7 + 0.5 * k, pop(900 - 60 * k), 0.22)
+    T.put(t + 1.2, pop(1300), 0.35); T.put(t + 1.45, whoosh(0.5), 0.35)
+    for k in range(4): T.put(t + 1.5 + 0.5 * k, pop(900 - 50 * k), 0.22)
     # router: la onda llega, decodifica (tipeo), cable (thunk), paquetes, y de vuelta
     t = S['router']
     T.put(t - 0.12, whoosh(0.4), 0.45); T.put(t + 0.3, pop(1000), 0.3)
-    T.put(t + 0.7, whoosh(0.4), 0.3); dg = tramo('interface-texto-digital', 0.0, 0.7); T.put(t + 1.3, dg if dg is not None else tick(), 0.5)
-    T.put(t + 2.3, thunk(), 0.5); md = tramo('modem-conexion', 3.3, 5.1, 0.05, 0.5); T.put(t + 2.35, md if md is not None else whoosh(0.4), 0.38)
+    T.put(t + 0.7, whoosh(0.4), 0.3)
+    # toda la sección del router lleva el sonido de módem (ya NO el tipeo digital, que queda solo para los bits de la notebook)
+    md = tramo('modem-conexion', 2.5, 6.6, 0.15, 0.45); T.put(t + 0.9, md if md is not None else whoosh(0.4), 0.45)
+    T.put(t + 2.3, thunk(), 0.5)
     for k in range(3): T.put(t + 2.8 + 0.16 * k, tick(), 0.3)
     T.put(t + 4.2, whoosh(0.4), 0.45)
     # ethernet: el cable pasa a ondas (detalle de profesional)
