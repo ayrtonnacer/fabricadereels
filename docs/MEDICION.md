@@ -11,7 +11,7 @@
 - Mejor un **recorte de 20–60 s** (alcanza y pesa poco). Con audio original si querés medir sonido.
 - YouTube/TikTok **no se pueden abrir desde la nube** (bloqueados). En tu compu: `yt-dlp -f "bv*[height<=1080]+ba/b" --merge-output-format mp4 "<link>"` o una grabación de pantalla, y lo adjuntás.
 - Si querés medir también el ritmo de la voz, pegá la **transcripción** (los subtítulos del video sirven).
-- Yo corro `medir.py`, guardo el informe y el script técnico en `docs/referencias/medidas/externos/<nombre>/`, agrego los números a `docs/referencias/PARAMETROS.md` y te cuento qué aprendí. **Se toma la estructura (ritmo, cámara, sonido), nunca el contenido.**
+- Yo corro `medir.py`, guardo el informe y el script técnico en `docs/referencias/externos/<nombre>/ (o `propios/<reel>/`)`, agrego los números a `docs/referencias/PARAMETROS.md` y te cuento qué aprendí. **Se toma la estructura (ritmo, cámara, sonido), nunca el contenido.**
 
 ## Comandos
 ```

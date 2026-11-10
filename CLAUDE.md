@@ -16,7 +16,7 @@ Para todo lo de HyperFrames (contrato de las composiciones, CLI, bloques del reg
 - `videos/_plantilla/` — punto de partida (3 escenas de ejemplo: gancho, explica, cierre). Se copia con `engine/nuevo.sh`.
 - `engine/` — lo nuestro alrededor de HyperFrames: `nuevo.sh`, `tiempos.py` y `audio/` (`voz.py`, `sfx.py`, `sfxlib.py`, `mezcla.py`, `radio.py`, `cortar_teclas.py`, `pronunciacion.json`).
 - `docs/material/` — archivos que pasa Ayrton (artículos, capturas con correcciones, referencias); `docs/BITACORA.md` — registro de sus indicaciones.
-- `docs/referencias/` — referencias medidas (`medidas/`) y tabla de parámetros (`PARAMETROS.md`); `docs/referencias/analisis/` (análisis y `SINTESIS.md`) + `assets/referencias/` (los 10 mp4) — los 10 videos de referencia que ya pasó Ayrton (leer antes de armar el script técnico).
+- `docs/referencias/` — TODO el análisis en un solo lugar: `externos/<video>/` (por referencia: `INFORME.md` medido, `SCRIPT-TECNICO-REFERENCIA.md`, `ANALISIS.md` cualitativo, `metricas.json`), `propios/<reel>/` (nuestros reels medidos), `PARAMETROS.md` (tabla), `SINTESIS.md` (patrones; leer antes de armar el script técnico), `INDICE.md`. Los 10 mp4 originales están en `assets/referencias/`.
 - `assets/voces/` (modelo Piper partido en 3), `assets/musica/`, `assets/sfx/propios/` (tipeo real, chinn, clicks).
 - El motor anterior (three.js propio) y los videos de Parrot quedaron en el historial de git: commit `ae9a888`.
 

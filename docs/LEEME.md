@@ -9,7 +9,7 @@
 | Subtítulos y texto | `SUBTITULOS.md`, `TIPOGRAFIA.md` |
 | Audio y voz | `AUDIO.md` (+ `../engine/audio/pronunciacion.json`) |
 | Medir videos | `MEDICION.md`, `referencias/PARAMETROS.md` |
-| Referencias (10 videos de Ayrton) | `referencias/analisis/SINTESIS.md`, `ANALISIS-REFERENCIAS.md` |
+| Referencias (10 videos de Ayrton) | `referencias/` (carpeta única: `SINTESIS.md`, `externos/`, `propios/`), `ANALISIS-REFERENCIAS.md` |
 | Registro de lo que dijo Ayrton | `BITACORA.md`; archivos que pasó: `material/` |
 | Vocabulario de edición | `GLOSARIO-EDICION.md` |
 | Archivo histórico (motor anterior, no usar) | `historial/` |
