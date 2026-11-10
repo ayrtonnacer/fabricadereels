@@ -103,6 +103,7 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--
   --plate: #0A0D12; --hi: #FAFAFA; --edge: #A1A1AA; --mid: #52525B; --trazo: 2.2;
   --bg: #0A0D12; --bg-hondo: #0A0D12; --panel: #0F1218; --line: #27272A; --grilla: rgba(113, 113, 122, .22);
   --text: #FAFAFA; --muted: #A1A1AA; --sky: #FAFAFA; --acc-glow: transparent;
+  --acc: #FF2E3F;   /* prueba: rojo en vez del lima #9FEF00 */
 }
 .fondo { background: var(--bg) !important; }
 .vineta { background: radial-gradient(ellipse at 50% 45%, transparent 60%, rgba(0, 0, 0, .45) 100%) !important; }
