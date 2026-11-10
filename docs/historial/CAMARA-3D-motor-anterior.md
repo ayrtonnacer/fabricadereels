@@ -1,3 +1,5 @@
+> **ARCHIVO HISTÓRICO (2026-11-10).** Describe el motor anterior ("Claqueta": `engine/camara3d.js`, `./reel`, `costuras.js`), reemplazado por HyperFrames + three.js. **Vigente:** `docs/CAMARA.md`, `docs/THREEJS.md` y `assets/escena3d.js`. Se conserva por las ideas (qué se probó y por qué), no como instrucciones.
+
 # Cámara 3D estilo After Effects (recorridos, cenital, latigazos)
 
 Pedido de Ayrton (2026-11-08): videos con **recorrido en 3D**, cambios de plano (cenital, órbita, dron en primera persona) y transiciones de video viral de IG, como se hace en After Effects, pero hechos con Claude.

@@ -1,22 +1,22 @@
 # Fábrica de reels — manual de operación
 
 Repo de @ayrtonnacer para producir reels verticales (1080×1920, ~30–60 s) explicativos de programación, matemática, ciberseguridad y Linux.
-Flujo: **el usuario pega una fuente (link o tema, a veces con lo que quiere o no) → Claude escribe el guion → el usuario lo aprueba → Claude arma el script técnico (planos, cámara, sfx) → se anima con HyperFrames (motion graphics 2D + cámara 2.5D) → voz Piper (Daniela es_AR) + efectos + música → mp4.**
+Flujo: **el usuario pega una fuente (link o tema, a veces con lo que quiere o no) → Claude escribe el guion → el usuario lo aprueba → Claude arma el script técnico (planos, cámara, sfx) → se anima con HyperFrames (three.js r187 con cámara que se mueve en profundidad) → voz Piper (Daniela es_AR) + efectos + música → mp4.**
 
-Cuando el usuario diga "hacé un reel de <fuente>" (o `/reel`), seguí `docs/FLUJO.md` paso a paso. Leé antes: `docs/PREFERENCIAS.md`, `docs/ESTILO.md`, `docs/CAMARA.md` (cómo la cámara da profundidad), `docs/THREEJS.md` (criterios y costos de three.js), `docs/SUBTITULOS.md`, `docs/TIPOGRAFIA.md`, `docs/BITACORA.md` (todo lo que dijo Ayrton), `docs/GUION.md` (Hook→Payoff→CTA/bucle, 2,3 palabras/s; investigación en `docs/INVESTIGACION-GUIONES.md`), `docs/MEDICION.md`, `docs/AUDIO.md`, `engine/audio/pronunciacion.json` y **`docs/DECISIONES.md`** (cada corrección de Ayrton; no repetir esos errores).
+Cuando el usuario diga "hacé un reel de <fuente>" (o `/reel`), seguí `docs/FLUJO.md` paso a paso. Mapa de todos los documentos: `docs/LEEME.md`. Leé antes: `docs/PREFERENCIAS.md`, `docs/ESTILO.md`, `docs/CAMARA.md` (cómo la cámara da profundidad), `docs/THREEJS.md` (criterios y costos de three.js), `docs/SUBTITULOS.md`, `docs/TIPOGRAFIA.md`, `docs/BITACORA.md` (todo lo que dijo Ayrton), `docs/GUION.md` (Hook→Payoff→CTA/bucle, 2,3 palabras/s; investigación en `docs/INVESTIGACION-GUIONES.md`), `docs/MEDICION.md`, `docs/AUDIO.md`, `engine/audio/pronunciacion.json` y **`docs/DECISIONES.md`** (cada corrección de Ayrton; no repetir esos errores).
 Para todo lo de HyperFrames (contrato de las composiciones, CLI, bloques del registro) usá las skills `/hyperframes`, `/hyperframes-cli`, `/hyperframes-registry` y `/media-use` que están en `.claude/skills/`. Donde choquen con este manual (voz, audio, estética), gana este manual.
 
 ## Estructura
 - `videos/<AAAA-MM-tema>/` — un video = un proyecto HyperFrames:
   - `video.json` — única fuente de verdad de tiempos: escenas (`id`, `d`), líneas de voz con su tiempo, audio.
   - `index.html` — raíz: monta una composición por escena (duraciones escritas por `engine/tiempos.py`).
-  - `compositions/<escena>.html` — cada escena: su set 2.5D, su cámara y su timeline GSAP.
+  - `compositions/<escena>.html` — cada escena: su set 3D (three.js), su cámara y su timeline GSAP.
   - `assets/` — `marca.css` (identidad), `escena3d.js` + `three.module.js` (librería 3D), `gsap.min.js` y `fonts/` locales (nada de CDN: el render no usa la red).
   - `sfx_events.py` (efectos), `guion.md`, `script-tecnico.md`; salidas `out/`, `audio/`, `final.mp4` (ignoradas por git).
 - `videos/_plantilla/` — punto de partida (3 escenas de ejemplo: gancho, explica, cierre). Se copia con `engine/nuevo.sh`.
 - `engine/` — lo nuestro alrededor de HyperFrames: `nuevo.sh`, `tiempos.py` y `audio/` (`voz.py`, `sfx.py`, `sfxlib.py`, `mezcla.py`, `radio.py`, `cortar_teclas.py`, `pronunciacion.json`).
 - `docs/material/` — archivos que pasa Ayrton (artículos, capturas con correcciones, referencias); `docs/BITACORA.md` — registro de sus indicaciones.
-- `docs/referencias/` — referencias medidas (`medidas/`) y tabla de parámetros (`PARAMETROS.md`); `referencias/` + `assets/referencias/` — los 10 videos de referencia que ya pasó Ayrton, con su análisis y `SINTESIS.md` (leer antes de armar el script técnico).
+- `docs/referencias/` — referencias medidas (`medidas/`) y tabla de parámetros (`PARAMETROS.md`); `docs/referencias/analisis/` (análisis y `SINTESIS.md`) + `assets/referencias/` (los 10 mp4) — los 10 videos de referencia que ya pasó Ayrton (leer antes de armar el script técnico).
 - `assets/voces/` (modelo Piper partido en 3), `assets/musica/`, `assets/sfx/propios/` (tipeo real, chinn, clicks).
 - El motor anterior (three.js propio) y los videos de Parrot quedaron en el historial de git: commit `ae9a888`.
 

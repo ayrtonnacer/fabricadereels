@@ -29,7 +29,7 @@ Hook-promesa (0–3 s) → Contexto mínimo (3–7) → Cuerpo A (7–20) → Mi
 - Proceso: elegir concepto → buscar el ángulo (error, historia, sorpresa) → **escribir primero el payoff y después el hook** → elegir la analogía visual antes del cuerpo (rueda, interruptores, embudo, resto) → recortar sin piedad.
 
 ## Calibración de la voz (medido en este repo)
-- Piper Daniela con `length_scale 0.92` habla ≈ 3,4 palabras/s *mientras habla*; con pausas y escenas, el video completo da **≈ 2,3 palabras/s**. **Planificar con 2,3 wps** (la investigación sugiere 2,5 genérico): 30 s ≈ 69 palabras, 45 s ≈ 103, 60 s ≈ 138.
+- Piper Daniela con `length_scale 0.92` habla ≈ 3,4 palabras/s *mientras habla*; con pausas y escenas, el video completo da **≈ 2,3 palabras/s**. **Planificar con 2,3 wps** (ojo: el reel de WiFi, con 103 palabras en 33 s, midió **3,11 pal/s** en total y 3,9 hablando; la referencia citada es 2,77. Para público que aprende, apuntar a ~2,8 y recortar o bajar la velocidad de la voz; ver `docs/MEDICION.md`) (la investigación sugiere 2,5 genérico): 30 s ≈ 69 palabras, 45 s ≈ 103, 60 s ≈ 138.
 - Contar palabras *como se pronuncian*: "777" = 3, "SHA-256" = 4–5, "@ayrtonnacer" = "arroba ayrton nacer".
 
 ## Lo visual del guion (Mayer + práctica)

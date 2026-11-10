@@ -1,7 +1,7 @@
 # Movimiento y transiciones (doctrina)
 
 Fuente: reglas de movimiento de **HyperFrames** (heygen-com/hyperframes, Apache-2.0: `motion-doctrine`, `cut-the-curve`, `references/motion.md`, `review.md`), medidas por ellos cuadro a cuadro en sus propios videos. Revisado el 2026-11-08 y adaptado a este motor; **no usamos HyperFrames** (ver "Qué se tomó y qué no" al final).
-Implementación: `engine/costuras.js` (transiciones entre escenas), `engine/camara3d.js` (cámara 3D), `engine/revisar.py` (chequeos).
+**Vigente como doctrina** (vale para cualquier herramienta). Implementación hoy: las transiciones se arman en cada escena (`videos/X/compositions/*.html`) y la cámara con `E.ruta` de `assets/escena3d.js` (`docs/CAMARA.md`); los chequeos son `npx hyperframes check` + `python engine/analisis/medir.py`. (Antes: `costuras.js`, `camara3d.js`, `revisar.py` del motor anterior.)
 
 ## 1. La ley del vector (lo más importante)
 > Cómo SALE una escena decide cómo ENTRA la siguiente: mismo eje, misma dirección, misma velocidad, y el corte cae a mitad del movimiento de los dos lados.

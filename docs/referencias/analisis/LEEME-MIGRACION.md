@@ -1,6 +1,6 @@
-# Léeme: de dónde viene esta carpeta (2026-11-10)
+# Léeme: de dónde viene esta carpeta (2026-11-10; hoy en `docs/referencias/analisis/`)
 Estos análisis los hizo una sesión anterior (9/11) sobre **10 videos de referencia que pasó Ayrton**, con el motor viejo (llamado "Claqueta": `reel`, `camara3d.js`, `costuras.js`). Ese motor se reemplazó por **HyperFrames + three.js + `escena3d.js`**, pero **el análisis sigue vigente**: qué hace cada referencia, el catálogo de transiciones y los patrones (vista explosionada con etiquetas, cámara "mover–retener–mover", plano continuo, una palabra por tic de sonido, rejilla de beats).
 - Donde dice `Claqueta`, `rig.toma`, `costuras`, `./reel analizar`, `camara3d.js` → equivale hoy a `escena3d.js` (`E.ruta`, `E.animar`), transiciones hechas en las escenas, y `python engine/analisis/medir.py`.
 - Los **números medidos con el método nuevo** (correlación de fase, tirón, voz, etc.) están en `docs/referencias/medidas/externos/<video>/` y resumidos en `docs/referencias/PARAMETROS.md`.
 - Los videos originales están en `assets/referencias/` (25 MB). El analizador anterior (flujo óptico) quedó en `engine/analisis/previo/` solo como historial.
-- Documentos que vinieron junto: `docs/ANALISIS-REFERENCIAS.md`, `docs/MOVIMIENTO.md`, `docs/CAMARA-3D.md`, `docs/FRAMEWORK.md` (escritos para el motor viejo; sirven como criterio, no como instrucciones de uso).
+- Documentos que vinieron junto: `docs/MOVIMIENTO.md` (doctrina vigente), `docs/ANALISIS-REFERENCIAS.md` (flujo reescrito), y en `docs/historial/` los del motor viejo (`CAMARA-3D`, `FRAMEWORK`).

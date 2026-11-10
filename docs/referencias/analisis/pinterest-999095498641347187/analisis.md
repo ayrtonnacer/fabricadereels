@@ -1,6 +1,6 @@
 # Desglose de referencia — Glitch cyber sobre calle real («system shutdown»)
 
-> Referencia de motion graphics que pasó Ayrton (2026-11-09), guardada en `assets/referencias/pinterest-999095498641347187.mp4`. Cortes, ritmo y volumen: **medidos** por `engine/analizar_video.py`. Planos, movimientos y transiciones: **leídos mirando los cuadros** (en motion graphics 2D las etiquetas automáticas de movimiento no sirven: se mueven los elementos, no una cámara). Vocabulario: `docs/GLOSARIO-EDICION.md` y `docs/MOVIMIENTO.md`. Hojas de cuadros locales en `referencias/pinterest-999095498641347187/` (no van a git; se regeneran con `./reel analizar`).
+> Referencia de motion graphics que pasó Ayrton (2026-11-09), guardada en `assets/referencias/pinterest-999095498641347187.mp4`. Cortes, ritmo y volumen: **medidos** por `engine/analisis/previo/analizar_video.py` (histórico; hoy `engine/analisis/medir.py`). Planos, movimientos y transiciones: **leídos mirando los cuadros** (en motion graphics 2D las etiquetas automáticas de movimiento no sirven: se mueven los elementos, no una cámara). Vocabulario: `docs/GLOSARIO-EDICION.md` y `docs/MOVIMIENTO.md`. Hojas de cuadros locales en `docs/referencias/analisis/pinterest-999095498641347187/` (no van a git; se regeneran con `./reel analizar`).
 
 ## Ficha
 - **Archivo:** `assets/referencias/pinterest-999095498641347187.mp4` · 720x1280 · 60 fps · 8,8 s
@@ -55,4 +55,4 @@ El metraje de Rusia/San Petersburgo y la persona (identidad de terceros), el azu
 - **Reveal por grilla** al pasar de «sistema vulnerable» a «sistema parcheado» (el farol azul → cálido).
 
 ## Datos crudos
-- `referencias/pinterest-999095498641347187/planos.json` y `audio.json` (medidos). Resumen de patrones de todas las referencias: `referencias/SINTESIS.md`.
+- `docs/referencias/analisis/pinterest-999095498641347187/planos.json` y `audio.json` (medidos). Resumen de patrones de todas las referencias: `referencias/SINTESIS.md`.

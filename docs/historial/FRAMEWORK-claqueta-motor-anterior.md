@@ -1,3 +1,5 @@
+> **ARCHIVO HISTÓRICO (2026-11-10).** Describe el motor anterior ("Claqueta": `engine/camara3d.js`, `./reel`, `costuras.js`), reemplazado por HyperFrames + three.js. **Vigente:** `docs/CAMARA.md`, `docs/THREEJS.md` y `assets/escena3d.js`. Se conserva por las ideas (qué se probó y por qué), no como instrucciones.
+
 # Claqueta: cómo funciona por dentro
 
 Claqueta es un **framework propio para hacer reels**: el mismo modelo que HyperFrames y Remotion (una página web que Chrome dibuja cuadro por cuadro y FFmpeg convierte en video), pero hecho a medida de los reels educativos de @ayrtonnacer: formato 1080×1920, voz Piper en español rioplatense, estética HackTheBox, 3D con three.js, reglas de guion y de movimiento, y un revisor que conoce las correcciones de Ayrton.

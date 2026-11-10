@@ -1,6 +1,6 @@
 # Desglose de referencia — «Los mercados corren con miedo y codicia» — psicología del trader (32 s)
 
-> Referencia de motion graphics que pasó Ayrton (2026-11-09), guardada en `assets/referencias/motion-ref-4.mp4`. Cortes, ritmo y volumen: **medidos** por `engine/analizar_video.py`. Planos, movimientos y transiciones: **leídos mirando los cuadros** (en motion graphics 2D las etiquetas automáticas de movimiento no sirven: se mueven los elementos, no una cámara). Vocabulario: `docs/GLOSARIO-EDICION.md` y `docs/MOVIMIENTO.md`. Hojas de cuadros locales en `referencias/motion-ref-4/` (no van a git; se regeneran con `./reel analizar`).
+> Referencia de motion graphics que pasó Ayrton (2026-11-09), guardada en `assets/referencias/motion-ref-4.mp4`. Cortes, ritmo y volumen: **medidos** por `engine/analisis/previo/analizar_video.py` (histórico; hoy `engine/analisis/medir.py`). Planos, movimientos y transiciones: **leídos mirando los cuadros** (en motion graphics 2D las etiquetas automáticas de movimiento no sirven: se mueven los elementos, no una cámara). Vocabulario: `docs/GLOSARIO-EDICION.md` y `docs/MOVIMIENTO.md`. Hojas de cuadros locales en `docs/referencias/analisis/motion-ref-4/` (no van a git; se regeneran con `./reel analizar`).
 
 ## Ficha
 - **Archivo:** `assets/referencias/motion-ref-4.mp4` · 720x1278 · 30 fps · 31,6 s
@@ -55,4 +55,4 @@ El CTA «Save this post, your future self will thank you»: nuestra regla 3 proh
 - **Una palabra por tic** para un reel con voz lenta: cada término técnico entra con su clic.
 
 ## Datos crudos
-- `referencias/motion-ref-4/planos.json` y `audio.json` (medidos). Resumen de patrones de todas las referencias: `referencias/SINTESIS.md`.
+- `docs/referencias/analisis/motion-ref-4/planos.json` y `audio.json` (medidos). Resumen de patrones de todas las referencias: `referencias/SINTESIS.md`.

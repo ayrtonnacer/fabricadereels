@@ -1,6 +1,6 @@
 # Desglose de referencia — Explicador largo de producto (agentes de IA, 104 s) con subtítulos por palabra
 
-> Referencia de motion graphics que pasó Ayrton (2026-11-09), guardada en `assets/referencias/motion-ref-5.mp4`. Cortes, ritmo y volumen: **medidos** por `engine/analizar_video.py`. Planos, movimientos y transiciones: **leídos mirando los cuadros** (en motion graphics 2D las etiquetas automáticas de movimiento no sirven: se mueven los elementos, no una cámara). Vocabulario: `docs/GLOSARIO-EDICION.md` y `docs/MOVIMIENTO.md`. Hojas de cuadros locales en `referencias/motion-ref-5/` (no van a git; se regeneran con `./reel analizar`).
+> Referencia de motion graphics que pasó Ayrton (2026-11-09), guardada en `assets/referencias/motion-ref-5.mp4`. Cortes, ritmo y volumen: **medidos** por `engine/analisis/previo/analizar_video.py` (histórico; hoy `engine/analisis/medir.py`). Planos, movimientos y transiciones: **leídos mirando los cuadros** (en motion graphics 2D las etiquetas automáticas de movimiento no sirven: se mueven los elementos, no una cámara). Vocabulario: `docs/GLOSARIO-EDICION.md` y `docs/MOVIMIENTO.md`. Hojas de cuadros locales en `docs/referencias/analisis/motion-ref-5/` (no van a git; se regeneran con `./reel analizar`).
 
 ## Ficha
 - **Archivo:** `assets/referencias/motion-ref-5.mp4` · 720x1280 · 30 fps · 1:44
@@ -54,4 +54,4 @@ El producto (Glasser.AI, InsiderForce), los precios, la mascota de píxeles, la 
 - **Tarjetas apiladas con una frase de definición** (como «Rank Tracking API») para presentar protocolos o comandos con su resultado.
 
 ## Datos crudos
-- `referencias/motion-ref-5/planos.json` y `audio.json` (medidos). Resumen de patrones de todas las referencias: `referencias/SINTESIS.md`.
+- `docs/referencias/analisis/motion-ref-5/planos.json` y `audio.json` (medidos). Resumen de patrones de todas las referencias: `referencias/SINTESIS.md`.

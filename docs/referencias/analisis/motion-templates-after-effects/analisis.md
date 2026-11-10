@@ -1,6 +1,6 @@
 # Desglose de referencia — Motion Templates (After Effects) — «Put your ideas in motion»
 
-> Referencia de motion graphics que pasó Ayrton (2026-11-09), guardada en `assets/referencias/motion-templates-after-effects.mp4`. Cortes, ritmo y volumen: **medidos** por `engine/analizar_video.py`. Planos, movimientos y transiciones: **leídos mirando los cuadros** (en motion graphics 2D las etiquetas automáticas de movimiento no sirven: se mueven los elementos, no una cámara). Vocabulario: `docs/GLOSARIO-EDICION.md` y `docs/MOVIMIENTO.md`. Hojas de cuadros locales en `referencias/motion-templates-after-effects/` (no van a git; se regeneran con `./reel analizar`).
+> Referencia de motion graphics que pasó Ayrton (2026-11-09), guardada en `assets/referencias/motion-templates-after-effects.mp4`. Cortes, ritmo y volumen: **medidos** por `engine/analisis/previo/analizar_video.py` (histórico; hoy `engine/analisis/medir.py`). Planos, movimientos y transiciones: **leídos mirando los cuadros** (en motion graphics 2D las etiquetas automáticas de movimiento no sirven: se mueven los elementos, no una cámara). Vocabulario: `docs/GLOSARIO-EDICION.md` y `docs/MOVIMIENTO.md`. Hojas de cuadros locales en `docs/referencias/analisis/motion-templates-after-effects/` (no van a git; se regeneran con `./reel analizar`).
 
 ## Ficha
 - **Archivo:** `assets/referencias/motion-templates-after-effects.mp4` · 720x1280 · 60 fps · 15 s
@@ -59,4 +59,4 @@ Las fotos y portadas de terceros (THE SMITHS, perro, lentes, VEED, PIN…), la m
 - **Cierre con silencio previo:** una pausa de 0,4 s antes del payoff, como el silencio antes del clic.
 
 ## Datos crudos
-- `referencias/motion-templates-after-effects/planos.json` y `audio.json` (medidos). Resumen de patrones de todas las referencias: `referencias/SINTESIS.md`.
+- `docs/referencias/analisis/motion-templates-after-effects/planos.json` y `audio.json` (medidos). Resumen de patrones de todas las referencias: `referencias/SINTESIS.md`.

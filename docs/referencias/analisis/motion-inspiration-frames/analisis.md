@@ -1,6 +1,6 @@
 # Desglose de referencia — «Instagram doesn't reward effort, it rewards strategy»
 
-> Referencia de motion graphics que pasó Ayrton (2026-11-09), guardada en `assets/referencias/motion-inspiration-frames.mp4`. Cortes, ritmo y volumen: **medidos** por `engine/analizar_video.py`. Planos, movimientos y transiciones: **leídos mirando los cuadros** (en motion graphics 2D las etiquetas automáticas de movimiento no sirven: se mueven los elementos, no una cámara). Vocabulario: `docs/GLOSARIO-EDICION.md` y `docs/MOVIMIENTO.md`. Hojas de cuadros locales en `referencias/motion-inspiration-frames/` (no van a git; se regeneran con `./reel analizar`).
+> Referencia de motion graphics que pasó Ayrton (2026-11-09), guardada en `assets/referencias/motion-inspiration-frames.mp4`. Cortes, ritmo y volumen: **medidos** por `engine/analisis/previo/analizar_video.py` (histórico; hoy `engine/analisis/medir.py`). Planos, movimientos y transiciones: **leídos mirando los cuadros** (en motion graphics 2D las etiquetas automáticas de movimiento no sirven: se mueven los elementos, no una cámara). Vocabulario: `docs/GLOSARIO-EDICION.md` y `docs/MOVIMIENTO.md`. Hojas de cuadros locales en `docs/referencias/analisis/motion-inspiration-frames/` (no van a git; se regeneran con `./reel analizar`).
 
 ## Ficha
 - **Archivo:** `assets/referencias/motion-inspiration-frames.mp4` · 720x1280 · 25 fps · 17,9 s
@@ -58,4 +58,4 @@ Los emojis y fotos de stock, la marca Instagram, el rojo/crema, el tono de «tip
 - **Reel con muy poca cámara:** casi todo tipografía y un objeto por beat; sirve para temas abstractos (matemática).
 
 ## Datos crudos
-- `referencias/motion-inspiration-frames/planos.json` y `audio.json` (medidos). Resumen de patrones de todas las referencias: `referencias/SINTESIS.md`.
+- `docs/referencias/analisis/motion-inspiration-frames/planos.json` y `audio.json` (medidos). Resumen de patrones de todas las referencias: `referencias/SINTESIS.md`.
