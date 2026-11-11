@@ -64,3 +64,7 @@ Todo lo que Ayrton dice y pasa se guarda acá (y el material en `docs/material/`
 - Ayrton pasó `github.com/pmndrs/react-three-rapier` "para entender mejor la física en los objetos con three.js; tomá lo que sirve, lo otro no".
 - Hecho: estudio del código; conclusión y criterios en `docs/FISICA.md`. Se usa el motor Rapier (`@dimforge/rapier3d-compat` 0.19.2) **horneado** (no el wrapper de React): `engine/fisica.mjs` + `E.fisica` en `escena3d.js` (plantilla) + ejemplo `videos/_plantilla/fisica.ejemplo.mjs`. Verificado: determinista, 43 ms para 20 cuerpos × 5 s. Los choques salen con tiempo y velocidad para sincronizar los efectos de sonido.
 
+
+## 2026-11-11 (2) — cables naturales (WiFi v6)
+- Ayrton: probar rehacer el reel de WiFi con cables más naturales, no una línea recta.
+- Hecho: `E.cable(A, B, color, r, holgura=0.12)` ahora es un tubo con caída (parábola ≈ catenaria) + curvatura lateral suave, apoyado en el piso con máximo suave (sin quiebres); `at(s)` sigue la curva, así que los paquetes la recorren. Va en `escena3d.js` de WiFi y de la plantilla. Se resolvió **analítico, sin Rapier**: un cable quieto no necesita simulación (idéntico resultado, costo cero). Rapier queda para cuando algo se mueva/caiga. Render 2 m 24 s (≈ 4,4 s por segundo de video).

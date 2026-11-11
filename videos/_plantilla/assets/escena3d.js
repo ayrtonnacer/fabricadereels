@@ -104,10 +104,16 @@ export async function crear(root, opts = {}) {
   E.pared = (w, h, d, c = 0x4a6088) => { const g = new THREE.Group(); const m = E.caja(w, h, d, E.std(c, 0.7, 0.05), Math.min(w, h, d) * 0.15); m.position.y = h / 2; g.add(m);
     const l = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(w, h, d)), new THREE.LineBasicMaterial({ color: 0x8aa0c8, transparent: true, opacity: 0.45 })); l.position.y = h / 2; g.add(l); return g; };
   E.paquete = (c = P.acc, s = 0.045) => new THREE.Mesh(new RoundedBoxGeometry(s, s, s, 2, s * 0.2), E.basic(c));
-  E.cable = (A, B, color = P.sky, r = 0.011) => {   // cilindro que crece de A hacia B: set(p) con p 0..1. Los extremos van SOBRE los objetos (puertos), no al aire.
-    const dir = new V().subVectors(B, A), len = dir.length(), geo = new THREE.CylinderGeometry(r, r, 1, 14); geo.translate(0, 0.5, 0);
-    const m = new THREE.Mesh(geo, E.basic(color)); m.position.copy(A); m.quaternion.setFromUnitVectors(new V(0, 1, 0), dir.clone().normalize()); scene.add(m);
-    const set = (p) => { m.scale.set(1, Math.max(1e-4, len * clamp(p)), 1); m.visible = p > 0.001; }; set(0); return { mesh: m, set, A, B, len, at: (s) => new V().lerpVectors(A, B, s) };
+  E.cable = (A, B, color = P.sky, r = 0.011, holgura = 0.12) => {   // cable con caída natural (holgura = flecha / largo): crece de A hacia B con set(p) p 0..1; si cuelga hasta el piso se apoya en él. Extremos SOBRE los objetos.
+    const dir = new V().subVectors(B, A), len = dir.length(), side = new V(-dir.z, 0, dir.x).normalize(), N = 80, pts = [];
+    for (let i = 0; i <= N; i++) { const s = i / N, q = new V().lerpVectors(A, B, s);
+      q.y -= 4 * holgura * len * s * (1 - s);                                 // parábola de caída (aprox. de la catenaria)
+      q.addScaledVector(side, 0.2 * holgura * len * Math.sin(Math.PI * s) * Math.sin(2 * Math.PI * s + 0.6));   // curvatura lateral suave: no es un plano perfecto
+      { const h = q.y - (r + 0.003); q.y = r + 0.003 + 0.5 * (h + Math.sqrt(h * h + 1e-4)); }   // apoyado en el piso sin atravesarlo (máximo suave: sin quiebres)
+      pts.push(q); }
+    const path = new THREE.CatmullRomCurve3(pts), RAD = 12, m = new THREE.Mesh(new THREE.TubeGeometry(path, N, r, RAD, false), E.basic(color)); scene.add(m);
+    const cnt = N * RAD * 6, set = (p) => { m.geometry.setDrawRange(0, Math.floor(clamp(p) * N) * RAD * 6); m.visible = p > 0.001; }; set(0);
+    return { mesh: m, set, A, B, len, at: (s) => path.getPointAt(clamp(s)) };
   };
   E.onda = ({ A, B, amp = 0.08, lambda = 0.4, up = new V(0, 1, 0), s0 = 0, s1 = 1, color = P.acc, radius = 0.011, N = 200, glow = true, opacity = 1 }) => {
     // senoide de A a B (fase global: tramos [s0,s1] distintos empalman sin cortes); set(p) la dibuja de a poco
