@@ -1,1 +1,1 @@
-Poner acá (no se sube a git) la música de fondo: `fondo.mp3`. Ajustar `audio.musica_desde` en `video.json` a un tramo sin silencios.
+Música por defecto: `palladio.mp3` (Karl Jenkins, *Palladio* I. Allegretto; elegida por Ayrton el 2026-11-11 para todos los reels). `video.json` → `audio.musica` y `audio.musica_desde` (0,6: salta el silencio inicial de la pista). `fondo.mp3` es la anterior, solo por si se quiere comparar.

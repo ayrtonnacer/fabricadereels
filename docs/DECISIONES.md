@@ -66,3 +66,7 @@
 - 2026-11-10: **una sola rama (`main`)**. Contenido rescatado de la rama vieja de motion graphics (referencias, análisis, guion de redes); el motor viejo no se trae (queda en la historia/etiqueta). Patrones a adoptar: vista explosionada con etiquetas, cámara mover–retener–mover, plano continuo, una palabra por tic de sonido, rejilla de beats.
 - 2026-11-10 (3): **el análisis de referencias es numérico** (biblia de estilo + `metas.json` + `comparar.py`); se elimina el script técnico/shooting script cualitativo. Los reels se planean en `plan.md` con metas en números y se verifican midiendo.
 - 2026-11-10 (4): ondas de radio = anillos, sinusoidal solo en frecuencias; módem en la sección del router; tipeo digital solo en la notebook.
+
+## 2026-11-11 — WiFi v7
+- Error a no repetir: mover paquetes con `lerp` entre los extremos de un cable curvo (se salen del cable) → usar `cab.at(s)`. Paquetes en el aire junto a las ondas → sacarlos.
+- Defaults nuevos: estética negro + línea + rojo; música Palladio.

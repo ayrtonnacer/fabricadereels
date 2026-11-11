@@ -11,7 +11,7 @@ Referencias: video "15 efectos de sonido que debes usar" (Mirko Vigna, 2026-11) 
 - Voz −1 a −6 dB (en la mezcla final queda a −14 LUFS integrado; pico real ≤ −1,5 dBTP).
 - Efectos 12–18 dB por debajo de la voz; música 22–24 dB por debajo de la voz mientras habla. `mezcla.py` lo logra con ganancias + sidechain: efectos ×1,25 bajan cuando habla la voz; música −8 dB con compresión sidechain más fuerte.
 - Ayrton prefiere efectos informáticos/de radio bien audibles: subirlos sin pisar la voz (usar `sfx_gain` en `video.json`).
-- Música: fade in 1,5 s, fade out 3,5 s, recortada al largo del video; elegir `musica_desde` en un tramo sin silencios (la pista actual tiene un hueco en 22,6–24,1 s → 24,5).
+- Música: fade in 1,5 s, fade out 3,5 s, recortada al largo del video; **música por defecto: `assets/musica/palladio.mp3` (Palladio, Karl Jenkins; decisión de Ayrton 2026-11-11)** con `musica_desde: 0.6` (la pista abre con 0,56 s de silencio); si se cambia el tramo, evitar silencios. La anterior `fondo.mp3` tenía un hueco en 22,6–24,1 s.
 
 ## Reglas de colocación
 - **Whoosh**: en el momento de máximo movimiento (la entrada de un elemento/transición), no antes ni después. Transiciones: 0,12 s antes de cada escena.

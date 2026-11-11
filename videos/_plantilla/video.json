@@ -23,8 +23,8 @@
   ]
  },
  "audio": {
-  "musica": "assets/musica/fondo.mp3",
-  "musica_desde": 24.5,
+  "musica": "assets/musica/palladio.mp3",
+  "musica_desde": 0.6,
   "musica_db": -8,
   "sfx_gain": 1.25,
   "loudness": -14
