@@ -68,3 +68,8 @@ Todo lo que Ayrton dice y pasa se guarda acá (y el material en `docs/material/`
 ## 2026-11-11 (2) — cables naturales (WiFi v6)
 - Ayrton: probar rehacer el reel de WiFi con cables más naturales, no una línea recta.
 - Hecho: `E.cable(A, B, color, r, holgura=0.12)` ahora es un tubo con caída (parábola ≈ catenaria) + curvatura lateral suave, apoyado en el piso con máximo suave (sin quiebres); `at(s)` sigue la curva, así que los paquetes la recorren. Va en `escena3d.js` de WiFi y de la plantilla. Se resolvió **analítico, sin Rapier**: un cable quieto no necesita simulación (idéntico resultado, costo cero). Rapier queda para cuando algo se mueva/caiga. Render 2 m 24 s (≈ 4,4 s por segundo de video).
+
+## 2026-11-11 (3) — estética por defecto: negro + línea + rojo
+- Ayrton quería el reel "con la última estética: negro, líneas y la misma música" y pasó el mp4 de referencia (WiFi con fondo casi negro, objetos en contorno blanco, acento **rojo**, cable blanco). Frenó mi primer intento por usar verde: **le gustó con rojo**. Pidió que sea **la estética por defecto** y que pensemos la paleta por si hace falta otro color (error, otro acento).
+- Medido del mp4: fondo (6,7,12), acento ≈ #FD2B3C, blanco #F5F6F8, grilla gris ≈ #26272E, chips ✓ en verde.
+- Hecho: `marca.css` (paleta con significado, `--estilo: linea`), `escena3d.js` (modo línea: `E.contornear`, `E.trazo`, `LineSegments2` local), teléfono del payoff como contorno que se "enciende", plantilla actualizada, tema anterior en `engine/themes/cyber.css`, `docs/ESTILO.md` (tabla de paleta). `--err` pasó a naranja-rojo para no confundirse con el acento rojo. Misma música (`fondo.mp3`). Render 81 s.

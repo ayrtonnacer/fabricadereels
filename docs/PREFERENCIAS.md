@@ -2,7 +2,7 @@
 Destilado de `docs/BITACORA.md` (cronológico, con el detalle) y `docs/DECISIONES.md`. **Se actualiza en cada tanda de indicaciones** y se repasa al empezar un video y antes de entregarlo; Ayrton no tiene que volver a aclararlo.
 
 ## Le gusta
-- Estética **cyber / HackTheBox**: azul-negro + lima; IBM Plex. **Piso de líneas en perspectiva** y el **gradiente** de fondo.
+- Estética (2026-11-11): **negro + objetos en línea (contorno blanco) + acento rojo**, referencia = el reel de WiFi que pasó Ayrton; IBM Plex. Lima/azul queda como tema alternativo. **Piso de líneas en perspectiva** y el **gradiente** de fondo.
 - **Profundidad real**: objetos 3D con perspectiva (le gustó cuando aparecieron los teléfonos en 3D); cámara que se mueve y revela. Prefiere **todo en three.js** (objetos, ondas, cables) mientras el render no se vuelva lento.
 - Motion graphics con **movimiento de cámara** como protagonista de la profundidad.
 - **Voz Daniela limpia** (sin efecto de radio) y sonido **limpio**: sin ruido de fondo; efectos puntuales con significado; **chinn** al aparecer el CTA; **sonido grave** (`boom-cinematico`) al inicio y al final; tipeo real de teclado.

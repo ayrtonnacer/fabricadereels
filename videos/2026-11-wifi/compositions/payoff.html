@@ -18,12 +18,15 @@
     tl.fromTo('#y-c2', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'back.out(1.6)' }, 2.1);
     import('./assets/escena3d.js').then(async (M) => {
       const E = await M.crear(root), { THREE, P, V, clamp, EASE } = E;
-      const rooms = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 3.8), E.std(0x14223a, 0.9, 0)); rooms.rotation.x = -Math.PI / 2; rooms.position.y = -0.002; E.scene.add(rooms);
-      const borde = (w, d, x, z) => { const l = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(w, 0.01, d)), new THREE.LineBasicMaterial({ color: 0x5a7aa8 })); l.position.set(x, 0.006, z); E.scene.add(l); };
+      const rooms = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 3.8), E.std(0x14223a, 0.9, 0)); rooms.rotation.x = -Math.PI / 2; rooms.position.y = -0.002; rooms.visible = !E.LINEA; E.scene.add(rooms);
+      const borde = (w, d, x, z) => { const q = [[-w / 2, -d / 2], [w / 2, -d / 2], [w / 2, d / 2], [-w / 2, d / 2]], pts = [];   // contorno del cuarto: línea gruesa
+        q.forEach((c, i) => { const n = q[(i + 1) % 4]; pts.push(new V(x + c[0], 0.006, z + c[1]), new V(x + n[0], 0.006, z + n[1])); }); E.scene.add(E.trazo(pts, P.muted, 3)); };
       borde(2.4, 1.7, 0, 0.7); borde(2.4, 1.7, 0, -1.05);
       const pared = E.pared(2.5, 0.5, 0.09); pared.position.set(0, 0, -0.18); E.scene.add(pared);
       const rt = E.router(); rt.position.set(0, 0, 1.55); E.scene.add(rt);
-      const tel = (z) => { const m = new THREE.MeshStandardMaterial({ color: 0xc3cee2, roughness: 0.35, metalness: 0.3, emissive: 0x000000 }); const t = E.caja(0.16, 0.02, 0.3, m, 0.01); t.position.set(0, 0.02, z); E.scene.add(t); return m; };
+      const tel = (z) => { const t = E.caja(0.16, 0.02, 0.3, E.std(0xc3cee2, 0.35, 0.3), 0.01); t.position.set(0, 0.02, z); E.scene.add(t); E.contornear(t, P.trazo, 4);
+        const lm = t.children[0].material;   // teléfono = contorno; "se ilumina" = el contorno toma el color de la señal
+        return { luz(col, k) { lm.color.copy(P.trazo).lerp(col, k); lm.linewidth = 4 + 3 * k; } }; };
       const mCerca = tel(0.45), mLejos = tel(-1.1), C = new V(0, 0.03, 1.55);
       const r5 = [E.anillo(P.sky, new V(0, 1, 0), 0.016), E.anillo(P.sky, new V(0, 1, 0), 0.016)], r24 = [E.anillo(P.acc, new V(0, 1, 0), 0.016), E.anillo(P.acc, new V(0, 1, 0), 0.016)];
       E.animar(tl, 3.9, (t) => {
@@ -32,8 +35,8 @@
         const ring = (r, t0, dur, rmax) => r.emitir((t - t0) / dur, rmax, C);
         const a = ring(r5[0], 0.4, 1.1, 1.5), b = ring(r5[1], 1.9, 1.1, 1.5), c = ring(r24[0], 0.8, 1.5, 3.5), e = ring(r24[1], 2.3, 1.5, 3.5);
         const hit = (rad, dist) => (rad > dist ? 1 : 0);   // distancias al router: cerca 1,1; lejos 2,65
-        mCerca.emissive.copy(P.sky).multiplyScalar(0.55 * Math.max(hit(a, 1.1), hit(b, 1.1), 0.7 * hit(c, 1.1), 0.7 * hit(e, 1.1)));
-        mLejos.emissive.copy(P.acc).multiplyScalar(0.55 * Math.max(hit(c, 2.65), hit(e, 2.65)));
+        mCerca.luz(P.sky, Math.max(hit(a, 1.1), hit(b, 1.1), 0.7 * hit(c, 1.1), 0.7 * hit(e, 1.1)));
+        mLejos.luz(P.acc, Math.max(hit(c, 2.65), hit(e, 2.65)));
       });
       window.__timelines['payoff'] = tl;
     });

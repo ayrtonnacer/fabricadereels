@@ -6,7 +6,8 @@ Resume la investigación de Ayrton (`docs/material/2026-11-threejs-guia-profesio
 - `assets/escena3d.js` (librería compartida) + `three.module.js`/`three.core.js` (r187) + `RoundedBoxGeometry.js` + `RoomEnvironment.js`, todo **local** (sin CDN). Una escena = `<canvas>` + HTML encima + `crear(root)`. Detalle de uso en `docs/CAMARA.md`.
 - Texto siempre HTML sobre el 3D (nítido, con la tipografía de marca); se ubica sobre puntos 3D con `E.label`.
 
-## 2. El "look" HackTheBox en 3D (lo que hace la librería)
+## 2. El "look" en 3D (lo que hace la librería)
+**Default: tema línea** (`--estilo: linea` en `marca.css`): el relleno es negro puro (`E.std` devuelve un material negro que tapa lo de atrás) y cada objeto se dibuja con contorno grueso blanco (`E.contornear` → `LineSegments2`, ancho en px: las líneas de WebGL miden 1 px y en video no se ven; `E.trazo(pts, color, px)` para líneas sueltas, ej. antenas). `E.caja` usa aristas vivas, sin entorno PMREM (ahorra ≈ 30 % de render: WiFi 33 s en 81 s). Los objetos propios de una escena deben usar `E.std` + `E.contornear` y nunca materiales sólidos claros. La tabla de abajo describe el modo `solido` (tema anterior).
 | Decisión | Por qué (guía) |
 |---|---|
 | `NeutralToneMapping`, exposición 1 | "Neutral respeta el color real: ideal para material educativo con colores de marca": el lima y el celeste salen exactos. Costo ≈ 0. |
