@@ -1,0 +1,51 @@
+<!-- BANDAS (7,6 s) — 3D: 2,4 GHz (onda larga: llega lejos) vs 5 GHz (onda corta: más datos, la frena la pared). Dos carriles en profundidad.
+     Las ondas se dibujan en dos tramos (antes/después de la pared) con FASE GLOBAL: empalman sin cortes. -->
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    .b-nota { font-weight: 500; font-size: 44px; color: var(--muted); }
+  </style>
+  <div id="root" data-composition-id="bandas" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <canvas id="b-cv" class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="hud" data-layout-ignore>
+      <div id="b-l24" class="ancla"><div class="chip" id="b-c24" style="border-color: var(--acc); color: var(--acc); font-weight: 700">2,4 GHz</div></div>
+      <div id="b-l5" class="ancla"><div class="chip" id="b-c5" style="font-weight: 700">5 GHz</div></div>
+      <div id="b-ln24" class="ancla"><p id="b-n24" class="b-nota">llega más lejos</p></div>
+      <div id="b-ln5" class="ancla"><p id="b-n5" class="b-nota">más datos</p></div>
+      <div id="b-lfrena" class="ancla"><div id="b-frena" class="chip warn" style="font-size: 38px; padding: 16px 24px"><b>⚠</b> se frena</div></div>
+    </div>
+    <div class="vineta" data-layout-ignore></div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="bandas"]');
+    const tl = gsap.timeline({ paused: true });
+    const ent = (s, t, d = 0.25) => tl.fromTo(s, { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: d }, t);
+    ent('#b-c24', 0.4); ent('#b-c5', 1.5); ent('#b-n5', 3.4); ent('#b-n24', 6.0);
+    tl.fromTo('#b-frena', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(1.6)' }, 5.3);
+    import('./assets/escena3d.js').then(async (M) => {
+      const E = await M.crear(root), { P, V, clamp, EASE } = E;
+      const rt = E.router(); rt.position.set(-0.78, 0, -0.02); rt.scale.setScalar(0.5); E.scene.add(rt);
+      const X0 = -0.55, X1 = 1.1, XW = 0.3, Z24 = -0.5, Z5 = 0.4, Y = 0.22, sw = (XW - X0) / (X1 - X0);
+      const lane = (z, lam, amp, color) => { const A = new V(X0, Y, z), B = new V(X1, Y, z); return { pre: E.onda({ A, B, amp, lambda: lam, s0: 0, s1: sw, color }), post: E.onda({ A, B, amp, lambda: lam, s0: sw, s1: 1, color }) }; };
+      const w24 = lane(Z24, 0.5, 0.075, P.acc), w5 = lane(Z5, 0.22, 0.05, P.sky);
+      const pared = E.pared(0.06, 0.55, 1.6); pared.position.set(XW, 0, (Z24 + Z5) / 2); E.scene.add(pared);
+      E.animar(tl, 7.6, (t) => {
+        E.ruta(t, [
+          { t: 0, p: [-1.0, 0.9, 3.6], l: [-0.35, 0.2, 0], e: 'io' },
+          { t: 1.0, p: [-0.5, 1.15, 4.6], l: [0.0, 0.2, 0], e: 'expo' },
+          { t: 4.4, p: [-0.1, 1.3, 5.0], l: [0.05, 0.2, 0], e: 'lin' },
+          { t: 5.9, p: [0.8, 1.15, 4.4], l: [0.25, 0.2, 0], e: 'io' },
+          { t: 7.6, p: [0.9, 1.2, 4.6], l: [0.25, 0.2, 0], e: 'lin' }]);
+        const a = EASE.io(clamp((t - 0.6) / 1.2)), b = EASE.io(clamp((t - 1.7) / 1.2)), dibuja = (w, p) => { w.pre.set(clamp(p / sw)); w.post.set(clamp((p - sw) / (1 - sw))); };
+        dibuja(w24, a); dibuja(w5, b);
+        pared.visible = t > 4.6; pared.scale.y = Math.max(1e-3, EASE.out(clamp((t - 4.6) / 0.5)));
+        const frena = EASE.io(clamp((t - 5.2) / 0.4)); w5.post.opacity(1 - 0.88 * frena); w24.post.opacity(1 - 0.3 * frena);
+        const L = (id, v, dx = 0, dyp = 0) => E.label(root.querySelector(id), v, dx, dyp);
+        L('#b-l24', new V(X0 + 0.2, Y + 0.3, Z24)); L('#b-l5', new V(X0 + 0.15, Y - 0.15, Z5 + 0.3)); L('#b-ln24', new V(X1 - 0.3, Y + 0.3, Z24)); L('#b-ln5', new V(X0 + 0.5, 0.0, Z5 + 0.3));
+        L('#b-lfrena', new V(XW + 0.42, 0.04, Z5 + 0.3));
+      });
+      window.__timelines['bandas'] = tl;
+    });
+  </script>
+</template>

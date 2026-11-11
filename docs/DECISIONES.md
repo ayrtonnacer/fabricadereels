@@ -70,3 +70,5 @@
 ## 2026-11-11 — WiFi v7
 - Error a no repetir: mover paquetes con `lerp` entre los extremos de un cable curvo (se salen del cable) → usar `cab.at(s)`. Paquetes en el aire junto a las ondas → sacarlos.
 - Defaults nuevos: estética negro + línea + rojo; música Palladio.
+- 2026-11-10 (5): prueba de estética **hairline** (placas planas + trazo fino, `--estilo: hairline`) en copia del WiFi, sin tocar el original; está a la espera de su elección. Si gana, pasar el estilo a `assets/escena3d.js` común y a `_plantilla`.
+- 2026-11-11: **voz de Daniela a `length_scale` 1,05** y guion al ≤ 2,9 pal/s (96 palabras en 33 s): a 0,92 hablaba ≈ 3,7 pal/s. Para bajar la velocidad no alcanza con la voz: hay que recortar texto o alargar el video. Mezcla: medir música vs voz por línea antes de fijar dB (`musica_nivelar` si la pista tiene mucha dinámica).

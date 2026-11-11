@@ -1,0 +1,42 @@
+<!-- PAYOFF (3,9 s) — 3D: departamento visto desde arriba: el router abajo, la pared al medio, el cuarto lejano arriba.
+     Anillos de onda en el piso: los de 5 GHz se frenan antes de la pared; los de 2,4 GHz la cruzan y llegan al teléfono lejano (que se ilumina). -->
+<template>
+  <style>#root { position: absolute; inset: 0; }</style>
+  <div id="root" data-composition-id="payoff" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <canvas id="y-cv" class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="hud" data-layout-ignore>
+      <div class="ancla" style="left: 305px; top: 255px"><div id="y-c1" class="chip ok"><b>✓</b> Cerca: 5 GHz</div></div>
+      <div class="ancla" style="left: 785px; top: 255px"><div id="y-c2" class="chip ok" style="border-color: var(--acc)"><b>✓</b> Lejos: 2,4 GHz</div></div>
+    </div>
+    <div class="vineta" data-layout-ignore></div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="payoff"]');
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo('#y-c1', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'back.out(1.6)' }, 1.5);
+    tl.fromTo('#y-c2', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'back.out(1.6)' }, 2.1);
+    import('./assets/escena3d.js').then(async (M) => {
+      const E = await M.crear(root), { THREE, P, V, clamp, EASE } = E;
+      const rooms = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 3.8), E.std(0x14223a, 0.9, 0)); rooms.rotation.x = -Math.PI / 2; rooms.position.y = -0.002; E.scene.add(rooms);
+      const borde = (w, d, x, z) => { const l = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(w, 0.01, d)), new THREE.LineBasicMaterial({ color: P.mid ? P.mid.getHex() : 0x5a7aa8 })); l.position.set(x, 0.006, z); E.scene.add(l); };
+      borde(2.4, 1.7, 0, 0.7); borde(2.4, 1.7, 0, -1.05);
+      const pared = E.pared(2.5, 0.5, 0.09); pared.position.set(0, 0, -0.18); E.scene.add(pared);
+      const rt = E.router(); rt.position.set(0, 0, 1.55); E.scene.add(rt);
+      const tel = (z) => { const m = P.mid ? E.std() : new THREE.MeshStandardMaterial({ color: 0xc3cee2, roughness: 0.35, metalness: 0.3, emissive: 0x000000 }); const t = E.caja(0.16, 0.02, 0.3, m, 0.01); t.position.set(0, 0.02, z); E.scene.add(t); return m; };
+      const mCerca = tel(0.45), mLejos = tel(-1.1), C = new V(0, 0.03, 1.55);
+      const r5 = [E.anillo(P.sky, new V(0, 1, 0), 0.016), E.anillo(P.sky, new V(0, 1, 0), 0.016)], r24 = [E.anillo(P.acc, new V(0, 1, 0), 0.016), E.anillo(P.acc, new V(0, 1, 0), 0.016)];
+      E.animar(tl, 3.9, (t) => {
+        const k = EASE.io(Math.min(1, t / 1.7)), d = Math.max(0, t - 1.7);   // pegada al router → se aleja y sube → deriva
+        E.cam.position.set(-0.2 + 0.5 * k + 0.12 * d, 0.55 + 6.6 * k + 0.1 * d, 2.9 + 2.3 * k - 0.1 * d); E.cam.lookAt(0, 0.05 * (1 - k), 1.55 * (1 - k) + 1.35 * k);
+        const ring = (r, t0, dur, rmax) => r.emitir((t - t0) / dur, rmax, C);
+        const a = ring(r5[0], 0.4, 1.1, 1.5), b = ring(r5[1], 1.9, 1.1, 1.5), c = ring(r24[0], 0.8, 1.5, 3.5), e = ring(r24[1], 2.3, 1.5, 3.5);
+        const hit = (rad, dist) => (rad > dist ? 1 : 0);   // distancias al router: cerca 1,1; lejos 2,65
+        const kC = Math.max(hit(a, 1.1), hit(b, 1.1), 0.7 * hit(c, 1.1), 0.7 * hit(e, 1.1)), kL = Math.max(hit(c, 2.65), hit(e, 2.65));
+        if (P.mid) { mCerca.color.copy(P.plate).lerp(P.sky, 0.28 * kC); mLejos.color.copy(P.plate).lerp(P.acc, 0.4 * kL); }   // hairline: el teléfono "se enciende" rellenando la placa
+        else { mCerca.emissive.copy(P.sky).multiplyScalar(0.55 * kC); mLejos.emissive.copy(P.acc).multiplyScalar(0.55 * kL); }
+      });
+      window.__timelines['payoff'] = tl;
+    });
+  </script>
+</template>

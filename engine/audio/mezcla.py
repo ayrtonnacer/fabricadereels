@@ -12,6 +12,8 @@ dur = sum(s['d'] for s in cfg['scenes'])
 music = a.musica or au['musica']; ofs = a.desde if a.desde is not None else au.get('musica_desde', 0)
 mdb = a.db if a.db is not None else au.get('musica_db', -8); sg = a.sfx if a.sfx is not None else au.get('sfx_gain', 1.25)
 LUFS = au.get('loudness', -14); A = V / 'audio'
+NIV = au.get('musica_nivelar'); NIV = f"acompressor=threshold={NIV[0]}dB:ratio={NIV[1]}:attack=80:release=800," if NIV else ''   # opcional: [umbral dB, ratio] parejo la música
+# (para música con mucha dinámica; sin esto la música sube y baja respecto de la voz)
 def ff(*x): subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', *x], check=True)
 def lufs(path):
     r = subprocess.run(['ffmpeg', '-hide_banner', '-i', path, '-af', 'ebur128=peak=true', '-f', 'null', '-'], capture_output=True, text=True).stderr
@@ -23,15 +25,15 @@ ff('-i', A / 'voz_pre.wav', '-af', f'volume={-16 - lufs(str(A / "voz_pre.wav"))}
 # música: completa (fade in 1.5 / out 3.5) o, en videos en bucle, solo en la ventana musica_ventana=[ini,fin] (silencio en el empalme)
 if au.get('musica_ventana'):
     mi, mf = au['musica_ventana']; ml = mf - mi
-    MCHAIN = f"atrim={ofs}:{ofs + ml},asetpts=PTS-STARTPTS,volume={mdb}dB,afade=t=in:st=0:d=1.2,afade=t=out:st={ml - 1.4}:d=1.4,adelay={int(mi*1000)}|{int(mi*1000)},apad=whole_dur={dur}"
+    MCHAIN = f"atrim={ofs}:{ofs + ml},asetpts=PTS-STARTPTS,{NIV}volume={mdb}dB,afade=t=in:st=0:d=1.2,afade=t=out:st={ml - 1.4}:d=1.4,adelay={int(mi*1000)}|{int(mi*1000)},apad=whole_dur={dur}"
 else:
-    MCHAIN = f"atrim={ofs}:{ofs + dur},asetpts=PTS-STARTPTS,volume={mdb}dB,afade=t=in:st=0:d=1.5,afade=t=out:st={dur - 3.5}:d=3.5"
+    MCHAIN = f"atrim={ofs}:{ofs + dur},asetpts=PTS-STARTPTS,{NIV}volume={mdb}dB,afade=t=in:st=0:d=1.5,afade=t=out:st={dur - 3.5}:d=3.5"
 # 2) mezcla con ducking
 g = f"""[0]aformat=sample_rates=48000:channel_layouts=stereo,asplit=3[v][vk1][vk2];
 [1]aformat=sample_rates=48000:channel_layouts=stereo,volume={sg}[s];
 [2]aformat=sample_rates=48000:channel_layouts=stereo,{MCHAIN}[m];
 [s][vk1]sidechaincompress=threshold=0.05:ratio=2.5:attack=5:release=200[sd];
-[m][vk2]sidechaincompress=threshold=0.03:ratio=4:attack=20:release=400[md];
+[m][vk2]sidechaincompress=threshold=0.03:ratio={au.get('musica_duck', 4)}:attack=20:release=400[md];
 [v][sd][md]amix=inputs=3:normalize=0:duration=first,aresample=48000[o]"""
 ff('-i', A / 'voz_norm.wav', '-i', A / 'sfx.wav', '-i', music, '-filter_complex', g, '-map', '[o]', '-ac', '2', '-c:a', 'pcm_s16le', A / 'premezcla.wav')
 # 3) nivel final: ganancia lineal a -14 LUFS y limitador de picos (-1,5 dBTP); sin compresión dinámica

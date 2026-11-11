@@ -75,23 +75,26 @@
   {
    "de": "Ethernet",
    "a": "ísernet",
-   "estado": "sin_verificar"
+   "estado": "ok",
+   "nota": "Aprobado de oído por Ayrton en el reel de WiFi (2026-11-11)."
   },
   {
    "de": "router",
    "a": "ráuter",
-   "estado": "sin_verificar",
-   "nota": "\"rúter\" sonaba \"RRUter\" (r inicial muy vibrada); probando \"ráuter\"."
+   "estado": "ok",
+   "nota": "Ayrton (2026-11-11): inglés americano /ˈraʊtər/, \"ráuter\", el ou como en shout. \"rúter\" sonaba \"RRUter\". Variantes a oído en docs/material/pronunciacion/router-variantes.mp3 (ráuter, ráutr, ráuder)."
   },
   {
    "de": "gigahertz",
    "a": "gigaérts",
-   "estado": "sin_verificar"
+   "estado": "ok",
+   "nota": "Aprobado de oído por Ayrton en el reel de WiFi (2026-11-11)."
   },
   {
    "de": "2,4",
    "a": "dos coma cuatro",
-   "estado": "sin_verificar"
+   "estado": "ok",
+   "nota": "Aprobado de oído por Ayrton en el reel de WiFi (2026-11-11)."
   }
  ],
  "prohibidas": [

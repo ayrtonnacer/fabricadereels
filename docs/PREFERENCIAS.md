@@ -46,3 +46,6 @@ Link + indicaciones → guion (público: técnicos, principiantes, reclutadores)
 - **Física (2026-11-11)**: solo si explica algo; se hornea con Rapier (`docs/FISICA.md`), nunca simulación en vivo; sin `Math.random()`; los choques sincronizan los efectos. No usar React/R3F.
 - **Paquetes (2026-11-11)**: cuadraditos SOLO sobre cables y siguiendo su curva (`cab.at`); en el aire, solo ondas. Lo que viaja sigue la forma real del medio.
 - **Música por defecto**: Palladio (`assets/musica/palladio.mp3`, desde 0,6 s), en todos los reels.
+
+## Agregado 2026-11-11
+- **Guardar cada pronunciación correcta apenas Ayrton la confirma o corrige**: va a `engine/audio/pronunciacion.json` (`estado: "ok"` + nota con la fecha y la fuente) y se anota en `docs/BITACORA.md`. Al terminar un video, las palabras que no corrigió quedan `ok` (las aprobó de oído). Confirmadas: uaifai, ráuter, ísernet, gigaérts, "dos coma cuatro".
