@@ -3,7 +3,7 @@
 Uso:  python engine/audio/voz.py videos/<video> [--modelo assets/voces/es_AR-daniela-high.onnx]
 Salida: <video>/audio/voz/<id>.wav y <video>/audio/voz.wav (líneas ubicadas en su tiempo, 48 kHz mono).
 Chequea: palabras prohibidas, líneas que se pasan de su escena y líneas que se pisan entre sí."""
-import argparse, json, re, sys, wave
+import os, argparse, json, re, sys, wave
 from pathlib import Path
 import numpy as np
 from scipy.signal import resample_poly
@@ -68,12 +68,14 @@ for l in sorted(vc['lineas'], key=lambda x: x['t']):
         if re.search(rf"(?<!\w){re.escape(p['palabra'])}(?!\w)", l['texto'], re.I):
             print(f"  !! {l['id']}: usa '{p['palabra']}' → mejor '{p['usar']}' ({p['motivo']})"); problemas += 1
     wav = V / f"audio/voz/{l['id']}.wav"
-    with wave.open(str(wav), 'wb') as w: als = voice.synthesize_wav(respell(l['texto']), w, syn_config=syn, include_alignments=True)
+    if os.environ.get('VOZ_REUSAR') and wav.exists(): als = None   # solo rehacer efecto y mezcla con las líneas ya sintetizadas (no cambia tiempos ni subtítulos)
+    else:
+        with wave.open(str(wav), 'wb') as w: als = voice.synthesize_wav(respell(l['texto']), w, syn_config=syn, include_alignments=True)
     with wave.open(str(wav)) as w: x = np.frombuffer(w.readframes(w.getnframes()), '<i2').astype(np.float32) / 32768; sr = w.getframerate()
     x = resample_poly(x, SR // 50, sr // 50) if sr != SR else x
     dur_voz = len(x) / SR   # lo que dura la VOZ (para chequear escenas); el efecto puede agregar cola
     if vc.get('efecto') == 'radio': x = _radio.radio(x, vc.get('radio_fuerza', 0.6))   # incluye squelch final
-    elif vc.get('efecto') == 'adjutant': x = _radio.adjutant(x, vc.get('adjutant_fuerza', 0.7), vc.get('adjutant_reverb', 0.22))   # voz tipo Adjutant de StarCraft + cola de sala
+    elif vc.get('efecto') == 'adjutant': x = _radio.adjutant(x, vc.get('adjutant_fuerza', 0.7), vc.get('adjutant_reverb', 0.0))   # voz tipo Adjutant de StarCraft + cola de sala
     if l.get('al_final'):   # video en bucle: sin silencio final y termina justo en el último cuadro
         nz = np.where(np.abs(x) > 0.012)[0]; x = x[:nz[-1] + int(0.03 * SR)] if len(nz) else x
         l = dict(l, t=total - len(x) / SR)

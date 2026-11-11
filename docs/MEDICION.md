@@ -52,3 +52,8 @@ Van en un solo lugar, con números y comparados con las referencias: `docs/refer
 
 ## Regla de uso
 Antes de entregar un reel: `medir.py` sobre `final.mp4` con la transcripción, mirar el **tirón**, el **ritmo de palabras** y que los **cortes** caigan donde dice el `plan.md`; correr `comparar.py videos/X/analisis/metricas.json`, guardar el informe en `docs/referencias/propios/<reel>/` y correr `biblia.py`. Cuando Ayrton pase una referencia: medirla primero y recién después proponer.
+
+## earshot: oídos para el audio (Leonxlnx/earshot, MIT)
+- Sirve para **describir y comparar sonidos con palabras y números**: `earshot describe a.wav`, `earshot ab A.wav B.wav` (diferencias en palabras + parecido CLAP), `earshot critique film.mp4` (tarjeta contra films profesionales), `earshot timeline`, `earshot sfx/kit` (banco de 252 efectos hechos en código). Usado el 2026-11-11 para afinar la voz Adjutant (`docs/AUDIO.md`).
+- **No viene instalado**: en cada sesión nueva hay que instalarlo (≈ 10 min la primera vez): `git clone https://github.com/Leonxlnx/earshot` → `python3 -m venv v && v/bin/pip install torch --index-url https://download.pytorch.org/whl/cpu && v/bin/pip install -e earshot` → `v/bin/earshot doctor --fetch` (baja 1,1 GB de modelos). Requiere salida a internet a: `huggingface.co`, `cdn-lfs.huggingface.co`, `cdn-lfs.hf.co`, `cas-bridge.xethub.hf.co`, `cas-server.xethub.hf.co`, `us.aws.cdn.hf.co`, `download.pytorch.org` (ya están en el entorno "fabricadereels", creado el 2026-11-11).
+- Lección: el parecido CLAP (coseno) mide sobre todo el contenido (voz, frase); usarlo para **comparar variantes entre sí**, y confiar en `describe`/`ab` (brillo, cola, piso de ruido, etiquetas AudioSet) para saber QUÉ cambiar.

@@ -95,8 +95,7 @@
         "texto": "Dale me gusta y seguime para aprender más de redes."
       }
     ],
-    "adjutant_fuerza": 0.7,
-    "adjutant_reverb": 0.22
+    "adjutant_fuerza": 0.7
   },
   "audio": {
     "musica": "assets/musica/palladio.mp3",

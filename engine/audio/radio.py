@@ -35,10 +35,12 @@ def radio(x, fuerza=0.6, squelch=True):
     return out
 
 
-# ---------- Adjutant (Terran Advisor, StarCraft): voz brillante y "digital" con cola de sala ----------
-# Medido del audio de referencia (engine/audio/adjutant_perfil.json): comparada con Daniela tiene +5 dB a 1,6–3,2 kHz, +7 a 3,2–6,4 y +8 a 6,4–12 kHz,
-# menos graves bajos, y una cola de ≈ 340 ms (mediana) tras cada frase. Se hace en 3 pasos: EQ que lleva el espectro de la voz al de la referencia,
-# excitación de agudos (armónicos por saturación) y reverb corta de sala. fuerza 0 = voz limpia, 1 = el espectro completo de la referencia.
+# ---------- Adjutant (Terran Advisor, StarCraft): voz brillante, SECA y "digital" ----------
+# Se afinó midiendo con earshot (CLAP + AudioSet) contra el audio de referencia (engine/audio/adjutant_perfil.json = solo números):
+#  - la referencia es SECA (cae en ≈ 170 ms, "silencio digital" entre frases): cualquier reverb la aleja (con 5 % de sala el parecido baja de 0,65 a 0,54);
+#  - es más brillante que Daniela (brillo 2,1 kHz contra 1,0 kHz) y se lee tonal/metálica, no ruidosa.
+# Cadena: EQ que lleva el espectro de la voz al de la referencia -> armónicos de agudos -> peine corto (timbre metálico, 3 ms) -> remuestreo bajo (alias "de juego").
+# fuerza 0 = voz limpia; 1 = espectro completo de la referencia. reverb queda en 0 salvo que se pida (la cola larga es lo que NO tiene el Adjutant).
 import json as _json
 from pathlib import Path as _P
 from scipy.signal import fftconvolve as _conv
@@ -49,26 +51,31 @@ def _tercios(x):
     act = e > 0.3 * np.median(e[e > 0.01]); m = np.repeat(act, fr)[:len(x)]; v = x[:len(m)][m]
     f, P = welch(v, SR, nperseg=4096); P = P / P.sum(); return f, P
 
-def adjutant(x, fuerza=0.7, reverb=0.22):
-    """x: voz mono float 48 kHz. Devuelve la voz con timbre de Adjutant + cola de sala (≈ 0,5 s más larga)."""
+def adjutant(x, fuerza=0.7, reverb=0.0, peine_ms=3.0, peine_g=0.6, remuestreo_hz=11025):
+    """x: voz mono float 48 kHz. Devuelve la voz con timbre de Adjutant (seca; mismo largo que x salvo que se pida reverb)."""
     f_ = float(np.clip(fuerza, 0, 1)); ref = _json.loads((_P(__file__).parent / 'adjutant_perfil.json').read_text())
     cen = np.array(ref['centros_hz'], float); objetivo = np.array(ref['db'], float)
     f, P = _tercios(x)
     actual = np.array([10 * np.log10(P[(f >= c / 2 ** (1 / 6)) & (f < c * 2 ** (1 / 6))].sum() + 1e-12) for c in cen])
     sm = lambda a: np.convolve(np.pad(a, 3, mode='edge'), np.ones(7) / 7, mode='valid')   # ≈ 2 octavas: sin copiar los armónicos de OTRA voz
-    g = np.clip((sm(objetivo) - sm(actual)) * f_, -9, 9)                      # dB de corrección por tercio (limitada para no romper la voz)
-    g -= np.median(g)                                                  # que el nivel general no cambie, solo la forma
+    g = np.clip((sm(objetivo) - sm(actual)) * f_, -9, 9); g -= np.median(g)
     N = len(x); X = np.fft.rfft(x); fr_ = np.fft.rfftfreq(N, 1 / SR)
-    gain = 10 ** (np.interp(np.log2(np.maximum(fr_, 1)), np.log2(cen), g) / 20); gain[fr_ < 80] = 0   # sin graves por debajo de 80 Hz
+    gain = 10 ** (np.interp(np.log2(np.maximum(fr_, 1)), np.log2(cen), g) / 20); gain[fr_ < 80] = 0
     y = np.fft.irfft(X * gain, N)
-    # excitación de agudos: armónicos de lo que hay sobre 2,5 kHz (da el brillo "digital" que la EQ sola no inventa)
-    hi = sosfilt(butter(4, 2500, btype='high', fs=SR, output='sos'), y); y = y + 0.35 * f_ * np.tanh(hi * 4) / 4
-    y = sosfilt(butter(4, 12500, btype='low', fs=SR, output='sos'), y)     # la referencia corta cerca de 12 kHz
-    # reverb de sala: respuesta de ruido que decae (RT60 ≈ 0,55 s), 12 ms de pre-retardo, sin graves ni agudos extremos
-    rng = np.random.default_rng(5); n = int(.7 * SR); t = np.arange(n) / SR
-    ir = _bp(rng.standard_normal(n), 300, 7000) * np.exp(-6.9 * t / .55); ir[:int(.012 * SR)] = 0
-    wet = _conv(y, ir)[:N + n]; wet *= (np.max(np.abs(y)) / (np.max(np.abs(wet)) + 1e-9)) * reverb * f_ * 2.2
-    out = np.concatenate([y, np.zeros(n)]); out[:len(wet)] += wet
+    hi = sosfilt(butter(4, 2500, btype='high', fs=SR, output='sos'), y); y = y + 0.35 * f_ * np.tanh(hi * 4) / 4   # armónicos de agudos
+    if f_ > 0:
+        d = int(peine_ms * SR / 1000); c = y.copy(); c[d:] += peine_g * f_ * y[:-d]; y = c                          # peine: timbre metálico
+        k = max(1, int(SR / remuestreo_hz)); y = np.repeat(y[::k], k)[:N]                                           # alias de baja resolución
+    y = sosfilt(butter(4, 12500, btype='low', fs=SR, output='sos'), y)
+    if f_ > 0:   # puerta: "silencio digital" entre palabras (la referencia tiene -120 dBFS de piso; Piper deja ruido de fondo)
+        w = int(.01 * SR); env = np.sqrt(np.convolve(y ** 2, np.ones(w) / w, mode='same')); thr = 10 ** (-48 / 20) * (np.max(np.abs(y)) + 1e-9)
+        a_ = (env > thr).astype(float); hold = int(.06 * SR); a_ = np.convolve(a_, np.ones(hold) / hold, mode='same'); y = y * np.clip(a_ * 3, 0, 1)
+    out = y
+    if reverb > 0:   # opcional (el Adjutant real no la tiene)
+        rng = np.random.default_rng(5); n = int(.7 * SR); t = np.arange(n) / SR
+        ir = _bp(rng.standard_normal(n), 300, 7000) * np.exp(-6.9 * t / .55); ir[:int(.012 * SR)] = 0
+        wet = _conv(y, ir)[:N + n]; wet *= (np.max(np.abs(y)) / (np.max(np.abs(wet)) + 1e-9)) * reverb * f_ * 2.2
+        out = np.concatenate([y, np.zeros(n)]); out[:len(wet)] += wet
     return out / (np.max(np.abs(out)) + 1e-9) * (np.max(np.abs(x)) if np.max(np.abs(x)) > 0 else 1)
 
 def _read(p):
