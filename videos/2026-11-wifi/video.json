@@ -37,7 +37,7 @@
     "length_scale": 1.05,
     "noise_scale": 0.6,
     "noise_w_scale": 0.7,
-    "efecto": "adjutant",
+    "efecto": "ninguno",
     "radio_fuerza": 0.6,
     "lineas": [
       {
@@ -94,8 +94,7 @@
         "t": 29.4,
         "texto": "Dale me gusta y seguime para aprender más de redes."
       }
-    ],
-    "adjutant_fuerza": 0.7
+    ]
   },
   "audio": {
     "musica": "assets/musica/palladio.mp3",
