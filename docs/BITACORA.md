@@ -89,3 +89,8 @@ Todo lo que Ayrton dice y pasa se guarda acá (y el material en `docs/material/`
 - Ojo: Piper no es determinista (`noise_scale`); cada corrida de `voz.py` cambia las duraciones ±0,1 s. Revisar la tabla de `voz.py` tras regenerar.
 - 2026-11-11 (4): Ayrton confirma "router" = **ráuter** (/ˈraʊtər/, americano; el ou como en shout) y apunta "rau tr" (r final suelta). Ya estaba así en el reel; se generaron 3 variantes (ráuter, ráutr, ráuder) en `docs/material/pronunciacion/router-variantes.mp3` para elegir de oído.
 - 2026-11-11 (5): Ayrton: "está todo bien" con las pronunciaciones del reel; pide ir guardando las correctas. Marcadas `ok`: ísernet, gigaérts, dos coma cuatro (más uaifai y ráuter). Regla en PREFERENCIAS.
+
+## 2026-11-11 (5) — se unen las dos sesiones (hairline + línea/cables/física)
+- Ayrton preguntó si "esa estética" era `@lucasmarkes/hairline`: **sí, la prueba A/B de hairline la hizo otra sesión** (rama `ccr-e8944866-j3olye`, nunca llegó a `main`). No usa el paquete (son SVG interactivos): replicó el **look** en three.js (placas del color del fondo + aristas finas LineSegments2). Esa es la estética aprobada (rojo `#FF2E3F`, Palladio, voz 1,05). En esta sesión se había rehecho el mismo look por su cuenta (`--estilo: linea`, `#FD2B3C`), más cables curvos, física y paquetes solo en cables.
+- Hecho: se unió esa rama a `main`; `videos/2026-11-wifi` ahora tiene **todo junto**: look línea/rojo, cables con caída, paquetes solo en el cable, Palladio (`musica_db 11`, `musica_duck 2`, `musica_nivelar`), voz `length_scale 1,05` y guion de 96 palabras. Plantilla con los mismos defaults de audio. Un solo `palladio.mp3`. Medido: −14,1 LUFS, 2,99 ataques/s.
+- `videos/2026-11-wifi-hairline/` queda como registro del A/B (se puede borrar).

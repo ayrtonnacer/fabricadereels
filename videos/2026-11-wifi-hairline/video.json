@@ -97,7 +97,7 @@
   ]
  },
  "audio": {
-  "musica": "assets/musica/palladio-allegretto.mp3",
+  "musica": "assets/musica/palladio.mp3",
   "musica_desde": 0,
   "musica_db": 11,
   "sfx_gain": 1.25,

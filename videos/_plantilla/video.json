@@ -1,32 +1,71 @@
 {
- "titulo": "Título del video",
- "fecha": "AAAA-MM",
- "fuente": "URL o tema de origen",
- "scenes": [
-  {"id": "gancho", "d": 3.6},
-  {"id": "explica", "d": 8.0},
-  {"id": "cierre", "d": 3.4}
- ],
- "voz": {
-  "modelo": "assets/voces/es_AR-daniela-high.onnx",
-  "length_scale": 0.92,
-  "noise_scale": 0.6,
-  "noise_w_scale": 0.7,
-  "efecto": "ninguno",
-  "radio_fuerza": 0.6,
-  "lineas": [
-   {"id": "l01", "escena": "gancho", "t": 0.15, "texto": "Una frase corta que prometa algo."},
-   {"id": "l02", "escena": "explica", "t": 3.85, "texto": "El primer concepto, con palabras simples."},
-   {"id": "l03", "escena": "explica", "t": 6.6, "texto": "Después, el segundo."},
-   {"id": "l04", "escena": "explica", "t": 8.9, "texto": "Y así se ve funcionando."},
-   {"id": "l05", "escena": "cierre", "t": 11.9, "texto": "Dale me gusta y seguime."}
-  ]
- },
- "audio": {
-  "musica": "assets/musica/palladio.mp3",
-  "musica_desde": 0.6,
-  "musica_db": -8,
-  "sfx_gain": 1.25,
-  "loudness": -14
- }
+  "titulo": "Título del video",
+  "fecha": "AAAA-MM",
+  "fuente": "URL o tema de origen",
+  "scenes": [
+    {
+      "id": "gancho",
+      "d": 3.6
+    },
+    {
+      "id": "explica",
+      "d": 8.0
+    },
+    {
+      "id": "cierre",
+      "d": 3.4
+    }
+  ],
+  "voz": {
+    "modelo": "assets/voces/es_AR-daniela-high.onnx",
+    "length_scale": 1.05,
+    "noise_scale": 0.6,
+    "noise_w_scale": 0.7,
+    "efecto": "ninguno",
+    "radio_fuerza": 0.6,
+    "lineas": [
+      {
+        "id": "l01",
+        "escena": "gancho",
+        "t": 0.15,
+        "texto": "Una frase corta que prometa algo."
+      },
+      {
+        "id": "l02",
+        "escena": "explica",
+        "t": 3.85,
+        "texto": "El primer concepto, con palabras simples."
+      },
+      {
+        "id": "l03",
+        "escena": "explica",
+        "t": 6.6,
+        "texto": "Después, el segundo."
+      },
+      {
+        "id": "l04",
+        "escena": "explica",
+        "t": 8.9,
+        "texto": "Y así se ve funcionando."
+      },
+      {
+        "id": "l05",
+        "escena": "cierre",
+        "t": 11.9,
+        "texto": "Dale me gusta y seguime."
+      }
+    ]
+  },
+  "audio": {
+    "musica": "assets/musica/palladio.mp3",
+    "musica_desde": 0.6,
+    "musica_db": 11,
+    "sfx_gain": 1.25,
+    "loudness": -14,
+    "musica_duck": 2,
+    "musica_nivelar": [
+      -30,
+      6
+    ]
+  }
 }

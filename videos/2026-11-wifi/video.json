@@ -1,106 +1,111 @@
 {
- "titulo": "Cómo funciona el WiFi",
- "fecha": "2026-11",
- "fuente": "HowStuffWorks \"What is WiFi and How Does it Work?\"; Wikipedia \"Wifi\"; Cisco \"¿Qué es el Wi-Fi?\"",
- "scenes": [
-  {
-   "id": "gancho",
-   "d": 3.2
+  "titulo": "Cómo funciona el WiFi",
+  "fecha": "2026-11",
+  "fuente": "HowStuffWorks \"What is WiFi and How Does it Work?\"; Wikipedia \"Wifi\"; Cisco \"¿Qué es el Wi-Fi?\"",
+  "scenes": [
+    {
+      "id": "gancho",
+      "d": 3.2
+    },
+    {
+      "id": "envia",
+      "d": 4.6
+    },
+    {
+      "id": "router",
+      "d": 5.2
+    },
+    {
+      "id": "ethernet",
+      "d": 4.6
+    },
+    {
+      "id": "bandas",
+      "d": 7.6
+    },
+    {
+      "id": "payoff",
+      "d": 3.9
+    },
+    {
+      "id": "cierre",
+      "d": 4.0
+    }
+  ],
+  "voz": {
+    "modelo": "assets/voces/es_AR-daniela-high.onnx",
+    "length_scale": 1.05,
+    "noise_scale": 0.6,
+    "noise_w_scale": 0.7,
+    "efecto": "ninguno",
+    "radio_fuerza": 0.6,
+    "lineas": [
+      {
+        "id": "l01",
+        "escena": "gancho",
+        "t": 0.2,
+        "texto": "Tu WiFi es una radio. Por eso a veces no llega."
+      },
+      {
+        "id": "l02",
+        "escena": "envia",
+        "t": 3.5,
+        "texto": "Tu dispositivo convierte unos y ceros en ondas de radio y las emite."
+      },
+      {
+        "id": "l03",
+        "escena": "router",
+        "t": 7.9,
+        "texto": "El router las recibe, las decodifica y las manda a internet por cable."
+      },
+      {
+        "id": "l04",
+        "escena": "router",
+        "t": 11.8,
+        "texto": "Y de vuelta, igual."
+      },
+      {
+        "id": "l05",
+        "escena": "ethernet",
+        "t": 13.3,
+        "texto": "Para la red, WiFi es Ethernet sin cable: solo cambia cómo viajan los paquetes."
+      },
+      {
+        "id": "l06",
+        "escena": "bandas",
+        "t": 17.9,
+        "texto": "Las ondas usan 2,4 o 5 gigahertz."
+      },
+      {
+        "id": "l07",
+        "escena": "bandas",
+        "t": 20.85,
+        "texto": "Más frecuencia, más datos, pero menos alcance: las paredes la frenan más."
+      },
+      {
+        "id": "l08",
+        "escena": "payoff",
+        "t": 25.25,
+        "texto": "Por eso, lejos del router, a veces la de 2,4 rinde más."
+      },
+      {
+        "id": "l09",
+        "escena": "cierre",
+        "t": 29.4,
+        "texto": "Dale me gusta y seguime para aprender más de redes."
+      }
+    ]
   },
-  {
-   "id": "envia",
-   "d": 4.6
-  },
-  {
-   "id": "router",
-   "d": 5.2
-  },
-  {
-   "id": "ethernet",
-   "d": 4.6
-  },
-  {
-   "id": "bandas",
-   "d": 7.6
-  },
-  {
-   "id": "payoff",
-   "d": 3.9
-  },
-  {
-   "id": "cierre",
-   "d": 4.0
+  "audio": {
+    "musica": "assets/musica/palladio.mp3",
+    "musica_desde": 0.6,
+    "musica_db": 11,
+    "sfx_gain": 1.25,
+    "loudness": -14,
+    "musica_duck": 2,
+    "musica_nivelar": [
+      -30,
+      6
+    ]
   }
- ],
- "voz": {
-  "modelo": "assets/voces/es_AR-daniela-high.onnx",
-  "length_scale": 0.92,
-  "noise_scale": 0.6,
-  "noise_w_scale": 0.7,
-  "efecto": "ninguno",
-  "radio_fuerza": 0.6,
-  "lineas": [
-   {
-    "id": "l01",
-    "escena": "gancho",
-    "t": 0.2,
-    "texto": "Tu WiFi es una radio. Por eso a veces no llega."
-   },
-   {
-    "id": "l02",
-    "escena": "envia",
-    "t": 3.5,
-    "texto": "Tu dispositivo convierte unos y ceros en ondas de radio y las emite por su antena."
-   },
-   {
-    "id": "l03",
-    "escena": "router",
-    "t": 8.1,
-    "texto": "El router las recibe, las decodifica y las manda a internet por cable."
-   },
-   {
-    "id": "l04",
-    "escena": "router",
-    "t": 11.8,
-    "texto": "Y de vuelta, igual."
-   },
-   {
-    "id": "l05",
-    "escena": "ethernet",
-    "t": 13.3,
-    "texto": "Para la red, el WiFi es Ethernet sin cable: solo cambia cómo viajan los paquetes."
-   },
-   {
-    "id": "l06",
-    "escena": "bandas",
-    "t": 17.9,
-    "texto": "Las ondas usan 2,4 o 5 gigahertz."
-   },
-   {
-    "id": "l07",
-    "escena": "bandas",
-    "t": 20.7,
-    "texto": "Cuanta más frecuencia, más datos, pero menos alcance: las paredes la frenan más."
-   },
-   {
-    "id": "l08",
-    "escena": "payoff",
-    "t": 25.5,
-    "texto": "Por eso, lejos del router, a veces la de 2,4 rinde más."
-   },
-   {
-    "id": "l09",
-    "escena": "cierre",
-    "t": 29.4,
-    "texto": "Dale me gusta y seguime para aprender más de redes."
-   }
-  ]
- },
- "audio": {
-  "musica": "assets/musica/palladio.mp3",
-  "musica_desde": 0.6,
-  "musica_db": -8,
-  "sfx_gain": 1.25,
-  "loudness": -14
- }
 }
