@@ -7,6 +7,7 @@
     "setup": "npm install && pip install -r requirements.txt"
   },
   "devDependencies": {
+    "@dimforge/rapier3d-compat": "^0.19.2",
     "hyperframes": "0.9.26"
   }
 }

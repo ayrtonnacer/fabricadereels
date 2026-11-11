@@ -23,6 +23,7 @@ Para todo lo de HyperFrames (contrato de las composiciones, CLI, bloques del reg
 ## Comandos
 ```
 bash engine/nuevo.sh AAAA-MM-tema                     # video nuevo desde la plantilla
+node engine/fisica.mjs videos/X/fisica.mjs        # (si el reel tiene física) hornea la simulación Rapier → assets/fisica.json; ver docs/FISICA.md
 python engine/audio/voz.py videos/X                   # voz + chequeo de tiempos y palabras prohibidas
 python engine/tiempos.py videos/X                     # duraciones de video.json → index.html
 python engine/subtitulos.py videos/X                  # subtítulos con tiempos exactos por palabra

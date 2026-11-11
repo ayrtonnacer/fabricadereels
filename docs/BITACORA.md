@@ -59,3 +59,8 @@ Todo lo que Ayrton dice y pasa se guarda acá (y el material en `docs/material/`
   2. **Sonido de la sección del router** ("el router las recibe, las decodifica y las manda a internet"): que sea el **sonido de router/módem**, no el tipeo digital sobre los 0/1 del router. El **tipeo digital queda solo cuando se escriben los 0 y 1 en la computadora**.
 - Pidió que el proceso a futuro sea **más dinámico y gaste menos tokens**: solo pasar el material y que se generen los videos bien (se gastó ~50 % del cupo semanal en esta serie de cambios).
 - Hecho: `envia`, `router` y `ethernet` usan anillos (`E.anillo`); ondas sinusoidales solo en `bandas`; `sfx_events.py`: módem en todo el router.
+
+## 2026-11-11 — repo react-three-rapier (física)
+- Ayrton pasó `github.com/pmndrs/react-three-rapier` "para entender mejor la física en los objetos con three.js; tomá lo que sirve, lo otro no".
+- Hecho: estudio del código; conclusión y criterios en `docs/FISICA.md`. Se usa el motor Rapier (`@dimforge/rapier3d-compat` 0.19.2) **horneado** (no el wrapper de React): `engine/fisica.mjs` + `E.fisica` en `escena3d.js` (plantilla) + ejemplo `videos/_plantilla/fisica.ejemplo.mjs`. Verificado: determinista, 43 ms para 20 cuerpos × 5 s. Los choques salen con tiempo y velocidad para sincronizar los efectos de sonido.
+

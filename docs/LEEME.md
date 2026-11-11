@@ -5,6 +5,7 @@
 |---|---|
 | Estilo visual, marca, color | `ESTILO.md` |
 | Cámara, 3D, librería | `CAMARA.md`, `THREEJS.md`, `MOVIMIENTO.md` |
+| Física (Rapier horneado) | `FISICA.md` |
 | Guion | `GUION.md`, `INVESTIGACION-GUIONES.md` |
 | Subtítulos y texto | `SUBTITULOS.md`, `TIPOGRAFIA.md` |
 | Audio y voz | `AUDIO.md` (+ `../engine/audio/pronunciacion.json`) |

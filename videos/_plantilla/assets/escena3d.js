@@ -134,6 +134,19 @@ export async function crear(root, opts = {}) {
   E.label = (el, v, dx = 0, dyp = 0) => {   // ubica un elemento HTML (position:absolute) sobre un punto 3D
     cam.updateMatrixWorld();   // la matriz de la cámara se actualiza al renderizar: sin esto el rótulo usa la del cuadro anterior
     const p = v.clone().project(cam); el.style.left = ((p.x * 0.5 + 0.5) * 1080 + dx) + 'px'; el.style.top = ((-p.y * 0.5 + 0.5) * 1920 + dyp) + 'px'; };
+  // Física horneada (engine/fisica.mjs): posa los objetos según el tiempo local t, con interpolación entre cuadros. Sin reloj ni azar.
+  E.fisica = (data, mapa) => {   // mapa = { nombre: Object3D }
+    const Q0 = new THREE.Quaternion(), Q1 = new THREE.Quaternion();
+    return (t) => {
+      const u = clamp(t * data.fps, 0, data.n - 1), i = Math.min(Math.floor(u), data.n - 2), k = u - i;
+      for (const nom in mapa) {
+        const a = data.cuerpos[nom], o = i * 7, m = mapa[nom];
+        m.position.set(a[o] + (a[o + 7] - a[o]) * k, a[o + 1] + (a[o + 8] - a[o + 1]) * k, a[o + 2] + (a[o + 9] - a[o + 2]) * k);
+        Q0.set(a[o + 3], a[o + 4], a[o + 5], a[o + 6]); Q1.set(a[o + 10], a[o + 11], a[o + 12], a[o + 13]);
+        m.quaternion.copy(Q0).slerp(Q1, k);
+      }
+    };
+  };
   E.animar = (tl, dur, fn) => {
     const st = { t: 0 }, draw = () => { fn(st.t); renderer.render(scene, cam); };
     tl.to(st, { t: dur, duration: dur, ease: 'none', onUpdate: draw }, 0); draw();

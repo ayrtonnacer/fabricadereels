@@ -43,3 +43,4 @@ Link + indicaciones → guion (público: técnicos, principiantes, reclutadores)
 - **Todo análisis con números** (como el repo de LuisPa): nada de "se siente", nada de script técnico cualitativo. Un solo lugar (`docs/referencias/`), una sola herramienta (`medir.py`), comparar siempre contra las metas. **Borrar lo que no se usa.**
 - **Ondas de radio = anillos/círculos** que se expanden; la onda sinusoidal solo para explicar frecuencias (2,4/5 GHz). Tipeo digital solo al escribir los 0/1 en la computadora; en el router, sonido de módem/router.
 - **Gastar pocos tokens**: ir directo, pocas iteraciones, sin releer docs ni regenerar de más; que alcance con pasar el material.
+- **Física (2026-11-11)**: solo si explica algo; se hornea con Rapier (`docs/FISICA.md`), nunca simulación en vivo; sin `Math.random()`; los choques sincronizan los efectos. No usar React/R3F.
