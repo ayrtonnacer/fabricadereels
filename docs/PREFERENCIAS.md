@@ -43,3 +43,6 @@ Link + indicaciones → guion (público: técnicos, principiantes, reclutadores)
 - **Todo análisis con números** (como el repo de LuisPa): nada de "se siente", nada de script técnico cualitativo. Un solo lugar (`docs/referencias/`), una sola herramienta (`medir.py`), comparar siempre contra las metas. **Borrar lo que no se usa.**
 - **Ondas de radio = anillos/círculos** que se expanden; la onda sinusoidal solo para explicar frecuencias (2,4/5 GHz). Tipeo digital solo al escribir los 0/1 en la computadora; en el router, sonido de módem/router.
 - **Gastar pocos tokens**: ir directo, pocas iteraciones, sin releer docs ni regenerar de más; que alcance con pasar el material.
+
+## Agregado 2026-11-11
+- **Guardar cada pronunciación correcta apenas Ayrton la confirma o corrige**: va a `engine/audio/pronunciacion.json` (`estado: "ok"` + nota con la fecha y la fuente) y se anota en `docs/BITACORA.md`. Al terminar un video, las palabras que no corrigió quedan `ok` (las aprobó de oído). Confirmadas: uaifai, ráuter, ísernet, gigaérts, "dos coma cuatro".

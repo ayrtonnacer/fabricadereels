@@ -75,7 +75,8 @@
   {
    "de": "Ethernet",
    "a": "ísernet",
-   "estado": "sin_verificar"
+   "estado": "ok",
+   "nota": "Aprobado de oído por Ayrton en el reel de WiFi (2026-11-11)."
   },
   {
    "de": "router",
@@ -86,12 +87,14 @@
   {
    "de": "gigahertz",
    "a": "gigaérts",
-   "estado": "sin_verificar"
+   "estado": "ok",
+   "nota": "Aprobado de oído por Ayrton en el reel de WiFi (2026-11-11)."
   },
   {
    "de": "2,4",
    "a": "dos coma cuatro",
-   "estado": "sin_verificar"
+   "estado": "ok",
+   "nota": "Aprobado de oído por Ayrton en el reel de WiFi (2026-11-11)."
   }
  ],
  "prohibidas": [
