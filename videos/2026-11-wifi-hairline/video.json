@@ -79,7 +79,7 @@
    {
     "id": "l07",
     "escena": "bandas",
-    "t": 20.7,
+    "t": 20.95,
     "texto": "Cuanta más frecuencia, más datos, pero menos alcance: las paredes la frenan más."
    },
    {
@@ -97,8 +97,8 @@
   ]
  },
  "audio": {
-  "musica": "assets/musica/fondo.mp3",
-  "musica_desde": 24.5,
+  "musica": "assets/musica/palladio-allegretto.mp3",
+  "musica_desde": 0,
   "musica_db": -8,
   "sfx_gain": 1.25,
   "loudness": -14
