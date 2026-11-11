@@ -49,3 +49,4 @@ Link + indicaciones → guion (público: técnicos, principiantes, reclutadores)
 
 ## Agregado 2026-11-11
 - **Guardar cada pronunciación correcta apenas Ayrton la confirma o corrige**: va a `engine/audio/pronunciacion.json` (`estado: "ok"` + nota con la fecha y la fuente) y se anota en `docs/BITACORA.md`. Al terminar un video, las palabras que no corrigió quedan `ok` (las aprobó de oído). Confirmadas: uaifai, ráuter, ísernet, gigaérts, "dos coma cuatro".
+- **Estándar de calidad (2026-11-11)**: objetos GRISES de trazo fino y continuo; blanco solo para cables, señal y tipografía; antenas con cuerpo; revisar cada objeto de cerca. Voz: probar el efecto Adjutant (StarCraft) para el público nerd (`voz.efecto: adjutant`).

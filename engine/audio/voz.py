@@ -71,11 +71,13 @@ for l in sorted(vc['lineas'], key=lambda x: x['t']):
     with wave.open(str(wav), 'wb') as w: als = voice.synthesize_wav(respell(l['texto']), w, syn_config=syn, include_alignments=True)
     with wave.open(str(wav)) as w: x = np.frombuffer(w.readframes(w.getnframes()), '<i2').astype(np.float32) / 32768; sr = w.getframerate()
     x = resample_poly(x, SR // 50, sr // 50) if sr != SR else x
+    dur_voz = len(x) / SR   # lo que dura la VOZ (para chequear escenas); el efecto puede agregar cola
     if vc.get('efecto') == 'radio': x = _radio.radio(x, vc.get('radio_fuerza', 0.6))   # incluye squelch final
+    elif vc.get('efecto') == 'adjutant': x = _radio.adjutant(x, vc.get('adjutant_fuerza', 0.7), vc.get('adjutant_reverb', 0.22))   # voz tipo Adjutant de StarCraft + cola de sala
     if l.get('al_final'):   # video en bucle: sin silencio final y termina justo en el último cuadro
         nz = np.where(np.abs(x) > 0.012)[0]; x = x[:nz[-1] + int(0.03 * SR)] if len(nz) else x
         l = dict(l, t=total - len(x) / SR)
-    dur = len(x) / SR; fin = l['t'] + dur; s0, s1 = scenes[l['escena']]
+    dur = dur_voz if not l.get('al_final') else len(x) / SR; fin = l['t'] + dur; s0, s1 = scenes[l['escena']]
     if als: PAL += [{'l': l['id'], 'w': q['w'], 't0': round(l['t'] + q['t0'], 3), 't1': round(l['t'] + q['t1'], 3)} for q in palabras(l['texto'], als, sr)]
     flag = ''
     if l['t'] < s0 - 0.05: flag += ' EMPIEZA ANTES DE SU ESCENA'

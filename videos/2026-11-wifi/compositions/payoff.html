@@ -20,13 +20,13 @@
       const E = await M.crear(root), { THREE, P, V, clamp, EASE } = E;
       const rooms = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 3.8), E.std(0x14223a, 0.9, 0)); rooms.rotation.x = -Math.PI / 2; rooms.position.y = -0.002; rooms.visible = !E.LINEA; E.scene.add(rooms);
       const borde = (w, d, x, z) => { const q = [[-w / 2, -d / 2], [w / 2, -d / 2], [w / 2, d / 2], [-w / 2, d / 2]], pts = [];   // contorno del cuarto: línea gruesa
-        q.forEach((c, i) => { const n = q[(i + 1) % 4]; pts.push(new V(x + c[0], 0.006, z + c[1]), new V(x + n[0], 0.006, z + n[1])); }); E.scene.add(E.trazo(pts, P.muted, 3)); };
+        q.forEach((c, i) => { const n = q[(i + 1) % 4]; pts.push(new V(x + c[0], 0.006, z + c[1]), new V(x + n[0], 0.006, z + n[1])); }); E.scene.add(E.trazo(pts, P.mid, P.px)); };
       borde(2.4, 1.7, 0, 0.7); borde(2.4, 1.7, 0, -1.05);
       const pared = E.pared(2.5, 0.5, 0.09); pared.position.set(0, 0, -0.18); E.scene.add(pared);
       const rt = E.router(); rt.position.set(0, 0, 1.55); E.scene.add(rt);
-      const tel = (z) => { const t = E.caja(0.16, 0.02, 0.3, E.std(0xc3cee2, 0.35, 0.3), 0.01); t.position.set(0, 0.02, z); E.scene.add(t); E.contornear(t, P.trazo, 4);
+      const tel = (z) => { const t = E.caja(0.16, 0.02, 0.3, E.std(0xc3cee2, 0.35, 0.3), 0.01); t.position.set(0, 0.02, z); E.scene.add(t); E.contornear(t);
         const lm = t.children[0].material;   // teléfono = contorno; "se ilumina" = el contorno toma el color de la señal
-        return { luz(col, k) { lm.color.copy(P.trazo).lerp(col, k); lm.linewidth = 4 + 3 * k; } }; };
+        return { luz(col, k) { lm.color.copy(P.edge).lerp(col, k); lm.linewidth = P.px + 2 * k; } }; };
       const mCerca = tel(0.45), mLejos = tel(-1.1), C = new V(0, 0.03, 1.55);
       const r5 = [E.anillo(P.sky, new V(0, 1, 0), 0.016), E.anillo(P.sky, new V(0, 1, 0), 0.016)], r24 = [E.anillo(P.acc, new V(0, 1, 0), 0.016), E.anillo(P.acc, new V(0, 1, 0), 0.016)];
       E.animar(tl, 3.9, (t) => {

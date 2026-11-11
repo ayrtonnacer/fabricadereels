@@ -37,7 +37,7 @@
     "length_scale": 1.05,
     "noise_scale": 0.6,
     "noise_w_scale": 0.7,
-    "efecto": "ninguno",
+    "efecto": "adjutant",
     "radio_fuerza": 0.6,
     "lineas": [
       {
@@ -79,13 +79,13 @@
       {
         "id": "l07",
         "escena": "bandas",
-        "t": 20.85,
+        "t": 20.95,
         "texto": "Más frecuencia, más datos, pero menos alcance: las paredes la frenan más."
       },
       {
         "id": "l08",
         "escena": "payoff",
-        "t": 25.25,
+        "t": 25.3,
         "texto": "Por eso, lejos del router, a veces la de 2,4 rinde más."
       },
       {
@@ -94,7 +94,9 @@
         "t": 29.4,
         "texto": "Dale me gusta y seguime para aprender más de redes."
       }
-    ]
+    ],
+    "adjutant_fuerza": 0.7,
+    "adjutant_reverb": 0.22
   },
   "audio": {
     "musica": "assets/musica/palladio.mp3",

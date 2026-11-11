@@ -39,7 +39,9 @@ export async function crear(root, opts = {}) {
     warn: new THREE.Color(css('--warn', '#FFB020')), text: new THREE.Color(css('--text', '#E8EEF7')), panel: new THREE.Color(css('--panel', '#111A28')),
   };
   const LINEA = css('--estilo', 'linea') === 'linea';   // tema "línea": negro + contornos gruesos; "solido": objetos rellenos con entorno
-  P.trazo = new THREE.Color(css('--trazo', '#E8EEF7')); P.piso = new THREE.Color(css('--piso', '#2A2F38')); P.muted = new THREE.Color(css('--muted', '#8A93A3'));
+  P.plate = new THREE.Color(css('--plate', '#0A0D12')); P.hi = new THREE.Color(css('--hi', '#FAFAFA')); P.edge = new THREE.Color(css('--edge', '#A1A1AA')); P.mid = new THREE.Color(css('--mid', '#52525B'));
+  P.px = parseFloat(css('--trazo-px', '2.2')); P.trazo = P.edge; P.piso = P.mid; P.muted = P.edge;   // trazo = arista gris; blanco (P.hi / P.sky) solo para resaltar
+  if (LINEA) { P.sky = P.hi; P.hondo = P.plate; P.bg = P.plate; }
   const hex = (c) => '#' + c.getHexString();
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setPixelRatio(1); renderer.setSize(1080, 1920, false); renderer.setClearColor(0x000000, 0);
@@ -56,13 +58,13 @@ export async function crear(root, opts = {}) {
   const E = { THREE, P, LINEA, renderer, scene, cam, EASE, clamp, V };
   // en línea, el "relleno" es negro puro (tapa lo de atrás) y el objeto se dibuja con su contorno (E.contornear)
   E.std = (c, r = 0.55, m = 0.15) => { if (!LINEA) return new THREE.MeshStandardMaterial({ color: c, roughness: r, metalness: m });
-    const k = new THREE.MeshBasicMaterial({ color: 0x000000, toneMapped: false, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1 }); k.userData.contorno = true; return k; };
+    const k = new THREE.MeshBasicMaterial({ color: P.plate, toneMapped: false, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1 }); k.userData.contorno = true; return k; };
   const LM = []; E.trazoMat = (color, w) => { const m = new LineMaterial({ color, linewidth: w, transparent: true, toneMapped: false }); m.resolution.set(1080, 1920); return m; };
-  E.trazo = (pts, color = P.trazo, w = 4) => {   // línea gruesa (px) por pares de puntos [a0,a1, b0,b1…]: las líneas de WebGL miden 1 px y en video no se ven
+  E.trazo = (pts, color = P.edge, w = P.px) => {   // línea gruesa (px) por pares de puntos [a0,a1, b0,b1…]: las líneas de WebGL miden 1 px y en video no se ven
     const g = new LineSegmentsGeometry(); g.setPositions(pts.flatMap((p) => [p.x, p.y, p.z])); const l = new LineSegments2(g, E.trazoMat(color, w)); l.computeLineDistances(); return l; };
-  E.contornear = (obj, color = P.trazo, w = 4, umbral = 30) => {   // agrega contorno grueso a cada malla con relleno negro (aristas marcadas, no facetas)
+  E.contornear = (obj, color = P.edge, w = P.px, umbral) => {   // agrega contorno grueso a cada malla con relleno negro (aristas marcadas, no facetas)
     if (!LINEA) return obj; const ms = []; obj.traverse((o) => { if (o.isMesh && o.material.userData.contorno) ms.push(o); });
-    for (const m of ms) { const e = new THREE.EdgesGeometry(m.geometry, umbral), g = new LineSegmentsGeometry(); g.setPositions(e.attributes.position.array);
+    for (const m of ms) { const e = new THREE.EdgesGeometry(m.geometry, umbral ?? (m.geometry.type === 'BoxGeometry' || m.geometry.type === 'PlaneGeometry' ? 30 : 12)), g = new LineSegmentsGeometry(); g.setPositions(e.attributes.position.array);
       const l = new LineSegments2(g, E.trazoMat(color, w)); l.computeLineDistances(); m.add(l); m.material.userData.contorno = false; }
     return obj; };
   E.basic = (c, o = 1) => new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: o, toneMapped: false });
@@ -70,10 +72,10 @@ export async function crear(root, opts = {}) {
 
   // piso de líneas en perspectiva: tiras con ancho en metros (las cercanas gruesas, las lejanas finas; convergen al horizonte)
   if (piso) {
-    const N = 26, w = 0.006, pos = [], quad = (x0, z0, x1, z1) => pos.push(x0, 0.001, z0, x1, 0.001, z0, x1, 0.001, z1, x0, 0.001, z0, x1, 0.001, z1, x0, 0.001, z1);
+    const N = 26, w = LINEA ? 0.0035 : 0.006, pos = [], quad = (x0, z0, x1, z1) => pos.push(x0, 0.001, z0, x1, 0.001, z0, x1, 0.001, z1, x0, 0.001, z0, x1, 0.001, z1, x0, 0.001, z1);
     for (let i = -N; i <= N; i++) { quad(i - w, -N, i + w, N); quad(-N, i - w, N, i + w); }
     const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
-    const g = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: LINEA ? P.piso : 0x2f4a70, transparent: true, opacity: LINEA ? 1 : 0.7, side: THREE.DoubleSide })); scene.add(g); E.piso = g;
+    const g = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: LINEA ? P.piso : 0x2f4a70, transparent: true, opacity: LINEA ? 0.55 : 0.7, side: THREE.DoubleSide })); scene.add(g); E.piso = g;
   }
   // sombra de contacto (falsa y barata): mancha suave bajo el objeto; ancla los objetos al piso
   E.sombra = (w, d, op = 0.6) => {
@@ -84,7 +86,7 @@ export async function crear(root, opts = {}) {
   };
 
   // textura de texto (pantallas): se redibuja solo cuando cambia el texto; admite varias líneas ('\n')
-  E.textoTex = (w, h, fondo = LINEA ? '#000000' : '#070B12') => {
+  E.textoTex = (w, h, fondo = LINEA ? css('--plate', '#0A0D12') : '#070B12') => {
     const cv = document.createElement('canvas'); cv.width = w; cv.height = h; const ctx = cv.getContext('2d');
     const tex = new THREE.CanvasTexture(cv); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4; let last = null;
     const api = { tex, texto(str, color = hex(P.acc), size = h * 0.2, alinear = 'left') {
@@ -99,7 +101,7 @@ export async function crear(root, opts = {}) {
   E.laptop = () => {   // ≈ 34 cm; frente hacia +z; sin antena (las notebooks no tienen una a la vista). userData: pantalla (texto), emisor (punto 3D de donde "sale" la onda)
     const g = new THREE.Group();
     const base = E.caja(0.34, 0.016, 0.23, E.std(0x34465f, 0.45, 0.55), 0.006); base.position.y = 0.008; g.add(base);
-    const teclas = new THREE.Mesh(new THREE.PlaneGeometry(0.29, 0.11), E.std(0x1b2840, 0.8, 0.1)); teclas.rotation.x = -Math.PI / 2; teclas.position.set(0, 0.0165, 0.035); g.add(teclas); E.contornear(teclas, P.muted, 2.5);
+    const teclas = new THREE.Mesh(new THREE.PlaneGeometry(0.29, 0.11), E.std(0x1b2840, 0.8, 0.1)); teclas.rotation.x = -Math.PI / 2; teclas.position.set(0, 0.0165, 0.035); g.add(teclas); E.contornear(teclas, P.mid, P.px);
     const lid = new THREE.Group(); lid.position.set(0, 0.016, -0.115); lid.rotation.x = -0.28;
     const marco = E.caja(0.34, 0.225, 0.01, E.std(0x34465f, 0.45, 0.55), 0.005); marco.position.y = 0.1125; lid.add(marco);
     const T = E.textoTex(512, 320); const pant = new THREE.Mesh(new THREE.PlaneGeometry(0.31, 0.195), new THREE.MeshBasicMaterial({ map: T.tex, toneMapped: false })); pant.position.set(0, 0.1125, 0.0056); lid.add(pant);
@@ -108,7 +110,7 @@ export async function crear(root, opts = {}) {
   E.router = () => {   // ≈ 42 cm; dos antenas (los routers sí las tienen); pantallita frontal con texto. userData: puertoTrasero, puertoLado, puntaAntena
     const g = new THREE.Group();
     const body = E.caja(0.42, 0.06, 0.26, E.std(0x2d4268, 0.4, 0.4), 0.014); body.position.y = 0.03; g.add(body);
-    for (const x of [-0.14, 0.14]) { if (LINEA) { const dx = 0.13 * Math.sin(0.5 * x), dy = 0.13 * Math.cos(0.5 * x), a = E.trazo([new V(x - dx, 0.19 - dy, -0.08), new V(x + dx, 0.19 + dy, -0.08)], P.trazo, 5); g.add(a); continue; }
+    for (const x of [-0.14, 0.14]) {
       const a = new THREE.Mesh(new THREE.CylinderGeometry(0.008, 0.008, 0.26, 14), E.std(0x44577a, 0.4, 0.5)); a.position.set(x, 0.19, -0.08); a.rotation.z = -x * 0.5; g.add(a); }
     const T = E.textoTex(256, 64); const pant = new THREE.Mesh(new THREE.PlaneGeometry(0.26, 0.04), new THREE.MeshBasicMaterial({ map: T.tex, toneMapped: false })); pant.position.set(0, 0.032, 0.1305); g.add(pant);
     for (const x of [-0.17, -0.15]) { const l = new THREE.Mesh(new THREE.SphereGeometry(0.006, 10, 10), E.basic(P.acc)); l.position.set(x, 0.05, 0.131); g.add(l); }
@@ -116,10 +118,10 @@ export async function crear(root, opts = {}) {
     g.userData = { pantalla: T, puertoTrasero: new V(0, 0.03, -0.13), puertoLado: new V(-0.21, 0.03, 0.0), puntaAntena: new V(-0.14 + 0.065, 0.31, -0.08) }; return g;
   };
   E.globo = () => { const g = new THREE.Group(); g.add(new THREE.Mesh(new THREE.SphereGeometry(0.3, 40, 28), E.std(0x10233f, 0.35, 0.3)));
-    if (LINEA) { const wg = new LineSegmentsGeometry(); wg.setPositions(new THREE.WireframeGeometry(new THREE.SphereGeometry(0.303, 14, 10)).attributes.position.array); const w = new LineSegments2(wg, E.trazoMat(P.sky, 2.5)); w.computeLineDistances(); g.add(w); return g; }
+    if (LINEA) { const wg = new LineSegmentsGeometry(); wg.setPositions(new THREE.WireframeGeometry(new THREE.SphereGeometry(0.303, 14, 10)).attributes.position.array); const w = new LineSegments2(wg, E.trazoMat(P.edge, P.px)); w.computeLineDistances(); g.add(w); return g; }
     const w = new THREE.LineSegments(new THREE.WireframeGeometry(new THREE.SphereGeometry(0.303, 14, 10)), new THREE.LineBasicMaterial({ color: P.sky, transparent: true, opacity: 0.65 })); g.add(w); return g; };
   E.pared = (w, h, d, c = 0x4a6088) => { const g = new THREE.Group(); const m = E.caja(w, h, d, E.std(c, 0.7, 0.05), Math.min(w, h, d) * 0.15); m.position.y = h / 2; g.add(m);
-    if (LINEA) { m.position.y = 0; const o = new THREE.Group(); o.position.y = h / 2; o.add(m); g.add(o); g.remove(m); E.contornear(o, P.muted, 4); return g; }
+    if (LINEA) { m.position.y = 0; const o = new THREE.Group(); o.position.y = h / 2; o.add(m); g.add(o); g.remove(m); E.contornear(o, P.edge, P.px); return g; }
     const l = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(w, h, d)), new THREE.LineBasicMaterial({ color: 0x8aa0c8, transparent: true, opacity: 0.45 })); l.position.y = h / 2; g.add(l); return g; };
   E.paquete = (c = P.acc, s = 0.045) => new THREE.Mesh(new RoundedBoxGeometry(s, s, s, 2, s * 0.2), E.basic(c));
   E.cable = (A, B, color = P.sky, r = 0.011, holgura = 0.12) => {   // cable con caída natural (holgura = flecha / largo): crece de A hacia B con set(p) p 0..1; si cuelga hasta el piso se apoya en él. Extremos SOBRE los objetos.
