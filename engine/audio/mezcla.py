@@ -31,7 +31,7 @@ g = f"""[0]aformat=sample_rates=48000:channel_layouts=stereo,asplit=3[v][vk1][vk
 [1]aformat=sample_rates=48000:channel_layouts=stereo,volume={sg}[s];
 [2]aformat=sample_rates=48000:channel_layouts=stereo,{MCHAIN}[m];
 [s][vk1]sidechaincompress=threshold=0.05:ratio=2.5:attack=5:release=200[sd];
-[m][vk2]sidechaincompress=threshold=0.03:ratio=4:attack=20:release=400[md];
+[m][vk2]sidechaincompress=threshold=0.03:ratio={au.get('musica_duck', 4)}:attack=20:release=400[md];
 [v][sd][md]amix=inputs=3:normalize=0:duration=first,aresample=48000[o]"""
 ff('-i', A / 'voz_norm.wav', '-i', A / 'sfx.wav', '-i', music, '-filter_complex', g, '-map', '[o]', '-ac', '2', '-c:a', 'pcm_s16le', A / 'premezcla.wav')
 # 3) nivel final: ganancia lineal a -14 LUFS y limitador de picos (-1,5 dBTP); sin compresión dinámica
