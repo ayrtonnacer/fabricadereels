@@ -67,3 +67,4 @@
 - 2026-11-10 (3): **el análisis de referencias es numérico** (biblia de estilo + `metas.json` + `comparar.py`); se elimina el script técnico/shooting script cualitativo. Los reels se planean en `plan.md` con metas en números y se verifican midiendo.
 - 2026-11-10 (4): ondas de radio = anillos, sinusoidal solo en frecuencias; módem en la sección del router; tipeo digital solo en la notebook.
 - 2026-11-10 (5): prueba de estética **hairline** (placas planas + trazo fino, `--estilo: hairline`) en copia del WiFi, sin tocar el original; está a la espera de su elección. Si gana, pasar el estilo a `assets/escena3d.js` común y a `_plantilla`.
+- 2026-11-11: **voz de Daniela a `length_scale` 1,05** y guion al ≤ 2,9 pal/s (96 palabras en 33 s): a 0,92 hablaba ≈ 3,7 pal/s. Para bajar la velocidad no alcanza con la voz: hay que recortar texto o alargar el video. Mezcla: medir música vs voz por línea antes de fijar dB (`musica_nivelar` si la pista tiene mucha dinámica).
