@@ -51,3 +51,9 @@ Link + indicaciones → guion (público: técnicos, principiantes, reclutadores)
 - **Guardar cada pronunciación correcta apenas Ayrton la confirma o corrige**: va a `engine/audio/pronunciacion.json` (`estado: "ok"` + nota con la fecha y la fuente) y se anota en `docs/BITACORA.md`. Al terminar un video, las palabras que no corrigió quedan `ok` (las aprobó de oído). Confirmadas: uaifai, ráuter, ísernet, gigaérts, "dos coma cuatro".
 - **Estándar de calidad (2026-11-11)**: objetos GRISES de trazo fino y continuo; blanco solo para cables, señal y tipografía; antenas con cuerpo; revisar cada objeto de cerca. Voz: probar el efecto Adjutant (StarCraft) para el público nerd (`voz.efecto: adjutant`).
 - **Voz sin efectos (2026-11-11)**: por defecto SIEMPRE Daniela limpia (`voz.efecto: "ninguno"`). El efecto Adjutant se probó y no le gustó; no proponerlo de nuevo salvo que lo pida.
+
+## Agregado 2026-11-12
+- **Las referencias que pasa son para aprender CÓMO se explica, no para copiarlas**: no repetir su hook, su orden ni sus objetos; proponer ángulo y analogías propias.
+- **Nada pixelado/"cuadrado" como protagonista** (la cara de 8×8 del reel de tensores no le gustó): formas suaves, objetos con más riqueza.
+- **Cuidar la pronunciación**: ante una palabra en inglés, ofrecer variantes de audio antes de usarla; "machine learning" como "mashín lérnin" no le gustó.
+- En un reel conceptual lo primero es que **quede claro la definición** (qué ES la cosa), antes que lucirse con la animación.
