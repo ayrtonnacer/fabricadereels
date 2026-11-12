@@ -1,0 +1,4 @@
+# Fuentes del reel (leídas 2026-11-12)
+- **GeeksforGeeks** (actualizado 11 nov 2025): escalar 0D (pérdida, accuracy, media), vector 1D (features, pesos, embeddings, gradientes), matriz 2D (datasets, pesos de capa, PCA), tensor ≥3D (imágenes 3D, video 4D; base de TensorFlow/PyTorch; cómputo en GPU + autodiferenciación; usado en CNN y transformers). Desventaja del tensor: difícil de visualizar y depurar.
+- **Wikipedia "Tensor" → sección Machine learning**: "este concepto de tensor difiere significativamente del de la matemática y la física: un tensor es lo mismo que un arreglo multidimensional" (una matriz rectangular es un ejemplo). Verifica el detalle de profesional de la escena 7.
+- No se pudieron leer: Towards Data Science y Medium (403 a clientes automáticos), Kaggle (404 sin sesión), Reddit (bloqueado como bot; no se evadió).

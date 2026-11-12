@@ -6,9 +6,9 @@ duracion_objetivo_s: 45
 cierre: cta
 loop_principal: "¿Cuántas dimensiones tiene un lote de fotos?"
 cierre_loop: "Cuatro: lote, canales, alto y ancho."
-verificado: false   # fuentes no accesibles desde la sesión; ver nota
+verificado: parcial   # GfG y Wikipedia leídas; ver fuentes/LEEME.md
 ---
-Fuentes pasadas por Ayrton (no se pudieron leer: red bloqueada): GeeksforGeeks, Wikipedia "Tensor", Reddit r/physicsmemes, Kaggle (paulrohan2020), Medium (malickiart), Towards Data Science.
+Fuentes pasadas por Ayrton (leídas GfG y Wikipedia; Medium, TDS, Kaggle y Reddit no accesibles): GeeksforGeeks, Wikipedia "Tensor", Reddit r/physicsmemes, Kaggle (paulrohan2020), Medium (malickiart), Towards Data Science.
 
 | # | escena | pantalla | voz | s |
 |---|--------|----------|-----|---|
