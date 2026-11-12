@@ -101,6 +101,12 @@
    "a": "mashín lérnin",
    "estado": "sin_verificar",
    "nota": "2026-11-12, reel de tensores; sin verificar de oído por Ayrton"
+  },
+  {
+   "de": "arranca",
+   "a": "arr ranca",
+   "estado": "sin_verificar",
+   "nota": "2026-11-12: Ayrton oyó 'aranca' (la r doble salía de 46 ms); 'arr ranca' da 104 ms de vibrante. Variantes en docs/material/pronunciacion/rr-variantes.mp3"
   }
  ],
  "prohibidas": [
