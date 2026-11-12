@@ -1,31 +1,35 @@
 {
-  "titulo": "Escalar, vector, matriz y tensor",
+  "titulo": "Qué es un tensor",
   "fecha": "2026-11",
   "fuente": "GeeksforGeeks, Wikipedia (Tensor), Towards Data Science",
   "scenes": [
     {
       "id": "gancho",
-      "d": 3.0
+      "d": 4.6
     },
     {
-      "id": "tipos",
-      "d": 13.2
+      "id": "pixel",
+      "d": 7.6
     },
     {
-      "id": "tensor",
-      "d": 9.8
+      "id": "foto",
+      "d": 10.4
     },
     {
-      "id": "red",
-      "d": 5.2
-    },
-    {
-      "id": "detalle",
+      "id": "video",
       "d": 8.4
     },
     {
+      "id": "datos",
+      "d": 5.7
+    },
+    {
+      "id": "usos",
+      "d": 6.1
+    },
+    {
       "id": "payoff",
-      "d": 4.0
+      "d": 7.2
     },
     {
       "id": "cierre",
@@ -43,74 +47,74 @@
       {
         "id": "l01",
         "escena": "gancho",
-        "t": 0.15,
-        "texto": "¿Qué forma tiene tu cara para una IA?"
+        "t": 0.2,
+        "texto": "Para una máquina, una foto, una canción y un texto son lo mismo."
       },
       {
         "id": "l02",
-        "escena": "tipos",
-        "t": 3.3,
-        "texto": "Una IA no ve: solo multiplica números."
+        "escena": "pixel",
+        "t": 4.9,
+        "texto": "Empecemos por un número: el brillo de un píxel. Es un escalar."
       },
       {
         "id": "l03",
-        "escena": "tipos",
-        "t": 5.9,
-        "texto": "Un número solo es un escalar: la pérdida del modelo."
+        "escena": "pixel",
+        "t": 8.9,
+        "texto": "Una fila de píxeles es una lista: un vector."
       },
       {
         "id": "l04",
-        "escena": "tipos",
-        "t": 9.4,
-        "texto": "Una lista es un vector: las características de un dato."
+        "escena": "foto",
+        "t": 12.5,
+        "texto": "Una foto en blanco y negro es una cuadrícula, como una planilla: una matriz."
       },
       {
         "id": "l05",
-        "escena": "tipos",
-        "t": 12.9,
-        "texto": "Una tabla es una matriz: los pesos de una capa."
+        "escena": "foto",
+        "t": 17.4,
+        "texto": "En color son tres cuadrículas apiladas: un cubo de números. Eso es un tensor."
       },
       {
         "id": "l06",
-        "escena": "tensor",
-        "t": 16.5,
-        "texto": "Con más ejes, un tensor. Tu foto en color tiene tres: alto, ancho y canales."
+        "escena": "video",
+        "t": 22.9,
+        "texto": "Y un video suma el tiempo: cubos uno detrás de otro."
       },
       {
         "id": "l07",
-        "escena": "tensor",
-        "t": 21.8,
-        "texto": "Apilá treinta y dos fotos y el modelo recibe cuatro ejes: un lote."
+        "escena": "video",
+        "t": 26.3,
+        "texto": "Un tensor es eso: números ordenados en todas las dimensiones que necesites."
       },
       {
         "id": "l08",
-        "escena": "red",
-        "t": 26.3,
-        "texto": "En la red, la entrada y los pesos son tensores. Cada capa los transforma."
+        "escena": "datos",
+        "t": 31.3,
+        "texto": "El sonido es una lista larga de números; un texto, palabras convertidas en números."
       },
       {
         "id": "l09",
-        "escena": "detalle",
-        "t": 31.5,
-        "texto": "Ojo: acá, rango es la cantidad de ejes. En álgebra lineal es otra cosa."
+        "escena": "usos",
+        "t": 37.0,
+        "texto": "Con cuentas sobre tensores, una máquina distingue lo que hay en una foto, entiende tu voz o te contesta."
       },
       {
         "id": "l10",
-        "escena": "detalle",
-        "t": 36.3,
-        "texto": "Y si las formas no encajan, el modelo ni arranca."
+        "escena": "payoff",
+        "t": 43.1,
+        "texto": "Por eso, para ella, todo es lo mismo: tensores."
       },
       {
         "id": "l11",
         "escena": "payoff",
-        "t": 39.9,
-        "texto": "Tu cara: tres ejes. Un lote de caras: cuatro."
+        "t": 46.4,
+        "texto": "Si aprendés TensorFlow, es lo primero que vas a usar."
       },
       {
         "id": "l12",
         "escena": "cierre",
-        "t": 44.4,
-        "texto": "Dale me gusta y seguime para aprender más de machine learning."
+        "t": 50.6,
+        "texto": "Dale me gusta y seguime para aprender más sobre inteligencia artificial."
       }
     ]
   },

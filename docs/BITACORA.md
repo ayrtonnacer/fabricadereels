@@ -115,3 +115,4 @@ Todo lo que Ayrton dice y pasa se guarda acá (y el material en `docs/material/`
 - 2026-11-12 (8): guion v3 de tensores con el "para qué", CTA sobre inteligencia artificial y arreglo de la rr; pendiente su OK.
 - 2026-11-12 (9): Ayrton cambió a Opus para revisar todo y armar el guion. Guion v4 (un viaje: foto → tensor → lote → capas → vector → pérdida) + lectura completa en audio; pendiente su OK.
 - 2026-11-12 (10): v4 poco didáctica; Ayrton pasó un texto simple de qué es un tensor (guardado en docs/material/). Guion v5 didáctico + lectura en audio; pendiente su OK.
+- 2026-11-12 (11): Ayrton: cambiar el final (aprender TensorFlow) y crear el video. Hecho: reel v5.1 (55 s, −14,0 LUFS). Pendiente: su opinión, y confirmar de oído PyTorch/TensorFlow/arranca (no se usan en esta versión salvo TensorFlow).

@@ -1,0 +1,37 @@
+<!-- PÍXEL (7,6 s) — la cámara entra a la foto: de lejos es una foto suave, de cerca una cuadrícula de números. Un píxel sale de la foto (escalar) y después toda su fila (vector). -->
+<template>
+  <style>#root { position: absolute; inset: 0; } .et { opacity: 0; } #root .w { display: inline-block; } </style>
+  <div id="root" data-composition-id="pixel" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <canvas id="x-cv" class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="hud" data-layout-ignore>
+
+    </div>
+    <div class="vineta" data-layout-ignore></div>
+
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="pixel"]');
+    const tl = gsap.timeline({ paused: true });
+    const ent = (id, t, d = 0.25) => { tl.fromTo(id, { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: d, ease: 'power3.out' }, t); };
+    const sal = (id, t) => { tl.to(id, { opacity: 0, duration: 0.2 }, t); };
+
+    Promise.all([import('./assets/escena3d.js'), import('./assets/tensor3d.js')]).then(async ([M, Tm]) => {
+      const E = await M.crear(root), T = Tm.T3(E), { V, P, clamp, EASE } = E;
+      const pop = (o, t, t0, d = 0.35, s = 1) => { const q = EASE.out(clamp((t - t0) / d)); o.scale.setScalar(Math.max(0.001, s * q)); o.visible = q > 0.002; };
+      const quitar = (o, t, t0, d = 0.3, s = 1) => { const q = 1 - EASE.in(clamp((t - t0) / d)); o.scale.setScalar(Math.max(0.001, s * q)); o.visible = q > 0.002; };
+      const foto = T.foto({ S: 0.9 }); foto.position.set(0, 0.55, 0); E.scene.add(foto);
+      const I = 5, J = 8, val = T.valores(16), c = foto.userData.centro(I, J).add(foto.position), cell = 0.9 / 16;
+      const px = T.celda(val[J][I], cell * 0.92, P.acc, val[J][I] / 255); px.position.set(c.x, c.y, 0.03); E.scene.add(px);
+      const fila = T.fila(val[J], cell * 0.9, cell, { gris: val[J].map((g) => g / 255) }); fila.position.set(0, c.y, 0.12); E.scene.add(fila);
+      E.animar(tl, 7.6, (t) => {
+        E.ruta(t, [{ t: 0, p: [0, 0.5, 3.6], l: [0, 0.42, 0] }, { t: 0.9, p: [0, 0.5, 3.5], l: [0, 0.42, 0], e: 'lin' }, { t: 2.3, p: [c.x, c.y, 0.75], l: [c.x, c.y, 0], e: 'io' },
+          { t: 4.1, p: [c.x * 0.9, c.y, 0.72], l: [c.x * 0.9, c.y, 0], e: 'lin' }, { t: 5.4, p: [0, c.y + 0.03, 2.0], l: [0, c.y, 0], e: 'io' }, { t: 7.6, p: [0, c.y + 0.03, 1.9], l: [0, c.y, 0], e: 'lin' }]);
+        foto.userData.mix(EASE.io(clamp((t - 1.0) / 0.9)));
+        const s = EASE.out(clamp((t - 1.6) / 0.5)), b = EASE.io(clamp((t - 4.3) / 0.6)); px.position.z = 0.03 + 0.15 * s - 0.06 * b; px.scale.setScalar(1 + 0.8 * s - 0.8 * b); px.visible = t < 4.95;
+        fila.userData.set(clamp((t - 4.4) / 1.1));
+      });
+      window.__timelines['pixel'] = tl;
+    });
+  </script>
+</template>
