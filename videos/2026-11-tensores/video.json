@@ -1,0 +1,119 @@
+{
+  "titulo": "Escalar, vector, matriz y tensor",
+  "fecha": "2026-11",
+  "fuente": "GeeksforGeeks, Wikipedia (Tensor), Towards Data Science",
+  "scenes": [
+    {
+      "id": "gancho",
+      "d": 3.4
+    },
+    {
+      "id": "tipos",
+      "d": 11.4
+    },
+    {
+      "id": "tensor",
+      "d": 9.2
+    },
+    {
+      "id": "detalle",
+      "d": 9.0
+    },
+    {
+      "id": "payoff",
+      "d": 3.2
+    },
+    {
+      "id": "cierre",
+      "d": 4.2
+    }
+  ],
+  "voz": {
+    "modelo": "assets/voces/es_AR-daniela-high.onnx",
+    "length_scale": 1.05,
+    "noise_scale": 0.6,
+    "noise_w_scale": 0.7,
+    "efecto": "ninguno",
+    "radio_fuerza": 0.6,
+    "lineas": [
+      {
+        "id": "l01",
+        "escena": "gancho",
+        "t": 0.15,
+        "texto": "¿Cuántas dimensiones tiene un lote de fotos?"
+      },
+      {
+        "id": "l02",
+        "escena": "tipos",
+        "t": 3.7,
+        "texto": "Un escalar es un número: la pérdida del modelo."
+      },
+      {
+        "id": "l03",
+        "escena": "tipos",
+        "t": 7.1,
+        "texto": "Una lista de números es un vector: las características de un dato."
+      },
+      {
+        "id": "l04",
+        "escena": "tipos",
+        "t": 11.2,
+        "texto": "Una tabla es una matriz: los pesos de una capa."
+      },
+      {
+        "id": "l05",
+        "escena": "tensor",
+        "t": 14.9,
+        "texto": "Todos son tensores; cambia la cantidad de ejes. Una foto en color tiene tres: alto, ancho y canales."
+      },
+      {
+        "id": "l06",
+        "escena": "tensor",
+        "t": 20.9,
+        "texto": "Apilá treinta y dos fotos y sumás un eje: el lote."
+      },
+      {
+        "id": "l07",
+        "escena": "detalle",
+        "t": 24.3,
+        "texto": "Ojo: en machine learning, rango es la cantidad de ejes."
+      },
+      {
+        "id": "l08",
+        "escena": "detalle",
+        "t": 28.0,
+        "texto": "En álgebra lineal significa otra cosa."
+      },
+      {
+        "id": "l09",
+        "escena": "detalle",
+        "t": 30.4,
+        "texto": "Y si las formas no encajan, el modelo ni arranca."
+      },
+      {
+        "id": "l10",
+        "escena": "payoff",
+        "t": 33.6,
+        "texto": "Cuatro: lote, canales, alto y ancho."
+      },
+      {
+        "id": "l11",
+        "escena": "cierre",
+        "t": 36.9,
+        "texto": "Dale me gusta y seguime para aprender más de machine learning."
+      }
+    ]
+  },
+  "audio": {
+    "musica": "assets/musica/palladio.mp3",
+    "musica_desde": 0.6,
+    "musica_db": 11,
+    "sfx_gain": 1.25,
+    "loudness": -14,
+    "musica_duck": 2,
+    "musica_nivelar": [
+      -30,
+      6
+    ]
+  }
+}

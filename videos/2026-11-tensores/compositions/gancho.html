@@ -1,0 +1,39 @@
+<!-- GANCHO (3,2 s) — 3D: un router emite ondas por el piso (eje z hacia la cámara) detrás del titular; el cuadro 0 ya muestra la idea.
+     Al final la cámara avanza y el titular se agranda y atraviesa la pantalla (zoom through) hacia "envia". -->
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    #root .w { display: inline-block; }
+    #g-titular { width: 980px; text-align: center; }
+    #g-firma { position: absolute; left: 0; right: 0; top: 250px; text-align: center; }
+  </style>
+  <div id="root" data-composition-id="gancho" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <canvas id="g-cv" class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="hud" data-layout-ignore><div class="ancla" style="top: 640px"><h1 id="g-titular" class="titular"><span class="w">Tu</span> <span class="w">WiFi</span> <span class="w">es</span><br /><span class="w">una</span> <span class="w acc">radio</span></h1></div></div>
+    <div class="vineta" data-layout-ignore></div>
+    <div id="g-firma" class="firma">@ayrtonnacer</div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="gancho"]');
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo('#g-titular .w', { opacity: 0.9, filter: 'blur(2px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.18, ease: 'power4.out', stagger: 0.07 }, 0);
+    tl.fromTo('#g-firma', { opacity: 0.6 }, { opacity: 1, duration: 0.25 }, 0);
+    tl.to('#g-firma', { opacity: 0, duration: 0.2 }, 2.55);
+    tl.to('#g-titular', { scale: 14, opacity: 0, filter: 'blur(10px)', duration: 0.6, ease: 'power3.in' }, 2.6);   // zoom through
+    import('./assets/escena3d.js').then(async (M) => {
+      const E = await M.crear(root), { P, V, clamp, EASE } = E;
+      const rt = E.router(); rt.position.set(0, 0, -0.2); rt.scale.setScalar(1.4); E.scene.add(rt);
+      const anillos = [0, 1, 2, 3].map(() => E.anillo(P.acc, new V(0, 1, 0), 0.016));
+      E.animar(tl, 3.2, (t) => {
+        E.ruta(t, [
+          { t: 0, p: [0, 3.2, 5.2], l: [0, 0.2, -0.5] },
+          { t: 1.5, p: [0, 1.25, 3.0], l: [0, 0.35, -0.3], e: 'expo' },
+          { t: 2.6, p: [0, 1.15, 2.8], l: [0, 0.35, -0.3], e: 'lin' },
+          { t: 3.2, p: [0, 0.8, 0.9], l: [0, 0.35, -0.8], e: 'in' }]);
+        anillos.forEach((r, i) => r.emitir(((t + 0.9 - 0.7 * i) % 2.8) / 2.8, 4.5, new V(0, 0.02, -0.2)));
+      });
+      window.__timelines['gancho'] = tl;
+    });
+  </script>
+</template>

@@ -1,0 +1,114 @@
+/* Identidad de @ayrtonnacer: tema "línea" (negro, objetos 3D dibujados solo con contorno blanco, acento rojo). Reglas en docs/ESTILO.md.
+   Para volver al tema sólido azul-negro: cambiar --estilo a "solido" y los colores de abajo por los de engine/themes/cyber.css (ver docs/ESTILO.md → Paleta).
+   Todo color va por variable: nunca escribir un color fijo en una escena.
+   NO agregar: líneas de escaneo, esquinas en L / HUD, mayúsculas con espaciado amplio. */
+@font-face { font-family: "Plex Sans"; src: url("fonts/ibm-plex-sans-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "Plex Sans"; src: url("fonts/ibm-plex-sans-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+@font-face { font-family: "IBM Plex Mono"; src: url("fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+@font-face { font-family: "IBM Plex Mono"; src: url("fonts/ibm-plex-mono-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+
+/* PALETA — cada color tiene UN significado (ver docs/ESTILO.md). Para un acento nuevo: agregar la variable acá y usarla con var(--…).
+   Look "hairline" (aprobado por Ayrton): objetos GRISES (--edge) de trazo fino sobre placas casi negras; BLANCO (--hi) solo para lo que debe resaltar
+   (cables, señal en el aire, tipografía); rojo (--acc) para el énfasis. */
+:root {
+  --estilo: linea;     /* linea = placas + aristas finas sobre negro · solido = objetos rellenos (tema anterior) */
+  --plate: #0A0D12;    /* relleno de los objetos 3D (tapa lo de atrás) */
+  --hi: #FAFAFA;       /* blanco de resalte: cables, tipografía */
+  --edge: #A1A1AA;     /* aristas de los objetos (gris) */
+  --mid: #52525B;      /* detalles interiores y piso */
+  --trazo-px: 2.2;     /* grosor de las aristas, en píxeles de video */
+  --bg: #0A0D12; --bg-hondo: #0A0D12; --bg-glow: #0A0D12;
+  --panel: #0F1218;    /* tarjetas, pantallas */
+  --line: #27272A;     /* filetes */
+  --grilla: rgba(113, 113, 122, .22);
+  --piso: #52525B;
+  --text: #FAFAFA;
+  --muted: #A1A1AA;
+  --acc: #FF2E3F;      /* énfasis: palabra clave, firma, progreso, señal */
+  --acc-glow: transparent;
+  --sky: #FAFAFA;      /* secundario neutro = blanco: cables, internet, 5 GHz */
+  --ok: #2EE08C;      /* ✓ correcto */
+  --warn: #FFB020;    /* ⚠ aviso */
+  --err: #FF6A1F;     /* ✕ error: bloque RELLENO naranja-rojo con ✕ (el acento ya es rojo: distinguir por color y por forma) */
+  --sans: "Plex Sans", sans-serif;
+  --mono: "IBM Plex Mono", monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--sans); }
+
+/* ---- Set 2.5D (ver docs/CAMARA.md) ----
+   .vista (perspectiva, recorta)  >  .cam (dolly z + giros)  >  .mundo (traslación x/y)  >  capas con data-x/y/z
+   Las posiciones y profundidades las pone camara.js con GSAP; acá no se escribe ningún transform. */
+.vista { position: absolute; inset: 0; overflow: hidden; perspective: 1600px; }
+.cam, .mundo { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-style: preserve-3d; }
+.mundo > * { position: absolute; left: 540px; top: 960px; }  /* origen del mundo = centro de pantalla; camara.js centra cada pieza */
+
+/* Fondo: degradé + piso de grilla en perspectiva (da profundidad cuando la cámara se mueve) */
+.fondo { position: absolute; inset: 0; background: radial-gradient(1300px 1100px at 50% 30%, var(--bg-glow) 0%, var(--bg) 58%, var(--bg-hondo) 100%); }
+.piso { width: 3000px; height: 3000px;
+  background-image: linear-gradient(var(--grilla) 3px, transparent 3px), linear-gradient(90deg, var(--grilla) 3px, transparent 3px);
+  background-size: 160px 160px;
+  -webkit-mask-image: radial-gradient(closest-side, #000 35%, transparent 100%); mask-image: radial-gradient(closest-side, #000 35%, transparent 100%); }
+.vineta { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 45%, transparent 52%, rgba(0, 0, 0, .65) 100%); }
+
+/* Tipografía: espaciado normal o apretado, nunca abierto */
+.titular, .bajada, .tarjeta p { text-wrap: balance; }   /* sin palabras sueltas en la última línea (docs/TIPOGRAFIA.md) */
+.titular { font-weight: 700; font-size: 124px; line-height: .98; letter-spacing: -.03em; text-align: center; }
+.titular.chico { font-size: 92px; }
+.bajada { font-weight: 500; font-size: 50px; line-height: 1.25; color: var(--muted); text-align: center; }
+.acc { color: var(--acc); text-shadow: 0 0 40px var(--acc-glow); }
+.mono { font-family: var(--mono); }
+.firma { font-weight: 700; font-size: 60px; color: var(--acc); letter-spacing: -.01em; }
+
+/* Piezas */
+.tarjeta { background: linear-gradient(180deg, rgba(23, 34, 52, .96), rgba(15, 23, 36, .96)); border: 2px solid var(--line); border-radius: 22px; box-shadow: 0 40px 90px rgba(0, 0, 0, .55); }
+.chip { display: inline-flex; align-items: center; gap: 18px; padding: 22px 32px; border-radius: 16px; font-weight: 500; font-size: 44px; border: 2px solid var(--line); background: var(--panel); }
+.chip.ok { border-color: color-mix(in srgb, var(--ok) 55%, transparent); }
+.chip.ok b { color: var(--ok); }
+.chip.warn { border-color: color-mix(in srgb, var(--warn) 60%, transparent); }
+.chip.warn b { color: var(--warn); }
+.chip.err { background: var(--err); border-color: var(--err); color: #fff; font-weight: 700; }
+.terminal { background: var(--panel); border: 2px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: 0 40px 90px rgba(0, 0, 0, .6); }
+.terminal .barra { height: 64px; display: flex; align-items: center; gap: 12px; padding: 0 26px; background: var(--panel); border-bottom: 2px solid var(--line); }
+.terminal .barra i { width: 16px; height: 16px; border-radius: 50%; background: var(--line); }
+.terminal .cuerpo { padding: 30px 34px; font: 400 38px/1.5 var(--mono); white-space: pre; }
+.terminal .ps { color: var(--acc); font-weight: 700; }
+
+/* "Paso 1 de 3" en sans + segmentos */
+.pasos { width: 940px; }
+.pasos .lbl { font-weight: 500; font-size: 40px; color: var(--muted); }
+.pasos .lbl b { color: var(--acc); font-weight: 700; }
+.pasos .segs { display: flex; gap: 10px; margin-top: 16px; }
+.pasos .seg { flex: 1; height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; }
+.pasos .seg i { display: block; height: 100%; width: 100%; background: var(--acc); transform-origin: left center; }
+
+/* ---- Objetos reutilizables de redes (notebook, router, trazos) ---- */
+.trazo { fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; }
+.laptop { width: 380px; height: 232px; }
+.laptop .pantalla { position: absolute; left: 30px; top: 0; width: 320px; height: 200px; border: 7px solid var(--line); border-radius: 16px 16px 6px 6px; background: var(--panel); display: flex; align-items: center; justify-content: center; font: 700 44px var(--mono); color: var(--acc); }
+.laptop .base { position: absolute; left: 0; top: 206px; width: 380px; height: 22px; border-radius: 4px 4px 20px 20px; background: linear-gradient(180deg, #2A3A52, #1B2840); }
+.router { width: 420px; height: 160px; }
+.router .cuerpo { position: absolute; left: 0; top: 64px; width: 420px; height: 96px; border-radius: 20px; background: linear-gradient(180deg, #1C2A42, #111A28); border: 2px solid var(--line); display: flex; align-items: center; justify-content: center; font: 700 42px var(--mono); color: var(--text); box-shadow: 0 30px 70px rgba(0, 0, 0, .55); }
+.router .ant { position: absolute; top: 0; width: 14px; height: 80px; border-radius: 7px; background: #33445E; }
+.router .ant.a { left: 64px; } .router .ant.b { right: 64px; }
+.anillo { overflow: visible; }   /* svg de 2x2 px: el círculo interno crece con attr r y el trazo queda fijo */
+.paquete { width: 30px; height: 30px; border-radius: 7px; background: var(--acc); box-shadow: 0 0 22px var(--acc-glow); }
+.pared { width: 54px; border-radius: 8px; background: repeating-linear-gradient(0deg, #2A3A52 0 46px, #1B2840 46px 50px); border: 2px solid var(--line); }
+
+/* Bits en primer plano (data-z 450–700): dan profundidad por paralaje y desenfoque; siempre en los bordes, nunca sobre lo que se lee. */
+.bit { font: 700 140px var(--mono); color: var(--acc); opacity: .2; filter: blur(5px); }
+
+/* ---- Escenas 3D (three.js): el canvas va debajo; el texto HTML se ubica con E.label() sobre puntos 3D ----
+   .ancla = contenedor posicionado por left/top (px) con translate(-50%,-50%) FIJO en CSS; la animación (GSAP) va en el hijo. */
+.canvas3d { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+.hud { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; pointer-events: none; }
+.ancla { position: absolute; left: 540px; top: 960px; transform: translate(-50%, -50%); white-space: nowrap; }
+.ancla > * { white-space: nowrap; text-wrap: nowrap; }
+
+/* ---- Look hairline: piezas HTML (rótulos y tarjetas de placa fina, sin brillo ni sombra) ---- */
+.fondo { background: var(--bg) !important; }
+.vineta { background: radial-gradient(ellipse at 50% 45%, transparent 60%, rgba(0, 0, 0, .45) 100%) !important; }
+.acc { text-shadow: none !important; }
+.chip, .tarjeta { background: var(--panel); border: 1.5px solid var(--edge); border-radius: 6px; box-shadow: none; }
+.chip.ok { border-color: var(--ok); } .chip.warn { border-color: var(--warn); }

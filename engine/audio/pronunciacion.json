@@ -95,6 +95,12 @@
    "a": "dos coma cuatro",
    "estado": "ok",
    "nota": "Aprobado de oído por Ayrton en el reel de WiFi (2026-11-11)."
+  },
+  {
+   "de": "machine learning",
+   "a": "mashín lérnin",
+   "estado": "sin_verificar",
+   "nota": "2026-11-12, reel de tensores"
   }
  ],
  "prohibidas": [
