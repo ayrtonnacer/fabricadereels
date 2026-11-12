@@ -107,6 +107,18 @@
    "a": "arr ranca",
    "estado": "sin_verificar",
    "nota": "2026-11-12: Ayrton oyó 'aranca' (la r doble salía de 46 ms); 'arr ranca' da 104 ms de vibrante. Variantes en docs/material/pronunciacion/rr-variantes.mp3"
+  },
+  {
+   "de": "PyTorch",
+   "a": "páitorch",
+   "estado": "sin_verificar",
+   "nota": "2026-11-12: sin respelling sonaba 'pitorch'"
+  },
+  {
+   "de": "TensorFlow",
+   "a": "tensorflou",
+   "estado": "sin_verificar",
+   "nota": "2026-11-12"
   }
  ],
  "prohibidas": [
@@ -129,6 +141,11 @@
    "palabra": "guardalo",
    "usar": "dale me gusta",
    "motivo": "la CTA debe funcionar en todas las plataformas; YouTube no tiene 'guardar' (2026-11-02)"
+  },
+  {
+   "palabra": "IA",
+   "usar": "inteligencia artificial / un modelo",
+   "motivo": "Piper lee 'una IA' como 'una ya' (medido 2026-11-12)"
   }
  ]
 }
