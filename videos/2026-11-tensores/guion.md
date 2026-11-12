@@ -10,17 +10,19 @@ verificado: sí   # GfG, Wikipedia y Towards Data Science; ver fuentes/LEEME.md
 ---
 Fuentes pasadas por Ayrton (leídas GfG y Wikipedia; Medium, TDS, Kaggle y Reddit no accesibles): GeeksforGeeks, Wikipedia "Tensor", Reddit r/physicsmemes, Kaggle (paulrohan2020), Medium (malickiart), Towards Data Science.
 
-| # | escena | pantalla | voz | s |
-|---|--------|----------|-----|---|
-| 1 | gancho | lote de fotos apilado, texto "¿Cuántos ejes?" | ¿Cuántas dimensiones tiene un lote de fotos? | 0-3 |
-| 2 | escalar | un punto; "0 ejes" | Un escalar es un número: la pérdida del modelo. | 3-8 |
-| 3 | vector | fila de puntos; "1 eje" | Una lista de números es un vector: las características de un dato. | 8-14 |
-| 4 | matriz | grilla; "2 ejes" | Una tabla es una matriz: los pesos de una capa. | 14-20 |
-| 5 | tensor | cubo RGB (alto, ancho, canales); "3 ejes" | Todos son tensores; cambia la cantidad de ejes. Una foto en color tiene tres: alto, ancho y canales. | 20-27 |
-| 6 | lote | cubos apilados; (32, 3, 224, 224) | Apilá treinta y dos fotos y sumás un eje: el lote. | 27-32 |
-| 7 | detalle pro | "rango = ejes" vs rango de una matriz; shape que no encaja → bloque error ✕ | Ojo: en machine learning, rango es la cantidad de ejes. En álgebra lineal significa otra cosa. Y si las formas no encajan, el modelo ni arranca. | 32-40 |
-| 8 | payoff | los 4 ejes rotulados | Cuatro: lote, canales, alto y ancho. | 40-43 |
-| 9 | cierre | CTA grande, firma chica | Dale me gusta y seguime para aprender más de machine learning. | 43-48 |
+| # | escena | voz | s |
+|---|--------|-----|---|
+| 1 | gancho | ¿Qué forma tiene tu cara para una IA? | 0–3,0 |
+| 2 | tipos | Una IA no ve: solo multiplica números. | 3,3 |
+| 3 | tipos | Un número solo es un escalar: la pérdida del modelo. | 5,9 |
+| 4 | tipos | Una lista es un vector: las características de un dato. | 9,4 |
+| 5 | tipos | Una tabla es una matriz: los pesos de una capa. | 12,9 |
+| 6 | tensor | Con más ejes, un tensor. Tu foto en color tiene tres: alto, ancho y canales. | 16,5 |
+| 7 | tensor | Apilá treinta y dos fotos y el modelo recibe cuatro ejes: un lote. | 21,8 |
+| 8 | red | En la red, la entrada y los pesos son tensores. Cada capa los transforma. | 26,3 |
+| 9 | detalle | Ojo: acá, rango es la cantidad de ejes. En álgebra lineal es otra cosa. | 31,5 |
+| 10 | detalle | Y si las formas no encajan, el modelo ni arranca. | 36,3 |
+| 11 | payoff | Tu cara: tres ejes. Un lote de caras: cuatro. | 39,9 |
+| 12 | cierre | Dale me gusta y seguime para aprender más de machine learning. | 44,4 |
 
-Palabras de voz ≈ 112 (≈ 2,3 pal/s a 48 s).
-Cámara (resumen): avanza en z de un objeto al siguiente, uno por escena (punto → fila → grilla → cubo → pila); retención en cada uno; pico de movimiento = whoosh. Cierre: aterriza en el CTA y queda quieta; chinn.
+Versión final (2026-11-12): hook personal (idea del short de referencia y de cómo se lo explicó Ayrton a un amigo), "para qué sirve" = la entrada y los pesos de una red son tensores, detalle de profesional = "rango" en ML vs álgebra lineal, y error de forma (canales primero vs canales al final). Loop: la cara del hook vuelve en el payoff con sus ejes. 131 palabras, 48,6 s. Cámara y efectos: `plan.md`.

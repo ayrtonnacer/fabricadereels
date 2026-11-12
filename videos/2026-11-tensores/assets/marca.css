@@ -112,3 +112,9 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--
 .acc { text-shadow: none !important; }
 .chip, .tarjeta { background: var(--panel); border: 1.5px solid var(--edge); border-radius: 6px; box-shadow: none; }
 .chip.ok { border-color: var(--ok); } .chip.warn { border-color: var(--warn); }
+
+/* ---- reel de tensores: rótulos sobre los objetos 3D ---- */
+.rot { font-family: var(--sans); font-weight: 700; font-size: 58px; letter-spacing: -.02em; color: var(--text); text-shadow: 0 2px 22px #000, 0 0 6px #000; }
+.rot b { color: var(--acc); font-weight: 700; }
+.rot.mono { font-family: var(--mono); font-weight: 500; font-size: 46px; color: var(--muted); letter-spacing: 0; }
+.rot.mono b { font-weight: 700; }

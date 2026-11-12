@@ -5,27 +5,31 @@
   "scenes": [
     {
       "id": "gancho",
-      "d": 3.4
+      "d": 3.0
     },
     {
       "id": "tipos",
-      "d": 11.4
+      "d": 13.2
     },
     {
       "id": "tensor",
-      "d": 9.2
+      "d": 9.8
+    },
+    {
+      "id": "red",
+      "d": 5.2
     },
     {
       "id": "detalle",
-      "d": 9.0
+      "d": 8.4
     },
     {
       "id": "payoff",
-      "d": 3.2
+      "d": 4.0
     },
     {
       "id": "cierre",
-      "d": 4.2
+      "d": 5.0
     }
   ],
   "voz": {
@@ -40,66 +44,72 @@
         "id": "l01",
         "escena": "gancho",
         "t": 0.15,
-        "texto": "¿Cuántas dimensiones tiene un lote de fotos?"
+        "texto": "¿Qué forma tiene tu cara para una IA?"
       },
       {
         "id": "l02",
         "escena": "tipos",
-        "t": 3.7,
-        "texto": "Un escalar es un número: la pérdida del modelo."
+        "t": 3.3,
+        "texto": "Una IA no ve: solo multiplica números."
       },
       {
         "id": "l03",
         "escena": "tipos",
-        "t": 7.1,
-        "texto": "Una lista de números es un vector: las características de un dato."
+        "t": 5.9,
+        "texto": "Un número solo es un escalar: la pérdida del modelo."
       },
       {
         "id": "l04",
         "escena": "tipos",
-        "t": 11.2,
-        "texto": "Una tabla es una matriz: los pesos de una capa."
+        "t": 9.4,
+        "texto": "Una lista es un vector: las características de un dato."
       },
       {
         "id": "l05",
-        "escena": "tensor",
-        "t": 14.9,
-        "texto": "Todos son tensores; cambia la cantidad de ejes. Una foto en color tiene tres: alto, ancho y canales."
+        "escena": "tipos",
+        "t": 12.9,
+        "texto": "Una tabla es una matriz: los pesos de una capa."
       },
       {
         "id": "l06",
         "escena": "tensor",
-        "t": 20.9,
-        "texto": "Apilá treinta y dos fotos y sumás un eje: el lote."
+        "t": 16.5,
+        "texto": "Con más ejes, un tensor. Tu foto en color tiene tres: alto, ancho y canales."
       },
       {
         "id": "l07",
-        "escena": "detalle",
-        "t": 24.3,
-        "texto": "Ojo: en machine learning, rango es la cantidad de ejes."
+        "escena": "tensor",
+        "t": 21.8,
+        "texto": "Apilá treinta y dos fotos y el modelo recibe cuatro ejes: un lote."
       },
       {
         "id": "l08",
-        "escena": "detalle",
-        "t": 28.0,
-        "texto": "En álgebra lineal significa otra cosa."
+        "escena": "red",
+        "t": 26.3,
+        "texto": "En la red, la entrada y los pesos son tensores. Cada capa los transforma."
       },
       {
         "id": "l09",
         "escena": "detalle",
-        "t": 30.4,
-        "texto": "Y si las formas no encajan, el modelo ni arranca."
+        "t": 31.5,
+        "texto": "Ojo: acá, rango es la cantidad de ejes. En álgebra lineal es otra cosa."
       },
       {
         "id": "l10",
-        "escena": "payoff",
-        "t": 33.6,
-        "texto": "Cuatro: lote, canales, alto y ancho."
+        "escena": "detalle",
+        "t": 36.3,
+        "texto": "Y si las formas no encajan, el modelo ni arranca."
       },
       {
         "id": "l11",
+        "escena": "payoff",
+        "t": 39.9,
+        "texto": "Tu cara: tres ejes. Un lote de caras: cuatro."
+      },
+      {
+        "id": "l12",
         "escena": "cierre",
-        "t": 36.9,
+        "t": 44.4,
         "texto": "Dale me gusta y seguime para aprender más de machine learning."
       }
     ]

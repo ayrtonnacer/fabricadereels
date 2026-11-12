@@ -73,3 +73,8 @@
 - 2026-11-10 (5): prueba de estética **hairline** (placas planas + trazo fino, `--estilo: hairline`) en copia del WiFi, sin tocar el original; está a la espera de su elección. Si gana, pasar el estilo a `assets/escena3d.js` común y a `_plantilla`.
 - 2026-11-11: **voz de Daniela a `length_scale` 1,05** y guion al ≤ 2,9 pal/s (96 palabras en 33 s): a 0,92 hablaba ≈ 3,7 pal/s. Para bajar la velocidad no alcanza con la voz: hay que recortar texto o alargar el video. Mezcla: medir música vs voz por línea antes de fijar dB (`musica_nivelar` si la pista tiene mucha dinámica).
 - 2026-11-11 (2): error a no repetir: contornos blancos gruesos (4–5 px) y antenas de una sola línea → quedan con cortes y sin riqueza. Usar gris fino continuo y blanco solo para resaltar.
+
+## 2026-11-12 — Reel de tensores (escalar, vector, matriz, tensor)
+- Ayrton pidió "armá el guion y el video directamente" (sin checkpoint) a partir de las fuentes, el short de referencia y su explicación a un amigo. Decisión de proceso: cuando lo pide así, se salta el checkpoint (7b); el guion queda igual en `videos/2026-11-tensores/guion.md`.
+- Técnico: `Object3D.clone()` serializa `userData` (falla con objetos/funciones) → usar `T.copiar()` de `assets/tensor3d.js`. Encuadre: con `dy` = 170 px y subtítulos en 1120–1320, un objeto de 0,6 m necesita cámara a ≥ 2,6–3,0 m; los rótulos van ARRIBA del objeto (abajo pisan los subtítulos).
+- Red: WebFetch no resolvía hosts nuevos aunque el entorno ya estaba abierto; `curl` desde Bash sí. YouTube bloquea la descarga automática (login) y vidIQ sin créditos: los videos de referencia se pasan por Colab (mp4 comprimido a 540p).
