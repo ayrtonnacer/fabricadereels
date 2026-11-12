@@ -1,36 +1,33 @@
 ---
-tipo: concepto
+tipo: concepto (didáctico)
 tema: "qué es un tensor y para qué lo usa la inteligencia artificial"
-concepto_unico: "Un modelo convierte una foto en un número, tensor por tensor."
-duracion_objetivo_s: 50
+concepto_unico: "Un tensor es una caja de números con las dimensiones que haga falta; así la máquina guarda todo."
+duracion_objetivo_s: 55
 cierre: cta
-loop_principal: "Una foto = más de 150 mil números… ¿qué hace el modelo con ellos?"
-cierre_loop: "De ciento cincuenta mil números a uno solo, tensor por tensor."
-verificado: sí   # 224×224×3 = 150.528; PyTorch NCHW / TensorFlow NHWC por defecto; fuentes en fuentes/LEEME.md
-version: 4 (2026-11-12, revisión con Opus)
+loop_principal: "Para una máquina, una foto, una canción y un texto son lo mismo (¿por qué?)."
+cierre_loop: "Por eso, para ella, todo es lo mismo: tensores."
+verificado: sí
+version: 5 (2026-11-12)   # nivel didáctico del texto que pasó Ayrton (docs/material/2026-11-12-que-es-un-tensor.txt)
 ---
-## Por qué no cerraban la v2/v3
-1. **Dos videos pegados**: primero la definición (escalar → tensor) y después una lista de aplicaciones. El "para qué" quedaba como agregado, no como respuesta.
-2. **Aplicaciones abstractas** ("reconoce caras, traduce, recomienda"): se dicen pero no se ven funcionar.
-3. **12 escenas, ~146 palabras**: más de una idea por reel.
-
-## La idea de la v4: UN viaje
-Se sigue **una foto real a través de un modelo**. En ese viaje aparecen los cuatro objetos **donde se usan de verdad**: la foto es un tensor, el lote suma un eje, los pesos son tensores, la salida es un vector y la pérdida es un escalar. La definición y el "para qué" son lo mismo. El escalar se presenta al principio (escalera) y vuelve al final como la pérdida: es el número que el entrenamiento achica.
+## Criterio
+La v4 era correcta pero técnica (lote, capas, pérdida, PyTorch vs TensorFlow): no se entendía si no sabías ya. La v5 explica desde lo cotidiano, con **un solo ejemplo que crece de a una dimensión**: un píxel → una fila → una foto en blanco y negro → una foto en color → un video. Cada paso suma un eje y es un uso real. Después, los otros datos (sonido, texto) y qué hace la máquina con eso.
+Recurso didáctico fijo: arriba de la pantalla, un **mapa de dimensiones** `0D · 1D · 2D · 3D · 4D` que se va encendiendo (el paso actual en rojo) y acumula lo aprendido.
 
 | # | escena | voz | pantalla y cámara | s aprox. |
 |---|--------|-----|---|---|
-| 1 | gancho | Para un modelo, esta foto son más de ciento cincuenta mil números. | foto suave (paisaje de montañas en línea y grises, nada pixelado) y un contador que sube a **150.528**; la cámara entra a la foto hasta que se ve hecha de números | 0–3,5 |
-| 2 | tensor | Ordenados en tres ejes: alto, ancho y color. Eso es un tensor. | la foto se separa en 3 placas (canales) en profundidad; ejes alto/ancho/canales; órbita | 3,5–8 |
-| 3 | escalera | Cero ejes es un escalar; uno, un vector; dos, una matriz. Todos son tensores. | viaje en z: un número → una fila → una planilla → el bloque de la foto; chips 0 · 1 · 2 · 3 ejes | 8–14 |
-| 4 | lote | El modelo toma treinta y dos fotos juntas: cuatro ejes. | 32 bloques en fila; forma `(32, 224, 224, 3)`; pull-back | 14–18 |
-| 5 | capas | Cada capa las mezcla con sus pesos, que también son tensores. | el lote cruza 3 placas de pesos y en cada una cambia de forma (los chips de forma cambian); la cámara lo sigue en z | 18–23 |
-| 6 | salida | Por cada foto sale un vector: una probabilidad por clase. | barras de probabilidad; la de "montaña" en rojo, 0,91 | 23–27 |
-| 7 | pérdida | Y cuánto se equivocó queda en un escalar: la pérdida. Entrenar es achicarlo. | todo colapsa en un solo número que baja: 2,30 → 0,12 | 27–32 |
-| 8 | la forma | Por eso la forma manda: si no encaja entre capas, el código falla. | dos formas que no encajan; bloque error ✕ | 32–37 |
-| 9 | detalle pro | Ojo: PyTorch pone el color primero; TensorFlow, al final. | `(32, 3, 224, 224)` vs `(32, 224, 224, 3)` con el 3 en rojo | 37–41 |
-| 10 | payoff | De ciento cincuenta mil números a uno solo, tensor por tensor. | pull-back largo: la foto en un extremo, el número en el otro y la cadena de tensores en el medio (todo el viaje en un plano) | 41–46 |
-| 11 | cierre | Dale me gusta y seguime para aprender más sobre inteligencia artificial. | CTA grande, firma chica debajo, chinn | 46–50 |
+| 1 | gancho | Para una máquina, una foto, una canción y un texto son lo mismo. | tres objetos en línea (paisaje suave, onda de sonido, renglón de texto) que se convierten en el mismo bloque de números; acercamiento | 0–4 |
+| 2 | escalar | Empecemos por un número: el brillo de un píxel. Es un escalar. | la cámara entra a la foto hasta un solo punto con su número (128) y su tono de gris; mapa: **0D** | 4–9 |
+| 3 | vector | Una fila de píxeles es una lista: un vector. | se abre la fila de ese punto; mapa: **1D** | 9–12 |
+| 4 | matriz | Una foto en blanco y negro es una cuadrícula, como una planilla: una matriz. | la fila se completa en la foto entera (se ve como foto de lejos y como planilla de cerca); mapa: **2D** | 12–17 |
+| 5 | tensor | En color son tres cuadrículas apiladas: un cubo de números. Eso es un tensor. | se separan tres capas (tinte rojo, verde, azul) y forman un cubo; órbita para ver la profundidad; mapa: **3D** | 17–23 |
+| 6 | video | Y un video suma el tiempo: cubos uno detrás de otro. | los cubos se alinean en el tiempo, con un cursor de reproducción; mapa: **4D** | 23–27 |
+| 7 | definición | Un tensor es eso: números ordenados en todas las dimensiones que necesites. | todo el recorrido en un plano (punto, fila, foto, cubo, video), cada uno con su 0D…4D | 27–32 |
+| 8 | otros datos | El sonido es una lista larga de números; un texto, palabras convertidas en números. | la onda se vuelve una fila de números (1D); cada palabra se vuelve una fila de números (2D) | 32–38 |
+| 9 | usos | Con cuentas sobre tensores, una máquina distingue caras, entiende tu voz o te contesta. | los bloques entran a un modelo y salen tres resultados: un recuadro sobre la foto, texto de lo que se dijo, una respuesta | 38–44 |
+| 10 | payoff | Por eso, para ella, todo es lo mismo: tensores. Y por eso Google le puso TensorFlow a su librería. | vuelven los tres objetos del gancho, ya como bloques iguales; aparece la palabra "TensorFlow" (texto, sin logo) | 44–50 |
+| 11 | cierre | Dale me gusta y seguime para aprender más sobre inteligencia artificial. | CTA grande, firma chica debajo, chinn | 50–55 |
 
-126 palabras; lectura medida: 37,9 s de voz, ~43 s con pausas, ~50 s con respiros visuales (≈ 2,5 pal/s).
-Voz: sin "IA" (se lee "ya"), sin "red" (la r inicial dura 23 ms) y sin "arranca"; PyTorch → "páitorch", TensorFlow → "tensorflou" (sin verificar). Lectura completa: `docs/material/pronunciacion/tensores-guion-v4-lectura.mp3`.
-Datos: 224 × 224 × 3 = 150.528 (entrada estándar de ImageNet); la pérdida 2,30 ≈ ln(10) es la de un modelo que adivina al azar entre 10 clases; PyTorch usa (N, C, H, W) y TensorFlow/Keras (N, H, W, C) por defecto.
+143 palabras; lectura medida: 42,6 s de voz, ~48 s con pausas → video de ~55 s (2,6 pal/s).
+Voz: sin "IA", "red", "arranca", "rojo" ni "herramienta" (r cortas que suenan mal). Lectura: `docs/material/pronunciacion/tensores-guion-v5-lectura.mp3`.
+Visual: nada pixelado como protagonista; la foto es un paisaje suave y la cuadrícula solo aparece al acercarse (es lo que se enseña). Los tintes rojo/verde/azul de las capas son la única excepción a la paleta y tienen significado (los canales).
+Datos: brillo de un píxel 0–255 en 8 bits; foto en color = alto × ancho × 3; video = cuadros × alto × ancho × 3; audio = muestras en el tiempo; texto = palabras convertidas en vectores (embeddings); TensorFlow se llama así por los tensores que "fluyen" por el cálculo.

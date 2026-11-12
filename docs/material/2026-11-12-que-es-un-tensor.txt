@@ -1,0 +1,6 @@
+Texto que pasó Ayrton (2026-11-12) como referencia del nivel didáctico buscado para el reel de tensores:
+
+qué tensor?
+Un tensor es esencialmente un contenedor de números organizados en múltiples dimensiones, como una versión más avanzada de una hoja de cálculo. Mientras que un solo número es simplemente un valor y una lista es una fila de números, un tensor puede organizar datos en cuadrículas, cubos o incluso dimensiones superiores; imagine una foto como una cuadrícula de píxeles de color o un video como una secuencia de esas cuadrículas a lo largo del tiempo. Los tensores son los componentes básicos que los sistemas de IA utilizan para almacenar y procesar todo tipo de información, desde texto e imágenes hasta sonido y datos de sensores. Los marcos de IA modernos, como TensorFlow y PyTorch, se basan en operaciones con tensores, realizando cálculos matemáticos eficientes sobre estas matrices multidimensionales.
+
+Indicación: "al espectador le tiene que quedar claro qué es, sus usos etc, tiene que ser un video didáctico".
