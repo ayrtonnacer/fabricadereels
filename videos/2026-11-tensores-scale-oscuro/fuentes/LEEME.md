@@ -1,0 +1,8 @@
+# Fuentes del reel (leídas 2026-11-12)
+- **GeeksforGeeks** (actualizado 11 nov 2025): escalar 0D (pérdida, accuracy, media), vector 1D (features, pesos, embeddings, gradientes), matriz 2D (datasets, pesos de capa, PCA), tensor ≥3D (imágenes 3D, video 4D; base de TensorFlow/PyTorch; cómputo en GPU + autodiferenciación; usado en CNN y transformers). Desventaja del tensor: difícil de visualizar y depurar.
+- **Wikipedia "Tensor" → sección Machine learning**: "este concepto de tensor difiere significativamente del de la matemática y la física: un tensor es lo mismo que un arreglo multidimensional" (una matriz rectangular es un ejemplo). Verifica el detalle de profesional de la escena 7.
+- No se pudieron leer: Towards Data Science y Medium (403 a clientes automáticos), Kaggle (404 sin sesión), Reddit (bloqueado como bot; no se evadió).
+
+## Agregado (Ayrton pegó el texto de Towards Data Science y de Wikipedia)
+- **Towards Data Science** (Niklas Lang, 20 dic 2022): rango = cantidad de índices para ubicar un número = nº de dimensiones; escalar rango 0, vector 1, matriz 2, tensor ≥3 ("tensor" es además el término paraguas); `shape` = largo de cada eje (ej. `[3,3]`); suma/resta/producto de Hadamard/división exigen mismas dimensiones; usos: recomendadores (matriz clientes×productos + un eje de contexto), imágenes RGB y video; nombre de TensorFlow.
+- **Wikipedia**: escalares = tensores de orden 0, vectores = orden 1; "rank" tiene otro significado en matrices (detalle de profesional usado en la escena 7); en física el tensor obedece leyes de transformación (el producto vectorial no es un tensor); en ML, tensor = arreglo multidimensional.

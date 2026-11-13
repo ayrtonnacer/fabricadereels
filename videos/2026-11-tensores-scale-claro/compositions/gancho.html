@@ -1,0 +1,43 @@
+<!-- GANCHO (4,6 s) — título "Para una máquina, son lo mismo"; una foto, una canción y un texto se convierten en números, cada uno con su forma (bloque 3D, fila 1D, planilla 2D). -->
+<template>
+  <style>#root { position: absolute; inset: 0; } .et { opacity: 0; } #root .w { display: inline-block; } #g-firma { position: absolute; left: 0; right: 0; top: 205px; text-align: center; } #g-tit { width: 980px; text-align: center; }</style>
+  <div id="root" data-composition-id="gancho" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <canvas id="g-cv" class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="hud" data-layout-ignore>
+      <div class="ancla" style="top: 420px"><h1 id="g-tit" class="titular chico"><span class="w">Para</span> <span class="w">una</span> <span class="w">máquina,</span><br /><span class="w">son</span> <span class="w acc">lo</span> <span class="w acc">mismo</span></h1></div>
+    </div>
+    <div class="vineta" data-layout-ignore></div>
+    <div id="g-firma" class="firma">@ayrtonnacer</div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="gancho"]');
+    const tl = gsap.timeline({ paused: true });
+    const ent = (id, t, d = 0.25) => { tl.fromTo(id, { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: d, ease: 'power3.out' }, t); };
+    const sal = (id, t) => { tl.to(id, { opacity: 0, duration: 0.2 }, t); };
+    tl.fromTo('#g-firma', { opacity: 0.6 }, { opacity: 1, duration: 0.25 }, 0);
+    tl.fromTo('#g-tit .w', { opacity: 0.85, filter: 'blur(3px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.18, ease: 'power4.out', stagger: 0.06 }, 0.05);
+    Promise.all([import('./assets/escena3d.js'), import('./assets/tensor3d.js')]).then(async ([M, Tm]) => {
+      const E = await M.crear(root), T = Tm.T3(E), { V, P, clamp, EASE } = E;
+      const pop = (o, t, t0, d = 0.35, s = 1) => { const q = EASE.out(clamp((t - t0) / d)); o.scale.setScalar(Math.max(0.001, s * q)); o.visible = q > 0.002; };
+      const quitar = (o, t, t0, d = 0.3, s = 1) => { const q = 1 - EASE.in(clamp((t - t0) / d)); o.scale.setScalar(Math.max(0.001, s * q)); o.visible = q > 0.002; };
+      const THREE_G = E.THREE.Group;
+      const placaTexto = (S) => { const g = new THREE_G(); const b = E.caja(S + 0.03, S + 0.03, 0.03, E.std(0)); g.add(b); E.contornear(g);
+        const cv = document.createElement('canvas'); cv.width = cv.height = 512; const x = cv.getContext('2d'); x.fillStyle = '#FFFFFF'; x.fillRect(0, 0, 512, 512);
+        x.font = '600 70px "IBM Plex Mono", monospace'; x.fillStyle = '#000000'; x.textAlign = 'center'; x.textBaseline = 'middle'; ['hola,', '¿qué', 'tal?'].forEach((l, i) => x.fillText(l, 256, 256 + (i - 1) * 100));
+        const tx = new E.THREE.CanvasTexture(cv); tx.colorSpace = E.THREE.SRGBColorSpace; const m = new E.THREE.Mesh(new E.THREE.PlaneGeometry(S, S), new E.THREE.MeshBasicMaterial({ map: tx, toneMapped: false })); m.position.z = 0.0165; g.add(m); return g; };
+      const placaOnda = (S) => { const g = new THREE_G(); const b = E.caja(S + 0.03, S + 0.03, 0.03, E.std(0)); g.add(b); E.contornear(g); const o = T.onda(S * 0.86, S * 0.28); o.position.z = 0.02; g.add(o); return g; };
+      // cada dato se convierte en SU forma: la foto en un bloque 3D (3 canales), el sonido en una fila (1D), el texto en una planilla (2D)
+      const planilla = () => { const g = new THREE_G(), F = [['0.2', '-0.7', '0.5', '0.1'], ['0.9', '0.3', '-0.4', '0.6'], ['-0.2', '0.8', '0.1', '-0.5']].map((w, i) => { const f = T.fila(w, 0.075, 0.084); f.position.y = (1 - i) * 0.09; f.userData.set(1); g.add(f); return f; }); return g; };
+      const X = [-0.65, 0, 0.65], orig = [T.foto({ S: 0.5 }), placaOnda(0.5), placaTexto(0.5)];
+      const fila = T.fila(['0.1', '0.6', '-0.3', '-0.8', '0.2', '0.7'], 0.075, 0.084); fila.userData.set(1);
+      const forma = [T.capas({ S: 0.44, sep: 0.07 }), fila, planilla()];
+      orig.forEach((o, i) => { o.position.set(X[i], 0.5, 0); E.scene.add(o); }); forma.forEach((b, i) => { b.position.set(X[i], 0.5, 0.03); E.scene.add(b); });
+      E.animar(tl, 4.6, (t) => {
+        E.ruta(t, [{ t: 0, p: [0.2, 0.72, 4.8], l: [0, 0.4, 0] }, { t: 2.8, p: [0.1, 0.7, 4.6], l: [0, 0.4, 0], e: 'lin' }, { t: 4.0, p: [0.5, 0.76, 4.5], l: [0, 0.4, 0], e: 'io' }, { t: 4.6, p: [0.52, 0.76, 4.45], l: [0, 0.4, 0], e: 'lin' }]);
+        orig.forEach((o, i) => quitar(o, t, 3.0 + 0.1 * i)); forma.forEach((b, i) => pop(b, t, 3.25 + 0.1 * i, 0.4));
+      });
+      window.__timelines['gancho'] = tl;
+    });
+  </script>
+</template>
