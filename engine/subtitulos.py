@@ -11,6 +11,9 @@ V = Path(sys.argv[1]); cfg = json.loads((V / 'video.json').read_text()); P = jso
 total = round(sum(s['d'] for s in cfg['scenes']), 3)
 FIN = re.compile(r'[.?!…]$'); PAUSA = re.compile(r'[,;:]$')
 MAXP, MAXC = 4, 30
+# fondo del subtítulo (opcional, video.json → "subtitulos": {"fondo": "rgba(0,0,0,.86)"}): barra detrás del texto para que no se pierda sobre imágenes
+_fondo = cfg.get('subtitulos', {}).get('fondo')
+FONDO = f" background: {_fondo}; padding: 12px 30px 16px; border-radius: 14px;" if _fondo else ''
 
 # 1) agrupar palabras en bloques
 grupos, cur = [], []
@@ -63,7 +66,7 @@ comp = f'''<!-- SUBTÍTULOS (generado por engine/subtitulos.py: no editar a mano
     .g {{ position: absolute; left: 70px; right: 70px; top: 1120px; height: 200px; display: none; align-items: center; justify-content: center;
       text-align: center; text-wrap: balance; font: 700 70px/1.08 var(--sans); letter-spacing: -0.01em; color: var(--text);
       text-shadow: 0 3px 0 rgba(0, 0, 0, .6), 0 0 28px rgba(0, 0, 0, .85); }}
-    .g .t {{ display: block; max-width: 940px; text-align: center; text-wrap: balance; }}
+    .g .t {{ display: block; width: fit-content; max-width: 940px; text-align: center; text-wrap: balance;{FONDO} }}
     .g .s {{ display: inline; }}
   </style>
   <div id="root" data-composition-id="subtitulos" data-width="1080" data-height="1920">

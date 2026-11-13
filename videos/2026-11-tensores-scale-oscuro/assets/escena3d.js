@@ -31,7 +31,7 @@ export const EASE = {
 
 export async function crear(root, opts = {}) {
   const { fov = 40, dy = 170, canvas = root.querySelector('canvas'), piso = true } = opts;
-  try { await document.fonts.load('700 48px "IBM Plex Mono"'); await document.fonts.load('700 48px "Plex Sans"'); } catch (e) { /* sin fuentes: cae a monospace */ }
+  try { await document.fonts.load('700 48px "Geist Mono"'); await document.fonts.load('700 48px "Host Grotesk"'); } catch (e) { /* sin fuentes: cae a monospace */ }
   const V = THREE.Vector3;
   const P = {
     bg: new THREE.Color(css('--bg', '#0B111C')), hondo: new THREE.Color(css('--bg-hondo', '#060A11')), line: new THREE.Color(css('--line', '#24344B')),
@@ -91,7 +91,7 @@ export async function crear(root, opts = {}) {
     const tex = new THREE.CanvasTexture(cv); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4; let last = null;
     const api = { tex, texto(str, color = hex(P.acc), size = h * 0.2, alinear = 'left') {
       if (str === last) return; last = str;
-      ctx.fillStyle = fondo; ctx.fillRect(0, 0, w, h); ctx.font = `700 ${size}px "IBM Plex Mono", monospace`; ctx.fillStyle = color;
+      ctx.fillStyle = fondo; ctx.fillRect(0, 0, w, h); ctx.font = `700 ${size}px "Geist Mono", monospace`; ctx.fillStyle = color;
       ctx.textAlign = alinear; ctx.textBaseline = 'middle'; const L = str.split('\n'), lh = size * 1.3, y0 = h / 2 - (L.length - 1) * lh / 2, x0 = alinear === 'center' ? w / 2 : w * 0.16;
       L.forEach((l, i) => ctx.fillText(l, x0, y0 + i * lh + size * 0.04)); tex.needsUpdate = true; } };
     api.texto(''); return api;

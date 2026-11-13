@@ -61,3 +61,4 @@ Link + indicaciones → guion (público: técnicos, principiantes, reclutadores)
 - **Tipografía en pantalla**: le hacen ruido los textos muy juntos o con mucho espacio vacío; revisar aire y alineación de rótulos, chips y subtítulos en cada `snapshot`.
 - **Guardar los reels terminados**: copia liviana del final en `docs/referencias/propios/<reel>/` junto con su medición, para tener referencia de lo que le gusta.
 - **Paleta Scale (2026-11-13)**: probando colores de Scale AI. **No le gusta el verde (Evergreen) como fondo**; los colores de Scale se usan como **acento sobre base neutra** (negro/blanco/grises), no como superficie. Acento elegido para la prueba: Foundry Tan `#A8927C`.
+- **Subtítulos sobre imágenes (2026-11-13)**: si el fondo tiene mucho detalle (números, fotos), usar la **barra negra detrás del subtítulo** (`video.json → subtitulos.fondo`). Pidió probar la tipografía de Scale (Host Grotesk + Geist Mono).

@@ -37,7 +37,7 @@ export function T3(E) {
     const k = N + ':' + sol + canal; if (texGrilla.has(k)) return texGrilla.get(k);
     const C = 64, cv = document.createElement('canvas'); cv.width = cv.height = N * C; const x = cv.getContext('2d'), val = T.valores(N, sol, canal);
     x.fillStyle = '#0A0D12'; x.fillRect(0, 0, cv.width, cv.height);
-    x.font = '600 21px "IBM Plex Mono", monospace'; x.textAlign = 'center'; x.textBaseline = 'middle';
+    x.font = '600 21px "Geist Mono", monospace'; x.textAlign = 'center'; x.textBaseline = 'middle';
     for (let j = 0; j < N; j++) for (let i = 0; i < N; i++) { const g = val[j][i]; x.fillStyle = `rgb(${g},${g},${g})`; x.fillRect(i * C + 2, j * C + 2, C - 4, C - 4); x.fillStyle = g > 140 ? '#0A0D12' : '#FAFAFA'; x.fillText(String(g), i * C + C / 2, j * C + C / 2 + 1); }
     const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; texGrilla.set(k, t); return t;
   };
@@ -55,7 +55,7 @@ export function T3(E) {
   const planoNum = (txt, size, color) => {
     const k = txt + color; let m = texNum.get(k);
     if (!m) { const cv = document.createElement('canvas'); cv.width = cv.height = 192; const x = cv.getContext('2d');
-      x.font = `700 ${txt.length > 3 ? 62 : 76}px "IBM Plex Mono", monospace`; x.fillStyle = color; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(txt, 96, 100);
+      x.font = `700 ${txt.length > 3 ? 62 : 76}px "Geist Mono", monospace`; x.fillStyle = color; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(txt, 96, 100);
       const tex = new THREE.CanvasTexture(cv); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4; m = new THREE.MeshBasicMaterial({ map: tex, transparent: true, toneMapped: false }); texNum.set(k, m); }
     return new THREE.Mesh(new THREE.PlaneGeometry(size, size), m);
   };

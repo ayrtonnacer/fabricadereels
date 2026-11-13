@@ -24,7 +24,7 @@
       const THREE_G = E.THREE.Group;
       const placaTexto = (S) => { const g = new THREE_G(); const b = E.caja(S + 0.03, S + 0.03, 0.03, E.std(0)); g.add(b); E.contornear(g);
         const cv = document.createElement('canvas'); cv.width = cv.height = 512; const x = cv.getContext('2d'); x.fillStyle = '#0A0D12'; x.fillRect(0, 0, 512, 512);
-        x.font = '600 70px "IBM Plex Mono", monospace'; x.fillStyle = '#FAFAFA'; x.textAlign = 'center'; x.textBaseline = 'middle'; ['hola,', '¿qué', 'tal?'].forEach((l, i) => x.fillText(l, 256, 256 + (i - 1) * 100));
+        x.font = '600 70px "Geist Mono", monospace'; x.fillStyle = '#FAFAFA'; x.textAlign = 'center'; x.textBaseline = 'middle'; ['hola,', '¿qué', 'tal?'].forEach((l, i) => x.fillText(l, 256, 256 + (i - 1) * 100));
         const tx = new E.THREE.CanvasTexture(cv); tx.colorSpace = E.THREE.SRGBColorSpace; const m = new E.THREE.Mesh(new E.THREE.PlaneGeometry(S, S), new E.THREE.MeshBasicMaterial({ map: tx, toneMapped: false })); m.position.z = 0.0165; g.add(m); return g; };
       const placaOnda = (S) => { const g = new THREE_G(); const b = E.caja(S + 0.03, S + 0.03, 0.03, E.std(0)); g.add(b); E.contornear(g); const o = T.onda(S * 0.86, S * 0.28); o.position.z = 0.02; g.add(o); return g; };
       // cada dato se convierte en SU forma: la foto en un bloque 3D (3 canales), el sonido en una fila (1D), el texto en una planilla (2D)
