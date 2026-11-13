@@ -57,3 +57,6 @@ Link + indicaciones → guion (público: técnicos, principiantes, reclutadores)
 - **Nada pixelado/"cuadrado" como protagonista** (la cara de 8×8 del reel de tensores no le gustó): formas suaves, objetos con más riqueza.
 - **Cuidar la pronunciación**: ante una palabra en inglés, ofrecer variantes de audio antes de usarla; "machine learning" como "mashín lérnin" no le gustó.
 - En un reel conceptual lo primero es que **quede claro la definición** (qué ES la cosa), antes que lucirse con la animación.
+- **Portada (2026-11-13)**: todos los reels arrancan con un cuadro fijo de **0,1 s** que sirve de portada al publicar (se elige como fotograma de portada): título grande del hook + el objeto clave + firma. Después, el hook con su **título** en pantalla (como en el reel de WiFi: "Tu WiFi es una radio").
+- **Tipografía en pantalla**: le hacen ruido los textos muy juntos o con mucho espacio vacío; revisar aire y alineación de rótulos, chips y subtítulos en cada `snapshot`.
+- **Guardar los reels terminados**: copia liviana del final en `docs/referencias/propios/<reel>/` junto con su medición, para tener referencia de lo que le gusta.
