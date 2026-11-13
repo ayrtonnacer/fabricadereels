@@ -7,7 +7,7 @@ cierre: cta
 loop_principal: "Para una máquina, una foto, una canción y un texto son lo mismo (¿por qué?)."
 cierre_loop: "Por eso, para ella, todo es lo mismo: tensores."
 verificado: sí
-version: 5.1 (2026-11-12; final: "si aprendés TensorFlow…" en vez del origen del nombre, a pedido de Ayrton)   # nivel didáctico del texto que pasó Ayrton (docs/material/2026-11-12-que-es-un-tensor.txt)
+version: 5.2 (2026-11-13: revisión técnica — "bloque" en vez de "cubo", la voz dice que todos son tensores, cada dato con su forma en gancho/payoff, canales de color distintos, cierre con álgebra lineal, portada de 0,1 s; antes 5.1 2026-11-12: final: "si aprendés TensorFlow…" en vez del origen del nombre, a pedido de Ayrton)   # nivel didáctico del texto que pasó Ayrton (docs/material/2026-11-12-que-es-un-tensor.txt)
 ---
 ## Criterio
 La v4 era correcta pero técnica (lote, capas, pérdida, PyTorch vs TensorFlow): no se entendía si no sabías ya. La v5 explica desde lo cotidiano, con **un solo ejemplo que crece de a una dimensión**: un píxel → una fila → una foto en blanco y negro → una foto en color → un video. Cada paso suma un eje y es un uso real. Después, los otros datos (sonido, texto) y qué hace la máquina con eso.
@@ -19,12 +19,12 @@ Recurso didáctico fijo: arriba de la pantalla, un **mapa de dimensiones** `0D �
 | 2 | escalar | Empecemos por un número: el brillo de un píxel. Es un escalar. | la cámara entra a la foto hasta un solo punto con su número (128) y su tono de gris; mapa: **0D** | 4–9 |
 | 3 | vector | Una fila de píxeles es una lista: un vector. | se abre la fila de ese punto; mapa: **1D** | 9–12 |
 | 4 | matriz | Una foto en blanco y negro es una cuadrícula, como una planilla: una matriz. | la fila se completa en la foto entera (se ve como foto de lejos y como planilla de cerca); mapa: **2D** | 12–17 |
-| 5 | tensor | En color son tres cuadrículas apiladas: un cubo de números. Eso es un tensor. | se separan tres capas (tinte rojo, verde, azul) y forman un cubo; órbita para ver la profundidad; mapa: **3D** | 17–23 |
-| 6 | video | Y un video suma el tiempo: cubos uno detrás de otro. | los cubos se alinean en el tiempo, con un cursor de reproducción; mapa: **4D** | 23–27 |
-| 7 | definición | Un tensor es eso: números ordenados en todas las dimensiones que necesites. | todo el recorrido en un plano (punto, fila, foto, cubo, video), cada uno con su 0D…4D | 27–32 |
+| 5 | tensor | En color son tres cuadrículas apiladas: un bloque de números en tres dimensiones. | se separan tres capas (tinte rojo, verde, azul) y forman un cubo; órbita para ver la profundidad; mapa: **3D** | 17–23 |
+| 6 | video | Y un video suma el tiempo: bloques uno detrás de otro. | los cubos se alinean en el tiempo, con un cursor de reproducción; mapa: **4D** | 23–27 |
+| 7 | definición | Todos son tensores: números ordenados en las dimensiones que necesites. | todo el recorrido en un plano (punto, fila, foto, cubo, video), cada uno con su 0D…4D | 27–32 |
 | 8 | otros datos | El sonido es una lista larga de números; un texto, palabras convertidas en números. | la onda se vuelve una fila de números (1D); cada palabra se vuelve una fila de números (2D) | 32–38 |
 | 9 | usos | Con cuentas sobre tensores, una máquina distingue lo que hay en una foto, entiende tu voz o te contesta. | los bloques entran a un modelo y salen tres resultados: un recuadro sobre la montaña de la foto, el texto de lo que se dijo, una respuesta | 38–44 |
-| 10 | payoff | Por eso, para ella, todo es lo mismo: tensores. Si aprendés TensorFlow, es lo primero que vas a usar. | vuelven los tres objetos del gancho, ya como bloques iguales; aparece "TensorFlow" (texto, sin logo) | 44–50 |
+| 10 | payoff | Por eso, para ella, todo es lo mismo: tensores. Y la matemática que los mueve es el álgebra lineal: por ahí conviene empezar. | vuelven los tres objetos del gancho, ya como bloques iguales; aparece "TensorFlow" (texto, sin logo) | 44–50 |
 | 11 | cierre | Dale me gusta y seguime para aprender más sobre inteligencia artificial. | CTA grande, firma chica debajo, chinn | 50–55 |
 
 143 palabras; lectura medida: 42,6 s de voz, ~48 s con pausas → video de ~55 s (2,6 pal/s).

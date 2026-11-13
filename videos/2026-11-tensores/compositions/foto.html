@@ -5,7 +5,7 @@
     <div class="fondo" data-layout-ignore></div>
     <canvas id="f-cv" class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
     <div class="hud" data-layout-ignore>
-      <div class="ancla" style="top: 452px"><h2 id="f-tit" class="titular et acc">tensor</h2></div>
+
     </div>
     <div class="vineta" data-layout-ignore></div>
 
@@ -15,7 +15,7 @@
     const tl = gsap.timeline({ paused: true });
     const ent = (id, t, d = 0.25) => { tl.fromTo(id, { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: d, ease: 'power3.out' }, t); };
     const sal = (id, t) => { tl.to(id, { opacity: 0, duration: 0.2 }, t); };
-    ent('#f-tit', 8.75, 0.3);
+
     Promise.all([import('./assets/escena3d.js'), import('./assets/tensor3d.js')]).then(async ([M, Tm]) => {
       const E = await M.crear(root), T = Tm.T3(E), { V, P, clamp, EASE } = E;
       const pop = (o, t, t0, d = 0.35, s = 1) => { const q = EASE.out(clamp((t - t0) / d)); o.scale.setScalar(Math.max(0.001, s * q)); o.visible = q > 0.002; };

@@ -4,6 +4,10 @@
   "fuente": "GeeksforGeeks, Wikipedia (Tensor), Towards Data Science",
   "scenes": [
     {
+      "id": "portada",
+      "d": 0.1
+    },
+    {
       "id": "gancho",
       "d": 4.6
     },
@@ -29,7 +33,7 @@
     },
     {
       "id": "payoff",
-      "d": 7.2
+      "d": 8.0
     },
     {
       "id": "cierre",
@@ -47,73 +51,73 @@
       {
         "id": "l01",
         "escena": "gancho",
-        "t": 0.2,
+        "t": 0.3,
         "texto": "Para una máquina, una foto, una canción y un texto son lo mismo."
       },
       {
         "id": "l02",
         "escena": "pixel",
-        "t": 4.9,
+        "t": 5.0,
         "texto": "Empecemos por un número: el brillo de un píxel. Es un escalar."
       },
       {
         "id": "l03",
         "escena": "pixel",
-        "t": 8.9,
+        "t": 9.0,
         "texto": "Una fila de píxeles es una lista: un vector."
       },
       {
         "id": "l04",
         "escena": "foto",
-        "t": 12.5,
+        "t": 12.6,
         "texto": "Una foto en blanco y negro es una cuadrícula, como una planilla: una matriz."
       },
       {
         "id": "l05",
         "escena": "foto",
-        "t": 17.4,
-        "texto": "En color son tres cuadrículas apiladas: un cubo de números. Eso es un tensor."
+        "t": 17.5,
+        "texto": "En color son tres cuadrículas apiladas: un bloque de números en tres dimensiones."
       },
       {
         "id": "l06",
         "escena": "video",
-        "t": 22.9,
-        "texto": "Y un video suma el tiempo: cubos uno detrás de otro."
+        "t": 23.0,
+        "texto": "Y un video suma el tiempo: bloques uno detrás de otro."
       },
       {
         "id": "l07",
         "escena": "video",
-        "t": 26.3,
-        "texto": "Un tensor es eso: números ordenados en todas las dimensiones que necesites."
+        "t": 26.4,
+        "texto": "Todos son tensores: números ordenados en las dimensiones que necesites."
       },
       {
         "id": "l08",
         "escena": "datos",
-        "t": 31.3,
+        "t": 31.4,
         "texto": "El sonido es una lista larga de números; un texto, palabras convertidas en números."
       },
       {
         "id": "l09",
         "escena": "usos",
-        "t": 37.0,
+        "t": 37.1,
         "texto": "Con cuentas sobre tensores, una máquina distingue lo que hay en una foto, entiende tu voz o te contesta."
       },
       {
         "id": "l10",
         "escena": "payoff",
-        "t": 43.1,
+        "t": 43.2,
         "texto": "Por eso, para ella, todo es lo mismo: tensores."
       },
       {
         "id": "l11",
         "escena": "payoff",
-        "t": 46.4,
-        "texto": "Si aprendés TensorFlow, es lo primero que vas a usar."
+        "t": 46.5,
+        "texto": "Y la matemática que los mueve es el álgebra lineal: por ahí conviene empezar."
       },
       {
         "id": "l12",
         "escena": "cierre",
-        "t": 50.6,
+        "t": 51.5,
         "texto": "Dale me gusta y seguime para aprender más sobre inteligencia artificial."
       }
     ]

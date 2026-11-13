@@ -17,7 +17,7 @@
       <div class="m-it" id="m0"><div class="d">0D</div><div class="n">escalar</div></div>
       <div class="m-it" id="m1"><div class="d">1D</div><div class="n">vector</div></div>
       <div class="m-it" id="m2"><div class="d">2D</div><div class="n">matriz</div></div>
-      <div class="m-it" id="m3"><div class="d">3D</div><div class="n">cubo</div></div>
+      <div class="m-it" id="m3"><div class="d">3D</div><div class="n">bloque</div></div>
       <div class="m-it" id="m4"><div class="d">4D</div><div class="n">video</div></div>
     </div>
     <div id="m-llave"></div><div id="m-llave-t">todos son tensores</div>
@@ -29,8 +29,8 @@
     const actual = (i, t) => { tl.to('#m' + i, { opacity: 1, color: ACC, duration: 0.2 }, t); };
     const visto = (i, t) => { tl.to('#m' + i, { color: TXT, duration: 0.2 }, t); };
     actual(0, 1.1); visto(0, 4.5); actual(1, 4.6); visto(1, 9.6); actual(2, 9.67); visto(2, 15.0); actual(3, 15.06); visto(3, 19.1); actual(4, 19.18);
-    tl.to(['#m0', '#m1', '#m2', '#m3', '#m4'], { color: ACC, opacity: 1, duration: 0.3, stagger: 0.06 }, 22.3);
-    tl.to(['#m-llave', '#m-llave-t'], { opacity: 1, duration: 0.3 }, 22.5);
+    tl.to(['#m0', '#m1', '#m2', '#m3', '#m4'], { color: ACC, opacity: 1, duration: 0.3, stagger: 0.06 }, 21.95);
+    tl.to(['#m-llave', '#m-llave-t'], { opacity: 1, duration: 0.3 }, 22.1);
     tl.to(['#m0', '#m1', '#m2', '#m3', '#m4'], { color: TXT, duration: 0.3 }, 26.0);
     tl.to(['#m-llave', '#m-llave-t'], { opacity: 0, duration: 0.3 }, 26.2);
     actual(1, 27.6); visto(1, 29.5); actual(2, 29.56);
