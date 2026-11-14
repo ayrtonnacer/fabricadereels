@@ -1,7 +1,10 @@
-/* Identidad de @ayrtonnacer: tema "línea" (negro, objetos 3D dibujados solo con contorno blanco, acento rojo). Reglas en docs/ESTILO.md.
-   Para volver al tema sólido azul-negro: cambiar --estilo a "solido" y los colores de abajo por los de engine/themes/cyber.css (ver docs/ESTILO.md → Paleta).
+/* Identidad de @ayrtonnacer: tema "Scale" (default desde 2026-11-14): negro puro, objetos 3D de línea gris, un solo acento Foundry Tan, Host Grotesk + Geist Mono. Reglas en docs/ESTILO.md.
+   Otros temas en engine/themes/ (linea-roja.css = el anterior; cyber.css = azul-negro + lima, sólido).
    Todo color va por variable: nunca escribir un color fijo en una escena.
    NO agregar: líneas de escaneo, esquinas en L / HUD, mayúsculas con espaciado amplio. */
+/* Tipografía de Scale (brand.scale.com/typography): Aeonik es paga; las alternativas aprobadas son Host Grotesk (texto) y Geist Mono (valores y detalle). Variables: un archivo cubre todos los pesos */
+@font-face { font-family: "Host Grotesk"; src: url("fonts/host-grotesk-latin-400-normal.woff2") format("woff2"); font-weight: 300 800; }
+@font-face { font-family: "Geist Mono"; src: url("fonts/geist-mono-latin-400-normal.woff2") format("woff2"); font-weight: 100 900; }
 @font-face { font-family: "Plex Sans"; src: url("fonts/ibm-plex-sans-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
 @font-face { font-family: "Plex Sans"; src: url("fonts/ibm-plex-sans-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
 @font-face { font-family: "IBM Plex Mono"; src: url("fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
@@ -11,27 +14,23 @@
    Look "hairline" (aprobado por Ayrton): objetos GRISES (--edge) de trazo fino sobre placas casi negras; BLANCO (--hi) solo para lo que debe resaltar
    (cables, señal en el aire, tipografía); rojo (--acc) para el énfasis. */
 :root {
-  --estilo: linea;     /* linea = placas + aristas finas sobre negro · solido = objetos rellenos (tema anterior) */
-  --plate: #0A0D12;    /* relleno de los objetos 3D (tapa lo de atrás) */
-  --hi: #FAFAFA;       /* blanco de resalte: cables, tipografía */
-  --edge: #A1A1AA;     /* aristas de los objetos (gris) */
-  --mid: #52525B;      /* detalles interiores y piso */
-  --trazo-px: 2.2;     /* grosor de las aristas, en píxeles de video */
-  --bg: #0A0D12; --bg-hondo: #0A0D12; --bg-glow: #0A0D12;
-  --panel: #0F1218;    /* tarjetas, pantallas */
-  --line: #27272A;     /* filetes */
-  --grilla: rgba(113, 113, 122, .22);
-  --piso: #52525B;
-  --text: #FAFAFA;
-  --muted: #A1A1AA;
-  --acc: #FF2E3F;      /* énfasis: palabra clave, firma, progreso, señal */
-  --acc-glow: transparent;
-  --sky: #FAFAFA;      /* secundario neutro = blanco: cables, internet, 5 GHz */
-  --ok: #2EE08C;      /* ✓ correcto */
-  --warn: #FFB020;    /* ⚠ aviso */
-  --err: #FF6A1F;     /* ✕ error: bloque RELLENO naranja-rojo con ✕ (el acento ya es rojo: distinguir por color y por forma) */
-  --sans: "Plex Sans", sans-serif;
-  --mono: "IBM Plex Mono", monospace;
+  /* ===== Paleta Scale (brand.scale.com/color) sobre la estética de línea: base NEUTRA (negro y grises) y el color solo como acento ===== */
+  --estilo: linea;
+  --plate: #000000;    /* Black de Scale */
+  --hi: #FFFFFF;       /* White: tipografía, cables */
+  --edge: #929292;     /* Soft Gray: aristas */
+  --mid: #4D4D4D;     /* piso y detalles */
+  --trazo-px: 2.2;
+  --bg: #000000; --bg-hondo: #000000; --bg-glow: #000000; --fog: #000000;
+  --panel: #0D0D0D; --line: #1F1F1F; --grilla: rgba(255, 255, 255, .10); --piso: #4D4D4D;
+  --text: #FFFFFF; --muted: #C7C7C7;   /* Medium Gray */
+  --acc: #A8927C;      /* Foundry Tan: único acento (palabra clave, firma, señal) */
+  --acc-glow: transparent; --sky: #FFFFFF;
+  --ok: #2EE08C; --warn: #A8927C;
+  --err: #DC2626;      /* el rojo que usa la propia guía de Scale */
+  --sombra-txt: 0 2px 22px #000, 0 0 6px #000;
+  --sans: "Host Grotesk", sans-serif;
+  --mono: "Geist Mono", monospace;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -112,3 +111,9 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--
 .acc { text-shadow: none !important; }
 .chip, .tarjeta { background: var(--panel); border: 1.5px solid var(--edge); border-radius: 6px; box-shadow: none; }
 .chip.ok { border-color: var(--ok); } .chip.warn { border-color: var(--warn); }
+
+/* ---- rótulos sobre los objetos 3D (del reel de tensores) ---- */
+.rot { font-family: var(--sans); font-weight: 700; font-size: 58px; letter-spacing: -.02em; color: var(--text); text-shadow: var(--sombra-txt); }
+.rot b { color: var(--acc); font-weight: 700; }
+.rot.mono { font-family: var(--mono); font-weight: 500; font-size: 46px; color: var(--muted); letter-spacing: 0; }
+.rot.mono b { font-weight: 700; }

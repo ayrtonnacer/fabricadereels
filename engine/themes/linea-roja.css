@@ -1,0 +1,28 @@
+/* Tema "línea roja" (default 2026-11-11 → 2026-11-14): negro + aristas grises + acento rojo, IBM Plex. Para usarlo: reemplazar el bloque :root de assets/marca.css por este y las @font-face por las de Plex (ver engine/themes/LEEME.md). */
+@font-face { font-family: "Plex Sans"; src: url("fonts/ibm-plex-sans-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "Plex Sans"; src: url("fonts/ibm-plex-sans-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+@font-face { font-family: "IBM Plex Mono"; src: url("fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+@font-face { font-family: "IBM Plex Mono"; src: url("fonts/ibm-plex-mono-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+:root {
+  --estilo: linea;     /* linea = placas + aristas finas sobre negro · solido = objetos rellenos (tema anterior) */
+  --plate: #0A0D12;    /* relleno de los objetos 3D (tapa lo de atrás) */
+  --hi: #FAFAFA;       /* blanco de resalte: cables, tipografía */
+  --edge: #A1A1AA;     /* aristas de los objetos (gris) */
+  --mid: #52525B;      /* detalles interiores y piso */
+  --trazo-px: 2.2;     /* grosor de las aristas, en píxeles de video */
+  --bg: #0A0D12; --bg-hondo: #0A0D12; --bg-glow: #0A0D12;
+  --panel: #0F1218;    /* tarjetas, pantallas */
+  --line: #27272A;     /* filetes */
+  --grilla: rgba(113, 113, 122, .22);
+  --piso: #52525B;
+  --text: #FAFAFA;
+  --muted: #A1A1AA;
+  --acc: #FF2E3F;      /* énfasis: palabra clave, firma, progreso, señal */
+  --acc-glow: transparent;
+  --sky: #FAFAFA;      /* secundario neutro = blanco: cables, internet, 5 GHz */
+  --ok: #2EE08C;      /* ✓ correcto */
+  --warn: #FFB020;    /* ⚠ aviso */
+  --err: #FF6A1F;     /* ✕ error: bloque RELLENO naranja-rojo con ✕ (el acento ya es rojo: distinguir por color y por forma) */
+  --sans: "Plex Sans", sans-serif;
+  --mono: "IBM Plex Mono", monospace;
+}

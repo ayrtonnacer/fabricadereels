@@ -11,3 +11,4 @@ Cada archivo lleva fecha. Lo que se aprende de cada uno va resumido en `docs/BIT
 | `2026-11-threejs-guia-profesional-r187.md` | Investigación de Ayrton: three.js para videos y reels con calidad profesional (r187) | `docs/THREEJS.md` |
 | `2026-11-09-wifi-correcciones/5…8-*.png` | Capturas con marcas: antena de la notebook y bits grandes, cables que no tocan, etiqueta "pared" | `docs/BITACORA.md`, `docs/THREEJS.md` |
 | `../../assets/sfx/propios/{interface-texto-digital,modem-conexion,hit-metal}.mp3` | Sonidos nuevos: tipeo digital, módem, hit metálico | `docs/AUDIO.md` |
+| `2026-11-14-aprendizaje-basado-en-proyectos-wikipedia.pdf` | Artículo de Wikipedia sobre aprendizaje basado en proyectos (el método con el que Ayrton estudia haciendo reels) | `docs/CANAL.md` |

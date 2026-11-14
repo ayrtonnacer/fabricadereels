@@ -2,7 +2,7 @@
 Destilado de `docs/BITACORA.md` (cronológico, con el detalle) y `docs/DECISIONES.md`. **Se actualiza en cada tanda de indicaciones** y se repasa al empezar un video y antes de entregarlo; Ayrton no tiene que volver a aclararlo.
 
 ## Le gusta
-- Estética (2026-11-11): **negro + objetos en línea (contorno blanco) + acento rojo**, referencia = el reel de WiFi que pasó Ayrton; IBM Plex. Lima/azul queda como tema alternativo. **Piso de líneas en perspectiva** y el **gradiente** de fondo.
+- Estética (**por defecto desde 2026-11-14**): **tema Scale** — negro puro, objetos 3D de línea gris, un solo acento Foundry Tan, Host Grotesk + Geist Mono, subtítulos con barra negra (reel de tensores, publicado y con buena respuesta). Línea roja (WiFi) y lima/azul quedan como temas alternativos en `engine/themes/`. **Piso de líneas en perspectiva** y el **gradiente** de fondo.
 - **Profundidad real**: objetos 3D con perspectiva (le gustó cuando aparecieron los teléfonos en 3D); cámara que se mueve y revela. Prefiere **todo en three.js** (objetos, ondas, cables) mientras el render no se vuelva lento.
 - Motion graphics con **movimiento de cámara** como protagonista de la profundidad.
 - **Voz Daniela limpia** (sin efecto de radio) y sonido **limpio**: sin ruido de fondo; efectos puntuales con significado; **chinn** al aparecer el CTA; **sonido grave** (`boom-cinematico`) al inicio y al final; tipeo real de teclado.
@@ -62,3 +62,7 @@ Link + indicaciones → guion (público: técnicos, principiantes, reclutadores)
 - **Guardar los reels terminados**: copia liviana del final en `docs/referencias/propios/<reel>/` junto con su medición, para tener referencia de lo que le gusta.
 - **Paleta Scale (2026-11-13)**: probando colores de Scale AI. **No le gusta el verde (Evergreen) como fondo**; los colores de Scale se usan como **acento sobre base neutra** (negro/blanco/grises), no como superficie. Acento elegido para la prueba: Foundry Tan `#A8927C`.
 - **Subtítulos sobre imágenes (2026-11-13)**: si el fondo tiene mucho detalle (números, fotos), usar la **barra negra detrás del subtítulo** (`video.json → subtitulos.fondo`). Pidió probar la tipografía de Scale (Host Grotesk + Geist Mono).
+- **Público y feedback (2026-11-14)**: el reel de tensores tuvo mejor respuesta de lo esperado. Lo que gustó: **explica para el que no sabe de IT** (la mayoría). Lo que falla: **la voz se nota robótica**; le sugirieron **clonar su voz** para la marca personal. Todo en `docs/PUBLICO.md`; anotar ahí el feedback de cada reel publicado.
+- **Marca reconocible (2026-11-14)**: canal sin cara como Kurzgesagt, Fireship, 3Blue1Brown, FaztTech; lo que hace que lo reconozcan es **lo que se repite** (estética, color, voz, música, inicio y cierre). No variar esos elementos entre reels. Detalle en `docs/CANAL.md`.
+- **A mejorar (2026-11-14)**: portada, hook y **dinamismo de cámara** (medido: 0,5 movimientos notorios cada 10 s contra 1,5–5 de las referencias; ver `docs/CANAL.md` → Próximas mejoras).
+- **Repo para compartir (2026-11-14)**: todo lo importante tiene que estar en `main` en GitHub, para que otra persona pueda editar los videos como él quiere.

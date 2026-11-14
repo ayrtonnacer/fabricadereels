@@ -1,5 +1,5 @@
 # fabricadereels — fábrica de reels de @ayrtonnacer
-Reels verticales (1080×1920, 30 fps, 30–60 s) que explican programación, matemática, ciberseguridad y Linux. Objetos 3D con three.js dentro de [HyperFrames](https://github.com/heygen-com/hyperframes) (HTML + GSAP renderizado a video), cámara que viaja en profundidad, voz Piper (Daniela es_AR), efectos, música y subtítulos.
+Reels verticales (1080×1920, 30 fps, 30–60 s) que explican programación, matemática, ciberseguridad y Linux. Objetos 3D con three.js dentro de [HyperFrames](https://github.com/heygen-com/hyperframes) (HTML + GSAP renderizado a video), cámara que viaja en profundidad, estética inspirada en Scale AI (negro, línea gris, acento tan), voz Piper (Daniela es_AR), efectos, música y subtítulos.
 
 ## Instalación
 ```
@@ -14,10 +14,10 @@ Vista previa a mano: `cd videos/X && npx hyperframes preview`.
 
 ## Mapa del repo
 - `CLAUDE.md` — reglas y comandos (empezar acá). `docs/LEEME.md` — mapa de todos los documentos.
-- `videos/` — un video = una carpeta (`_plantilla/` es el punto de partida; `2026-11-wifi/` el primero).
+- `videos/` — un video = una carpeta (`_plantilla/` es el punto de partida; estado de cada uno en `videos/LEEME.md`).
 - `engine/` — scripts: voz, subtítulos, efectos, mezcla, medición.
 - `assets/` — voces, música, sonidos propios (`sfx/propios/`) y los 10 videos de referencia (`referencias/`).
-- `docs/` — manual, preferencias, bitácora, referencias medidas (`docs/referencias/`).
+- `docs/` — manual, preferencias, bitácora, referencias medidas (`docs/referencias/`). Para entender el proyecto: `docs/CANAL.md` (visión) y `docs/PUBLICO.md` (para quién).
 
 ## GitHub, en simple
 Hay una sola rama: `main`. Todo se guarda y se sube ahí; no hace falta usar ramas ni pull requests.

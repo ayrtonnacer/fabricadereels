@@ -9,7 +9,7 @@ Correr los dos después de cambiar texto o tiempos de la voz.
 ## Reglas
 - **Zona segura**: franja **y 1120–1320** (1080×1920). Arriba de lo que tapa la interfaz de las apps (≥ 1330 px hacia abajo) y debajo de la imagen. Por eso la cámara sube todo el set 170 px (`DY` en `assets/camara.js`) y **la imagen no pasa de y ≈ 1100**. Nada importante en los 200 px superiores.
 - Bloques de 2–5 palabras, 1–2 líneas, máx. ~34 caracteres; cortan en puntuación. Un bloque **no termina en artículo, preposición o conjunción** (esa palabra pasa al siguiente). Nunca una palabra sola en la última línea (`text-wrap: balance` + `&nbsp;` entre las dos últimas palabras; ver `docs/TIPOGRAFIA.md`).
-- Plex Sans 700, 70 px, color de texto del tema, sombra para leer sobre cualquier fondo. Espaciado normal o apretado, nunca abierto.
+- Sans del tema (`--sans`, hoy Host Grotesk) 700, 70 px, color de texto del tema, sombra para leer sobre cualquier fondo. **Barra negra detrás** (`video.json → "subtitulos": {"fondo": "rgba(0,0,0,.86)"}`, ya en la plantilla) para que no se pierda sobre imágenes con detalle. Espaciado normal o apretado, nunca abierto.
 - La **palabra que se dice** se pinta con el acento (`--acc`); el cambio es un corte seco. Los bloques aparecen de golpe.
 - No repetir en pantalla lo que ya dice el subtítulo (se sacó la bajada "Por eso a veces no llega" del gancho).
 - Números y siglas: el subtítulo muestra el texto original ("2,4"), la voz lo lee por diccionario ("dos coma cuatro").

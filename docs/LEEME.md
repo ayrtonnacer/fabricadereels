@@ -3,7 +3,10 @@
 
 | Tema | Documento |
 |---|---|
-| Estilo visual, marca, color | `ESTILO.md` |
+| Quién es Ayrton, para qué el canal, inspiraciones, qué se repite para que lo reconozcan, próximas mejoras | `CANAL.md` |
+| Público objetivo y feedback de cada reel publicado | `PUBLICO.md` |
+| Estilo visual, marca, color | `ESTILO.md` (temas alternativos: `../engine/themes/LEEME.md`) |
+| Qué es cada carpeta de video y su estado | `../videos/LEEME.md` |
 | Cámara, 3D, librería | `CAMARA.md`, `THREEJS.md`, `MOVIMIENTO.md` |
 | Física (Rapier horneado) | `FISICA.md` |
 | Guion | `GUION.md`, `INVESTIGACION-GUIONES.md` |

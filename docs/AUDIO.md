@@ -56,6 +56,16 @@ Piper lee mal siglas y palabras en inglés. Se corrige con `engine/audio/pronunc
 - `prohibidas`: palabras que no van en la voz; `voz.py` avisa y propone alternativa.
 Se escribe el texto natural en `video.json`; `voz.py` aplica el diccionario. Si algo suena mal, se agrega al diccionario en el mismo commit. Tips: acento escrito para marcar la sílaba tónica; siglas separadas por letras ("u ese be").
 
+## Voz propia (pendiente, 2026-11-14)
+El público marcó la voz como lo más flojo ("se nota un poco lo robótico"; "si es para tu marca personal debería tener tu voz", `PUBLICO.md`). Opciones evaluadas (costos aproximados de 2026-11; confirmarlos antes de pagar):
+| Opción | Costo | Notas |
+|---|---|---|
+| **ElevenLabs** (clonación instantánea) | Starter ≈ USD 5/mes (≈ 30.000 caracteres ≈ 40–50 reels de 40 s) · Creator ≈ USD 22/mes (≈ 100.000) | Mejor calidad y el acento queda fiel; uso comercial desde Starter. Sin GPU. No usa `pronunciacion.json`: escribir fonético o usar sus diccionarios. Si se cancela, se pierde la voz. Clave por credencial del entorno (nunca en el chat) y permitir `api.elevenlabs.io`. |
+| **Chatterbox multilingüe** (Resemble, MIT) | Gratis, local | Clona con 10–30 s de audio. Lento en CPU: conviene GPU (Colab). El acento puede irse a neutro. |
+| **XTTS-v2** (Coqui) | Gratis, local | Mantiene bien el acento, pero la licencia es **no comercial**. |
+| **Piper entrenado con su voz** | Gratis | Rápido en CPU y con diccionario, pero pide 1–3 h de grabaciones y GPU para entrenar. |
+Plan: Ayrton graba 1–2 min (sin eco, WAV mono ≥ 24 kHz, hablando como en un reel) → `docs/material/voz-ayrton/` → prueba lado a lado con Daniela, mismo guion → si convence, `voz.py --voz piper|clon` (la voz sale por línea; `video.json` sigue mandando en los tiempos). Daniela queda de respaldo.
+
 ## Audio y HyperFrames
 HyperFrames renderiza el video **mudo** (`out/mudo.mp4`); la voz, los efectos y la música los hace y mezcla este repo (`voz.py` → `sfx.py` → `mezcla.py`), que ya cumple −14 LUFS con ducking. No poner `<audio>` en las composiciones (se mezclaría dos veces). La skill `/media-use` de HyperFrames ofrece voces y música propias; Ayrton eligió Daniela (Piper): no cambiarla sin que lo pida.
 
