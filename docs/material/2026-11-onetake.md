@@ -28,3 +28,17 @@ Una película = **una sola cámara continua**; en cada límite entre escenas **a
 `python engine/analisis/arrastre.py docs/referencias/propios/2026-11-tensores-scale-oscuro/final-960.mp4 --escenas videos/2026-11-tensores-scale-oscuro/video.json`:
 arrastre medio **0,51**; límites en 0,00 (t = 36,8 s y 50,9 s → diapositiva), 0,35 (42,9 s), 0,45 (0,1 s, la portada) y 0,62–1,00 el resto. Planos con CV 0,45 (×104 entre el más corto y el más largo, pero por la portada de 0,1 s). Cuadros quietos 72 % (la diferencia está medida a 108 px de ancho: movimientos lentos de cámara cuentan como quietos, así que el número es un máximo). **Heurística: 1,00 no prueba continuidad si el piso/fondo persiste; mirar siempre los cuadros.**
 Lectura: el cierre (50,9 s) es un corte a otra composición (CTA) y el cambio en 36,8 s es el paso a "usos/payoff"; son los dos límites donde conviene diseñar una transformación.
+
+## Ampliación (2026-11-15): todo lo que se copió/adaptó al repo
+Pedido de Ayrton: "copiá todo lo útil". Criterio: **no se copió código** (licencia PolyForm Noncommercial: el canal puede monetizarse y el repo es compartible); se **reescribió con código propio** lo que sirve, porque las fórmulas son matemática estándar.
+| De onetake | En nuestro repo |
+|---|---|
+| `lib/motion.js` (resortes, impact, shake, whip, camera log-zoom, zoomThrough, morphRect, iris, hop, gather) | `videos/_plantilla/assets/movimiento.js` (probado con node) |
+| `probe.py` (arrastre), energy map, estilo de rhythm.md | `engine/analisis/arrastre.py` (+ mapa de energía) |
+| sound.md (materiales, un cuarto, menos eventos, barro, efecto rana) | `docs/AUDIO.md` (sección nueva) + `engine/analisis/barro.py` |
+| rhythm.md / SKILL.md (planilla, CV ≥ 0,25, ≥ 25 % quieto, no terminar dos planos igual) | `videos/_plantilla/plan.md` (metas + tabla de límites), `docs/CAMARA.md` reglas 7–9 |
+| composition.md: **pausa = byte-idéntica** (un push 1→1,05 ya falla), `handEnv` apaga la mano; ruido fijo 256² (alfa ≤ 7/255) sobre gradientes oscuros para evitar bandas tras el codificado | regla 9 de CAMARA.md; **idea pendiente**: probar el ruido anti-bandas en el fondo Scale (negro con gradiente) |
+| 3d.md: legibilidad de texto en el mundo (≥ 24 px de alto, aplastamiento ≥ 0,6), ≤ 35° de elevación, vista cenital = se lee como cambio de color | pendiente: chequeo automático de legibilidad en `escena3d.js` |
+| SKILL.md flujo: 3 conceptos distintos, no arrastrar el look de un film a otro, segundo idioma sin bifurcar la composición (`?lang=` + deformación de tiempo) | `docs/FLUJO.md` (ángulos); el segundo idioma queda como idea para reels en inglés |
+**No sirve para nosotros**: render 4K60 y captura por cuadro con Playwright (tenemos HyperFrames), `record_footage.py`/UI reconstruida (no hacemos demos de producto), Kokoro/faster-whisper (tenemos Piper y `subtitulos.py`), galería de 12 films (solo el Pro de pago trae el código fuente completo).
+

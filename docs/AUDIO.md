@@ -88,3 +88,14 @@ Dibujar la onda de `voz.wav` y `sfx.wav` con los inicios de palabra de `audio/pa
 - La voz **no** lleva efecto de radio (`voz.efecto: "ninguno"`). Si suena "de radio": revisar (1) ambiente/zumbido, (2) efectos de estática (`glitch()`: evitarlo), (3) procesamiento dinámico. `mezcla.py` ya no usa `loudnorm` (comprimía y bombeaba): voz con `highpass 70 Hz` + compresión leve (2:1) y ganancia lineal a −16 LUFS; la mezcla se lleva a −14 LUFS con **ganancia lineal + limitador** (pico −1,5 dBTP).
 - Piper entrega 22 kHz: no hay contenido sobre ~11 kHz; es propio del modelo y no es un efecto.
 - Pronunciación: ver `engine/audio/pronunciacion.json`; "gui" se lee /gi/ ("guifi" suena "gifi"): para "WiFi" se usa "uaifai".
+
+## Principios tomados de onetake (feitangyuan/onetake, 2026-11-15; solo ideas, `docs/material/2026-11-onetake.md`)
+- **Un seno puro por evento suena a chiptune/tragamonedas**: un objeto real tiene parciales inarmónicos y un transitorio de ruido (cristal: fundamental + 2,76× y 5,4× con decaimientos más rápidos + soplido de ~2 kHz; madera: golpe grave con caída de tono + chasquido a ~3 kHz; sub: seno con caída de tono, saturado, para golpes y aterrizajes; burbuja: resonancia que sube, para un pop redondo).
+- **Un solo "cuarto"** para todos los efectos: una respuesta al impulso sintética (≈ 1,1 s de cola, 12 ms de pre-retardo, 3 primeras reflexiones) con envío del 15 % (tecla) al 60–70 % (soplido largo de aire). Así los sonidos quedan *dentro* de la imagen.
+- **Menos eventos que escenas/movimientos**; si dos sonidos caen a < 40 ms, dejar uno. Los golpes son lo más fuerte del film; **el aterrizaje tiene que sonar más fuerte que el movimiento que lo precede** (medir por loudness K de cada beat, no por RMS).
+- **Cámara como instrumento**: el "aire" de un movimiento de cámara = ruido filtrado cuyo volumen sigue |d log zoom / dt|^1,3 (en zoom a fondo, bandas cada vez más agudas). Es el whoosh *en el pico*, derivado de la curva real y no puesto a ojo.
+- **Barro**: medir bandas por ventana de 0,5 s (`python engine/analisis/barro.py final.mp4`); alarma si la mezcla entera pasa de ~35 % en 100–300 Hz (palladio sola: 32 %) o una ventana de 60 %. Notas del acompañamiento de F4 para arriba y colas cortas.
+- **Muchos golpes parecidos alineados forman un tono** (efecto "rana"): variar el timbre en cada golpe y romper la alineación temporal; no repetir un ping tonal.
+- **Final**: no cerrar con un acorde de vibráfono/shimmer genérico (se oye "efecto de stock"); cerrar con la cadencia de la música o con un golpe propio del film.
+- Volumen de ellos: −16 LUFS / −3,5 dBTP; **el nuestro sigue siendo −14 LUFS** (Instagram/Reels) con pico real ≤ −1,5 dBTP.
+

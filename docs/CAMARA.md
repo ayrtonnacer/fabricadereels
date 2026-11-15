@@ -13,6 +13,17 @@ Lo que pidió Ayrton: cámara de película, **siempre al servicio de que se enti
 8. **Un límite = algo que sobrevive.** En cada cambio de escena, un objeto (o un contenedor, o la cámara que empuja hasta llenar el cuadro) tiene que seguir y transformarse en lo siguiente. Se anota en el plan (columna "qué sobrevive") y se mide con `engine/analisis/arrastre.py` (meta: medio ≥ 0,5; ningún límite en 0,0 salvo el cambio de tema o el cierre del CTA).
 9. **Pausas de verdad quietas**: ≥ 25 % de los cuadros sin movimiento y al menos un tramo ≥ 1 s; en una pausa no hay push-in ni flotación. **Temblor** decreciente y determinista solo en los aterrizajes. Variación de planos ≥ 4× (el más largo contra el más corto); no terminar dos planos seguidos igual; no reencuadrar con saltos iguales cada beat (metrónomo).
 
+### Biblioteca de movimientos `assets/movimiento.js` (2026-11-15)
+Funciones puras del tiempo local (sin azar ni reloj), copiadas con la plantilla por `nuevo.sh`; en una composición: `import * as M from './assets/movimiento.js'`.
+| Función | Para qué |
+|---|---|
+| `resorte(tau, z, w)`, `entra(t, t0)`, `popIn`, `letra(t, t0, i)`, `sale(t, t1)` | entradas con carácter (la opacidad se adelanta al movimiento), escalonadas por letra, salidas que levantan y desenfocan |
+| `impacto(t, tGolpe)`, `estirar(vx, vy)` | aplastar y vibrar al aterrizar; estirar según la velocidad |
+| `temblor(t, tGolpe)` | temblor decreciente y determinista, cero antes del golpe: SOLO en aterrizajes |
+| `latigazo`, `empuje`, `mano`/`envMano`, `camara(t, claves)`, `mirarAdelantado` | whip, empuje lento (no en pausas), flotación de mano apagable, cámara por claves con zoom logarítmico, seguimiento con adelanto |
+| `morfar`, `atravesar`, `iris`, `salto`, `juntar` | **límites con arrastre**: un rect se vuelve otro; la cámara empuja hasta que un objeto llena el cuadro; un círculo se abre; un salto en arco; un grupo converge |
+Probada con `node` (resorte → 1, temblor 0 antes del golpe, zoom logarítmico, `atravesar` llena el cuadro). Todavía NO integrada a `escena3d.js`: usarla donde haga falta (p. ej. sumar `M.temblor` a la posición de `cam` tras `E.ruta`).
+
 ## (histórico) Cámara 2.5D sin 3D
 
 Decisión de 2026-11-09: el estilo es **motion graphics 2D**; la profundidad la da **el movimiento de cámara** (paralaje), no modelos three.js. Renderiza en CPU ~9× más rápido que el motor 3D anterior (15 s de video en ~36 s).

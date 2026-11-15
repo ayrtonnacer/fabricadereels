@@ -63,3 +63,6 @@ Antes de entregar un reel: `medir.py` sobre `final.mp4` con la transcripción, m
 
 ## Continuidad entre escenas (2026-11-15)
 `python engine/analisis/arrastre.py final.mp4 --escenas videos/X/video.json [--json arrastre.json]` — puntaje 0–1 por corte (cuánto de lo que había sigue después) + % de cuadros quietos, tramo quieto máximo y variación de los planos. Idea de `probe.py` de onetake (código propio, solo numpy/PIL/ffmpeg). Umbrales de referencia: medio ≥ 0,5; < 0,2 = diapositiva; CV de planos ≥ 0,25; ≥ 25 % quietos. Es una heurística: mirar siempre los cuadros de cada límite. Estudio completo: `docs/material/2026-11-onetake.md`.
+`arrastre.py` también imprime un **mapa de energía** (1 carácter ≈ 1/12 s, una fila = 4 s; espacio = quieto … `@` = corte duro) para ver de un vistazo dónde hay pausas y ráfagas.
+`python engine/analisis/barro.py final.mp4` — reparte la energía en bandas por ventana de 0,5 s y avisa si se acumulan los graves-medios (100–300 Hz). Alarma, no meta.
+

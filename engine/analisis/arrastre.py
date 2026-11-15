@@ -80,11 +80,15 @@ def main():
         run = run + 1 if q else 0; best = max(best, run)
     lim = [0] + cortes + [n]; planos = np.array([(lim[k + 1] - lim[k]) / fps for k in range(len(lim) - 1)])
     cv = float(planos.std() / planos.mean()) if len(planos) > 1 else 0.0
+    # mapa de energía (1 carácter ≈ 1/12 s, filas de 4 s; ' .:-=+*#%@' de quieto a corte duro), como el de onetake: se ve dónde hay pausas y ráfagas
+    paso = max(1, int(round(fps / 12))); e = [dif[i:i + paso].mean() for i in range(0, n, paso)]; fila = int(round(4 * fps / paso)); esc = ' .:-=+*#%@'; lv = np.array([0, .0015, .004, .008, .015, .03, .06, .1, .16])
+    mapa = [''.join(esc[int(np.searchsorted(lv, x, side='right'))] for x in e[r:r + fila]) for r in range(0, len(e), fila)]; m_mapa = mapa
     m = dict(archivo=a.video, cortes=res, arrastre_medio=round(float(np.mean([r['arrastre'] for r in res])), 2) if res else None,
              pct_cuadros_quietos=round(100 * float(quietos.mean()), 1), tramo_quieto_max_s=round(best / fps, 2),
-             planos_s=[round(float(p), 1) for p in planos], planos_cv=round(cv, 2), plano_min_max_ratio=round(float(planos.max() / max(planos.min(), 1e-6)), 1))
+             planos_s=[round(float(p), 1) for p in planos], planos_cv=round(cv, 2), mapa_energia=m_mapa, plano_min_max_ratio=round(float(planos.max() / max(planos.min(), 1e-6)), 1))
     print(f"{a.video}: {len(res)} cortes · arrastre medio {m['arrastre_medio']} · quietos {m['pct_cuadros_quietos']} % (tramo máx. {m['tramo_quieto_max_s']} s) · CV de planos {m['planos_cv']} (máx/mín ×{m['plano_min_max_ratio']})")
     for r in res: print(f"  t={r['seg']:>6} s  arrastre {r['arrastre']:.2f}  {r['veredicto']}")
+    print('mapa de energía (cada fila = 4 s; espacio = quieto, @ = corte duro):'); [print(f'  {k * 4:>3}s |{r}|') for k, r in enumerate(m_mapa)]
     if a.json: open(a.json, 'w').write(json.dumps(m, ensure_ascii=False, indent=1))
 
 
