@@ -1,5 +1,7 @@
 # Banco de prueba estético: resultados (2026-11-15)
 
+> **VEREDICTO DE AYRTON (2026-11-15): no le gusta v4; prefiere el original (v0).** Los números de cámara mejoraron, pero el desenfoque dejó ilegibles los números del reel y la luz ensució el negro. Leer esto como registro de lo que NO funcionó; ver `docs/DECISIONES.md`.
+
 **Qué es.** Tres planos del reel de tensores (gancho, bloque 3D, cierre; 20 s) para probar **de a una** cuatro mejoras de nivel profesional y medir cada una. Nada se pasó todavía a la plantilla: primero decide Ayrton.
 
 **Cómo se usa.** En `index.html`, `window.NIVEL` va de 0 a 4 y cada nivel suma una mejora:
