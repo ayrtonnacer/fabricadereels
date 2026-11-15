@@ -3,3 +3,4 @@ numpy
 scipy
 onnx   # tiempos por palabra para subtítulos (piper include_alignments)
 opencv-python-headless   # análisis de video (engine/analisis/medir.py)
+faster-whisper   # "escuchar" el audio y compararlo con el guion (engine/audio/escuchar.py); baja el modelo de Hugging Face la primera vez

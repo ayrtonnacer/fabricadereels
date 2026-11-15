@@ -99,3 +99,8 @@ Dibujar la onda de `voz.wav` y `sfx.wav` con los inicios de palabra de `audio/pa
 - **Final**: no cerrar con un acorde de vibráfono/shimmer genérico (se oye "efecto de stock"); cerrar con la cadencia de la música o con un golpe propio del film.
 - Volumen de ellos: −16 LUFS / −3,5 dBTP; **el nuestro sigue siendo −14 LUFS** (Instagram/Reels) con pico real ≤ −1,5 dBTP.
 
+## Escuchar con Whisper (2026-11-15)
+`python engine/audio/escuchar.py final.mp4 --video videos/X [--modelo small|medium]` transcribe con faster-whisper (local; la 1.ª vez baja el modelo de Hugging Face) y compara con `voz.lineas`: % de palabras entendidas por línea y qué palabra se oyó distinta. **Antes de entregar un reel**, correrlo y mirar las palabras que fallan: si fallan en varias líneas (o con `medium`), suenan mal → `pronunciacion.json`.
+- Whisper solo entiende **voz**: no describe la música (para eso: `barro.py`, `medir.py` y el oído de Ayrton).
+- Primera lectura del reel de tensores (small): 90 % de palabras. Sospechosas: **"texto" → "tecto"** (2 líneas), **"álgebra" → "alfeora"**, "seguime" → "sílame", "larga"→"lara", "convertidas"→"cometidas". Revisarlas en el diccionario antes del próximo reel.
+
