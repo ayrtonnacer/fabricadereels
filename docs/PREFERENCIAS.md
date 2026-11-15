@@ -68,3 +68,8 @@ Link + indicaciones → guion (público: técnicos, principiantes, reclutadores)
 - **Marca reconocible (2026-11-14)**: canal sin cara como Kurzgesagt, Fireship, 3Blue1Brown, FaztTech; lo que hace que lo reconozcan es **lo que se repite** (estética, color, voz, música, inicio y cierre). No variar esos elementos entre reels. Detalle en `docs/CANAL.md`.
 - **A mejorar (2026-11-14)**: portada, hook y **dinamismo de cámara** (medido: 0,5 movimientos notorios cada 10 s contra 1,5–5 de las referencias; ver `docs/CANAL.md` → Próximas mejoras).
 - **Repo para compartir (2026-11-14)**: todo lo importante tiene que estar en `main` en GitHub, para que otra persona pueda editar los videos como él quiere.
+
+## Agregado 2026-11-15 (onetake)
+- **Cámara continua de verdad**: en cada límite entre escenas algo sobrevive y se transforma en lo siguiente; se mide con `engine/analisis/arrastre.py` (medio ≥ 0,5). Ayrton pasó el repo onetake y pidió **no instalar nada** por seguridad: estudiar leyendo y tomar ideas/umbrales (licencia no comercial: nada de copiar código).
+- Pausas verdaderamente quietas (≥ 25 % de cuadros) y cámara que anticipa al objeto; no más movimiento. Detalle: `docs/CAMARA.md` (reglas 7–9) y `docs/material/2026-11-onetake.md`.
+

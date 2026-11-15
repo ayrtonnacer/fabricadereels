@@ -9,6 +9,9 @@ Lo que pidió Ayrton: cámara de película, **siempre al servicio de que se enti
 4. **Plano continuo en vez de corte.** Dentro de una misma idea no se corta: el objeto se transforma en el siguiente (el píxel sale de la foto, la fila crece a planilla, la planilla se apila en bloque). Se corta solo al cambiar de tema.
 5. **Nunca desenfocar ni recortar lo que se explica.** El zoom no puede dejar el objeto cortado si hay que leerlo.
 6. **Las metas de `metas.json` son una alarma, no un objetivo.** Si el ojo dice que confunde, gana el ojo.
+7. **Seguir anticipando (de onetake, `docs/material/2026-11-onetake.md`)**: la cámara apunta ~0,1 s por DELANTE del objeto (`sineInOut`) y, antes de un golpe, fija el punto de aterrizaje y va hasta él con `expoInOut`; así sigue al sujeto sin perderlo. Menos movimiento, mejor puesto.
+8. **Un límite = algo que sobrevive.** En cada cambio de escena, un objeto (o un contenedor, o la cámara que empuja hasta llenar el cuadro) tiene que seguir y transformarse en lo siguiente. Se anota en el plan (columna "qué sobrevive") y se mide con `engine/analisis/arrastre.py` (meta: medio ≥ 0,5; ningún límite en 0,0 salvo el cambio de tema o el cierre del CTA).
+9. **Pausas de verdad quietas**: ≥ 25 % de los cuadros sin movimiento y al menos un tramo ≥ 1 s; en una pausa no hay push-in ni flotación. **Temblor** decreciente y determinista solo en los aterrizajes. Variación de planos ≥ 4× (el más largo contra el más corto); no terminar dos planos seguidos igual; no reencuadrar con saltos iguales cada beat (metrónomo).
 
 ## (histórico) Cámara 2.5D sin 3D
 
