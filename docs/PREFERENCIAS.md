@@ -2,6 +2,7 @@
 Destilado de `docs/BITACORA.md` (cronológico, con el detalle) y `docs/DECISIONES.md`. **Se actualiza en cada tanda de indicaciones** y se repasa al empezar un video y antes de entregarlo; Ayrton no tiene que volver a aclararlo.
 
 ## Le gusta
+- **Cámara de película al servicio del concepto** (2026-11-15): planos continuos (un objeto se transforma en el siguiente en vez de cortar), pocos movimientos clave y dinámicos, **pausas** sobre cada objeto nombrado, y planos generales que muestren las ideas juntas (ej.: escalar, vector y matriz vistos de lejos). Entradas con carácter y diseño de sonido en cada movimiento.
 - Estética (**por defecto desde 2026-11-14**): **tema Scale** — negro puro, objetos 3D de línea gris, un solo acento Foundry Tan, Host Grotesk + Geist Mono, subtítulos con barra negra (reel de tensores, publicado y con buena respuesta). Línea roja (WiFi) y lima/azul quedan como temas alternativos en `engine/themes/`. **Piso de líneas en perspectiva** y el **gradiente** de fondo.
 - **Profundidad real**: objetos 3D con perspectiva (le gustó cuando aparecieron los teléfonos en 3D); cámara que se mueve y revela. Prefiere **todo en three.js** (objetos, ondas, cables) mientras el render no se vuelva lento.
 - Motion graphics con **movimiento de cámara** como protagonista de la profundidad.
@@ -12,6 +13,7 @@ Destilado de `docs/BITACORA.md` (cronológico, con el detalle) y `docs/DECISIONE
 - Reels **rápidos de producir**.
 
 ## No le gusta / errores a no repetir
+- **Cámara que se mueve todo el tiempo o zoom de más** (banco v4, 2026-11-15): confunde. La cámara se mueve **solo en los momentos clave** y **se queda quieta** cuando se nombra un objeto; **pausas** para que se lea. Nada de desenfocar lo que se explica.
 - Elementos de fondo **sin sentido** (puntitos verdes, un "1" suelto flotando): todo lo decorativo tiene que significar algo.
 - **Palabras sueltas** en la última línea (viudas/huérfanas).
 - Ondas **cortadas** (sin continuidad); cables que **no tocan** el objeto.

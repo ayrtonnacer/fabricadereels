@@ -1,6 +1,15 @@
 # Profundidad: cámara y 3D
 > **Estándar actual (2026-11-09 noche): todos los objetos van en three.js (r187)** con la librería `assets/escena3d.js` (ver "Librería 3D" abajo y la guía completa en `docs/THREEJS.md`). El sistema CSS 2.5D (`camara.js`) queda como alternativa para piezas puramente tipográficas, pero ya no se usa en los reels. Pedido de Ayrton: aprovechar el eje z y la perspectiva de los objetos 3D, siempre que el render no se vuelva lento (medido abajo).
 
+## Gramática de cámara (2026-11-15, después del banco de prueba)
+Lo que pidió Ayrton: cámara de película, **siempre al servicio de que se entienda**. Lo que falló en el banco v4: moverse todo el tiempo y hacer zoom de más.
+1. **Mover solo en los cambios de idea.** Un movimiento clave por concepto nuevo (≈ 1 cada 5–8 s), dinámico (llegada con cola larga), con whoosh en el pico.
+2. **Retener cuando se nombra.** Cuando la voz nombra un objeto, la cámara está **quieta** (≥ 1,5 s) y el objeto entero y legible. La quietud es lo que lo resalta.
+3. **Plano general para relacionar.** Cuando la idea es "estas cosas son lo mismo", la cámara se aleja hasta verlas juntas y retiene (≥ 2,5 s).
+4. **Plano continuo en vez de corte.** Dentro de una misma idea no se corta: el objeto se transforma en el siguiente (el píxel sale de la foto, la fila crece a planilla, la planilla se apila en bloque). Se corta solo al cambiar de tema.
+5. **Nunca desenfocar ni recortar lo que se explica.** El zoom no puede dejar el objeto cortado si hay que leerlo.
+6. **Las metas de `metas.json` son una alarma, no un objetivo.** Si el ojo dice que confunde, gana el ojo.
+
 ## (histórico) Cámara 2.5D sin 3D
 
 Decisión de 2026-11-09: el estilo es **motion graphics 2D**; la profundidad la da **el movimiento de cámara** (paralaje), no modelos three.js. Renderiza en CPU ~9× más rápido que el motor 3D anterior (15 s de video en ~36 s).
