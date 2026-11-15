@@ -17,6 +17,7 @@ import { RoomEnvironment } from './RoomEnvironment.js';
 import { LineSegments2 } from './LineSegments2.js';
 import { LineSegmentsGeometry } from './LineSegmentsGeometry.js';
 import { LineMaterial } from './LineMaterial.js';
+import { temblor } from './movimiento.js';
 export { THREE };
 
 const css = (v, d) => (getComputedStyle(document.documentElement).getPropertyValue(v).trim() || d);
@@ -151,11 +152,14 @@ export async function crear(root, opts = {}) {
   };
 
   // ---------- cámara y dibujo ----------
-  E.ruta = (t, K) => {   // K = [{ t, p:[x,y,z], l:[x,y,z], e }]: de cada punto al siguiente con la easing `e` del destino
+  E.ruta = (t, K, golpes = []) => {   // K = [{ t, p:[x,y,z], l:[x,y,z], e }]: de cada punto al siguiente con la easing `e` del destino
     let i = 0; while (i < K.length - 2 && t > K[i + 1].t) i++;
     const a = K[i], b = K[i + 1], k = (EASE[b.e || 'io'])(clamp((t - a.t) / Math.max(1e-6, b.t - a.t)));
     const mix = (u, v) => u.map((x, j) => x + (v[j] - x) * k);
     cam.position.set(...mix(a.p, b.p)); cam.lookAt(...mix(a.l, b.l));
+    for (const [tg, amp = 0.012, sem = 1] of golpes) {   // temblor de aterrizaje (docs/CAMARA.md regla 9): golpes = [[tGolpe, amplitud en metros, semilla], ...]; cero antes del golpe, decae solo
+      const o = temblor(t, tg, { amp, decay: 9, f: 19, sem }); if (o.x || o.y) { cam.position.x += o.x; cam.position.y += o.y; cam.rotation.z += o.rot; }
+    }
   };
   E.label = (el, v, dx = 0, dyp = 0) => {   // ubica un elemento HTML (position:absolute) sobre un punto 3D
     cam.updateMatrixWorld();   // la matriz de la cámara se actualiza al renderizar: sin esto el rótulo usa la del cuadro anterior

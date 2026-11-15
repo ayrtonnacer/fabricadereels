@@ -22,7 +22,7 @@ Funciones puras del tiempo local (sin azar ni reloj), copiadas con la plantilla 
 | `temblor(t, tGolpe)` | temblor decreciente y determinista, cero antes del golpe: SOLO en aterrizajes |
 | `latigazo`, `empuje`, `mano`/`envMano`, `camara(t, claves)`, `mirarAdelantado` | whip, empuje lento (no en pausas), flotación de mano apagable, cámara por claves con zoom logarítmico, seguimiento con adelanto |
 | `morfar`, `atravesar`, `iris`, `salto`, `juntar` | **límites con arrastre**: un rect se vuelve otro; la cámara empuja hasta que un objeto llena el cuadro; un círculo se abre; un salto en arco; un grupo converge |
-Probada con `node` (resorte → 1, temblor 0 antes del golpe, zoom logarítmico, `atravesar` llena el cuadro). Todavía NO integrada a `escena3d.js`: usarla donde haga falta (p. ej. sumar `M.temblor` a la posición de `cam` tras `E.ruta`).
+Probada con `node` (resorte → 1, temblor 0 antes del golpe, zoom logarítmico, `atravesar` llena el cuadro). Integrada en la plantilla: `E.ruta(t, claves, golpes)` acepta `golpes = [[tGolpe, amplitud_m, semilla], …]` (p. ej. `[[1.2, 0.012]]` para un aterrizaje con temblor de ~1 cm que decae en ~0,4 s). Sin `golpes`, se comporta igual que antes; los videos ya publicados no se tocaron. **Sin probar en render** (este entorno no tiene `node_modules`): la primera vez que se use, mirar `snapshot` en el golpe y ajustar la amplitud.
 
 ## (histórico) Cámara 2.5D sin 3D
 
