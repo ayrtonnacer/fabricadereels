@@ -35,6 +35,7 @@ python engine/audio/sfx.py videos/X                   # efectos desde sfx_events
 python engine/audio/mezcla.py videos/X                # mezcla −14 LUFS + out/mudo.mp4 → final.mp4
 python engine/analisis/medir.py video.mp4 salida/ [--transcripcion t.txt]   # mide cámara, cortes, color, audio → números (cámara, cortes, transiciones, ritmo, audio)
 python engine/analisis/comparar.py ref/metricas.json propio/metricas.json  # qué parámetro se aleja (sin 2.º archivo: contra la biblia de estilo)
+python engine/analisis/encuadre.py video.mp4 [otro.mp4 …]   # encuadre: ancho/alto del contenido y nitidez relativa
 ```
 Instalación: `npm install` (HyperFrames fijado en 0.9.26) y `pip install -r requirements.txt`; requiere Node ≥ 22 y ffmpeg.
 

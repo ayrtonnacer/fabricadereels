@@ -1,0 +1,47 @@
+<!-- SUBTÍTULOS (recortado del reel de tensores para el banco de prueba: no editar a mano; se rehace desde audio/palabras.json).
+     Franja segura y 1120–1320. Los bloques aparecen de golpe; la palabra que se dice se pinta con el acento. -->
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    .g { position: absolute; left: 70px; right: 70px; top: 1120px; height: 200px; display: none; align-items: center; justify-content: center;
+      text-align: center; text-wrap: balance; font: 700 70px/1.08 var(--sans); letter-spacing: -0.01em; color: var(--text);
+      text-shadow: 0 3px 0 rgba(0, 0, 0, .6), 0 0 28px rgba(0, 0, 0, .85); }
+    .g .t { display: block; width: fit-content; max-width: 940px; text-align: center; text-wrap: balance; background: rgba(0, 0, 0, .86); padding: 12px 30px 16px; border-radius: 14px; }
+    .g .s { display: inline; }
+  </style>
+  <div id="root" data-composition-id="subtitulos" data-width="1080" data-height="1920">
+    <div class="g" id="g0"><span class="t"><span class="s" id="s0_0">Para</span> <span class="s" id="s0_1">una</span>&nbsp;<span class="s" id="s0_2">máquina,</span></span></div>
+    <div class="g" id="g1"><span class="t"><span class="s" id="s1_0">una</span>&nbsp;<span class="s" id="s1_1">foto,</span></span></div>
+    <div class="g" id="g2"><span class="t"><span class="s" id="s2_0">una</span>&nbsp;<span class="s" id="s2_1">canción</span></span></div>
+    <div class="g" id="g3"><span class="t"><span class="s" id="s3_0">y</span> <span class="s" id="s3_1">un</span> <span class="s" id="s3_2">texto</span> <span class="s" id="s3_3">son</span> <span class="s" id="s3_4">lo</span>&nbsp;<span class="s" id="s3_5">mismo.</span></span></div>
+    <div class="g" id="g4"><span class="t"><span class="s" id="s4_0">Una</span> <span class="s" id="s4_1">foto</span> <span class="s" id="s4_2">en</span>&nbsp;<span class="s" id="s4_3">blanco</span></span></div>
+    <div class="g" id="g5"><span class="t"><span class="s" id="s5_0">y</span> <span class="s" id="s5_1">negro</span>&nbsp;<span class="s" id="s5_2">es</span></span></div>
+    <div class="g" id="g6"><span class="t"><span class="s" id="s6_0">una</span> <span class="s" id="s6_1">cuadrícula,</span> <span class="s" id="s6_2">como</span> <span class="s" id="s6_3">una</span>&nbsp;<span class="s" id="s6_4">planilla:</span></span></div>
+    <div class="g" id="g7"><span class="t"><span class="s" id="s7_0">una</span>&nbsp;<span class="s" id="s7_1">matriz.</span></span></div>
+    <div class="g" id="g8"><span class="t"><span class="s" id="s8_0">En</span> <span class="s" id="s8_1">color</span> <span class="s" id="s8_2">son</span>&nbsp;<span class="s" id="s8_3">tres</span></span></div>
+    <div class="g" id="g9"><span class="t"><span class="s" id="s9_0">cuadrículas</span>&nbsp;<span class="s" id="s9_1">apiladas:</span></span></div>
+    <div class="g" id="g10"><span class="t"><span class="s" id="s10_0">un</span> <span class="s" id="s10_1">bloque</span> <span class="s" id="s10_2">de</span>&nbsp;<span class="s" id="s10_3">números</span></span></div>
+    <div class="g" id="g11"><span class="t"><span class="s" id="s11_0">en</span> <span class="s" id="s11_1">tres</span>&nbsp;<span class="s" id="s11_2">dimensiones.</span></span></div>
+    <div class="g" id="g12"><span class="t"><span class="s" id="s12_0">Dale</span> <span class="s" id="s12_1">me</span>&nbsp;<span class="s" id="s12_2">gusta</span></span></div>
+    <div class="g" id="g13"><span class="t"><span class="s" id="s13_0">y</span> <span class="s" id="s13_1">seguime</span> <span class="s" id="s13_2">para</span> <span class="s" id="s13_3">aprender</span>&nbsp;<span class="s" id="s13_4">más</span></span></div>
+    <div class="g" id="g14"><span class="t"><span class="s" id="s14_0">sobre</span> <span class="s" id="s14_1">inteligencia</span>&nbsp;<span class="s" id="s14_2">artificial.</span></span></div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="subtitulos"]');
+    const tl = gsap.timeline({ paused: true });
+    const ACC = getComputedStyle(document.documentElement).getPropertyValue('--acc').trim() || '#9FEF00';
+    const TXT = getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || '#E8EEF7';
+    const D = [{"a": 0.273, "b": 1.179, "w": [{"w": "Para", "t0": 0.323, "t1": 0.474}, {"w": "una", "t0": 0.497, "t1": 0.637}, {"w": "máquina,", "t0": 0.683, "t1": 1.055}]}, {"a": 1.179, "b": 1.783, "w": [{"w": "una", "t0": 1.229, "t1": 1.403}, {"w": "foto,", "t0": 1.438, "t1": 1.728}]}, {"a": 1.783, "b": 2.351, "w": [{"w": "una", "t0": 1.833, "t1": 2.007}, {"w": "canción", "t0": 2.053, "t1": 2.367}]}, {"a": 2.351, "b": 3.874, "w": [{"w": "y", "t0": 2.401, "t1": 2.459}, {"w": "un", "t0": 2.483, "t1": 2.576}, {"w": "texto", "t0": 2.634, "t1": 2.924}, {"w": "son", "t0": 2.947, "t1": 3.086}, {"w": "lo", "t0": 3.11, "t1": 3.168}, {"w": "mismo.", "t0": 3.226, "t1": 3.574}]}, {"a": 4.985, "b": 5.948, "w": [{"w": "Una", "t0": 5.035, "t1": 5.232}, {"w": "foto", "t0": 5.29, "t1": 5.499}, {"w": "en", "t0": 5.522, "t1": 5.592}, {"w": "blanco", "t0": 5.615, "t1": 5.975}]}, {"a": 5.948, "b": 6.483, "w": [{"w": "y", "t0": 5.998, "t1": 6.033}, {"w": "negro", "t0": 6.091, "t1": 6.335}, {"w": "es", "t0": 6.393, "t1": 6.498}]}, {"a": 6.483, "b": 8.189, "w": [{"w": "una", "t0": 6.533, "t1": 6.683}, {"w": "cuadrícula,", "t0": 6.73, "t1": 7.252}, {"w": "como", "t0": 7.357, "t1": 7.496}, {"w": "una", "t0": 7.519, "t1": 7.659}, {"w": "planilla:", "t0": 7.705, "t1": 8.146}]}, {"a": 8.189, "b": 9.236, "w": [{"w": "una", "t0": 8.239, "t1": 8.425}, {"w": "matriz.", "t0": 8.471, "t1": 8.936}]}, {"a": 9.896, "b": 10.767, "w": [{"w": "En", "t0": 9.946, "t1": 10.039}, {"w": "color", "t0": 10.097, "t1": 10.318}, {"w": "son", "t0": 10.376, "t1": 10.573}, {"w": "tres", "t0": 10.62, "t1": 10.759}]}, {"a": 10.767, "b": 11.94, "w": [{"w": "cuadrículas", "t0": 10.817, "t1": 11.305}, {"w": "apiladas:", "t0": 11.363, "t1": 11.885}]}, {"a": 11.94, "b": 12.811, "w": [{"w": "un", "t0": 11.99, "t1": 12.094}, {"w": "bloque", "t0": 12.129, "t1": 12.385}, {"w": "de", "t0": 12.419, "t1": 12.489}, {"w": "números", "t0": 12.524, "t1": 12.814}]}, {"a": 12.811, "b": 14.217, "w": [{"w": "en", "t0": 12.861, "t1": 12.953}, {"w": "tres", "t0": 12.988, "t1": 13.128}, {"w": "dimensiones.", "t0": 13.162, "t1": 13.917}]}, {"a": 15.696, "b": 16.312, "w": [{"w": "Dale", "t0": 15.746, "t1": 15.932}, {"w": "me", "t0": 15.979, "t1": 16.037}, {"w": "gusta", "t0": 16.083, "t1": 16.327}]}, {"a": 16.312, "b": 17.391, "w": [{"w": "y", "t0": 16.362, "t1": 16.385}, {"w": "seguime", "t0": 16.455, "t1": 16.71}, {"w": "para", "t0": 16.757, "t1": 16.873}, {"w": "aprender", "t0": 16.896, "t1": 17.256}, {"w": "más", "t0": 17.291, "t1": 17.407}]}, {"a": 17.391, "b": 19.146, "w": [{"w": "sobre", "t0": 17.441, "t1": 17.639}, {"w": "inteligencia", "t0": 17.662, "t1": 18.161}, {"w": "artificial.", "t0": 18.185, "t1": 18.846}]}];
+    D.forEach((g, k) => {
+      const el = root.querySelector('#g' + k);
+      tl.fromTo(el, { display: 'none' }, { display: 'flex', duration: 0.001 }, g.a);
+      tl.to(el, { display: 'none', duration: 0.001 }, g.b);
+      g.w.forEach((w, j) => {
+        const s = root.querySelector('#s' + k + '_' + j);
+        tl.fromTo(s, { color: TXT }, { color: ACC, duration: 0.001 }, w.t0);
+        tl.to(s, { color: TXT, duration: 0.001 }, Math.min(g.b - 0.01, w.t1 + 0.015));
+      });
+    });
+    window.__timelines["subtitulos"] = tl;
+  </script>
+</template>

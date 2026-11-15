@@ -46,6 +46,8 @@ Números del reel de tensores medido (`referencias/propios/2026-11-tensores-scal
 3. **Portada.** Hoy es el cuadro de 0,1 s con título + objeto + firma. Mejorarla: un objeto protagonista más grande, menos texto (3 a 5 palabras) y que se lea en miniatura. Comparar con las portadas de los canales de arriba.
 4. **Voz propia** (feedback del público, `PUBLICO.md`).
 
+**Banco de prueba estético (2026-11-15)**: `videos/2026-11-banco-estetica/RESULTADOS.md`. Encuadre (ancho del contenido 60 → 72 %, igual que las referencias), luz de contorno, desenfoque (rack focus con la voz) y cámara (en movimiento 28 → 64 %). Pendiente que Ayrton elija qué pasa a la plantilla; brecha que queda: la franja de abajo de los subtítulos vacía.
+
 ## Cómo trabajaría un profesional de primer nivel (ideas para profundizar, no para agrandar)
 - **Partir de material crudo**: el paper, la documentación oficial o el libro de texto en vez de un artículo que ya lo resume. Y del lado del público, partir de las **métricas crudas** de cada reel (curva de retención, en qué segundo se van) en vez de opiniones.
 - **Métodos**: una pregunta de investigación por reel (aprendizaje basado en proyectos); la técnica Feynman (si no se puede explicar simple, todavía no se entendió); revisión técnica de un par antes de publicar; pruebas A/B de portada y hook cuando la plataforma lo permita; medir con `medir.py` y `comparar.py` antes de opinar.

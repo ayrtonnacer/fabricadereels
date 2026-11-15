@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <!-- BANCO DE PRUEBA ESTÉTICO: 3 planos del reel de tensores (gancho, bloque 3D, cierre).
+         NIVEL acumula mejoras de a una: 0 original · 1 encuadre · 2 luz de contorno · 3 desenfoque (profundidad y movimiento) · 4 cámara en metas. -->
+    <script>window.NIVEL = 4;</script>
+    <script src="assets/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/marca.css" />
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="20.1" data-width="1080" data-height="1920">
+      <div id="portada" data-composition-id="portada" data-composition-src="compositions/portada.html"
+        data-start="0" data-duration="0.1" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="gancho" data-composition-id="gancho" data-composition-src="compositions/gancho.html"
+        data-start="0.1" data-duration="4.6" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="foto" data-composition-id="foto" data-composition-src="compositions/foto.html"
+        data-start="4.7" data-duration="10.4" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="cierre" data-composition-id="cierre" data-composition-src="compositions/cierre.html"
+        data-start="15.1" data-duration="5" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="subtitulos" data-composition-id="subtitulos" data-composition-src="compositions/subtitulos.html"
+        data-start="0" data-duration="20.1" data-track-index="9" data-track-kind="captions" data-width="1080" data-height="1920" style="z-index: 50"></div>
+    </div>
+    <script>
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

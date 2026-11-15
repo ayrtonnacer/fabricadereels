@@ -20,6 +20,7 @@ python engine/analisis/comparar.py propio/metricas.json                       # 
 python engine/analisis/comparar.py referencia/metricas.json propio/metricas.json [--tolerancia 25]   # contra un video puntual
 python engine/analisis/biblia.py                                          # regenera las tablas de la biblia de estilo
 python engine/analisis/medir.py --autotest      # verifica el método con movimientos sintéticos conocidos
+python engine/analisis/encuadre.py a.mp4 b.mp4 [--zona 200,1100]   # encuadre: ocupación, ancho y alto del contenido, nitidez relativa (profundidad de campo)
 ```
 Salida en `salida/`: `INFORME.md` (lectura en español, con tabla de cortes/transiciones y de movimientos de cámara), `metricas.json`, `medidas.csv` (por cuadro), `hoja_resumen.jpg` (1 cuadro por segundo) y, con `--hojas`, hojas de 60 cuadros con su número. Un reel de 33 s se mide en ~14 s.
 
@@ -36,6 +37,7 @@ Salida en `salida/`: `INFORME.md` (lectura en español, con tabla de cortes/tran
 | Audio | LUFS, rango dinámico, pico, % de silencio, ataques por segundo, golpes graves, % de voz activa | EBU R128 (ffmpeg) + análisis espectral propio |
 | Transiciones | por cada corte: velocidad de cámara en los 0,3 s previos, plano que sigue, distancia al golpe de sonido más cercano; % de cortes con movimiento fuerte antes y % sobre un golpe (±0,1 s) | de la misma detección de cortes y de los ataques de audio |
 | Mover–retener–mover | movimientos notorios (pico ≥ 100 px/s) cada 10 s, su pico y duración, retención entre movimientos (≥ 0,5 s), ataque y liberación (tiempo del 10 % al pico y del pico al 10 %) | tramos de movimiento de la cámara; ataque y liberación sobre la velocidad suavizada |
+| Encuadre (`encuadre.py`) | ancho y alto del contenido (% del cuadro, percentiles 3–97), ocupación (% de píxeles con contenido) y nitidez relativa (bloques más nítidos / mediana: > 1 = hay planos enfocados y desenfocados) | umbral de luminancia sobre el negro de fondo tras un desenfoque leve (borra el piso); laplaciano por bloques. **Límite**: el texto cuenta como contenido y el desenfoque baja la ocupación; comparar ancho y alto, no ocupación, entre versiones con y sin desenfoque. Afines: ancho 72 %, alto 45–67 % |
 | Palabras por segundo | ritmo de la narración | **solo con transcripción** (palabras ÷ segundos). Sin ella no se estima: el intento de estimarlo por sílabas del audio resultó engañoso (daba 6,0 cuando el real es ~8,6) y se descartó |
 
 ## Calibración y límites (cómo sabemos que no miente)
