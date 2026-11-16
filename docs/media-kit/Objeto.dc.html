@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<svg viewBox="0 0 600 600" style="width:100%;height:100%;display:block;overflow:visible"><path d="{{ d }}" stroke="{{ linea }}" style="fill:none;stroke-width:2;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round"></path><circle cx="{{ dx }}" cy="{{ dy }}" r="{{ dr }}" style="fill:#A8927C"></circle></svg>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:300,&quot;height&quot;:300},&quot;tipo&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;cubo&quot;,&quot;tensor&quot;,&quot;esfera&quot;,&quot;candado&quot;,&quot;terminal&quot;],&quot;default&quot;:&quot;cubo&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;linea&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;options&quot;:[&quot;#929292&quot;,&quot;#000000&quot;],&quot;default&quot;:&quot;#929292&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;punto&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:11,&quot;min&quot;:4,&quot;max&quot;:30,&quot;tsType&quot;:&quot;number&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.tipo ?? 'cubo';
+    const iso = (s, x, y, z) => [300 + (x - y) * 0.866 * s, 300 + (x + y) * 0.5 * s - z * s];
+    const L = (a, b) => `M${a[0].toFixed(1)} ${a[1].toFixed(1)} L${b[0].toFixed(1)} ${b[1].toFixed(1)} `;
+    const ell = (cx, cy, rx, ry) => rx < 1 ? `M${cx} ${cy - ry} L${cx} ${cy + ry} ` : `M${cx - rx} ${cy} A${rx} ${ry} 0 1 0 ${cx + rx} ${cy} A${rx} ${ry} 0 1 0 ${cx - rx} ${cy} `;
+    let d = '', dot = [300, 300];
+    if (t === 'tensor') {
+      const s = 90, p = (x, y, z) => iso(s, x, y, z);
+      for (let i = 0; i <= 3; i++) {
+        d += L(p(i, 0, 3), p(i, 3, 3)) + L(p(0, i, 3), p(3, i, 3));
+        d += L(p(i, 3, 0), p(i, 3, 3)) + L(p(0, 3, i), p(3, 3, i));
+        d += L(p(3, i, 0), p(3, i, 3)) + L(p(3, 0, i), p(3, 3, i));
+      }
+      dot = p(3, 3, 3);
+    } else if (t === 'esfera') {
+      const R = 250;
+      [0, 125, 216.5, 250].forEach(rx => d += ell(300, 300, rx, R));
+      [-60, -30, 0, 30, 60].forEach(a => { const r = R * Math.cos(a * Math.PI / 180); d += ell(300, 300 - R * Math.sin(a * Math.PI / 180), r, r * 0.28); });
+      dot = [300, 300 + R * 0.28];
+    } else if (t === 'candado') {
+      d = 'M150 260 H450 V540 H150 Z M200 220 H500 V500 M150 260 L200 220 M450 260 L500 220 M450 540 L500 500 M200 260 V170 A100 100 0 0 1 400 170 V260 M250 220 V130 A100 100 0 0 1 450 130 V220 M300 395 V450';
+      dot = [300, 370];
+    } else if (t === 'terminal') {
+      d = 'M100 200 H460 V480 H100 Z M150 160 H510 V440 M100 200 L150 160 M460 200 L510 160 M460 480 L510 440 M100 240 H460 M130 290 H330 M130 330 H260 M130 370 H300 M130 405 L150 420 L130 435';
+      dot = [180, 420];
+    } else {
+      const s = 230, p = (x, y, z) => [260 + (x * 0.9 - y * 0.55) * s, 332 + (x * 0.3 + y * 0.42) * s - z * s];
+      const v = [[0,0,0],[1,0,0],[1,1,0],[0,1,0]];
+      v.forEach((a, i) => { const b = v[(i + 1) % 4]; d += L(p(...a), p(...b)) + L(p(a[0], a[1], 1), p(b[0], b[1], 1)) + L(p(...a), p(a[0], a[1], 1)); });
+      dot = p(1, 1, 1);
+    }
+    return { d, dx: dot[0], dy: dot[1], dr: this.props.punto ?? 11, linea: this.props.linea ?? '#929292' };
+  }
+}
+</script>
+</body>
+</html>

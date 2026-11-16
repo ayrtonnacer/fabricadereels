@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="design_doc_mode" content="canvas"></meta><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;700&amp;family=Geist+Mono:wght@400;500;700&amp;display=swap"></link><script src="./image-slot.js"></script><style>body{margin:0;background:#0b0b0b}a{color:#A8927C}a:hover{color:#FFFFFF}</style></helmet>
+<div style="background:#0b0b0b;padding:200px;display:flex;flex-direction:column;gap:240px;font-family:'Host Grotesk',sans-serif;color:#FFFFFF;width:max-content">
+
+<section data-screen-label="00 Portada del kit" style="display:flex;flex-direction:column;gap:40px;max-width:2400px">
+  <div style="font-family:'Geist Mono',monospace;font-size:32px;color:#A8927C">media kit · v2 · 16/11/2026</div>
+  <h1 style="margin:0;font-size:240px;line-height:0.95;font-weight:700;letter-spacing:-0.03em"><span style="color:#A8927C">@</span>ayrtonnacer</h1>
+  <p style="margin:0;font-size:48px;line-height:1.3;font-weight:500;letter-spacing:-0.02em;color:#C7C7C7;max-width:1800px;text-wrap:pretty">Divulgación de programación, matemática, ciencia, ciberseguridad y Linux en reels verticales. Negro puro, objetos de línea gris, un solo acento tan. Lo que se repite en cada reel es la marca.</p>
+  <div style="display:flex;gap:48px;flex-wrap:wrap;font-family:'Geist Mono',monospace;font-size:30px;color:#C7C7C7;padding-top:24px">
+    <a href="#s01">01 portada</a><a href="#s02">02 identidad</a><a href="#s03">03 reglas</a><a href="#s04">04 plantillas</a><a href="#s05">05 animaciones</a><a href="#s06">06 movimiento y sonido</a><a href="#s07">07 tokens</a>
+  </div>
+</section>
+
+<section id="s01" data-screen-label="01 Sistema de portada" style="display:flex;flex-direction:column;gap:72px">
+  <div style="display:flex;flex-direction:column;gap:20px;max-width:1800px">
+    <div style="font-family:'Geist Mono',monospace;font-size:32px;color:#A8927C">01</div>
+    <h2 style="margin:0;font-size:120px;line-height:1;font-weight:700;letter-spacing:-0.03em">Sistema de portada</h2>
+    <p style="margin:0;font-size:40px;line-height:1.35;font-weight:500;color:#C7C7C7;letter-spacing:-0.01em;text-wrap:pretty">El mismo cuadro sirve de fotograma de 0,1 s y de miniatura de Shorts. Cambian el título y el objeto; la grilla, la firma, el piso y el punto tan quedan fijos.</p>
+  </div>
+  <div style="display:flex;gap:80px;align-items:flex-start">
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <div style="font-family:'Geist Mono',monospace;font-size:28px;color:#C7C7C7">anatomía · con guías · 1080×1920</div>
+      <div style="width:1080px;height:1920px;outline:1px solid #262626">
+        <dc-import name="Portada" tema="programacion" antes="La IA no lee" clave="palabras" guias="{{ true }}" hint-size="1080px,1920px"></dc-import>
+      </div>
+    </div>
+    <div style="width:1000px;display:flex;flex-direction:column;gap:56px;padding-top:120px">
+      <div style="display:flex;gap:32px"><div style="font-family:'Geist Mono',monospace;font-size:36px;color:#A8927C;width:60px">1</div><div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:52px;font-weight:700;letter-spacing:-0.02em">Firma arriba a la izquierda</div><div style="font-size:36px;line-height:1.35;color:#C7C7C7;font-weight:500">Host Grotesk 700, 44 px, en tan, y = 262. Sola, sin ícono ni rótulo al lado. Queda dentro del recorte 3:4 de la grilla de Instagram.</div></div></div>
+      <div style="display:flex;gap:32px"><div style="font-family:'Geist Mono',monospace;font-size:36px;color:#A8927C;width:60px">2</div><div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:52px;font-weight:700;letter-spacing:-0.02em">Título de 3 a 5 palabras</div><div style="font-size:36px;line-height:1.35;color:#C7C7C7;font-weight:500">Host Grotesk 700, 140 px, −0,03 em, máximo 3 líneas desde y = 350. Una sola palabra clave en tan. Corte balanceado: nunca una palabra sola en la última línea.</div></div></div>
+      <div style="display:flex;gap:32px"><div style="font-family:'Geist Mono',monospace;font-size:36px;color:#A8927C;width:60px">3</div><div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:52px;font-weight:700;letter-spacing:-0.02em">Objeto protagonista</div><div style="font-size:36px;line-height:1.35;color:#C7C7C7;font-weight:500">Wireframe gris #929292 de 2 px en un cuadro de 560 px centrado, apoyado en el piso. Lleva un único punto tan: la señal de lo que hay que mirar.</div></div></div>
+      <div style="display:flex;gap:32px"><div style="font-family:'Geist Mono',monospace;font-size:36px;color:#A8927C;width:60px">4</div><div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:52px;font-weight:700;letter-spacing:-0.02em">Piso y gradiente</div><div style="font-size:36px;line-height:1.35;color:#C7C7C7;font-weight:500">Líneas #3A3A3A en perspectiva desde y = 1180, que aparecen con un fundido. Nunca pasan detrás del título.</div></div></div>
+      <div style="display:flex;gap:32px"><div style="font-family:'Geist Mono',monospace;font-size:36px;color:#A8927C;width:60px">5</div><div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:52px;font-weight:700;letter-spacing:-0.02em">Zonas</div><div style="font-size:36px;line-height:1.35;color:#C7C7C7;font-weight:500">Todo lo que se lee entre 200 y 1330. Subtítulos entre 1120 y 1320. Lo que queda afuera lo tapa la interfaz.</div></div></div>
+    </div>
+  </div>
+  <div style="display:flex;gap:80px;align-items:flex-start;flex-wrap:nowrap">
+    <div style="display:flex;flex-direction:column;gap:24px"><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#C7C7C7">programación</div><div style="width:1080px;height:1920px;outline:1px solid #262626"><dc-import name="Portada" tema="programacion" antes="La IA no lee" clave="palabras" hint-size="1080px,1920px"></dc-import></div></div>
+    <div style="display:flex;flex-direction:column;gap:24px"><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#C7C7C7">matemática</div><div style="width:1080px;height:1920px;outline:1px solid #262626"><dc-import name="Portada" tema="matematica" antes="El infinito tiene" clave="tamaños" hint-size="1080px,1920px"></dc-import></div></div>
+    <div style="display:flex;flex-direction:column;gap:24px"><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#C7C7C7">ciberseguridad</div><div style="width:1080px;height:1920px;outline:1px solid #262626"><dc-import name="Portada" tema="ciberseguridad" antes="Tu contraseña dura" clave="segundos" hint-size="1080px,1920px"></dc-import></div></div>
+    <div style="display:flex;flex-direction:column;gap:24px"><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#C7C7C7">Linux</div><div style="width:1080px;height:1920px;outline:1px solid #262626"><dc-import name="Portada" tema="linux" antes="En Linux todo es" clave="archivo" hint-size="1080px,1920px"></dc-import></div></div>
+  </div>
+  <div style="display:flex;gap:160px;align-items:flex-start">
+    <div style="display:flex;flex-direction:column;gap:32px">
+      <div style="font-family:'Geist Mono',monospace;font-size:28px;color:#C7C7C7">prueba a 150 px de ancho</div>
+      <div style="display:flex;gap:24px">
+        <div style="width:150px;height:267px;overflow:hidden;outline:1px solid #262626"><div style="width:1080px;height:1920px;transform:scale(0.13889);transform-origin:0 0"><dc-import name="Portada" tema="programacion" antes="La IA no lee" clave="palabras" hint-size="1080px,1920px"></dc-import></div></div>
+        <div style="width:150px;height:267px;overflow:hidden;outline:1px solid #262626"><div style="width:1080px;height:1920px;transform:scale(0.13889);transform-origin:0 0"><dc-import name="Portada" tema="matematica" antes="El infinito tiene" clave="tamaños" hint-size="1080px,1920px"></dc-import></div></div>
+        <div style="width:150px;height:267px;overflow:hidden;outline:1px solid #262626"><div style="width:1080px;height:1920px;transform:scale(0.13889);transform-origin:0 0"><dc-import name="Portada" tema="ciberseguridad" antes="Tu contraseña dura" clave="segundos" hint-size="1080px,1920px"></dc-import></div></div>
+        <div style="width:150px;height:267px;overflow:hidden;outline:1px solid #262626"><div style="width:1080px;height:1920px;transform:scale(0.13889);transform-origin:0 0"><dc-import name="Portada" tema="linux" antes="En Linux todo es" clave="archivo" hint-size="1080px,1920px"></dc-import></div></div>
+      </div>
+      <p style="margin:0;width:672px;font-size:32px;line-height:1.4;color:#C7C7C7;font-weight:500;text-wrap:pretty">A este tamaño el título queda en ≈19 px y se lee. La firma no se lee y no hace falta: lo que identifica es negro, título blanco con una palabra tan, silueta gris y el punto tan.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:32px">
+      <div style="font-family:'Geist Mono',monospace;font-size:28px;color:#C7C7C7">grilla de perfil · recorte 3:4</div>
+      <div style="display:grid;grid-template-columns:repeat(3,240px);gap:4px;background:#000;padding:4px">
+        <div style="width:240px;height:320px;overflow:hidden"><div style="width:1080px;height:1920px;transform:scale(0.2222);transform-origin:0 0;margin-top:-53px"><dc-import name="Portada" tema="programacion" antes="La IA no lee" clave="palabras" hint-size="1080px,1920px"></dc-import></div></div>
+        <div style="width:240px;height:320px;overflow:hidden"><div style="width:1080px;height:1920px;transform:scale(0.2222);transform-origin:0 0;margin-top:-53px"><dc-import name="Portada" tema="matematica" antes="El infinito tiene" clave="tamaños" hint-size="1080px,1920px"></dc-import></div></div>
+        <div style="width:240px;height:320px;overflow:hidden"><div style="width:1080px;height:1920px;transform:scale(0.2222);transform-origin:0 0;margin-top:-53px"><dc-import name="Portada" tema="ciberseguridad" antes="Tu contraseña dura" clave="segundos" hint-size="1080px,1920px"></dc-import></div></div>
+        <div style="width:240px;height:320px;overflow:hidden"><div style="width:1080px;height:1920px;transform:scale(0.2222);transform-origin:0 0;margin-top:-53px"><dc-import name="Portada" tema="linux" antes="En Linux todo es" clave="archivo" hint-size="1080px,1920px"></dc-import></div></div>
+        <div style="width:240px;height:320px;overflow:hidden"><div style="width:1080px;height:1920px;transform:scale(0.2222);transform-origin:0 0;margin-top:-53px"><dc-import name="Portada" tema="programacion" antes="Qué es un" clave="token" hint-size="1080px,1920px"></dc-import></div></div>
+        <div style="width:240px;height:320px;overflow:hidden"><div style="width:1080px;height:1920px;transform:scale(0.2222);transform-origin:0 0;margin-top:-53px"><dc-import name="Portada" tema="matematica" antes="Qué es un" clave="tensor" objeto="tensor" hint-size="1080px,1920px"></dc-import></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="s02" data-screen-label="02 Identidad" style="display:flex;flex-direction:column;gap:72px">
+  <div style="display:flex;flex-direction:column;gap:20px;max-width:1800px">
+    <div style="font-family:'Geist Mono',monospace;font-size:32px;color:#A8927C">02</div>
+    <h2 style="margin:0;font-size:120px;line-height:1;font-weight:700;letter-spacing:-0.03em">Identidad</h2>
+    <p style="margin:0;font-size:40px;line-height:1.35;font-weight:500;color:#C7C7C7;letter-spacing:-0.01em;text-wrap:pretty">Solo texto: el wordmark tipográfico es la firma, sin ícono al lado. Donde el texto no entra (perfil), va tu foto. Los objetos de línea quedan para los reels y las historias destacadas.</p>
+  </div>
+  <div style="display:flex;gap:80px;align-items:flex-start">
+    <div style="display:flex;flex-direction:column;gap:24px"><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#C7C7C7">wordmark · sobre negro</div>
+      <div style="width:1600px;height:900px;background:#000;outline:1px solid #262626;display:flex;align-items:center;justify-content:center"><div style="font-size:200px;font-weight:700;letter-spacing:-0.03em;line-height:1"><span style="color:#A8927C">@</span>ayrtonnacer</div></div></div>
+    <div style="display:flex;flex-direction:column;gap:24px"><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#C7C7C7">sobre claro · solo si hace falta</div>
+      <div style="width:1600px;height:900px;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><div style="font-size:200px;font-weight:700;letter-spacing:-0.03em;line-height:1;color:#000"><span style="color:#A8927C">@</span>ayrtonnacer</div></div></div>
+  </div>
+  <div style="display:flex;gap:80px;align-items:flex-start">
+    <div style="display:flex;flex-direction:column;gap:24px"><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#C7C7C7">foto de perfil · 1080×1080 · recorte circular</div>
+      <div style="width:1080px;height:1080px;background:#000;outline:1px solid #262626;display:flex;align-items:center;justify-content:center"><image-slot id="foto-perfil" shape="circle" placeholder="Soltá acá tu foto de perfil" style="width:1000px;height:1000px"></image-slot></div></div>
+    <div style="width:900px;display:flex;flex-direction:column;gap:24px;padding-top:64px">
+      <div style="font-size:52px;font-weight:700;letter-spacing:-0.02em">Tu foto, la misma en todas las redes</div>
+      <div style="font-size:36px;line-height:1.4;color:#C7C7C7;font-weight:500;text-wrap:pretty">Fondo oscuro o negro, para que el círculo se funda con el perfil. Sin marco, sin texto y sin logo encima: a 40 px solo se ve la cara. La firma ya está al lado, en el nombre de usuario.</div>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:24px"><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#C7C7C7">banner de YouTube · 2560×1440 · zona segura 1546×423</div>
+    <div style="position:relative;width:2560px;height:1440px;background:#000;outline:1px solid #262626;overflow:hidden">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse 50% 30% at 50% 50%, #0e0e0e 0%, #000 70%)"></div>
+      <div style="position:absolute;top:900px;left:0;width:2560px;height:540px;-webkit-mask-image:linear-gradient(to bottom, transparent 0%, #000 50%);mask-image:linear-gradient(to bottom, transparent 0%, #000 50%)"><svg viewBox="0 0 2560 540" style="width:2560px;height:540px;display:block"><path d="{{ pisoBanner }}" style="fill:none;stroke:#3a3a3a;stroke-width:1.5"></path></svg></div>
+      <div style="position:absolute;top:508px;left:507px;width:1546px;height:423px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px">
+        <div style="font-size:170px;font-weight:700;letter-spacing:-0.03em;line-height:1"><span style="color:#A8927C">@</span>ayrtonnacer</div>
+        <div style="font-family:'Geist Mono',monospace;font-size:38px;color:#C7C7C7">programación · matemática · ciencia · ciberseguridad · Linux</div>
+      </div>
+      <sc-if value="{{ guias }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;top:508px;left:507px;width:1546px;height:423px;border:2px dashed #839CB2;box-sizing:border-box"></div><div style="position:absolute;top:460px;left:507px;font-family:'Geist Mono',monospace;font-size:28px;color:#839CB2">zona visible en todos los dispositivos</div></sc-if>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:32px"><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#C7C7C7">historias destacadas · recorte circular</div>
+    <div style="display:flex;gap:72px">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:24px"><div style="width:300px;height:300px;border-radius:50%;background:#000;outline:2px solid #333;display:flex;align-items:center;justify-content:center"><div style="width:180px;height:180px"><dc-import name="Objeto" tipo="tensor" hint-size="180px,180px" style="width:180px;height:180px"></dc-import></div></div><div style="font-size:34px;font-weight:700;letter-spacing:-0.02em">Programación</div></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:24px"><div style="width:300px;height:300px;border-radius:50%;background:#000;outline:2px solid #333;display:flex;align-items:center;justify-content:center"><div style="width:180px;height:180px"><dc-import name="Objeto" tipo="esfera" hint-size="180px,180px" style="width:180px;height:180px"></dc-import></div></div><div style="font-size:34px;font-weight:700;letter-spacing:-0.02em">Matemática</div></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:24px"><div style="width:300px;height:300px;border-radius:50%;background:#000;outline:2px solid #333;display:flex;align-items:center;justify-content:center"><div style="width:180px;height:180px"><dc-import name="Objeto" tipo="candado" hint-size="180px,180px" style="width:180px;height:180px"></dc-import></div></div><div style="font-size:34px;font-weight:700;letter-spacing:-0.02em">Ciberseguridad</div></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:24px"><div style="width:300px;height:300px;border-radius:50%;background:#000;outline:2px solid #333;display:flex;align-items:center;justify-content:center"><div style="width:180px;height:180px"><dc-import name="Objeto" tipo="terminal" hint-size="180px,180px" style="width:180px;height:180px"></dc-import></div></div><div style="font-size:34px;font-weight:700;letter-spacing:-0.02em">Linux</div></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:24px"><div style="width:300px;height:300px;border-radius:50%;background:#000;outline:2px solid #333;display:flex;align-items:center;justify-content:center"><div style="width:180px;height:180px"><dc-import name="Objeto" tipo="cubo" hint-size="180px,180px" style="width:180px;height:180px"></dc-import></div></div><div style="font-size:34px;font-weight:700;letter-spacing:-0.02em">Sobre mí</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="s03" data-screen-label="03 Reglas de uso" style="display:flex;flex-direction:column;gap:72px">
+  <div style="display:flex;flex-direction:column;gap:20px;max-width:1800px">
+    <div style="font-family:'Geist Mono',monospace;font-size:32px;color:#A8927C">03</div>
+    <h2 style="margin:0;font-size:120px;line-height:1;font-weight:700;letter-spacing:-0.03em">Reglas de uso</h2>
+  </div>
+  <div style="display:flex;gap:80px;align-items:flex-start">
+    <div style="display:flex;flex-direction:column;gap:24px"><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#C7C7C7">espacio libre · x = alto de la @</div>
+      <div style="width:1600px;height:900px;background:#000;outline:1px solid #262626;display:flex;align-items:center;justify-content:center">
+        <div style="position:relative;padding:120px;outline:2px dashed #839CB2"><div style="font-size:160px;font-weight:700;letter-spacing:-0.03em;line-height:1"><span style="color:#A8927C">@</span>ayrtonnacer</div>
+          <div style="position:absolute;top:0;left:0;width:120px;height:120px;background:rgba(131,156,178,0.22);display:flex;align-items:center;justify-content:center;font-family:'Geist Mono',monospace;font-size:36px;color:#839CB2">x</div>
+          <div style="position:absolute;bottom:0;right:0;width:120px;height:120px;background:rgba(131,156,178,0.22);display:flex;align-items:center;justify-content:center;font-family:'Geist Mono',monospace;font-size:36px;color:#839CB2">x</div>
+        </div>
+      </div></div>
+    <div style="display:flex;flex-direction:column;gap:24px"><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#C7C7C7">tamaños mínimos</div>
+      <div style="width:1100px;height:900px;background:#000;outline:1px solid #262626;padding:96px;box-sizing:border-box;display:flex;flex-direction:column;gap:72px">
+        <div style="display:flex;align-items:center;gap:48px"><div style="width:220px;font-size:27px;font-weight:700;letter-spacing:-0.03em;line-height:1;white-space:nowrap"><span style="color:#A8927C">@</span>ayrtonnacer</div><div style="font-family:'Geist Mono',monospace;font-size:32px;color:#C7C7C7">wordmark · 160 px de ancho en pantalla</div></div>
+        <div style="display:flex;align-items:center;gap:48px"><div style="width:220px;font-size:44px;font-weight:700;letter-spacing:-0.01em;color:#A8927C">@ayrtonnacer</div><div style="font-family:'Geist Mono',monospace;font-size:32px;color:#C7C7C7">firma en portada · 44 px</div></div>
+        <div style="display:flex;align-items:center;gap:48px"><div style="width:220px;font-size:40px;font-weight:700;letter-spacing:-0.01em;color:#A8927C">@ayrtonnacer</div><div style="font-family:'Geist Mono',monospace;font-size:32px;color:#C7C7C7">firma en reel · 60 px (hook) y 58 px (cierre)</div></div>
+        <div style="display:flex;align-items:center;gap:48px"><div style="width:220px;font-size:40px;font-weight:700;letter-spacing:-0.02em;color:#C7C7C7">rótulo</div><div style="font-family:'Geist Mono',monospace;font-size:32px;color:#C7C7C7">texto en reel · 40 px mínimo</div></div>
+      </div></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:32px"><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#C7C7C7">qué no hacer</div>
+    <div style="display:grid;grid-template-columns:repeat(6,520px);gap:40px">
+      <div style="display:flex;flex-direction:column;gap:20px"><div style="width:520px;height:520px;background:#A8927C;display:flex;align-items:center;padding:48px;box-sizing:border-box;font-size:72px;font-weight:700;letter-spacing:-0.03em;line-height:1">La IA no lee palabras</div><div style="display:flex;gap:16px;align-items:center"><span style="background:#DC2626;color:#fff;font-family:'Geist Mono',monospace;font-size:26px;padding:6px 14px">✕</span><span style="font-size:32px;font-weight:700;letter-spacing:-0.02em">Color de fondo</span></div></div>
+      <div style="display:flex;flex-direction:column;gap:20px"><div style="width:520px;height:520px;background:#000;outline:1px solid #262626;display:flex;align-items:center;padding:48px;box-sizing:border-box;font-size:44px;font-weight:700;letter-spacing:0.3em;line-height:1.3">LA IA NO LEE PALABRAS</div><div style="display:flex;gap:16px;align-items:center"><span style="background:#DC2626;color:#fff;font-family:'Geist Mono',monospace;font-size:26px;padding:6px 14px">✕</span><span style="font-size:32px;font-weight:700;letter-spacing:-0.02em">Mayúsculas espaciadas</span></div></div>
+      <div style="display:flex;flex-direction:column;gap:20px"><div style="width:520px;height:520px;background:#000;outline:1px solid #262626;display:flex;align-items:center;padding:48px;box-sizing:border-box;font-size:72px;font-weight:700;letter-spacing:-0.03em;line-height:1;text-shadow:0 0 24px #A8927C, 0 0 48px #A8927C"><div>La IA no lee <span style="color:#A8927C">palabras</span></div></div><div style="display:flex;gap:16px;align-items:center"><span style="background:#DC2626;color:#fff;font-family:'Geist Mono',monospace;font-size:26px;padding:6px 14px">✕</span><span style="font-size:32px;font-weight:700;letter-spacing:-0.02em">Brillo o neón</span></div></div>
+      <div style="display:flex;flex-direction:column;gap:20px"><div style="position:relative;width:520px;height:520px;background:#000;outline:1px solid #262626;overflow:hidden"><div style="position:absolute;inset:0;font-family:'Geist Mono',monospace;font-size:30px;line-height:1.2;color:#2a2a2a;word-break:break-all;padding:12px">0110100101001011010010110100101101001011011010010100101101001011010010110100101101001011011010010100101101001011010010110100101101001011011010010100101101001011010010110100101101001011011010010100101101001011010010110100101101001011011010010100101101001011010010110100101101001011</div><div style="position:absolute;inset:0;display:flex;align-items:center;padding:48px;font-size:72px;font-weight:700;letter-spacing:-0.03em;line-height:1"><div>La IA no lee <span style="color:#A8927C">palabras</span></div></div></div><div style="display:flex;gap:16px;align-items:center"><span style="background:#DC2626;color:#fff;font-family:'Geist Mono',monospace;font-size:26px;padding:6px 14px">✕</span><span style="font-size:32px;font-weight:700;letter-spacing:-0.02em">Decorado detrás del texto</span></div></div>
+      <div style="display:flex;flex-direction:column;gap:20px"><div style="width:520px;height:520px;background:#000;outline:1px solid #262626;display:flex;align-items:center;padding:48px;box-sizing:border-box;font-size:72px;font-weight:700;letter-spacing:-0.03em;line-height:1"><div>La IA no lee las<br></br><span style="color:#A8927C">palabras</span> por<br></br>dentro</div></div><div style="display:flex;gap:16px;align-items:center"><span style="background:#DC2626;color:#fff;font-family:'Geist Mono',monospace;font-size:26px;padding:6px 14px">✕</span><span style="font-size:32px;font-weight:700;letter-spacing:-0.02em">Palabra suelta al final</span></div></div>
+      <div style="display:flex;flex-direction:column;gap:20px"><div style="width:520px;height:520px;background:#000;outline:1px solid #262626;display:flex;align-items:center;padding:48px;box-sizing:border-box;font-size:72px;font-weight:700;letter-spacing:-0.03em;line-height:1"><span><span style="color:#839CB2">La IA</span> no lee <span style="color:#A8927C">palabras</span></span></div><div style="display:flex;gap:16px;align-items:center"><span style="background:#DC2626;color:#fff;font-family:'Geist Mono',monospace;font-size:26px;padding:6px 14px">✕</span><span style="font-size:32px;font-weight:700;letter-spacing:-0.02em">Dos acentos en un título</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="s04" data-screen-label="04 Plantillas" style="display:flex;flex-direction:column;gap:72px">
+  <div style="display:flex;flex-direction:column;gap:20px;max-width:1800px">
+    <div style="font-family:'Geist Mono',monospace;font-size:32px;color:#A8927C">04</div>
+    <h2 style="margin:0;font-size:120px;line-height:1;font-weight:700;letter-spacing:-0.03em">Plantillas</h2>
+    <p style="margin:0;font-size:40px;line-height:1.35;font-weight:500;color:#C7C7C7;letter-spacing:-0.01em;text-wrap:pretty">Cuadros de 1080×1920 para cada momento del reel. La miniatura de Shorts es la misma portada de la sección 01.</p>
+  </div>
+  <div style="display:flex;gap:80px;align-items:flex-start">
+    <div style="display:flex;flex-direction:column;gap:24px"><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#C7C7C7">hook · cuadro 0 con subtítulo</div>
+      <div style="width:1080px;height:1920px;outline:1px solid #262626"><dc-import name="Portada" tema="programacion" antes="La IA no lee" clave="palabras" sub-antes="Lee pedacitos llamados" sub-clave="tokens" hint-size="1080px,1920px"></dc-import></div></div>
+
+    <div style="display:flex;flex-direction:column;gap:24px"><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#C7C7C7">paso N de M</div>
+      <div style="position:relative;width:1080px;height:1920px;background:#000;outline:1px solid #262626;overflow:hidden">
+        <div style="position:absolute;top:270px;left:90px;right:90px;display:flex;flex-direction:column;gap:28px">
+          <div style="font-family:'Geist Mono',monospace;font-size:40px;color:#C7C7C7">paso 2 de 4</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px"><div style="height:8px;background:#FFFFFF"></div><div style="height:8px;background:#A8927C"></div><div style="height:8px;background:#333"></div><div style="height:8px;background:#333"></div></div>
+        </div>
+        <h2 style="position:absolute;top:420px;left:90px;width:900px;margin:0;font-size:110px;line-height:1;font-weight:700;letter-spacing:-0.03em;text-wrap:balance">Cortar el texto en <span style="color:#A8927C">tokens</span></h2>
+        <div style="position:absolute;top:700px;left:290px;width:500px;height:500px"><dc-import name="Objeto" tipo="tensor" hint-size="500px,500px" style="width:500px;height:500px"></dc-import></div>
+        <div style="position:absolute;top:1150px;left:90px;right:90px;display:flex;justify-content:center"><div style="background:#000;padding:14px 28px;font-size:64px;line-height:1.15;font-weight:700;letter-spacing:-0.02em;text-align:center;text-wrap:balance">El modelo ve <span style="color:#A8927C">números</span>, no letras</div></div>
+      </div></div>
+
+    <div style="display:flex;flex-direction:column;gap:24px"><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#C7C7C7">rótulos de datos</div>
+      <div style="position:relative;width:1080px;height:1920px;background:#000;outline:1px solid #262626;overflow:hidden">
+        <div style="position:absolute;top:300px;left:90px;width:420px;display:flex;flex-direction:column;gap:12px"><div style="font-family:'Geist Mono',monospace;font-size:104px;line-height:1;letter-spacing:-0.03em">50.257</div><div style="font-size:40px;line-height:1.2;font-weight:700;letter-spacing:-0.02em;color:#C7C7C7">tokens en el vocabulario de GPT-2</div></div>
+        <div style="position:absolute;top:300px;left:570px;width:420px;display:flex;flex-direction:column;gap:12px"><div style="font-family:'Geist Mono',monospace;font-size:104px;line-height:1;letter-spacing:-0.03em">≈ 4</div><div style="font-size:40px;line-height:1.2;font-weight:700;letter-spacing:-0.02em;color:#C7C7C7">caracteres por token, en inglés</div></div>
+        <svg viewBox="0 0 1080 1920" style="position:absolute;inset:0;width:1080px;height:1920px"><path d="M200 560 L200 650 L330 790 M680 560 L680 650 L750 790" style="fill:none;stroke:#929292;stroke-width:2"></path><circle cx="330" cy="790" r="7" style="fill:#FFFFFF"></circle><circle cx="750" cy="790" r="7" style="fill:#FFFFFF"></circle></svg>
+        <div style="position:absolute;top:700px;left:290px;width:500px;height:500px"><dc-import name="Objeto" tipo="tensor" hint-size="500px,500px" style="width:500px;height:500px"></dc-import></div>
+        <div style="position:absolute;top:1150px;left:90px;right:90px;display:flex;justify-content:center"><div style="background:#000;padding:14px 28px;font-size:64px;line-height:1.15;font-weight:700;letter-spacing:-0.02em;text-align:center;text-wrap:balance">Cada pedacito tiene su <span style="color:#A8927C">número</span></div></div>
+      </div></div>
+
+    <div style="display:flex;flex-direction:column;gap:24px"><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#C7C7C7">correcto ✓ / error ✕</div>
+      <div style="position:relative;width:1080px;height:1920px;background:#000;outline:1px solid #262626;overflow:hidden">
+        <h2 style="position:absolute;top:300px;left:90px;width:900px;margin:0;font-size:120px;line-height:1;font-weight:700;letter-spacing:-0.03em;text-wrap:balance">¿Cuánto da <span style="font-family:'Geist Mono',monospace;color:#A8927C;letter-spacing:-0.04em">0,1 + 0,2</span>?</h2>
+        <div style="position:absolute;top:640px;left:90px;right:90px;display:flex;flex-direction:column;gap:64px">
+          <div style="display:flex;flex-direction:column;gap:20px"><div style="font-size:40px;font-weight:700;letter-spacing:-0.02em;color:#C7C7C7">Lo que esperás</div><div style="align-self:flex-start;background:#DC2626;color:#FFFFFF;font-family:'Geist Mono',monospace;font-size:64px;padding:24px 36px">✕ 0,3</div></div>
+          <div style="display:flex;flex-direction:column;gap:20px"><div style="font-size:40px;font-weight:700;letter-spacing:-0.02em;color:#C7C7C7">Lo que da la computadora</div><div style="align-self:flex-start;background:#2EE08C;color:#000000;font-family:'Geist Mono',monospace;font-size:52px;padding:24px 36px">✓ 0,30000000000000004</div></div>
+        </div>
+        <div style="position:absolute;top:1150px;left:90px;right:90px;display:flex;justify-content:center"><div style="background:#000;padding:14px 28px;font-size:64px;line-height:1.15;font-weight:700;letter-spacing:-0.02em;text-align:center;text-wrap:balance">Guarda los decimales en <span style="color:#A8927C">binario</span></div></div>
+      </div></div>
+
+    <div style="display:flex;flex-direction:column;gap:24px"><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#C7C7C7">tarjeta de cierre</div>
+      <div style="position:relative;width:1080px;height:1920px;background:#000;outline:1px solid #262626;overflow:hidden">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 38% at 50% 40%, #0e0e0e 0%, #000 70%)"></div>
+        <div style="position:absolute;top:1180px;left:0;width:1080px;height:740px;-webkit-mask-image:linear-gradient(to bottom, transparent 0%, #000 40%);mask-image:linear-gradient(to bottom, transparent 0%, #000 40%)"><svg viewBox="0 0 1080 740" style="width:1080px;height:740px;display:block"><path d="{{ pisoReel }}" style="fill:none;stroke:#3a3a3a;stroke-width:1.5"></path></svg></div>
+        <div style="position:absolute;top:360px;left:90px;right:90px;display:flex;flex-direction:column;align-items:center;gap:64px;text-align:center">
+          <div style="width:220px;height:220px"><dc-import name="Objeto" tipo="terminal" hint-size="220px,220px" style="width:220px;height:220px"></dc-import></div>
+          <div style="font-size:104px;line-height:1;font-weight:700;letter-spacing:-0.03em;text-wrap:balance">Dale like y seguime para aprender más sobre <span style="color:#A8927C">Linux</span></div>
+          <div style="font-family:'Geist Mono',monospace;font-size:44px;color:#A8927C">@ayrtonnacer</div>
+        </div>
+      </div></div>
+  </div>
+</section>
+
+<section id="s05" data-screen-label="05 Animaciones de ejemplo" style="display:flex;flex-direction:column;gap:72px">
+  <div style="display:flex;flex-direction:column;gap:20px;max-width:1800px">
+    <div style="font-family:'Geist Mono',monospace;font-size:32px;color:#A8927C">05</div>
+    <h2 style="margin:0;font-size:120px;line-height:1;font-weight:700;letter-spacing:-0.03em">Animaciones de ejemplo</h2>
+    <p style="margin:0;font-size:40px;line-height:1.35;font-weight:500;color:#C7C7C7;letter-spacing:-0.01em;text-wrap:pretty">Cuatro tramos en loop, con los tiempos y curvas de docs/MOVIMIENTO.md y el texto del reel de tensores. Sirven de referencia para armar las escenas en el motor.</p>
+  </div>
+  <div style="display:flex;gap:64px;align-items:flex-start">
+    <div style="display:flex;flex-direction:column;gap:24px;width:540px">
+      <div style="width:540px;height:960px;overflow:hidden;outline:1px solid #262626"><div style="width:1080px;height:1920px;transform:scale(0.5);transform-origin:0 0"><dc-import name="Demo" tipo="hook" hint-size="1080px,1920px"></dc-import></div></div>
+      <div style="font-size:40px;font-weight:700;letter-spacing:-0.02em">Hook</div>
+      <div style="font-size:30px;line-height:1.4;font-weight:500;color:#C7C7C7;text-wrap:pretty">Título visible desde el cuadro 0 (blur 3 → 0). Dolly lento hacia el objeto. Subtítulos con la palabra dicha en tan. Sale con zoom. Sonido: boom grave en 0, entra la música.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:24px;width:540px">
+      <div style="width:540px;height:960px;overflow:hidden;outline:1px solid #262626"><div style="width:1080px;height:1920px;transform:scale(0.5);transform-origin:0 0"><dc-import name="Demo" tipo="pasos" hint-size="1080px,1920px"></dc-import></div></div>
+      <div style="font-size:40px;font-weight:700;letter-spacing:-0.02em">Paso N de M</div>
+      <div style="font-size:30px;line-height:1.4;font-weight:500;color:#C7C7C7;text-wrap:pretty">El ejemplo crece: escalar, vector, matriz, tensor. El indicador queda fijo fuera de la cámara; la escena cambia con curva-izq. Sonido: whoosh en el pico de cada curva.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:24px;width:540px">
+      <div style="width:540px;height:960px;overflow:hidden;outline:1px solid #262626"><div style="width:1080px;height:1920px;transform:scale(0.5);transform-origin:0 0"><dc-import name="Demo" tipo="transiciones" hint-size="1080px,1920px"></dc-import></div></div>
+      <div style="font-size:40px;font-weight:700;letter-spacing:-0.02em">Transiciones</div>
+      <div style="font-size:30px;line-height:1.4;font-weight:500;color:#C7C7C7;text-wrap:pretty">Curva-izq, zoom y foco, cada una con su significado. Salida acelerada, entrada frenada, mismo eje. Sonido: whoosh en curva y zoom; el foco va sin efecto.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:24px;width:540px">
+      <div style="width:540px;height:960px;overflow:hidden;outline:1px solid #262626"><div style="width:1080px;height:1920px;transform:scale(0.5);transform-origin:0 0"><dc-import name="Demo" tipo="cierre" hint-size="1080px,1920px"></dc-import></div></div>
+      <div style="font-size:40px;font-weight:700;letter-spacing:-0.02em">Cierre</div>
+      <div style="font-size:30px;line-height:1.4;font-weight:500;color:#C7C7C7;text-wrap:pretty">Grúa que baja al piso. El llamado entra palabra por palabra al ritmo de la voz; la firma aparece después, más chica. Sonido: chinn con el llamado, boom grave al final.</div>
+    </div>
+  </div>
+</section>
+
+<section id="s06" data-screen-label="06 Movimiento y sonido" style="display:flex;flex-direction:column;gap:72px">
+  <div style="display:flex;flex-direction:column;gap:20px;max-width:1800px">
+    <div style="font-family:'Geist Mono',monospace;font-size:32px;color:#A8927C">06</div>
+    <h2 style="margin:0;font-size:120px;line-height:1;font-weight:700;letter-spacing:-0.03em">Movimiento y sonido</h2>
+  </div>
+  <div style="width:2400px;background:#000;outline:1px solid #262626;padding:120px;box-sizing:border-box;display:flex;flex-direction:column;gap:80px">
+    <div style="display:flex;flex-direction:column;gap:28px;max-width:1900px">
+      <div style="font-size:72px;line-height:1.05;font-weight:700;letter-spacing:-0.03em;text-wrap:balance">Un set con profundidad y una <span style="color:#A8927C">toma continua</span></div>
+      <div style="font-size:36px;line-height:1.45;font-weight:500;color:#C7C7C7;text-wrap:pretty">Cada reel es un solo espacio 2.5D/3D (three.js con escena3d.js; CSS 2.5D con camara.js solo para piezas tipográficas) que una cámara de película recorre. La profundidad la da el espacio: piso en perspectiva, objetos a distintas z y paralaje cuando la cámara se mueve. La cámara siempre está al servicio de que se entienda.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:96px;row-gap:56px">
+      <div style="display:flex;gap:32px"><div style="font-family:'Geist Mono',monospace;font-size:34px;color:#A8927C;width:56px;flex-shrink:0">1</div><div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:44px;font-weight:700;letter-spacing:-0.02em;text-wrap:balance">Aprovechar el espacio</div><div style="font-size:32px;line-height:1.45;font-weight:500;color:#C7C7C7;text-wrap:pretty">Las ideas viven en estaciones del set, encadenadas en el eje z (lo cercano abajo, lo lejano “hacia arriba” de la pantalla). Rótulos y títulos al frente, fondos lejos. Objetos que se conectan en el mismo plano z. Órbita leve (ry ±6) para que se vea la profundidad.</div></div></div>
+      <div style="display:flex;gap:32px"><div style="font-family:'Geist Mono',monospace;font-size:34px;color:#A8927C;width:56px;flex-shrink:0">2</div><div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:44px;font-weight:700;letter-spacing:-0.02em;text-wrap:balance">Plano continuo en vez de corte</div><div style="font-size:32px;line-height:1.45;font-weight:500;color:#C7C7C7;text-wrap:pretty">Dentro de una misma idea no se corta: el objeto se transforma en el siguiente (el píxel sale de la foto, la fila crece a planilla, la planilla se apila en bloque). Se corta solo al cambiar de tema.</div></div></div>
+      <div style="display:flex;gap:32px"><div style="font-family:'Geist Mono',monospace;font-size:34px;color:#A8927C;width:56px;flex-shrink:0">3</div><div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:44px;font-weight:700;letter-spacing:-0.02em;text-wrap:balance">Un límite es algo que sobrevive</div><div style="font-size:32px;line-height:1.45;font-weight:500;color:#C7C7C7;text-wrap:pretty">En cada cambio de escena un objeto, un contenedor o la cámara que empuja hasta llenar el cuadro sigue y se transforma en lo siguiente. Se anota en el plan (“qué sobrevive”) y se mide con arrastre.py: medio ≥ 0,5.</div></div></div>
+      <div style="display:flex;gap:32px"><div style="font-family:'Geist Mono',monospace;font-size:34px;color:#A8927C;width:56px;flex-shrink:0">4</div><div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:44px;font-weight:700;letter-spacing:-0.02em;text-wrap:balance">Mover solo en los cambios de idea</div><div style="font-size:32px;line-height:1.45;font-weight:500;color:#C7C7C7;text-wrap:pretty">Un movimiento clave por concepto nuevo (≈ 1 cada 5–8 s), con llegada de cola larga y whoosh en el pico. Anticipar: la cámara apunta ~0,1 s por delante del objeto y fija el punto de aterrizaje antes del golpe.</div></div></div>
+      <div style="display:flex;gap:32px"><div style="font-family:'Geist Mono',monospace;font-size:34px;color:#A8927C;width:56px;flex-shrink:0">5</div><div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:44px;font-weight:700;letter-spacing:-0.02em;text-wrap:balance">Retener cuando se nombra</div><div style="font-size:32px;line-height:1.45;font-weight:500;color:#C7C7C7;text-wrap:pretty">Cuando la voz nombra un objeto, la cámara queda quieta ≥ 1,5 s con el objeto entero y legible. Para relacionar (“esto es lo mismo”), plano general que retiene ≥ 2,5 s. ≥ 25 % de cuadros quietos, con un tramo ≥ 1 s.</div></div></div>
+      <div style="display:flex;gap:32px"><div style="font-family:'Geist Mono',monospace;font-size:34px;color:#A8927C;width:56px;flex-shrink:0">6</div><div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:44px;font-weight:700;letter-spacing:-0.02em;text-wrap:balance">Dinamismo con intención</div><div style="font-size:32px;line-height:1.45;font-weight:500;color:#C7C7C7;text-wrap:pretty">Metas medidas contra las referencias: 60–90 % de cuadros con cámara en movimiento, 1,5–5 movimientos notorios cada 10 s, planos de 2,5–6,5 s y cortes sobre un golpe de sonido. Son una alarma, no un objetivo: si confunde, gana el ojo.</div></div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div style="font-size:44px;font-weight:700;letter-spacing:-0.02em">Vocabulario de cámara</div>
+      <div style="display:grid;grid-template-columns:420px 1fr 1fr;column-gap:48px;row-gap:22px;font-size:30px;line-height:1.35;font-weight:500;color:#C7C7C7">
+        <div style="font-family:'Geist Mono',monospace;font-size:26px;color:#929292">movimiento</div><div style="font-family:'Geist Mono',monospace;font-size:26px;color:#929292">cómo</div><div style="font-family:'Geist Mono',monospace;font-size:26px;color:#929292">para qué</div>
+        <div style="color:#fff;font-weight:700">Aterrizaje</div><div>De lejos e inclinada a su lugar, expo.out</div><div>Entrada del hook; el cuadro 0 ya muestra el título</div>
+        <div style="color:#fff;font-weight:700">Dolly / push-in</div><div>Acercarse de a poco en 1,5–3 s</div><div>Dar vida mientras se lee, sin que el título flote</div>
+        <div style="color:#fff;font-weight:700">Travelling entre estaciones</div><div>Pan a la estación siguiente, power3.inOut, 0,8–1,2 s</div><div>Pasar de un paso al otro sin cortar</div>
+        <div style="color:#fff;font-weight:700">Órbita</div><div>Giro de ±6–12° alrededor del objeto</div><div>Mostrar que es un objeto, revelar un costado</div>
+        <div style="color:#fff;font-weight:700">Grúa, picado, contrapicado</div><div>Inclinar la cámara 6–20°</div><div>Mostrar el piso, mirar desde arriba o desde abajo</div>
+        <div style="color:#fff;font-weight:700">Zoom through</div><div>Atravesar un objeto en 0,6 s, power3.in</div><div>Ir más hondo; la escena siguiente arranca adentro</div>
+        <div style="color:#fff;font-weight:700">Pull-back</div><div>Desde pegado a un detalle hasta el plano general</div><div>Revelar el contexto de un dato</div>
+        <div style="color:#fff;font-weight:700">Aterrizaje en el llamado</div><div>Baja y queda quieta, expo.out 1,1 s</div><div>Cierre: el foco es el llamado; la firma después</div>
+      </div>
+    </div>
+    <div style="font-size:30px;line-height:1.45;font-weight:500;color:#929292;max-width:1900px;text-wrap:pretty">Lo que no se mueve con la cámara (firma del inicio, “Paso N de M”) va fuera del set. Temblor solo en los aterrizajes, decreciente. Nunca desenfocar ni recortar lo que se explica. Fuente: docs/CAMARA.md y docs/MOVIMIENTO.md.</div>
+  </div>
+  <div style="width:2400px;background:#000;outline:1px solid #262626;padding:120px;box-sizing:border-box;display:flex;flex-direction:column;gap:96px">
+    <div style="display:flex;flex-direction:column;gap:32px">
+      <div style="font-size:56px;font-weight:700;letter-spacing:-0.02em">Estructura de cada reel</div>
+      <div style="display:grid;grid-template-columns:24px 240px 1fr 360px 300px;gap:12px;height:12px"><div style="background:#A8927C"></div><div style="background:#FFFFFF"></div><div style="background:#929292"></div><div style="background:#C7C7C7"></div><div style="background:#A8927C"></div></div>
+      <div style="display:grid;grid-template-columns:360px 220px 1fr 640px;column-gap:48px;row-gap:28px;font-size:34px;line-height:1.35;font-weight:500;color:#C7C7C7">
+        <div style="font-family:'Geist Mono',monospace;font-size:28px;color:#929292">tramo</div><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#929292">duración</div><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#929292">qué pasa</div><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#929292">sonido</div>
+        <div style="color:#fff;font-weight:700">1 · Portada</div><div style="font-family:'Geist Mono',monospace">0,1 s</div><div>Título grande, objeto clave y firma. Cuadro fijo.</div><div>Boom grave</div>
+        <div style="color:#fff;font-weight:700">2 · Hook</div><div style="font-family:'Geist Mono',monospace">≤ 3 s</div><div>Título grande desde el cuadro 0. La promesa del reel.</div><div>Entra la música firma</div>
+        <div style="color:#fff;font-weight:700">3 · Explicación</div><div style="font-family:'Geist Mono',monospace">variable</div><div>Un ejemplo concreto que muestra la idea. Pasos y rótulos de datos.</div><div>Whoosh por movimiento de cámara, clicks en los datos</div>
+        <div style="color:#fff;font-weight:700">4 · Payoff</div><div style="font-family:'Geist Mono',monospace">variable</div><div>Cierra lo que prometió el hook.</div><div>Retención quieta, sin efectos</div>
+        <div style="color:#fff;font-weight:700">5 · Cierre</div><div style="font-family:'Geist Mono',monospace">2–3 s</div><div>“Dale like y seguime para aprender más sobre &lt;tema&gt;” y la firma en tan.</div><div>“Chinn” de cristal al aparecer el llamado, boom grave al final</div>
+      </div>
+      <div style="font-family:'Geist Mono',monospace;font-size:28px;color:#929292">total 30–60 s · 1080×1920</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:32px">
+      <div style="font-size:56px;font-weight:700;letter-spacing:-0.02em">La ley del vector</div>
+      <div style="font-size:34px;line-height:1.45;font-weight:500;color:#C7C7C7;max-width:1900px;text-wrap:pretty">Cómo sale una escena decide cómo entra la siguiente: mismo eje, misma dirección, misma velocidad. La salida acelera (power4.in), la entrada frena (power4.out), y el corte cae a mitad del movimiento. Cada reel elige una corriente (por defecto, izquierda) y las otras direcciones se gastan con motivo. Nunca dos transiciones seguidas en direcciones opuestas. De 2 a 4 tipos por reel.</div>
+      <div style="display:grid;grid-template-columns:360px 1fr 1fr;column-gap:48px;row-gap:24px;font-size:32px;line-height:1.35;font-weight:500;color:#C7C7C7">
+        <div style="font-family:'Geist Mono',monospace;font-size:28px;color:#929292">salida</div><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#929292">qué hace</div><div style="font-family:'Geist Mono',monospace;font-size:28px;color:#929292">cuándo</div>
+        <div style="font-family:'Geist Mono',monospace;color:#fff">curva-izq</div><div>Sale acelerando ~230 px, entra en la misma dirección frenando, desde 35 % de opacidad, blur 8 px</div><div>Por defecto, en la corriente</div>
+        <div style="font-family:'Geist Mono',monospace;color:#fff">zoom</div><div>Sale 1 → 1,2 con blur 0 → 10; entra 0,75 → 1</div><div>Ir más hondo en la misma idea</div>
+        <div style="font-family:'Geist Mono',monospace;color:#fff">zoom-inverso</div><div>Sale 1 → 0,8; entra 1,25 → 1</div><div>El payoff, una llegada</div>
+        <div style="font-family:'Geist Mono',monospace;color:#fff">foco</div><div>Pico de desenfoque de 10 px que tapa un corte seco, escala 1,06</div><div>El único corte que se ve; cada ~8 s como mucho</div>
+        <div style="font-family:'Geist Mono',monospace;color:#fff">latigazo</div><div>Barrido de 0,15 s con desenfoque direccional</div><div>Cambio brusco de tema</div>
+        <div style="font-family:'Geist Mono',monospace;color:#fff">corte</div><div>Corte seco</div><div>Dentro de una escena; máximo un tercio</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:80px">
+      <div style="display:flex;flex-direction:column;gap:24px"><div style="font-size:56px;font-weight:700;letter-spacing:-0.02em">Tiempos</div><div style="font-size:34px;line-height:1.45;font-weight:500;color:#C7C7C7">Palabras que entran con blur 10 → 0 en 0,18 s, de a 60–120 ms. Un título que aterrizó queda quieto. Un cambio visual cada 1,5–3 s, nada quieto más de 3 s. Planos de 2,5 a 6,5 s, un movimiento notorio cada 3 a 5 s. Quietud de 0,3–0,75 s antes del payoff.</div></div>
+      <div style="display:flex;flex-direction:column;gap:24px"><div style="font-size:56px;font-weight:700;letter-spacing:-0.02em">Evitar</div><div style="font-size:34px;line-height:1.45;font-weight:500;color:#C7C7C7">Todas las escenas entrando igual. Fundido más deslizamiento hacia arriba en todo. Loops de flotar o respirar. Zoom lento sobre un título. Rebote en interfaz. Partículas, brillo o cosas flotando sin motivo.</div></div>
+      <div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:80px">
+      <div style="display:flex;flex-direction:column;gap:24px"><div style="font-size:56px;font-weight:700;letter-spacing:-0.02em">Cámara</div><div style="font-size:34px;line-height:1.45;font-weight:500;color:#C7C7C7">Un solo set por reel, en 2.5D o 3D, recorrido en plano continuo. Movimientos de película: dolly, travelling, grúa, picado y contrapicado. Retención quieta cuando se nombra algo. Entre planos, transición rápida.</div></div>
+      <div style="display:flex;flex-direction:column;gap:24px"><div style="font-size:56px;font-weight:700;letter-spacing:-0.02em">Sonido</div><div style="font-size:34px;line-height:1.45;font-weight:500;color:#C7C7C7">Boom grave al inicio y al final. “Chinn” de cristal con el llamado. Whoosh en cada movimiento de cámara. Clicks de interfaz para los datos. Una música firma para todos los reels (hoy Can You Hear The Music; pendiente: pista propia).</div></div>
+      <div style="display:flex;flex-direction:column;gap:24px"><div style="font-size:56px;font-weight:700;letter-spacing:-0.02em">Voz y subtítulos</div><div style="font-size:34px;line-height:1.45;font-weight:500;color:#C7C7C7">Voz: hoy Daniela (sintética), a futuro la propia clonada. Español rioplatense con voseo. Subtítulos siempre, Host Grotesk 700 70 px, bloques de 2 a 5 palabras, barra negra al 86 % detrás y la palabra dicha en tan, entre y = 1120 y 1320.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="s07" data-screen-label="07 Tokens" style="display:flex;flex-direction:column;gap:72px">
+  <div style="display:flex;flex-direction:column;gap:20px;max-width:1800px">
+    <div style="font-family:'Geist Mono',monospace;font-size:32px;color:#A8927C">07</div>
+    <h2 style="margin:0;font-size:120px;line-height:1;font-weight:700;letter-spacing:-0.03em">Paleta y tipografía</h2>
+    <p style="margin:0;font-size:40px;line-height:1.35;font-weight:500;color:#C7C7C7;letter-spacing:-0.01em">Los mismos valores están en <span style="font-family:'Geist Mono',monospace;color:#FFFFFF">marca.css</span>, listos para el repo.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(5,420px);gap:40px">
+    <sc-for list="{{ colores }}" as="c" hint-placeholder-count="10">
+      <div style="display:flex;flex-direction:column;gap:20px"><div style="height:240px;background:{{ c.hex }};outline:1px solid #333"></div><div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:36px;font-weight:700;letter-spacing:-0.02em">{{ c.nombre }}</div><div style="font-family:'Geist Mono',monospace;font-size:26px;color:#C7C7C7">{{ c.token }} · {{ c.hex }}</div><div style="font-size:28px;line-height:1.35;font-weight:500;color:#929292">{{ c.uso }}</div></div></div>
+    </sc-for>
+  </div>
+  <div style="display:flex;gap:80px;align-items:flex-start">
+    <div style="width:1400px;background:#000;outline:1px solid #262626;padding:96px;box-sizing:border-box;display:flex;flex-direction:column;gap:56px">
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="font-family:'Geist Mono',monospace;font-size:26px;color:#929292">Host Grotesk 700 · −0,03 em · títulos</div><div style="font-size:140px;font-weight:700;letter-spacing:-0.03em;line-height:0.98">El infinito tiene <span style="color:#A8927C">tamaños</span></div></div>
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="font-family:'Geist Mono',monospace;font-size:26px;color:#929292">Host Grotesk 700 · −0,02 em · texto y subtítulos</div><div style="font-size:64px;font-weight:700;letter-spacing:-0.02em;line-height:1.15">Cada palabra se corta en pedacitos</div></div>
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="font-family:'Geist Mono',monospace;font-size:26px;color:#929292">Geist Mono · números, datos, detalle técnico</div><div style="font-family:'Geist Mono',monospace;font-size:64px;letter-spacing:-0.02em">50.257 · 0x7F · $ ls -la</div></div>
+    </div>
+    <div style="width:1100px;background:#000;outline:1px solid #262626;padding:72px;box-sizing:border-box"><pre style="margin:0;font-family:'Geist Mono',monospace;font-size:26px;line-height:1.55;color:#C7C7C7;white-space:pre">{{ css }}</pre></div>
+  </div>
+</section>
+
+
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;guias&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  piso(w, h, vp, step, ys) {
+    let d = '';
+    const n = Math.ceil(w / step) + 6;
+    for (let i = -n; i <= n; i++) { const xb = w / 2 + i * step; const xt = w / 2 + (xb - w / 2) * (-vp) / (h - vp); d += `M${xt.toFixed(1)} 0 L${xb} ${h} `; }
+    ys.forEach(y => d += `M0 ${y} H${w} `);
+    return d;
+  }
+  renderVals() {
+    return {
+      guias: this.props.guias ?? true,
+      pisoReel: this.piso(1080, 740, -500, 200, [0, 40, 95, 170, 270, 400, 570]),
+      pisoBanner: this.piso(2560, 540, -400, 240, [0, 30, 75, 135, 215, 320, 450]),
+      colores: [
+        { nombre: 'Negro', token: '--negro', hex: '#000000', uso: 'Único fondo.' },
+        { nombre: 'Blanco', token: '--blanco', hex: '#FFFFFF', uso: 'Texto principal y señal.' },
+        { nombre: 'Foundry Tan', token: '--tan', hex: '#A8927C', uso: 'Único acento: palabra clave, firma, punto del objeto.' },
+        { nombre: 'Gris medio', token: '--gris', hex: '#C7C7C7', uso: 'Rótulos secundarios.' },
+        { nombre: 'Línea', token: '--linea', hex: '#929292', uso: 'Objetos 3D, trazo de 2 px.' },
+        { nombre: 'Piso', token: '--piso', hex: '#3A3A3A', uso: 'Líneas del piso en perspectiva.' },
+        { nombre: 'Correcto', token: '--ok', hex: '#2EE08C', uso: 'Solo “correcto ✓”, bloque relleno con texto negro.' },
+        { nombre: 'Error', token: '--error', hex: '#DC2626', uso: 'Solo “error ✕”, bloque relleno con texto blanco.' },
+        { nombre: 'Cloud Slate', token: '--slate', hex: '#839CB2', uso: 'Categoría dentro de la explicación.' },
+        { nombre: 'Archive Purple', token: '--purple', hex: '#79648C', uso: 'Categoría dentro de la explicación.' }
+      ],
+      css: `:root {
+  --negro: #000000;
+  --blanco: #FFFFFF;
+  --tan: #A8927C;
+  --gris: #C7C7C7;
+  --linea: #929292;
+  --piso: #3A3A3A;
+  --ok: #2EE08C;
+  --error: #DC2626;
+  --slate: #839CB2;
+  --purple: #79648C;
+
+  --font-texto: "Host Grotesk", sans-serif;
+  --font-mono: "Geist Mono", monospace;
+  --tracking-titulo: -0.03em;
+  --tracking-texto: -0.02em;
+
+  --t-portada: 140px;
+  --t-subs: 64px;
+  --t-rotulo: 40px;
+  --t-firma: 34px;
+  --trazo: 2px;
+  --margen-x: 90px;
+
+  --lectura-desde: 200px;
+  --lectura-hasta: 1330px;
+  --subs-desde: 1120px;
+  --subs-hasta: 1320px;
+}`
+    };
+  }
+}
+</script>
+</body>
+</html>
