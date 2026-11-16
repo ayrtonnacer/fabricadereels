@@ -1,0 +1,15 @@
+<!-- CORTE (6.8 s) — FÁBRICA DE TOKENS (v2): la cuchilla corta el mensaje en 6 tokens con su número. El set y la cámara son uno solo para todo el video (assets/fabrica.js, tiempo global T = 4.1 + t). -->
+<template>
+  <style>#root { position: absolute; inset: 0; }</style>
+  <div id="root" data-composition-id="corte" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <canvas class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="hud" data-layout-ignore></div>
+    <div class="vineta" data-layout-ignore></div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="corte"]');
+    const tl = gsap.timeline({ paused: true });
+    import('./assets/fabrica.js').then((F) => F.montar(root, tl, 4.1, 6.8)).then(() => { window.__timelines['corte'] = tl; });
+  </script>
+</template>

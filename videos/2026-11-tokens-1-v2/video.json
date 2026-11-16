@@ -1,0 +1,116 @@
+{
+  "titulo": "Qué son los tokens (parte 1): la IA lee números",
+  "fecha": "2026-11",
+  "fuente": "NVIDIA, 'What Are AI Tokens?'; datos medidos con tiktoken (o200k_base, GPT-4o); ViT (Dosovitskiy et al., 2020)",
+  "scenes": [
+    {
+      "id": "portada",
+      "d": 0.1
+    },
+    {
+      "id": "gancho",
+      "d": 4.0
+    },
+    {
+      "id": "corte",
+      "d": 6.8
+    },
+    {
+      "id": "comparten",
+      "d": 8.4
+    },
+    {
+      "id": "mayus",
+      "d": 5.6
+    },
+    {
+      "id": "idioma",
+      "d": 6.2
+    },
+    {
+      "id": "foto",
+      "d": 7.0
+    },
+    {
+      "id": "payoff",
+      "d": 4.4
+    },
+    {
+      "id": "cierre",
+      "d": 5.0
+    }
+  ],
+  "voz": {
+    "modelo": "assets/voces/es_AR-daniela-high.onnx",
+    "length_scale": 1.05,
+    "noise_scale": 0.6,
+    "noise_w_scale": 0.7,
+    "efecto": "ninguno",
+    "radio_fuerza": 0.6,
+    "lineas": [
+      {
+        "id": "l01",
+        "escena": "gancho",
+        "t": 0.4,
+        "texto": "La inteligencia artificial no lee tu mensaje: lee números."
+      },
+      {
+        "id": "l02",
+        "escena": "corte",
+        "t": 4.4,
+        "texto": "Primero, un tokenizador lo corta en pedazos llamados tokens, y a cada uno le da un número fijo."
+      },
+      {
+        "id": "l03",
+        "escena": "comparten",
+        "t": 11.2,
+        "texto": "Las palabras comunes entran enteras. Las raras se parten, y dos palabras distintas pueden compartir un pedazo, con el mismo número."
+      },
+      {
+        "id": "l04",
+        "escena": "mayus",
+        "t": 19.6,
+        "texto": "Ojo: una mayúscula o un espacio adelante ya cambian el número del token."
+      },
+      {
+        "id": "l05",
+        "escena": "idioma",
+        "t": 25.2,
+        "texto": "Y el español gasta más: el mismo texto ocupa un tercio más de tokens que en inglés."
+      },
+      {
+        "id": "l06",
+        "escena": "foto",
+        "t": 31.4,
+        "texto": "Con una foto pasa igual: se divide en cuadraditos de dieciséis por dieciséis píxeles, y cada uno es un token."
+      },
+      {
+        "id": "l07",
+        "escena": "payoff",
+        "t": 38.4,
+        "texto": "Para la inteligencia artificial, todo es una lista de números."
+      },
+      {
+        "id": "l08",
+        "escena": "cierre",
+        "t": 42.8,
+        "texto": "Dale me gusta y seguime para aprender más sobre inteligencia artificial."
+      }
+    ]
+  },
+  "audio": {
+    "musica": "assets/musica/palladio.mp3",
+    "musica_desde": 0.6,
+    "musica_db": 11,
+    "sfx_gain": 1.25,
+    "loudness": -14,
+    "musica_duck": 2,
+    "musica_nivelar": [
+      -30,
+      6
+    ]
+  },
+  "subtitulos": {
+    "fondo": "rgba(0,0,0,.86)"
+  }
+}

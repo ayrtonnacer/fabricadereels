@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <!-- Todo local (sin CDN): el render no depende de la red. -->
+    <script src="assets/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/marca.css" />
+  </head>
+  <body>
+    <!-- Duraciones: las escribe `python engine/tiempos.py videos/X` desde video.json (única fuente de verdad). -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="47.5" data-width="1080" data-height="1920">
+      <div id="portada" data-composition-id="portada" data-composition-src="compositions/portada.html"
+        data-start="0" data-duration="0.1" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="gancho" data-composition-id="gancho" data-composition-src="compositions/gancho.html"
+        data-start="0.1" data-duration="4" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="corte" data-composition-id="corte" data-composition-src="compositions/corte.html"
+        data-start="4.1" data-duration="6.8" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="comparten" data-composition-id="comparten" data-composition-src="compositions/comparten.html"
+        data-start="10.9" data-duration="8.4" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="mayus" data-composition-id="mayus" data-composition-src="compositions/mayus.html"
+        data-start="19.3" data-duration="5.6" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="idioma" data-composition-id="idioma" data-composition-src="compositions/idioma.html"
+        data-start="24.9" data-duration="6.2" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="foto" data-composition-id="foto" data-composition-src="compositions/foto.html"
+        data-start="31.1" data-duration="7" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="payoff" data-composition-id="payoff" data-composition-src="compositions/payoff.html"
+        data-start="38.1" data-duration="4.4" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="cierre" data-composition-id="cierre" data-composition-src="compositions/cierre.html"
+        data-start="42.5" data-duration="5" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="subtitulos" data-composition-id="subtitulos" data-composition-src="compositions/subtitulos.html"
+        data-start="0" data-duration="47.5" data-track-index="9" data-track-kind="captions" data-width="1080" data-height="1920" style="z-index: 50"></div>
+    </div>
+    <script>
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

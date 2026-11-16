@@ -1,0 +1,15 @@
+<!-- IDIOMA (6.2 s) — FÁBRICA DE TOKENS (v2): viaje a D: 36 cubitos en inglés contra 48 en español. El set y la cámara son uno solo para todo el video (assets/fabrica.js, tiempo global T = 24.9 + t). -->
+<template>
+  <style>#root { position: absolute; inset: 0; }</style>
+  <div id="root" data-composition-id="idioma" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <canvas class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="hud" data-layout-ignore></div>
+    <div class="vineta" data-layout-ignore></div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="idioma"]');
+    const tl = gsap.timeline({ paused: true });
+    import('./assets/fabrica.js').then((F) => F.montar(root, tl, 24.9, 6.2)).then(() => { window.__timelines['idioma'] = tl; });
+  </script>
+</template>

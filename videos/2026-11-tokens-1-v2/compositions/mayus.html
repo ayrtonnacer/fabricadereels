@@ -1,0 +1,15 @@
+<!-- MAYUS (5.6 s) — FÁBRICA DE TOKENS (v2): viaje a C: hola / Hola / ·hola. El set y la cámara son uno solo para todo el video (assets/fabrica.js, tiempo global T = 19.3 + t). -->
+<template>
+  <style>#root { position: absolute; inset: 0; }</style>
+  <div id="root" data-composition-id="mayus" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <canvas class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="hud" data-layout-ignore></div>
+    <div class="vineta" data-layout-ignore></div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="mayus"]');
+    const tl = gsap.timeline({ paused: true });
+    import('./assets/fabrica.js').then((F) => F.montar(root, tl, 19.3, 5.6)).then(() => { window.__timelines['mayus'] = tl; });
+  </script>
+</template>
