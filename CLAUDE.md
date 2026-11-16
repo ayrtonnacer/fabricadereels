@@ -40,7 +40,7 @@ python engine/analisis/encuadre.py video.mp4 [otro.mp4 …]   # encuadre: ancho/
 python engine/analisis/arrastre.py final.mp4 --escenas videos/X/video.json   # continuidad: qué sobrevive en cada corte (medio ≥ 0,5), % quieto, variación de planos, mapa de energía
 python engine/analisis/barro.py final.mp4                                    # graves-medios acumulados en la mezcla (alarma > 35 %)
 ```
-**Sesión nueva = contenedor limpio: lo primero, `bash engine/preparar.sh`** (instala lo que falte, no rompe nada si ya está). Instalación a mano: `npm install` (HyperFrames fijado en 0.9.26) y `pip install -r requirements.txt`; requiere Node ≥ 22 y ffmpeg.
+**Las sesiones de la nube se preparan solas** (gancho `.claude/hooks/session-start.sh`, registrado en `.claude/settings.json`: instala ffmpeg, Python y `node_modules` solo si cambió algo). Si algo falta igual (otro entorno): `bash engine/preparar.sh`. Instalación a mano: `npm install` (HyperFrames fijado en 0.9.26) y `pip install -r requirements.txt`; requiere Node ≥ 22 y ffmpeg.
 
 ## Reglas que nunca se rompen (detalle en docs/)
 1. **Estilo motion graphics en 3D**: todos los objetos en **three.js r187** con `assets/escena3d.js` (guía: `docs/THREEJS.md`) (notebook, router, ondas, cables…), cámara que se mueve en el eje z, piso de líneas en perspectiva; el texto es HTML sobre el 3D. Escenas simples (reel completo ≈ 2 s de render por segundo de video; si pasa de ~3, simplificar). **Nada decorativo sin significado** (sin puntitos ni bits de fondo).
