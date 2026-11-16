@@ -2,7 +2,7 @@
    y UNA cámara continua que la recorre. Cada composición (gancho, corte, comparten, mayus, idioma, foto, payoff) monta el mismo set y lo
    dibuja en el TIEMPO GLOBAL del video (T = inicio de la escena + t local): así los cortes entre composiciones no se ven (plano continuo).
    Todo es función de T (sin reloj ni azar). Rótulos HTML anclados a puntos 3D (se mueven con la cámara: paralaje real).
-   Sin cinta ni línea de montaje (Ayrton: estorbaba el texto). Estaciones (x, z): A mensaje/cuchilla (0, 0) · B pedazos compartidos (1.6, −3.5) · C mayúsculas (−1.6, −7) · D idiomas (1.6, −10.5) · E foto (−1.6, −14).
+   Sin cinta ni línea de montaje (Ayrton: estorbaba el texto). Estaciones en diagonal hacia la izquierda y al fondo (media kit, "ley del vector": todos los viajes en la MISMA dirección, la corriente = izquierda): A (0, 0) · B (−1.8, −3.5) · C (−3.6, −7) · D (−5.4, −10.5) · E (−7.2, −14).
    Tiempos: salen de audio/palabras.json (voz) — escena + tiempo de la palabra. */
 export async function montar(root, tl, T0, dur) {
   const [M, Km, Tm] = await Promise.all([import('./escena3d.js'), import('./token3d.js'), import('./tensor3d.js')]);
@@ -11,7 +11,7 @@ export async function montar(root, tl, T0, dur) {
   const st = (a, b, x) => clamp((x - a) / Math.max(1e-6, b - a));
   const io = (a, b, x) => EASE.io(st(a, b, x)), out = (a, b, x) => EASE.out(st(a, b, x));
   const ventana = (T, a, b, f = 0.25) => out(a, a + f, T) * (1 - st(b, b + f, T));   // aparece en a, se va en b
-  const S = { A: new V(0, 0, 0), B: new V(1.6, 0, -3.5), C: new V(-1.6, 0, -7), D: new V(1.6, 0, -10.5), E: new V(-1.6, 0, -14) };
+  const S = { A: new V(0, 0, 0), B: new V(-1.8, 0, -3.5), C: new V(-3.6, 0, -7), D: new V(-5.4, 0, -10.5), E: new V(-7.2, 0, -14) };
   const en = (s, x, y, z = 0) => new V(S[s].x + x, y, S[s].z + z);
   const add = (o, s, x, y, z = 0) => { o.position.copy(en(s, x, y, z)); E.scene.add(o); return o; };
   const todas = [];   // fichas que giran en el payoff (en orden de la línea)
@@ -29,8 +29,10 @@ export async function montar(root, tl, T0, dur) {
   const hoja = add(E.trazo([new V(0, -0.16, 0.05), new V(0, 0.16, 0.05)], P.acc, 4), 'A', 0, 0.6);
   const bordesA = []; { let x = -anchoA / 2; fA.forEach((f) => { x += f.userData.w; bordesA.push(x); }); bordesA.pop(); }
   todas.push(...fA);
-  const tit = fijo('<span class="w">La IA no lee tu mensaje.</span><br /><span class="w">Lee <span class="acc">números</span></span>', 'titular chico', 440, -1, 3.7, 'width: 980px; text-align: center;');
-  const firma = fijo('@ayrtonnacer', 'firma', 205, -1, 3.7);
+  // hook según el media kit (docs/media-kit): firma 60 px en tan arriba a la izquierda (y 262), título de 3–5 palabras, 140 px, alineado a la izquierda desde y 350, una sola palabra en tan
+  const tit = fijo('La IA lee <span class="acc">números</span>', 'titular', 350, -1, 3.7, 'width: 900px; font-size: 140px; line-height: .98; letter-spacing: -.03em; text-align: left; text-wrap: balance; white-space: normal;');
+  const firma = fijo('@ayrtonnacer', 'firma', 262, -1, 3.7, 'font-size: 60px;');
+  for (const r of [tit, firma]) { r.a.style.left = '90px'; r.a.style.transform = 'none'; r.a.style.whiteSpace = 'normal'; }
   const ids = fijo(TOK.map(([, id], i) => `<span class="n">${id}${i < 5 ? ',' : ']'}</span>`).join(' ').replace('<span class="n">', '<span class="n">['), 'mono', 960, 2.7, 3.8, 'font: 500 40px var(--mono); color: var(--acc); letter-spacing: -.02em;');
   const idsN = ids.d.querySelectorAll('.n');
   anclado('6 <b>tokens</b>', 'rot', en('A', 0, 0.98), 6.9, 10.2);
@@ -43,7 +45,7 @@ export async function montar(root, tl, T0, dur) {
   todas.push(seg, ...pa.fs, ...pb.fs);
   const xr = pa.fs[1].position.x + pa.fs[1].userData.w / 2 + 0.06;
   const lazo = add(E.trazo([new V(xr, 0.62, 0.03), new V(xr + 0.07, 0.62, 0.03), new V(xr + 0.07, 0.62, 0.03), new V(xr + 0.07, 0.24, 0.03), new V(xr + 0.07, 0.24, 0.03), new V(xr, 0.24, 0.03)], P.acc, 3), 'B', 0, 0);
-  anclado('tokenizador de GPT-4o', 'mono', en('B', 0, 1.3), 11.3, 18.3, 'font: 500 34px var(--mono); color: var(--muted);');
+  anclado('tokenizador de GPT-4o', 'mono', en('B', 0, 1.3), 11.3, 18.3, 'font: 500 40px var(--mono); color: var(--muted);');
 
   // ---------- C: mayúscula y espacio cambian el número ----------
   const DC = [['hola', 122845, 19.6], ['Hola', 157464, 20.15], [' hola', 171847, 20.85]];
@@ -77,7 +79,7 @@ export async function montar(root, tl, T0, dur) {
   const CAM = [
     K_(0, 'A', [0.35, 0.95, 4.6], [0, 0.5, 0]), K_(3.5, 'A', [0.2, 0.9, 4.3], [0, 0.5, 0], 'lin'), K_(4.1, 'A', [0, 0.78, 4.3], [0, 0.58, 0], 'in'),   // gancho: plano medio frontal, dolly in lento
     K_(4.7, 'A', [0, 0.74, 4.0], [0, 0.58, 0], 'out'), K_(6.1, 'A', [0, 0.74, 3.95], [0, 0.58, 0], 'lin'), K_(6.9, 'A', [0.5, 1.15, 5.5], [0, 0.5, 0], 'io'), K_(10.3, 'A', [0.4, 1.12, 5.4], [0, 0.5, 0], 'lin'),   // dolly out + leve picado
-    { t: 10.65, p: [1.5, 1.8, 2.0], l: [1.3, 0.8, -2.4], e: 'in' },                                                            // grúa por encima de A…
+    { t: 10.65, p: [-1.2, 2.6, 2.2], l: [-1.6, 0.9, -2.6], e: 'in' },                                                            // grúa por encima de A…
     K_(11.05, 'B', [0.15, 0.42, 2.6], [0, 1.0, 0], 'out'), K_(13.0, 'B', [0.1, 0.5, 2.55], [0, 1.0, 0], 'lin'),                // …y baja a un CONTRAPICADO de "seguridad"
     K_(13.6, 'B', [0.35, 0.95, 4.7], [0, 0.62, 0], 'io'), K_(18.6, 'B', [0.25, 0.93, 4.6], [0, 0.62, 0], 'lin'),               // dolly out a plano general de las 3 palabras
     K_(19.4, 'C', [-0.5, 2.2, 3.4], [0, 0.6, 0], 'io'), K_(24.0, 'C', [-0.35, 1.6, 3.7], [0, 0.6, 0], 'lin'),                  // travelling a C: PICADO que baja lento
@@ -86,7 +88,7 @@ export async function montar(root, tl, T0, dur) {
     K_(31.0, 'E', [0.3, 0.98, 3.25], [0, 0.82, 0], 'io'), K_(33.4, 'E', [0.2, 0.95, 3.15], [0, 0.82, 0], 'lin'),               // travelling a la foto
     { t: 33.9, p: [pc.x, pc.y + 0.05, S.E.z + 1.7], l: [pc.x, pc.y, S.E.z], e: 'io' }, { t: 35.4, p: [pc.x, pc.y + 0.05, S.E.z + 1.62], l: [pc.x, pc.y, S.E.z], e: 'lin' },   // dolly in: plano detalle del cuadradito
     K_(35.95, 'E', [0, 0.78, 3.45], [0, 0.6, 0], 'io'), K_(37.8, 'E', [0, 0.78, 3.35], [0, 0.6, 0], 'lin'),                    // dolly out
-    { t: 38.9, p: [2.6, 5.4, 7.9], l: [-0.3, -1.1, -6.6], e: 'io' }, { t: 42.6, p: [2.4, 5.2, 7.4], l: [-0.3, -1.1, -6.6], e: 'lin' },   // grúa al plano general en picado de toda la fábrica
+    { t: 38.9, p: [3.9, 11.4, 10.6], l: [-2.6, -1.9, -5.0], e: 'io' }, { t: 42.6, p: [3.7, 11.0, 10.1], l: [-2.6, -1.9, -5.0], e: 'lin' },   // grúa al plano general en picado de toda la fábrica
   ];
   const GOLPES = [[6.9, 0.006], [11.05, 0.006, 2], [19.4, 0.006, 3], [24.8, 0.006, 4], [31.0, 0.006, 5]];
 

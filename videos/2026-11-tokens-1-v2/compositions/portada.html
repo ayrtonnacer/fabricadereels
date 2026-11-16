@@ -1,24 +1,24 @@
-<!-- PORTADA (0,1 s, cuadro fijo para elegir como portada al publicar): título "¿Qué es un token?", el mensaje cortado en tokens con su número y la firma. -->
+<!-- PORTADA (0,1 s, fotograma de portada y miniatura) — según el media kit (docs/media-kit/Portada.dc.html): firma 44 px arriba a la izquierda (y 262),
+     título de 3–5 palabras a 140 px desde y 350 con UNA palabra en tan, objeto protagonista de línea gris en un cuadro de 560 px centrado y apoyado en el piso,
+     con un único punto tan; piso en perspectiva que aparece con un fundido desde y ≈ 1180 y nunca pasa detrás del título. -->
 <template>
-  <style>#root { position: absolute; inset: 0; } #p-firma { position: absolute; left: 0; right: 0; top: 205px; text-align: center; }</style>
+  <style>#root { position: absolute; inset: 0; } #p-firma { position: absolute; left: 90px; top: 262px; font-size: 44px; letter-spacing: -.01em; }
+    #p-tit { position: absolute; left: 90px; top: 350px; width: 900px; margin: 0; font-size: 140px; line-height: .98; letter-spacing: -.03em; text-align: left; text-wrap: balance; }</style>
   <div id="root" data-composition-id="portada" data-width="1080" data-height="1920">
     <div class="fondo" data-layout-ignore></div>
     <canvas id="p-cv" class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
-    <div class="hud" data-layout-ignore>
-      <div class="ancla" style="top: 470px"><h1 id="p-tit" class="titular" style="width: 980px; text-align: center;">¿Qué es un <span class="acc">token</span>?</h1></div>
-    </div>
-    <div class="vineta" data-layout-ignore></div>
+    <h1 id="p-tit" class="titular">¿Qué es un <span class="acc">token</span>?</h1>
     <div id="p-firma" class="firma">@ayrtonnacer</div>
   </div>
   <script>
     const root = document.querySelector('[data-composition-id="portada"]');
     const tl = gsap.timeline({ paused: true });
     Promise.all([import('./assets/escena3d.js'), import('./assets/token3d.js')]).then(async ([M, Km]) => {
-      const E = await M.crear(root), K = Km.K3(E);
-      const TOK = [['hola', 122845], [',', 11], [' ¿', 12873], ['qué', 23535], [' tal', 4858], ['?', 30]];
-      const fs = TOK.map(([txt, id]) => K.ficha({ txt, id })), fila = K.fila(fs, 0.08); fila.position.set(0, 0.6, 0); E.scene.add(fila);
-      fs.forEach((f, i) => { f.userData.verId(1); if (i === 3) f.userData.acento(1); });
-      E.animar(tl, 0.1, () => E.ruta(0, [{ t: 0, p: [0.7, 0.95, 5.6], l: [0, 0.5, 0] }, { t: 1, p: [0.7, 0.95, 5.6], l: [0, 0.5, 0] }]));
+      const E = await M.crear(root, { dy: 0 }), K = Km.K3(E), { THREE, P } = E;
+      // objeto: tres fichas de token en perspectiva (el mensaje cortado), texto blanco; el único tan es el punto en la esquina de la del frente
+      const fs = [['hola', 0], ['¿qué', 1], ['tal?', 2]].map(([txt, i]) => { const f = K.ficha({ txt, size: 1.5 }); f.position.set(-0.12 + i * 0.16, 0.18 + i * 0.3, -i * 0.42); E.scene.add(f); return f; });
+      const punto = new THREE.Mesh(new THREE.SphereGeometry(0.03, 20, 14), E.basic(P.acc)); const f0 = fs[0]; punto.position.set(f0.position.x + f0.userData.w / 2, f0.position.y + f0.userData.h / 2, f0.position.z + 0.04); E.scene.add(punto);
+      E.animar(tl, 0.1, () => E.ruta(0, [{ t: 0, p: [1.5, 1.35, 3.1], l: [0.12, 1.0, -0.4] }, { t: 1, p: [1.5, 1.35, 3.1], l: [0.12, 1.0, -0.4] }]));
       window.__timelines['portada'] = tl;
     });
   </script>

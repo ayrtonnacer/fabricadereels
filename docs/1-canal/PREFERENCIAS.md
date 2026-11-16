@@ -84,3 +84,4 @@ Link + indicaciones → guion (público: técnicos, principiantes, reclutadores)
 - **Nada que estorbe al texto**: la línea de montaje (cinta con cubitos) se sacó porque pasaba por detrás de las fichas. Decorado solo si explica algo y nunca detrás de lo que se lee.
 - **Explicarle lo que hago con vocabulario de cine** (plano, ángulo, movimiento, transición): `docs/2-estilo/GLOSARIO-EDICION.md`, con ejemplos por segundo.
 - **Música firma**: *Can You Hear The Music*, en todos los reels; elegir el tramo para que el crescendo termine en el CTA.
+- **Media kit (2026-11-16)** en `docs/media-kit/` (abrir `Media Kit.dc.html`): manda en portada, hook, tamaños, reglas de uso y transiciones. Revisar cada reel contra él antes de entregar.
