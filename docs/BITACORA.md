@@ -133,3 +133,6 @@ Todo lo que Ayrton dice y pasa se guarda acá (y el material en `docs/material/`
 - 2026-11-15 (9): Ayrton autorizó **instalar lo necesario** y crear versiones propias del código, e instalar Whisper para "escuchar" audio. Instalado: `pip install -r requirements.txt` (opencv, scipy…), `npm install` (HyperFrames 0.9.26) y `faster-whisper`. Probado: temblor de cámara en render real (`E.ruta` con `golpes`: diferencia visible en el golpe, ≈ 0 a los 0,5 s) y `engine/audio/escuchar.py` (Whisper vs guion). Aclaración: Whisper transcribe voz, no oye música.
 - 2026-11-16: Ayrton pidió que cada sesión nueva quede lista sola. Hecho: gancho de inicio `.claude/hooks/session-start.sh` (síncrono, solo en la nube, compara hashes: 1.ª vez ~3 s, siguientes 0,02 s) + `.claude/settings.json`. Alternativa más rápida (pendiente de su aprobación): guardar la preparación como script del entorno de Claude Code, que deja el contenedor ya cacheado.
 
+
+## 2026-11-16
+- Ayrton pidió un reel "qué son los tokens en IA" y pasó el artículo de NVIDIA (guardado en `docs/material/2026-11-16-que-son-los-tokens-nvidia.md`). Guion en revisión (checkpoint).
