@@ -1,0 +1,13 @@
+1	whoosh/swishes/swishes/swish-1.wav	0.126 s	brillo 259 Hz	pisa la voz 10 %
+2	whoosh/swishes/swishes/swish-10.wav	0.125 s	brillo 582 Hz	pisa la voz 98 %
+3	whoosh/swishes/swishes/swish-11.wav	0.104 s	brillo 588 Hz	pisa la voz 99 %
+4	whoosh/swishes/swishes/swish-12.wav	0.076 s	brillo 623 Hz	pisa la voz 99 %
+5	whoosh/swishes/swishes/swish-13.wav	0.071 s	brillo 622 Hz	pisa la voz 99 %
+6	whoosh/swishes/swishes/swish-2.wav	0.096 s	brillo 237 Hz	pisa la voz 5 %
+7	whoosh/swishes/swishes/swish-3.wav	0.146 s	brillo 206 Hz	pisa la voz 1 %
+8	whoosh/swishes/swishes/swish-4.wav	0.146 s	brillo 275 Hz	pisa la voz 34 %
+9	whoosh/swishes/swishes/swish-5.wav	0.127 s	brillo 231 Hz	pisa la voz 3 %
+10	whoosh/swishes/swishes/swish-6.wav	0.138 s	brillo 248 Hz	pisa la voz 4 %
+11	whoosh/swishes/swishes/swish-7.wav	0.188 s	brillo 228 Hz	pisa la voz 5 %
+12	whoosh/swishes/swishes/swish-8.wav	0.154 s	brillo 221 Hz	pisa la voz 5 %
+13	whoosh/swishes/swishes/swish-9.wav	0.197 s	brillo 297 Hz	pisa la voz 31 %

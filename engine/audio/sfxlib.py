@@ -159,3 +159,30 @@ class Track:
         b = buf / np.max(np.abs(buf)) * 0.7
         with wave.open(str(path), 'wb') as w:
             w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((b * 32767).astype('<i2').tobytes())
+
+
+# ---- variedad: elegir sonidos del catálogo medido (engine/audio/catalogo_sfx.json) sin repetir dentro de un reel y distintos entre reels ----
+import json as _json, hashlib as _hl
+SEMILLA = 'reel'            # sfx.py la pone = nombre de la carpeta del video: cada reel recorre el banco en otro orden
+USADOS = []                 # (rol, archivo) en el orden en que se usaron; sfx.py los anota en audio/sfx_usados.txt
+_CAT, _ORDEN = None, {}
+def _catalogo():
+    global _CAT
+    if _CAT is None:
+        f = Path(__file__).with_name('catalogo_sfx.json'); _CAT = _json.loads(f.read_text()) if f.exists() else []
+    return _CAT
+def elegir(rol, gain=1.0, max_dur=None, min_brillo=None, max_brillo=None, max_voz=None, filtro=''):
+    """Un sonido real del rol (curva, dato, aparece, se-va, resultado, error, golpe, digital, ambiente), distinto de los ya usados en este reel.
+    Filtros medidos: max_dur (s), brillo en Hz (centroide), max_voz (fracción de energía en 300–3000 Hz: menos = pisa menos la voz).
+    Determinista: mismo reel → misma elección. None si no hay banco (usar el sintético)."""
+    c = [o for o in _catalogo() if o['rol'] == rol and filtro.lower() in o['archivo'].lower()
+         and (max_dur is None or o['dur'] <= max_dur) and (min_brillo is None or o['brillo_hz'] >= min_brillo)
+         and (max_brillo is None or o['brillo_hz'] <= max_brillo) and (max_voz is None or o['voz'] <= max_voz) and (SFX_DIR / o['archivo']).exists()]
+    if not c: return None
+    clave = (rol, filtro, max_dur, min_brillo, max_brillo, max_voz)
+    if clave not in _ORDEN:
+        sem = int(_hl.md5((SEMILLA + repr(clave)).encode()).hexdigest()[:8], 16)
+        _ORDEN[clave] = [c[i] for i in np.random.default_rng(sem).permutation(len(c))]
+    usados = {a for _, a in USADOS}
+    o = next((o for o in _ORDEN[clave] if o['archivo'] not in usados), _ORDEN[clave][len(USADOS) % len(_ORDEN[clave])])
+    USADOS.append((rol, o['archivo'])); return _leer(SFX_DIR / o['archivo'], gain)

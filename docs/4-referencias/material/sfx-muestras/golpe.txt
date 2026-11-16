@@ -1,0 +1,16 @@
+1	hit/breaking-falling/bfh1_glass_hit_01.ogg	0.302 s	brillo 5888 Hz	pisa la voz 0 %
+2	hit/breaking-falling/bfh1_glass_hit_02.ogg	0.333 s	brillo 6588 Hz	pisa la voz 0 %
+3	hit/breaking-falling/bfh1_hit_01.ogg	0.729 s	brillo 2834 Hz	pisa la voz 57 %
+4	hit/breaking-falling/bfh1_hit_02.ogg	0.797 s	brillo 193 Hz	pisa la voz 10 %
+5	hit/breaking-falling/bfh1_hit_03.ogg	0.485 s	brillo 3415 Hz	pisa la voz 43 %
+6	hit/breaking-falling/bfh1_hit_04.ogg	0.497 s	brillo 3469 Hz	pisa la voz 48 %
+7	hit/breaking-falling/bfh1_hit_05.ogg	0.276 s	brillo 5329 Hz	pisa la voz 8 %
+8	hit/breaking-falling/bfh1_hit_06.ogg	0.595 s	brillo 1021 Hz	pisa la voz 48 %
+9	hit/breaking-falling/bfh1_hit_07.ogg	0.456 s	brillo 353 Hz	pisa la voz 15 %
+10	hit/breaking-falling/bfh1_hit_08.ogg	0.39 s	brillo 1460 Hz	pisa la voz 46 %
+11	hit/breaking-falling/bfh1_hit_09.ogg	0.262 s	brillo 5303 Hz	pisa la voz 9 %
+12	hit/breaking-falling/bfh1_hit_10.ogg	0.303 s	brillo 4909 Hz	pisa la voz 25 %
+13	hit/breaking-falling/bfh1_hit_11.ogg	0.302 s	brillo 6912 Hz	pisa la voz 1 %
+14	hit/breaking-falling/bfh1_hit_12.ogg	0.511 s	brillo 5134 Hz	pisa la voz 24 %
+15	hit/breaking-falling/bfh1_hit_13.ogg	0.377 s	brillo 4626 Hz	pisa la voz 20 %
+16	hit/breaking-falling/bfh1_metal_hit_01.ogg	0.238 s	brillo 6767 Hz	pisa la voz 2 %

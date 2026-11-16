@@ -85,3 +85,4 @@ Link + indicaciones → guion (público: técnicos, principiantes, reclutadores)
 - **Explicarle lo que hago con vocabulario de cine** (plano, ángulo, movimiento, transición): `docs/2-estilo/GLOSARIO-EDICION.md`, con ejemplos por segundo.
 - **Música firma**: *Can You Hear The Music*, en todos los reels; elegir el tramo para que el crescendo termine en el CTA.
 - **Media kit (2026-11-16)** en `docs/media-kit/` (abrir `Media Kit.dc.html`): manda en portada, hook, tamaños, reglas de uso y transiciones. Revisar cada reel contra él antes de entregar.
+- **Portada y hook con la anatomía del media kit en todos los reels** (plantilla). **Efectos variados** (no repetir el mismo whoosh/golpe): `elegir(rol)`; fijos de marca solo boom y chinn.

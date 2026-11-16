@@ -124,3 +124,12 @@ Ayrton la pasó (webm → `assets/musica/can-you-hear-the-music.mp3`) para todos
 - **Tramo (corregido 2026-11-16)**: Ayrton quiere que **empiece desde el inicio, con los violines** (`musica_desde: 0`, `musica_fade_in: 0.4`). El primer tramo de la pista es muy suave (−28 dB) y crece: sin ayuda, los primeros 20 s quedan inaudibles y después tapa la voz.
 - **Nivel**: `musica_nivelar: [-32, 4]` + `musica_db: 10` (medido: queda entre −13 dB —inicio— y −9 dB —final— por debajo de la voz mientras habla, con el ducking de ×2 incluido; en las pausas se oye más, ej. mientras se llena de números). Opción nueva `musica_fade_in` (s) en `video.json`.
 - **Derechos**: es una obra con copyright (banda sonora). Instagram/TikTok/YouTube pueden silenciar el video o reclamarlo; lo más seguro es agregarla desde la biblioteca de música de la app al publicar (y subir el video sin música) o confirmar la licencia. Lo mismo valía para Palladio.
+
+
+## Variedad de efectos (2026-11-16)
+Ayrton: "siempre usás los mismos efectos en las transiciones y al final". Ahora:
+- **Catálogo medido** `engine/audio/catalogo_sfx.json` (`python engine/audio/catalogo_sfx.py`): 291 sonidos del banco con su **rol** (curva = transición, dato, aparece, se-va, resultado, error, golpe, digital, ambiente) y sus números (duración, ataque, cola, brillo en Hz, cuánto pisa la voz = energía en 300–3000 Hz).
+- **`elegir(rol, max_dur=, max_voz=, min_brillo=, max_brillo=, filtro=)`** en `sfxlib`: devuelve un sonido real de ese rol **sin repetir dentro del reel** y en **otro orden en cada reel** (semilla = nombre de la carpeta). Cada video deja la lista en `audio/sfx_usados.txt`. La plantilla (`videos/_plantilla/sfx_events.py`) ya lo usa: `w()` transición, `aparece()`, `dato()`, `resultado()`, `aterriza()`.
+- **Fijos de marca (media kit)**: boom grave al inicio y al final y chinn cuando aterriza el CTA. No varían, salvo que Ayrton lo decida.
+- **Elegir de oído**: `python engine/audio/muestras_sfx.py` arma `docs/4-referencias/material/sfx-muestras/<rol>.mp3` (Daniela dice "transición 1", suena la opción…) + `<rol>.txt` (número → archivo y medidas). Las que Ayrton elija se fijan con `elegir(rol, filtro='<archivo>')` o se sacan del catálogo.
+- **Límite**: Whisper solo entiende voz (sirve para la pronunciación, no para juzgar un efecto). Para los efectos, Claude mide; el gusto lo decide Ayrton escuchando.

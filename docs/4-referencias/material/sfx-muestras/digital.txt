@@ -1,0 +1,14 @@
+1	ui/kenney-interface/Audio/glitch_001.ogg	0.017 s	brillo 455 Hz	pisa la voz 15 %
+2	ui/kenney-interface/Audio/glitch_002.ogg	0.027 s	brillo 1419 Hz	pisa la voz 14 %
+3	ui/kenney-interface/Audio/glitch_003.ogg	0.012 s	brillo 3893 Hz	pisa la voz 39 %
+4	ui/kenney-interface/Audio/glitch_004.ogg	0.02 s	brillo 4110 Hz	pisa la voz 3 %
+5	ui/kenney-interface/Audio/scratch_001.ogg	0.139 s	brillo 4714 Hz	pisa la voz 44 %
+6	ui/kenney-interface/Audio/scratch_002.ogg	0.139 s	brillo 6071 Hz	pisa la voz 9 %
+7	ui/kenney-interface/Audio/scratch_003.ogg	0.123 s	brillo 12036 Hz	pisa la voz 6 %
+8	ui/kenney-interface/Audio/scratch_004.ogg	0.325 s	brillo 4527 Hz	pisa la voz 48 %
+9	ui/kenney-interface/Audio/scratch_005.ogg	0.325 s	brillo 4874 Hz	pisa la voz 29 %
+10	ui/kenney-interface/Audio/scroll_001.ogg	1.0 s	brillo 8935 Hz	pisa la voz 17 %
+11	ui/kenney-interface/Audio/scroll_002.ogg	1.0 s	brillo 526 Hz	pisa la voz 68 %
+12	ui/kenney-interface/Audio/scroll_003.ogg	1.0 s	brillo 1449 Hz	pisa la voz 67 %
+13	ui/kenney-interface/Audio/scroll_004.ogg	1.0 s	brillo 4002 Hz	pisa la voz 52 %
+14	ui/kenney-interface/Audio/scroll_005.ogg	1.0 s	brillo 2950 Hz	pisa la voz 69 %

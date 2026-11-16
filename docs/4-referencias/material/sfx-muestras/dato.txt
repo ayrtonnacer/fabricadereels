@@ -1,0 +1,16 @@
+1	click/clicks-switches/10 Clicks and Switches/click.1.ogg	0.287 s	brillo 3567 Hz	pisa la voz 48 %
+2	click/clicks-switches/10 Clicks and Switches/click.10.ogg	0.774 s	brillo 7282 Hz	pisa la voz 7 %
+3	click/clicks-switches/10 Clicks and Switches/click.2.ogg	0.42 s	brillo 4763 Hz	pisa la voz 16 %
+4	click/clicks-switches/10 Clicks and Switches/click.3.ogg	0.271 s	brillo 3087 Hz	pisa la voz 61 %
+5	click/clicks-switches/10 Clicks and Switches/click.4.ogg	0.225 s	brillo 3107 Hz	pisa la voz 55 %
+6	click/clicks-switches/10 Clicks and Switches/click.5.ogg	0.195 s	brillo 4391 Hz	pisa la voz 45 %
+7	click/clicks-switches/10 Clicks and Switches/click.6.ogg	0.179 s	brillo 6284 Hz	pisa la voz 4 %
+8	click/clicks-switches/10 Clicks and Switches/click.7.ogg	0.222 s	brillo 3717 Hz	pisa la voz 48 %
+9	click/clicks-switches/10 Clicks and Switches/click.8.ogg	0.21 s	brillo 4413 Hz	pisa la voz 40 %
+10	click/clicks-switches/10 Clicks and Switches/click.9.ogg	0.104 s	brillo 6402 Hz	pisa la voz 4 %
+11	ui/kenney-interface/Audio/click_001.ogg	0.097 s	brillo 1591 Hz	pisa la voz 65 %
+12	ui/kenney-interface/Audio/click_002.ogg	0.012 s	brillo 1948 Hz	pisa la voz 88 %
+13	ui/kenney-interface/Audio/click_003.ogg	0.007 s	brillo 2164 Hz	pisa la voz 89 %
+14	ui/kenney-interface/Audio/click_004.ogg	0.022 s	brillo 8168 Hz	pisa la voz 34 %
+15	ui/kenney-interface/Audio/click_005.ogg	0.007 s	brillo 492 Hz	pisa la voz 44 %
+16	ui/kenney-interface/Audio/select_001.ogg	0.04 s	brillo 2440 Hz	pisa la voz 70 %

@@ -1,0 +1,16 @@
+1	ui/kenney-interface/Audio/bong_001.ogg	0.12 s	brillo 208 Hz	pisa la voz 1 %
+2	ui/kenney-interface/Audio/drop_001.ogg	0.132 s	brillo 1549 Hz	pisa la voz 89 %
+3	ui/kenney-interface/Audio/drop_002.ogg	0.188 s	brillo 712 Hz	pisa la voz 94 %
+4	ui/kenney-interface/Audio/drop_003.ogg	0.188 s	brillo 689 Hz	pisa la voz 94 %
+5	ui/kenney-interface/Audio/drop_004.ogg	0.284 s	brillo 642 Hz	pisa la voz 92 %
+6	ui/kenney-interface/Audio/maximize_001.ogg	0.258 s	brillo 4612 Hz	pisa la voz 5 %
+7	ui/kenney-interface/Audio/maximize_002.ogg	0.258 s	brillo 5288 Hz	pisa la voz 8 %
+8	ui/kenney-interface/Audio/maximize_003.ogg	0.212 s	brillo 5965 Hz	pisa la voz 15 %
+9	ui/kenney-interface/Audio/maximize_004.ogg	0.418 s	brillo 10172 Hz	pisa la voz 15 %
+10	ui/kenney-interface/Audio/maximize_005.ogg	0.526 s	brillo 7076 Hz	pisa la voz 4 %
+11	ui/kenney-interface/Audio/maximize_006.ogg	0.38 s	brillo 343 Hz	pisa la voz 67 %
+12	ui/kenney-interface/Audio/maximize_007.ogg	0.183 s	brillo 2228 Hz	pisa la voz 99 %
+13	ui/kenney-interface/Audio/maximize_008.ogg	0.225 s	brillo 344 Hz	pisa la voz 82 %
+14	ui/kenney-interface/Audio/maximize_009.ogg	0.222 s	brillo 1250 Hz	pisa la voz 100 %
+15	ui/kenney-interface/Audio/open_001.ogg	0.148 s	brillo 12470 Hz	pisa la voz 2 %
+16	ui/kenney-interface/Audio/open_002.ogg	0.314 s	brillo 8560 Hz	pisa la voz 12 %

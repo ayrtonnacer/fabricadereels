@@ -1,0 +1,13 @@
+1	bell/dings/ding.2.ogg	2.167 s	brillo 1818 Hz	pisa la voz 66 %
+2	bell/dings/ding.3.ogg	2.036 s	brillo 2069 Hz	pisa la voz 60 %
+3	bell/dings/ding.4.ogg	0.642 s	brillo 2617 Hz	pisa la voz 58 %
+4	ui/kenney-interface/Audio/confirmation_001.ogg	0.29 s	brillo 501 Hz	pisa la voz 99 %
+5	ui/kenney-interface/Audio/confirmation_002.ogg	0.539 s	brillo 1847 Hz	pisa la voz 83 %
+6	ui/kenney-interface/Audio/confirmation_003.ogg	0.322 s	brillo 2548 Hz	pisa la voz 94 %
+7	ui/kenney-interface/Audio/confirmation_004.ogg	0.49 s	brillo 1201 Hz	pisa la voz 99 %
+8	ui/kenney-interface/Audio/glass_001.ogg	0.276 s	brillo 1889 Hz	pisa la voz 98 %
+9	ui/kenney-interface/Audio/glass_002.ogg	0.122 s	brillo 1953 Hz	pisa la voz 98 %
+10	ui/kenney-interface/Audio/glass_003.ogg	0.121 s	brillo 1810 Hz	pisa la voz 94 %
+11	ui/kenney-interface/Audio/glass_004.ogg	0.692 s	brillo 7335 Hz	pisa la voz 0 %
+12	ui/kenney-interface/Audio/glass_005.ogg	0.132 s	brillo 2517 Hz	pisa la voz 85 %
+13	ui/kenney-interface/Audio/glass_006.ogg	0.132 s	brillo 1594 Hz	pisa la voz 99 %

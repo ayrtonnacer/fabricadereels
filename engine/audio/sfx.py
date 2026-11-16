@@ -9,5 +9,6 @@ V = Path(sys.argv[1]); cfg = json.loads((V / 'video.json').read_text())
 S, acc = {}, 0.0
 for s in cfg['scenes']: S[s['id']] = acc; acc += s['d']
 spec = importlib.util.spec_from_file_location('ev', V / 'sfx_events.py'); ev = importlib.util.module_from_spec(spec); spec.loader.exec_module(ev)
+sfxlib.SEMILLA = V.resolve().name
 T = sfxlib.Track(acc); ev.build(T, S, sfxlib)
-(V / 'audio').mkdir(exist_ok=True); T.save(V / 'audio/sfx.wav'); print(f'sfx.wav listo ({acc:.1f}s)')
+(V / 'audio').mkdir(exist_ok=True); T.save(V / 'audio/sfx.wav'); (V / 'audio/sfx_usados.txt').write_text('\n'.join(f'{r}\t{a}' for r, a in sfxlib.USADOS)); print(f'sfx.wav listo ({acc:.1f}s)')

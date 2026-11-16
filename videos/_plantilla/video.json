@@ -4,6 +4,10 @@
   "fuente": "URL o tema de origen",
   "scenes": [
     {
+      "id": "portada",
+      "d": 0.1
+    },
+    {
       "id": "gancho",
       "d": 3.6
     },
@@ -27,31 +31,31 @@
       {
         "id": "l01",
         "escena": "gancho",
-        "t": 0.15,
+        "t": 0.25,
         "texto": "Una frase corta que prometa algo."
       },
       {
         "id": "l02",
         "escena": "explica",
-        "t": 3.85,
+        "t": 3.95,
         "texto": "El primer concepto, con palabras simples."
       },
       {
         "id": "l03",
         "escena": "explica",
-        "t": 6.6,
+        "t": 6.7,
         "texto": "Después, el segundo."
       },
       {
         "id": "l04",
         "escena": "explica",
-        "t": 8.9,
+        "t": 9.0,
         "texto": "Y así se ve funcionando."
       },
       {
         "id": "l05",
         "escena": "cierre",
-        "t": 11.9,
+        "t": 12.0,
         "texto": "Dale me gusta y seguime."
       }
     ]
