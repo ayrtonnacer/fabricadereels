@@ -1,4 +1,4 @@
-"""Efectos del reel "Qué son los tokens (parte 1)" — v2 con banco CC0 + materiales onetake + una sala compartida (docs/AUDIO.md).
+"""Efectos del reel "Qué son los tokens (parte 1)" — v2 con banco CC0 + materiales onetake + una sala compartida (docs/2-estilo/AUDIO.md).
 S[id] = segundo de inicio de cada escena. Whoosh en el PICO de velocidad de cada movimiento de cámara. Menos eventos que beats."""
 from sfxlib import *
 

@@ -1,5 +1,5 @@
 # Guion — Qué son los tokens (parte 1): la IA lee números
-Aprobado por Ayrton el 2026-11-16 (versión técnica, serie de 2). Datos validados en `docs/material/2026-11-16-tokens-validacion.md`.
+Aprobado por Ayrton el 2026-11-16 (versión técnica, serie de 2). Datos validados en `docs/4-referencias/material/2026-11-16-tokens-validacion.md`.
 
 | Escena | Tiempo | Voz |
 |---|---|---|

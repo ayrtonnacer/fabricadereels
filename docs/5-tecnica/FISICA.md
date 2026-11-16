@@ -3,7 +3,7 @@
 Ayrton pasó `github.com/pmndrs/react-three-rapier` (el wrapper de React de **Rapier**, motor de física en Rust/WASM) para entender la física con three.js. Se estudió el código (`Physics.tsx`, `RigidBody.tsx`, `utils-collider.ts`, readme). **El paquete en sí no se usa** (es React/R3F; nosotros no tenemos React ni bucle de tiempo real); **sí se usa el motor que hay debajo**, `@dimforge/rapier3d-compat` 0.19.2 (WASM embebido en el JS, sin red), y varias ideas.
 
 ## Qué problema tiene la física para nosotros
-Nuestras escenas se dibujan **como función del tiempo `t`** (render determinista, `docs/THREEJS.md`): HyperFrames puede pedir el cuadro 3,2 s antes que el 1,0 s, o repetirlo. Una simulación avanza paso a paso y guarda estado, así que no se puede correr "en vivo" dentro del render.
+Nuestras escenas se dibujan **como función del tiempo `t`** (render determinista, `docs/5-tecnica/THREEJS.md`): HyperFrames puede pedir el cuadro 3,2 s antes que el 1,0 s, o repetirlo. Una simulación avanza paso a paso y guarda estado, así que no se puede correr "en vivo" dentro del render.
 
 ## Solución: **hornear** la simulación
 1. `videos/X/fisica.mjs` describe el mundo (piso, cuerpos, rebote, fricción). Ejemplo: `videos/_plantilla/fisica.ejemplo.mjs`.
@@ -27,7 +27,7 @@ Medido: 20 cubos × 5 s → 43 ms, dos corridas dan resultados **idénticos** (v
 | **Debug** (`<Debug/>` dibuja los colliders) | Si un objeto "flota" o se hunde, dibujar los colliders como alambre para ver el desfase. |
 
 ## Lo que NO se toma
-- **React/R3F, `<Physics>`, hooks, `InstancedRigidBodies`**: no tenemos React; instancing no hace falta (docs/THREEJS.md §5).
+- **React/R3F, `<Physics>`, hooks, `InstancedRigidBodies`**: no tenemos React; instancing no hace falta (docs/5-tecnica/THREEJS.md §5).
 - **Bucle en vivo (`updateLoop`, `useFrame`, `FrameStepper`)**: rompe el render determinista. Todo se hornea.
 - **Interacción del usuario / controles / `Attractor`**: es video, no interactivo; el "empujón" se programa en el spec (posición inicial, `applyImpulse` en un paso dado).
 - Un detalle: `scaleColliderArgs` de `utils-collider.ts` tiene un error (multiplica `s.x` tres veces en vez de x/y/z); si alguna vez se escala un collider, calcularlo a mano.

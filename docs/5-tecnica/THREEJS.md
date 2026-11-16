@@ -1,9 +1,9 @@
 # three.js en la fábrica de reels: cómo trabajamos y qué criterios usamos
-Resume la investigación de Ayrton (`docs/material/2026-11-threejs-guia-profesional-r187.md`, guía "Three.js para videos y reels con calidad profesional", r187), el artículo "100 consejos de Three.js que mejoran el rendimiento" (Utsubo, 2026) y lo que **verificamos probando** acá (r187, CPU sin GPU). La documentación oficial (threejs.org) está bloqueada desde la nube; ante una duda de API se lee el código del paquete (`node_modules/three`, `examples/jsm`) o la wiki en `raw.githubusercontent.com`. **Todo tiene que encajar con la estética HackTheBox** (azul-negro + lima; `docs/ESTILO.md`).
+Resume la investigación de Ayrton (`docs/4-referencias/material/2026-11-threejs-guia-profesional-r187.md`, guía "Three.js para videos y reels con calidad profesional", r187), el artículo "100 consejos de Three.js que mejoran el rendimiento" (Utsubo, 2026) y lo que **verificamos probando** acá (r187, CPU sin GPU). La documentación oficial (threejs.org) está bloqueada desde la nube; ante una duda de API se lee el código del paquete (`node_modules/three`, `examples/jsm`) o la wiki en `raw.githubusercontent.com`. **Todo tiene que encajar con la estética HackTheBox** (azul-negro + lima; `docs/2-estilo/ESTILO.md`).
 
 ## 1. Stack y flujo (ya montado)
 - HyperFrames renderiza cada cuadro buscando el tiempo en el timeline (determinístico): nuestras escenas 3D dibujan **como función del tiempo local** `t` (`E.animar`), sin reloj, sin `requestAnimationFrame`, sin azar. Es lo que la guía llama "render offline determinista"; no hace falta Mediabunny/Remotion/CCapture.
-- `assets/escena3d.js` (librería compartida) + `three.module.js`/`three.core.js` (r187) + `RoundedBoxGeometry.js` + `RoomEnvironment.js`, todo **local** (sin CDN). Una escena = `<canvas>` + HTML encima + `crear(root)`. Detalle de uso en `docs/CAMARA.md`.
+- `assets/escena3d.js` (librería compartida) + `three.module.js`/`three.core.js` (r187) + `RoundedBoxGeometry.js` + `RoomEnvironment.js`, todo **local** (sin CDN). Una escena = `<canvas>` + HTML encima + `crear(root)`. Detalle de uso en `docs/2-estilo/CAMARA.md`.
 - Texto siempre HTML sobre el 3D (nítido, con la tipografía de marca); se ubica sobre puntos 3D con `E.label`.
 
 ## 2. El "look" en 3D (lo que hace la librería)

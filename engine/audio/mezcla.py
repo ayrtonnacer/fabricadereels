@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Mezcla final: voz + efectos + música -> <video>/audio/mezcla.wav, y si existe out/mudo.mp4 lo une en <video>/final.mp4.
 Uso: python engine/audio/mezcla.py videos/<video> [--musica ruta.mp3] [--desde seg] [--db -8] [--sfx 1.25]
-Reglas (docs/AUDIO.md): voz a -14 LUFS (referencia); efectos y música bajan solos cuando habla la voz (sidechain);
-música con fade in 1.5 s y fade out 3.5 s; arrancar la música en un tramo SIN silencios (ver docs/AUDIO.md)."""
+Reglas (docs/2-estilo/AUDIO.md): voz a -14 LUFS (referencia); efectos y música bajan solos cuando habla la voz (sidechain);
+música con fade in 1.5 s y fade out 3.5 s; arrancar la música en un tramo SIN silencios (ver docs/2-estilo/AUDIO.md)."""
 import argparse, json, subprocess
 from pathlib import Path
 ap = argparse.ArgumentParser(); ap.add_argument('video'); ap.add_argument('--musica'); ap.add_argument('--desde', type=float)

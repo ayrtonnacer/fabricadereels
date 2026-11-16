@@ -57,7 +57,7 @@ def sparkle(n=7):
         f=rng.uniform(2800,6500); t0=int(SR*k*0.055); d=0.18; s=np.sin(2*np.pi*f*tt(d))*env(int(SR*d),0.002,0.05)*0.5; out[t0:t0+len(s)]+=s
     return out
 
-# ---- capas del diseño sonoro (docs/AUDIO.md): impactos, graves, ambiente, reverb, samples ----
+# ---- capas del diseño sonoro (docs/2-estilo/AUDIO.md): impactos, graves, ambiente, reverb, samples ----
 from scipy.signal import fftconvolve
 from pathlib import Path
 import subprocess
@@ -126,7 +126,7 @@ class Track:
     def __init__(self, dur, sala=1.1):
         self.buf = np.zeros(int(SR * dur)); self.wet = np.zeros(int(SR * dur)); self.sala = sala
     def put(self, t, x, g=1.0, send=0.0):
-        """send (0..1) = cuánto del sonido va a la sala compartida (un solo cuarto para todo: lo que une los sonidos; ver docs/AUDIO.md)."""
+        """send (0..1) = cuánto del sonido va a la sala compartida (un solo cuarto para todo: lo que une los sonidos; ver docs/2-estilo/AUDIO.md)."""
         i = int(t * SR)
         if i < 0: return
         x = x[:max(0, len(self.buf) - i)]; self.buf[i:i + len(x)] += x * g

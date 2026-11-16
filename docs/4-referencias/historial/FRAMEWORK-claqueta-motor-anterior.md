@@ -1,4 +1,4 @@
-> **ARCHIVO HISTÓRICO (2026-11-10).** Describe el motor anterior ("Claqueta": `engine/camara3d.js`, `./reel`, `costuras.js`), reemplazado por HyperFrames + three.js. **Vigente:** `docs/CAMARA.md`, `docs/THREEJS.md` y `assets/escena3d.js`. Se conserva por las ideas (qué se probó y por qué), no como instrucciones.
+> **ARCHIVO HISTÓRICO (2026-11-10).** Describe el motor anterior ("Claqueta": `engine/camara3d.js`, `./reel`, `costuras.js`), reemplazado por HyperFrames + three.js. **Vigente:** `docs/2-estilo/CAMARA.md`, `docs/5-tecnica/THREEJS.md` y `assets/escena3d.js`. Se conserva por las ideas (qué se probó y por qué), no como instrucciones.
 
 # Claqueta: cómo funciona por dentro
 
@@ -36,7 +36,7 @@ Un video es una carpeta `videos/<AAAA-MM-tema>/` con:
 | Pieza | Qué hace |
 |---|---|
 | `engine/lib.js` | Tiempo y escenas (`timeline`, `installRender`), animaciones declarativas `data-a="up|left|pop|fade:inicio:duración"`, `data-show`, tipeo `data-type`, barra "Paso N de M", fondo. Easings `eo`, `eio`, `eb`; `hash` para azar determinístico. |
-| `engine/costuras.js` | Transiciones entre escenas con velocidad igualada (`"salida"` en video.json). `docs/MOVIMIENTO.md`. |
+| `engine/costuras.js` | Transiciones entre escenas con velocidad igualada (`"salida"` en video.json). `docs/2-estilo/MOVIMIENTO.md`. |
 | `engine/dinamismo.js` | Capa opcional de dinamismo: palabra gigante con blur, sello, resalte que se dibuja, zoom lento, cursor con clic. `docs/DINAMISMO.md`. |
 | `engine/camara3d.js` | Cámara 3D por tomas (dron FPV, órbita, cenital, vértigo, mover), transiciones automáticas, desenfoque de movimiento real, temblor, speed ramp, carteles 3D. `docs/CAMARA-3D.md`. |
 | `engine/themes/` | Estética: `cyber.css` (por defecto), `redteam.css` (opcional), `estados.css` (chips ok/aviso/error). Todo color por variables CSS. |

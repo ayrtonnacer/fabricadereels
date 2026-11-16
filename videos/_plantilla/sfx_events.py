@@ -1,4 +1,4 @@
-"""Efectos de la plantilla. Significados fijos en engine/audio/sfxlib.py (docstring) y docs/AUDIO.md.
+"""Efectos de la plantilla. Significados fijos en engine/audio/sfxlib.py (docstring) y docs/2-estilo/AUDIO.md.
 S[id] = segundo de inicio de cada escena (de video.json). Los tiempos de la cámara están en compositions/*.html:
 el whoosh va en el PICO de velocidad del movimiento, no al empezar."""
 from sfxlib import *

@@ -1,5 +1,5 @@
 /* Librería 3D de la fábrica de reels (three.js r187, local). Objetos de redes con la identidad HackTheBox, listos para reusar.
-   Todo es función del tiempo local `t` (determinístico; sin reloj ni azar). Guía de uso y criterios: docs/THREEJS.md.
+   Todo es función del tiempo local `t` (determinístico; sin reloj ni azar). Guía de uso y criterios: docs/5-tecnica/THREEJS.md.
 
    Uso en una composición (script de la escena):
      import('./assets/escena3d.js').then(async (M) => {
@@ -157,7 +157,7 @@ export async function crear(root, opts = {}) {
     const a = K[i], b = K[i + 1], k = (EASE[b.e || 'io'])(clamp((t - a.t) / Math.max(1e-6, b.t - a.t)));
     const mix = (u, v) => u.map((x, j) => x + (v[j] - x) * k);
     cam.position.set(...mix(a.p, b.p)); cam.lookAt(...mix(a.l, b.l));
-    for (const [tg, amp = 0.012, sem = 1] of golpes) {   // temblor de aterrizaje (docs/CAMARA.md regla 9): golpes = [[tGolpe, amplitud en metros, semilla], ...]; cero antes del golpe, decae solo
+    for (const [tg, amp = 0.012, sem = 1] of golpes) {   // temblor de aterrizaje (docs/2-estilo/CAMARA.md regla 9): golpes = [[tGolpe, amplitud en metros, semilla], ...]; cero antes del golpe, decae solo
       const o = temblor(t, tg, { amp, decay: 9, f: 19, sem }); if (o.x || o.y) { cam.position.x += o.x; cam.position.y += o.y; cam.rotation.z += o.rot; }
     }
   };

@@ -7,7 +7,7 @@ cierre: cta
 loop_principal: "Para una máquina, una foto, una canción y un texto son lo mismo (¿por qué?)."
 cierre_loop: "Por eso, para ella, todo es lo mismo: tensores."
 verificado: sí
-version: 5.2 (2026-11-13: revisión técnica — "bloque" en vez de "cubo", la voz dice que todos son tensores, cada dato con su forma en gancho/payoff, canales de color distintos, cierre con álgebra lineal, portada de 0,1 s; antes 5.1 2026-11-12: final: "si aprendés TensorFlow…" en vez del origen del nombre, a pedido de Ayrton)   # nivel didáctico del texto que pasó Ayrton (docs/material/2026-11-12-que-es-un-tensor.txt)
+version: 5.2 (2026-11-13: revisión técnica — "bloque" en vez de "cubo", la voz dice que todos son tensores, cada dato con su forma en gancho/payoff, canales de color distintos, cierre con álgebra lineal, portada de 0,1 s; antes 5.1 2026-11-12: final: "si aprendés TensorFlow…" en vez del origen del nombre, a pedido de Ayrton)   # nivel didáctico del texto que pasó Ayrton (docs/4-referencias/material/2026-11-12-que-es-un-tensor.txt)
 ---
 ## Criterio
 La v4 era correcta pero técnica (lote, capas, pérdida, PyTorch vs TensorFlow): no se entendía si no sabías ya. La v5 explica desde lo cotidiano, con **un solo ejemplo que crece de a una dimensión**: un píxel → una fila → una foto en blanco y negro → una foto en color → un video. Cada paso suma un eje y es un uso real. Después, los otros datos (sonido, texto) y qué hace la máquina con eso.
@@ -28,6 +28,6 @@ Recurso didáctico fijo: arriba de la pantalla, un **mapa de dimensiones** `0D �
 | 11 | cierre | Dale me gusta y seguime para aprender más sobre inteligencia artificial. | CTA grande, firma chica debajo, chinn | 50–55 |
 
 143 palabras; lectura medida: 42,6 s de voz, ~48 s con pausas → video de ~55 s (2,6 pal/s).
-Voz: sin "IA", "red", "arranca", "rojo" ni "herramienta" (r cortas que suenan mal). Lectura: `docs/material/pronunciacion/tensores-guion-v5-lectura.mp3`.
+Voz: sin "IA", "red", "arranca", "rojo" ni "herramienta" (r cortas que suenan mal). Lectura: `docs/4-referencias/material/pronunciacion/tensores-guion-v5-lectura.mp3`.
 Visual: nada pixelado como protagonista; la foto es un paisaje suave y la cuadrícula solo aparece al acercarse (es lo que se enseña). Los tintes rojo/verde/azul de las capas son la única excepción a la paleta y tienen significado (los canales).
 Datos: brillo de un píxel 0–255 en 8 bits; foto en color = alto × ancho × 3; video = cuadros × alto × ancho × 3; audio = muestras en el tiempo; texto = palabras convertidas en vectores (embeddings); TensorFlow se llama así por los tensores que "fluyen" por el cálculo.

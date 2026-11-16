@@ -4,14 +4,14 @@
 ## Para qué sirve (tres usos)
 1. **Analizar videos de referencia** que pase Ayrton (transiciones, movimientos de cámara, planos, sonido) y convertirlos en **números** (cortes, transiciones, cámara, ritmo, sonido) que se suman a la biblia de estilo, sin que él tenga que describirlos.
 2. **Verificar nuestros reels** antes de entregarlos (¿la cámara se mueve de forma suave?, ¿el ritmo de palabras es el que queremos?, ¿los cortes caen donde pensamos?) con `comparar.py` contra las metas.
-3. **Comparar** un reel propio contra la biblia de estilo (`docs/referencias/BIBLIA-DE-ESTILO.md`) o contra un video puntual, y ver qué número se aleja.
+3. **Comparar** un reel propio contra la biblia de estilo (`docs/4-referencias/BIBLIA-DE-ESTILO.md`) o contra un video puntual, y ver qué número se aleja.
 
 ## Cómo pasarme un video de referencia
 - **Adjuntá el .mp4** en el chat (arrastrar el archivo). Eso es todo: lo leo como archivo, no hace falta ningún "lenguaje de código".
 - Mejor un **recorte de 20–60 s** (alcanza y pesa poco). Con audio original si querés medir sonido.
 - YouTube/TikTok **no se pueden abrir desde la nube** (bloqueados). En tu compu: `yt-dlp -f "bv*[height<=1080]+ba/b" --merge-output-format mp4 "<link>"` o una grabación de pantalla, y lo adjuntás.
 - Si querés medir también el ritmo de la voz, pegá la **transcripción** (los subtítulos del video sirven).
-- Yo corro `medir.py`, guardo el informe en `docs/referencias/externos/<nombre>/` (o `propios/<reel>/`), regenero las tablas con `python engine/analisis/biblia.py` y te cuento qué aprendí. **Se toma la estructura (ritmo, cámara, sonido), nunca el contenido.**
+- Yo corro `medir.py`, guardo el informe en `docs/4-referencias/externos/<nombre>/` (o `propios/<reel>/`), regenero las tablas con `python engine/analisis/biblia.py` y te cuento qué aprendí. **Se toma la estructura (ritmo, cámara, sonido), nunca el contenido.**
 
 ## Comandos
 ```
@@ -50,19 +50,19 @@ Salida en `salida/`: `INFORME.md` (lectura en español, con tabla de cortes/tran
 30 fps es el estándar de contenido explicativo en redes (cine 24; web/redes 30; 60 para acción rápida o gaming). Reels, TikTok y Shorts aceptan hasta 60. Nuestros reels se renderizan a **30 fps** (HyperFrames por defecto) y está medido que alcanza: la cámara va a una velocidad mediana de **13 px/s** y su p95 es **141 px/s ≈ 4,7 px por cuadro**; el parpadeo por saltos recién aparece cuando el movimiento pasa de ~15 px por cuadro. 60 fps duplicaría el tiempo de render sin ganancia visible; solo valdría para movimientos muy rápidos. El analizador mide cada cuadro a la tasa nativa del video (si una referencia está a 60 fps, mide a 60).
 
 ## Hallazgos
-Van en un solo lugar, con números y comparados con las referencias: `docs/referencias/BIBLIA-DE-ESTILO.md`. (Voz del WiFi v4: 3,11 palabras/s contra una meta de 2,6–2,9; ver la biblia.)
+Van en un solo lugar, con números y comparados con las referencias: `docs/4-referencias/BIBLIA-DE-ESTILO.md`. (Voz del WiFi v4: 3,11 palabras/s contra una meta de 2,6–2,9; ver la biblia.)
 
 ## Regla de uso
-Antes de entregar un reel: `medir.py` sobre `final.mp4` con la transcripción, mirar el **tirón**, el **ritmo de palabras** y que los **cortes** caigan donde dice el `plan.md`; correr `comparar.py videos/X/analisis/metricas.json`, guardar el informe en `docs/referencias/propios/<reel>/` y correr `biblia.py`. Cuando Ayrton pase una referencia: medirla primero y recién después proponer.
+Antes de entregar un reel: `medir.py` sobre `final.mp4` con la transcripción, mirar el **tirón**, el **ritmo de palabras** y que los **cortes** caigan donde dice el `plan.md`; correr `comparar.py videos/X/analisis/metricas.json`, guardar el informe en `docs/4-referencias/propios/<reel>/` y correr `biblia.py`. Cuando Ayrton pase una referencia: medirla primero y recién después proponer.
 
 ## earshot: oídos para el audio (Leonxlnx/earshot, MIT)
-- Sirve para **describir y comparar sonidos con palabras y números**: `earshot describe a.wav`, `earshot ab A.wav B.wav` (diferencias en palabras + parecido CLAP), `earshot critique film.mp4` (tarjeta contra films profesionales), `earshot timeline`, `earshot sfx/kit` (banco de 252 efectos hechos en código). Usado el 2026-11-11 para afinar la voz Adjutant (`docs/AUDIO.md`).
+- Sirve para **describir y comparar sonidos con palabras y números**: `earshot describe a.wav`, `earshot ab A.wav B.wav` (diferencias en palabras + parecido CLAP), `earshot critique film.mp4` (tarjeta contra films profesionales), `earshot timeline`, `earshot sfx/kit` (banco de 252 efectos hechos en código). Usado el 2026-11-11 para afinar la voz Adjutant (`docs/2-estilo/AUDIO.md`).
 - **No viene instalado**: en cada sesión nueva hay que instalarlo (≈ 10 min la primera vez): `git clone https://github.com/Leonxlnx/earshot` → `python3 -m venv v && v/bin/pip install torch --index-url https://download.pytorch.org/whl/cpu && v/bin/pip install -e earshot` → `v/bin/earshot doctor --fetch` (baja 1,1 GB de modelos). Requiere salida a internet a: `huggingface.co`, `cdn-lfs.huggingface.co`, `cdn-lfs.hf.co`, `cas-bridge.xethub.hf.co`, `cas-server.xethub.hf.co`, `us.aws.cdn.hf.co`, `download.pytorch.org` (ya están en el entorno "fabricadereels", creado el 2026-11-11).
 - Lección: el parecido CLAP (coseno) mide sobre todo el contenido (voz, frase); usarlo para **comparar variantes entre sí**, y confiar en `describe`/`ab` (brillo, cola, piso de ruido, etiquetas AudioSet) para saber QUÉ cambiar.
 
 
 ## Continuidad entre escenas (2026-11-15)
-`python engine/analisis/arrastre.py final.mp4 --escenas videos/X/video.json [--json arrastre.json]` — puntaje 0–1 por corte (cuánto de lo que había sigue después) + % de cuadros quietos, tramo quieto máximo y variación de los planos. Idea de `probe.py` de onetake (código propio, solo numpy/PIL/ffmpeg). Umbrales de referencia: medio ≥ 0,5; < 0,2 = diapositiva; CV de planos ≥ 0,25; ≥ 25 % quietos. Es una heurística: mirar siempre los cuadros de cada límite. Estudio completo: `docs/material/2026-11-onetake.md`.
+`python engine/analisis/arrastre.py final.mp4 --escenas videos/X/video.json [--json arrastre.json]` — puntaje 0–1 por corte (cuánto de lo que había sigue después) + % de cuadros quietos, tramo quieto máximo y variación de los planos. Idea de `probe.py` de onetake (código propio, solo numpy/PIL/ffmpeg). Umbrales de referencia: medio ≥ 0,5; < 0,2 = diapositiva; CV de planos ≥ 0,25; ≥ 25 % quietos. Es una heurística: mirar siempre los cuadros de cada límite. Estudio completo: `docs/4-referencias/material/2026-11-onetake.md`.
 `arrastre.py` también imprime un **mapa de energía** (1 carácter ≈ 1/12 s, una fila = 4 s; espacio = quieto … `@` = corte duro) para ver de un vistazo dónde hay pausas y ráfagas.
 `python engine/analisis/barro.py final.mp4` — reparte la energía en bandas por ventana de 0,5 s y avisa si se acumulan los graves-medios (100–300 Hz). Alarma, no meta.
 

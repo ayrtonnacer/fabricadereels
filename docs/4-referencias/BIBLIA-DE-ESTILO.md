@@ -1,5 +1,5 @@
 # Biblia de estilo medida
-Qué funciona en un reel de motion graphics, **con números**. Se construye midiendo videos (`engine/analisis/medir.py`) y no se opina sobre ellos: *"una opinión no la puedes recrear, un número sí"* (idea del repo de LuisPa, `docs/MEDICION.md`). Es el equivalente a su "biblia de estilo", pero de nuestro estilo (HackTheBox, 3D, explicativo).
+Qué funciona en un reel de motion graphics, **con números**. Se construye midiendo videos (`engine/analisis/medir.py`) y no se opina sobre ellos: *"una opinión no la puedes recrear, un número sí"* (idea del repo de LuisPa, `docs/5-tecnica/MEDICION.md`). Es el equivalente a su "biblia de estilo", pero de nuestro estilo (HackTheBox, 3D, explicativo).
 
 - **Cómo se usa**: antes de planear un reel se leen las metas (`metas.json`, abajo); se escriben en `videos/X/plan.md`; después de renderizar se corre `python engine/analisis/comparar.py videos/X/analisis/metricas.json` y se corrige lo que quede fuera de rango.
 - **Datos**: una carpeta por video en `externos/` (referencias) y `propios/` (nuestros reels), cada una con `INFORME.md` (lectura), `metricas.json` (números) y `hoja_resumen.jpg` (un cuadro por segundo).

@@ -24,4 +24,4 @@ Ayrton: "tuvo mejor impacto de lo que esperé". Comparado con el reel anterior (
 ## Cómo seguir juntando feedback
 - Después de publicar cada reel, anotar acá: comentarios textuales (amigos, comentarios de Instagram/TikTok/YouTube) y, si los hay, números de la plataforma: **retención a los 3 s, promedio de visualización, % que vio todo, compartidos y guardados**. Los números valen más que las opiniones, y las opiniones explican los números.
 - Preguntar siempre **comparando con el reel anterior** ("¿qué te gustó más de este que del otro?"). Así salió el feedback más útil.
-- Guardar las capturas de las métricas en `docs/material/` con la fecha.
+- Guardar las capturas de las métricas en `docs/4-referencias/material/` con la fecha.

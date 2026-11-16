@@ -1,7 +1,7 @@
 # Movimiento y transiciones (doctrina)
 
 Fuente: reglas de movimiento de **HyperFrames** (heygen-com/hyperframes, Apache-2.0: `motion-doctrine`, `cut-the-curve`, `references/motion.md`, `review.md`), medidas por ellos cuadro a cuadro en sus propios videos. Revisado el 2026-11-08 y adaptado a este motor; **no usamos HyperFrames** (ver "Qué se tomó y qué no" al final).
-**Vigente como doctrina** (vale para cualquier herramienta). Implementación hoy: las transiciones se arman en cada escena (`videos/X/compositions/*.html`) y la cámara con `E.ruta` de `assets/escena3d.js` (`docs/CAMARA.md`); los chequeos son `npx hyperframes check` + `python engine/analisis/medir.py`. (Antes: `costuras.js`, `camara3d.js`, `revisar.py` del motor anterior.)
+**Vigente como doctrina** (vale para cualquier herramienta). Implementación hoy: las transiciones se arman en cada escena (`videos/X/compositions/*.html`) y la cámara con `E.ruta` de `assets/escena3d.js` (`docs/2-estilo/CAMARA.md`); los chequeos son `npx hyperframes check` + `python engine/analisis/medir.py`. (Antes: `costuras.js`, `camara3d.js`, `revisar.py` del motor anterior.)
 
 ## 1. La ley del vector (lo más importante)
 > Cómo SALE una escena decide cómo ENTRA la siguiente: mismo eje, misma dirección, misma velocidad, y el corte cae a mitad del movimiento de los dos lados.
@@ -28,7 +28,7 @@ Cada reel elige UNA dirección dominante (la "corriente"; por defecto, izquierda
 
 ## 3. Portadores y causa
 - El ojo sigue objetos, no abstracciones. La mejor transición le pasa un **portador** al otro lado: el cursor a mitad de camino, una tarjeta que se achica y se acomoda en la escena siguiente, la pantalla de la notebook que se convierte en el mundo nuevo, el nodo que la cámara atraviesa.
-- **Movimiento causal**: cada movimiento lo dispara el anterior (clic → se aplasta → sale disparado → impacta → rebota → aparece). El efecto empieza EN el cuadro de la causa, nunca "un ratito después". El sonido también (docs/AUDIO.md: el whoosh en el pico).
+- **Movimiento causal**: cada movimiento lo dispara el anterior (clic → se aplasta → sale disparado → impacta → rebota → aparece). El efecto empieza EN el cuadro de la causa, nunca "un ratito después". El sonido también (docs/2-estilo/AUDIO.md: el whoosh en el pico).
 - **Quietud antes del clímax**: 0,3–0,75 s de pausa entre la acción y el resultado (la coma dramática). El payoff se ve a velocidad normal.
 
 ## 4. Catálogo de transiciones (`"salida"` en video.json)

@@ -1,5 +1,5 @@
 # Cómo escribir el guion
-Base: `docs/INVESTIGACION-GUIONES.md` (investigación completa, con fuentes y plantillas por tipo de reel). Acá va lo que se aplica siempre. Donde la investigación choca con una decisión de Ayrton, gana Ayrton (ver "Conflictos").
+Base: `docs/3-guion/INVESTIGACION-GUIONES.md` (investigación completa, con fuentes y plantillas por tipo de reel). Acá va lo que se aplica siempre. Donde la investigación choca con una decisión de Ayrton, gana Ayrton (ver "Conflictos").
 
 ## Público
 **Mixto** (Ayrton, 2026-11-09): gente técnica, **principiantes que están aprendiendo** y **reclutadores** que buscan perfiles técnicos. Los reels son también el portfolio de Ayrton: tienen que **demostrar que sabe**. Entonces:
@@ -29,7 +29,7 @@ Hook-promesa (0–3 s) → Contexto mínimo (3–7) → Cuerpo A (7–20) → Mi
 - Proceso: elegir concepto → buscar el ángulo (error, historia, sorpresa) → **escribir primero el payoff y después el hook** → elegir la analogía visual antes del cuerpo (rueda, interruptores, embudo, resto) → recortar sin piedad.
 
 ## Calibración de la voz (medido en este repo)
-- Piper Daniela con `length_scale 0.92` habla ≈ 3,4 palabras/s *mientras habla*; con pausas y escenas, el video completo da **≈ 2,3 palabras/s**. **Planificar con 2,3 wps** (ojo: el reel de WiFi, con 103 palabras en 33 s, midió **3,11 pal/s** en total y 3,9 hablando; la referencia citada es 2,77. Para público que aprende, apuntar a ~2,8 y recortar o bajar la velocidad de la voz; ver `docs/MEDICION.md`) (la investigación sugiere 2,5 genérico): 30 s ≈ 69 palabras, 45 s ≈ 103, 60 s ≈ 138.
+- Piper Daniela con `length_scale 0.92` habla ≈ 3,4 palabras/s *mientras habla*; con pausas y escenas, el video completo da **≈ 2,3 palabras/s**. **Planificar con 2,3 wps** (ojo: el reel de WiFi, con 103 palabras en 33 s, midió **3,11 pal/s** en total y 3,9 hablando; la referencia citada es 2,77. Para público que aprende, apuntar a ~2,8 y recortar o bajar la velocidad de la voz; ver `docs/5-tecnica/MEDICION.md`) (la investigación sugiere 2,5 genérico): 30 s ≈ 69 palabras, 45 s ≈ 103, 60 s ≈ 138.
 - Contar palabras *como se pronuncian*: "777" = 3, "SHA-256" = 4–5, "@ayrtonnacer" = "arroba ayrton nacer".
 
 ## Lo visual del guion (Mayer + práctica)
@@ -57,5 +57,5 @@ La plantilla fija la **arquitectura** (bloques, tiempos, campos), no las frases,
 - [ ] Concepto en ≤ 12 palabras. [ ] Hook ≤ 3 s, promesa que se cumple. [ ] Primer cuadro concreto.
 - [ ] Un loop abierto en el hook y cerrado en el payoff, antes del CTA. [ ] Palabras pronunciadas ≤ duración × 2,3.
 - [ ] Sin muletillas de IA ni términos sin explicar. [ ] Al menos una marca personal. [ ] Cifras y comandos verificados/ejecutados.
-- [ ] Cada bloque con visual sincronizado a una palabra y su movimiento de cámara (`docs/CAMARA.md`); nada quieto > 3 s. [ ] Otro tipo de hook y de analogía que el video anterior.
+- [ ] Cada bloque con visual sincronizado a una palabra y su movimiento de cámara (`docs/2-estilo/CAMARA.md`); nada quieto > 3 s. [ ] Otro tipo de hook y de analogía que el video anterior.
 Plantilla de guion: `videos/_plantilla/guion.md`.

@@ -1,5 +1,5 @@
 # Temas de color
-El tema por defecto vive en `videos/_plantilla/assets/marca.css` (y cada video tiene su copia). Hoy es **Scale** (desde 2026-11-14): negro puro, objetos 3D de línea gris, acento Foundry Tan `#A8927C`, Host Grotesk + Geist Mono. Detalle en `docs/ESTILO.md`.
+El tema por defecto vive en `videos/_plantilla/assets/marca.css` (y cada video tiene su copia). Hoy es **Scale** (desde 2026-11-14): negro puro, objetos 3D de línea gris, acento Foundry Tan `#A8927C`, Host Grotesk + Geist Mono. Detalle en `docs/2-estilo/ESTILO.md`.
 
 Temas alternativos (no se usan salvo que Ayrton lo pida):
 | Archivo | Tema | Hasta |

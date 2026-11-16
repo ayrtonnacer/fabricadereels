@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Mide un video como un instrumento: pasa la percepción ("se siente suave", "va rápido") a NÚMEROS repetibles (docs/MEDICION.md).
+"""Mide un video como un instrumento: pasa la percepción ("se siente suave", "va rápido") a NÚMEROS repetibles (docs/5-tecnica/MEDICION.md).
 Uso:  python engine/analisis/medir.py video.mp4 carpeta_salida [--transcripcion texto.txt] [--hojas]
 Salida en carpeta_salida/:
   metricas.json   resumen: imagen, cortes, cámara (movimiento, zoom, velocidad, tirón/jerk), audio
@@ -158,7 +158,7 @@ def ataque_liberacion(fuerza, pico, fps):
 
 
 def ritmo_camara(movs, n, fps):
-    """Gramática 'mover–retener–mover' y forma del movimiento, en números (docs/MEDICION.md)."""
+    """Gramática 'mover–retener–mover' y forma del movimiento, en números (docs/5-tecnica/MEDICION.md)."""
     dur = n / fps; fuertes = [m for m in movs if m['vel_max_px_s'] >= 100]                       # los que se notan (no deriva)
     huecos = [movs[i + 1]['desde_s'] - movs[i]['hasta_s'] for i in range(len(movs) - 1)]
     ret = [h for h in huecos if h >= 0.5]

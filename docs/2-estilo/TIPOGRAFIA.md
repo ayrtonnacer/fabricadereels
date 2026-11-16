@@ -1,5 +1,5 @@
 # Tipografía: viudas, huérfanas y palabras sueltas
-Fuente: artículo de Adobe que pasó Ayrton (`docs/material/2026-11-viudas-y-huerfanas-adobe.pdf`). Su definición: una **viuda** es una palabra suelta o línea corta al final de un párrafo; una **huérfana**, al principio de una página o columna, separada del resto del párrafo. En pantalla las dos nos molestan por lo mismo: **una palabra sola colgando** ("Por eso a veces no / **llega**" — caso real del reel de WiFi, marcado por Ayrton).
+Fuente: artículo de Adobe que pasó Ayrton (`docs/4-referencias/material/2026-11-viudas-y-huerfanas-adobe.pdf`). Su definición: una **viuda** es una palabra suelta o línea corta al final de un párrafo; una **huérfana**, al principio de una página o columna, separada del resto del párrafo. En pantalla las dos nos molestan por lo mismo: **una palabra sola colgando** ("Por eso a veces no / **llega**" — caso real del reel de WiFi, marcado por Ayrton).
 
 ## Reglas para los videos
 1. **Nunca una palabra sola en la última línea** de un bloque de 2 líneas o más (titulares, bajadas, subtítulos, tarjetas).

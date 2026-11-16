@@ -13,11 +13,11 @@ Abrí una sesión de Claude Code sobre este repo: carga `CLAUDE.md`. Pegá una f
 Vista previa a mano: `cd videos/X && npx hyperframes preview`.
 
 ## Mapa del repo
-- `CLAUDE.md` — reglas y comandos (empezar acá). `docs/LEEME.md` — mapa de todos los documentos.
+- `CLAUDE.md` — reglas y comandos (empezar acá). `docs/BIBLIA.md` — mapa de todos los documentos.
 - `videos/` — un video = una carpeta (`_plantilla/` es el punto de partida; estado de cada uno en `videos/LEEME.md`).
 - `engine/` — scripts: voz, subtítulos, efectos, mezcla, medición.
 - `assets/` — voces, música, sonidos propios (`sfx/propios/`) y los 10 videos de referencia (`referencias/`).
-- `docs/` — manual, preferencias, bitácora, referencias medidas (`docs/referencias/`). Para entender el proyecto: `docs/CANAL.md` (visión) y `docs/PUBLICO.md` (para quién).
+- `docs/` — manual, preferencias, bitácora, referencias medidas (`docs/4-referencias/`). Para entender el proyecto: `docs/1-canal/CANAL.md` (visión) y `docs/1-canal/PUBLICO.md` (para quién).
 
 ## GitHub, en simple
 Hay una sola rama: `main`. Todo se guarda y se sube ahí; no hace falta usar ramas ni pull requests.

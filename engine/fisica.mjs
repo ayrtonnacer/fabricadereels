@@ -1,6 +1,6 @@
 // Hornea una simulación de física (Rapier) a un JSON que la escena 3D reproduce como función del tiempo.
 // Uso:  node engine/fisica.mjs videos/X/fisica.mjs [salida.json]   (por defecto videos/X/assets/fisica.json)
-// El spec exporta { dur, fps?, gravedad?, crear(R, w) -> { nombre: RigidBody } }. Ver docs/FISICA.md.
+// El spec exporta { dur, fps?, gravedad?, crear(R, w) -> { nombre: RigidBody } }. Ver docs/5-tecnica/FISICA.md.
 import { pathToFileURL } from 'node:url';
 import { writeFileSync } from 'node:fs';
 import { dirname, resolve, join } from 'node:path';

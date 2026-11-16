@@ -1,4 +1,4 @@
-"""Efectos del reel de WiFi. Significados fijos (docs/AUDIO.md). S[id] = inicio de cada escena. Whoosh en el PICO del movimiento de cámara."""
+"""Efectos del reel de WiFi. Significados fijos (docs/2-estilo/AUDIO.md). S[id] = inicio de cada escena. Whoosh en el PICO del movimiento de cámara."""
 from sfxlib import *
 
 

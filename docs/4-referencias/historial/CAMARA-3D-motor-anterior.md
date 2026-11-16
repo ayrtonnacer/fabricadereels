@@ -1,4 +1,4 @@
-> **ARCHIVO HISTÓRICO (2026-11-10).** Describe el motor anterior ("Claqueta": `engine/camara3d.js`, `./reel`, `costuras.js`), reemplazado por HyperFrames + three.js. **Vigente:** `docs/CAMARA.md`, `docs/THREEJS.md` y `assets/escena3d.js`. Se conserva por las ideas (qué se probó y por qué), no como instrucciones.
+> **ARCHIVO HISTÓRICO (2026-11-10).** Describe el motor anterior ("Claqueta": `engine/camara3d.js`, `./reel`, `costuras.js`), reemplazado por HyperFrames + three.js. **Vigente:** `docs/2-estilo/CAMARA.md`, `docs/5-tecnica/THREEJS.md` y `assets/escena3d.js`. Se conserva por las ideas (qué se probó y por qué), no como instrucciones.
 
 # Cámara 3D estilo After Effects (recorridos, cenital, latigazos)
 
@@ -14,7 +14,7 @@ El **3D Camera Tracker** de AE es otra cosa: analiza un video filmado para pegar
 | Composición 3D | `THREE.Scene` con el "set" (racks, piso, objetos a escala real) |
 | Capa 3D de texto | `cartel(THREE, lineas, {ancho})` — plano con texto en las fuentes y colores del tema |
 | Cámara + null + keyframes | `Rig` con `toma()`s en tiempo GLOBAL: una sola cámara continua para todo el video |
-| Easy Ease / gráfico de velocidad | `ease`: `suave`, `salida`, `entrada`, `latigazo`, `lineal`, `llegada` (expo.out), `acelera`/`frena` (las dos mitades de un corte), `empujon` o una función. Qué curva para qué rol: `docs/MOVIMIENTO.md` §5 |
+| Easy Ease / gráfico de velocidad | `ease`: `suave`, `salida`, `entrada`, `latigazo`, `lineal`, `llegada` (expo.out), `acelera`/`frena` (las dos mitades de un corte), `empujon` o una función. Qué curva para qué rol: `docs/2-estilo/MOVIMIENTO.md` §5 |
 | Auto Bézier del camino | curvas Catmull-Rom con velocidad constante (`fpv`, `mover` con `via`) |
 | Motion blur (obturador 180°) | `MotionBlur`: promedia sub-cuadros reales, solo cuando la cámara va rápido |
 | Wiggle de cámara en mano | `temblor(T, amp, frec)` en `rig.extra` |

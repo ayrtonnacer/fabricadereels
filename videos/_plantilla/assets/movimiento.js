@@ -1,5 +1,5 @@
 // Biblioteca de movimientos puros: todo es función del tiempo local t (determinista, sin Math.random ni reloj) → compatible con el contrato de HyperFrames.
-// Escrita para este repo a partir de las ideas de docs/material/2026-11-onetake.md (las fórmulas son matemática estándar: resorte amortiguado, smootherstep, easing exponencial).
+// Escrita para este repo a partir de las ideas de docs/4-referencias/material/2026-11-onetake.md (las fórmulas son matemática estándar: resorte amortiguado, smootherstep, easing exponencial).
 // Uso:  import * as M from './assets/movimiento.js';  const k = M.resorte(t - t0); el.style... = ...  /  en three.js: cámara.position.x += M.temblor(t, tGolpe).x
 export const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 export const lerp = (a, b, k) => a + (b - a) * k;
@@ -38,7 +38,7 @@ export function temblor(t, tGolpe, { amp = 12, decay = 9, f = 19, sem = 1 } = {}
 }
 // Latigazo: desplazamiento 0→dist con curva exponencial (arranca y frena fuerte): para pasar de un punto a otro "de golpe".
 export const latigazo = (t, t0, dur, dist) => dist * expoInOut(seg(t, t0, t0 + dur));
-// Empuje lento: 1 → 1+cant. OJO: en una pausa NO usarlo (la pausa tiene que estar quieta; docs/CAMARA.md regla 9).
+// Empuje lento: 1 → 1+cant. OJO: en una pausa NO usarlo (la pausa tiene que estar quieta; docs/2-estilo/CAMARA.md regla 9).
 export const empuje = (t, t0, t1, cant = 0.07) => 1 + cant * seg(t, t0, t1);
 // Flotación de mano: dos senos lentos; `env` la apaga en las pausas (env=0 → cámara 100 % quieta).
 export function mano(t, { amp = 3, f1 = 0.31, f2 = 0.47 } = {}, env = 1) { return { x: env * amp * Math.sin(2 * Math.PI * f1 * t), y: env * amp * 0.7 * Math.sin(2 * Math.PI * f2 * t + 1.3) }; }

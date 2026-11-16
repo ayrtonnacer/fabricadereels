@@ -48,7 +48,7 @@ Números del reel de tensores medido (`referencias/propios/2026-11-tensores-scal
 
 **Banco de prueba estético (2026-11-15)**: `videos/2026-11-banco-estetica/RESULTADOS.md`. Encuadre (ancho del contenido 60 → 72 %, igual que las referencias), luz de contorno, desenfoque (rack focus con la voz) y cámara (en movimiento 28 → 64 %). Pendiente que Ayrton elija qué pasa a la plantilla; brecha que queda: la franja de abajo de los subtítulos vacía.
 
-**Próximo paso acordado (2026-11-15): juntar más referencias** de reels explicativos/contemplativos (cámara, luz, planos) antes de volver a cambiar el estilo. Con 3 afines las metas son provisorias; con 10–15 se pueden separar los patrones comunes de los casos particulares. Prioridad: reels **explicativos** (que enseñen un concepto) y no solo promos o collage; cómo cargarlos en `docs/MEDICION.md`. Cada una se mide y se mira cuadro a cuadro **antes** de proponer algo.
+**Próximo paso acordado (2026-11-15): juntar más referencias** de reels explicativos/contemplativos (cámara, luz, planos) antes de volver a cambiar el estilo. Con 3 afines las metas son provisorias; con 10–15 se pueden separar los patrones comunes de los casos particulares. Prioridad: reels **explicativos** (que enseñen un concepto) y no solo promos o collage; cómo cargarlos en `docs/5-tecnica/MEDICION.md`. Cada una se mide y se mira cuadro a cuadro **antes** de proponer algo.
 
 ## Cómo trabajaría un profesional de primer nivel (ideas para profundizar, no para agrandar)
 - **Partir de material crudo**: el paper, la documentación oficial o el libro de texto en vez de un artículo que ya lo resume. Y del lado del público, partir de las **métricas crudas** de cada reel (curva de retención, en qué segundo se van) en vez de opiniones.

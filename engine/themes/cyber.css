@@ -1,4 +1,4 @@
-/* Identidad de @ayrtonnacer (tema "cyber" / HackTheBox: azul-negro + lima). Reglas en docs/ESTILO.md.
+/* Identidad de @ayrtonnacer (tema "cyber" / HackTheBox: azul-negro + lima). Reglas en docs/2-estilo/ESTILO.md.
    Todo color va por variable: nunca escribir un color fijo en una escena.
    NO agregar: líneas de escaneo, esquinas en L / HUD, mayúsculas con espaciado amplio. */
 @font-face { font-family: "Plex Sans"; src: url("fonts/ibm-plex-sans-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
@@ -27,7 +27,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--sans); }
 
-/* ---- Set 2.5D (ver docs/CAMARA.md) ----
+/* ---- Set 2.5D (ver docs/2-estilo/CAMARA.md) ----
    .vista (perspectiva, recorta)  >  .cam (dolly z + giros)  >  .mundo (traslación x/y)  >  capas con data-x/y/z
    Las posiciones y profundidades las pone camara.js con GSAP; acá no se escribe ningún transform. */
 .vista { position: absolute; inset: 0; overflow: hidden; perspective: 1600px; }
@@ -43,7 +43,7 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--
 .vineta { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 45%, transparent 52%, rgba(0, 0, 0, .65) 100%); }
 
 /* Tipografía: espaciado normal o apretado, nunca abierto */
-.titular, .bajada, .tarjeta p { text-wrap: balance; }   /* sin palabras sueltas en la última línea (docs/TIPOGRAFIA.md) */
+.titular, .bajada, .tarjeta p { text-wrap: balance; }   /* sin palabras sueltas en la última línea (docs/2-estilo/TIPOGRAFIA.md) */
 .titular { font-weight: 700; font-size: 124px; line-height: .98; letter-spacing: -.03em; text-align: center; }
 .titular.chico { font-size: 92px; }
 .bajada { font-weight: 500; font-size: 50px; line-height: 1.25; color: var(--muted); text-align: center; }

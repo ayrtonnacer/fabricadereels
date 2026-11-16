@@ -1,4 +1,4 @@
-/* Cámara 2.5D para motion graphics (docs/CAMARA.md).
+/* Cámara 2.5D para motion graphics (docs/2-estilo/CAMARA.md).
    El set es HTML plano repartido en capas a distintas profundidades; una cámara con perspectiva viaja entre
    "estaciones". La profundidad sale del movimiento de cámara (paralaje), no de modelos 3D: renderiza rápido.
 

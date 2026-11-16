@@ -1,5 +1,5 @@
 # Profundidad: cámara y 3D
-> **Estándar actual (2026-11-09 noche): todos los objetos van en three.js (r187)** con la librería `assets/escena3d.js` (ver "Librería 3D" abajo y la guía completa en `docs/THREEJS.md`). El sistema CSS 2.5D (`camara.js`) queda como alternativa para piezas puramente tipográficas, pero ya no se usa en los reels. Pedido de Ayrton: aprovechar el eje z y la perspectiva de los objetos 3D, siempre que el render no se vuelva lento (medido abajo).
+> **Estándar actual (2026-11-09 noche): todos los objetos van en three.js (r187)** con la librería `assets/escena3d.js` (ver "Librería 3D" abajo y la guía completa en `docs/5-tecnica/THREEJS.md`). El sistema CSS 2.5D (`camara.js`) queda como alternativa para piezas puramente tipográficas, pero ya no se usa en los reels. Pedido de Ayrton: aprovechar el eje z y la perspectiva de los objetos 3D, siempre que el render no se vuelva lento (medido abajo).
 
 ## Gramática de cámara (2026-11-15, después del banco de prueba)
 Lo que pidió Ayrton: cámara de película, **siempre al servicio de que se entienda**. Lo que falló en el banco v4: moverse todo el tiempo y hacer zoom de más.
@@ -9,7 +9,7 @@ Lo que pidió Ayrton: cámara de película, **siempre al servicio de que se enti
 4. **Plano continuo en vez de corte.** Dentro de una misma idea no se corta: el objeto se transforma en el siguiente (el píxel sale de la foto, la fila crece a planilla, la planilla se apila en bloque). Se corta solo al cambiar de tema.
 5. **Nunca desenfocar ni recortar lo que se explica.** El zoom no puede dejar el objeto cortado si hay que leerlo.
 6. **Las metas de `metas.json` son una alarma, no un objetivo.** Si el ojo dice que confunde, gana el ojo.
-7. **Seguir anticipando (de onetake, `docs/material/2026-11-onetake.md`)**: la cámara apunta ~0,1 s por DELANTE del objeto (`sineInOut`) y, antes de un golpe, fija el punto de aterrizaje y va hasta él con `expoInOut`; así sigue al sujeto sin perderlo. Menos movimiento, mejor puesto.
+7. **Seguir anticipando (de onetake, `docs/4-referencias/material/2026-11-onetake.md`)**: la cámara apunta ~0,1 s por DELANTE del objeto (`sineInOut`) y, antes de un golpe, fija el punto de aterrizaje y va hasta él con `expoInOut`; así sigue al sujeto sin perderlo. Menos movimiento, mejor puesto.
 8. **Un límite = algo que sobrevive.** En cada cambio de escena, un objeto (o un contenedor, o la cámara que empuja hasta llenar el cuadro) tiene que seguir y transformarse en lo siguiente. Se anota en el plan (columna "qué sobrevive") y se mide con `engine/analisis/arrastre.py` (meta: medio ≥ 0,5; ningún límite en 0,0 salvo el cambio de tema o el cierre del CTA).
 9. **Pausas de verdad quietas**: ≥ 25 % de los cuadros sin movimiento y al menos un tramo ≥ 1 s; en una pausa no hay push-in ni flotación. **Temblor** decreciente y determinista solo en los aterrizajes. Variación de planos ≥ 4× (el más largo contra el más corto); no terminar dos planos seguidos igual; no reencuadrar con saltos iguales cada beat (metrónomo).
 
@@ -60,7 +60,7 @@ Pose: `x`, `y` (px del mundo; 0,0 = centro), `z` (+ acerca / − aleja), `rx` (i
 | **Inclinar (tilt)** | `rx` 6–20 | mostrar el piso, sensación de "mirar desde arriba" |
 | **Zoom through** | `z` hasta +1500 en 0,6 s, `power3.in` | transición: atravesar un objeto; la escena siguiente arranca en `z:900` y se asienta |
 | **Pull-back (revelar)** | de `z:+700` pegado a un detalle a `z:0` | revelar el contexto de un dato (no en el cierre: ahí el foco es el CTA) |
-| **Recorrido de código** | estación = bloque de código; zoom `z:+400…600`, después `y` = alto de línea × n.º de línea, pausa de lectura por línea, y vuelta a `z:0` | explicar un fragmento línea por línea (de code-reel-studio, `docs/material/2026-11-code-reel-studio.md`) con `zoom-click` en el zoom in/out |
+| **Recorrido de código** | estación = bloque de código; zoom `z:+400…600`, después `y` = alto de línea × n.º de línea, pausa de lectura por línea, y vuelta a `z:0` | explicar un fragmento línea por línea (de code-reel-studio, `docs/4-referencias/material/2026-11-code-reel-studio.md`) con `zoom-click` en el zoom in/out |
 | **Aterrizaje en el CTA** | desde `z:-700, rx:14` a `z:0, rx:5`, expo.out 1,1 s, y queda quieta | cierre: el foco es el llamado; la firma aparece después, chica, sin zoom |
 
 Reglas: un movimiento = una intención. Llegadas lentas con cola larga (`expo.out`), viajes `power2/3.inOut`, salidas que aceleran (`power3.in`). En el corte entre escenas, misma dirección y velocidad a ambos lados. **El whoosh va en el pico de velocidad** (la mitad de un `inOut`, el final de un `in`). Nada de "flotar/respirar" en loop ni temblores sin motivo.
@@ -72,7 +72,7 @@ Reglas: un movimiento = una intención. Llegadas lentas con cola larga (`expo.ou
 4. Desenfoque: en entradas de texto (blur → 0). Para un rack focus real entre dos planos, usar el bloque del registro (`npx hyperframes catalog --tag camera`).
 
 ## Referencias
-Scripts técnicos de reels de referencia en `docs/referencias/` (Ayrton los va pasando). Cuando una referencia trae un movimiento nuevo, se agrega a la tabla de arriba.
+Scripts técnicos de reels de referencia en `docs/4-referencias/` (Ayrton los va pasando). Cuando una referencia trae un movimiento nuevo, se agrega a la tabla de arriba.
 
 ## Profundidad en el eje z (lo que se hace en cada escena)
 Para que no quede todo plano en z = 0:

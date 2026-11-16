@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compara un video propio contra la biblia de estilo (o contra una referencia puntual) y dice qué número se aleja (docs/MEDICION.md).
+"""Compara un video propio contra la biblia de estilo (o contra una referencia puntual) y dice qué número se aleja (docs/5-tecnica/MEDICION.md).
 Uso:
   python engine/analisis/comparar.py propio/metricas.json                      # contra metas.json + referencias afines (lo normal)
   python engine/analisis/comparar.py referencia/metricas.json propio/metricas.json [--tolerancia 25]   # contra un video puntual

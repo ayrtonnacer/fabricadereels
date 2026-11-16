@@ -1,4 +1,4 @@
-"""Efectos del reel "Qué es un tensor". Significados fijos en engine/audio/sfxlib.py y docs/AUDIO.md.
+"""Efectos del reel "Qué es un tensor". Significados fijos en engine/audio/sfxlib.py y docs/2-estilo/AUDIO.md.
 S[id] = segundo de inicio de cada escena. Whoosh en el PICO de velocidad de cada movimiento de cámara (mitad de un 'io')."""
 from sfxlib import *
 

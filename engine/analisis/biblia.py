@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Arma las tablas numéricas de docs/referencias/BIBLIA-DE-ESTILO.md a partir de todos los metricas.json.
+"""Arma las tablas numéricas de docs/4-referencias/BIBLIA-DE-ESTILO.md a partir de todos los metricas.json.
 Uso: python engine/analisis/biblia.py            (reescribe las tablas entre <!-- TABLAS:inicio --> y <!-- TABLAS:fin -->)
-Fuentes: docs/referencias/externos/*/metricas.json (referencias), propios/*/metricas.json (nuestros reels), metas.json (rangos objetivo).
+Fuentes: docs/4-referencias/externos/*/metricas.json (referencias), propios/*/metricas.json (nuestros reels), metas.json (rangos objetivo).
 Los grupos son: TODAS (todas las referencias) y AFINES (las oscuras y contemplativas, parecidas a nuestro estilo)."""
 import glob, json, os, statistics as st, sys
-RAIZ = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'docs', 'referencias')
+RAIZ = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'docs', '4-referencias')
 AFINES = ['motion-ref-2', 'motion-ref-3', 'motion-ref-4']          # lente explosionada, anuncio de vidrio, miedo y codicia
 CLAVES = [  # (ruta, etiqueta, unidad, decimales)
     ('segundos', 'Duración', 's', 0),

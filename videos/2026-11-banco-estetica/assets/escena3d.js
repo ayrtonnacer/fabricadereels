@@ -1,5 +1,5 @@
 /* Librería 3D de la fábrica de reels (three.js r187, local). Objetos de redes con la identidad HackTheBox, listos para reusar.
-   Todo es función del tiempo local `t` (determinístico; sin reloj ni azar). Guía de uso y criterios: docs/THREEJS.md.
+   Todo es función del tiempo local `t` (determinístico; sin reloj ni azar). Guía de uso y criterios: docs/5-tecnica/THREEJS.md.
 
    Uso en una composición (script de la escena):
      import('./assets/escena3d.js').then(async (M) => {

@@ -2,7 +2,7 @@
 """Genera los subtítulos quemados del video a partir de los tiempos exactos por palabra (voz.py → audio/palabras.json).
 Uso: python engine/subtitulos.py videos/<video>      (correr después de voz.py y tiempos.py)
 Salida: <video>/compositions/subtitulos.html (+ el host en index.html si falta).
-Reglas (docs/SUBTITULOS.md): bloques de 2–4 palabras, 1–2 líneas, nunca una palabra sola en la última línea; la palabra que se dice
+Reglas (docs/2-estilo/SUBTITULOS.md): bloques de 2–4 palabras, 1–2 líneas, nunca una palabra sola en la última línea; la palabra que se dice
 va en el acento; zona segura: franja y 1120–1320 (arriba de la interfaz de las apps y debajo de la imagen, que el set deja libre)."""
 import json, re, sys
 from pathlib import Path
