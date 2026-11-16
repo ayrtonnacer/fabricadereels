@@ -18,3 +18,4 @@ assets/voces/*.onnx
 videos/*/analisis/medidas.csv
 videos/*/analisis/hojas/
 .venv-manim/
+out/manim/
