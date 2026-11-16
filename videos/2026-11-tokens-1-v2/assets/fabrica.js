@@ -90,6 +90,18 @@ export async function montar(root, tl, T0, dur) {
   ];
   const GOLPES = [[6.9, 0.006], [11.05, 0.006, 2], [19.4, 0.006, 3], [24.8, 0.006, 4], [31.0, 0.006, 5]];
 
+  // ---------- final: la pantalla se llena de números (después de "todo es una lista de números") ----------
+  const CAMPO = (T0 + dur) > 41.5; let celdas = [];
+  if (CAMPO) {
+    const COLS = 5, ROWS = 14, TF = 41.95, lcg = (n) => { let x = (n * 2654435761) >>> 0; x ^= x >>> 15; x = Math.imul(x, 2246822519) >>> 0; x ^= x >>> 13; return (x >>> 0) / 4294967296; };   // azar determinista por celda
+    const fondo = document.createElement('div'); fondo.style.cssText = 'position:absolute;inset:0;background:#000;opacity:0'; hud.insertBefore(fondo, hud.firstChild); celdas.fondo = fondo;
+    const REALES = [122845, 11, 12873, 23535, 4858, 30, 157464, 171847, 28287, 27054, 36753, 34623];
+    for (let r = 0; r < ROWS; r++) for (let q = 0; q < COLS; q++) {
+      const i = r * COLS + q, d = document.createElement('div'); d.style.cssText = `position:absolute;left:${q * 216}px;top:${r * 137 + 30}px;width:216px;text-align:center;font:600 46px var(--mono);letter-spacing:-.02em;opacity:0`; hud.insertBefore(d, fondo.nextSibling);
+      const dist = Math.hypot((q - 2) / 2.5, (r - 6.5) / 7); celdas.push({ d, i, t0: TF + 0.15 + dist * 1.1 + lcg(i + 7) * 0.25, real: i % 7 === 3 }); }
+    celdas.valor = (i, k) => { const u = lcg(i * 131 + k * 17 + 3); return celdas[i].real ? String(REALES[(i + k) % REALES.length]) : String(Math.floor(10 + u * (u < 0.5 ? 989 : 199989))); };
+  }
+
   E.animar(tl, dur, (t) => {
     const T = T0 + t;
     E.ruta(T, CAM, GOLPES);
@@ -117,6 +129,13 @@ export async function montar(root, tl, T0, dur) {
       f.position.set(S.E.x + x0 + (x1 - x0) * q, yJ + (0.22 - yJ) * q + 0.12 * Math.sin(Math.PI * q), S.E.z + 0.03 + 0.1 * Math.sin(Math.PI * q)); f.visible = T > 35.8; f.userData.borde(q); });
     // payoff: todas las fichas de la línea giran y muestran su número (texto → ID; cuadradito → vector)
     todas.forEach((f, i) => f.userData.girar(st(40.55 + 0.035 * i, 41.0 + 0.035 * i, T)));
+    if (CAMPO) { const k0 = T - 41.95;
+      celdas.fondo.style.opacity = 0.93 * out(41.9, 42.5, T);
+      for (const c of celdas) { const q = out(c.t0, c.t0 + 0.25, T);
+        if (q <= 0.001) { c.d.style.opacity = 0; continue; }
+        const k = Math.floor(T * (3 + 6 * st(42, 44, T)) + c.i * 0.31);   // la lluvia de números se acelera hacia el final
+        if (c.k !== k) { c.k = k; c.d.textContent = celdas.valor(c.i, k); }
+        c.d.style.opacity = q * (c.real ? 1 : 0.55); c.d.style.color = c.real ? 'var(--acc)' : 'var(--muted)'; c.d.style.transform = `translateY(${(1 - q) * 24}px)`; } }
     // rótulos
     E.cam.updateMatrixWorld();
     for (const r of R) { const o = ventana(T, r.a0, r.a1); r.a.style.opacity = o; r.a.style.display = o > 0.001 ? 'block' : 'none';

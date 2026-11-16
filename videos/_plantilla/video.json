@@ -58,11 +58,16 @@
   },
   "audio": {
     "musica": "assets/musica/can-you-hear-the-music.mp3",
-    "musica_desde": 52.0,
-    "musica_db": -8,
+    "musica_desde": 0,
+    "musica_db": 10,
     "sfx_gain": 1.25,
     "loudness": -14,
-    "musica_duck": 2
+    "musica_duck": 2,
+    "musica_nivelar": [
+      -32,
+      4
+    ],
+    "musica_fade_in": 0.4
   },
   "subtitulos": {
     "fondo": "rgba(0,0,0,.86)"

@@ -121,6 +121,6 @@ Palladio (medido): 31 % de la energía en 20–100 Hz, 35 % en 100–300 Hz, 27 
 
 ## Música firma desde 2026-11-16: *Can You Hear The Music*
 Ayrton la pasó (webm → `assets/musica/can-you-hear-the-music.mp3`) para todos los reels. Medida: 110 s; crescendo de −28 dB (inicio) a −10 dB (≈ 95 s) y corte a los 100 s. Bandas: 33 % 20–100 Hz, 23 % 100–300 Hz, 30 % 300–1000 Hz (pisa menos la voz que Palladio: la mezcla del reel de tokens bajó de 34 % a 29 % en 100–300 Hz).
-- **Tramo**: `musica_desde = 100 − duración del reel` (para 47,5 s → 52) → el crescendo llega al máximo en el CTA y termina antes del corte de la pista.
-- **Nivel**: el tramo 52–99,5 s mide −11,5 LUFS; `musica_db: −8`, sin `musica_nivelar` (el nivelado aplastaría el crescendo). Revisar de oído en cada reel.
+- **Tramo (corregido 2026-11-16)**: Ayrton quiere que **empiece desde el inicio, con los violines** (`musica_desde: 0`, `musica_fade_in: 0.4`). El primer tramo de la pista es muy suave (−28 dB) y crece: sin ayuda, los primeros 20 s quedan inaudibles y después tapa la voz.
+- **Nivel**: `musica_nivelar: [-32, 4]` + `musica_db: 10` (medido: queda entre −13 dB —inicio— y −9 dB —final— por debajo de la voz mientras habla, con el ducking de ×2 incluido; en las pausas se oye más, ej. mientras se llena de números). Opción nueva `musica_fade_in` (s) en `video.json`.
 - **Derechos**: es una obra con copyright (banda sonora). Instagram/TikTok/YouTube pueden silenciar el video o reclamarlo; lo más seguro es agregarla desde la biblioteca de música de la app al publicar (y subir el video sin música) o confirmar la licencia. Lo mismo valía para Palladio.

@@ -99,3 +99,8 @@
 - **No quedarse en la definición**: Ayrton marcó el primer guion como superficial. Un reel conceptual lleva la definición clara **y** datos técnicos concretos de la fuente (números, mecanismos); si no entra, serie.
 - **Validar los datos de la fuente, aunque sea una empresa grande**: el artículo de NVIDIA trae ejemplos inventados (dark+ness con 217/655: en GPT-4o "brightness" es un solo token), reglas simplificadas ("corta = 1 token") y exageraciones ("decenas de miles = una novela"). Medir con la herramienta real (tiktoken) y usar números reales.
 - Voz: Whisper sobre la voz sola (`escuchar.py audio/voz.wav`) separa los problemas de pronunciación de los de la música. Frases con palabras repetidas ("con mayúscula, sin mayúscula") se entienden mal: simplificar.
+
+## 2026-11-16 · v2 de tokens
+- **No recortar la música que pasa Ayrton sin avisar**: elegí el tramo del crescendo (52–99 s) y él quería el inicio, con los violines. Ante una canción nueva, usar desde el segundo 0 salvo que diga otra cosa, y nivelar para que se escuche desde el principio sin tapar la voz.
+- **Un decorado que pasa detrás del texto estorba** (la línea de montaje): se saca. Todo lo que se agrega al fondo se revisa contra los rótulos y los subtítulos.
+- **Si cambia la duración de una escena, regenerar su composición**: la duración estaba escrita dentro de `payoff.html` (`montar(root, tl, T0, dur)`) y el campo de números quedó congelado en el cuadro 42,5 hasta que se corrigió.

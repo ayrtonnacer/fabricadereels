@@ -12,3 +12,7 @@ Un solo set 3D (`assets/fabrica.js`): una cinta en el piso que serpentea hacia e
 | Cuadros quietos | 77 % | **64 %** ✓ | ≥ 25 % |
 | Velocidad p95 | 131 | 2408 (▲ meta 1900: los viajes largos son rápidos) | 400–1900 |
 El 0,04 de `arrastre.py` en t = 10,9 s no es un corte: cae en el medio de la grúa (cámara rápida). El único corte real es al CTA.
+
+## v2.2 (2026-11-16): cambios pedidos por Ayrton
+- Música desde el inicio (violines), nivelada; ver `docs/2-estilo/AUDIO.md`.
+- Final nuevo: después de "todo es una lista de números" y del plano general (grúa), **la pantalla se llena de números** (campo de 5×14 con los IDs reales de los tokens en tan y otros en gris, que aparece desde el centro hacia afuera y llueve cada vez más rápido) → corte al CTA con riser + golpe. `payoff` dura 6 s (antes 4,4) y el CTA empieza a los 44,1 s; el video dura 49,1 s.

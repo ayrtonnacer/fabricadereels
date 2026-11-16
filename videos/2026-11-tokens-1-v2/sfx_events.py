@@ -47,6 +47,10 @@ def build(T, S, lib=None):
     w(38.35, 1.1, 0.5, 13, 160, 2200)
     for k in range(10): tk(40.55 + 0.09 * k, 0.18, k + 6)
     T.put(41.3, ding_(1318.5, 1.4), 0.2, send=0.6)
+    # el campo de números: lluvia digital que se acelera, y luego el golpe al CTA
+    if dig is not None: T.put(41.95, dig[:int(SR * 1.2)], 0.3, send=0.1)
+    for k in range(26): tk(42.0 + 0.08 * k + 0.0012 * k * k, 0.14 + 0.004 * k, k + 3)
+    T.put(42.3, air(1.6, 200, 3800) if ok else whoosh(1.4), 0.3, send=0.5)
     # cierre
-    T.put(41.6, reverse(riser(0.8)), 0.35); T.put(42.45, bm if bm is not None else impact(), 0.55, send=0.3)
-    T.put(43.2, ch if ch is not None else sparkle(9), 0.5, send=0.2)
+    T.put(43.2, reverse(riser(0.8)), 0.35); T.put(44.05, bm if bm is not None else impact(), 0.55, send=0.3)
+    T.put(44.8, ch if ch is not None else sparkle(9), 0.5, send=0.2)

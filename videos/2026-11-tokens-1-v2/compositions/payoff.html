@@ -1,4 +1,4 @@
-<!-- PAYOFF (4.4 s) — FÁBRICA DE TOKENS (v2): la cámara se eleva y muestra toda la fábrica; todas las fichas giran a números. El set y la cámara son uno solo para todo el video (assets/fabrica.js, tiempo global T = 38.1 + t). -->
+<!-- PAYOFF (6 s) — FÁBRICA DE TOKENS (v2): la cámara se eleva y muestra toda la fábrica; todas las fichas giran a números. El set y la cámara son uno solo para todo el video (assets/fabrica.js, tiempo global T = 38.1 + t). -->
 <template>
   <style>#root { position: absolute; inset: 0; }</style>
   <div id="root" data-composition-id="payoff" data-width="1080" data-height="1920">
@@ -10,6 +10,6 @@
   <script>
     const root = document.querySelector('[data-composition-id="payoff"]');
     const tl = gsap.timeline({ paused: true });
-    import('./assets/fabrica.js').then((F) => F.montar(root, tl, 38.1, 4.4)).then(() => { window.__timelines['payoff'] = tl; });
+    import('./assets/fabrica.js').then((F) => F.montar(root, tl, 38.1, 6)).then(() => { window.__timelines['payoff'] = tl; });
   </script>
 </template>

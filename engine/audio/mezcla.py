@@ -27,7 +27,7 @@ if au.get('musica_ventana'):
     mi, mf = au['musica_ventana']; ml = mf - mi
     MCHAIN = f"atrim={ofs}:{ofs + ml},asetpts=PTS-STARTPTS,{NIV}volume={mdb}dB,afade=t=in:st=0:d=1.2,afade=t=out:st={ml - 1.4}:d=1.4,adelay={int(mi*1000)}|{int(mi*1000)},apad=whole_dur={dur}"
 else:
-    MCHAIN = f"atrim={ofs}:{ofs + dur},asetpts=PTS-STARTPTS,{NIV}volume={mdb}dB,afade=t=in:st=0:d=1.5,afade=t=out:st={dur - 3.5}:d=3.5"
+    MCHAIN = f"atrim={ofs}:{ofs + dur},asetpts=PTS-STARTPTS,{NIV}volume={mdb}dB,afade=t=in:st=0:d={au.get('musica_fade_in', 1.5)},afade=t=out:st={dur - 3.5}:d=3.5"
 # 2) mezcla con ducking
 g = f"""[0]aformat=sample_rates=48000:channel_layouts=stereo,asplit=3[v][vk1][vk2];
 [1]aformat=sample_rates=48000:channel_layouts=stereo,volume={sg}[s];
