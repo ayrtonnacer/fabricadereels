@@ -104,3 +104,13 @@ Dibujar la onda de `voz.wav` y `sfx.wav` con los inicios de palabra de `audio/pa
 - Whisper solo entiende **voz**: no describe la música (para eso: `barro.py`, `medir.py` y el oído de Ayrton).
 - Primera lectura del reel de tensores (small): 90 % de palabras. Sospechosas: **"texto" → "tecto"** (2 líneas), **"álgebra" → "alfeora"**, "seguime" → "sílame", "larga"→"lara", "convertidas"→"cometidas". Revisarlas en el diccionario antes del próximo reel.
 
+
+
+## Banco de efectos y materiales (2026-11-16)
+Pedido de Ayrton: "todos los recursos necesarios para hacer videos profesionales". Antes solo había 10 sonidos propios + sintéticos simples; el banco real de Adobe nunca se cargó. Ahora hay tres capas, de más a menos propia:
+1. **Propios de Ayrton** (`assets/sfx/propios/`): boom-cinematico (inicio y final), chinn (CTA), tipeo, interface-texto-digital, módem, hit-metal. Siempre tienen prioridad.
+2. **Banco CC0** (`bash engine/audio/bajar_sfx.sh`, ~450 archivos; `sfxlib.banco(tipo, filtro, i)`): licencia CC0 verificada en cada página de OpenGameArt el 2026-11-16 (no exige atribución; se listan igual): Swishes (artisticdude), Air Whoosh (pyranostudios), UI SFX Set (51 sonidos), Kenney Interface Sounds, 10 Clicks and Switches (StarNinjas), 75 CC0 Breaking/Falling/Hit SFX (rubberduck), 4 Metal Dings (StarNinjas), Kenney Sci-Fi Sounds, 7 Space Sounds (Joth). **No se usó** "Weird Whooshes" (licencia CC-BY: pide atribución). Kenney.nl y Freesound están bloqueados desde la nube.
+3. **Materiales sintetizados de onetake** (`engine/onetake/`, **solo uso no comercial**, ver su LEEME): `air` (whoosh de aire filtrado), `glass` (tono golpeado con parciales inarmónicos), `wood` (golpe seco), `sub` (golpe grave), `bubble` (pop redondo), `wobble` (gelatina). Suenan a objeto real, no a chiptune.
+**Sala compartida**: `T.put(t, sonido, gain, send=0.3)` manda parte del sonido a UNA reverb (T60 1,1 s) para todo el video: es lo que hace que sonidos distintos suenen en el mismo cuarto (idea de onetake). Referencia: click/tick `send` 0,15; pop/ding 0,3–0,6; whoosh 0,4–0,5.
+**Reglas que sumamos de onetake**: menos eventos que beats (si dos sonidos caen a < 40 ms, dejar uno); un whoosh = aire sintético + swish real superpuestos; acordes suaves de dos notas (no la cadencia de vibráfono de siempre); revisar graves-medios por ventana de 0,5 s (`barro.py`).
+**Pendiente**: grabaciones foley propias (papel, tela, objetos) y una pista de ambiente muy baja; ver si Ayrton consigue el banco de Adobe.

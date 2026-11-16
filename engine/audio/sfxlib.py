@@ -3,7 +3,9 @@ Significado de cada sonido (usar siempre igual): whoosh=transición · pop=apare
 buzz/powerdown=error o pérdida · powerup=algo se activa · thunk=confirmación (Enter, enchufar) · tick=tecla/dato ·
 glitch=texto que 'tiembla' · riser=progreso · boom=golpe de apertura · sparkle=cierre/logro ·
 impact/hit=remarcar una acción · bassdrop=momento épico/cámara lenta · braam=entrada dramática · ambient=base que evita el silencio · reverse(riser)=succión previa a un golpe."""
-import numpy as np, wave
+import numpy as np, wave, sys
+from pathlib import Path
+from scipy.signal import butter, fftconvolve
 from scipy.signal import lfilter
 SR = 48000
 rng = np.random.default_rng(7)
@@ -99,22 +101,36 @@ def propio(nombre, gain=1.0):
     if f is None: return None
     raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', str(f), '-f', 'f32le', '-ac', '1', '-ar', str(SR), '-'], capture_output=True, check=True).stdout
     x = np.frombuffer(raw, '<f4').astype(float); return x / (np.max(np.abs(x)) + 1e-9) * gain
-def sample(cat, i=0, gain=1.0):
-    """Primer sonido real de assets/sfx/<cat>/ (ver assets/sfx/LEEME.md); None si no hay, y se usa el sintético."""
-    fs = sorted(p for p in (SFX_DIR / cat).glob('*') if p.suffix.lower() in ('.wav', '.mp3', '.flac', '.ogg')) if (SFX_DIR / cat).is_dir() else []
-    if not fs: return None
-    raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', str(fs[i % len(fs)]), '-f', 'f32le', '-ac', '1', '-ar', str(SR), '-'], capture_output=True, check=True).stdout
+def _leer(f, gain=1.0):
+    raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', str(f), '-f', 'f32le', '-ac', '1', '-ar', str(SR), '-'], capture_output=True, check=True).stdout
     x = np.frombuffer(raw, '<f4').astype(float); return x / (np.max(np.abs(x)) + 1e-9) * gain
+def banco(cat, filtro='', i=0, gain=1.0):
+    """Sonido real del banco CC0 (engine/audio/bajar_sfx.sh → assets/sfx/<cat>/<pack>/…), buscando en subcarpetas.
+    `filtro` = texto que debe tener el nombre del archivo (ej. banco('whoosh','swish-3'), banco('ui','click'), banco('hit','metal_hit')); `i` elige entre los que coinciden. None si no hay."""
+    d = SFX_DIR / cat
+    fs = sorted(p for p in d.rglob('*') if p.suffix.lower() in ('.wav', '.mp3', '.flac', '.ogg') and filtro.lower() in p.name.lower() and not p.name.startswith('._')) if d.is_dir() else []
+    return _leer(fs[i % len(fs)], gain) if fs else None
+def sample(cat, i=0, gain=1.0): return banco(cat, '', i, gain)
+# ---- onetake (engine/onetake: SOLO uso no comercial, ver engine/onetake/LEEME.md) ----
+try:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'onetake'))
+    import sfx_palette as _op   # onetake
+    air, glass, wood, bubble, wobble, sub_ = _op.air, _op.glass, _op.wood, _op.bubble, _op.wobble, _op.sub   # onetake
+    sub = lambda f=62, d=0.7: _op.sub(f, d)   # onetake
+    HAY_ONETAKE = True
+except Exception: HAY_ONETAKE = False
 
 
 class Track:
     """Pista de efectos: put(t, sonido, ganancia). typing/enter/line son atajos de terminal."""
-    def __init__(self, dur):
-        self.buf = np.zeros(int(SR * dur))
-    def put(self, t, x, g=1.0):
+    def __init__(self, dur, sala=1.1):
+        self.buf = np.zeros(int(SR * dur)); self.wet = np.zeros(int(SR * dur)); self.sala = sala
+    def put(self, t, x, g=1.0, send=0.0):
+        """send (0..1) = cuánto del sonido va a la sala compartida (un solo cuarto para todo: lo que une los sonidos; ver docs/AUDIO.md)."""
         i = int(t * SR)
         if i < 0: return
         x = x[:max(0, len(self.buf) - i)]; self.buf[i:i + len(x)] += x * g
+        if send > 0: self.wet[i:i + len(x)] += x * g * send
     def ambient(self, t0=0, lvl=0.0):
         """Base de ambiente (zumbido + ruido). DESACTIVADA por defecto (Ayrton 2026-11-09: sonido limpio); pasar lvl > 0 para usarla."""
         if lvl <= 0: return
@@ -135,6 +151,11 @@ class Track:
         self.put(t, thunk(), 0.5 if ks else 0.9)
     def line(self, t): self.put(t, tick(), 0.25)
     def save(self, path):
-        b = self.buf / np.max(np.abs(self.buf)) * 0.7
+        buf = self.buf
+        if np.any(self.wet):   # sala compartida: respuesta al impulso sintética (T60 ~1,1 s, 12 ms de pre-delay, lp 3,8 kHz)
+            n = int(SR * self.sala * 1.3); t = np.arange(n) / SR; ir = rng.standard_normal(n) * np.exp(-6.9 * t / self.sala)
+            b_, a_ = butter(2, 3800 / (SR / 2)); ir = lfilter(b_, a_, ir); ir[:int(SR * 0.012)] = 0; ir = ir / np.abs(ir).sum() * 4
+            buf = buf + fftconvolve(self.wet, ir)[:len(buf)] * 0.9
+        b = buf / np.max(np.abs(buf)) * 0.7
         with wave.open(str(path), 'wb') as w:
             w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((b * 32767).astype('<i2').tobytes())
