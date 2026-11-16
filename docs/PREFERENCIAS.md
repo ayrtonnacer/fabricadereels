@@ -47,7 +47,7 @@ Link + indicaciones → guion (público: técnicos, principiantes, reclutadores)
 - **Gastar pocos tokens**: ir directo, pocas iteraciones, sin releer docs ni regenerar de más; que alcance con pasar el material.
 - **Física (2026-11-11)**: solo si explica algo; se hornea con Rapier (`docs/FISICA.md`), nunca simulación en vivo; sin `Math.random()`; los choques sincronizan los efectos. No usar React/R3F.
 - **Paquetes (2026-11-11)**: cuadraditos SOLO sobre cables y siguiendo su curva (`cab.at`); en el aire, solo ondas. Lo que viaja sigue la forma real del medio.
-- **Música por defecto**: Palladio (`assets/musica/palladio.mp3`, desde 0,6 s), en todos los reels.
+- **Música por defecto** (desde 2026-11-16): *Can You Hear The Music* (`assets/musica/can-you-hear-the-music.mp3`); antes Palladio.
 
 ## Agregado 2026-11-11
 - **Guardar cada pronunciación correcta apenas Ayrton la confirma o corrige**: va a `engine/audio/pronunciacion.json` (`estado: "ok"` + nota con la fecha y la fuente) y se anota en `docs/BITACORA.md`. Al terminar un video, las palabras que no corrigió quedan `ok` (las aprobó de oído). Confirmadas: uaifai, ráuter, ísernet, gigaérts, "dos coma cuatro".
@@ -78,3 +78,9 @@ Link + indicaciones → guion (público: técnicos, principiantes, reclutadores)
 - **Cada reel con su propia puesta en escena**: se mantienen inicio (firma) y cierre (CTA), pero el medio NO copia el reel anterior (orden de planos, objetos de frente, título arriba). Explorar el espacio: estaciones en profundidad, recorridos de cámara por el set, vistas explosionadas.
 - **Sonido más rico**: usar los sonidos propios que encajan con el tema (ej. `interface-texto-digital` para datos/tokens, `zoom-click` en acercamientos) además de los sintéticos; falta un banco de efectos reales (pendiente de su OK sobre la fuente).
 - Datos técnicos concretos y verificados en reels conceptuales (no quedarse en la definición).
+
+## Agregado 2026-11-16 (v2 de tokens)
+- **Todos los reels en 2.5D con cámara fluida** (le gustó la v2 "fábrica"): un solo set 3D que la cámara recorre en plano secuencia; jugar con entradas, dolly in / out, grúa y **ángulos distintos (picado, contrapicado, lateral)**; transiciones de plano a plano **más rápidas** (viajes de ~0,8 s) y retenciones quietas cuando se nombra algo.
+- **Nada que estorbe al texto**: la línea de montaje (cinta con cubitos) se sacó porque pasaba por detrás de las fichas. Decorado solo si explica algo y nunca detrás de lo que se lee.
+- **Explicarle lo que hago con vocabulario de cine** (plano, ángulo, movimiento, transición): `docs/GLOSARIO-EDICION.md`, con ejemplos por segundo.
+- **Música firma**: *Can You Hear The Music*, en todos los reels; elegir el tramo para que el crescendo termine en el CTA.

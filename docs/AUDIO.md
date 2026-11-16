@@ -117,3 +117,10 @@ Pedido de Ayrton: "todos los recursos necesarios para hacer videos profesionales
 
 ## Música propia (Suno) — recomendación 2026-11-16 (medida, no escuchada)
 Palladio (medido): 31 % de la energía en 20–100 Hz, 35 % en 100–300 Hz, 27 % en 300–1000 Hz, solo 7 % arriba de 1 kHz → ocupa la misma franja que la voz (200–3000 Hz) y es la causa de las ventanas de barro. Para una pista propia: instrumental, 90–100 BPM (o 120 con sensación de mitad de tempo), electrónica mínima y oscura; graves solo en sub (< 80 Hz) y brillo arriba de 4 kHz, **medios vacíos** para la voz; un pulso de plucks/ticks que acompañe los clicks de datos; partes que se puedan cortar (intro 4 compases, cuerpo en loop, final con cadencia propia, sin vibráfono de stock); 60–90 s. Una sola pista firma para todos los reels (marca reconocible). Licencia: con el plan gratis de Suno las canciones no se pueden usar comercialmente; con plan pago sí.
+
+
+## Música firma desde 2026-11-16: *Can You Hear The Music*
+Ayrton la pasó (webm → `assets/musica/can-you-hear-the-music.mp3`) para todos los reels. Medida: 110 s; crescendo de −28 dB (inicio) a −10 dB (≈ 95 s) y corte a los 100 s. Bandas: 33 % 20–100 Hz, 23 % 100–300 Hz, 30 % 300–1000 Hz (pisa menos la voz que Palladio: la mezcla del reel de tokens bajó de 34 % a 29 % en 100–300 Hz).
+- **Tramo**: `musica_desde = 100 − duración del reel` (para 47,5 s → 52) → el crescendo llega al máximo en el CTA y termina antes del corte de la pista.
+- **Nivel**: el tramo 52–99,5 s mide −11,5 LUFS; `musica_db: −8`, sin `musica_nivelar` (el nivelado aplastaría el crescendo). Revisar de oído en cada reel.
+- **Derechos**: es una obra con copyright (banda sonora). Instagram/TikTok/YouTube pueden silenciar el video o reclamarlo; lo más seguro es agregarla desde la biblioteca de música de la app al publicar (y subir el video sin música) o confirmar la licencia. Lo mismo valía para Palladio.

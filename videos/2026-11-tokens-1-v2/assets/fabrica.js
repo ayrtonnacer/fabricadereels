@@ -2,7 +2,7 @@
    y UNA cámara continua que la recorre. Cada composición (gancho, corte, comparten, mayus, idioma, foto, payoff) monta el mismo set y lo
    dibuja en el TIEMPO GLOBAL del video (T = inicio de la escena + t local): así los cortes entre composiciones no se ven (plano continuo).
    Todo es función de T (sin reloj ni azar). Rótulos HTML anclados a puntos 3D (se mueven con la cámara: paralaje real).
-   Estaciones (x, z): A mensaje/cuchilla (0, 0) · B pedazos compartidos (1.6, −3.5) · C mayúsculas (−1.6, −7) · D idiomas (1.6, −10.5) · E foto (−1.6, −14).
+   Sin cinta ni línea de montaje (Ayrton: estorbaba el texto). Estaciones (x, z): A mensaje/cuchilla (0, 0) · B pedazos compartidos (1.6, −3.5) · C mayúsculas (−1.6, −7) · D idiomas (1.6, −10.5) · E foto (−1.6, −14).
    Tiempos: salen de audio/palabras.json (voz) — escena + tiempo de la palabra. */
 export async function montar(root, tl, T0, dur) {
   const [M, Km, Tm] = await Promise.all([import('./escena3d.js'), import('./token3d.js'), import('./tensor3d.js')]);
@@ -21,16 +21,6 @@ export async function montar(root, tl, T0, dur) {
   const rotulo = (html, cls, css = '') => { const a = document.createElement('div'); a.className = 'ancla'; const d = document.createElement('div'); d.className = cls; d.innerHTML = html; d.style.cssText = css; a.appendChild(d); hud.appendChild(a); return { a, d }; };
   const anclado = (html, cls, p, a0, a1, css = '', dy = 0) => R.push({ ...rotulo(html, cls, css), p, a0, a1, dy });
   const fijo = (html, cls, top, a0, a1, css = '') => { const r = rotulo(html, cls, css); r.a.style.top = top + 'px'; R.push({ ...r, a0, a1, fijo: true }); return r; };
-
-  // ---------- la línea: cinta en el piso que pasa por las 5 estaciones y sigue hacia el fondo (al modelo) ----------
-  const ruta = new THREE.CatmullRomCurve3([new V(0, 0.004, 1.2), en('A', 0, 0.004, 0.35), en('B', -0.2, 0.004, 0.4), en('C', 0.2, 0.004, 0.4), en('D', -0.2, 0.004, 0.4), en('E', 0.2, 0.004, 0.4), new V(0, 0.004, -19)]);
-  { const pts = [], N = 220; let prev = null;
-    for (let i = 0; i <= N; i++) { const s = i / N, p = ruta.getPointAt(s), tg = ruta.getTangentAt(s), n = new V(-tg.z, 0, tg.x).normalize().multiplyScalar(0.2), a = p.clone().add(n), b = p.clone().sub(n);
-      if (prev) pts.push(prev[0], a, prev[1], b); prev = [a, b]; }
-    E.scene.add(E.trazo(pts, P.mid, 1.6)); }
-  const cinta = Array.from({ length: 30 }, () => { const c = K.cubito(0.05); E.scene.add(c); return c; });
-  const VIAJES = [[9.9, 11.3], [18.3, 19.4], [23.7, 24.9], [29.7, 31.0], [37.6, 39.4]];
-  const avance = (T) => VIAJES.reduce((s, [a, b]) => s + io(a, b, T), 0) + 0.15 * st(6.1, 6.9, T);   // la cinta avanza solo cuando la cámara viaja
 
   // ---------- A: el mensaje y la cuchilla ----------
   const TOK = [['hola', 122845], [',', 11], [' ¿', 12873], ['qué', 23535], [' tal', 4858], ['?', 30]];
@@ -82,25 +72,27 @@ export async function montar(root, tl, T0, dur) {
 
   // ---------- cámara: estación por estación, sin cortes ----------
   const K_ = (T, s, p, l, e) => ({ t: T, p: [S[s].x + p[0], p[1], S[s].z + p[2]], l: [S[s].x + l[0], l[1], S[s].z + l[2]], e });
+  // Vocabulario (docs/CINE.md): plano general / medio / detalle · travelling (la cámara viaja) · dolly in/out (se acerca/aleja) · grúa (sube/baja)
+  // picado (desde arriba, mirando hacia abajo) · contrapicado (desde abajo, mirando hacia arriba) · paneo (gira sobre sí misma)
   const CAM = [
-    K_(0, 'A', [0.35, 0.95, 4.6], [0, 0.5, 0]), K_(3.5, 'A', [0.2, 0.9, 4.3], [0, 0.5, 0], 'lin'), K_(4.1, 'A', [0, 0.78, 4.3], [0, 0.58, 0], 'in'),
-    K_(4.7, 'A', [0, 0.74, 4.0], [0, 0.58, 0], 'out'), K_(6.1, 'A', [0, 0.74, 3.95], [0, 0.58, 0], 'lin'), K_(7.0, 'A', [0.3, 0.9, 5.5], [0, 0.5, 0], 'io'), K_(9.9, 'A', [0.22, 0.9, 5.4], [0, 0.5, 0], 'lin'),
-    { t: 10.6, p: [1.5, 1.7, 2.2], l: [1.2, 0.8, -2.2], e: 'in' },   // grúa: sube por encima de las fichas de A
-    K_(11.3, 'B', [0.1, 1.15, 3.0], [0, 1.0, 0], 'out'), K_(13.0, 'B', [0.0, 1.12, 2.9], [0, 1.0, 0], 'lin'), K_(13.9, 'B', [0.35, 0.95, 4.7], [0, 0.62, 0], 'io'), K_(18.3, 'B', [0.25, 0.93, 4.6], [0, 0.62, 0], 'lin'),
-    K_(19.4, 'C', [-0.6, 0.85, 4.2], [0, 0.56, 0], 'io'), K_(23.7, 'C', [-0.35, 0.8, 4.0], [0, 0.56, 0], 'lin'),
-    K_(24.9, 'D', [0.45, 1.0, 3.6], [0.08, 0.7, 0], 'io'), K_(27.3, 'D', [0.3, 0.97, 3.5], [0.08, 0.7, 0], 'lin'), K_(28.0, 'D', [0.12, 0.88, 3.25], [0.1, 0.68, 0], 'io'), K_(29.7, 'D', [0.1, 0.87, 3.2], [0.1, 0.68, 0], 'lin'),
-    K_(31.0, 'E', [0.3, 0.98, 3.25], [0, 0.82, 0], 'io'), K_(33.4, 'E', [0.2, 0.95, 3.15], [0, 0.82, 0], 'lin'),
-    { t: 34.1, p: [pc.x, pc.y + 0.05, S.E.z + 1.7], l: [pc.x, pc.y, S.E.z], e: 'io' }, { t: 35.4, p: [pc.x, pc.y + 0.05, S.E.z + 1.62], l: [pc.x, pc.y, S.E.z], e: 'lin' },
-    K_(36.2, 'E', [0, 0.78, 3.45], [0, 0.6, 0], 'io'), K_(37.6, 'E', [0, 0.78, 3.35], [0, 0.6, 0], 'lin'),
-    { t: 39.4, p: [3.4, 3.0, 5.2], l: [0, 0.45, -7.2], e: 'io' }, { t: 42.6, p: [3.1, 2.8, 4.7], l: [0, 0.45, -7.2], e: 'lin' },
+    K_(0, 'A', [0.35, 0.95, 4.6], [0, 0.5, 0]), K_(3.5, 'A', [0.2, 0.9, 4.3], [0, 0.5, 0], 'lin'), K_(4.1, 'A', [0, 0.78, 4.3], [0, 0.58, 0], 'in'),   // gancho: plano medio frontal, dolly in lento
+    K_(4.7, 'A', [0, 0.74, 4.0], [0, 0.58, 0], 'out'), K_(6.1, 'A', [0, 0.74, 3.95], [0, 0.58, 0], 'lin'), K_(6.9, 'A', [0.5, 1.15, 5.5], [0, 0.5, 0], 'io'), K_(10.3, 'A', [0.4, 1.12, 5.4], [0, 0.5, 0], 'lin'),   // dolly out + leve picado
+    { t: 10.65, p: [1.5, 1.8, 2.0], l: [1.3, 0.8, -2.4], e: 'in' },                                                            // grúa por encima de A…
+    K_(11.05, 'B', [0.15, 0.42, 2.6], [0, 1.0, 0], 'out'), K_(13.0, 'B', [0.1, 0.5, 2.55], [0, 1.0, 0], 'lin'),                // …y baja a un CONTRAPICADO de "seguridad"
+    K_(13.6, 'B', [0.35, 0.95, 4.7], [0, 0.62, 0], 'io'), K_(18.6, 'B', [0.25, 0.93, 4.6], [0, 0.62, 0], 'lin'),               // dolly out a plano general de las 3 palabras
+    K_(19.4, 'C', [-0.5, 2.2, 3.4], [0, 0.6, 0], 'io'), K_(24.0, 'C', [-0.35, 1.6, 3.7], [0, 0.6, 0], 'lin'),                  // travelling a C: PICADO que baja lento
+    K_(24.8, 'D', [1.1, 0.35, 2.9], [0.05, 0.75, 0], 'io'), K_(27.3, 'D', [0.9, 0.4, 2.85], [0.05, 0.75, 0], 'lin'),           // travelling a D: contrapicado lateral
+    K_(27.8, 'D', [0.15, 0.85, 3.0], [0.12, 0.66, 0], 'io'), K_(30.2, 'D', [0.1, 0.84, 2.95], [0.12, 0.66, 0], 'lin'),         // dolly in frontal al +33 %
+    K_(31.0, 'E', [0.3, 0.98, 3.25], [0, 0.82, 0], 'io'), K_(33.4, 'E', [0.2, 0.95, 3.15], [0, 0.82, 0], 'lin'),               // travelling a la foto
+    { t: 33.9, p: [pc.x, pc.y + 0.05, S.E.z + 1.7], l: [pc.x, pc.y, S.E.z], e: 'io' }, { t: 35.4, p: [pc.x, pc.y + 0.05, S.E.z + 1.62], l: [pc.x, pc.y, S.E.z], e: 'lin' },   // dolly in: plano detalle del cuadradito
+    K_(35.95, 'E', [0, 0.78, 3.45], [0, 0.6, 0], 'io'), K_(37.8, 'E', [0, 0.78, 3.35], [0, 0.6, 0], 'lin'),                    // dolly out
+    { t: 38.9, p: [2.6, 5.4, 7.9], l: [-0.3, -1.1, -6.6], e: 'io' }, { t: 42.6, p: [2.4, 5.2, 7.4], l: [-0.3, -1.1, -6.6], e: 'lin' },   // grúa al plano general en picado de toda la fábrica
   ];
-  const GOLPES = [[7.0, 0.006], [11.3, 0.006, 2], [19.4, 0.006, 3], [24.9, 0.006, 4], [31.0, 0.006, 5]];
+  const GOLPES = [[6.9, 0.006], [11.05, 0.006, 2], [19.4, 0.006, 3], [24.8, 0.006, 4], [31.0, 0.006, 5]];
 
   E.animar(tl, dur, (t) => {
     const T = T0 + t;
     E.ruta(T, CAM, GOLPES);
-    // cinta
-    const av = avance(T); cinta.forEach((cb, k) => { const s = ((k / cinta.length + 0.035 * av) % 1 + 1) % 1, p = ruta.getPointAt(s); cb.position.set(p.x, 0.03, p.z); cb.visible = s > 0.02 && s < 0.97; });
     // A
     const T1 = 5.05, T2 = 6.0, u = st(T1, T2, T), xh = -anchoA / 2 - 0.05 + (anchoA + 0.1) * EASE.io(u);
     hoja.position.x = S.A.x + xh; hoja.visible = T > T1 - 0.05 && T < T2 + 0.1; hoja.material.opacity = 1 - st(T2, T2 + 0.1, T);

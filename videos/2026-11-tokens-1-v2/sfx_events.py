@@ -21,30 +21,30 @@ def build(T, S, lib=None):
     # A: cuchilla, se separan, números
     T.put(5.0, air(1.0, 220, 3400) if ok else whoosh(0.9), 0.3, send=0.4)
     for k in range(5): tk(5.15 + 0.17 * k, 0.22, k)
-    w(6.55, 0.7, 0.4, 2)
+    w(6.5, 0.7, 0.4, 2)
     for k in range(6): T.put(8.15 + 0.08 * k, pop_(430 + 40 * k), 0.22, send=0.3)
     # viaje A→B (grúa) y estación B
-    w(10.6, 1.0, 0.5, 9, 200, 3000); T.put(11.3, sub(66, 0.6) if ok else thunk(), 0.25, send=0.3)
+    w(10.65, 0.8, 0.5, 9, 200, 3000); T.put(11.05, sub(66, 0.6) if ok else thunk(), 0.25, send=0.3)
     T.put(11.05, ding_(784, 0.7), 0.16, send=0.5); tk(12.0)
-    w(13.45, 0.7, 0.35, 7)
+    w(13.3, 0.6, 0.35, 7)
     T.put(13.85, pop_(420), 0.28, send=0.3); T.put(14.05, pop_(470), 0.28, send=0.3)
     tk(15.9, 0.3, 3); T.put(17.05, ding_(1318.5, 1.3), 0.2, send=0.6); T.put(17.07, ding_(1976, 1.3), 0.12, send=0.6)
     # viaje B→C y estación C
-    w(18.85, 0.9, 0.45, 4); T.put(19.4, sub(62, 0.5) if ok else thunk(), 0.2, send=0.3)
+    w(19.0, 0.8, 0.45, 4); T.put(19.4, sub(62, 0.5) if ok else thunk(), 0.2, send=0.3)
     for t, f in [(19.6, 400), (20.15, 480), (20.85, 560)]: T.put(t, pop_(f), 0.3, send=0.3)
     tk(22.25, 0.3, 5)
     # viaje C→D y estación D
-    w(24.3, 0.9, 0.45, 6); T.put(24.9, sub(62, 0.5) if ok else thunk(), 0.2, send=0.3)
+    w(24.4, 0.8, 0.45, 6); T.put(24.8, sub(62, 0.5) if ok else thunk(), 0.2, send=0.3)
     for k in range(9): tk(25.35 + 0.2 * k, 0.12, k)
-    w(27.65, 0.6, 0.3, 8); T.put(27.7, ding_(1046, 0.9), 0.16, send=0.5)
+    w(27.55, 0.5, 0.3, 8); T.put(27.7, ding_(1046, 0.9), 0.16, send=0.5)
     # viaje D→E y la foto
-    w(30.35, 1.0, 0.45, 10); T.put(31.0, sub(60, 0.5) if ok else thunk(), 0.2, send=0.3)
-    tk(33.1, 0.28, 2); w(33.75, 0.6, 0.4, 11)
-    w(35.8, 0.7, 0.4, 12)
+    w(30.6, 0.8, 0.45, 10); T.put(31.0, sub(60, 0.5) if ok else thunk(), 0.2, send=0.3)
+    tk(33.1, 0.28, 2); w(33.65, 0.5, 0.4, 11)
+    w(35.7, 0.55, 0.4, 12)
     for k in range(7): T.put(35.95 + 0.1 * k, pop_(380 + 35 * k), 0.18, send=0.3)
     T.put(36.45, ding_(988, 1.0), 0.16, send=0.5)
     # payoff: la cámara se eleva y ve toda la fábrica; todo gira a números
-    w(38.5, 1.6, 0.5, 13, 160, 2200)
+    w(38.35, 1.1, 0.5, 13, 160, 2200)
     for k in range(10): tk(40.55 + 0.09 * k, 0.18, k + 6)
     T.put(41.3, ding_(1318.5, 1.4), 0.2, send=0.6)
     # cierre
