@@ -94,3 +94,8 @@
 - **El negro puro de Scale no se ensucia**: sin halos ni gradientes grises detrás del objeto.
 - **Una mejora por vez, mostrada ANTES de sumar la siguiente.** Acá se sumaron las cuatro y se mostraron juntas: no se pudo saber cuál era la que molestaba.
 - Original (v0) elegido sobre v4. `videos/2026-11-banco-estetica/RESULTADOS.md` queda como registro, no como receta.
+
+## 2026-11-16 · Reel de tokens (parte 1)
+- **No quedarse en la definición**: Ayrton marcó el primer guion como superficial. Un reel conceptual lleva la definición clara **y** datos técnicos concretos de la fuente (números, mecanismos); si no entra, serie.
+- **Validar los datos de la fuente, aunque sea una empresa grande**: el artículo de NVIDIA trae ejemplos inventados (dark+ness con 217/655: en GPT-4o "brightness" es un solo token), reglas simplificadas ("corta = 1 token") y exageraciones ("decenas de miles = una novela"). Medir con la herramienta real (tiktoken) y usar números reales.
+- Voz: Whisper sobre la voz sola (`escuchar.py audio/voz.wav`) separa los problemas de pronunciación de los de la música. Frases con palabras repetidas ("con mayúscula, sin mayúscula") se entienden mal: simplificar.

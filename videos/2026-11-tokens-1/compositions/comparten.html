@@ -1,0 +1,39 @@
+<!-- COMPARTEN (8,4 s) — "seguridad" (palabra común) es UN token. "nitidez" y "lucidez" (raras) se parten: nit|idez y luc|idez.
+     El pedazo "idez" tiene el mismo número en las dos (36753). Números reales del tokenizador de GPT-4o (o200k_base, medidos con tiktoken). -->
+<template>
+  <style>#root { position: absolute; inset: 0; } #m-nota { font: 500 34px var(--mono); color: var(--muted); opacity: 0; }</style>
+  <div id="root" data-composition-id="comparten" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <canvas id="m-cv" class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="hud" data-layout-ignore>
+      <div class="ancla" style="top: 300px"><div id="m-nota">tokenizador de GPT-4o</div></div>
+    </div>
+    <div class="vineta" data-layout-ignore></div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="comparten"]');
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo('#m-nota', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.4);
+    Promise.all([import('./assets/escena3d.js'), import('./assets/token3d.js')]).then(async ([M, Km]) => {
+      const E = await M.crear(root), K = Km.K3(E), { V, P, clamp, EASE } = E;
+      const seg = K.ficha({ txt: ' seguridad', id: 28287 }); seg.position.set(0, 1.02, 0); E.scene.add(seg);
+      const pal = (a, b, y) => { const fs = [K.ficha({ txt: a[0], id: a[1] }), K.ficha({ txt: b[0], id: b[1] })], f = K.fila(fs, 0); f.position.set(0, y, 0); E.scene.add(f);
+        const mc = K.marco(f.userData.ancho + 0.05, K.H + 0.05); mc.position.set(0, y, 0); E.scene.add(mc); return { f, fs, mc }; };
+      const A = pal([' nit', 27054], ['idez', 36753], 0.62), B = pal([' luc', 34623], ['idez', 36753], 0.24);
+      // corchete tan que une los dos "idez"
+      const xr = A.fs[1].position.x + A.fs[1].userData.w / 2 + 0.06, yA = 0.62, yB = 0.24;
+      const lazo = E.trazo([new V(xr, yA, 0.03), new V(xr + 0.07, yA, 0.03), new V(xr + 0.07, yA, 0.03), new V(xr + 0.07, yB, 0.03), new V(xr + 0.07, yB, 0.03), new V(xr, yB, 0.03)], P.acc, 3); E.scene.add(lazo);
+      const partir = (w, t, t0) => { const q = EASE.io(clamp((t - t0) / 0.5)); w.f.userData.abrir(0.07 * q); w.mc.userData.set(1 - q); w.fs.forEach((f) => f.userData.borde(q)); };
+      E.animar(tl, 8.4, (t) => {
+        E.ruta(t, [{ t: 0, p: [0.1, 1.15, 3.0], l: [0, 1.0, 0] }, { t: 2.1, p: [0.0, 1.12, 2.9], l: [0, 1.0, 0], e: 'lin' }, { t: 3.0, p: [0.35, 0.95, 4.7], l: [0, 0.62, 0], e: 'io' }, { t: 8.4, p: [0.25, 0.93, 4.6], l: [0, 0.62, 0], e: 'lin' }], [[3.0, 0.008]]);
+        K.pop(seg, t, 0.15, 0.4); seg.userData.verId(clamp((t - 1.1) / 0.3)); seg.userData.acento(t > 1.0 && t < 1.9 ? 1 : 0);
+        K.pop(A.f, t, 2.35, 0.35); K.pop(A.mc, t, 2.35, 0.35); K.pop(B.f, t, 2.5, 0.35); K.pop(B.mc, t, 2.5, 0.35);
+        partir(A, t, 2.95); partir(B, t, 3.15);
+        [A, B].forEach((w, k) => w.fs.forEach((f) => f.userData.verId(clamp((t - 3.6 - 0.15 * k) / 0.3))));
+        [A, B].forEach((w) => w.fs[1].userData.acento(t > 5.0 ? 1 : 0));
+        lazo.visible = t > 6.15; lazo.material.opacity = clamp((t - 6.15) / 0.25);
+      });
+      window.__timelines['comparten'] = tl;
+    });
+  </script>
+</template>

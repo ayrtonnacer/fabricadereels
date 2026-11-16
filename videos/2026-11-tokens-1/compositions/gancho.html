@@ -1,0 +1,37 @@
+<!-- GANCHO (4,0 s) — título "La IA no lee tu mensaje. Lee números."; el mensaje "hola, ¿qué tal?" entero en una placa; cuando la voz dice "números"
+     aparece debajo la lista de números que ve el modelo (IDs reales del tokenizador de GPT-4o). Termina con la cámara bajando hacia la placa (sigue en "corte"). -->
+<template>
+  <style>#root { position: absolute; inset: 0; } #root .w { display: inline-block; } #g-firma { position: absolute; left: 0; right: 0; top: 205px; text-align: center; } #g-tit { width: 980px; text-align: center; }
+    #g-ids { font: 500 40px var(--mono); color: var(--acc); letter-spacing: -.02em; } #g-ids .n { display: inline-block; }</style>
+  <div id="root" data-composition-id="gancho" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <canvas id="g-cv" class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="hud" data-layout-ignore>
+      <div class="ancla" style="top: 440px"><h1 id="g-tit" class="titular chico"><span class="w">La</span> <span class="w">IA</span> <span class="w">no</span> <span class="w">lee</span> <span class="w">tu</span> <span class="w">mensaje.</span><br /><span class="w">Lee</span> <span class="w acc">números</span></h1></div>
+      <div class="ancla" id="g-ids-a" style="top: 960px"><div id="g-ids"><span class="n">[122845,</span> <span class="n">11,</span> <span class="n">12873,</span> <span class="n">23535,</span> <span class="n">4858,</span> <span class="n">30]</span></div></div>
+    </div>
+    <div class="vineta" data-layout-ignore></div>
+    <div id="g-firma" class="firma">@ayrtonnacer</div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="gancho"]');
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo('#g-firma', { opacity: 0.6 }, { opacity: 1, duration: 0.25 }, 0);
+    tl.fromTo('#g-tit .w', { opacity: 0.85, filter: 'blur(3px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.18, ease: 'power4.out', stagger: 0.06 }, 0.05);
+    tl.fromTo('#g-ids .n', { opacity: 0, y: 18, filter: 'blur(6px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.22, ease: 'power3.out', stagger: 0.09 }, 2.7);
+    tl.to('#g-tit, #g-firma', { opacity: 0, duration: 0.3 }, 3.6);
+    tl.to('#g-ids', { opacity: 0, duration: 0.25 }, 3.7);
+    Promise.all([import('./assets/escena3d.js'), import('./assets/token3d.js')]).then(async ([M, Km]) => {
+      const E = await M.crear(root), K = Km.K3(E), { clamp, EASE } = E;
+      const TOK = [['hola', 122845], [',', 11], [' ¿', 12873], ['qué', 23535], [' tal', 4858], ['?', 30]];
+      const fs = TOK.map(([txt, id]) => K.ficha({ txt, id })), fila = K.fila(fs, 0); fila.position.set(0, 0.6, 0); E.scene.add(fila);
+      fs.forEach((f) => f.userData.borde(0));
+      const marco = K.marco(fila.userData.ancho + 0.06, K.H + 0.06); marco.position.copy(fila.position); marco.userData.set(1); E.scene.add(marco);
+      E.animar(tl, 4.0, (t) => {
+        E.ruta(t, [{ t: 0, p: [0.35, 0.95, 4.6], l: [0, 0.5, 0] }, { t: 3.4, p: [0.2, 0.9, 4.3], l: [0, 0.5, 0], e: 'lin' }, { t: 4.0, p: [0, 0.78, 4.3], l: [0, 0.58, 0], e: 'in' }]);
+        fs.forEach((f, i) => f.userData.acento(t > 2.75 + 0.09 * i && t < 3.6 ? 1 : 0));
+      });
+      window.__timelines['gancho'] = tl;
+    });
+  </script>
+</template>

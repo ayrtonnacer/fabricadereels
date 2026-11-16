@@ -1,0 +1,23 @@
+<!-- MAYUS (5,6 s) — "hola", "Hola" (mayúscula) y " hola" (espacio) (con espacio adelante) son tres tokens distintos: 157464, 122845, 171847 (GPT-4o). -->
+<template>
+  <style>#root { position: absolute; inset: 0; }</style>
+  <div id="root" data-composition-id="mayus" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <canvas id="y-cv" class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="vineta" data-layout-ignore></div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="mayus"]');
+    const tl = gsap.timeline({ paused: true });
+    Promise.all([import('./assets/escena3d.js'), import('./assets/token3d.js')]).then(async ([M, Km]) => {
+      const E = await M.crear(root), K = Km.K3(E), { clamp, EASE } = E;
+      const D = [['hola', 122845, 0.3], ['Hola', 157464, 0.85], [' hola', 171847, 1.55]];
+      const fs = D.map(([txt, id], i) => { const f = K.ficha({ txt, id, size: 1.35 }); f.position.set(0, 1.14 - i * 0.4, 0); E.scene.add(f); return f; });
+      E.animar(tl, 5.6, (t) => {
+        E.ruta(t, [{ t: 0, p: [-0.6, 0.85, 4.2], l: [0, 0.56, 0] }, { t: 5.6, p: [-0.35, 0.8, 4.0], l: [0, 0.56, 0], e: 'lin' }]);
+        fs.forEach((f, i) => { K.pop(f, t, D[i][2], 0.35); f.userData.verId(clamp((t - D[i][2] - 0.25) / 0.3)); f.userData.acento(t > 2.9 && t < 4.1 ? 1 : 0); });
+      });
+      window.__timelines['mayus'] = tl;
+    });
+  </script>
+</template>

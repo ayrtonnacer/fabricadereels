@@ -1,0 +1,37 @@
+<!-- IDIOMA (6,2 s) — el mismo párrafo del artículo: 36 tokens en inglés, 48 en español (+33 %, GPT-4o). Cada cubito = un token; los 12 de más, en tan. -->
+<template>
+  <style>#root { position: absolute; inset: 0; } .lb { opacity: 0; } #i-mas { font: 700 64px var(--sans); color: var(--acc); opacity: 0; }</style>
+  <div id="root" data-composition-id="idioma" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <canvas id="i-cv" class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="hud" data-layout-ignore>
+      <div class="ancla" id="i-en-a"><div id="i-en" class="rot mono lb">inglés <b>36</b></div></div>
+      <div class="ancla" id="i-es-a"><div id="i-es" class="rot mono lb">español <b>48</b></div></div>
+      <div class="ancla" id="i-mas-a"><div id="i-mas">+33 %</div></div>
+    </div>
+    <div class="vineta" data-layout-ignore></div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="idioma"]');
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo('#i-en', { opacity: 0 }, { opacity: 1, duration: 0.25 }, 0.45);
+    tl.fromTo('#i-es', { opacity: 0 }, { opacity: 1, duration: 0.25 }, 1.0);
+    tl.fromTo('#i-mas', { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(2)' }, 2.75);
+    Promise.all([import('./assets/escena3d.js'), import('./assets/token3d.js')]).then(async ([M, Km]) => {
+      const E = await M.crear(root), K = Km.K3(E), { V, clamp } = E;
+      const S = 0.03, PI = 0.037, X0 = -0.44;
+      const barra = (n, y, extra) => Array.from({ length: n }, (_, k) => { const col = Math.floor(k / 2), fil = k % 2, c = K.cubito(S, col >= extra); c.position.set(X0 + col * PI, y - fil * PI, 0); E.scene.add(c); return c; });
+      const en = barra(36, 0.95, 99), es = barra(48, 0.55, 18);
+      const lab = (id, v, dx, dy) => E.label(document.getElementById(id), v, dx, dy);
+      E.animar(tl, 6.2, (t) => {
+        E.ruta(t, [{ t: 0, p: [0.45, 1.0, 3.6], l: [0.08, 0.7, 0] }, { t: 2.4, p: [0.3, 0.97, 3.5], l: [0.08, 0.7, 0], e: 'lin' }, { t: 3.1, p: [0.12, 0.88, 3.25], l: [0.1, 0.68, 0], e: 'io' }, { t: 6.2, p: [0.1, 0.87, 3.2], l: [0.1, 0.68, 0], e: 'lin' }]);
+        en.forEach((c, k) => K.pop(c, t, 0.4 + 0.022 * k, 0.2));
+        es.forEach((c, k) => K.pop(c, t, 1.0 + 0.026 * k, 0.2));
+        lab('i-en-a', new V(X0, 0.95 + 0.09, 0), 0, 0); document.getElementById('i-en-a').style.transform = 'translate(0,-100%)';
+        lab('i-es-a', new V(X0, 0.55 + 0.09, 0), 0, 0); document.getElementById('i-es-a').style.transform = 'translate(0,-100%)';
+        lab('i-mas-a', new V(X0 + 20.5 * PI, 0.55 + 0.07, 0), 0, 0); document.getElementById('i-mas-a').style.transform = 'translate(-50%,-100%)';
+      });
+      window.__timelines['idioma'] = tl;
+    });
+  </script>
+</template>

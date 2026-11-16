@@ -4,6 +4,7 @@ Un video = una carpeta = un proyecto HyperFrames. Se crea con `bash engine/nuevo
 | Carpeta | Qué es | Estado |
 |---|---|---|
 | `_plantilla/` | Punto de partida (estética Scale por defecto) | base |
+| `2026-11-tokens-1/` | **Qué son los tokens, parte 1** (la IA lee números; datos medidos con tiktoken) | hecho (2026-11-16), esperando revisión de Ayrton |
 | `2026-11-tensores-scale-oscuro/` | **Qué es un tensor**, versión con estética Scale (la que Ayrton eligió) | ✓ **publicado** en Instagram (2026-11-14); feedback en `docs/PUBLICO.md` |
 | `2026-11-tensores/` | Qué es un tensor v5.2, estética línea roja | versión previa, reemplazada por la Scale |
 | `2026-11-wifi/` | Cómo funciona el WiFi (estética línea roja) | ✓ terminado (el primero) |

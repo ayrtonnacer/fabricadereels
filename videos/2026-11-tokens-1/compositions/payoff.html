@@ -1,0 +1,27 @@
+<!-- PAYOFF (4,4 s) — vuelve el mensaje en tokens y una fila de cuadraditos de la foto; en "lista de números" cada ficha gira y muestra su dorso:
+     el texto, su número (ID); el cuadradito, su vector de números (valores ilustrativos). -->
+<template>
+  <style>#root { position: absolute; inset: 0; }</style>
+  <div id="root" data-composition-id="payoff" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <canvas id="o-cv" class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="vineta" data-layout-ignore></div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="payoff"]');
+    const tl = gsap.timeline({ paused: true });
+    Promise.all([import('./assets/escena3d.js'), import('./assets/token3d.js'), import('./assets/tensor3d.js')]).then(async ([M, Km, Tm]) => {
+      const E = await M.crear(root), K = Km.K3(E), T = Tm.T3(E), { clamp } = E;
+      const TOK = [['hola', 122845], [',', 11], [' ¿', 12873], ['qué', 23535], [' tal', 4858], ['?', 30]];
+      const ft = TOK.map(([txt, id]) => K.ficha({ txt, back: String(id) })), filaT = K.fila(ft, 0.085); filaT.position.set(0, 0.95, 0); E.scene.add(filaT);
+      const tex = T.texSuave(0.3, 'gris'), N = 14, J = 7, VEC = ['0.21\n-0.47\n0.88', '0.35\n0.12\n-0.61', '-0.08\n0.54\n0.27', '0.73\n-0.19\n0.05', '-0.32\n0.66\n-0.14', '0.18\n-0.70\n0.42'];
+      const fp = VEC.map((v, k) => K.ficha({ img: { tex, uv: [(4 + k) / N, 1 - (J + 1) / N, (5 + k) / N, 1 - J / N] }, back: v, size: 1.25 })), filaP = K.fila(fp, 0.06); filaP.position.set(0, 0.5, 0); E.scene.add(filaP);
+      E.animar(tl, 4.4, (t) => {
+        E.ruta(t, [{ t: 0, p: [0.0, 0.95, 5.25], l: [0, 0.7, 0] }, { t: 4.4, p: [0.1, 0.93, 5.0], l: [0, 0.7, 0], e: 'lin' }]);
+        ft.forEach((f, i) => { K.pop(f, t, 0.05 * i, 0.3); f.userData.girar((t - 2.45 - 0.07 * i) / 0.45); });
+        fp.forEach((f, i) => { K.pop(f, t, 0.3 + 0.05 * i, 0.3); f.userData.girar((t - 2.7 - 0.07 * i) / 0.45); });
+      });
+      window.__timelines['payoff'] = tl;
+    });
+  </script>
+</template>

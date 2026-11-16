@@ -136,3 +136,4 @@ Todo lo que Ayrton dice y pasa se guarda acá (y el material en `docs/material/`
 
 ## 2026-11-16
 - Ayrton pidió un reel "qué son los tokens en IA" y pasó el artículo de NVIDIA (guardado en `docs/material/2026-11-16-que-son-los-tokens-nvidia.md`). Guion en revisión (checkpoint).
+- 2026-11-16: el primer guion le pareció **"demasiado superficial"**: quiere datos técnicos de la fuente. Se pasó a serie de 2 partes con datos verificados. Después pidió **"revisá el guion, agregá algo más técnico y validá los datos"**: se midió con tiktoken y se corrigieron varios datos del artículo de NVIDIA (`docs/material/2026-11-16-tokens-validacion.md`). Pidió **"creá el video 1"** → `videos/2026-11-tokens-1/`.

@@ -1,0 +1,25 @@
+<!-- PORTADA (0,1 s, cuadro fijo para elegir como portada al publicar): título "¿Qué es un token?", el mensaje cortado en tokens con su número y la firma. -->
+<template>
+  <style>#root { position: absolute; inset: 0; } #p-firma { position: absolute; left: 0; right: 0; top: 205px; text-align: center; }</style>
+  <div id="root" data-composition-id="portada" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <canvas id="p-cv" class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="hud" data-layout-ignore>
+      <div class="ancla" style="top: 470px"><h1 id="p-tit" class="titular" style="width: 980px; text-align: center;">¿Qué es un <span class="acc">token</span>?</h1></div>
+    </div>
+    <div class="vineta" data-layout-ignore></div>
+    <div id="p-firma" class="firma">@ayrtonnacer</div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="portada"]');
+    const tl = gsap.timeline({ paused: true });
+    Promise.all([import('./assets/escena3d.js'), import('./assets/token3d.js')]).then(async ([M, Km]) => {
+      const E = await M.crear(root), K = Km.K3(E);
+      const TOK = [['hola', 122845], [',', 11], [' ¿', 12873], ['qué', 23535], [' tal', 4858], ['?', 30]];
+      const fs = TOK.map(([txt, id]) => K.ficha({ txt, id })), fila = K.fila(fs, 0.08); fila.position.set(0, 0.6, 0); E.scene.add(fila);
+      fs.forEach((f, i) => { f.userData.verId(1); if (i === 3) f.userData.acento(1); });
+      E.animar(tl, 0.1, () => E.ruta(0, [{ t: 0, p: [0.7, 0.95, 5.6], l: [0, 0.5, 0] }, { t: 1, p: [0.7, 0.95, 5.6], l: [0, 0.5, 0] }]));
+      window.__timelines['portada'] = tl;
+    });
+  </script>
+</template>

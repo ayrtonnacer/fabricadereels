@@ -1,0 +1,44 @@
+<!-- FOTO (7,0 s) — una foto de 224×224 se corta en cuadraditos de 16×16 píxeles (14×14 = 196 tokens, como en ViT-B/16).
+     Se acerca a un cuadradito ("16 × 16 píxeles") y después una fila de cuadraditos sale de la foto y forma una fila de tokens. -->
+<template>
+  <style>#root { position: absolute; inset: 0; } #f-px { opacity: 0; } #f-n { opacity: 0; }</style>
+  <div id="root" data-composition-id="foto" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <canvas id="f-cv" class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="hud" data-layout-ignore>
+      <div class="ancla" id="f-px-a"><div id="f-px" class="rot"><b>16 × 16</b> píxeles</div></div>
+      <div class="ancla" id="f-n-a"><div id="f-n" class="rot">224 × 224 = <b>196 tokens</b></div></div>
+    </div>
+    <div class="vineta" data-layout-ignore></div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="foto"]');
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo('#f-px', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.25 }, 2.7);
+    tl.to('#f-px', { opacity: 0, duration: 0.2 }, 4.4);
+    tl.fromTo('#f-n', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.25 }, 5.3);
+    Promise.all([import('./assets/escena3d.js'), import('./assets/token3d.js'), import('./assets/tensor3d.js')]).then(async ([M, Km, Tm]) => {
+      const E = await M.crear(root), K = Km.K3(E), T = Tm.T3(E), { V, P, clamp, EASE } = E;
+      const S = 0.9, N = 14, c = S / N, Y = 0.85, foto = T.foto({ S }); foto.position.set(0, Y, 0); E.scene.add(foto);
+      const pts = []; for (let k = 1; k < N; k++) { const u = -S / 2 + k * c; pts.push(new V(u, -S / 2, 0.022), new V(u, S / 2, 0.022), new V(-S / 2, u, 0.022), new V(S / 2, u, 0.022)); }
+      const grilla = E.trazo(pts, P.hi, 1.4); grilla.position.y = Y; E.scene.add(grilla);
+      const J = 7, I0 = 6, tex = T.texSuave(0.3, 'gris');
+      const parches = Array.from({ length: N }, (_, i) => { const f = K.ficha({ img: { tex, uv: [i / N, 1 - (J + 1) / N, (i + 1) / N, 1 - J / N] }, size: c / K.H }); E.scene.add(f); return f; });
+      const marca = K.marco(c, c, P.acc, 5); marca.position.set(-S / 2 + (I0 + 0.5) * c, Y + S / 2 - (J + 0.5) * c, 0.01); E.scene.add(marca);
+      const yJ = Y + S / 2 - (J + 0.5) * c, gapF = 0.022, anchoF = N * c + (N - 1) * gapF;
+      const pxA = document.getElementById('f-px-a');
+      E.animar(tl, 7.0, (t) => {
+        const pc = marca.position;
+        E.ruta(t, [{ t: 0, p: [0.3, 0.98, 3.25], l: [0, 0.82, 0] }, { t: 2.3, p: [0.2, 0.95, 3.15], l: [0, 0.82, 0], e: 'lin' }, { t: 3.0, p: [pc.x, pc.y + 0.05, 1.7], l: [pc.x, pc.y, 0], e: 'io' },
+          { t: 4.3, p: [pc.x, pc.y + 0.05, 1.62], l: [pc.x, pc.y, 0], e: 'lin' }, { t: 5.1, p: [0, 0.78, 3.45], l: [0, 0.6, 0], e: 'io' }, { t: 7.0, p: [0, 0.78, 3.35], l: [0, 0.6, 0], e: 'lin' }], [[3.0, 0.004]]);
+        grilla.visible = t > 2.0; grilla.material.opacity = 0.55 * clamp((t - 2.0) / 0.4);
+        marca.userData.set(clamp((t - 2.7) / 0.2) * (1 - clamp((t - 4.6) / 0.2)));
+        E.label(pxA, new V(pc.x, pc.y + c * 0.9, 0), 0, 0); E.label(document.getElementById('f-n-a'), new V(0, 0.22 - 0.13, 0), 0, 0);
+        parches.forEach((f, i) => { const q = EASE.io(clamp((t - 4.7 - 0.05 * i) / 0.7));
+          const x0 = -S / 2 + (i + 0.5) * c, x1 = -anchoF / 2 + c / 2 + i * (c + gapF);
+          f.position.set(x0 + (x1 - x0) * q, yJ + (0.22 - yJ) * q + 0.12 * Math.sin(Math.PI * q), 0.03 + 0.1 * Math.sin(Math.PI * q)); f.visible = t > 4.7; f.userData.borde(q); });
+      });
+      window.__timelines['foto'] = tl;
+    });
+  </script>
+</template>

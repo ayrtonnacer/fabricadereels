@@ -1,0 +1,41 @@
+<!-- CORTE (6,8 s) — sigue del gancho: la placa "hola, ¿qué tal?" entera. Una cuchilla de luz la recorre ("tokenizador... corta"),
+     se separan los pedazos ("pedazos llamados tokens") y debajo de cada uno aparece su número ("un número fijo"). -->
+<template>
+  <style>#root { position: absolute; inset: 0; } #c-rot { opacity: 0; }</style>
+  <div id="root" data-composition-id="corte" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <canvas id="c-cv" class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="hud" data-layout-ignore>
+      <div class="ancla" id="c-rot-a" style="top: 520px"><div id="c-rot" class="rot">6 <b>tokens</b></div></div>
+    </div>
+    <div class="vineta" data-layout-ignore></div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="corte"]');
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo('#c-rot', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.25, ease: 'power3.out' }, 2.8);
+    Promise.all([import('./assets/escena3d.js'), import('./assets/token3d.js')]).then(async ([M, Km]) => {
+      const E = await M.crear(root), K = Km.K3(E), { V, P, clamp, EASE } = E;
+      const TOK = [['hola', 122845], [',', 11], [' ¿', 12873], ['qué', 23535], [' tal', 4858], ['?', 30]];
+      const fs = TOK.map(([txt, id]) => K.ficha({ txt, id })), fila = K.fila(fs, 0); fila.position.set(0, 0.6, 0); E.scene.add(fila);
+      const ancho0 = fila.userData.ancho;
+      const marco = K.marco(ancho0 + 0.06, K.H + 0.06); marco.position.copy(fila.position); E.scene.add(marco);
+      // cuchilla: línea vertical tan que recorre la placa de izquierda a derecha; deja una marca en cada límite entre tokens
+      const hoja = E.trazo([new V(0, -0.16, 0.05), new V(0, 0.16, 0.05)], P.acc, 4); hoja.position.y = 0.6; E.scene.add(hoja);
+      const bordes = []; { let x = -ancho0 / 2; fs.forEach((f) => { x += f.userData.w; bordes.push(x); }); bordes.pop(); }
+      const T0 = 0.95, T1 = 1.9, rot = document.getElementById('c-rot-a');
+      E.animar(tl, 6.8, (t) => {
+        E.ruta(t, [{ t: 0, p: [0, 0.78, 4.3], l: [0, 0.58, 0] }, { t: 0.6, p: [0, 0.74, 4.0], l: [0, 0.58, 0], e: 'out' }, { t: 2.0, p: [0, 0.74, 3.95], l: [0, 0.58, 0], e: 'lin' },
+          { t: 2.9, p: [0.3, 0.9, 5.5], l: [0, 0.5, 0], e: 'io' }, { t: 6.8, p: [0.22, 0.9, 5.4], l: [0, 0.5, 0], e: 'lin' }], [[2.9, 0.008]]);
+        const u = clamp((t - T0) / (T1 - T0)), xh = -ancho0 / 2 - 0.05 + (ancho0 + 0.1) * EASE.io(u);
+        hoja.position.x = xh; hoja.visible = t > T0 - 0.05 && t < T1 + 0.1; hoja.material.opacity = 1 - clamp((t - T1) / 0.1);
+        const ab = EASE.io(clamp((t - 2.0) / 0.8)), gap = 0.085 * ab; fila.userData.abrir(gap);
+        marco.userData.set(1 - ab);
+        fs.forEach((f, i) => f.userData.borde(Math.max(ab, xh > bordes[Math.max(0, i - 1)] ? 0.7 : 0)));
+        fs.forEach((f, i) => f.userData.verId(EASE.out(clamp((t - 4.05 - 0.08 * i) / 0.3))));
+        fs.forEach((f, i) => f.userData.acento(t > 4.05 + 0.08 * i && t < 4.7 + 0.08 * i ? 1 : 0));
+      });
+      window.__timelines['corte'] = tl;
+    });
+  </script>
+</template>
