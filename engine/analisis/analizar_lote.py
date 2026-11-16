@@ -11,10 +11,12 @@ if not vids: sys.exit('No hay mp4 nuevos en assets/referencias/_nuevas/')
 for v in vids:
     slug = v.stem.lower().replace(' ', '-'); dst = OUT / slug; dst.mkdir(parents=True, exist_ok=True)
     print(f'== {slug}'); subprocess.run([sys.executable, str(R / 'engine/analisis/medir.py'), str(v), str(dst)], check=True)
+    subprocess.run([sys.executable, str(R / 'engine/analisis/movimientos.py'), str(dst), '--video', str(v)], check=True)   # libro de movimientos de cámara
     txt = v.with_suffix('.txt')
     if txt.exists(): shutil.copy(txt, dst / 'NOTAS-DE-AYRTON.txt')
     if mover:
         shutil.move(str(v), R / 'assets/referencias' / v.name)
         if txt.exists(): shutil.move(str(txt), R / 'assets/referencias' / txt.name)
 subprocess.run([sys.executable, str(R / 'engine/analisis/biblia.py')], check=True)
+subprocess.run([sys.executable, str(R / 'engine/analisis/movimientos.py'), '--catalogo'], check=True)
 print(f'listo: {len(vids)} referencia(s) medida(s). Revisar docs/4-referencias/BIBLIA-DE-ESTILO.md y los INFORME.md nuevos.')

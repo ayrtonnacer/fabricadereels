@@ -1,0 +1,58 @@
+[
+ {
+  "desde_s": 0.17,
+  "hasta_s": 1.88,
+  "dur_s": 1.71,
+  "tipo": "dolly / zoom in (se acerca)",
+  "distancia_pct_ancho": 17.6,
+  "zoom_pct": 28.2,
+  "pico_px_s": 1918,
+  "pico_en_pct": 38,
+  "curva": "simétrico (ease in-out)",
+  "cuadro_ini": 4,
+  "cuadro_pico": 19,
+  "cuadro_fin": 44
+ },
+ {
+  "desde_s": 2.46,
+  "hasta_s": 14.5,
+  "dur_s": 12.04,
+  "tipo": "paneo / travelling a la derecha",
+  "distancia_pct_ancho": 395.5,
+  "zoom_pct": -122.4,
+  "pico_px_s": 4833,
+  "pico_en_pct": 73,
+  "curva": "arranca lento y termina fuerte (ease-in)",
+  "cuadro_ini": 59,
+  "cuadro_pico": 269,
+  "cuadro_fin": 347
+ },
+ {
+  "desde_s": 14.62,
+  "hasta_s": 20.92,
+  "dur_s": 6.29,
+  "tipo": "diagonal",
+  "distancia_pct_ancho": 146.7,
+  "zoom_pct": -51.0,
+  "pico_px_s": 4072,
+  "pico_en_pct": 63,
+  "curva": "simétrico (ease in-out)",
+  "cuadro_ini": 351,
+  "cuadro_pico": 445,
+  "cuadro_fin": 501
+ },
+ {
+  "desde_s": 21.04,
+  "hasta_s": 22.25,
+  "dur_s": 1.21,
+  "tipo": "grúa / tilt hacia abajo",
+  "distancia_pct_ancho": 26.9,
+  "zoom_pct": 5.8,
+  "pico_px_s": 1148,
+  "pico_en_pct": 0,
+  "curva": "arranca fuerte y frena largo (ease-out)",
+  "cuadro_ini": 505,
+  "cuadro_pico": 505,
+  "cuadro_fin": 533
+ }
+]
