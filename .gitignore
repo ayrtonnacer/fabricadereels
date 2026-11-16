@@ -17,3 +17,4 @@ assets/voces/*.onnx
 # análisis: lo pesado se regenera
 videos/*/analisis/medidas.csv
 videos/*/analisis/hojas/
+.venv-manim/
