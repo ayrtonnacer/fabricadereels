@@ -73,3 +73,8 @@ Link + indicaciones → guion (público: técnicos, principiantes, reclutadores)
 - **Cámara continua de verdad**: en cada límite entre escenas algo sobrevive y se transforma en lo siguiente; se mide con `engine/analisis/arrastre.py` (medio ≥ 0,5). Ayrton pasó el repo onetake y pidió **no instalar nada** por seguridad: estudiar leyendo y tomar ideas/umbrales (licencia no comercial: nada de copiar código).
 - Pausas verdaderamente quietas (≥ 25 % de cuadros) y cámara que anticipa al objeto; no más movimiento. Detalle: `docs/CAMARA.md` (reglas 7–9) y `docs/material/2026-11-onetake.md`.
 
+
+## Agregado 2026-11-16 (tokens)
+- **Cada reel con su propia puesta en escena**: se mantienen inicio (firma) y cierre (CTA), pero el medio NO copia el reel anterior (orden de planos, objetos de frente, título arriba). Explorar el espacio: estaciones en profundidad, recorridos de cámara por el set, vistas explosionadas.
+- **Sonido más rico**: usar los sonidos propios que encajan con el tema (ej. `interface-texto-digital` para datos/tokens, `zoom-click` en acercamientos) además de los sintéticos; falta un banco de efectos reales (pendiente de su OK sobre la fuente).
+- Datos técnicos concretos y verificados en reels conceptuales (no quedarse en la definición).
