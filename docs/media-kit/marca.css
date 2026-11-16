@@ -1,0 +1,45 @@
+/* marca.css — @ayrtonnacer · tema Scale · v1 (2026-11-16) */
+@import url("https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;700&family=Geist+Mono:wght@400;500;700&display=swap");
+
+:root {
+  /* Color: el fondo siempre es negro; el resto es acento */
+  --negro: #000000;
+  --blanco: #FFFFFF;      /* resaltar: texto, señal */
+  --linea: #929292;       /* objetos 3D de línea */
+  --gris: #C7C7C7;        /* rótulos secundarios */
+  --piso: #3A3A3A;        /* piso en perspectiva */
+  --tan: #A8927C;         /* único acento: palabra clave, firma */
+  --ok: #2EE08C;          /* solo "correcto ✓" (bloque relleno, texto negro) */
+  --error: #DC2626;       /* solo "error ✕" (bloque relleno, texto blanco) */
+  --slate: #839CB2;       /* categoría A, dentro de la explicación */
+  --purple: #79648C;      /* categoría B, dentro de la explicación */
+
+  /* Tipografía */
+  --font-texto: "Host Grotesk", system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --peso: 700;
+  --tracking-titulo: -0.03em;
+  --tracking-texto: -0.02em;
+
+  /* Escala para 1080×1920 */
+  --t-portada: 140px;
+  --t-titulo: 120px;
+  --t-paso: 96px;
+  --t-cierre: 104px;
+  --t-subs: 64px;
+  --t-dato: 110px;
+  --t-rotulo: 40px;
+  --t-firma: 34px;
+
+  /* Trazo y margen */
+  --trazo: 2px;
+  --margen-x: 90px;
+
+  /* Zonas seguras (px desde arriba) */
+  --lectura-desde: 200px;
+  --lectura-hasta: 1330px;
+  --subs-desde: 1120px;
+  --subs-hasta: 1320px;
+  --firma-y: 270px;
+  --titulo-y: 350px;
+}

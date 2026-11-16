@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;700&amp;family=Geist+Mono:wght@400;500;700&amp;display=swap"></link><style>body{margin:0;background:#000}</style></helmet>
+<div style="position:relative;width:1080px;height:1920px;background:#000;overflow:hidden;font-family:'Host Grotesk',sans-serif">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 38% at 50% 56%, #0e0e0e 0%, #000 70%)"></div>
+  <div style="position:absolute;top:1180px;left:0;width:1080px;height:740px;-webkit-mask-image:linear-gradient(to bottom, transparent 0%, #000 40%);mask-image:linear-gradient(to bottom, transparent 0%, #000 40%)">
+    <svg viewBox="0 0 1080 740" style="width:1080px;height:740px;display:block"><path d="{{ piso }}" style="fill:none;stroke:#3a3a3a;stroke-width:1.5"></path></svg>
+  </div>
+  <div style="position:absolute;top:262px;left:90px;font-size:44px;font-weight:700;letter-spacing:-0.01em;color:#A8927C">@ayrtonnacer</div>
+  <h1 style="position:absolute;top:350px;left:90px;width:900px;margin:0;font-size:140px;line-height:0.98;font-weight:700;letter-spacing:-0.03em;color:#FFFFFF;text-wrap:balance">{{ antes }}<span style="color:#A8927C">{{ clave }}</span>{{ despues }}</h1>
+  <div style="position:absolute;top:800px;left:260px;width:560px;height:560px">
+    <dc-import name="Objeto" tipo="{{ objeto }}" hint-size="560px,560px" style="width:560px;height:560px"></dc-import>
+  </div>
+  <sc-if value="{{ hasSub }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;top:1150px;left:90px;right:90px;display:flex;justify-content:center">
+      <div style="background:#000;padding:14px 28px;font-size:64px;line-height:1.15;font-weight:700;letter-spacing:-0.02em;color:#FFFFFF;text-align:center;text-wrap:balance">{{ subAntes }}<span style="color:#A8927C">{{ subClave }}</span>{{ subDespues }}</div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ guias }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;top:0;left:0;right:0;height:200px;background:rgba(131,156,178,0.22);display:flex;align-items:flex-end;padding:0 0 16px 24px;box-sizing:border-box;font-family:'Geist Mono',monospace;font-size:28px;color:#839CB2">0–200 · interfaz de la app</div>
+    <div style="position:absolute;top:1330px;left:0;right:0;bottom:0;background:rgba(131,156,178,0.22);padding:16px 24px;box-sizing:border-box;font-family:'Geist Mono',monospace;font-size:28px;color:#839CB2">1330–1920 · interfaz de la app</div>
+    <div style="position:absolute;top:1120px;left:0;right:0;height:200px;border-top:2px dashed #839CB2;border-bottom:2px dashed #839CB2;box-sizing:border-box;display:flex;justify-content:flex-end;align-items:flex-start;padding:8px 24px;font-family:'Geist Mono',monospace;font-size:28px;color:#839CB2">subtítulos 1120–1320</div>
+    <div style="position:absolute;top:240px;left:0;right:0;height:1440px;border-top:2px dashed #FFFFFF;border-bottom:2px dashed #FFFFFF;box-sizing:border-box;display:flex;align-items:flex-end;padding:8px 24px;font-family:'Geist Mono',monospace;font-size:28px;color:#FFFFFF">recorte grilla 3:4 · 240–1680</div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1080,&quot;height&quot;:1920},&quot;tema&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;programacion&quot;,&quot;matematica&quot;,&quot;ciberseguridad&quot;,&quot;linux&quot;],&quot;default&quot;:&quot;programacion&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;antes&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;La IA no lee&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;clave&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;palabras&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;despues&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;objeto&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;tensor&quot;,&quot;esfera&quot;,&quot;candado&quot;,&quot;terminal&quot;,&quot;cubo&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;guias&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;subAntes&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;subClave&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;subDespues&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props;
+    const tema = p.tema ?? 'programacion';
+    const temas = { programacion: ['programación', 'tensor'], matematica: ['matemática', 'esfera'], ciberseguridad: ['ciberseguridad', 'candado'], linux: ['Linux', 'terminal'] };
+    const [temaTxt, obj] = temas[tema] || temas.programacion;
+    const w = 1080, h = 740, vp = -500;
+    let piso = '';
+    for (let i = -12; i <= 12; i++) { const xb = w / 2 + i * 200; const xt = w / 2 + (xb - w / 2) * (-vp) / (h - vp); piso += `M${xt.toFixed(1)} 0 L${xb} ${h} `; }
+    [0, 40, 95, 170, 270, 400, 570].forEach(y => piso += `M0 ${y} H${w} `);
+    const sp = (a, b) => (a ? a + b : '');
+    const antes = p.antes ?? 'La IA no lee', clave = p.clave ?? 'palabras', despues = p.despues ?? '';
+    return {
+      temaTxt, objeto: p.objeto || obj, piso,
+      antes: sp(antes, ' '), clave, despues: despues ? ' ' + despues : '',
+      hasSub: !!(p.subClave || p.subAntes),
+      subAntes: sp(p.subAntes, ' '), subClave: p.subClave ?? '', subDespues: p.subDespues ? ' ' + p.subDespues : '',
+      guias: !!p.guias
+    };
+  }
+}
+</script>
+</body>
+</html>
