@@ -18,6 +18,8 @@ La cámara es lo que da profundidad y lo que guía la mirada. Regla madre (Ayrto
 8. **Temblor solo al aterrizar.** Chiquito (0,006 m) y decreciente, al llegar a una estación. Nunca en una pausa.
 9. **Las metas son una alarma, no un objetivo** (`docs/4-referencias/metas.json`). Si el ojo dice que confunde, gana el ojo.
 
+**Actualización 11-17 (Ayrton):** las referencias de Instagram que más le gustan (9 reels medidos en `docs/4-referencias/material/2026-11-17-refs-instagram-dinamismo/`) mueven la cámara en el 69–88 % de los cuadros. Por eso la regla 2 ("quieta cuando se nombra") se relaja: en una retención hay **deriva orbital lenta** (≈ 10° y 8 % de acercamiento, < 100 px/s) que no mueve el texto de lugar; los viajes siguen siendo rápidos. Ver el recurso en `videos/2026-11-python-variables/assets/set.js` (`orb`).
+
 ## Planos y movimientos: recetas
 Posiciones relativas a la estación, en metros (objeto de ≈ 0,3–0,5 m apoyado en el piso). `p` = dónde está la cámara, `l` = a dónde mira. Son puntos de partida: confirmar con `python engine/reel.py encuadre` y con los cuadros.
 | Plano / ángulo | `p` (x, y, z) | `l` | Para qué |

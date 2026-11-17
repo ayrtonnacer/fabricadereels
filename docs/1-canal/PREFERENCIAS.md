@@ -22,9 +22,9 @@
 ## 3. Cámara y puesta en escena
 - **Un solo set 3D recorrido en plano secuencia** (le gustó la v2 de tokens, "la fábrica"): estaciones en profundidad, dolly in/out, grúa, travelling y **ángulos distintos** (picado, contrapicado, lateral) (11-16).
 - **Viajes rápidos (~0,8 s) y retenciones quietas** cuando se nombra algo. Pausas para que se lea (11-15, 11-16).
-- **No**: cámara que se mueve todo el tiempo, zoom de más, desenfocar o recortar lo que se explica (banco de prueba, 11-15).
+- **No**: desenfocar o recortar lo que se explica. Ojo, el banco de prueba del 11-15 rechazó "cámara que se mueve todo el tiempo y zoom de más", pero el 11-17 Ayrton pide más movimiento: lo que vale hoy es movimiento **con intención** (viajes que cambian de ángulo, deriva lenta en las retenciones, zoom a un detalle) con el texto siempre legible.
 - **Plano general** para mostrar las ideas juntas (escalar, vector y matriz vistos de lejos).
-- **Más dinamismo y uso del espacio** (11-17, referencia de Instagram pendiente de medir): la cámara tiene que recorrer y usar el espacio con más energía; crear objetos propios si hace falta.
+- **Más dinamismo y uso del espacio** (11-17): le encantan 9 reels de Instagram medidos (`material/2026-11-17-refs-instagram-dinamismo/`): plano secuencia con la cámara en movimiento **69–88 %** del tiempo (la nuestra, 45 %), 2–4 movimientos notorios cada 10 s, cambios de ángulo, paneos y zooms (+100 %), y **un objeto que se transforma** en vez de objetos sueltos. Crear objetos propios si hace falta. Dice que nuestra tipografía y nuestros sonidos son mejores: se mantienen.
 - **Cada reel con su propia puesta en escena**: se mantienen inicio y cierre; el medio no copia el reel anterior (orden de planos, objetos de frente, título arriba) (11-16).
 - **Nada que estorbe al texto**: un decorado que pasa detrás de lo que se lee se saca (la cinta de la fábrica) (11-16).
 - **Profundidad real**: objetos 3D con perspectiva, **piso de líneas en perspectiva**. No reemplazar el 3D por dibujos planos (11-07).

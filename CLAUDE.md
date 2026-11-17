@@ -44,6 +44,7 @@ python engine/reel.py audio videos/X          # solo efectos + mezcla
 python engine/reel.py medir videos/X          # mide final.mp4 contra las metas (agregar --escuchar para la pronunciación)
 python engine/reel.py entregar videos/X       # copia liviana + portada + lista de cierre
 python engine/reel.py estado                  # en qué etapa está cada video
+bash engine/bajar_referencia.sh <url>         # baja un reel de Instagram para analizarlo (yt-dlp, se instala solo); después: python engine/analisis/medir.py <mp4> <salida> --hojas
 ```
 Las sesiones de la nube se preparan solas (`.claude/hooks/session-start.sh`: ffmpeg, Python, `node_modules`, banco de efectos). En otro entorno: `bash engine/preparar.sh` (Node ≥ 22, ffmpeg; HyperFrames fijado en 0.9.26).
 Herramientas sueltas (las usa `reel.py`): `engine/audio/voz.py`, `sfx.py`, `mezcla.py`, `escuchar.py`; `engine/analisis/medir.py`, `comparar.py`, `arrastre.py`, `barro.py`, `encuadre.py`, `movimientos.py`, `biblia.py`; `node engine/fisica.mjs` (física horneada).
