@@ -12,7 +12,7 @@ verificado: sí   # todo sale del artículo, en su orden (switch → router → 
 fuente: https://www.cisco.com/site/us/en/learn/topics/small-business/networking-basics.html
 serie: parte 1 de 2 (parte 2: tipos de switch y despliegues inalámbricos)
 ---
-## Voz (137 palabras ≈ 60 s a 2,3 palabras/s)
+## Voz (137 palabras ≈ 60 s a 2,3 palabras/s; el ritmo vigente es 2,4–2,8: ver docs/3-guion/GUION.md)
 | Bloque | Voz |
 |---|---|
 | HOOK · 0–4 s · 9 pal | Switch, router y punto de acceso: tres trabajos distintos. |

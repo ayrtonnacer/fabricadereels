@@ -5,19 +5,13 @@
     <meta name="viewport" content="width=1080, height=1920" />
     <!-- Todo local (sin CDN): el render no depende de la red. -->
     <script src="assets/gsap.min.js"></script>
-        <link rel="stylesheet" href="assets/marca.css" />
+    <link rel="stylesheet" href="assets/marca.css" />
   </head>
   <body>
-    <!-- Duraciones: las escribe `python engine/tiempos.py videos/X` desde video.json (única fuente de verdad). -->
-    <div id="root" data-composition-id="main" data-start="0" data-duration="15.1" data-width="1080" data-height="1920">
-      <div id="portada" data-composition-id="portada" data-composition-src="compositions/portada.html"
-        data-start="0" data-duration="0.1" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
-      <div id="gancho" data-composition-id="gancho" data-composition-src="compositions/gancho.html"
-        data-start="0.1" data-duration="3.6" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
-      <div id="explica" data-composition-id="explica" data-composition-src="compositions/explica.html"
-        data-start="3.7" data-duration="8" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
-      <div id="cierre" data-composition-id="cierre" data-composition-src="compositions/cierre.html"
-        data-start="11.7" data-duration="3.4" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+    <!-- Este archivo no se edita a mano: las escenas salen de video.json (python engine/reel.py voz videos/X). -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="19" data-width="1080" data-height="1920">
+      <!-- ESCENAS:INICIO (generado por engine/tiempos.py; no editar) -->
+      <!-- ESCENAS:FIN -->
     </div>
     <script>
       window.__timelines["main"] = gsap.timeline({ paused: true });

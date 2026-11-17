@@ -1,23 +1,86 @@
-# Flujo para hacer un reel
+# Flujo para hacer un reel (paso a paso)
+Cada paso tiene: **qué leer**, **qué hacer**, y **listo cuando** (la condición para pasar al siguiente). Comandos desde la raíz del repo. `X` = carpeta del video (`videos/AAAA-MM-tema`).
+No saltear pasos ni adelantarse: animar antes del OK del guion es el error más caro.
 
-Comandos desde la raíz del repo, salvo donde dice "en la carpeta del video".
+## 0. Preparar
+- **Leer**: `docs/1-canal/PREFERENCIAS.md` (entero; es corto).
+- **Hacer**: guardar todo lo que Ayrton pasó (PDF, capturas, audio, texto) en `docs/4-referencias/material/` y anotar su pedido en `docs/1-canal/BITACORA.md` (una línea con fecha).
+- **Listo cuando**: el material está en el repo.
 
-0. **Guardar el material**: todo lo que Ayrton pase (PDF, imágenes, sonidos, texto) se copia al repo (`docs/4-referencias/material/`, `assets/sfx/propios/`, `videos/X/fuentes/`) y sus indicaciones se anotan en `docs/1-canal/BITACORA.md`.
-1. **Fuente**: leer el link/tema completo (WebFetch/WebSearch). Extraer objetivo, ideas clave, comandos o fórmulas, advertencias. Verificar contra la fuente oficial.
-2. **Guion** (`docs/3-guion/GUION.md`, plantilla `videos/_plantilla/guion.md`): una idea, Hook → Payoff → CTA/bucle, ≤ duración × 2,3 palabras. Por escena: voz y texto en pantalla (la cámara va en el plan numérico, paso 3b).
-3. **✋ Checkpoint**: mostrar el guion (texto de voz + una línea por escena) y esperar OK.
-3b. **Plan numérico** (`plan.md` del video, plantilla `videos/_plantilla/plan.md`): metas tomadas de `docs/4-referencias/BIBLIA-DE-ESTILO.md` y `metas.json` (cortes por minuto, plano mediano, velocidad y ataque/liberación de cámara, retenciones, palabras/s, LUFS) y, por escena, cámara, transición y sonido **en números** (`docs/2-estilo/CAMARA.md`). Se lo muestro a Ayrton junto con los primeros cuadros. **Por cada límite entre escenas, escribir qué sobrevive y se transforma** (tipos en `docs/4-referencias/material/2026-11-onetake.md`); y antes del guion, para un reel nuevo, ofrecer 2–3 ángulos distintos si el tema lo permite.
-4. **Crear el video**: `bash engine/nuevo.sh AAAA-MM-tema` (copia la plantilla). Completar `video.json`: escenas (`id` = nombre de la composición, `d` = segundos) y `voz.lineas`.
-5. **Voz primero**: `python engine/audio/voz.py videos/X`. Ajustar texto y tiempos hasta que no haya avisos; las escenas duran lo que pide la voz (voz ≤ fin de escena − 0,1 s; ≥ 0,15 s entre líneas). Luego `python engine/tiempos.py videos/X` copia las duraciones a `index.html` y `python engine/subtitulos.py videos/X` arma los subtítulos con los tiempos exactos por palabra (`docs/2-estilo/SUBTITULOS.md`).
-6. **Portada + visual**: el video arranca con una **portada fija de 0,1 s** (título grande del hook + objeto clave + firma; composición `portada`), seguida del hook con su título. Después, la imagen no pasa de y ≈ 1100 (subtítulos en 1120–1320). una composición por escena en `compositions/` (copiar las de la plantilla). Cada parte aparece cuando la voz la nombra (tiempos locales de la escena = tiempo de la línea − inicio de la escena).
-7. **Revisar** (en la carpeta del video): `npx hyperframes check` (sin errores) y `npx hyperframes snapshot --at 0,1.5,…` → **mirar las imágenes** antes de renderizar. Ojo con: cuadro 0 (es la miniatura), textos chicos, cortes entre escenas.
-8. **Efectos**: `sfx_events.py` con los significados fijos (`docs/2-estilo/AUDIO.md`); whoosh en el pico de cada movimiento de cámara. `python engine/audio/sfx.py videos/X`.
-9. **Render** (en la carpeta del video): `npx hyperframes render --workers 4 -o out/mudo.mp4` (~2,5 s por segundo de video en CPU).
-9b. **Medir** (`docs/5-tecnica/MEDICION.md`): `python engine/analisis/medir.py videos/X/out/mudo.mp4 videos/X/analisis` (con `--transcripcion` sobre `final.mp4` para palabras/s); `python engine/analisis/comparar.py videos/X/analisis/metricas.json` contra la biblia de estilo y el `plan.md`. Si Ayrton pasó una referencia: medirla (`externos/<slug>/`), correr `python engine/analisis/biblia.py` para actualizar las tablas y recién después proponer. **Continuidad**: `python engine/analisis/arrastre.py videos/X/final.mp4 --escenas videos/X/video.json` (medio ≥ 0,5; ningún límite en 0,0 salvo cambio de tema/CTA).
-10. **Mezcla**: `python engine/audio/mezcla.py videos/X` → `final.mp4` (−14 LUFS, pico ≤ −1,5 dB).
-11. **Entrega**: mp4 + descripción con créditos (voz: Piper es_AR-daniela, CC BY-SA 4.0; y la fuente).
-12. **Cierre**: registrar correcciones en `docs/1-canal/DECISIONES.md` y palabras nuevas en `engine/audio/pronunciacion.json`; commit.
+## 1. Fuente
+- **Hacer**: leer la fuente completa (WebFetch; si falla, `curl` desde Bash). Sacar: la idea central, el mecanismo (el porqué), 2–4 datos concretos, y qué se presta a mostrarse en 3D.
+- **Verificar cada dato contra la fuente primaria o midiéndolo** (documentación oficial, paper, o la herramienta real: p. ej. los tokens se contaron con tiktoken). Los artículos de divulgación, aunque sean de empresas grandes, traen ejemplos inventados.
+- El guion cubre el **tema central** de la fuente; los ángulos laterales se ofrecen como otros reels.
+- **Listo cuando**: hay una lista de datos verificados con su origen.
 
-**A futuro**: publicar automáticamente en las redes de Ayrton (pendiente; no publicar nada sin que lo pida).
+## 2. Guion
+- **Leer**: `docs/3-guion/GUION.md`, `docs/1-canal/PUBLICO.md`.
+- **Hacer**: `python engine/reel.py nuevo AAAA-MM-tema`. Completar `guion.md` y, en `video.json`: `titulo`, `tema`, `fuente`, `scenes` (dejar `portada` 0.1 primero y `cierre` último; el medio, una escena por idea) y `voz.lineas` (con `t` estimado: ≈ 3 palabras por segundo mientras habla + 0,4 s de pausa entre frases). Cambiar el tema en `compositions/cierre.html`.
+- Para un tema nuevo, ofrecer 2–3 ángulos distintos antes de escribir.
+- `python engine/reel.py guion X` → corregir todo ✕.
+- **Listo cuando**: `reel.py guion` no da errores y el guion pasa el checklist de `GUION.md`.
 
-Cambios chicos: tocar solo la escena afectada, `snapshot --composition <id>` y volver a renderizar.
+## 3. ✋ Checkpoint con Ayrton
+- **Mostrar** (en el chat, corto): la idea en una frase; la tabla **escena | lo que se ve | voz | duración**; por escena, el plano y el movimiento de cámara en vocabulario de cine (`docs/2-estilo/GLOSARIO-EDICION.md`); el título de portada; los datos con su fuente; palabras con pronunciación dudosa (ofrecer variantes de audio).
+- **Esperar su OK.** Si corrige: aplicar, anotar en `BITACORA.md`, volver a mostrar solo lo que cambió.
+- Excepción: si pidió "hacelo directo", seguir sin esperar.
+
+## 4. Voz y tiempos
+- **Hacer**: `python engine/reel.py voz X`. Si `voz.py` marca ⚠ (una línea se pasa de su escena o pisa a otra): ajustar `t` de la línea o `d` de la escena en `video.json` y volver a correr. La escena dura lo que pide la voz (la voz termina ≥ 0,1 s antes del fin de la escena; ≥ 0,15 s entre líneas).
+- Esto genera `index.html`, `assets/tiempos.js`, un plano por escena y los subtítulos. **A partir de acá ningún tiempo se escribe a mano.**
+- **Listo cuando**: voz sin avisos y el ritmo está en 2,4–2,8 palabras por segundo.
+
+## 5. Plan de cámara
+- **Leer**: `docs/2-estilo/CAMARA.md`, `docs/2-estilo/ESTILO.md`.
+- **Hacer**: completar `plan.md`: las estaciones del set (qué idea vive en cada una y dónde), y por cada frase de voz: plano, ángulo, movimiento de llegada, qué aparece y con qué palabra, sonido. Regla de oro: **un movimiento por idea nueva; quieta mientras se nombra**.
+- El recorrido de este reel **no copia el del reel anterior** (mirar `plan.md` del último video en `videos/LEEME.md`).
+- **Listo cuando**: cada frase tiene su plano y cada viaje de cámara su motivo.
+
+## 6. El set (`assets/set.js`)
+- **Leer**: `docs/5-tecnica/THREEJS.md` (funciones de `E`), y `videos/_plantilla/assets/set.js` como molde (`videos/2026-11-tokens-1-v2/assets/fabrica.js` es un ejemplo completo de 49 s).
+- **Hacer**, en este orden: (1) estaciones; (2) objetos y rótulos; (3) lista `CAM` de poses; (4) `dibujar(T)`. Tiempos siempre con `cuando('l03', 'palabra')` / `ESC.<escena>.t0`.
+- Encuadrar sin renderizar: `python engine/reel.py encuadre "px,py,pz" "lx,ly,lz" "x,y,z" …` dice en qué píxel cae cada punto. Lo que se lee: x 60–1020, y 200–1100.
+- Objetos nuevos: relleno `E.std()` + `E.contornear()`; colores `P.edge`, `P.hi`, `P.acc`. Si un objeto sirve para otros reels, va a un archivo aparte (`assets/<tema>3d.js`).
+
+## 7. Revisar y mirar cuadros (repetir hasta que quede bien)
+- `python engine/reel.py revisar X` → 0 errores (✕). Los avisos (⚠) se leen y se corrigen o se justifican.
+- `python engine/reel.py cuadros X` → abrir `X/out/cuadros/contact-sheet.jpg` y **mirar cada cuadro** preguntando:
+  1. Cuadro 0: ¿se entiende la idea en miniatura? Firma + título de 3–5 palabras + objeto, nada detrás del título.
+  2. ¿Lo que nombra la voz está entero, quieto y legible, entre y 200 y 1100? ¿Algo pisa los subtítulos (y 1120–1320)?
+  3. ¿Hay rótulos encimados, pegados entre sí o con una palabra sola en la última línea?
+  4. ¿Cables que no tocan, líneas cortadas, objetos atravesados, algo que asoma detrás de un texto?
+  5. ¿Se usa un solo acento tan por plano y significa "mirá acá"?
+  6. Cierre: CTA grande y centrado, firma chica debajo, texto igual a la voz.
+- Un cuadro dudoso se vuelve a sacar solo: `python engine/reel.py cuadros X 12.4,13.1`. Cambiar **una cosa por vez**.
+- **Listo cuando**: revisar da 0 errores y los 6 puntos están bien en todos los cuadros.
+
+## 8. Sonido (`sfx_events.py`)
+- **Leer**: `docs/2-estilo/AUDIO.md`.
+- **Hacer**: un renglón por cosa que pasa en `set.js`, con el mismo tiempo. `P.apertura()` y `P.cierre(...)` no se tocan. `P.viaje(t)` en el **pico** de cada viaje de cámara (la mitad del viaje). Menos sonidos que movimientos.
+
+## 9. Render, medir, corregir
+- `python engine/reel.py render X` → `final.mp4`. Si pasa de 3 s por segundo de video: simplificar el set.
+- `python engine/reel.py medir X` → mirar "Fuera de la meta", el arrastre (continuidad) y el barro (graves). Lo que queda fuera se corrige o se justifica en `plan.md`. `--escuchar` (Whisper) antes de entregar: palabras que se entienden mal → `pronunciacion.json`.
+- Mirar 3–4 cuadros del `final.mp4` en los viajes de cámara (no deben verse saltos).
+
+## 10. Entregar
+- Escribir `descripcion.md` (gancho + 2–3 líneas + fuentes + créditos: "Voz: Piper es_AR-daniela, CC BY-SA 4.0" + hashtags).
+- `python engine/reel.py entregar X` y completar su lista. Repasar `PREFERENCIAS.md` contra el video.
+- Contarle a Ayrton, en vocabulario de cine y con segundos, qué hace la cámara y qué quedó fuera de las metas. Mandarle el `final.mp4` y la portada.
+- `video.json → "estado": "listo"`, fila en `videos/LEEME.md`, commit y push a `main`.
+
+## 11. Después de sus correcciones
+- Cada corrección: `BITACORA.md` (una línea) → si es una regla nueva, `PREFERENCIAS.md` en su sección (reemplazar, no apilar) → al cerrar el video, resumen en `DECISIONES.md`. Palabras corregidas → `pronunciacion.json` con `estado: "ok"`.
+- Cambios chicos: tocar solo lo afectado, `reel.py cuadros X <tiempos>` y volver a renderizar.
+- Cuando publique: `"estado": "publicado"` y el feedback en `docs/1-canal/PUBLICO.md`.
+
+## Errores típicos y cómo se arreglan
+| Síntoma | Causa | Arreglo |
+|---|---|---|
+| `check` se queda esperando o una escena sale negra | error de JavaScript en `set.js` (el timeline no se registró) | mirar la consola en `npx hyperframes snapshot`; revisar nombres de funciones de `E` |
+| Un objeto no aparece cuando la voz lo nombra | tiempo escrito a mano o `cuando()` con una palabra que no está en la línea | `reel.py revisar` lo marca; usar la palabra exacta del texto |
+| Cambió la voz y la imagen quedó corrida | no se corrió `reel.py voz` | correrlo; todo se reacomoda |
+| El sonido es el viejo | `sfx_events.py` falló | `reel.py audio X` y leer el error |
+| Un rótulo queda en el lugar del cuadro anterior | se movió la cámara después de ubicarlo | `R.dibujar(T)` va al final de `dibujar`, después de `E.ruta` |
+| Render lento (> 3 s por segundo) | set pesado | menos mallas y segmentos; sin sombras ni postproceso (`THREEJS.md`) |
+| Texto fuera de cuadro o sobre los subtítulos | cámara muy cerca | `reel.py encuadre` y alejar la cámara o bajar el punto al que mira (sube el objeto) |

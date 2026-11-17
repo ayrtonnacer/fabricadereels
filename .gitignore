@@ -2,12 +2,12 @@ node_modules/
 __pycache__/
 .DS_Store
 # salidas de cada video (se regeneran)
-videos/*/out/
-videos/*/audio/
-videos/*/frames/
-videos/*/.hyperframes/
-videos/*/*.mp4
-videos/*/*.wav
+videos/**/out/
+videos/**/audio/
+videos/**/frames/
+videos/**/.hyperframes/
+videos/**/*.mp4
+videos/**/*.wav
 # assets pesados o con licencia
 assets/sfx/*
 !assets/sfx/LEEME.md
@@ -15,7 +15,9 @@ assets/sfx/*
 !assets/sfx/propios/**
 assets/voces/*.onnx
 # análisis: lo pesado se regenera
-videos/*/analisis/medidas.csv
-videos/*/analisis/hojas/
+videos/**/analisis/medidas.csv
+videos/**/analisis/hojas/
 .venv-manim/
 out/manim/
+videos/**/analisis/transcripcion.txt
+videos/**/portada.jpg

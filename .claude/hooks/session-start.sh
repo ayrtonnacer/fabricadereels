@@ -22,3 +22,6 @@ if ! sha256sum --check --status "$pyhashes" 2>/dev/null; then
   python3 -m pip install -q -r requirements.txt
   sha256sum .claude/hooks/session-start.sh requirements.txt > "$pyhashes" || rm -f "$pyhashes"
 fi
+
+# Banco de efectos reales (CC0, ~450 archivos; no se sube a git). Si falla la descarga no frena la sesión: se usan los sintéticos.
+[ -d assets/sfx/whoosh ] || bash engine/audio/bajar_sfx.sh >/dev/null 2>&1 || echo "aviso: no se pudo bajar el banco de efectos (bash engine/audio/bajar_sfx.sh)"

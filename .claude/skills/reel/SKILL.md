@@ -1,14 +1,20 @@
 ---
 name: reel
-description: Crear un reel vertical de motion graphics (HyperFrames + cámara 2.5D, voz en off, efectos, música) a partir de un link o tema de programación, matemática, ciberseguridad o Linux, con el estilo y las reglas de @ayrtonnacer.
+description: Crear un reel vertical explicativo de @ayrtonnacer (un set 3D con cámara continua en HyperFrames + three.js, voz en off, efectos, música, subtítulos) a partir de un link o tema de programación, matemática, ciberseguridad o Linux.
 ---
 # /reel <link o tema>
-Seguí `CLAUDE.md` y `docs/5-tecnica/FLUJO.md`. Resumen:
-1. Leer la fuente y verificarla. Leer `docs/2-estilo/ESTILO.md`, `docs/2-estilo/CAMARA.md`, `docs/3-guion/GUION.md`, `docs/2-estilo/AUDIO.md`, `docs/1-canal/DECISIONES.md`, `engine/audio/pronunciacion.json`. Para el contrato de HyperFrames, la skill `/hyperframes`.
-2. Escribir el guion (tabla escena | pantalla | voz | duración; público técnico) y **pedir aprobación antes de animar**.
-3. Con el OK, armar `plan.md` (metas numéricas tomadas de `docs/4-referencias/BIBLIA-DE-ESTILO.md` y `metas.json`; planos, cámara, sfx en números; `docs/2-estilo/CAMARA.md`).
-4. `bash engine/nuevo.sh AAAA-MM-tema`, completar `video.json`, correr `voz.py` hasta que no haya avisos, `tiempos.py`, `subtitulos.py`, armar `compositions/*.html` y `sfx_events.py`.
-5. `npx hyperframes check` sin errores y `snapshot` de cuadros clave (0, cada escena, cortes, CTA) y mirarlos; luego `render --workers 4 -o out/mudo.mp4`, `sfx.py`, `mezcla.py`.
-6. Entregar `final.mp4` + descripción con créditos. Registrar correcciones en `docs/1-canal/DECISIONES.md` y palabras nuevas en `pronunciacion.json`.
-Repasar `docs/1-canal/PREFERENCIAS.md` al empezar y antes de entregar. Todo en three.js (`assets/escena3d.js`). Guardar en el repo (siempre, sin que se lo pidan) todo lo que pase Ayrton (`docs/1-canal/BITACORA.md`, `docs/4-referencias/material/`). Subtítulos siempre (imagen hasta y 1100; subtítulos 1120–1320); sin palabras sueltas; sin puntitos de fondo.
-Reglas duras: motion graphics 2D con profundidad por cámara (no three.js como base); `marca.css` con color = significado (verde ok, ámbar aviso, error = bloque rojo con ✕); firma @ayrtonnacer sola, con el acento, al inicio y al final; en el cierre el foco es el CTA (firma chica debajo, sin zoom) y suena el chinn; CTA "dale like / seguime para aprender más de <tema>"; voz sin "pendrive"/"like"; no leer terminal ni carteles; sin scanlines/HUD.
+Las reglas están en `CLAUDE.md` (ya cargado). El procedimiento completo, con qué leer en cada paso y cuándo está terminado, es **`docs/5-tecnica/FLUJO.md`: abrilo y seguilo en orden.** Resumen:
+
+1. Leer `docs/1-canal/PREFERENCIAS.md`. Guardar el material de Ayrton en `docs/4-referencias/material/` y su pedido en `docs/1-canal/BITACORA.md`.
+2. Leer la fuente y **verificar cada dato** contra la fuente primaria.
+3. `python engine/reel.py nuevo AAAA-MM-tema` → `guion.md` + `video.json` (leer `docs/3-guion/GUION.md` y `docs/1-canal/PUBLICO.md`) → `python engine/reel.py guion videos/X` sin errores.
+4. **✋ Mostrar el guion y esperar el OK de Ayrton.** No animar antes.
+5. `python engine/reel.py voz videos/X` hasta que no haya avisos.
+6. `plan.md` (leer `docs/2-estilo/CAMARA.md` y `ESTILO.md`) → escribir `assets/set.js` (leer `docs/5-tecnica/THREEJS.md`; molde: `videos/_plantilla/assets/set.js`) → `sfx_events.py` (leer `docs/2-estilo/AUDIO.md`).
+7. `python engine/reel.py revisar videos/X` (0 errores) y `python engine/reel.py cuadros videos/X`: **mirar la hoja de cuadros** con la lista del paso 7 del flujo. Repetir hasta que esté bien.
+8. `python engine/reel.py render videos/X` → `python engine/reel.py medir videos/X` → corregir o justificar lo que quede fuera.
+9. `descripcion.md` → `python engine/reel.py entregar videos/X` → contarle a Ayrton qué hace la cámara (vocabulario de cine) → commit y push a `main`.
+
+Lo que se escribe a mano: `guion.md`, `plan.md`, `video.json`, `assets/set.js`, el tema en `compositions/cierre.html`, `sfx_events.py`, `descripcion.md`. Todo lo demás se genera.
+Lo que **no** se cambia sin que Ayrton lo pida: portada y gancho (anatomía), cierre/CTA, firma, paleta, tipografías, voz, música firma, boom y chinn.
+No publicar nada en redes.

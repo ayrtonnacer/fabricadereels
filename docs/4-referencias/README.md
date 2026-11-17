@@ -17,4 +17,4 @@ Cada carpeta de video tiene: `INFORME.md` (lectura en español: cortes y transic
 1. `python engine/analisis/medir.py <video> docs/4-referencias/externos/<slug>` (o `propios/<reel>` con `--transcripcion`).
 2. `python engine/analisis/biblia.py` regenera las tablas de `BIBLIA-DE-ESTILO.md`.
 3. Se ajusta `metas.json` si las referencias nuevas lo piden.
-4. Para un reel nuestro: `python engine/analisis/comparar.py videos/X/analisis/metricas.json` dice qué número cae fuera de la meta.
+4. Para un reel nuestro: `python engine/reel.py medir videos/X` (corre medir, comparar, arrastre y barro) dice qué número cae fuera de la meta.

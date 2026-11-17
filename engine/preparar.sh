@@ -9,3 +9,4 @@ python3 -c "import piper, cv2, scipy, numpy, faster_whisper" 2>/dev/null || pip 
 [ -d node_modules/hyperframes ] || npm install --no-audit --no-fund 2>&1 | tail -1
 python3 -c "import piper, cv2, scipy, numpy, faster_whisper" 2>/dev/null && echo "python: ok" || echo "python: FALTAN paquetes (pip install -r requirements.txt)"
 [ -x node_modules/.bin/hyperframes ] && echo "hyperframes: ok" || echo "hyperframes: FALTA (npm install)"
+[ -d assets/sfx/whoosh ] || bash engine/audio/bajar_sfx.sh 2>&1 | tail -1 || echo "banco de efectos: no se pudo bajar (se usan los sintéticos)"

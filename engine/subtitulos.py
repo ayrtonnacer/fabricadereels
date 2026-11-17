@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Genera los subtítulos quemados del video a partir de los tiempos exactos por palabra (voz.py → audio/palabras.json).
-Uso: python engine/subtitulos.py videos/<video>      (correr después de voz.py y tiempos.py)
+Uso: python engine/subtitulos.py videos/<video>      (después de voz.py; lo corre solo `python engine/reel.py voz videos/<video>`)
 Salida: <video>/compositions/subtitulos.html (+ el host en index.html si falta).
-Reglas (docs/2-estilo/SUBTITULOS.md): bloques de 2–4 palabras, 1–2 líneas, nunca una palabra sola en la última línea; la palabra que se dice
+Reglas (docs/2-estilo/SUBTITULOS.md): bloques de 2–5 palabras, 1–2 líneas, nunca una palabra sola en la última línea; la palabra que se dice
 va en el acento; zona segura: franja y 1120–1320 (arriba de la interfaz de las apps y debajo de la imagen, que el set deja libre)."""
 import json, re, sys
 from pathlib import Path
@@ -75,8 +75,8 @@ comp = f'''<!-- SUBTÍTULOS (generado por engine/subtitulos.py: no editar a mano
   <script>
     const root = document.querySelector('[data-composition-id="subtitulos"]');
     const tl = gsap.timeline({{ paused: true }});
-    const ACC = getComputedStyle(document.documentElement).getPropertyValue('--acc').trim() || '#9FEF00';
-    const TXT = getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || '#E8EEF7';
+    const ACC = getComputedStyle(document.documentElement).getPropertyValue('--acc').trim() || '#A8927C';
+    const TXT = getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || '#FFFFFF';
     const D = {js};
     D.forEach((g, k) => {{
       const el = root.querySelector('#g' + k);
@@ -93,12 +93,16 @@ comp = f'''<!-- SUBTÍTULOS (generado por engine/subtitulos.py: no editar a mano
 </template>
 '''
 (V / 'compositions/subtitulos.html').write_text(comp)
+# el host de los subtítulos en index.html lo escribe tiempos.py (misma fuente de verdad que las escenas)
+sys.path.insert(0, str(Path(__file__).parent)); import tiempos
 idx = (V / 'index.html').read_text()
-host = f'''      <div id="subtitulos" data-composition-id="subtitulos" data-composition-src="compositions/subtitulos.html"
+if tiempos.INI in idx: tiempos.sincronizar(V, silencio=True)
+else:   # videos anteriores (sin marcas en index.html)
+    host = f'''      <div id="subtitulos" data-composition-id="subtitulos" data-composition-src="compositions/subtitulos.html"
         data-start="0" data-duration="{total}" data-track-index="9" data-track-kind="captions" data-width="1080" data-height="1920" style="z-index: 50"></div>
 '''
-if 'id="subtitulos"' in idx: idx = re.sub(r'      <div id="subtitulos".*?</div>\n', host, idx, flags=re.S)
-else: idx = idx.replace('    </div>\n    <script>', host + '    </div>\n    <script>', 1)
-(V / 'index.html').write_text(idx)
+    if 'id="subtitulos"' in idx: idx = re.sub(r'      <div id="subtitulos".*?</div>\n', host, idx, flags=re.S)
+    else: idx = idx.replace('    </div>\n    <script>', host + '    </div>\n    <script>', 1)
+    (V / 'index.html').write_text(idx)
 print(f'{len(dat)} bloques de subtítulos (máx. {max(len(g["w"]) for g in dat)} palabras); franja y 1120–1320')
 for g in dat: print(f'  {g["a"]:6.2f}–{g["b"]:6.2f}  ' + ' '.join(w['w'] for w in g['w']))

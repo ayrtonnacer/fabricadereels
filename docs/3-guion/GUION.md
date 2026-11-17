@@ -1,61 +1,67 @@
 # Cómo escribir el guion
-Base: `docs/3-guion/INVESTIGACION-GUIONES.md` (investigación completa, con fuentes y plantillas por tipo de reel). Acá va lo que se aplica siempre. Donde la investigación choca con una decisión de Ayrton, gana Ayrton (ver "Conflictos").
+Lo que se aplica siempre. La investigación completa, con fuentes y plantillas por tipo de reel, está en `INVESTIGACION-GUIONES.md` (consulta; donde choque con este documento o con Ayrton, gana este). Público: `docs/1-canal/PUBLICO.md`.
 
-## Público
-**Mixto** (Ayrton, 2026-11-09): gente técnica, **principiantes que están aprendiendo** y **reclutadores** que buscan perfiles técnicos. Los reels son también el portfolio de Ayrton: tienen que **demostrar que sabe**. Entonces:
-- Explicar bien y con precisión, sin tratar a nadie de tonto ni simplificar de más (un técnico nota lo incorrecto). Vocabulario del área sí, pero cada término nuevo se ancla con una imagen o una frase corta para que el principiante no se pierda.
-- Cada reel lleva **un detalle de profesional**: algo preciso que no está en la explicación típica (por ejemplo, que en 2,4 GHz solo los canales 1, 6 y 11 no se pisan). Es lo que diferencia "lo copié" de "lo entiendo". Si no sale de la fuente, se marca como tal en el checkpoint y se verifica.
-- Mostrar el mecanismo (el porqué), no solo el nombre de las cosas.
+## Para quién
+**La mayoría no es de IT**; también miran principiantes y reclutadores (los reels son el portfolio de Ayrton). Las dos cosas a la vez:
+- **Se entiende sin saber nada de antemano.** Cada término nuevo llega con una imagen o un ejemplo cotidiano (una planilla, una foto, un video). Sin jerga de especialista en un reel introductorio.
+- **No tiene errores que un experto pueda marcar**, y trae **un detalle de profesional**: algo preciso que no está en la explicación típica (p. ej. que en 2,4 GHz solo los canales 1, 6 y 11 no se pisan).
+- Se muestra el **mecanismo** (el porqué), no solo el nombre de las cosas. No se trata a nadie de tonto.
 
-## Reglas de siempre
-- Voz en español rioplatense (voseo): "Necesitás", "elegí", "seguime". Escribir como se habla ("ojo", "pensalo así", "posta").
-- Frases cortas (≤ 12 palabras). Un paso = una o dos frases.
-- NO leer: comandos, rutas, texto de carteles/tarjetas. La voz explica el porqué; la pantalla muestra el qué.
-- Términos técnicos sí (público técnico), pero dichos como se hablan: siglas y palabras en inglés por el diccionario de pronunciación. Explicar solo lo que no es de uso común en el área.
-- Cero palabras prohibidas (ver `pronunciacion.json`): pendrive→memoria, like→me gusta, dev, guardalo.
-- Sin muletillas de IA: "¿Sabías que…?", "En el mundo de…", "Imaginá…", "Sumérgete", "Desbloqueá", "Aquí está la clave", "y lo mejor de todo". Ni hooks vacíos ("No vas a creer…", "Esto cambia todo", "El 99% no sabe esto").
-- Advertencias importantes (p. ej. "se borra todo") van en pantalla, no en la voz.
-- En el texto de pantalla se puede escribir "like"; en `voz.lineas[].texto` va "me gusta".
-- Formato del guion para aprobar: tabla escena | pantalla | voz | duración (más los campos de abajo si hace falta).
+## Proceso
+1. **Una idea**, escrita en una frase de ≤ 12 palabras. Si hace falta "y además…", son dos reels (ofrecer serie).
+2. Elegir el **ángulo**. Para un tema nuevo, ofrecer 2–3. El guion cubre el tema central de la fuente.
+3. **Escribir primero el payoff y después el gancho** (el payoff cierra literalmente lo que el gancho promete).
+4. Elegir **el ejemplo que crece**: un caso cotidiano que avanza de a un paso (píxel → fila → foto → video; un mensaje → pedazos → números). Cada paso es una estación del set.
+5. Poner los **datos concretos y verificados** (2–4 números o mecanismos medidos). El "para qué sirve" se muestra funcionando dentro de la explicación, no como lista al final.
+6. Recortar sin piedad hasta que entre en el ritmo.
 
-## Estructura (45 s, ~100–110 palabras de voz)
-Hook-promesa (0–3 s) → Contexto mínimo (3–7) → Cuerpo A (7–20) → Micro-loop/giro (20–23) → Cuerpo B (23–36) → **Payoff que cierra lo prometido en el hook** (36–41) → CTA (41–45).
-- **30 s:** sin contexto ni micro-loop. **60 s:** agregar un segundo micro-loop. **Tutorial con más de 4 pasos → serie de 2–3 partes** (cada parte se entiende sola).
-- Duración = la mínima que necesita UNA idea completa. Nunca más de 3 min.
-- **Un solo loop principal**: se abre en el hook y se cierra en el payoff, antes del CTA. Nunca dos abiertos a la vez. **Jamás un loop abierto justo antes del CTA.**
-- El cierre es *literal* respecto de lo prometido ("lo rompés en segundos" → se muestra cómo se rompe en segundos).
-- **Hook:** 1–3 s, 6–9 palabras, promesa verificable que el video cumple; el primer cuadro ya muestra algo concreto (terminal, hash, mensaje cifrado), nunca logo ni "hola, hoy vamos a ver". Fórmulas: resultado primero, mito, error común, historia, pregunta, dato sorprendente, desafío, comparación, humor. Alternar el tipo entre videos.
-- **Una idea por reel**, escrita en una frase de ≤ 12 palabras. Si hace falta "y además…", son dos reels.
-- Proceso: elegir concepto → buscar el ángulo (error, historia, sorpresa) → **escribir primero el payoff y después el hook** → elegir la analogía visual antes del cuerpo (rueda, interruptores, embudo, resto) → recortar sin piedad.
+## Estructura (45 s ≈ 110–125 palabras)
+| Bloque | Segundos | Palabras | Qué hace |
+|---|---|---|---|
+| **Gancho** | 0–3 | 6–10 | promesa verificable que el video cumple; el cuadro 0 ya muestra algo concreto (título + objeto) |
+| Contexto | 3–7 | 8–12 | lo mínimo para entender la pregunta |
+| Cuerpo A | 7–20 | ~32 | el primer paso del ejemplo |
+| Giro | 20–23 | 6–8 | "pero…": mantiene la atención (solo en 45–60 s) |
+| Cuerpo B | 23–36 | ~32 | el segundo paso; el detalle de profesional |
+| **Payoff** | 36–41 | 10–14 | cierra lo prometido en el gancho; se ve funcionando |
+| **CTA** | 41–45 | 10–12 | "Dale me gusta y seguime para aprender más de <tema>." |
+- 30 s: sin contexto ni giro. 60 s: un segundo giro. Tutorial con más de 4 pasos → serie de 2–3 partes que se entienden solas.
+- Duración = la mínima que necesita una idea completa (lo habitual: 30–60 s).
+- **Un solo loop**: se abre en el gancho y se cierra en el payoff, antes del CTA. Nunca un loop abierto justo antes del CTA.
+- **Tipos de gancho** (alternar entre reels): resultado primero · mito · error común · pregunta · dato sorprendente · comparación · desafío. Nunca "hola, hoy vamos a ver".
 
-## Calibración de la voz (medido en este repo)
-- Piper Daniela con `length_scale 0.92` habla ≈ 3,4 palabras/s *mientras habla*; con pausas y escenas, el video completo da **≈ 2,3 palabras/s**. **Planificar con 2,3 wps** (ojo: el reel de WiFi, con 103 palabras en 33 s, midió **3,11 pal/s** en total y 3,9 hablando; la referencia citada es 2,77. Para público que aprende, apuntar a ~2,8 y recortar o bajar la velocidad de la voz; ver `docs/5-tecnica/MEDICION.md`) (la investigación sugiere 2,5 genérico): 30 s ≈ 69 palabras, 45 s ≈ 103, 60 s ≈ 138.
-- Contar palabras *como se pronuncian*: "777" = 3, "SHA-256" = 4–5, "@ayrtonnacer" = "arroba ayrton nacer".
+## Reglas de la voz
+- **Rioplatense, voseo**: "necesitás", "elegí", "seguime". Como se habla.
+- **Frases cortas**: ideal ≤ 12 palabras; más de 16, partirla.
+- **Ritmo: 2,4–2,8 palabras por segundo del video completo** (máximo 2,9). Medido en los reels que funcionaron (tokens 2,42; tensores 2,67; WiFi 2,90, que quedó rápido). Con Daniela a `length_scale` 1,05: 30 s ≈ 75–85 palabras · 45 s ≈ 110–125 · 60 s ≈ 145–165.
+- Contar las palabras como se pronuncian: "777" = 3, "SHA-256" = 4–5.
+- **No leer** comandos, rutas ni lo que dice un cartel: la voz explica el porqué, la pantalla muestra el qué. Las advertencias ("se borra todo") van en pantalla.
+- **Palabras que no van en la voz**: "pendrive" (→ memoria), "like" (→ me gusta), "dev", "guardalo", "IA" (Piper lo lee "ya" → "inteligencia artificial"). Lista completa en `engine/audio/pronunciacion.json` → `prohibidas`.
+- **Sin muletillas de IA**: "¿Sabías que…?", "En el mundo de…", "Imaginá…", "Sumergite", "Desbloqueá", "Aquí está la clave", "y lo mejor de todo", "No vas a creer…", "Esto cambia todo", "El 99 % no sabe…".
+- Evitar frases con la misma palabra repetida ("con mayúscula, sin mayúscula"): la voz sintética las enreda.
+- **Palabras en inglés o siglas**: fijarse si están en `pronunciacion.json`; si no, agregarlas y ofrecerle a Ayrton variantes de audio en el checkpoint.
+- Marca personal: primera persona cuando suma (una anécdota, un error real).
 
-## Lo visual del guion (Mayer + práctica)
-- Cada indicación visual cae *mientras* la voz nombra la cosa (contigüidad). Nada queda igual más de 3 s: un cambio cada 2–3 s.
-- Texto grande en pantalla solo para el término o número que se enseña, no para repetir la oración (redundancia). Resaltar la palabra clave con el acento del tema.
-- Construcción progresiva (la fórmula o tabla se arma al ritmo de la voz); zoom al resultado cuando algo "da"; antes/después en rojo/verde.
-- Sonido: música de colchón baja; 3–5 SFX con significado fijo (tecla = acción, ding = resultado, tono grave = problema).
+## Lo visual del guion
+- Cada cosa aparece **mientras** la voz la nombra. Un cambio visual por idea; la cámara quieta mientras se nombra (`docs/2-estilo/CAMARA.md`).
+- Texto en pantalla solo para el término o el número que se enseña; nunca la oración entera (ya está el subtítulo).
+- Construcción progresiva: la tabla o la fórmula se arma al ritmo de la voz.
+- **Título de portada**: 3–5 palabras, una en tan; que se entienda en miniatura.
 
 ## Cierre
-- **El texto del cierre en pantalla coincide con la voz** (Ayrton, 2026-11-09): "Dale like y seguime para aprender más de <tema>" (en voz: "dale me gusta y seguime…").
-- "aprender más **de** <tema>" para temas de una palabra (redes, Linux); "**sobre** <tema>" para temas largos o frases ("sobre cómo funciona internet").
-- Fórmula multiplataforma: "Dale me gusta y seguime para aprender más de <área concreta>." (variar el área; nunca "guardalo"). En pantalla, la firma `@ayrtonnacer`.
-- **Versión bucle** (shorts/reels): sin CTA hablado; la última frase desemboca en el hook y el último cuadro vuelve al primero (cámara en la misma pose al final y al principio; el corte se esconde en un movimiento; música en silencio en el empalme; ver el video Parrot en bucle en el historial de git, commit `ae9a888`). Para contenido educativo funciona mejor como *desafío* ("¿te animás a descifrar el mensaje del principio?") que como truco de edición.
-- En humor: el CTA mata el remate; solo texto en pantalla o nada.
+- Voz: **"Dale me gusta y seguime para aprender más de <tema>."** Pantalla: "Dale like y seguime para aprender más de <tema>". El tema es el mismo en los dos. "de" para una palabra (redes, Linux); "sobre" para una frase ("sobre inteligencia artificial").
+- **Versión bucle** (opcional, sin CTA hablado): la última frase desemboca en el gancho y el último cuadro vuelve al primero. Funciona mejor como desafío que como truco. Avisarle a Ayrton si se propone.
+- En humor: el CTA mata el remate; solo en pantalla.
 
-## Originalidad (riesgo de "contenido no auténtico" en YouTube)
-La plantilla fija la **arquitectura** (bloques, tiempos, campos), no las frases, hooks ni animaciones. Variar tipo de hook, analogía visual y música entre videos. Poner marca personal en cada guion (primera persona, anécdota de la cursada, un error real, un callejón sin salida). Material propio en pantalla; nada de capturas ajenas sin transformar. Fuente primaria en la descripción para historias de hackeos; nunca flags de máquinas activas de HTB.
+## Originalidad
+La plantilla fija la arquitectura, no las frases. Variar tipo de gancho, ejemplo y recorrido de cámara entre reels. **Las referencias que pasa Ayrton son para ver cómo se explica, no para copiar** su gancho, su orden ni sus objetos. Fuente primaria en la descripción; nunca flags de máquinas activas de HackTheBox.
 
-## Conflictos con la investigación (decide Ayrton)
-- La investigación sugiere evitar el "verde Matrix". Ayrton eligió HackTheBox (lima sobre azul-negro) para Parrot: se mantiene.
-- Sugiere subtítulos de 2–4 palabras. Ayrton pidió **no** agregarlos por ahora: se mantiene.
-- Sugiere tutoriales de un solo Short ≤ 4 pasos. Parrot (7 pasos, 54–58 s) quedó como video único porque a Ayrton le gustó así; en temas nuevos, ofrecer serie.
+## Formato para el checkpoint
+Una tabla **escena | lo que se ve (plano y movimiento) | voz | duración**, más: la idea en una frase, el título de portada, los datos con su fuente y las pronunciaciones dudosas. Corto: Ayrton tiene que poder aprobarlo de una leída.
 
-## Checklist antes de aprobar el guion
-- [ ] Concepto en ≤ 12 palabras. [ ] Hook ≤ 3 s, promesa que se cumple. [ ] Primer cuadro concreto.
-- [ ] Un loop abierto en el hook y cerrado en el payoff, antes del CTA. [ ] Palabras pronunciadas ≤ duración × 2,3.
-- [ ] Sin muletillas de IA ni términos sin explicar. [ ] Al menos una marca personal. [ ] Cifras y comandos verificados/ejecutados.
-- [ ] Cada bloque con visual sincronizado a una palabra y su movimiento de cámara (`docs/2-estilo/CAMARA.md`); nada quieto > 3 s. [ ] Otro tipo de hook y de analogía que el video anterior.
-Plantilla de guion: `videos/_plantilla/guion.md`.
+## Checklist antes de mostrarlo
+- [ ] `python engine/reel.py guion videos/X` sin errores (ritmo, gancho, CTA, palabras prohibidas, muletillas).
+- [ ] Idea en ≤ 12 palabras. [ ] Gancho con promesa que el payoff cumple. [ ] Un solo loop, cerrado antes del CTA.
+- [ ] Alguien que no sabe nada lo entiende; un experto no encuentra errores. [ ] Un detalle de profesional.
+- [ ] Cada dato verificado contra la fuente primaria o medido. [ ] Otro tipo de gancho y de ejemplo que el reel anterior.
+Plantilla: `videos/_plantilla/guion.md`.

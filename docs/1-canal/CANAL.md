@@ -22,17 +22,18 @@ Sin cara, la marca se construye con **elementos que se repiten en cada reel**:
 | Elemento | Qué tenemos (fijo) | Estado |
 |---|---|---|
 | Estética y color | Tema Scale: negro puro, objetos 3D de línea gris, acento Foundry Tan, Host Grotesk + Geist Mono (`ESTILO.md`) | ✓ definido (2026-11-14) |
-| Estructura | Portada 0,1 s → hook con título → explicación con un ejemplo que crece → payoff → CTA con firma | ✓ definido |
+| Estructura | Portada 0,1 s → gancho con título → un set recorrido en plano secuencia, con un ejemplo que crece → payoff → CTA con firma | ✓ definido (2026-11-16) |
 | Sonido | Boom grave al inicio y al final, chinn en el CTA, whoosh en la cámara (`AUDIO.md`) | ✓ definido |
 | Voz | Daniela (Piper), se nota robótica | ⚠ a mejorar: voz clonada de Ayrton (`AUDIO.md` → Voz propia) |
-| Música | Cambia según el reel | ⚠ a definir: una firma musical o un estilo fijo |
+| Música | Firma: *Can You Hear The Music*, desde el segundo 0 (`AUDIO.md`) | ✓ definido (2026-11-16); pendiente una pista propia con licencia |
 | Firma | `@ayrtonnacer` en tan al inicio y al final | ✓ |
 
 **Regla para el repo**: el inicio, el cierre, la paleta, la voz y los sonidos fijos **no se cambian entre reels** salvo decisión explícita de Ayrton. Lo que cambia es el medio (tema, objetos, ejemplo).
 
 ## Próximas mejoras (en este orden)
-Números del reel de tensores medido (`referencias/propios/2026-11-tensores-scale-oscuro/`) contra las metas (`referencias/metas.json`):
-1. **Dinamismo de cámara.** Es la mayor diferencia con las referencias:
+Estado al 2026-11-17: el punto 1 se resolvió con el reel de tokens v2 (set único, viajes de ~0,8 s y retenciones: 3,2 movimientos notorios cada 10 s, arrastre 0,61) y con la plantilla nueva; las metas se recalibraron a ese estilo (`docs/4-referencias/metas.json`). Quedan abiertos 2, 3 y 4.
+Números del reel de tensores (`docs/4-referencias/propios/2026-11-tensores-scale-oscuro/`) contra las metas de entonces (tomadas de referencias externas):
+1. **Dinamismo de cámara.** Era la mayor diferencia con las referencias:
    | Métrica | Tensores | Meta |
    |---|---|---|
    | % de cuadros con cámara en movimiento | 37,9 | 60–90 |
@@ -46,7 +47,7 @@ Números del reel de tensores medido (`referencias/propios/2026-11-tensores-scal
 3. **Portada.** Hoy es el cuadro de 0,1 s con título + objeto + firma. Mejorarla: un objeto protagonista más grande, menos texto (3 a 5 palabras) y que se lea en miniatura. Comparar con las portadas de los canales de arriba.
 4. **Voz propia** (feedback del público, `PUBLICO.md`).
 
-**Banco de prueba estético (2026-11-15)**: `videos/2026-11-banco-estetica/RESULTADOS.md`. Encuadre (ancho del contenido 60 → 72 %, igual que las referencias), luz de contorno, desenfoque (rack focus con la voz) y cámara (en movimiento 28 → 64 %). Pendiente que Ayrton elija qué pasa a la plantilla; brecha que queda: la franja de abajo de los subtítulos vacía.
+**Banco de prueba estético (2026-11-15)**: `videos/_archivo/2026-11-banco-estetica/RESULTADOS.md`. Encuadre (ancho del contenido 60 → 72 %, igual que las referencias), luz de contorno, desenfoque (rack focus con la voz) y cámara (en movimiento 28 → 64 %). Resultado: Ayrton eligió el original (v0) sobre la versión con las cuatro mejoras; quedó como registro de lo que NO hacer (desenfocar lo que se explica, mover la cámara todo el tiempo).
 
 **Próximo paso acordado (2026-11-15): juntar más referencias** de reels explicativos/contemplativos (cámara, luz, planos) antes de volver a cambiar el estilo. Con 3 afines las metas son provisorias; con 10–15 se pueden separar los patrones comunes de los casos particulares. Prioridad: reels **explicativos** (que enseñen un concepto) y no solo promos o collage; cómo cargarlos en `docs/5-tecnica/MEDICION.md`. Cada una se mide y se mira cuadro a cuadro **antes** de proponer algo.
 

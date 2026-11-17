@@ -1,24 +1,15 @@
 {
   "titulo": "Título del video",
+  "tema": "tema",
+  "estado": "guion",
   "fecha": "AAAA-MM",
   "fuente": "URL o tema de origen",
   "scenes": [
-    {
-      "id": "portada",
-      "d": 0.1
-    },
-    {
-      "id": "gancho",
-      "d": 3.6
-    },
-    {
-      "id": "explica",
-      "d": 8.0
-    },
-    {
-      "id": "cierre",
-      "d": 3.4
-    }
+    { "id": "portada", "d": 0.1 },
+    { "id": "gancho", "d": 3.5 },
+    { "id": "explica", "d": 7.4 },
+    { "id": "payoff", "d": 3.6 },
+    { "id": "cierre", "d": 4.4 }
   ],
   "voz": {
     "modelo": "assets/voces/es_AR-daniela-high.onnx",
@@ -26,54 +17,24 @@
     "noise_scale": 0.6,
     "noise_w_scale": 0.7,
     "efecto": "ninguno",
-    "radio_fuerza": 0.6,
     "lineas": [
-      {
-        "id": "l01",
-        "escena": "gancho",
-        "t": 0.25,
-        "texto": "Una frase corta que prometa algo."
-      },
-      {
-        "id": "l02",
-        "escena": "explica",
-        "t": 3.95,
-        "texto": "El primer concepto, con palabras simples."
-      },
-      {
-        "id": "l03",
-        "escena": "explica",
-        "t": 6.7,
-        "texto": "Después, el segundo."
-      },
-      {
-        "id": "l04",
-        "escena": "explica",
-        "t": 9.0,
-        "texto": "Y así se ve funcionando."
-      },
-      {
-        "id": "l05",
-        "escena": "cierre",
-        "t": 12.0,
-        "texto": "Dale me gusta y seguime."
-      }
+      { "id": "l01", "escena": "gancho", "t": 0.35, "texto": "Una frase corta que promete algo concreto." },
+      { "id": "l02", "escena": "explica", "t": 4.0, "texto": "El primer concepto, con palabras simples." },
+      { "id": "l03", "escena": "explica", "t": 7.3, "texto": "Después, el segundo, con un ejemplo cotidiano." },
+      { "id": "l04", "escena": "payoff", "t": 11.3, "texto": "Y así se ve todo funcionando junto." },
+      { "id": "l05", "escena": "cierre", "t": 14.9, "texto": "Dale me gusta y seguime para aprender más de tema." }
     ]
   },
   "audio": {
     "musica": "assets/musica/can-you-hear-the-music.mp3",
     "musica_desde": 0,
+    "musica_fade_in": 0.4,
     "musica_db": 10,
-    "sfx_gain": 1.25,
-    "loudness": -14,
+    "musica_nivelar": [-32, 4],
     "musica_duck": 2,
-    "musica_nivelar": [
-      -32,
-      4
-    ],
-    "musica_fade_in": 0.4
+    "sfx_gain": 1.25,
+    "loudness": -14
   },
-  "subtitulos": {
-    "fondo": "rgba(0,0,0,.86)"
-  }
+  "subtitulos": { "fondo": "rgba(0,0,0,.86)" },
+  "publicar": { "fecha": "", "redes": ["instagram", "tiktok", "youtube"], "links": {} }
 }

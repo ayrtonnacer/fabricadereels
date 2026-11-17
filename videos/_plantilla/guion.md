@@ -1,25 +1,29 @@
 ---
-tipo: concepto | mito | tutorial | historia | ctf | mate-visual | serie | humor
-tema: ""
+tipo: concepto            # concepto | mito | tutorial | historia | ctf | mate-visual | serie | humor
+tema: ""                  # la palabra del CTA: "aprender más de <tema>"
 concepto_unico: ""        # UNA idea, ≤ 12 palabras
 duracion_objetivo_s: 45
-wps: 2.3                  # palabras/seg medidas con Piper Daniela (length_scale 0.92), video completo
-palabras_max: 103         # duracion * wps
-cierre: cta | bucle       # bucle = sin CTA, la última frase desemboca en el hook
-loop_principal: ""        # la pregunta que abre el hook
+palabras_max: 125         # duración × 2,8 (ritmo 2,4–2,8 palabras por segundo; docs/3-guion/GUION.md)
+gancho_tipo: ""           # resultado primero | mito | error común | pregunta | dato sorprendente | comparación | desafío (otro que el reel anterior)
+loop: ""                  # la pregunta que abre el gancho
 cierre_loop: ""           # la frase del payoff que la responde
-verificado: false         # cifras y comandos chequeados?
+detalle_profesional: ""   # el dato preciso que no está en la explicación típica
+titulo_portada: ""        # 3–5 palabras, una en tan
+fuentes: []               # primarias; cada dato verificado o medido
+verificado: false
 ---
-### HOOK · 0-3 s · 6-9 pal
+<!-- Una sección por escena de video.json (mismo id). VOZ = texto exacto de voz.lineas. -->
+### gancho · 0–3 s · 6–10 palabras
 - VOZ: ""
-- TEXTO_PANTALLA: ""      # 2-4 palabras, 1 keyword resaltada
-- VISUAL: ""              # qué se ve en el cuadro 1, sincronizado con qué palabra
-- CAMARA: ""              # aterrizaje / push-in / pan a estación / órbita / zoom through / pull-back (docs/2-estilo/CAMARA.md)
-- ANIMACION: ""
-- SFX: ""                 # opcional; solo si marca algo
-### CONTEXTO · 3-7 s · 8-10 pal
-### CUERPO A · 7-20 s · ~30 pal
-### MICRO-LOOP · 20-23 s · 6-8 pal     # "Pero…" (solo 45-60 s)
-### CUERPO B · 23-36 s · ~30 pal
-### PAYOFF · 36-41 s · 10-14 pal       # cierra literalmente el hook
-### CIERRE · 41-45 s · 8-10 pal        # CTA o empalme con el hook (bucle)
+- SE VE: ""               # título de portada + objeto protagonista (estación A)
+- CÁMARA: ""              # plano, ángulo y movimiento, en vocabulario de cine (docs/2-estilo/GLOSARIO-EDICION.md)
+### <escena> · contexto / cuerpo A · ~32 palabras
+- VOZ: ""
+- SE VE: ""               # qué aparece y con qué palabra de la voz
+- CÁMARA: ""
+- TEXTO EN PANTALLA: ""   # solo el término o el número que se enseña
+### <escena> · giro + cuerpo B · ~38 palabras
+### payoff · 10–14 palabras          # cierra literalmente el gancho; plano general si junta ideas
+### cierre · CTA
+- VOZ: "Dale me gusta y seguime para aprender más de <tema>."
+- SE VE: "Dale like y seguime para aprender más de <tema>" + firma chica debajo

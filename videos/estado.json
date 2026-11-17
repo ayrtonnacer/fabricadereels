@@ -1,0 +1,62 @@
+[
+ {
+  "video": "2026-11-tensores-scale-oscuro",
+  "titulo": "Qué es un tensor",
+  "estado": "publicado",
+  "duracion_s": 55.9,
+  "final_mp4": false,
+  "descripcion": true,
+  "publicar": {},
+  "carpeta": "videos/2026-11-tensores-scale-oscuro"
+ },
+ {
+  "video": "2026-11-tokens-1-v2",
+  "titulo": "Qué son los tokens (parte 1): la IA lee números",
+  "estado": "listo",
+  "duracion_s": 49.1,
+  "final_mp4": false,
+  "descripcion": true,
+  "publicar": {},
+  "carpeta": "videos/2026-11-tokens-1-v2"
+ },
+ {
+  "video": "2026-11-wifi",
+  "titulo": "Cómo funciona el WiFi",
+  "estado": "listo",
+  "duracion_s": 33.1,
+  "final_mp4": false,
+  "descripcion": false,
+  "publicar": {},
+  "carpeta": "videos/2026-11-wifi"
+ },
+ {
+  "video": "2026-11-tensores",
+  "titulo": "Qué es un tensor",
+  "estado": "archivo",
+  "duracion_s": 55.9,
+  "final_mp4": false,
+  "descripcion": false,
+  "publicar": {},
+  "carpeta": "videos/_archivo/2026-11-tensores"
+ },
+ {
+  "video": "2026-11-tokens-1",
+  "titulo": "Qué son los tokens (parte 1): la IA lee números",
+  "estado": "archivo",
+  "duracion_s": 47.5,
+  "final_mp4": false,
+  "descripcion": true,
+  "publicar": {},
+  "carpeta": "videos/_archivo/2026-11-tokens-1"
+ },
+ {
+  "video": "2026-11-wifi-hairline",
+  "titulo": "Cómo funciona el WiFi",
+  "estado": "archivo",
+  "duracion_s": 33.1,
+  "final_mp4": false,
+  "descripcion": false,
+  "publicar": {},
+  "carpeta": "videos/_archivo/2026-11-wifi-hairline"
+ }
+]

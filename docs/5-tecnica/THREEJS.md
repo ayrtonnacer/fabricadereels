@@ -1,57 +1,118 @@
-# three.js en la fábrica de reels: cómo trabajamos y qué criterios usamos
-Resume la investigación de Ayrton (`docs/4-referencias/material/2026-11-threejs-guia-profesional-r187.md`, guía "Three.js para videos y reels con calidad profesional", r187), el artículo "100 consejos de Three.js que mejoran el rendimiento" (Utsubo, 2026) y lo que **verificamos probando** acá (r187, CPU sin GPU). La documentación oficial (threejs.org) está bloqueada desde la nube; ante una duda de API se lee el código del paquete (`node_modules/three`, `examples/jsm`) o la wiki en `raw.githubusercontent.com`. **Todo tiene que encajar con la estética HackTheBox** (azul-negro + lima; `docs/2-estilo/ESTILO.md`).
+# three.js en la fábrica: cómo se escribe un set
+Referencia de la librería `assets/escena3d.js` (three.js r187, local) y del patrón "un set, muchos planos". Molde para copiar: `videos/_plantilla/assets/set.js`. Ejemplo completo: `videos/2026-11-tokens-1-v2/assets/fabrica.js`. Reglas de cámara: `docs/2-estilo/CAMARA.md`. Look: `docs/2-estilo/ESTILO.md`.
+Ante una duda de API de three.js: leer el código local (`node_modules/three` no está; usar `videos/_plantilla/assets/three.module.js` / `three.core.js`), no adivinar.
 
-## 1. Stack y flujo (ya montado)
-- HyperFrames renderiza cada cuadro buscando el tiempo en el timeline (determinístico): nuestras escenas 3D dibujan **como función del tiempo local** `t` (`E.animar`), sin reloj, sin `requestAnimationFrame`, sin azar. Es lo que la guía llama "render offline determinista"; no hace falta Mediabunny/Remotion/CCapture.
-- `assets/escena3d.js` (librería compartida) + `three.module.js`/`three.core.js` (r187) + `RoundedBoxGeometry.js` + `RoomEnvironment.js`, todo **local** (sin CDN). Una escena = `<canvas>` + HTML encima + `crear(root)`. Detalle de uso en `docs/2-estilo/CAMARA.md`.
-- Texto siempre HTML sobre el 3D (nítido, con la tipografía de marca); se ubica sobre puntos 3D con `E.label`.
+## Cómo funciona el render
+HyperFrames pide cuadros sueltos (puede pedir el segundo 3,2 antes que el 1,0, o repetirlo). Por eso **cada cuadro se dibuja como función del tiempo**: nada de reloj, `requestAnimationFrame`, azar ni estado que se acumule. Para física: se hornea antes (`FISICA.md`).
 
-## 2. El "look" en 3D (lo que hace la librería)
-**Default: tema línea** (`--estilo: linea` en `marca.css`): el relleno es negro puro (`E.std` devuelve un material negro que tapa lo de atrás) y cada objeto se dibuja con contorno grueso blanco (`E.contornear` → `LineSegments2`, ancho en px: las líneas de WebGL miden 1 px y en video no se ven; `E.trazo(pts, color, px)` para líneas sueltas, ej. antenas). `E.caja` usa aristas vivas, sin entorno PMREM (ahorra ≈ 30 % de render: WiFi 33 s en 81 s). Los objetos propios de una escena deben usar `E.std` + `E.contornear` y nunca materiales sólidos claros. La tabla de abajo describe el modo `solido` (tema anterior).
-| Decisión | Por qué (guía) |
+## El patrón
+```js
+// videos/X/assets/set.js  — lo único de 3D que se escribe en cada reel
+import { plano } from './escena3d.js';
+import { ESC, cuando, hasta } from './tiempos.js';          // generado desde video.json + la voz
+
+export const montar = (root, tl, id) => plano(root, tl, id, async (E) => {
+  // 1) ARMAR el set una vez: estaciones, objetos, rótulos, lista de poses de cámara
+  const { THREE, V, P } = E, R = E.rotulos();
+  const cubo = E.contornear(E.caja(0.5, 0.5, 0.5, E.std())); cubo.position.y = 0.25; E.scene.add(cubo);
+  const CAM = [{ t: 0, p: [1.7, 1.6, 3], l: [0, 0.6, 0] }, { t: 3, p: [1.5, 1.4, 2.6], l: [0, 0.6, 0], e: 'lin' }];
+  // 2) DEVOLVER la función que dibuja el cuadro del segundo T (tiempo GLOBAL del video)
+  return (T) => { E.ruta(T, CAM); E.pop(cubo, T, cuando('l01', 'cubo')); R.dibujar(T); };
+});
+```
+- Cada escena de `video.json` es un **plano**: su composición (`compositions/<id>.html`, generada) llama `montar(root, tl, '<id>')`, que arma **el mismo set** y lo dibuja durante esa escena. Como todos usan el tiempo global `T`, los límites no se ven: es un plano secuencia.
+- `plano()` lee de `tiempos.js` cuándo empieza y cuánto dura la escena y registra el timeline. **No se escriben duraciones a mano.**
+- `E.T0`, `E.dur`, `E.id`: inicio, duración e id del plano actual (casi nunca hacen falta).
+
+## Tiempos (`assets/tiempos.js`, generado)
+| | |
 |---|---|
-| `NeutralToneMapping`, exposición 1 | "Neutral respeta el color real: ideal para material educativo con colores de marca": el lima y el celeste salen exactos. Costo ≈ 0. |
-| Entorno procedural `RoomEnvironment` (PMREM), `environmentIntensity` 0,4 | Lo que más rinde: reflejos y relleno; sin él los metales quedan planos. **Cuesta ≈ +30 % de render** pero se nota (comparado lado a lado); se mantiene. Sin archivos HDRI. |
-| Key cálida suave + **contraluz celeste** + hemisférica azul | "Cálida en el key y fría en el rim dan volumen gratis"; el rim recorta las siluetas sobre el fondo oscuro. |
-| Aristas **biseladas** (`RoundedBoxGeometry`) | "Ninguna arista es perfectamente filosa": diferencia entre cubo de tutorial y objeto de producto. |
-| **Sombra de contacto** falsa (plano con degradé radial) | Ancla los objetos al piso; casi gratis (las sombras reales cuestan una pasada por luz). |
-| Neones (`MeshBasic`, `toneMapped: false`) + halo aditivo | El lima exacto, sin que el tone mapping lo apague. |
-| Piso de **tiras** con ancho en metros + niebla | Líneas que convergen al horizonte (le gustan a Ayrton); las `GridHelper` de 1 px desaparecen. |
-| Materiales: metalness 0,4–0,55 en carcasas, roughness 0,35–0,5 | Valores de partida de la guía; nunca roughness 0; nada de `metalness` intermedio sin entorno. |
-| Escala real (notebook 0,34 m, router 0,42 m) | Luces y proporciones creíbles. |
-| FOV vertical 40° | La guía pide 20–35° para un objeto protagonista y 35–50° para escena explicativa: acá son escenas explicativas. |
+| `ESC.gancho.t0` / `.t1` / `.d` | segundo en que empieza / termina la escena, y su duración |
+| `VOZ.l03.t0` / `.t1` | inicio y fin de la frase |
+| `cuando('l03')` | segundo en que empieza la línea |
+| `cuando('l03', 'router')` | segundo en que la voz **empieza a decir** esa palabra (`cuando('l03','de',1)` = la segunda vez) |
+| `hasta('l03', 'router')` | segundo en que termina de decirla |
+| `DUR` | duración total |
+La palabra se escribe como en el texto de `video.json` (da igual mayúsculas, tildes y puntuación). `reel.py revisar` avisa si no está en la línea.
 
-## 3. Reglas de objetos y composición (correcciones de Ayrton)
-- **Los cables tocan los objetos**: salen de un puerto real (`router.userData.puertoTrasero/puertoLado`, lado de la notebook) y entran **hasta el centro** del globo. Las señales de radio no tienen que encajar justo con el objeto, los cables sí.
-- **Las notebooks no tienen una antena a la vista**: la onda sale de la tapa (`laptop.userData.emisor`) y se expande por el piso en anillos. Los routers sí llevan antenas.
-- **Los bits caben en la pantalla**: 3 líneas de 8 dígitos, chicas, tipeadas de a poco.
-- **No poner etiquetas obvias** (una pared no necesita decir "pared"; "el espectador no es idiota"). Cada rótulo tiene que aportar algo.
-- Lo que se conecta comparte plano/trazo; los rótulos HTML nunca pisan el título ni la franja de subtítulos.
-- Escena y encuadre: la imagen no pasa de y ≈ 1100 (`dy` de la librería), con la cámara guionada (`E.ruta`, easings `io`/`expo`/`out`), sin OrbitControls.
-
-## 4. Costo de render (CPU, 4 workers, medido el 2026-11-09)
-| Versión del reel de WiFi (33 s) | Render |
+## Ayudantes de tiempo (todos devuelven 0→1)
+| | |
 |---|---|
-| r160, sin entorno, objetos de cajas | 66 s (2,0 s por segundo) |
-| r187 + entorno + biseles + sombras | 122 s (3,7 s por segundo) |
-Escena "router" aislada (5,2 s): actual 25 s · **sin entorno 18 s** · sin entorno ni tone mapping 17 s · sin antialias 21 s. Conclusión: el entorno es lo más caro y lo que más se nota; el tone mapping no cuesta. Con GPU (`--browser-gpu`) baja mucho. Si un reel pasa de ~4 s por segundo: quitar el entorno en las escenas donde no se luce (`crear(root, …)`), reducir segmentos de las mallas o el halo de las ondas.
+| `E.st(a, b, T)` | rampa lineal entre los segundos a y b |
+| `E.io(a, b, T)` | arranca y frena suave |
+| `E.out(a, b, T)` | llega frenando |
+| `E.ventana(T, a, b, f=0.25)` | 1 entre a y b, con entrada y salida de `f` segundos |
+| `E.pop(obj, T, t0, d=0.35, s=1)` | el objeto entra por escala en `t0` (antes es invisible) |
+| `E.EASE.io/out/in/expo/lin(x)` | curvas sueltas; `E.clamp(x)` |
 
-## 5. Lo que NO usamos (y por qué)
-- **Postprocesado** (bloom, viñeta, grano, SMAA con pmndrs): la viñeta ya es CSS; el bloom real cuesta mucho en CPU y el halo aditivo de las ondas lo reemplaza. Si algún día se agrega: HalfFloat + grano 3–8 % para evitar el banding de los degradés oscuros que Instagram/TikTok empeoran.
-- **WebGPU/TSL, compute, instancing/BatchedMesh, Draco/KTX2/LOD**: nuestras escenas tienen decenas de mallas; el cuello de botella es el relleno de píxeles en CPU, no las llamadas de dibujo.
-- **HDRI externos** (Poly Haven, CC0): posibles si hace falta un look de estudio; bajar el `.hdr` 1k–2k a `assets/` y usar `HDRLoader` (antes `RGBELoader`). Hoy alcanza `RoomEnvironment`.
-- **Supersampling 2×** (render a 2160×3840 y bajar con lanczos): da bordes más limpios, pero cuesta ~4×; reservar para un "modo final" si algún día se publica en mejor calidad.
+## Cámara
+`E.ruta(T, CAM, GOLPES)` — `CAM = [{ t, p: [x,y,z], l: [x,y,z], e }]`: en el segundo `t` la cámara está en `p` mirando a `l`; llega desde la pose anterior con la curva `e` (`'io'` por defecto, `'out'`, `'in'`, `'expo'`, `'lin'`).
+- **Retención** = repetir la misma pose en dos tiempos (`e: 'lin'`).
+- `GOLPES = [[tGolpe, 0.006, semilla], …]`: temblor de aterrizaje (metros; decae solo en ≈ 0,4 s).
+- FOV vertical 40°. Unidades en metros, piso en y = 0, z negativo = al fondo.
+- Ayuda para poses relativas a una estación: `const K = (T, s, p, l, e) => ({ t: T, p: [S[s].x + p[0], p[1], S[s].z + p[2]], l: [S[s].x + l[0], l[1], S[s].z + l[2]], e })`.
+- Probar una pose sin renderizar: `python engine/reel.py encuadre "px,py,pz" "lx,ly,lz" "x,y,z"`.
 
-## 6. Consejos de los 100 de Utsubo que aplican acá
-- Medir antes de optimizar (`renderer.info`); compartir materiales; no crear objetos dentro del bucle de dibujo (`E.anillo` solo regenera geometría cuando cambia el radio); `dispose()` de geometrías/texturas que se reemplazan.
-- Evitar transparencias apiladas (sobredibujo): los halos son pocos y finos.
-- Escalas reales y origen cerca de 0 (sin z-fight); `NoToneMapping` si se usa postprocesado.
-- `Timer` reemplaza a `Clock` (r183); `PCFSoftShadowMap` no existe desde r186 (si se usan sombras reales: `PCFShadowMap` + `shadow.radius`).
-- `RoomEnvironment` + PMREM: generar **una vez** por renderer (ya lo hace `crear`).
+## Materiales y trazos (tema línea)
+| | |
+|---|---|
+| `E.std()` | relleno negro que tapa lo de atrás (marca el objeto para `contornear`) |
+| `E.contornear(obj, color=P.edge, px=2.2)` | le dibuja las aristas a cada malla con `E.std()`; devuelve el objeto |
+| `E.basic(color, opacidad=1)` | color plano exacto (para lo tan o blanco: puntos, paquetes) |
+| `E.trazo([a0, a1, b0, b1, …], color, px)` | líneas sueltas por pares de puntos (`V`), con grosor en píxeles |
+| `E.caja(w, h, d, material)` | caja (malla) |
+| `E.sombra(w, d)` | mancha de contacto (solo en tema sólido; en línea casi no se ve) |
+| `E.textoTex(w, h)` → `{ tex, texto(str, color, tamaño, alinear) }` | textura de texto para pantallas (Geist Mono; admite `\n`) |
+Colores: `P.acc` (tan), `P.hi` (blanco), `P.edge` (gris de aristas), `P.mid` / `P.piso`, `P.plate` (negro), `P.ok`, `P.warn`. Vector: `new V(x, y, z)`. three completo: `E.THREE`.
+Objeto propio: `const g = new THREE.Group(); g.add(malla con E.std()); E.contornear(g); E.scene.add(g);`. Geometrías con pocos segmentos. **No usar `obj.clone()`** en objetos con `userData` (falla): construirlos de nuevo.
 
-## 7. Checklist antes de entregar un reel con 3D
-1. ☐ Objetos con bisel, sombra de contacto y escala real. ☐ Cables tocan; ondas continuas; sin etiquetas obvias.
-2. ☐ Neones con `toneMapped:false`; colores solo de las variables del tema.
-3. ☐ `snapshot` de cada escena en 3–4 instantes (inicio, medio, fin, cortes) y de las partes con texto encima.
-4. ☐ Tiempo de render razonable (≈ ≤ 4 s por segundo en CPU).
-5. ☐ Revisar en el teléfono el texto y el banding de fondos oscuros.
+## Objetos listos
+| | Tamaño | `userData` |
+|---|---|---|
+| `E.laptop()` | 0,34 m, frente hacia +z, sin antena | `pantalla.texto('1011\n0110', color, tamaño)`, `emisor` (de dónde sale la onda), `lid` |
+| `E.router()` | 0,42 m, dos antenas | `pantalla`, `puertoTrasero`, `puertoLado`, `puntaAntena` |
+| `E.globo()` | esfera de 0,3 m con meridianos | — |
+| `E.pared(w, h, d)` | apoyada en el piso | — |
+| `E.paquete(color, lado)` | cubito relleno (solo sobre cables) | — |
+| `E.cable(A, B, color=P.hi, radio, holgura)` | cable con caída; **se agrega solo a la escena** | `.set(p)` crece 0→1 · `.at(s)` punto sobre el cable (para mover paquetes) |
+| `E.onda({ A, B, amp, lambda, up, color })` | senoide (solo para frecuencias); se agrega sola | `.set(p)`, `.at(s)`, `.opacity(o)` |
+| `E.anillo(color, normal, grosor)` | onda de radio; se agrega solo | `.emitir(p, radioMax, centro)` con p 0→1 |
+Puntos locales a mundo: `obj.updateMatrixWorld(true); obj.localToWorld(obj.userData.puertoLado.clone())`.
+Objetos de otros reels que se pueden copiar a `assets/`: `videos/2026-11-tokens-1-v2/assets/token3d.js` (fichas de texto con número atrás, marcos, cubitos) y `tensor3d.js` (planillas de números, foto suave, bloques).
+
+## Rótulos HTML sobre el 3D
+```js
+const R = E.rotulos();
+R.anclado('6 <b>tokens</b>', 'rot', new V(0, 0.98, 0), tEntra, tSale, 'css extra', 'arriba');   // sigue a un punto 3D
+R.fijo('Título de <span class="acc">cuatro</span> palabras', 'titular', 90, 350, -1, tSale, 'width: 900px; font-size: 140px; text-align: left;');   // en (x, y) px
+// … y al FINAL de dibujar(T), después de E.ruta:
+R.dibujar(T);
+```
+- `anclado(html, clase, punto, tEntra, tSale, css, pos)`: `pos` = `'centro'`, `'arriba'` (queda sobre el punto) o `'izq'` (empieza en el punto). Aparece y se va solo (fundido de 0,25 s).
+- `fijo(html, clase, x, y, tEntra, tSale, css)`: no se mueve con la cámara (título, firma). `tEntra = -1` = visible desde el cuadro 0.
+- Clases de `marca.css`: `rot` (58 px; `<b>` en tan), `rot mono` (46 px), `titular`, `firma`, `chip`. Devuelven `{ a, d }` (contenedor y contenido) para animarlos a mano.
+- `E.label(elemento, punto3D)` ubica cualquier `.ancla` sobre un punto (lo usa `R`).
+
+## Otras
+- `E.fisica(datos, { nombre: objeto })` → `poner(t)`: reproduce una simulación horneada (`FISICA.md`).
+- `E.animar(tl, dur, fn)`: dibujo por cuadro en tiempo local (lo usa `plano`; directo solo en composiciones especiales).
+- `crear(root, { dy, fov, piso })`: bajo nivel; `plano(root, tl, id, armar, opciones)` acepta las mismas opciones.
+
+## Costo de render (CPU, 4 workers)
+| | s de render por s de video |
+|---|---|
+| Plantilla (set de 3 estaciones) | 2,0 |
+| Tokens v2 (5 estaciones, ~60 fichas) | ≈ 2–2,5 |
+| Con entorno, biseles y sombras (tema sólido viejo) | 3,7 |
+**Regla: ≤ 3.** Cada plano arma el set entero, así que el set tiene que ser liviano: decenas de mallas, pocos segmentos, sin sombras reales, sin postproceso (bloom, grano), sin entorno HDRI, `setPixelRatio(1)`. No crear objetos dentro de `dibujar(T)` (se arma todo antes; adentro solo se mueven, muestran u ocultan). Textos en pantallas: `texto()` solo redibuja si cambió.
+
+## Lo que no se usa
+OrbitControls, React/R3F, WebGPU, instancing, postprocesado, sombras reales, CDN, `Math.random()`. Manim solo para matemática que se transforma (`MANIM.md`).
+
+## Checklist del set antes de renderizar
+- ☐ Todos los tiempos con `cuando()` / `ESC` (ningún segundo escrito a mano).
+- ☐ Objetos con `E.std()` + `E.contornear()`; colores solo de `P`.
+- ☐ Cables tocan; ondas = anillos; sin etiquetas obvias; un solo tan por plano.
+- ☐ `R.dibujar(T)` al final de `dibujar`.
+- ☐ Lo que se lee, entre y 200 y 1100 (`reel.py encuadre` + cuadros).
+- ☐ `reel.py revisar` sin errores.

@@ -1,16 +1,16 @@
-/* Librería 3D de la fábrica de reels (three.js r187, local). Objetos de redes con la identidad HackTheBox, listos para reusar.
-   Todo es función del tiempo local `t` (determinístico; sin reloj ni azar). Guía de uso y criterios: docs/5-tecnica/THREEJS.md.
+/* Librería 3D de la fábrica de reels (three.js r187, local). Tema Scale: relleno negro + contorno de línea gris; el color sale de marca.css.
+   Todo es función del tiempo (determinístico; sin reloj ni azar). Referencia completa de funciones: docs/5-tecnica/THREEJS.md.
 
-   Uso en una composición (script de la escena):
-     import('./assets/escena3d.js').then(async (M) => {
-       const E = await M.crear(root);                       // renderer transparente 1080×1920, cámara, luces, entorno, piso
-       const lap = E.laptop(); E.scene.add(lap);            // objetos: laptop, router, globo, cable, onda, anillo, pared, paquete
-       E.animar(tl, 4.6, (t) => { E.ruta(t, [...]); ... }); // dibuja en cada cuadro; ruta() mueve la cámara entre posiciones
-       window.__timelines['id'] = tl;                       // registrar AL FINAL (la construcción es asíncrona)
+   USO NORMAL — un solo set para todo el video (assets/set.js), dibujado en TIEMPO GLOBAL T:
+     import { plano } from './escena3d.js';
+     export const montar = (root, tl, id) => plano(root, tl, id, async (E) => {
+       const cubo = E.caja(0.5, 0.5, 0.5, E.std()); E.contornear(cubo); E.scene.add(cubo);   // 1) armar el set (una vez)
+       return (T) => { E.ruta(T, CAM); E.pop(cubo, T, 1.2); };                                // 2) dibujar el cuadro del segundo T del video
      });
-   Unidades: metros (notebook ≈ 0,34 m). Piso en y = 0. La imagen sube `dy` px para dejar libre la franja de subtítulos.
-   Look: Neutral tone mapping (conserva el lima de marca), entorno procedural (RoomEnvironment) de baja intensidad, luz key + contraluz celeste,
-   aristas biseladas, sombras de contacto; los neones (ondas, anillos, paquetes) son MeshBasic sin tone mapping para que el lima sea exacto. */
+   Cada escena de video.json es un "plano" del mismo set: su composición (generada por engine/tiempos.py) solo llama a montar(root, tl, id).
+   plano() lee de assets/tiempos.js cuándo empieza y cuánto dura la escena: NUNCA escribir duraciones a mano en una composición.
+
+   Unidades: metros (notebook ≈ 0,34 m). Piso en y = 0. La imagen sube `dy` px (170 por defecto) para dejar libre la franja de subtítulos. */
 import * as THREE from './three.module.js';
 import { RoundedBoxGeometry } from './RoundedBoxGeometry.js';
 import { RoomEnvironment } from './RoomEnvironment.js';
@@ -57,6 +57,12 @@ export async function crear(root, opts = {}) {
   const sun = new THREE.DirectionalLight(0xfff4e6, 2.0); sun.position.set(2.5, 5, 4); scene.add(sun);
   const rim = new THREE.DirectionalLight(0x6ec9ff, 1.5); rim.position.set(-3, 3, -4); scene.add(rim);
   const E = { THREE, P, LINEA, renderer, scene, cam, EASE, clamp, V };
+  // ---------- tiempo: rampas 0→1 entre dos instantes (para que algo pase "cuando la voz lo nombra") ----------
+  E.st = (a, b, x) => clamp((x - a) / Math.max(1e-6, b - a));                 // lineal
+  E.io = (a, b, x) => EASE.io(E.st(a, b, x));                                // arranca y frena suave
+  E.out = (a, b, x) => EASE.out(E.st(a, b, x));                              // llega frenando
+  E.ventana = (T, a, b, f = 0.25) => E.out(a, a + f, T) * (1 - E.st(b, b + f, T));   // 0→1 al entrar en a, 1→0 al salir en b
+  E.pop = (o, T, t0, d = 0.35, s = 1) => { const q = EASE.out(clamp((T - t0) / d)); o.scale.setScalar(Math.max(0.001, s * q)); o.visible = q > 0.002; return q; };   // entrada por escala
   // en línea, el "relleno" es negro puro (tapa lo de atrás) y el objeto se dibuja con su contorno (E.contornear)
   E.std = (c, r = 0.55, m = 0.15) => { if (!LINEA) return new THREE.MeshStandardMaterial({ color: c, roughness: r, metalness: m });
     const k = new THREE.MeshBasicMaterial({ color: P.plate, toneMapped: false, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1 }); k.userData.contorno = true; return k; };
@@ -177,9 +183,33 @@ export async function crear(root, opts = {}) {
       }
     };
   };
+  // ---------- rótulos HTML sobre el 3D (texto nítido con la tipografía de marca) ----------
+  // const R = E.rotulos();  R.anclado('6 <b>tokens</b>', 'rot', punto3D, tEntra, tSale);  R.fijo('Título', 'titular', 90, 350, t0, t1, 'font-size:140px');  y en cada cuadro: R.dibujar(T)
+  E.rotulos = (hud = root.querySelector('.hud')) => {
+    const L = [], crear_ = (html, cls, css) => { const a = document.createElement('div'); a.className = 'ancla'; const d = document.createElement('div'); d.className = cls; d.innerHTML = html; d.style.cssText = css || ''; a.appendChild(d); hud.appendChild(a); return { a, d }; };
+    return {
+      anclado(html, cls, p, a0, a1, css = '', pos = 'centro') { const r = { ...crear_(html, cls, css), p, a0, a1, pos }; L.push(r); return r; },   // pos: 'centro' | 'arriba' (el rótulo queda sobre el punto) | 'izq' (empieza en el punto)
+      fijo(html, cls, x, y, a0, a1, css = '') { const r = { ...crear_(html, cls, css), a0, a1, fijo: true }; Object.assign(r.a.style, { left: x + 'px', top: y + 'px', transform: 'none', whiteSpace: 'normal' }); r.d.style.whiteSpace = 'normal'; L.push(r); return r; },   // esquina superior izquierda en (x, y) px
+      dibujar(T) { cam.updateMatrixWorld();
+        for (const r of L) { const o = E.ventana(T, r.a0, r.a1); r.a.style.opacity = o; r.a.style.display = o > 0.001 ? 'block' : 'none';
+          if (!r.fijo && o > 0.001) { E.label(r.a, r.p); r.a.style.transform = r.pos === 'izq' ? 'translate(0,-100%)' : r.pos === 'arriba' ? 'translate(-50%,-100%)' : 'translate(-50%,-50%)'; } } },
+    };
+  };
   E.animar = (tl, dur, fn) => {
     const st = { t: 0 }, draw = () => { fn(st.t); renderer.render(scene, cam); };
     tl.to(st, { t: dur, duration: dur, ease: 'none', onUpdate: draw }, 0); draw();
   };
+  return E;
+}
+
+/* Un PLANO del set único: arma el set con `armar(E)` (que devuelve la función dibujar(T)) y lo dibuja en el tiempo GLOBAL del video
+   durante la escena `id`. El inicio y la duración salen de assets/tiempos.js (generado desde video.json). Registra el timeline al final. */
+export async function plano(root, tl, id, armar, opts) {
+  const { ESC } = await import('./tiempos.js'), e = ESC[id];
+  if (!e) throw new Error(`plano(): la escena "${id}" no está en video.json (correr: python engine/reel.py voz videos/X)`);
+  const E = await crear(root, opts); E.id = id; E.T0 = e.t0; E.dur = e.d;
+  const dibujar = await armar(E);
+  E.animar(tl, e.d, (t) => dibujar(e.t0 + t));
+  window.__timelines[id] = tl;
   return E;
 }

@@ -1,89 +1,79 @@
-# Preferencias de Ayrton (resumen para consultar ANTES de cada video)
-Destilado de `docs/1-canal/BITACORA.md` (cronológico, con el detalle) y `docs/1-canal/DECISIONES.md`. **Se actualiza en cada tanda de indicaciones** y se repasa al empezar un video y antes de entregarlo; Ayrton no tiene que volver a aclararlo.
+# Preferencias de Ayrton — lo vigente, por tema
+**Leer entero al empezar un reel y antes de entregarlo.** Es el destilado de todo lo que dijo (`BITACORA.md`, cronológico) y de cada corrección (`DECISIONES.md`). Acá está **solo lo que vale hoy**: cuando cambia de opinión, se reemplaza el renglón en su sección (no se agrega al final). Entre paréntesis, la fecha de la decisión.
 
-## Le gusta
-- **Cámara de película al servicio del concepto** (2026-11-15): planos continuos (un objeto se transforma en el siguiente en vez de cortar), pocos movimientos clave y dinámicos, **pausas** sobre cada objeto nombrado, y planos generales que muestren las ideas juntas (ej.: escalar, vector y matriz vistos de lejos). Entradas con carácter y diseño de sonido en cada movimiento.
-- Estética (**por defecto desde 2026-11-14**): **tema Scale** — negro puro, objetos 3D de línea gris, un solo acento Foundry Tan, Host Grotesk + Geist Mono, subtítulos con barra negra (reel de tensores, publicado y con buena respuesta). Línea roja (WiFi) y lima/azul quedan como temas alternativos en `engine/themes/`. **Piso de líneas en perspectiva** y el **gradiente** de fondo.
-- **Profundidad real**: objetos 3D con perspectiva (le gustó cuando aparecieron los teléfonos en 3D); cámara que se mueve y revela. Prefiere **todo en three.js** (objetos, ondas, cables) mientras el render no se vuelva lento.
-- Motion graphics con **movimiento de cámara** como protagonista de la profundidad.
-- **Voz Daniela limpia** (sin efecto de radio) y sonido **limpio**: sin ruido de fondo; efectos puntuales con significado; **chinn** al aparecer el CTA; **sonido grave** (`boom-cinematico`) al inicio y al final; tipeo real de teclado.
-- **Subtítulos** siempre (mucha gente mira en silencio), en zona segura.
-- Cierre con **foco en el CTA**; la firma chica debajo.
-- Que cada reel **demuestre que sabe** (portfolio para reclutadores): un detalle de profesional.
-- Reels **rápidos de producir**.
+## 1. Qué busca
+- Canal **sin cara** que se reconozca en un cuadro (como Kurzgesagt, Fireship, 3Blue1Brown): **lo que se repite es la marca**. Inicio, cierre, paleta, tipografía, voz, música y sonidos fijos no varían entre reels (11-14).
+- Cada reel es su **portfolio**: tiene que demostrar que sabe (un detalle de profesional) y a la vez lo obliga a aprender el tema.
+- **Reels rápidos de producir** y **gastar pocos tokens**: ir directo, pocas iteraciones, no releer documentos ni regenerar de más (11-10).
+- **Medir en vez de opinar**: parámetros que se puedan repetir, no "se siente" (11-10). Pero **los números son una alarma, no un objetivo**: si el ojo dice que confunde, gana el ojo (11-15).
+- **Una mejora por vez, mostrada antes de sumar la siguiente** (11-07, 11-15). Ante "cambiar la estética": 3–4 cuadros antes de renderizar todo.
+- **Borrar lo que no se usa.** Todo lo importante en `main`, para que otra persona pueda hacer los videos como él quiere (11-14).
 
-## No le gusta / errores a no repetir
-- **Cámara que se mueve todo el tiempo o zoom de más** (banco v4, 2026-11-15): confunde. La cámara se mueve **solo en los momentos clave** y **se queda quieta** cuando se nombra un objeto; **pausas** para que se lea. Nada de desenfocar lo que se explica.
-- Elementos de fondo **sin sentido** (puntitos verdes, un "1" suelto flotando): todo lo decorativo tiene que significar algo.
-- **Palabras sueltas** en la última línea (viudas/huérfanas).
-- Ondas **cortadas** (sin continuidad); cables que **no tocan** el objeto.
-- Texto del CTA que **no coincide con la voz**: debe decir "Dale like y seguime para aprender más de <tema>".
-- Zoom a su usuario en el cierre; "guardalo"; efecto de radio / sonido sucio; estética roja o Anduril.
-- Render lento (el motor viejo con 3D pesado): three.js solo simple (medido ≈ +1 s de render por segundo de video).
-- Pronunciación mal: "WiFi" escrito "guifi" sonaba "gifi" → usar "uaifai" (pendiente que Ayrton elija de oído entre 3 variantes en `docs/4-referencias/material/pronunciacion/`).
+## 2. Público y contenido
+- **La mayoría no es de IT** (feedback del reel de tensores, 11-14). Se entiende sin saber nada de antemano y no tiene errores que un experto pueda marcar. Sin jerga de especialista en un reel introductorio (nada de "lote", "pérdida", "NCHW").
+- En un reel conceptual, primero **que quede claro QUÉ ES la cosa**, con un ejemplo cotidiano que crece de a un paso (píxel → fila → foto → video). El "para qué sirve" se muestra **funcionando dentro de la explicación**, no como lista al final (11-12).
+- **No quedarse en la definición**: datos técnicos concretos y verificados (números, mecanismos). Si no entra, serie (11-16).
+- **Validar los datos aunque la fuente sea una empresa grande**: medir con la herramienta real (11-16). Revisión técnica antes de publicar: "no quiero cometer un papelón" (11-13).
+- Un dato se muestra con **su forma real** (una foto es un bloque 3D, un sonido una fila; "bloque", no "cubo", si no es cúbico) (11-13).
+- **Las referencias que pasa son para aprender CÓMO se explica o la técnica de cámara, no para copiarlas**: nunca repetir su hook, su orden ni sus objetos (11-12).
+- Ante una fuente, el guion cubre **su tema central**; los ángulos laterales se ofrecen como otros reels (11-09).
+- No rotular lo obvio ("pared"): "el espectador no es tonto" (11-09).
 
-## Flujo acordado
-Link + indicaciones → guion (público: técnicos, principiantes, reclutadores) → **su OK** → plan numérico (metas de la biblia de estilo) → video → entrega. A futuro: publicar automáticamente en sus redes (no hacerlo sin que lo pida).
+## 3. Cámara y puesta en escena
+- **Un solo set 3D recorrido en plano secuencia** (le gustó la v2 de tokens, "la fábrica"): estaciones en profundidad, dolly in/out, grúa, travelling y **ángulos distintos** (picado, contrapicado, lateral) (11-16).
+- **Viajes rápidos (~0,8 s) y retenciones quietas** cuando se nombra algo. Pausas para que se lea (11-15, 11-16).
+- **No**: cámara que se mueve todo el tiempo, zoom de más, desenfocar o recortar lo que se explica (banco de prueba, 11-15).
+- **Plano general** para mostrar las ideas juntas (escalar, vector y matriz vistos de lejos).
+- **Cada reel con su propia puesta en escena**: se mantienen inicio y cierre; el medio no copia el reel anterior (orden de planos, objetos de frente, título arriba) (11-16).
+- **Nada que estorbe al texto**: un decorado que pasa detrás de lo que se lee se saca (la cinta de la fábrica) (11-16).
+- **Profundidad real**: objetos 3D con perspectiva, **piso de líneas en perspectiva**. No reemplazar el 3D por dibujos planos (11-07).
+- Quiere que se le explique lo hecho con **vocabulario de cine** y segundos (`docs/2-estilo/GLOSARIO-EDICION.md`) (11-16).
 
-## Agregado 2026-11-09 (noche, 3)
-- **Realismo con sentido**: las notebooks no llevan antena a la vista; los **cables tocan los objetos** (puertos, centro del globo); las ondas de radio no necesitan encajar justo.
-- **Cero etiquetas obvias**: no rotular lo que se ve ("pared"); el espectador no es tonto.
-- **Bits chicos y dentro de la pantalla**; sonido digital de interfaz para tipear 0 y 1 (el teclado solo para código); módem como guiño de "conexión"; hit metálico mejor que un whoosh suave en el cierre.
-- **"WiFi" = "uaifai"** (aprobado). "router" = "ráuter" (a confirmar).
-- CTA: "de <tema>" para temas de una palabra; "sobre <tema>" para frases largas.
-- Pasa **investigación propia** (guías, artículos) para que la use y la deje documentada: `docs/5-tecnica/THREEJS.md`.
+## 4. Estética
+- **Tema Scale** (por defecto desde 11-14): negro puro, objetos de **línea gris fina y continua**, **un solo acento Foundry Tan**, blanco solo para texto, cables y señal; Host Grotesk + Geist Mono.
+- **El negro no se ensucia**: sin halos, degradés grises ni brillos detrás de los objetos (11-15). Los colores de Scale van de acento, **nunca de fondo** (el verde Evergreen de fondo no le gustó) (11-13).
+- **No**: estética roja o Anduril, lima/HackTheBox (temas viejos), scanlines, HUD/esquinas, mayúsculas espaciadas, "// TUTORIAL", texto de la fuente al final (11-04 a 11-14).
+- **Nada pixelado o "cuadrado" como protagonista** (la cara de 8×8): formas suaves, objetos con riqueza (11-12).
+- **Objetos**: contornos finos (≈ 2 px; a 4–5 px se tapan), líneas que no se cortan, antenas con cuerpo, escala real, revisar cada objeto de cerca (11-11). Las notebooks no llevan antena a la vista; los routers sí (11-09).
+- **Lo que se conecta se toca**: los cables salen de un puerto real y llegan al cuerpo del objeto. Lo que viaja sigue la forma del medio: cuadraditos solo sobre cables (`cable.at(s)`), en el aire solo ondas (11-11).
+- **Ondas de radio = anillos** que se expanden; la senoide solo para explicar frecuencias. Ondas continuas, nunca cortadas (11-10).
+- **Sin decorado sin sentido**: ni puntitos, ni bits flotando, ni un "1" suelto (11-09).
+- **Tipografía**: le hacen ruido los textos muy juntos o con mucho vacío; texto centrado en su placa; chips con aire; **nunca una palabra sola en la última línea** (11-09, 11-13).
+- **Media kit** (`docs/media-kit/`, 11-16): manda en portada, gancho, tamaños y reglas de uso.
 
-## Agregado 2026-11-10
-- **Medir en vez de opinar**: prefiere parámetros técnicos replicables a percepciones subjetivas; quiere analizar videos de referencia (transiciones, cámara, planos, sonido) para tener parámetros de inspiración. Se le pasa el .mp4 a Claude y se mide (`docs/5-tecnica/MEDICION.md`).
-- Renderizamos a **30 fps** (estándar; alcanza para nuestro movimiento).
+## 5. Inicio y cierre (fijos)
+- **Portada**: cuadro fijo de 0,1 s que sirve de miniatura: firma + título de 3–5 palabras (una en tan) + objeto protagonista con un punto tan. Después el **gancho con el mismo título** (11-13, 11-16).
+- **Firma `@ayrtonnacer`** al inicio y al final, en tan, **sola** (sin punto ni adorno). Lo resaltado es lo que hay que recordar (11-04).
+- **Cierre**: el foco es el **CTA**; la firma chica debajo; **nunca zoom a su usuario**. El texto coincide con la voz: "Dale like y seguime para aprender más de <tema>" ("de" para una palabra, "sobre" para una frase). **Nunca "guardalo"** (11-09).
 
-## Agregado 2026-11-10 (2)
-- **Una sola rama (`main`)**: no quiere ramas ni PR; todo directo a `main`. Explicarle GitHub en simple y evitar jerga.
-- Referencias suyas que le gustan (10 videos en `assets/referencias/`): las **contemplativas/oscuras** con cámara que mueve–retiene–mueve y planos continuos; patrón favorito para reels técnicos: **vista explosionada 3D con etiquetas y tooltip** (`docs/4-referencias/BIBLIA-DE-ESTILO.md`).
+## 6. Voz y pronunciación
+- **Daniela (Piper) limpia**, sin efectos. El efecto de radio y el Adjutant se probaron y no le gustaron: no proponerlos (11-09, 11-11).
+- El público marcó la voz como lo más flojo ("se nota lo robótico"); pendiente **clonar su voz** (`docs/2-estilo/AUDIO.md` → Voz propia) (11-14).
+- **Ritmo**: `length_scale` 1,05 y 2,4–2,8 palabras por segundo en total; más de 2,9 es demasiado rápido para quien aprende (11-11).
+- **Cuidar la pronunciación**: ante una palabra en inglés, ofrecer variantes de audio antes de usarla. Cada pronunciación que confirma o corrige va a `pronunciacion.json` en el momento (11-11, 11-12).
+- Confirmadas: "uaifai" (WiFi), "ráuter", "ísernet", "gigaérts", "dos coma cuatro". No le gustó "mashín lérnin": decir "inteligencia artificial". La voz lee "IA" como "ya": escribir "inteligencia artificial".
+- No decir "pendrive" (memoria), "like" (me gusta). No leer la terminal ni los carteles. Frases con palabras repetidas se entienden mal: simplificar.
 
-## Agregado 2026-11-10 (3)
-- **Todo análisis con números** (como el repo de LuisPa): nada de "se siente", nada de script técnico cualitativo. Un solo lugar (`docs/4-referencias/`), una sola herramienta (`medir.py`), comparar siempre contra las metas. **Borrar lo que no se usa.**
-- **Ondas de radio = anillos/círculos** que se expanden; la onda sinusoidal solo para explicar frecuencias (2,4/5 GHz). Tipeo digital solo al escribir los 0/1 en la computadora; en el router, sonido de módem/router.
-- **Gastar pocos tokens**: ir directo, pocas iteraciones, sin releer docs ni regenerar de más; que alcance con pasar el material.
-- **Física (2026-11-11)**: solo si explica algo; se hornea con Rapier (`docs/5-tecnica/FISICA.md`), nunca simulación en vivo; sin `Math.random()`; los choques sincronizan los efectos. No usar React/R3F.
-- **Paquetes (2026-11-11)**: cuadraditos SOLO sobre cables y siguiendo su curva (`cab.at`); en el aire, solo ondas. Lo que viaja sigue la forma real del medio.
-- **Música por defecto** (desde 2026-11-16): *Can You Hear The Music* (`assets/musica/can-you-hear-the-music.mp3`); antes Palladio.
+## 7. Sonido y música
+- **Sonido limpio**: sin ruido de fondo, sin glitch ni estática; efectos puntuales con significado (11-09).
+- **Fijos de marca**: boom grave (`boom-cinematico`) al inicio y al final; **chinn** cuando aterriza el CTA (11-09).
+- **Efectos variados**: no repetir siempre el mismo whoosh o golpe; usar los sonidos reales del banco y los propios que encajan con el tema (11-16). Tipeo real de teclado para código; sonido digital para los 0 y 1; módem para "conexión"; hit metálico mejor que un whoosh suave antes del cierre.
+- **Música firma**: *Can You Hear The Music*, en todos los reels, **desde el segundo 0 (los violines)**, nivelada para que se oiga desde el principio sin tapar la voz. **No recortar una canción que él pasa sin avisar** (11-16).
 
-## Agregado 2026-11-11
-- **Guardar cada pronunciación correcta apenas Ayrton la confirma o corrige**: va a `engine/audio/pronunciacion.json` (`estado: "ok"` + nota con la fecha y la fuente) y se anota en `docs/1-canal/BITACORA.md`. Al terminar un video, las palabras que no corrigió quedan `ok` (las aprobó de oído). Confirmadas: uaifai, ráuter, ísernet, gigaérts, "dos coma cuatro".
-- **Estándar de calidad (2026-11-11)**: objetos GRISES de trazo fino y continuo; blanco solo para cables, señal y tipografía; antenas con cuerpo; revisar cada objeto de cerca. Voz: probar el efecto Adjutant (StarCraft) para el público nerd (`voz.efecto: adjutant`).
-- **Voz sin efectos (2026-11-11)**: por defecto SIEMPRE Daniela limpia (`voz.efecto: "ninguno"`). El efecto Adjutant se probó y no le gustó; no proponerlo de nuevo salvo que lo pida.
+## 8. Subtítulos
+- **Siempre** (mucha gente mira sin sonido), en zona segura (y 1120–1320), con **barra negra** detrás, palabra dicha en tan (11-09, 11-13).
+- No repetir en pantalla lo que ya dice el subtítulo.
 
-## Agregado 2026-11-12
-- **Las referencias que pasa son para aprender CÓMO se explica, no para copiarlas**: no repetir su hook, su orden ni sus objetos; proponer ángulo y analogías propias.
-- **Nada pixelado/"cuadrado" como protagonista** (la cara de 8×8 del reel de tensores no le gustó): formas suaves, objetos con más riqueza.
-- **Cuidar la pronunciación**: ante una palabra en inglés, ofrecer variantes de audio antes de usarla; "machine learning" como "mashín lérnin" no le gustó.
-- En un reel conceptual lo primero es que **quede claro la definición** (qué ES la cosa), antes que lucirse con la animación.
-- **Portada (2026-11-13)**: todos los reels arrancan con un cuadro fijo de **0,1 s** que sirve de portada al publicar (se elige como fotograma de portada): título grande del hook + el objeto clave + firma. Después, el hook con su **título** en pantalla (como en el reel de WiFi: "Tu WiFi es una radio").
-- **Tipografía en pantalla**: le hacen ruido los textos muy juntos o con mucho espacio vacío; revisar aire y alineación de rótulos, chips y subtítulos en cada `snapshot`.
-- **Guardar los reels terminados**: copia liviana del final en `docs/4-referencias/propios/<reel>/` junto con su medición, para tener referencia de lo que le gusta.
-- **Paleta Scale (2026-11-13)**: probando colores de Scale AI. **No le gusta el verde (Evergreen) como fondo**; los colores de Scale se usan como **acento sobre base neutra** (negro/blanco/grises), no como superficie. Acento elegido para la prueba: Foundry Tan `#A8927C`.
-- **Subtítulos sobre imágenes (2026-11-13)**: si el fondo tiene mucho detalle (números, fotos), usar la **barra negra detrás del subtítulo** (`video.json → subtitulos.fondo`). Pidió probar la tipografía de Scale (Host Grotesk + Geist Mono).
-- **Público y feedback (2026-11-14)**: el reel de tensores tuvo mejor respuesta de lo esperado. Lo que gustó: **explica para el que no sabe de IT** (la mayoría). Lo que falla: **la voz se nota robótica**; le sugirieron **clonar su voz** para la marca personal. Todo en `docs/1-canal/PUBLICO.md`; anotar ahí el feedback de cada reel publicado.
-- **Marca reconocible (2026-11-14)**: canal sin cara como Kurzgesagt, Fireship, 3Blue1Brown, FaztTech; lo que hace que lo reconozcan es **lo que se repite** (estética, color, voz, música, inicio y cierre). No variar esos elementos entre reels. Detalle en `docs/1-canal/CANAL.md`.
-- **A mejorar (2026-11-14)**: portada, hook y **dinamismo de cámara** (medido: 0,5 movimientos notorios cada 10 s contra 1,5–5 de las referencias; ver `docs/1-canal/CANAL.md` → Próximas mejoras).
-- **Repo para compartir (2026-11-14)**: todo lo importante tiene que estar en `main` en GitHub, para que otra persona pueda editar los videos como él quiere.
+## 9. Cómo trabajar con él
+- **Checkpoint del guion antes de animar**, salvo que pida "hacelo directo".
+- **Guardar todo en el repo sin que lo pida** (indicaciones, archivos, pronunciaciones, reels terminados en `docs/4-referencias/propios/`).
+- **Una sola rama (`main`)**, sin pull requests; GitHub explicado en simple.
+- **No instalar ni ejecutar repos de terceros** que pasa para estudiar: leerlos y tomar ideas; respetar licencias (onetake es no comercial) (11-15).
+- **No publicar en redes** sin que lo pida.
+- No cambiar tema, estructura y animaciones a la vez: una cosa por vez (11-07).
 
-## Agregado 2026-11-15 (onetake)
-- **Cámara continua de verdad**: en cada límite entre escenas algo sobrevive y se transforma en lo siguiente; se mide con `engine/analisis/arrastre.py` (medio ≥ 0,5). Ayrton pasó el repo onetake y pidió **no instalar nada** por seguridad: estudiar leyendo y tomar ideas/umbrales (licencia no comercial: nada de copiar código).
-- Pausas verdaderamente quietas (≥ 25 % de cuadros) y cámara que anticipa al objeto; no más movimiento. Detalle: `docs/2-estilo/CAMARA.md` (reglas 7–9) y `docs/4-referencias/material/2026-11-onetake.md`.
-
-
-## Agregado 2026-11-16 (tokens)
-- **Cada reel con su propia puesta en escena**: se mantienen inicio (firma) y cierre (CTA), pero el medio NO copia el reel anterior (orden de planos, objetos de frente, título arriba). Explorar el espacio: estaciones en profundidad, recorridos de cámara por el set, vistas explosionadas.
-- **Sonido más rico**: usar los sonidos propios que encajan con el tema (ej. `interface-texto-digital` para datos/tokens, `zoom-click` en acercamientos) además de los sintéticos; falta un banco de efectos reales (pendiente de su OK sobre la fuente).
-- Datos técnicos concretos y verificados en reels conceptuales (no quedarse en la definición).
-
-## Agregado 2026-11-16 (v2 de tokens)
-- **Todos los reels en 2.5D con cámara fluida** (le gustó la v2 "fábrica"): un solo set 3D que la cámara recorre en plano secuencia; jugar con entradas, dolly in / out, grúa y **ángulos distintos (picado, contrapicado, lateral)**; transiciones de plano a plano **más rápidas** (viajes de ~0,8 s) y retenciones quietas cuando se nombra algo.
-- **Nada que estorbe al texto**: la línea de montaje (cinta con cubitos) se sacó porque pasaba por detrás de las fichas. Decorado solo si explica algo y nunca detrás de lo que se lee.
-- **Explicarle lo que hago con vocabulario de cine** (plano, ángulo, movimiento, transición): `docs/2-estilo/GLOSARIO-EDICION.md`, con ejemplos por segundo.
-- **Música firma**: *Can You Hear The Music*, en todos los reels; elegir el tramo para que el crescendo termine en el CTA.
-- **Media kit (2026-11-16)** en `docs/media-kit/` (abrir `Media Kit.dc.html`): manda en portada, hook, tamaños, reglas de uso y transiciones. Revisar cada reel contra él antes de entregar.
-- **Portada y hook con la anatomía del media kit en todos los reels** (plantilla). **Efectos variados** (no repetir el mismo whoosh/golpe): `elegir(rol)`; fijos de marca solo boom y chinn.
-- **Referencias con dos propósitos**: cómo se explica y técnica de cámara (el tema no importa en estas últimas). Catálogo de movimientos en `docs/4-referencias/CATALOGO-MOVIMIENTOS.md`.
+## 10. Pendientes abiertos (decide Ayrton)
+- Voz clonada propia. Música propia con licencia (la firma actual tiene copyright: puede ser silenciada; lo más seguro es agregarla desde la biblioteca de la app).
+- Los materiales de sonido de `engine/onetake/` son de **uso no comercial**: confirmar si se siguen usando en reels publicados o se reemplazan por el banco CC0.
+- Confirmar de oído las pronunciaciones `sin_verificar` de `pronunciacion.json` ("token", "tokenizador", entre otras).
+- Publicación programada en redes (ver `docs/5-tecnica/PUBLICACION.md`).

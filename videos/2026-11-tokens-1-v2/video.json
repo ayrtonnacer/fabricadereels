@@ -1,4 +1,5 @@
 {
+  "estado": "listo",
   "titulo": "Qué son los tokens (parte 1): la IA lee números",
   "fecha": "2026-11",
   "fuente": "NVIDIA, 'What Are AI Tokens?'; datos medidos con tiktoken (o200k_base, GPT-4o); ViT (Dosovitskiy et al., 2020)",

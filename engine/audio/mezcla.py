@@ -9,7 +9,9 @@ ap = argparse.ArgumentParser(); ap.add_argument('video'); ap.add_argument('--mus
 ap.add_argument('--db', type=float); ap.add_argument('--sfx', type=float); a = ap.parse_args()
 V = Path(a.video); cfg = json.loads((V / 'video.json').read_text()); au = cfg['audio']
 dur = sum(s['d'] for s in cfg['scenes'])
-music = a.musica or au['musica']; ofs = a.desde if a.desde is not None else au.get('musica_desde', 0)
+RAIZ = Path(__file__).resolve().parents[2]
+music = a.musica or au['musica']; music = music if Path(music).exists() else str(RAIZ / music)   # la ruta de video.json es relativa a la raíz del repo
+ofs = a.desde if a.desde is not None else au.get('musica_desde', 0)
 mdb = a.db if a.db is not None else au.get('musica_db', -8); sg = a.sfx if a.sfx is not None else au.get('sfx_gain', 1.25)
 LUFS = au.get('loudness', -14); A = V / 'audio'
 NIV = au.get('musica_nivelar'); NIV = f"acompressor=threshold={NIV[0]}dB:ratio={NIV[1]}:attack=80:release=800," if NIV else ''   # opcional: [umbral dB, ratio] parejo la música

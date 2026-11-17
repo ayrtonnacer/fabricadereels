@@ -2,12 +2,13 @@
 Motivo (Ayrton): mucha gente mira los reels **sin sonido**; el video tiene que entenderse leyendo.
 
 ## Cómo se hacen
+Todo junto: `python engine/reel.py voz videos/X`. Por dentro:
 1. `python engine/audio/voz.py videos/X` — además de la voz guarda `audio/palabras.json`: el **tiempo exacto de cada palabra**. Salen de la duración por fonema que da el propio modelo de Piper (`include_alignments`, paquete `onnx`), así que no hace falta transcribir con Whisper ni hay deriva.
-2. `python engine/subtitulos.py videos/X` — arma `compositions/subtitulos.html` (generado: no editar a mano) y el host en `index.html` (`data-track-kind="captions"`, `z-index: 50`).
-Correr los dos después de cambiar texto o tiempos de la voz.
+2. `python engine/subtitulos.py videos/X` — arma `compositions/subtitulos.html` (generado: no editar a mano) ; el host en `index.html` lo escribe `tiempos.py`.
+Correrlo después de cambiar texto o tiempos de la voz.
 
 ## Reglas
-- **Zona segura**: franja **y 1120–1320** (1080×1920). Arriba de lo que tapa la interfaz de las apps (≥ 1330 px hacia abajo) y debajo de la imagen. Por eso la cámara sube todo el set 170 px (`DY` en `assets/camara.js`) y **la imagen no pasa de y ≈ 1100**. Nada importante en los 200 px superiores.
+- **Zona segura**: franja **y 1120–1320** (1080×1920). Arriba de lo que tapa la interfaz de las apps (≥ 1330 px hacia abajo) y debajo de la imagen. Por eso la librería 3D sube la imagen 170 px (`dy` en `assets/escena3d.js`) y **la imagen no pasa de y ≈ 1100**. Nada importante en los 200 px superiores.
 - Bloques de 2–5 palabras, 1–2 líneas, máx. ~34 caracteres; cortan en puntuación. Un bloque **no termina en artículo, preposición o conjunción** (esa palabra pasa al siguiente). Nunca una palabra sola en la última línea (`text-wrap: balance` + `&nbsp;` entre las dos últimas palabras; ver `docs/2-estilo/TIPOGRAFIA.md`).
 - Sans del tema (`--sans`, hoy Host Grotesk) 700, 70 px, color de texto del tema, sombra para leer sobre cualquier fondo. **Barra negra detrás** (`video.json → "subtitulos": {"fondo": "rgba(0,0,0,.86)"}`, ya en la plantilla) para que no se pierda sobre imágenes con detalle. Espaciado normal o apretado, nunca abierto.
 - La **palabra que se dice** se pinta con el acento (`--acc`); el cambio es un corte seco. Los bloques aparecen de golpe.

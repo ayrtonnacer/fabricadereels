@@ -1,33 +1,38 @@
-# Plan numérico — <título>
-Se arma DESPUÉS de que Ayrton aprueba el guion y ANTES de animar. Todo con números de `docs/4-referencias/BIBLIA-DE-ESTILO.md`; al terminar el render, `python engine/analisis/comparar.py videos/X/analisis/metricas.json` dice si se cumplieron.
+# Plan de cámara — <título>
+Se arma DESPUÉS del OK del guion y de `python engine/reel.py voz` (los segundos salen de ahí), y ANTES de escribir `assets/set.js`.
+Reglas y recetas: `docs/2-estilo/CAMARA.md`. Al terminar: `python engine/reel.py medir videos/X` y completar "Medido".
 
-## Metas del reel (copiar de `docs/4-referencias/metas.json`; ajustar solo con motivo)
-| Parámetro | Meta | Por qué se desvía (si lo hace) |
-|---|---|---|
-| Duración / palabras por segundo | ___ s / 2,6–2,9 | |
-| Cortes por minuto · plano mediano | ___ · ___ s | |
-| Cámara en movimiento | 60–90 % de los cuadros (alarma; con pausas de verdad quedan ≥ 25 % quietos, ver `docs/2-estilo/CAMARA.md` regla 9) | |
-| Continuidad entre escenas (`arrastre.py`) | medio ≥ 0,5; ningún límite en 0,0 salvo cambio de tema/CTA | |
-| Variación de planos | el más largo ≥ 4× el más corto · ≥ 25 % cuadros quietos · un tramo quieto ≥ 1 s | |
-| Velocidad mediana · pico de un movimiento notorio | ___ px/s · ___ px/s | |
-| Ataque / liberación de un movimiento | ___ s / ___ s (parecidos = ease simétrico) | |
-| Retención entre movimientos | ___ s | |
-| Volumen · pico | −14 LUFS · ≤ −1,5 dBTP | |
-
-## Planos (un renglón por escena; todo en números)
-| Esc | Desde–hasta (s) | Voz (texto exacto) | Set (objetos y z) | Cámara: tipo · zoom total % · pico px/s · ataque/liberación s | Entradas (t local, s) | SFX (s; en el pico del movimiento) | Transición: tipo · vel. de cámara antes (px/s) |
-|---|---|---|---|---|---|---|---|
-| gancho | 0–3 | | | | | | |
-| … | | | | | | | |
-| cierre | | "Dale me gusta y seguime…" | CTA grande, firma chica debajo | llega al CTA y queda | CTA palabra por palabra, firma +1,1 s | chinn al aterrizar | — |
-
-## Límites entre escenas (uno por cada corte; ver tipos en `docs/4-referencias/material/2026-11-onetake.md`)
-| De → a | Qué SOBREVIVE y en qué se transforma | Tipo (objeto · contenedor · empuje de cámara · círculo · grupo · superficie) | Cómo termina el plano (resorte / desenfoque / corte; no repetir dos seguidas) |
+## El set
+- **Idea del espacio** (en una frase; distinta del reel anterior): ___
+- **Corriente** (hacia dónde van todos los viajes): ___
+| Estación | Posición (x, y, z) m | Idea que vive ahí | Objetos (uno solo lleva el tan) |
 |---|---|---|---|
-| gancho → … | | | |
+| A | 0, 0, 0 | gancho: ___ | ___ |
+| B | ___ | ___ | ___ |
 
-## Chequeo (con números, después del render)
-- [ ] `python engine/analisis/arrastre.py videos/X/final.mp4 --escenas videos/X/video.json` (continuidad, quietud, variación de planos, mapa de energía)
-- [ ] `python engine/analisis/barro.py videos/X/final.mp4` (graves-medios acumulados en la mezcla)
-- [ ] `comparar.py` sin parámetros fuera de la meta (o desvío justificado arriba)
-- [ ] cuadro 0 muestra la idea (miniatura) · [ ] nada quieto > 3 s · [ ] texto entre 200 y 1330 px de alto · [ ] cuadros revisados con `snapshot`
+## Plano por plano (un renglón por frase de voz)
+| Línea | Voz (inicio s) | Estación | Plano y ángulo | Cómo llega la cámara (movimiento · duración) | Qué aparece y con qué palabra | Sonido |
+|---|---|---|---|---|---|---|
+| l01 | ___ | A | medio, tres cuartos, leve picado | cuadro 0 = portada; push-in lento | título + firma desde el cuadro 0 | boom de apertura |
+| l02 | ___ | ___ | ___ | travelling · 0,9 s | ___ | viaje + aterriza |
+| … | | | | | | |
+| CTA | ___ | — | CTA centrado | corte; aterriza y queda quieta | CTA palabra por palabra; firma a los 1,3 s | succión → boom → chinn |
+
+## Chequeo del plan (antes de animar)
+- [ ] Un movimiento por idea nueva; la cámara queda quieta ≥ 1,5 s en cada cosa que se nombra.
+- [ ] Al menos tres ángulos distintos (frontal, picado, contrapicado, tres cuartos) y un plano general.
+- [ ] Ningún objeto de una estación futura asoma detrás del título ni de un rótulo.
+- [ ] Rótulos arriba de los objetos; nada que leer por debajo de y 1100.
+- [ ] El recorrido no calca el del reel anterior.
+
+## Medido (después del render)
+| | Este reel | Rango |
+|---|---|---|
+| Ritmo (palabras por segundo) | ___ | 2,4–2,8 |
+| Cuadros con cámara en movimiento | ___ % | 25–75 % |
+| Movimientos notorios cada 10 s | ___ | 1,5–5 |
+| Continuidad (arrastre medio) | ___ | ≥ 0,5 |
+| Graves-medios (100–300 Hz) | ___ % | < 35 % |
+| Volumen · pico | ___ | −14 LUFS · ≤ −1,5 dBTP |
+| Render | ___ s por segundo | ≤ 3 |
+Fuera de rango y por qué se acepta: ___

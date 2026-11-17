@@ -1,59 +1,66 @@
 # Fábrica de reels — manual de operación
 
-Repo de @ayrtonnacer para producir reels verticales (1080×1920, ~30–60 s) explicativos de programación, matemática, ciberseguridad y Linux.
-Flujo: **el usuario pega una fuente (link o tema, a veces con lo que quiere o no) → Claude escribe el guion → el usuario lo aprueba → Claude arma el plan numérico (metas de la biblia de estilo: cámara, cortes, ritmo, sonido) → se anima con HyperFrames (three.js r187 con cámara que se mueve en profundidad) → voz Piper (Daniela es_AR) + efectos + música → mp4.**
+Repo de @ayrtonnacer para producir reels verticales (1080×1920, 30 fps, 30–60 s) que explican programación, matemática, ciberseguridad y Linux **sin mostrar la cara**.
+Flujo: **Ayrton pega una fuente (link o tema) → Claude escribe el guion → Ayrton lo aprueba → plan → se anima (HyperFrames + three.js: un set 3D recorrido por una cámara continua) → voz Piper (Daniela) + efectos + música → mp4.**
 
-Cuando el usuario diga "hacé un reel de <fuente>" (o `/reel`), seguí `docs/5-tecnica/FLUJO.md` paso a paso. Mapa de todos los documentos: `docs/BIBLIA.md`. Leé antes: `docs/1-canal/PREFERENCIAS.md`, `docs/2-estilo/ESTILO.md`, `docs/2-estilo/CAMARA.md` (cómo la cámara da profundidad), `docs/5-tecnica/THREEJS.md` (criterios y costos de three.js), `docs/2-estilo/SUBTITULOS.md`, `docs/2-estilo/TIPOGRAFIA.md`, `docs/1-canal/BITACORA.md` (todo lo que dijo Ayrton), `docs/3-guion/GUION.md` (Hook→Payoff→CTA/bucle, 2,3 palabras/s; investigación en `docs/3-guion/INVESTIGACION-GUIONES.md`), `docs/5-tecnica/MEDICION.md`, `docs/2-estilo/AUDIO.md`, `engine/audio/pronunciacion.json` **`docs/1-canal/DECISIONES.md`** (cada corrección de Ayrton; no repetir esos errores), **`docs/1-canal/PUBLICO.md`** (para quién es y qué dijo la gente de cada reel) y **`docs/1-canal/CANAL.md`** (quién es Ayrton, inspiraciones, qué se repite en cada reel para que lo reconozcan, próximas mejoras).
-Para todo lo de HyperFrames (contrato de las composiciones, CLI, bloques del registro) usá las skills `/hyperframes`, `/hyperframes-cli`, `/hyperframes-registry` y `/media-use` que están en `.claude/skills/`. Donde choquen con este manual (voz, audio, estética), gana este manual.
+Cuando Ayrton diga "hacé un reel de <fuente>" (o `/reel`): seguí **`docs/5-tecnica/FLUJO.md`** paso a paso. Cada paso dice qué leer, qué comando correr y cuándo está terminado.
+
+## Qué leer (solo lo vigente; nada más hace falta para hacer un reel)
+| Cuándo | Documento |
+|---|---|
+| Siempre, al empezar y antes de entregar | `docs/1-canal/PREFERENCIAS.md` — gustos y errores de Ayrton, por tema (lo vigente, sin historia) |
+| Al escribir el guion | `docs/3-guion/GUION.md` · `docs/1-canal/PUBLICO.md` |
+| Al planear y animar | `docs/2-estilo/ESTILO.md` (look, portada, texto, subtítulos) · `docs/2-estilo/CAMARA.md` (gramática de cámara y recetas) · `docs/5-tecnica/THREEJS.md` (funciones de la librería 3D) |
+| Al hacer el sonido | `docs/2-estilo/AUDIO.md` |
+| Para HyperFrames (contrato, CLI, bloques) | skills `/hyperframes`, `/hyperframes-cli`, `/hyperframes-registry`. Donde choquen con este manual (voz, audio, estética), **gana este manual** |
+
+Solo de consulta (no leer de corrido): `docs/BIBLIA.md` (mapa de todo), `docs/1-canal/CANAL.md` (visión), `BITACORA.md` y `DECISIONES.md` (historial: contienen decisiones viejas ya reemplazadas), `docs/4-referencias/` (mediciones), `docs/2-estilo/GLOSARIO-EDICION.md` (vocabulario de cine para hablar con Ayrton), `docs/5-tecnica/MEDICION.md`, `FISICA.md`, `MANIM.md`.
+**Si dos documentos se contradicen**, el orden es: lo que Ayrton diga en la conversación → este archivo → `PREFERENCIAS.md` → el resto. Y se corrige el documento equivocado en el mismo commit.
 
 ## Estructura
-- `videos/<AAAA-MM-tema>/` — un video = un proyecto HyperFrames:
-  - `video.json` — única fuente de verdad de tiempos: escenas (`id`, `d`), líneas de voz con su tiempo, audio.
-  - `index.html` — raíz: monta una composición por escena (duraciones escritas por `engine/tiempos.py`).
-  - `compositions/<escena>.html` — cada escena: su set 3D (three.js), su cámara y su timeline GSAP.
-  - `assets/` — `marca.css` (identidad; otros temas en `engine/themes/`), `escena3d.js` + `three.module.js` (librería 3D), `movimiento.js` (resortes, temblor, límites con arrastre: `docs/2-estilo/CAMARA.md`), `gsap.min.js` y `fonts/` locales (nada de CDN: el render no usa la red).
-  - `sfx_events.py` (efectos), `guion.md`, `plan.md` (plan numérico); salidas `out/`, `audio/`, `final.mp4` (ignoradas por git).
-- `videos/_plantilla/` — punto de partida (3 escenas de ejemplo: gancho, explica, cierre). Se copia con `engine/nuevo.sh`.
-- `engine/` — lo nuestro alrededor de HyperFrames: `nuevo.sh`, `tiempos.py` y `audio/` (`voz.py`, `sfx.py`, `sfxlib.py`, `mezcla.py`, `radio.py`, `cortar_teclas.py`, `pronunciacion.json`).
-- `videos/LEEME.md` — qué es cada carpeta de video y en qué estado está (publicado, prueba, solo guion).
-- `docs/4-referencias/material/` — archivos que pasa Ayrton (artículos, capturas con correcciones, referencias); `docs/1-canal/BITACORA.md` — registro de sus indicaciones.
-- `docs/4-referencias/` — TODO el análisis, con números, en un solo lugar: `BIBLIA-DE-ESTILO.md` (qué funciona, con cifras; LEER antes de armar el plan), `metas.json` (rangos objetivo), `externos/<video>/` (`INFORME.md` + `metricas.json` de cada referencia) y `propios/<reel>/` (nuestros reels medidos). Los 10 mp4 originales están en `assets/referencias/`.
-- `assets/voces/` (modelo Piper partido en 3), `assets/musica/`, `assets/sfx/propios/` (tipeo real, chinn, clicks).
-- El motor anterior (three.js propio) y los videos de Parrot quedaron en el historial de git: commit `ae9a888`.
+- `videos/<AAAA-MM-tema>/` — un video = un proyecto HyperFrames. **Se escriben a mano solo 5 cosas:**
+  - `guion.md` y `plan.md` — el guion aprobado y el plan de cámara.
+  - `video.json` — **única fuente de verdad de los tiempos**: escenas (`id`, `d`), líneas de voz (`t`, `texto`), audio, `estado`.
+  - `assets/set.js` — **el set 3D del reel**: estaciones, objetos, rótulos y la cámara, todo en tiempo global del video.
+  - `compositions/cierre.html` — el CTA (solo se cambia el tema).
+  - `sfx_events.py` — los efectos, por significado.
+  - Se generan solos (no editar): `index.html`, `assets/tiempos.js`, `compositions/<escena>.html` (un "plano" por escena), `compositions/subtitulos.html`. Salidas ignoradas por git: `out/`, `audio/`, `final.mp4`.
+  - Librería (copiada de la plantilla, igual en todos): `assets/escena3d.js`, `movimiento.js`, `marca.css`, `three.*.js`, `gsap.min.js`, `fonts/`. Nada de CDN: el render no usa la red.
+- `videos/_plantilla/` — punto de partida que **ya cumple todas las reglas** (portada, gancho, set de 3 estaciones, cierre). `videos/2026-11-tokens-1-v2/` — el reel de referencia del estilo aprobado. `videos/_archivo/` — versiones viejas: **no copiar de ahí**. Estado de cada video: `videos/LEEME.md`.
+- `engine/` — `reel.py` (un comando por etapa), `verificar.py` (reglas del canal), `tiempos.py`, `subtitulos.py`, `audio/` (voz, efectos, mezcla, `pronunciacion.json`), `analisis/` (medición), `fisica.mjs`, `themes/` (temas viejos).
+- `docs/` — ver tabla de arriba. `docs/4-referencias/material/` — lo que pasa Ayrton. `docs/media-kit/` — sistema de diseño de la marca.
+- `assets/` — `voces/` (Piper, partido en 3), `musica/`, `sfx/propios/` (sonidos de marca), `referencias/` (videos de referencia).
 
-## Comandos
+## Comandos (desde la raíz del repo)
 ```
-bash engine/nuevo.sh AAAA-MM-tema                     # video nuevo desde la plantilla
-node engine/fisica.mjs videos/X/fisica.mjs        # (si el reel tiene física) hornea la simulación Rapier → assets/fisica.json; ver docs/5-tecnica/FISICA.md
-python engine/audio/voz.py videos/X                   # voz + chequeo de tiempos y palabras prohibidas
-python engine/tiempos.py videos/X                     # duraciones de video.json → index.html
-python engine/subtitulos.py videos/X                  # subtítulos con tiempos exactos por palabra
-(cd videos/X && npx hyperframes check)                # contrato y layout: sin errores
-(cd videos/X && npx hyperframes snapshot --at 0,1.5,4) # cuadros sueltos: MIRARLOS SIEMPRE antes de renderizar
-python engine/audio/sfx.py videos/X                   # efectos desde sfx_events.py
-(cd videos/X && npx hyperframes render --workers 4 -o out/mudo.mp4)   # ~2,5 s por segundo de video en CPU
-python engine/audio/mezcla.py videos/X                # mezcla −14 LUFS + out/mudo.mp4 → final.mp4
-python engine/audio/escuchar.py final.mp4 --video videos/X   # Whisper "escucha" la voz y la compara con el guion: % entendido por línea y palabras que suenan mal
-python engine/analisis/medir.py video.mp4 salida/ [--transcripcion t.txt]   # mide cámara, cortes, color, audio → números (cámara, cortes, transiciones, ritmo, audio)
-python engine/analisis/comparar.py ref/metricas.json propio/metricas.json  # qué parámetro se aleja (sin 2.º archivo: contra la biblia de estilo)
-python engine/analisis/encuadre.py video.mp4 [otro.mp4 …]   # encuadre: ancho/alto del contenido y nitidez relativa
-python engine/analisis/arrastre.py final.mp4 --escenas videos/X/video.json   # continuidad: qué sobrevive en cada corte (medio ≥ 0,5), % quieto, variación de planos, mapa de energía
-python engine/analisis/barro.py final.mp4                                    # graves-medios acumulados en la mezcla (alarma > 35 %)
+python engine/reel.py nuevo AAAA-MM-tema      # video nuevo desde la plantilla
+python engine/reel.py guion videos/X          # revisa guion y voz (ritmo, gancho, CTA, palabras prohibidas) ANTES del OK de Ayrton
+python engine/reel.py voz videos/X            # voz + subtítulos + tiempos (correr cada vez que cambia video.json)
+python engine/reel.py revisar videos/X        # reglas del canal + contrato HyperFrames: 0 errores antes de seguir
+python engine/reel.py cuadros videos/X        # cuadros clave en una hoja: MIRARLA SIEMPRE antes de renderizar
+python engine/reel.py encuadre "cámara" "mira" "punto" …   # dónde cae en pantalla un punto 3D (sin renderizar)
+python engine/reel.py render videos/X         # efectos + render mudo + mezcla → final.mp4  (≈ 2 s por segundo de video)
+python engine/reel.py audio videos/X          # solo efectos + mezcla
+python engine/reel.py medir videos/X          # mide final.mp4 contra las metas (agregar --escuchar para la pronunciación)
+python engine/reel.py entregar videos/X       # copia liviana + portada + lista de cierre
+python engine/reel.py estado                  # en qué etapa está cada video
 ```
-**Las sesiones de la nube se preparan solas** (gancho `.claude/hooks/session-start.sh`, registrado en `.claude/settings.json`: instala ffmpeg, Python y `node_modules` solo si cambió algo). Si algo falta igual (otro entorno): `bash engine/preparar.sh`. Instalación a mano: `npm install` (HyperFrames fijado en 0.9.26) y `pip install -r requirements.txt`; requiere Node ≥ 22 y ffmpeg.
+Las sesiones de la nube se preparan solas (`.claude/hooks/session-start.sh`: ffmpeg, Python, `node_modules`, banco de efectos). En otro entorno: `bash engine/preparar.sh` (Node ≥ 22, ffmpeg; HyperFrames fijado en 0.9.26).
+Herramientas sueltas (las usa `reel.py`): `engine/audio/voz.py`, `sfx.py`, `mezcla.py`, `escuchar.py`; `engine/analisis/medir.py`, `comparar.py`, `arrastre.py`, `barro.py`, `encuadre.py`, `movimientos.py`, `biblia.py`; `node engine/fisica.mjs` (física horneada).
 
-## Reglas que nunca se rompen (detalle en docs/)
-1. **Estilo motion graphics en 3D**: todos los objetos en **three.js r187** con `assets/escena3d.js` (guía: `docs/5-tecnica/THREEJS.md`) (notebook, router, ondas, cables…), cámara que se mueve en el eje z, piso de líneas en perspectiva; el texto es HTML sobre el 3D. Escenas simples (reel completo ≈ 2 s de render por segundo de video; si pasa de ~3, simplificar). **Nada decorativo sin significado** (sin puntitos ni bits de fondo).
-2. Estética (por defecto desde 2026-11-14): tema **Scale** de `assets/marca.css` (inspirado en la marca de Scale AI): negro puro, **objetos 3D de línea gris** (relleno negro), **un solo acento Foundry Tan** `--acc #A8927C`, texto blanco/gris, **Host Grotesk + Geist Mono**, subtítulos con barra negra. Los colores de marca van como acento, nunca de fondo. **Color = significado** (paleta en `docs/2-estilo/ESTILO.md`): énfasis = `--acc`, verde+✓ ok, ⚠ aviso, error = bloque rojo RELLENO+✕. Temas anteriores (línea roja, cyber) en `engine/themes/`. Sin scanlines, sin HUD/esquinas, sin mayúsculas espaciadas, sin texto de fuente al final. Paso = "Paso 1 de 7" en sans. Siempre `var(--…)`, nunca colores fijos.
-3. Firma `@ayrtonnacer` al inicio y al final, **con el acento del tema (tan)**, sola (sin punto ni adornos). En el cierre **el foco es el CTA**: la firma va debajo, más chica, sin zoom sobre ella. Chinn (`propio('chinn')`) cuando aterriza el CTA. El inicio y el cierre se mantienen entre reels; el medio cambia.
-4. CTA multiplataforma: texto "Dale like y seguime para aprender más de <tema>" / voz "dale me gusta y seguime para aprender más de <tema>" (**el texto coincide con la voz**). Nunca "guardalo".
-5. Voz: Daniela (Piper) por ahora (voz clonada de Ayrton pendiente: `docs/2-estilo/AUDIO.md` → Voz propia). **Público mixto, la mayoría no es de IT** (`docs/1-canal/PUBLICO.md`): que se entienda sin saber nada de antemano y sin errores que un experto pueda marcar; vocabulario del área sí, cada término nuevo con una imagen o ejemplo cotidiano; no leer la terminal ni los carteles; "memoria", no "pendrive"; "me gusta", no "like". Pronunciación por diccionario, no a ojo.
-6. Audio (`docs/2-estilo/AUDIO.md`): 4 capas (voz, música, efectos, ambiente), −14 LUFS, efectos audibles pero bajo la voz (ducking), música con fades ajustada al largo, **whoosh en el pico de cada movimiento de cámara**, silencio como recurso. HyperFrames renderiza mudo; el audio lo mezcla `mezcla.py`.
-7. **Guion**: una idea por reel, loop abierto en el hook y cerrado en el payoff, hook ≤ 3 s sin muletillas de IA, ≤ duración × 2,3 palabras. El cuadro 0 ya muestra la idea (es la miniatura).
-7b. **Checkpoint**: mostrar el guion (voz + una línea por escena con su movimiento de cámara) y esperar aprobación ANTES de animar.
-8. Cambiar UNA cosa por vez y mostrar cuadros (`snapshot`) antes de renderizar. **Subtítulos siempre** (se ve mucho en silencio): `docs/2-estilo/SUBTITULOS.md`; zona segura: imagen hasta y ≈ 1100, subtítulos en 1120–1320. Nada de palabras sueltas en la última línea (`docs/2-estilo/TIPOGRAFIA.md`).
-9. Contrato HyperFrames (`/hyperframes`): timeline pausado registrado en `window.__timelines`, nada de `Date.now()`/`Math.random()`/red, `fromTo` en escenas, ids únicos con prefijo por escena, posiciones de cámara por `data-x/y/z` (nunca `transform` en CSS).
-10. **Guardar todo en el repo, siempre y sin que Ayrton lo pida**: cada indicación va a `docs/1-canal/BITACORA.md` (detalle) y se destila en `docs/1-canal/PREFERENCIAS.md` (gustos y errores); cada archivo que pase va a `docs/4-referencias/material/` (o `assets/`, `videos/X/fuentes/`). **Repasar `docs/1-canal/PREFERENCIAS.md` al empezar y antes de entregar cada video.**
-11. **Medir en vez de opinar** (`docs/5-tecnica/MEDICION.md`): ante un video de referencia que pase Ayrton, primero `medir.py` y recién después proponer; antes de entregar un reel, medirlo y contrastarlo con `docs/4-referencias/BIBLIA-DE-ESTILO.md` (`comparar.py`). Render a **30 fps**.
-12. **Una sola rama: `main`.** Ayrton no usa ramas ni pull requests: commitear y subir **directo a `main`** (`git push origin main`); no crear ramas ni PR salvo que él lo pida. Hablarle de GitHub en palabras simples.
-13. Terminar cada video agregando a `docs/1-canal/DECISIONES.md` lo que el usuario corrigió y a `pronunciacion.json` cada palabra nueva.
+## Reglas que nunca se rompen
+`python engine/reel.py revisar` chequea solo las marcadas con ⚙; las demás se miran en los cuadros.
+1. **Un set 3D, una cámara continua.** Todo objeto en three.js r187 con `assets/escena3d.js`; el texto es HTML encima. El reel es un plano secuencia: la cámara **viaja rápido (≈ 0,8 s) y se queda QUIETA mientras la voz nombra algo**. Único corte: al CTA. Nada decorativo sin significado; nada detrás del texto. Render ≤ 3 s por segundo de video.
+2. **Estética Scale** (`assets/marca.css`): negro puro, objetos de **línea gris**, **un solo acento Foundry Tan** `--acc`, blanco solo para texto/cables/señal, Host Grotesk + Geist Mono. Color = significado (verde ✓ ok, ⚠ aviso, error = bloque rojo relleno ✕). ⚙ Siempre `var(--…)` / `P.acc`, nunca colores escritos a mano. ⚙ Sin scanlines, HUD, mayúsculas espaciadas, ni texto de fuente al final.
+3. **Marca fija en todos los reels** (no se toca sin que Ayrton lo pida): ⚙ portada de 0,1 s; gancho con firma + título de 3–5 palabras (una en tan); ⚙ firma `@ayrtonnacer` sola, en tan, al inicio y al final; ⚙ boom grave en 0 s y antes del CTA, chinn cuando aterriza el CTA; música firma; voz Daniela limpia. **Lo que cambia entre reels es el medio** (set, objetos, recorrido): no calcar el reel anterior.
+4. ⚙ **CTA**: pantalla "Dale like y seguime para aprender más de <tema>" · voz "Dale me gusta y seguime para aprender más de <tema>" (mismo tema; "sobre" si el tema es una frase). El foco es el CTA: firma chica debajo, sin zoom. Nunca "guardalo".
+5. **Público**: la mayoría no es de IT. Se entiende sin saber nada y no tiene errores que un experto pueda marcar. Cada término nuevo llega con una imagen o ejemplo cotidiano. Datos verificados contra la fuente primaria (medir, no citar de memoria).
+6. ⚙ **Guion**: una idea por reel; gancho ≤ 3 s y ≤ 10 palabras, sin muletillas de IA; loop abierto en el gancho y cerrado en el payoff; **2,4–2,8 palabras por segundo** del video completo (máximo 2,9); voz: "me gusta" no "like", "memoria" no "pendrive", no leer terminal ni carteles. Pronunciación por `pronunciacion.json`, nunca a ojo.
+7. **✋ Checkpoint**: mostrar el guion (voz + una línea por escena con su plano y movimiento de cámara, en vocabulario de cine) y **esperar el OK de Ayrton antes de animar**. Salvo que él pida explícitamente "hacelo directo".
+8. **Subtítulos siempre**, con barra negra, en y 1120–1320. La imagen que se lee va entre y 200 y 1100. Sin palabras sueltas en la última línea. **Mirar los cuadros antes de renderizar** y cambiar una cosa por vez.
+9. ⚙ **Contrato HyperFrames**: todo es función del tiempo (sin `Math.random()`, `Date.now()`, temporizadores ni red); timeline pausado registrado en `window.__timelines`; sin `transform` en CSS; sin `<audio>` (el sonido lo mezcla `mezcla.py`: 4 capas, −14 LUFS, efectos bajo la voz, sonido del viaje de cámara en el pico de velocidad).
+10. ⚙ **Los tiempos salen de la voz.** Nunca escribir segundos a mano en `set.js` ni en `sfx_events.py`: usar `cuando('l03', 'palabra')` y `ESC.<escena>.t0`. Si cambia `video.json`, correr `reel.py voz`.
+11. **Medir en vez de opinar**: ante una referencia, `medir.py` primero. Antes de entregar, `reel.py medir`. Las metas (`docs/4-referencias/metas.json`) son una alarma, no un objetivo: si el ojo de Ayrton dice otra cosa, gana el ojo.
+12. **Guardar todo en el repo, sin que Ayrton lo pida**: cada indicación → `docs/1-canal/BITACORA.md` (una línea con fecha) y, si cambia cómo se trabaja, → `PREFERENCIAS.md` en la sección de su tema (reemplazando lo viejo, no agregando al final). Cada archivo que pase → `docs/4-referencias/material/`. Cada palabra nueva → `pronunciacion.json`. Correcciones de un video terminado → `DECISIONES.md`.
+13. **Una sola rama: `main`.** Ayrton no usa ramas ni pull requests: commitear y subir directo a `main`. Hablarle de GitHub en palabras simples y explicarle lo que se hizo con vocabulario de cine (`GLOSARIO-EDICION.md`).
+14. **No publicar nada en redes** sin que Ayrton lo pida en ese momento.

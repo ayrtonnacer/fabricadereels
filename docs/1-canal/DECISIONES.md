@@ -1,4 +1,6 @@
-# Decisiones y correcciones de Ayrton (no repetir estos errores)
+# Decisiones y correcciones de Ayrton — historial por video
+> **Esto es un historial cronológico.** Tiene decisiones que después cambiaron (estética HackTheBox, Anduril, línea roja; "sin subtítulos"; "público técnico"; cámara 2.5D con CSS; Palladio; script técnico). **Lo vigente está destilado por tema en `PREFERENCIAS.md`**: ante una duda, vale ese. Acá se agrega al final lo que Ayrton corrige en cada video. Los videos viejos que se nombran están ahora en `videos/_archivo/`.
+
 ## 2026-11 — Parrot OS USB persistente
 - Estética: fondo oscuro tipo cyber/HackTheBox; sin serif, IBM Plex. Se descartó la estética y2k.
 - Tipografía del paso: "Pasos 1/7" en mono mayúscula se veía generado por IA → "Paso 1 de 7" en Plex Sans.

@@ -1,4 +1,6 @@
 # Biblia de estilo medida
+> **Cómo leerla (2026-11-17)**: acá está lo medido en los **videos de referencia** (otro género: fotorrealistas, con cortes y color) y en nuestros primeros reels. Las **metas vigentes para un reel nuestro** están en `metas.json` y se recalibraron al estilo que Ayrton aprobó (tokens v2: un set, plano secuencia, viajes rápidos y retenciones quietas); el resumen operativo está en `docs/2-estilo/CAMARA.md`. Los hallazgos de abajo son historia útil, no instrucciones.
+
 Qué funciona en un reel de motion graphics, **con números**. Se construye midiendo videos (`engine/analisis/medir.py`) y no se opina sobre ellos: *"una opinión no la puedes recrear, un número sí"* (idea del repo de LuisPa, `docs/5-tecnica/MEDICION.md`). Es el equivalente a su "biblia de estilo", pero de nuestro estilo (HackTheBox, 3D, explicativo).
 
 - **Cómo se usa**: antes de planear un reel se leen las metas (`metas.json`, abajo); se escriben en `videos/X/plan.md`; después de renderizar se corre `python engine/analisis/comparar.py videos/X/analisis/metricas.json` y se corrige lo que quede fuera de rango.
@@ -46,62 +48,62 @@ Vista explosionada con etiquetas y tooltip (motion-ref-2); texto cinético por p
 <!-- TABLAS:inicio -->
 ### Cada video, número por número
 
-| Parámetro | `motion-inspiration-frames` | `motion-inspiration-nokia` | `motion-ref-1` | `motion-ref-2` | `motion-ref-3` | `motion-ref-4` | `motion-ref-5` | `motion-templates-after-effects` | `pinterest-791437334567656517` | `pinterest-999095498641347187` | `short-tensores` | `shorts-animados-alejandro` | `2026-11-wifi-v5` |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Duración (s) | 18 | 20 | 9 | 20 | 25 | 32 | 104 | 15 | 50 | 9 | 53 | 10 | 33 |
-| Cortes por minuto | 47,2 | 53,8 | 38,6 | 9,0 | 4,8 | 19,0 | 13,2 | 36,0 | 33,6 | 82,4 | 28,5 | 48,8 | 9,1 |
-| Plano mediano (s) | 1,08 | 0,83 | 1,47 | 4,30 | 6,42 | 2,63 | 4,22 | 0,78 | 1,30 | 0,58 | 1,80 | 0,70 | 4,30 |
-| Cortes con movimiento fuerte antes (transición) (%) | 14 | 39 | 50 | 67 | 0 | 40 | 0 | 22 | 21 | 25 | 12 | 100 | 20 |
-| Cortes a ±0,1 s de un golpe de sonido (%) | 64 | 50 | 50 | 100 | 50 | 40 | 96 | 78 | 79 | 100 | 32 | 62 | 60 |
-| Cámara en movimiento (% cuadros) | 81 | 42 | 85 | 63 | 86 | 85 | 90 | 64 | 60 | 78 | 72 | 66 | 68 |
-| Velocidad mediana (px/s) | 37 | 201 | 305 | 22 | 69 | 33 | 30 | 161 | 64 | 122 | 29 | 110 | 16 |
-| Velocidad p95 (px/s) | 428 | 4564 | 2660 | 471 | 1908 | 526 | 487 | 4994 | 2116 | 629 | 178 | 1485 | 117 |
-| Movimiento lento (< 100 px/s) (%) | 76 | 36 | 19 | 81 | 57 | 71 | 73 | 46 | 56 | 47 | 86 | 48 | 94 |
-| Zoom neto (+ acerca) (%/s) | 16,84 | -0,91 | -13,03 | -2,12 | -6,41 | 1,83 | -0,78 | 3,39 | -4,63 | 3,07 | 1,23 | -2,44 | 1,77 |
-| Tirón mediano (menos = más suave) (px/s³) | 456 | 2858 | 10396 | 516 | 605 | 460 | 336 | 7075 | 1661 | 4837 | 910 | 2437 | 518 |
-| Movimientos notorios (pico ≥ 100 px/s) cada 10 s | 7,9 | 10,0 | 7,5 | 3,0 | 1,6 | 4,4 | 3,4 | 8,0 | 7,2 | 13,7 | 3,6 | 9,2 | 3,3 |
-| Pico mediano de un movimiento notorio (px/s) | 569 | 1822 | 2613 | 872 | 2995 | 916 | 968 | 2064 | 1492 | 438 | 276 | 1535 | 335 |
-| Duración de un movimiento notorio (s) | 0,98 | 0,55 | 1,40 | 1,21 | 4,00 | 1,55 | 2,67 | 0,51 | 0,75 | 0,59 | 1,23 | 0,57 | 1,37 |
-| Retención entre movimientos (≥ 0,5 s) (s) | 0,56 | 0,60 | 0,00 | 1,87 | 0,63 | 0,76 | 0,56 | 0,62 | 0,87 | 0,00 | 0,88 | 0,68 | 0,53 |
-| Ataque de un movimiento (10 % → pico) (s) | 0,04 | 0,07 | 0,30 | 0,03 | 0,29 | 0,13 | 0,14 | 0,17 | 0,10 | 0,40 | 0,13 | 0,13 | 0,14 |
-| Liberación (pico → 10 %) (s) | 0,52 | 0,12 | 0,22 | 0,40 | 0,44 | 0,13 | 0,47 | 0,10 | 0,23 | 0,23 | 0,27 | 0,17 | 0,13 |
-| Brillo medio (0–1) | 0,53 | 0,25 | 0,25 | 0,10 | 0,06 | 0,04 | 0,89 | 0,64 | 0,47 | 0,37 | 0,30 | 0,40 | 0,09 |
-| Saturación media (0–1) | 0,08 | 0,23 | 0,58 | 0,52 | 0,35 | 0,54 | 0,02 | 0,17 | 0,54 | 0,27 | 0,58 | 0,59 | 0,73 |
-| Volumen integrado (LUFS) | -14,5 | -14,7 | -14,3 | -16,0 | -14,2 | -14,2 | -11,7 | -13,4 | -14,5 | -9,6 | -10,7 | -14,6 | -14,0 |
-| Pico real (dBTP) | -0,1 | -3,3 | -1,2 | -3,7 | -0,1 | -0,9 | 2,2 | 2,7 | -0,6 | 1,7 | 1,9 | -1,5 | -1,8 |
-| Silencio (%) | 0,8 | 0,7 | 1,6 | 0,2 | 0,1 | 0,1 | 0,0 | 20,9 | 3,7 | 0,0 | 6,7 | 0,0 | 0,3 |
-| Voz activa (%) | 99 | 96 | 98 | 100 | 100 | 97 | 96 | 63 | 87 | 100 | 78 | 88 | 81 |
-| Ataques de sonido por segundo | 3,5 | 2,2 | 2,3 | 4,2 | 4,3 | 3,3 | 5,2 | 3,9 | 4,4 | 6,3 | 2,4 | 2,8 | 3,2 |
-| Golpes graves (n) | 2 | 0 | 3 | 41 | 4 | 2 | 5 | 1 | 4 | 0 | 0 | 2 | 11 |
-| Palabras por segundo (total) (pal/s) | — | — | — | — | — | — | — | — | — | — | — | — | 3,11 |
+| Parámetro | `motion-inspiration-frames` | `motion-inspiration-nokia` | `motion-ref-1` | `motion-ref-2` | `motion-ref-3` | `motion-ref-4` | `motion-ref-5` | `motion-templates-after-effects` | `pinterest-791437334567656517` | `pinterest-999095498641347187` | `short-tensores` | `shorts-animados-alejandro` | `2026-11-tensores-scale-oscuro` | `2026-11-tensores` | `2026-11-wifi-v5` |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Duración (s) | 18 | 20 | 9 | 20 | 25 | 32 | 104 | 15 | 50 | 9 | 53 | 10 | 56 | 56 | 33 |
+| Cortes por minuto | 47,2 | 53,8 | 38,6 | 9,0 | 4,8 | 19,0 | 13,2 | 36,0 | 33,6 | 82,4 | 28,5 | 48,8 | 6,4 | 7,5 | 9,1 |
+| Plano mediano (s) | 1,08 | 0,83 | 1,47 | 4,30 | 6,42 | 2,63 | 4,22 | 0,78 | 1,30 | 0,58 | 1,80 | 0,70 | 8,00 | 5,90 | 4,30 |
+| Cortes con movimiento fuerte antes (transición) (%) | 14 | 39 | 50 | 67 | 0 | 40 | 0 | 22 | 21 | 25 | 12 | 100 | 0 | 0 | 20 |
+| Cortes a ±0,1 s de un golpe de sonido (%) | 64 | 50 | 50 | 100 | 50 | 40 | 96 | 78 | 79 | 100 | 32 | 62 | 33 | 29 | 60 |
+| Cámara en movimiento (% cuadros) | 81 | 42 | 85 | 63 | 86 | 85 | 90 | 64 | 60 | 78 | 72 | 66 | 38 | 39 | 68 |
+| Velocidad mediana (px/s) | 37 | 201 | 305 | 22 | 69 | 33 | 30 | 161 | 64 | 122 | 29 | 110 | 5 | 5 | 16 |
+| Velocidad p95 (px/s) | 428 | 4564 | 2660 | 471 | 1908 | 526 | 487 | 4994 | 2116 | 629 | 178 | 1485 | 63 | 69 | 117 |
+| Movimiento lento (< 100 px/s) (%) | 76 | 36 | 19 | 81 | 57 | 71 | 73 | 46 | 56 | 47 | 86 | 48 | 97 | 97 | 94 |
+| Zoom neto (+ acerca) (%/s) | 16,84 | -0,91 | -13,03 | -2,12 | -6,41 | 1,83 | -0,78 | 3,39 | -4,63 | 3,07 | 1,23 | -2,44 | -2,13 | -0,49 | 1,77 |
+| Tirón mediano (menos = más suave) (px/s³) | 456 | 2858 | 10396 | 516 | 605 | 460 | 336 | 7075 | 1661 | 4837 | 910 | 2437 | 329 | 430 | 518 |
+| Movimientos notorios (pico ≥ 100 px/s) cada 10 s | 7,9 | 10,0 | 7,5 | 3,0 | 1,6 | 4,4 | 3,4 | 8,0 | 7,2 | 13,7 | 3,6 | 9,2 | 0,5 | 0,7 | 3,3 |
+| Pico mediano de un movimiento notorio (px/s) | 569 | 1822 | 2613 | 872 | 2995 | 916 | 968 | 2064 | 1492 | 438 | 276 | 1535 | 1042 | 666 | 335 |
+| Duración de un movimiento notorio (s) | 0,98 | 0,55 | 1,40 | 1,21 | 4,00 | 1,55 | 2,67 | 0,51 | 0,75 | 0,59 | 1,23 | 0,57 | 1,37 | 0,98 | 1,37 |
+| Retención entre movimientos (≥ 0,5 s) (s) | 0,56 | 0,60 | 0,00 | 1,87 | 0,63 | 0,76 | 0,56 | 0,62 | 0,87 | 0,00 | 0,88 | 0,68 | 1,26 | 1,24 | 0,53 |
+| Ataque de un movimiento (10 % → pico) (s) | 0,04 | 0,07 | 0,30 | 0,03 | 0,29 | 0,13 | 0,14 | 0,17 | 0,10 | 0,40 | 0,13 | 0,13 | 0,13 | 0,07 | 0,14 |
+| Liberación (pico → 10 %) (s) | 0,52 | 0,12 | 0,22 | 0,40 | 0,44 | 0,13 | 0,47 | 0,10 | 0,23 | 0,23 | 0,27 | 0,17 | 0,33 | 0,43 | 0,13 |
+| Brillo medio (0–1) | 0,53 | 0,25 | 0,25 | 0,10 | 0,06 | 0,04 | 0,89 | 0,64 | 0,47 | 0,37 | 0,30 | 0,40 | 0,06 | 0,09 | 0,09 |
+| Saturación media (0–1) | 0,08 | 0,23 | 0,58 | 0,52 | 0,35 | 0,54 | 0,02 | 0,17 | 0,54 | 0,27 | 0,58 | 0,59 | 0,02 | 0,56 | 0,73 |
+| Volumen integrado (LUFS) | -14,5 | -14,7 | -14,3 | -16,0 | -14,2 | -14,2 | -11,7 | -13,4 | -14,5 | -9,6 | -10,7 | -14,6 | -14,1 | -14,1 | -14,0 |
+| Pico real (dBTP) | -0,1 | -3,3 | -1,2 | -3,7 | -0,1 | -0,9 | 2,2 | 2,7 | -0,6 | 1,7 | 1,9 | -1,5 | -1,9 | -1,9 | -1,8 |
+| Silencio (%) | 0,8 | 0,7 | 1,6 | 0,2 | 0,1 | 0,1 | 0,0 | 20,9 | 3,7 | 0,0 | 6,7 | 0,0 | 0,3 | 0,3 | 0,3 |
+| Voz activa (%) | 99 | 96 | 98 | 100 | 100 | 97 | 96 | 63 | 87 | 100 | 78 | 88 | 95 | 95 | 81 |
+| Ataques de sonido por segundo | 3,5 | 2,2 | 2,3 | 4,2 | 4,3 | 3,3 | 5,2 | 3,9 | 4,4 | 6,3 | 2,4 | 2,8 | 2,9 | 2,9 | 3,2 |
+| Golpes graves (n) | 2 | 0 | 3 | 41 | 4 | 2 | 5 | 1 | 4 | 0 | 0 | 2 | 0 | 0 | 11 |
+| Palabras por segundo (total) (pal/s) | — | — | — | — | — | — | — | — | — | — | — | — | — | — | 3,11 |
 
 ### Resumen: 12 referencias · afines = motion-ref-2, motion-ref-3, motion-ref-4 · propio = último reel medido
 
-| Parámetro | Todas: mediana (p25–p75) | Afines: mediana (mín–máx) | Meta nuestra | **2026-11-wifi-v5** | Veredicto |
-|---|---|---|---|---|---|
-| Duración (s) | 20 (15–32) | 25 (20–32) | — | 33 |  |
-| Cortes por minuto | 34,8 (19,0–47,2) | 9,0 (4,8–19,0) | 4,0–20,0 | 9,1 | ✓ |
-| Plano mediano (s) | 1,39 (0,83–2,63) | 4,30 (2,63–6,42) | 2,50–6,50 | 4,30 | ✓ |
-| Cortes con movimiento fuerte antes (transición) (%) | 24 (14–40) | 40 (0–67) | 30–70 | 20 | ▼ bajo la meta |
-| Cortes a ±0,1 s de un golpe de sonido (%) | 63 (50–79) | 50 (40–100) | 50–100 | 60 | ✓ |
-| Cámara en movimiento (% cuadros) | 75 (64–85) | 85 (63–86) | 60–90 | 68 | ✓ |
-| Velocidad mediana (px/s) | 66 (33–122) | 33 (22–69) | 20–70 | 16 | ▼ bajo la meta |
-| Velocidad p95 (px/s) | 1057 (487–2116) | 526 (471–1908) | 400–1900 | 117 | ▼ bajo la meta |
-| Movimiento lento (< 100 px/s) (%) | 57 (47–73) | 71 (57–81) | 55–85 | 94 | ▲ sobre la meta |
-| Zoom neto (+ acerca) (%/s) | -0,84 (-2,44–1,83) | -2,12 (-6,41–1,83) | — | 1,77 |  |
-| Tirón mediano (menos = más suave) (px/s³) | 1286 (516–2858) | 516 (460–605) | 400–650 | 518 | ✓ |
-| Movimientos notorios (pico ≥ 100 px/s) cada 10 s | 7,3 (3,6–8,0) | 3,0 (1,6–4,4) | 1,5–5,0 | 3,3 | ✓ |
-| Pico mediano de un movimiento notorio (px/s) | 1230 (872–1822) | 916 (872–2995) | 800–3000 | 335 | ▼ bajo la meta |
-| Duración de un movimiento notorio (s) | 1,09 (0,59–1,40) | 1,55 (1,21–4,00) | 1,00–4,00 | 1,37 | ✓ |
-| Retención entre movimientos (≥ 0,5 s) (s) | 0,62 (0,56–0,76) | 0,76 (0,63–1,87) | 0,50–2,00 | 0,53 | ✓ |
-| Ataque de un movimiento (10 % → pico) (s) | 0,13 (0,10–0,17) | 0,13 (0,03–0,29) | 0,03–0,30 | 0,14 | ✓ |
-| Liberación (pico → 10 %) (s) | 0,23 (0,17–0,40) | 0,40 (0,13–0,44) | 0,13–0,45 | 0,13 | ✓ |
-| Brillo medio (0–1) | 0,33 (0,25–0,47) | 0,06 (0,04–0,10) | 0,04–0,12 | 0,09 | ✓ |
-| Saturación media (0–1) | 0,43 (0,23–0,54) | 0,52 (0,35–0,54) | 0,30–0,60 | 0,73 | ▲ sobre la meta |
-| Volumen integrado (LUFS) | -14,2 (-14,5–-13,4) | -14,2 (-16,0–-14,2) | -14,5–-13,5 | -14,0 | ✓ |
-| Pico real (dBTP) | -0,3 (-1,2–1,7) | -0,9 (-3,7–-0,1) | -3,0–-1,0 | -1,8 | ✓ |
-| Silencio (%) | 0,4 (0,1–1,6) | 0,1 (0,1–0,2) | 0,0–1,0 | 0,3 | ✓ |
-| Voz activa (%) | 96 (88–99) | 100 (97–100) | — | 81 |  |
-| Ataques de sonido por segundo | 3,7 (2,8–4,3) | 4,2 (3,3–4,3) | 3,0–4,5 | 3,2 | ✓ |
-| Golpes graves (n) | 2 (1–4) | 4 (2–41) | — | 11 |  |
+| Parámetro | Todas: mediana (p25–p75) | Afines: mediana (mín–máx) | Meta nuestra | **2026-11-tensores-scale-oscuro** | **2026-11-tensores** | **2026-11-wifi-v5** | Veredicto |
+|---|---|---|---|---|---|---|---|
+| Duración (s) | 20 (15–32) | 25 (20–32) | — | 56 | 56 | 33 |  |
+| Cortes por minuto | 34,8 (19,0–47,2) | 9,0 (4,8–19,0) | — | 6,4 | 7,5 | 9,1 |  |
+| Plano mediano (s) | 1,39 (0,83–2,63) | 4,30 (2,63–6,42) | — | 8,00 | 5,90 | 4,30 |  |
+| Cortes con movimiento fuerte antes (transición) (%) | 24 (14–40) | 40 (0–67) | — | 0 | 0 | 20 |  |
+| Cortes a ±0,1 s de un golpe de sonido (%) | 63 (50–79) | 50 (40–100) | — | 33 | 29 | 60 |  |
+| Cámara en movimiento (% cuadros) | 75 (64–85) | 85 (63–86) | 25–75 | 38 | 39 | 68 | ✓ |
+| Velocidad mediana (px/s) | 66 (33–122) | 33 (22–69) | — | 5 | 5 | 16 |  |
+| Velocidad p95 (px/s) | 1057 (487–2116) | 526 (471–1908) | 400–2600 | 63 | 69 | 117 | ▼ bajo la meta |
+| Movimiento lento (< 100 px/s) (%) | 57 (47–73) | 71 (57–81) | — | 97 | 97 | 94 |  |
+| Zoom neto (+ acerca) (%/s) | -0,84 (-2,44–1,83) | -2,12 (-6,41–1,83) | — | -2,13 | -0,49 | 1,77 |  |
+| Tirón mediano (menos = más suave) (px/s³) | 1286 (516–2858) | 516 (460–605) | 300–1300 | 329 | 430 | 518 | ✓ |
+| Movimientos notorios (pico ≥ 100 px/s) cada 10 s | 7,3 (3,6–8,0) | 3,0 (1,6–4,4) | 1,5–5,0 | 0,5 | 0,7 | 3,3 | ✓ |
+| Pico mediano de un movimiento notorio (px/s) | 1230 (872–1822) | 916 (872–2995) | 800–3000 | 1042 | 666 | 335 | ▼ bajo la meta |
+| Duración de un movimiento notorio (s) | 1,09 (0,59–1,40) | 1,55 (1,21–4,00) | 0,60–4,00 | 1,37 | 0,98 | 1,37 | ✓ |
+| Retención entre movimientos (≥ 0,5 s) (s) | 0,62 (0,56–0,76) | 0,76 (0,63–1,87) | 1,00–4,00 | 1,26 | 1,24 | 0,53 | ▼ bajo la meta |
+| Ataque de un movimiento (10 % → pico) (s) | 0,13 (0,10–0,17) | 0,13 (0,03–0,29) | 0,03–0,30 | 0,13 | 0,07 | 0,14 | ✓ |
+| Liberación (pico → 10 %) (s) | 0,23 (0,17–0,40) | 0,40 (0,13–0,44) | 0,05–0,45 | 0,33 | 0,43 | 0,13 | ✓ |
+| Brillo medio (0–1) | 0,33 (0,25–0,47) | 0,06 (0,04–0,10) | 0,02–0,12 | 0,06 | 0,09 | 0,09 | ✓ |
+| Saturación media (0–1) | 0,43 (0,23–0,54) | 0,52 (0,35–0,54) | — | 0,02 | 0,56 | 0,73 |  |
+| Volumen integrado (LUFS) | -14,2 (-14,5–-13,4) | -14,2 (-16,0–-14,2) | -14,5–-13,5 | -14,1 | -14,1 | -14,0 | ✓ |
+| Pico real (dBTP) | -0,3 (-1,2–1,7) | -0,9 (-3,7–-0,1) | -3,0–-1,0 | -1,9 | -1,9 | -1,8 | ✓ |
+| Silencio (%) | 0,4 (0,1–1,6) | 0,1 (0,1–0,2) | 0,0–1,0 | 0,3 | 0,3 | 0,3 | ✓ |
+| Voz activa (%) | 96 (88–99) | 100 (97–100) | — | 95 | 95 | 81 |  |
+| Ataques de sonido por segundo | 3,7 (2,8–4,3) | 4,2 (3,3–4,3) | 2,2–4,5 | 2,9 | 2,9 | 3,2 | ✓ |
+| Golpes graves (n) | 2 (1–4) | 4 (2–41) | — | 0 | 0 | 11 |  |
 <!-- TABLAS:fin -->

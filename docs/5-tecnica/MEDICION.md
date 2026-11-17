@@ -53,7 +53,7 @@ Salida en `salida/`: `INFORME.md` (lectura en español, con tabla de cortes/tran
 Van en un solo lugar, con números y comparados con las referencias: `docs/4-referencias/BIBLIA-DE-ESTILO.md`. (Voz del WiFi v4: 3,11 palabras/s contra una meta de 2,6–2,9; ver la biblia.)
 
 ## Regla de uso
-Antes de entregar un reel: `medir.py` sobre `final.mp4` con la transcripción, mirar el **tirón**, el **ritmo de palabras** y que los **cortes** caigan donde dice el `plan.md`; correr `comparar.py videos/X/analisis/metricas.json`, guardar el informe en `docs/4-referencias/propios/<reel>/` y correr `biblia.py`. Cuando Ayrton pase una referencia: medirla primero y recién después proponer.
+Antes de entregar un reel: **`python engine/reel.py medir videos/X`** (corre `medir.py` con la transcripción, `comparar.py`, `arrastre.py` y `barro.py`); mirar "Fuera de la meta", el arrastre y el ritmo de palabras, y completar "Medido" en `plan.md`. `python engine/reel.py entregar videos/X` copia el informe a `docs/4-referencias/propios/<reel>/`; después `python engine/analisis/biblia.py` actualiza las tablas. Las metas (`metas.json`) están calibradas a nuestro estilo (plano secuencia): no se miden cortes por minuto ni saturación. Cuando Ayrton pase una referencia: medirla primero y recién después proponer.
 
 ## earshot: oídos para el audio (Leonxlnx/earshot, MIT)
 - Sirve para **describir y comparar sonidos con palabras y números**: `earshot describe a.wav`, `earshot ab A.wav B.wav` (diferencias en palabras + parecido CLAP), `earshot critique film.mp4` (tarjeta contra films profesionales), `earshot timeline`, `earshot sfx/kit` (banco de 252 efectos hechos en código). Usado el 2026-11-11 para afinar la voz Adjutant (`docs/2-estilo/AUDIO.md`).

@@ -28,7 +28,7 @@ Cada término con qué es y **dónde verlo** en el reel de tokens v2 (`videos/20
 | **Grúa (crane)** | la cámara sube o baja | 10,3–11 s: sube por encima de las fichas; 37,8–38,9 s |
 | **Paneo (pan) / tilt** | la cámara gira sobre sí misma: horizontal / vertical | dentro de cada travelling |
 | **Órbita** | la cámara gira alrededor del objeto | (para la parte 2) |
-| **Push-in** | dolly in muy lento mientras se habla | 0–3,5 s |
+| **Push-in** | dolly in muy lento mientras se habla (lo usamos solo en el gancho) | 0–3,5 s |
 | **Whip pan / latigazo** | giro tan rápido que la imagen se barre; sirve de transición | — |
 | **Temblor de aterrizaje** | sacudida chiquita y decreciente al llegar | 11,05 / 19,4 / 24,8 / 31 s |
 | **Retención (hold)** | la cámara se queda quieta para que se lea | cada vez que se nombra algo |

@@ -186,3 +186,46 @@ def elegir(rol, gain=1.0, max_dur=None, min_brillo=None, max_brillo=None, max_vo
     usados = {a for _, a in USADOS}
     o = next((o for o in _ORDEN[clave] if o['archivo'] not in usados), _ORDEN[clave][len(USADOS) % len(_ORDEN[clave])])
     USADOS.append((rol, o['archivo'])); return _leer(SFX_DIR / o['archivo'], gain)
+
+
+# ---- ayudas comunes a todos los reels (antes se copiaban en cada sfx_events.py) ----
+def cuando(linea, palabra=None, k=0):
+    """Segundo en que la voz dice `palabra` en la línea `linea`. sfx.py la reemplaza por la real (lee assets/tiempos.js)."""
+    raise RuntimeError('cuando() solo funciona al correr engine/audio/sfx.py')
+def tramo(nombre, a, b, fade_in=0.02, fade_out=0.08, gain=1.0):
+    """Recorte [a, b] s de un sonido propio (assets/sfx/propios/<nombre>) con fundidos; None si falta."""
+    x = propio(nombre)
+    if x is None: return None
+    y = x[int(a * SR):int(b * SR)].copy(); fi, fo = int(fade_in * SR), int(fade_out * SR)
+    if fi: y[:fi] *= np.linspace(0, 1, fi)
+    if fo: y[-fo:] *= np.linspace(1, 0, fo)
+    return y * gain
+class Paleta:
+    """Los sonidos de un reel por SIGNIFICADO (docs/2-estilo/AUDIO.md). Cada llamada elige un sonido real distinto del banco (elegir(rol));
+    sin banco, cae al sintético. Uso en sfx_events.py:  P = Paleta(T);  P.apertura();  P.viaje(t_pico);  P.aparece(t);  P.cierre(S['cierre'])
+    FIJOS DE MARCA (no cambian entre reels): apertura() = boom grave en 0 s; cierre(t) = succión → boom → chinn cuando aterriza el CTA."""
+    def __init__(self, T): self.T = T
+    def _un(self, rol, sint, **kw):
+        x = elegir(rol, **kw); return x if x is not None else sint()
+    def viaje(self, t, d=0.6, g=0.4):
+        """Movimiento de cámara. `t` = el PICO de velocidad (la mitad de un viaje 'io'; el final de uno 'in'), no el arranque."""
+        self.T.put(t - d / 2, air(d) if HAY_ONETAKE else whoosh(d), g, send=0.5)
+        x = elegir('curva', max_dur=0.9)
+        if x is not None: self.T.put(t - 0.05, x, g * 0.6, send=0.4)
+    def aparece(self, t, g=0.3): self.T.put(t, self._un('aparece', lambda: bubble(500, 0.2) if HAY_ONETAKE else pop(900), max_dur=0.5), g, send=0.3)
+    def dato(self, t, g=0.22): self.T.put(t, self._un('dato', tick, max_dur=0.35), g, send=0.15)
+    def resultado(self, t, g=0.25): self.T.put(t, self._un('resultado', lambda: glass(1318, 1.0) if HAY_ONETAKE else ding(), max_dur=1.6), g, send=0.5)
+    def aterriza(self, t, g=0.2): self.T.put(t, self._un('golpe', lambda: sub(62, 0.5) if HAY_ONETAKE else thunk(), max_dur=0.8), g, send=0.3)
+    def error(self, t, g=0.3): self.T.put(t, self._un('error', buzz, max_dur=0.8), g, send=0.2)
+    def tipeo(self, t, n, bits=False):
+        """Tipeo: teclado real para código; bits=True → sonido digital (0 y 1 en una pantalla)."""
+        x = tramo('interface-texto-digital', 0, min(1.5, 0.06 * n + 0.2)) if bits else None
+        if x is not None: self.T.put(t, x, 0.4, send=0.15)
+        else: self.T.typing(t, n)
+    def apertura(self, g=0.6):
+        bm = propio('boom-cinematico'); self.T.put(0.0, bm * 0.9 if bm is not None else boom(), g, send=0.3)
+    def cierre(self, t, cta=0.55):
+        """t = segundo en que empieza la escena del CTA; `cta` = cuánto después aterriza el texto (suena el chinn)."""
+        bm = propio('boom-cinematico'); ch = propio('chinn')
+        self.T.put(t - 0.9, reverse(riser(0.8)), 0.35); self.T.put(t - 0.05, bm if bm is not None else impact(), 0.55, send=0.3)
+        self.T.put(t + cta, ch if ch is not None else sparkle(9), 0.5, send=0.2)
