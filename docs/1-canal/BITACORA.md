@@ -158,3 +158,4 @@ Todo lo que Ayrton dice y pasa se guarda acá (y el material en `docs/4-referenc
 - 2026-11-17: no le quedó clara la parte de dos nombres al mismo valor → reescrita con un ejemplo concreto paso a paso (lista compras/pedido con pan, leche y huevos; y por qué con un número no pasa).
 - 2026-11-17: no le quedó claro 'no se puede modificar' (mutable/inmutable) → la escena compartida ahora nombra y explica mutable (lista, como una lista en papel) e inmutable (número, el 19 nunca cambia).
 - 2026-11-17: decidió UN reel sobre qué son las variables (puede pasar de 48 s para que se entienda). Mutable/inmutable queda para una parte 2 aparte.
+- 2026-11-17: OK al guion de variables → animado y renderizado (`videos/2026-11-python-variables/final.mp4`, 53 s). Pidió subir sus preferencias de tono a `main` → hecho. Cambio de voz: "Si edad vale" se oía "si día" → "Con edad igual a diecinueve".

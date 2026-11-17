@@ -1,38 +1,34 @@
-# Plan de cámara — <título>
-Se arma DESPUÉS del OK del guion y de `python engine/reel.py voz` (los segundos salen de ahí), y ANTES de escribir `assets/set.js`.
-Reglas y recetas: `docs/2-estilo/CAMARA.md`. Al terminar: `python engine/reel.py medir videos/X` y completar "Medido".
+# Plan de cámara — Qué son las variables en Python
+Tiempos reales en `assets/tiempos.js` (salen de la voz). Poses calculadas para que lo que se lee caiga entre y 200 y 1100.
 
 ## El set
-- **Idea del espacio** (en una frase; distinta del reel anterior): ___
-- **Corriente** (hacia dónde van todos los viajes): ___
-| Estación | Posición (x, y, z) m | Idea que vive ahí | Objetos (uno solo lleva el tan) |
+- **Idea del espacio**: un recorrido de etiquetas (placas tan con hilo blanco) que apuntan a valores (placas grises) sobre losas de "memoria".
+- **Corriente**: hacia la **derecha** y al fondo (el reel anterior iba a la izquierda). Cierre: la cámara sube por encima del set y vuelve al gancho (el loop se cierra en el mismo lugar donde se abrió).
+
+| Estación | Posición (x, y, z) m | Idea | Objetos (el tan es la etiqueta) |
 |---|---|---|---|
-| A | 0, 0, 0 | gancho: ___ | ___ |
-| B | ___ | ___ | ___ |
+| A | 0, 0, 0 | gancho / payoff: no es una caja | caja de línea + ✕, etiqueta "edad" colgada del 19 |
+| B | 1,4, 0, −2,2 | qué es y cómo se crea | losa "memoria", 19, etiqueta "edad", código `edad = 19` |
+| C | 2,5, 0, −2,0 | usar el nombre = usar el valor | `edad` (se da vuelta: 19) `+ 1` `= 20` |
+| D | 3,6, 0, −4,6 | el tipo vive en el valor | 19 / "hola" / [1, 2] con int, str, list; la etiqueta salta al texto |
+| E | 5,0, 0, −7,0 | dos nombres, un valor | 250 con "precio" y "total"; la copia fantasma se borra |
 
-## Plano por plano (un renglón por frase de voz)
-| Línea | Voz (inicio s) | Estación | Plano y ángulo | Cómo llega la cámara (movimiento · duración) | Qué aparece y con qué palabra | Sonido |
+## Plano por plano
+| Línea | Voz (s) | Estación | Plano y ángulo | Llegada | Qué aparece | Sonido |
 |---|---|---|---|---|---|---|
-| l01 | ___ | A | medio, tres cuartos, leve picado | cuadro 0 = portada; push-in lento | título + firma desde el cuadro 0 | boom de apertura |
-| l02 | ___ | ___ | ___ | travelling · 0,9 s | ___ | viaje + aterriza |
-| … | | | | | | |
-| CTA | ___ | — | CTA centrado | corte; aterriza y queda quieta | CTA palabra por palabra; firma a los 1,3 s | succión → boom → chinn |
+| l01 | 0,35 | A | medio, tres cuartos, leve picado | portada; push-in lento | título + firma; ✕ caja en "caja" | boom; zumbido suave |
+| l02 | 3,56 | B | medio frontal | travelling 0,85 s | etiqueta en "nombre", hilo en "apunta", 19 en "valor", rótulo "memoria" | viaje + aterriza; aparece |
+| l03 | 8,15 | B | contrapicado cercano | dolly in 0,75 s | `edad = 19`: se enciende 19 en "crea", edad en "asocia" | tipeo; tic |
+| l04–l05 | 14,1 | C | frontal | travelling lateral 0,8 s | `edad` en "nombre", se da vuelta (19) en "valor"; `+ 1` en "más"; `= 20` en "veinte" | viaje; aparece; resultado suave |
+| l06–l07 | 21,6 | D | general en picado | travelling + grúa 0,85 s | 19, "hola", [1, 2] en su palabra con int/str/list; etiqueta en l07 | viaje + aterriza; tics |
+| l08 | 29,0 | D | medio, leve picado | dolly in 0,8 s | la etiqueta se despega del 19 y se pega al texto ("pasar" → "texto") | viaje corto |
+| l09 | 34,0 | D | contrapicado | 0,7 s | el 19 queda solo | — |
+| l10 | 37,2 | E | medio tres cuartos | travelling 0,85 s | precio → 250; total en "dos", hilo en "mismo"; `total = precio` | viaje + aterriza; aparece |
+| l11 | 40,4 | E | picado alto | grúa 0,8 s | copia fantasma en "copia" que se borra | zumbido suave; viaje |
+| l12 | 44,6 | A | medio tres cuartos | grúa por encima del set y bajada (1,5 s) | la caja se borra en "guarda"; la etiqueta en tan en "nombra" | viaje + aterriza; resultado |
+| CTA | 49,2 | — | CTA centrado | corte | CTA palabra por palabra; firma | succión → boom → chinn |
 
-## Chequeo del plan (antes de animar)
-- [ ] Un movimiento por idea nueva; la cámara queda quieta ≥ 1,5 s en cada cosa que se nombra.
-- [ ] Al menos tres ángulos distintos (frontal, picado, contrapicado, tres cuartos) y un plano general.
-- [ ] Ningún objeto de una estación futura asoma detrás del título ni de un rótulo.
-- [ ] Rótulos arriba de los objetos; nada que leer por debajo de y 1100.
-- [ ] El recorrido no calca el del reel anterior.
-
-## Medido (después del render)
-| | Este reel | Rango |
-|---|---|---|
-| Ritmo (palabras por segundo) | ___ | 2,4–2,8 |
-| Cuadros con cámara en movimiento | ___ % | 25–75 % |
-| Movimientos notorios cada 10 s | ___ | 1,5–5 |
-| Continuidad (arrastre medio) | ___ | ≥ 0,5 |
-| Graves-medios (100–300 Hz) | ___ % | < 35 % |
-| Volumen · pico | ___ | −14 LUFS · ≤ −1,5 dBTP |
-| Render | ___ s por segundo | ≤ 3 |
-Fuera de rango y por qué se acepta: ___
+## Medido (`reel.py medir`)
+- Fuera de meta: tirón mediano 1309 px/s³ (meta ≤ 1300, en el borde) y brillo medio 0,01 (negro puro de la estética Scale: justificado).
+- Arrastre bajo en 3,3 / 36,9 / 44,4 s: los límites de escena caen en medio de viajes rápidos (plano secuencia, sin corte real). 49,0 s = corte al CTA (permitido).
+- Whisper: 95 % de palabras entendidas. "Si edad" se oía "si día" → la frase pasó a "Con edad igual a diecinueve".

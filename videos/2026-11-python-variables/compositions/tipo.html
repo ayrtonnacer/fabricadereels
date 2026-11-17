@@ -1,0 +1,16 @@
+<!-- tipo: un plano del set único (assets/set.js). Generado por engine/tiempos.py; no hace falta editarlo:
+     qué se ve y cómo se mueve la cámara se escribe en assets/set.js, en tiempo global del video. -->
+<template>
+  <style>#root { position: absolute; inset: 0; }</style>
+  <div id="root" data-composition-id="tipo" data-width="1080" data-height="1920">
+    <div class="fondo" data-layout-ignore></div>
+    <canvas class="canvas3d" width="1080" height="1920" data-layout-ignore></canvas>
+    <div class="hud" data-layout-ignore></div>
+    <div class="vineta" data-layout-ignore></div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-composition-id="tipo"]');
+    const tl = gsap.timeline({ paused: true });
+    import('./assets/set.js').then((S) => S.montar(root, tl, 'tipo'));
+  </script>
+</template>

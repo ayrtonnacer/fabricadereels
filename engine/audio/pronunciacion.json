@@ -142,6 +142,12 @@
    "de": "esmart",
    "a": "esmárt",
    "estado": "sin_verificar"
+  },
+  {
+   "de": "Python",
+   "a": "Python",
+   "estado": "sin_verificar",
+   "nota": "reel de variables (2026-11-17): Piper la lee sin cambios y Whisper la entiende; falta que Ayrton la apruebe de oído."
   }
  ],
  "prohibidas": [

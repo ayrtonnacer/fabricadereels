@@ -1,5 +1,41 @@
 [
  {
+  "video": "2026-11-ia-aviones",
+  "titulo": "IA en el cielo",
+  "estado": "guion",
+  "duracion_s": 43.4,
+  "final_mp4": false,
+  "descripcion": false,
+  "publicar": {
+   "fecha": "",
+   "redes": [
+    "instagram",
+    "tiktok",
+    "youtube"
+   ],
+   "links": {}
+  },
+  "carpeta": "videos/2026-11-ia-aviones"
+ },
+ {
+  "video": "2026-11-python-variables",
+  "titulo": "Una variable es una etiqueta",
+  "estado": "listo",
+  "duracion_s": 53.1,
+  "final_mp4": true,
+  "descripcion": true,
+  "publicar": {
+   "fecha": "",
+   "redes": [
+    "instagram",
+    "tiktok",
+    "youtube"
+   ],
+   "links": {}
+  },
+  "carpeta": "videos/2026-11-python-variables"
+ },
+ {
   "video": "2026-11-tensores-scale-oscuro",
   "titulo": "Qué es un tensor",
   "estado": "publicado",
