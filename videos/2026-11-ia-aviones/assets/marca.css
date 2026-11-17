@@ -1,0 +1,85 @@
+/* Identidad de @ayrtonnacer: tema "Scale" (default desde 2026-11-14): negro puro, objetos 3D de línea gris, un solo acento Foundry Tan, Host Grotesk + Geist Mono. Reglas en docs/2-estilo/ESTILO.md.
+   Temas anteriores (no se usan): engine/themes/.
+   Todo color va por variable: nunca escribir un color fijo en una escena.
+   NO agregar: líneas de escaneo, esquinas en L / HUD, mayúsculas con espaciado amplio. */
+/* Tipografía de Scale (brand.scale.com/typography): Aeonik es paga; las alternativas aprobadas son Host Grotesk (texto) y Geist Mono (valores y detalle). Variables: un archivo cubre todos los pesos */
+@font-face { font-family: "Host Grotesk"; src: url("fonts/host-grotesk-latin-400-normal.woff2") format("woff2"); font-weight: 300 800; }
+@font-face { font-family: "Geist Mono"; src: url("fonts/geist-mono-latin-400-normal.woff2") format("woff2"); font-weight: 100 900; }
+
+/* PALETA — cada color tiene UN significado (ver docs/2-estilo/ESTILO.md). Para un acento nuevo: agregar la variable acá y usarla con var(--…).
+   Objetos GRISES (--edge) de trazo fino sobre negro; BLANCO (--hi) solo para lo que debe resaltar (cables, señal, tipografía); tan (--acc) = énfasis. */
+:root {
+  /* ===== Paleta Scale (brand.scale.com/color) sobre la estética de línea: base NEUTRA (negro y grises) y el color solo como acento ===== */
+  --estilo: linea;
+  --plate: #000000;    /* Black de Scale */
+  --hi: #FFFFFF;       /* White: tipografía, cables */
+  --edge: #929292;     /* Soft Gray: aristas */
+  --mid: #4D4D4D;     /* piso y detalles */
+  --trazo-px: 2.2;
+  --bg: #000000; --bg-hondo: #000000; --bg-glow: #000000; --fog: #000000;
+  --panel: #0D0D0D; --line: #1F1F1F; --grilla: rgba(255, 255, 255, .10); --piso: #4D4D4D;
+  --text: #FFFFFF; --muted: #C7C7C7;   /* Medium Gray */
+  --acc: #A8927C;      /* Foundry Tan: único acento (palabra clave, firma, señal) */
+  --acc-glow: transparent; --sky: #FFFFFF;
+  --ok: #2EE08C; --warn: #A8927C;
+  --err: #DC2626;      /* el rojo que usa la propia guía de Scale */
+  --sombra-txt: 0 2px 22px #000, 0 0 6px #000;
+  --sans: "Host Grotesk", sans-serif;
+  --mono: "Geist Mono", monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--sans); }
+
+
+
+/* Tipografía: espaciado normal o apretado, nunca abierto */
+.titular, .bajada, .tarjeta p { text-wrap: balance; }   /* sin palabras sueltas en la última línea (docs/2-estilo/TIPOGRAFIA.md) */
+.titular { font-weight: 700; font-size: 124px; line-height: .98; letter-spacing: -.03em; text-align: center; }
+.titular.chico { font-size: 92px; }
+.bajada { font-weight: 500; font-size: 50px; line-height: 1.25; color: var(--muted); text-align: center; }
+.acc { color: var(--acc); }
+.mono { font-family: var(--mono); }
+.firma { font-weight: 700; font-size: 60px; color: var(--acc); letter-spacing: -.01em; }
+
+/* Piezas */
+.chip { display: inline-flex; align-items: center; gap: 18px; padding: 22px 32px; border-radius: 16px; font-weight: 500; font-size: 44px; border: 2px solid var(--line); background: var(--panel); }
+.chip.ok { border-color: color-mix(in srgb, var(--ok) 55%, transparent); }
+.chip.ok b { color: var(--ok); }
+.chip.warn { border-color: color-mix(in srgb, var(--warn) 60%, transparent); }
+.chip.warn b { color: var(--warn); }
+.chip.err { background: var(--err); border-color: var(--err); color: #fff; font-weight: 700; }
+.terminal { background: var(--panel); border: 2px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: 0 40px 90px rgba(0, 0, 0, .6); }
+.terminal .barra { height: 64px; display: flex; align-items: center; gap: 12px; padding: 0 26px; background: var(--panel); border-bottom: 2px solid var(--line); }
+.terminal .barra i { width: 16px; height: 16px; border-radius: 50%; background: var(--line); }
+.terminal .cuerpo { padding: 30px 34px; font: 400 38px/1.5 var(--mono); white-space: pre; }
+.terminal .ps { color: var(--acc); font-weight: 700; }
+
+/* "Paso 1 de 3" en sans + segmentos */
+.pasos { width: 940px; }
+.pasos .lbl { font-weight: 500; font-size: 40px; color: var(--muted); }
+.pasos .lbl b { color: var(--acc); font-weight: 700; }
+.pasos .segs { display: flex; gap: 10px; margin-top: 16px; }
+.pasos .seg { flex: 1; height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; }
+.pasos .seg i { display: block; height: 100%; width: 100%; background: var(--acc); transform-origin: left center; }
+
+
+
+/* ---- Escenas 3D (three.js): el canvas va debajo; el texto HTML se ubica con E.label() sobre puntos 3D ----
+   .ancla = contenedor posicionado por left/top (px) con translate(-50%,-50%) FIJO en CSS; la animación (GSAP) va en el hijo. */
+.canvas3d { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+.hud { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; pointer-events: none; }
+.ancla { position: absolute; left: 540px; top: 960px; transform: translate(-50%, -50%); white-space: nowrap; }
+.ancla > * { white-space: nowrap; text-wrap: nowrap; }
+
+/* ---- Fondo y piezas HTML (placa fina, sin brillo ni sombra) ---- */
+.fondo { position: absolute; inset: 0; background: var(--bg); }   /* negro puro: sin halos ni degradés */
+.vineta { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 45%, transparent 60%, rgba(0, 0, 0, .45) 100%); }
+.chip, .tarjeta { background: var(--panel); border: 1.5px solid var(--edge); border-radius: 6px; box-shadow: none; }
+.chip.ok { border-color: var(--ok); } .chip.warn { border-color: var(--warn); }
+
+/* ---- rótulos sobre los objetos 3D (del reel de tensores) ---- */
+.rot { font-family: var(--sans); font-weight: 700; font-size: 58px; letter-spacing: -.02em; color: var(--text); text-shadow: var(--sombra-txt); }
+.rot b { color: var(--acc); font-weight: 700; }
+.rot.mono { font-family: var(--mono); font-weight: 500; font-size: 46px; color: var(--muted); letter-spacing: 0; }
+.rot.mono b { font-weight: 700; }

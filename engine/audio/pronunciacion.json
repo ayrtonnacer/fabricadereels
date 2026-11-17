@@ -137,6 +137,11 @@
    "a": "tokenizador",
    "estado": "sin_verificar",
    "nota": "reel de tokens (2026-11-16): Whisper la entiende; falta que Ayrton la apruebe de oído."
+  },
+  {
+   "de": "esmart",
+   "a": "esmárt",
+   "estado": "sin_verificar"
   }
  ],
  "prohibidas": [

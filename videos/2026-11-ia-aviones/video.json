@@ -1,0 +1,125 @@
+{
+  "titulo": "IA en el cielo",
+  "tema": "inteligencia artificial",
+  "estado": "guion",
+  "fecha": "2026-11",
+  "fuente": "WIRED US (adaptado por Manuel de León) · verificado: FAA, AOPA, AVweb",
+  "scenes": [
+    {
+      "id": "portada",
+      "d": 0.1
+    },
+    {
+      "id": "gancho",
+      "d": 3.9
+    },
+    {
+      "id": "avion",
+      "d": 8.6
+    },
+    {
+      "id": "smart",
+      "d": 10.6
+    },
+    {
+      "id": "limite",
+      "d": 10.4
+    },
+    {
+      "id": "payoff",
+      "d": 5.4
+    },
+    {
+      "id": "cierre",
+      "d": 4.4
+    }
+  ],
+  "voz": {
+    "modelo": "assets/voces/es_AR-daniela-high.onnx",
+    "length_scale": 1.05,
+    "noise_scale": 0.6,
+    "noise_w_scale": 0.7,
+    "efecto": "ninguno",
+    "lineas": [
+      {
+        "id": "l01",
+        "escena": "gancho",
+        "t": 0,
+        "texto": "Un avión cruzó Estados Unidos sin manos en los controles."
+      },
+      {
+        "id": "l02",
+        "escena": "avion",
+        "t": 0,
+        "texto": "Cinco mil kilómetros, esquivando tormentas. Había un piloto a bordo, pero nunca intervino. ¿Se puede confiar en eso?"
+      },
+      {
+        "id": "l03",
+        "escena": "smart",
+        "t": 0,
+        "texto": "Mientras tanto, el control aéreo estrena una inteligencia artificial llamada esmart."
+      },
+      {
+        "id": "l04",
+        "escena": "smart",
+        "t": 0,
+        "texto": "Revisa la ruta de cada avión y avisa dónde se van a cruzar."
+      },
+      {
+        "id": "l04b",
+        "escena": "smart",
+        "t": 0,
+        "texto": "Pero solo sugiere: decide un controlador humano."
+      },
+      {
+        "id": "l05",
+        "escena": "limite",
+        "t": 0,
+        "texto": "El problema: aprende con ejemplos. Ante algo que nunca vio, puede dar un resultado inesperado y peligroso."
+      },
+      {
+        "id": "l06",
+        "escena": "limite",
+        "t": 0,
+        "texto": "Y Estados Unidos ya recortó su meta de controladores: unos dos mil menos."
+      },
+      {
+        "id": "l07",
+        "escena": "payoff",
+        "t": 0,
+        "texto": "¿Confiar? Sí, pero con alguien mirando: la máquina propone, la persona decide."
+      },
+      {
+        "id": "l08",
+        "escena": "cierre",
+        "t": 0,
+        "texto": "Dale me gusta y seguime para aprender más de inteligencia artificial."
+      }
+    ]
+  },
+  "audio": {
+    "musica": "assets/musica/can-you-hear-the-music.mp3",
+    "musica_desde": 0,
+    "musica_fade_in": 0.4,
+    "musica_db": 10,
+    "musica_nivelar": [
+      -32,
+      4
+    ],
+    "musica_duck": 2,
+    "sfx_gain": 1.25,
+    "loudness": -14
+  },
+  "subtitulos": {
+    "fondo": "rgba(0,0,0,.86)"
+  },
+  "publicar": {
+    "fecha": "",
+    "redes": [
+      "instagram",
+      "tiktok",
+      "youtube"
+    ],
+    "links": {}
+  }
+}
