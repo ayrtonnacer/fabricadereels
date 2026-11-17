@@ -15,15 +15,15 @@
     },
     {
       "id": "nombre",
-      "d": 17.56
+      "d": 18.01
     },
     {
       "id": "tipo",
-      "d": 12.38
+      "d": 15.59
     },
     {
       "id": "compartida",
-      "d": 37.39
+      "d": 7.45
     },
     {
       "id": "payoff",
@@ -63,84 +63,60 @@
         "id": "l04",
         "escena": "nombre",
         "t": 14.11,
-        "texto": "Desde ahí, usar el nombre equivale a usar el valor. Si edad vale diecinueve, edad más uno da veinte."
+        "texto": "Desde ahí, usar el nombre equivale a usar el valor."
       },
       {
         "id": "l05",
-        "escena": "tipo",
-        "t": 21.12,
-        "texto": "Cada valor tiene un tipo. Un número, un texto, una lista."
+        "escena": "nombre",
+        "t": 18.01,
+        "texto": "Si edad vale diecinueve, edad más uno da veinte."
       },
       {
         "id": "l06",
         "escena": "tipo",
-        "t": 25.36,
-        "texto": "El tipo pertenece al valor, no al nombre."
+        "t": 21.57,
+        "texto": "Cada valor tiene un tipo. Un número, un texto, una lista."
       },
       {
         "id": "l07",
         "escena": "tipo",
-        "t": 28.57,
-        "texto": "Por eso un mismo nombre puede pasar de un número a un texto."
+        "t": 25.81,
+        "texto": "El tipo pertenece al valor, no al nombre."
       },
       {
         "id": "l08",
-        "escena": "compartida",
-        "t": 33.5,
-        "texto": "Creás una lista con pan y leche, y la llamás compras."
+        "escena": "tipo",
+        "t": 29.02,
+        "texto": "Por eso un mismo nombre puede pasar de un número a un texto."
       },
       {
         "id": "l09",
-        "escena": "compartida",
-        "t": 37.74,
-        "texto": "Después escribís que pedido es igual a compras."
+        "escena": "tipo",
+        "t": 33.95,
+        "texto": "Python solo mueve la etiqueta hacia otro valor."
       },
       {
         "id": "l10",
         "escena": "compartida",
-        "t": 40.95,
-        "texto": "Python no copia la lista. Le pega una segunda etiqueta a la misma."
+        "t": 37.16,
+        "texto": "También podés pegar dos etiquetas al mismo valor."
       },
       {
         "id": "l11",
         "escena": "compartida",
-        "t": 45.88,
-        "texto": "Una lista es mutable. Se puede modificar por dentro, como una lista en papel a la que le sumás un renglón."
+        "t": 40.37,
+        "texto": "No se copia nada. Hay un solo valor con dos nombres."
       },
       {
         "id": "l12",
-        "escena": "compartida",
-        "t": 53.58,
-        "texto": "Si agregás huevos usando pedido, compras también los tiene. Es una sola lista."
-      },
-      {
-        "id": "l13",
-        "escena": "compartida",
-        "t": 58.51,
-        "texto": "Un número, en cambio, es inmutable. El diecinueve nunca cambia."
-      },
-      {
-        "id": "l14",
-        "escena": "compartida",
-        "t": 62.41,
-        "texto": "Si le sumás uno, Python crea otro número, el veinte, y solo esa etiqueta se mueve."
-      },
-      {
-        "id": "l15",
-        "escena": "compartida",
-        "t": 68.37,
-        "texto": "La otra sigue apuntando al diecinueve."
-      },
-      {
-        "id": "l16",
         "escena": "payoff",
-        "t": 70.89,
+        "t": 44.61,
         "texto": "Por eso, en Python, una variable no guarda el valor. Lo nombra."
       },
       {
-        "id": "l17",
+        "id": "l13",
         "escena": "cierre",
-        "t": 75.48,
+        "t": 49.2,
         "texto": "Dale me gusta y seguime para aprender más de Python."
       }
     ]

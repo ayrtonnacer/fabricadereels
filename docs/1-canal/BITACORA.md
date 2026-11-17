@@ -157,3 +157,4 @@ Todo lo que Ayrton dice y pasa se guarda acá (y el material en `docs/4-referenc
 - 2026-11-17: el guion de variables le pareció naif por momentos ("Python no protesta": cancherada que queda rara) y con exceso de dos puntos → reescrito serio y sin dos puntos; regla en `PREFERENCIAS.md` §6 y `GUION.md`.
 - 2026-11-17: no le quedó clara la parte de dos nombres al mismo valor → reescrita con un ejemplo concreto paso a paso (lista compras/pedido con pan, leche y huevos; y por qué con un número no pasa).
 - 2026-11-17: no le quedó claro 'no se puede modificar' (mutable/inmutable) → la escena compartida ahora nombra y explica mutable (lista, como una lista en papel) e inmutable (número, el 19 nunca cambia).
+- 2026-11-17: decidió UN reel sobre qué son las variables (puede pasar de 48 s para que se entienda). Mutable/inmutable queda para una parte 2 aparte.
