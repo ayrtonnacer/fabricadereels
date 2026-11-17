@@ -56,7 +56,7 @@ En un plano secuencia los límites entre escenas de `video.json` no se ven: son 
 - **El viaje cruza el límite** (empieza antes y termina después), en la dirección de la corriente.
 - **Algo sobrevive**: el objeto de una estación sigue visible, más chico, mientras se llega a la siguiente; o se transforma (la fila crece a planilla, la planilla se apila en bloque).
 - Se mide con `arrastre.py` (lo corre `reel.py medir`): medio ≥ 0,5; un 0,0 solo en el corte al CTA. Ojo: en medio de una grúa rápida puede dar bajo sin que haya corte.
-- **Corte al CTA**: succión (riser invertido) → boom → el CTA aterriza con el chinn. Está en la plantilla.
+- **Corte al CTA**: hit metálico + boom → el CTA aterriza con el chinn. Está en la plantilla.
 
 ## Significado de las direcciones (gastarlas con motivo)
 | Dirección | Significa |

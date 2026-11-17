@@ -24,6 +24,7 @@
 - **Viajes rápidos (~0,8 s) y retenciones quietas** cuando se nombra algo. Pausas para que se lea (11-15, 11-16).
 - **No**: cámara que se mueve todo el tiempo, zoom de más, desenfocar o recortar lo que se explica (banco de prueba, 11-15).
 - **Plano general** para mostrar las ideas juntas (escalar, vector y matriz vistos de lejos).
+- **Más dinamismo y uso del espacio** (11-17, referencia de Instagram pendiente de medir): la cámara tiene que recorrer y usar el espacio con más energía; crear objetos propios si hace falta.
 - **Cada reel con su propia puesta en escena**: se mantienen inicio y cierre; el medio no copia el reel anterior (orden de planos, objetos de frente, título arriba) (11-16).
 - **Nada que estorbe al texto**: un decorado que pasa detrás de lo que se lee se saca (la cinta de la fábrica) (11-16).
 - **Profundidad real**: objetos 3D con perspectiva, **piso de líneas en perspectiva**. No reemplazar el 3D por dibujos planos (11-07).
@@ -37,7 +38,7 @@
 - **Objetos**: contornos finos (≈ 2 px; a 4–5 px se tapan), líneas que no se cortan, antenas con cuerpo, escala real, revisar cada objeto de cerca (11-11). Las notebooks no llevan antena a la vista; los routers sí (11-09).
 - **Lo que se conecta se toca**: los cables salen de un puerto real y llegan al cuerpo del objeto. Lo que viaja sigue la forma del medio: cuadraditos solo sobre cables (`cable.at(s)`), en el aire solo ondas (11-11).
 - **Ondas de radio = anillos** que se expanden; la senoide solo para explicar frecuencias. Ondas continuas, nunca cortadas (11-10).
-- **Sin decorado sin sentido**: ni puntitos, ni bits flotando, ni un "1" suelto (11-09).
+- **Sin decorado sin sentido**: ni puntitos, ni bits flotando, ni un "1" suelto (11-09). Tampoco **tablas o losas de soporte** debajo de los objetos: no hacen falta (11-17).
 - **Tipografía**: le hacen ruido los textos muy juntos o con mucho vacío; texto centrado en su placa; chips con aire; **nunca una palabra sola en la última línea** (11-09, 11-13).
 - **Media kit** (`docs/media-kit/`, 11-16): manda en portada, gancho, tamaños y reglas de uso.
 
@@ -51,13 +52,14 @@
 - El público marcó la voz como lo más flojo ("se nota lo robótico"); pendiente **clonar su voz** (`docs/2-estilo/AUDIO.md` → Voz propia) (11-14).
 - **Ritmo**: `length_scale` 1,05 y 2,4–2,8 palabras por segundo en total; más de 2,9 es demasiado rápido para quien aprende (11-11).
 - **Cuidar la pronunciación**: ante una palabra en inglés, ofrecer variantes de audio antes de usarla. Cada pronunciación que confirma o corrige va a `pronunciacion.json` en el momento (11-11, 11-12).
+- "Python" → "páiton" (sin respelling decía "piton", 11-17; variantes para elegir en `material/pronunciacion/python-variantes.mp3`).
 - Confirmadas: "uaifai" (WiFi), "ráuter", "ísernet", "gigaérts", "dos coma cuatro". No le gustó "mashín lérnin": decir "inteligencia artificial". La voz lee "IA" como "ya": escribir "inteligencia artificial".
 - **Tono**: educativo de alta calidad, serio y riguroso, entretenido pero no denso. **Nada de frases canchereras** que buscan hacerse el simpático ("Python no protesta"): suenan naif. **Sin dos puntos** en la voz: la narración es oral, se escribe con puntos y comas (11-17).
 - No decir "pendrive" (memoria), "like" (me gusta). No leer la terminal ni los carteles. Frases con palabras repetidas se entienden mal: simplificar.
 
 ## 7. Sonido y música
 - **Sonido limpio**: sin ruido de fondo, sin glitch ni estática; efectos puntuales con significado (11-09).
-- **Fijos de marca**: boom grave (`boom-cinematico`) al inicio y al final; **chinn** cuando aterriza el CTA (11-09).
+- **Fijos de marca**: boom grave (`boom-cinematico`) al inicio y al final; **chinn** cuando aterriza el CTA (11-09). Antes del CTA, **hit metálico real**, no la succión sintética ("waaash" muy sintético, 11-17): nada de sonidos generados donde hay uno real en el banco.
 - **Efectos variados**: no repetir siempre el mismo whoosh o golpe; usar los sonidos reales del banco y los propios que encajan con el tema (11-16). Tipeo real de teclado para código; sonido digital para los 0 y 1; módem para "conexión"; hit metálico mejor que un whoosh suave antes del cierre.
 - **Música firma**: *Can You Hear The Music*, en todos los reels, **desde el segundo 0 (los violines)**, nivelada para que se oiga desde el principio sin tapar la voz. **No recortar una canción que él pasa sin avisar** (11-16).
 

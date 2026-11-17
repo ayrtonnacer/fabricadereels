@@ -12,7 +12,7 @@ Sonido **limpio**: sin ambiente de fondo, sin estática ni glitch. Los valores d
 
 ## Fijos de marca (iguales en todos los reels)
 - **`P.apertura()`**: boom grave (`boom-cinematico`) en el segundo 0.
-- **`P.cierre(S['cierre'])`**: succión (riser invertido) → boom → **chinn** cuando aterriza el CTA.
+- **`P.cierre(S['cierre'])`**: **hit metálico real + boom** → **chinn** cuando aterriza el CTA.
 - **Música firma** desde el segundo 0 (los violines): `musica_desde: 0`, `musica_fade_in: 0.4`, `musica_nivelar: [-32, 4]`, `musica_db: 10`, `musica_duck: 2`. La pista crece de −28 a −10 dB; sin nivelar, el inicio no se oye y el final tapa la voz. **No recortar otro tramo sin avisarle a Ayrton.**
 
 ## Cómo se escribe `sfx_events.py`

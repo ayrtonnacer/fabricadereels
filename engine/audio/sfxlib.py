@@ -203,7 +203,7 @@ def tramo(nombre, a, b, fade_in=0.02, fade_out=0.08, gain=1.0):
 class Paleta:
     """Los sonidos de un reel por SIGNIFICADO (docs/2-estilo/AUDIO.md). Cada llamada elige un sonido real distinto del banco (elegir(rol));
     sin banco, cae al sintético. Uso en sfx_events.py:  P = Paleta(T);  P.apertura();  P.viaje(t_pico);  P.aparece(t);  P.cierre(S['cierre'])
-    FIJOS DE MARCA (no cambian entre reels): apertura() = boom grave en 0 s; cierre(t) = succión → boom → chinn cuando aterriza el CTA."""
+    FIJOS DE MARCA (no cambian entre reels): apertura() = boom grave en 0 s; cierre(t) = hit metálico + boom → chinn cuando aterriza el CTA."""
     def __init__(self, T): self.T = T
     def _un(self, rol, sint, **kw):
         x = elegir(rol, **kw); return x if x is not None else sint()
@@ -227,5 +227,7 @@ class Paleta:
     def cierre(self, t, cta=0.55):
         """t = segundo en que empieza la escena del CTA; `cta` = cuánto después aterriza el texto (suena el chinn)."""
         bm = propio('boom-cinematico'); ch = propio('chinn')
-        self.T.put(t - 0.9, reverse(riser(0.8)), 0.35); self.T.put(t - 0.05, bm if bm is not None else impact(), 0.55, send=0.3)
+        hm = propio('hit-metal')   # Ayrton (2026-11-17): la succión sintética (riser invertido) sonaba a 'waaash' artificial → hit metálico real del banco
+        if hm is not None: self.T.put(t - 0.05, hm, 0.4, send=0.3)
+        self.T.put(t - 0.05, bm if bm is not None else impact(), 0.55, send=0.3)
         self.T.put(t + cta, ch if ch is not None else sparkle(9), 0.5, send=0.2)

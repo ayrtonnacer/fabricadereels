@@ -28,7 +28,12 @@ Tiempos reales en `assets/tiempos.js` (salen de la voz). Poses calculadas para q
 | l12 | 44,6 | A | medio tres cuartos | grúa por encima del set y bajada (1,5 s) | la caja se borra en "guarda"; la etiqueta en tan en "nombra" | viaje + aterriza; resultado |
 | CTA | 49,2 | — | CTA centrado | corte | CTA palabra por palabra; firma | succión → boom → chinn |
 
+## Dinamismo (corrección de Ayrton 11-17, referencia medida en `docs/4-referencias/material/2026-11-17-ref-ig-dinamismo/`)
+- Sin losas de soporte. Las retenciones ya no son quietas: **deriva orbital lenta** (≈ 10° y 8 % de acercamiento, < 100 px/s; el texto sigue legible). Los planos altos derivan alejándose para no recortar bordes.
+- Etiquetas y valores **entran volando** desde fuera del cuadro (no solo por escala). Cámara en movimiento: 45 % de los cuadros (antes ≈ 20 %; la referencia: 75 %).
+- Sonido: el "waaash" de la succión antes del CTA se cambió por el hit metálico real del banco (marca).
+
 ## Medido (`reel.py medir`)
-- Fuera de meta: tirón mediano 1309 px/s³ (meta ≤ 1300, en el borde) y brillo medio 0,01 (negro puro de la estética Scale: justificado).
+- Fuera de meta: retención mediana 0,80 s (meta 1–4 s; a propósito: la deriva continua parte las retenciones, pedido de Ayrton) y brillo medio 0,01 (negro puro de la estética Scale: justificado).
 - Arrastre bajo en 3,3 / 36,9 / 44,4 s: los límites de escena caen en medio de viajes rápidos (plano secuencia, sin corte real). 49,0 s = corte al CTA (permitido).
 - Whisper: 95 % de palabras entendidas. "Si edad" se oía "si día" → la frase pasó a "Con edad igual a diecinueve".
