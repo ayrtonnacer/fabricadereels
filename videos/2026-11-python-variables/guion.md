@@ -7,7 +7,7 @@ palabras_max: 170
 gancho_tipo: "mito"
 loop: "Si una variable no es una caja, ¿qué es?"
 cierre_loop: "Una variable no guarda el valor. Lo nombra."
-detalle_profesional: "Asignar un nombre a otro no copia el objeto. Con enteros no se nota porque son inmutables; con una lista, un cambio por un nombre se ve en el otro (a is b → True)."
+detalle_profesional: "pedido = compras no copia la lista: un cambio por un nombre se ve en el otro. Con enteros, x += 1 crea un número nuevo y mueve solo esa etiqueta (son inmutables)."
 titulo_portada: "Una variable es una etiqueta"
 fuentes: ["Variables in Python: Usage and Best Practices (Real Python)", "Referencia del lenguaje Python, 4.2 Naming and binding (docs.python.org)", "medido en Python 3.13: a=[1,2]; b=a; b.append(3) → a==[1,2,3]; x=19; y=x; x+=1 → y==19"]
 verificado: true
@@ -25,11 +25,11 @@ verificado: true
 - SE VE: tres valores con su forma (número, texto, lista) y su tipo grabado en el bloque; la etiqueta se despega del número y se pega al texto
 - CÁMARA: plano general de los tres valores; travelling corto lateral para el movimiento de la etiqueta
 ### compartida · giro + detalle de profesional
-- VOZ: l08–l11
-- SE VE: segunda etiqueta al mismo bloque (dos hilos); con un número nada cambia (el número no se modifica, se reemplaza); en la lista entra el 3 por una etiqueta y aparece en ambas
-- CÁMARA: grúa ascendente para ver los dos hilos; contrapicado a la lista; quieta cuando entra el 3
+- VOZ: l08–l12 (ver video.json)
+- SE VE: una lista con dos bloques (pan, leche) y la etiqueta "compras"; baja la etiqueta "pedido" y se pega a la MISMA lista (dos hilos, un objeto); entra "huevos" por el hilo de pedido y la lista crece (una sola); al lado, el 19 con dos etiquetas: al sumarle uno aparece un 20 nuevo y solo una etiqueta salta a él
+- CÁMARA: travelling lateral a la lista; grúa ascendente para ver los dos hilos; quieta cuando entra "huevos"; travelling corto al número
 ### payoff
-- VOZ: l12
+- VOZ: l13
 - SE VE: plano general: etiquetas, hilos y valores; la caja del gancho desaparece
 - CÁMARA: dolly out, quieta
 ### cierre · CTA

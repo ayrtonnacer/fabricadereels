@@ -19,19 +19,19 @@
     },
     {
       "id": "tipo",
-      "d": 13.76
+      "d": 12.38
     },
     {
       "id": "compartida",
-      "d": 18.7
+      "d": 23.63
     },
     {
       "id": "payoff",
-      "d": 4.58
+      "d": 4.59
     },
     {
       "id": "cierre",
-      "d": 4.18
+      "d": 4.17
     }
   ],
   "voz": {
@@ -86,37 +86,43 @@
       {
         "id": "l08",
         "escena": "compartida",
-        "t": 34.88,
-        "texto": "Dos nombres pueden apuntar al mismo valor."
+        "t": 33.5,
+        "texto": "Creás una lista con pan y leche, y la llamás compras."
       },
       {
         "id": "l09",
         "escena": "compartida",
         "t": 37.74,
-        "texto": "Asignar uno al otro no copia nada. Es el mismo objeto con dos etiquetas."
+        "texto": "Después escribís que pedido es igual a compras."
       },
       {
         "id": "l10",
         "escena": "compartida",
-        "t": 43.02,
-        "texto": "Con números no se nota, porque un número no se puede modificar."
+        "t": 40.95,
+        "texto": "Python no copia la lista. Le pega una segunda etiqueta a la misma."
       },
       {
         "id": "l11",
         "escena": "compartida",
-        "t": 47.61,
-        "texto": "Una lista sí. Si le agregás un elemento desde un nombre, el otro también lo ve."
+        "t": 45.88,
+        "texto": "Si agregás huevos usando pedido, compras también los tiene. Es una sola lista."
       },
       {
         "id": "l12",
-        "escena": "payoff",
-        "t": 53.58,
-        "texto": "Por eso, en Python, una variable no guarda el valor. Lo nombra."
+        "escena": "compartida",
+        "t": 50.82,
+        "texto": "Con un número es distinto. Sumarle uno crea un número nuevo, y solo esa etiqueta se mueve."
       },
       {
         "id": "l13",
+        "escena": "payoff",
+        "t": 57.13,
+        "texto": "Por eso, en Python, una variable no guarda el valor. Lo nombra."
+      },
+      {
+        "id": "l14",
         "escena": "cierre",
-        "t": 58.16,
+        "t": 61.72,
         "texto": "Dale me gusta y seguime para aprender más de Python."
       }
     ]
