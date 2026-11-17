@@ -1,0 +1,131 @@
+{
+  "titulo": "La barra que rompe rutas",
+  "tema": "Python",
+  "estado": "guion",
+  "fecha": "2026-11",
+  "fuente": "Python Print New Line (K. Fessel) + medido en Python 3.13",
+  "scenes": [
+    {
+      "id": "portada",
+      "d": 0.1
+    },
+    {
+      "id": "gancho",
+      "d": 3.5
+    },
+    {
+      "id": "orden",
+      "d": 3.4
+    },
+    {
+      "id": "salto",
+      "d": 12.0
+    },
+    {
+      "id": "ruta",
+      "d": 16.2
+    },
+    {
+      "id": "payoff",
+      "d": 4.8
+    },
+    {
+      "id": "cierre",
+      "d": 4.3
+    }
+  ],
+  "voz": {
+    "modelo": "assets/voces/es_AR-daniela-high.onnx",
+    "length_scale": 1.05,
+    "noise_scale": 0.6,
+    "noise_w_scale": 0.7,
+    "efecto": "ninguno",
+    "lineas": [
+      {
+        "id": "l01",
+        "escena": "gancho",
+        "t": 0.35,
+        "texto": "Python rompe esta ruta de archivo sin avisarte."
+      },
+      {
+        "id": "l02",
+        "escena": "orden",
+        "t": 3.75,
+        "texto": "La barra invertida no es una letra. Es una orden."
+      },
+      {
+        "id": "l03",
+        "escena": "salto",
+        "t": 7.2,
+        "texto": "Barra y ene significan: saltá de línea. Son dos teclas, pero Python las guarda como un solo carácter invisible."
+      },
+      {
+        "id": "l04",
+        "escena": "salto",
+        "t": 13.9,
+        "texto": "Cada texto que mostrás termina con uno. Por eso cada mensaje cae en su renglón."
+      },
+      {
+        "id": "l05",
+        "escena": "ruta",
+        "t": 19.4,
+        "texto": "Pero mirá lo que pasa con una ruta de Windows."
+      },
+      {
+        "id": "l06",
+        "escena": "ruta",
+        "t": 23.1,
+        "texto": "La carpeta nueva empieza con barra y ene: Python la lee como salto de línea."
+      },
+      {
+        "id": "l07",
+        "escena": "ruta",
+        "t": 28.5,
+        "texto": "El archivo de texto empieza con barra te: un tabulador."
+      },
+      {
+        "id": "l08",
+        "escena": "ruta",
+        "t": 32.6,
+        "texto": "Veintidós caracteres escritos. Python lee veinte."
+      },
+      {
+        "id": "l09",
+        "escena": "payoff",
+        "t": 35.5,
+        "texto": "La solución: una erre delante de las comillas. Así Python respeta cada barra."
+      },
+      {
+        "id": "l10",
+        "escena": "cierre",
+        "t": 40.4,
+        "texto": "Dale me gusta y seguime para aprender más de Python."
+      }
+    ]
+  },
+  "audio": {
+    "musica": "assets/musica/can-you-hear-the-music.mp3",
+    "musica_desde": 0,
+    "musica_fade_in": 0.4,
+    "musica_db": 10,
+    "musica_nivelar": [
+      -32,
+      4
+    ],
+    "musica_duck": 2,
+    "sfx_gain": 1.25,
+    "loudness": -14
+  },
+  "subtitulos": {
+    "fondo": "rgba(0,0,0,.86)"
+  },
+  "publicar": {
+    "fecha": "",
+    "redes": [
+      "instagram",
+      "tiktok",
+      "youtube"
+    ],
+    "links": {}
+  }
+}
