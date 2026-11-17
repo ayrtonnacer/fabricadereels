@@ -1,9 +1,9 @@
 {
-  "titulo": "La barra que rompe rutas",
+  "titulo": "Una variable es una etiqueta",
   "tema": "Python",
   "estado": "guion",
   "fecha": "2026-11",
-  "fuente": "Python Print New Line (K. Fessel) + medido en Python 3.13",
+  "fuente": "Variables in Python: Usage and Best Practices (Real Python) + medido en Python 3.13",
   "scenes": [
     {
       "id": "portada",
@@ -14,20 +14,16 @@
       "d": 3.5
     },
     {
-      "id": "orden",
-      "d": 3.4
+      "id": "nombre",
+      "d": 15.0
     },
     {
-      "id": "salto",
-      "d": 12.0
-    },
-    {
-      "id": "ruta",
-      "d": 16.2
+      "id": "lista",
+      "d": 13.8
     },
     {
       "id": "payoff",
-      "d": 4.8
+      "d": 4.3
     },
     {
       "id": "cierre",
@@ -45,60 +41,54 @@
         "id": "l01",
         "escena": "gancho",
         "t": 0.35,
-        "texto": "Python rompe esta ruta de archivo sin avisarte."
+        "texto": "Una variable no es una caja. Es una etiqueta."
       },
       {
         "id": "l02",
-        "escena": "orden",
+        "escena": "nombre",
         "t": 3.75,
-        "texto": "La barra invertida no es una letra. Es una orden."
+        "texto": "En Python, un nombre apunta a un valor que vive en la memoria."
       },
       {
         "id": "l03",
-        "escena": "salto",
-        "t": 7.2,
-        "texto": "Barra y ene significan: saltá de línea. Son dos teclas, pero Python las guarda como un solo carácter invisible."
+        "escena": "nombre",
+        "t": 8.0,
+        "texto": "Al asignar, Python crea el valor y le pega tu nombre, como una etiqueta."
       },
       {
         "id": "l04",
-        "escena": "salto",
-        "t": 13.9,
-        "texto": "Cada texto que mostrás termina con uno. Por eso cada mensaje cae en su renglón."
+        "escena": "nombre",
+        "t": 12.4,
+        "texto": "Podés pegar otra etiqueta al mismo valor. No se copia: es un único objeto con dos nombres."
       },
       {
         "id": "l05",
-        "escena": "ruta",
-        "t": 19.4,
-        "texto": "Pero mirá lo que pasa con una ruta de Windows."
+        "escena": "lista",
+        "t": 18.9,
+        "texto": "Pero mirá lo que pasa con una lista."
       },
       {
         "id": "l06",
-        "escena": "ruta",
-        "t": 23.1,
-        "texto": "La carpeta nueva empieza con barra y ene: Python la lee como salto de línea."
+        "escena": "lista",
+        "t": 22.0,
+        "texto": "Le agregás un elemento usando un nombre, y el otro nombre también lo ve."
       },
       {
         "id": "l07",
-        "escena": "ruta",
-        "t": 28.5,
-        "texto": "El archivo de texto empieza con barra te: un tabulador."
+        "escena": "lista",
+        "t": 27.1,
+        "texto": "Y la etiqueta se mueve: pasa de un número a un texto, y Python no protesta."
       },
       {
         "id": "l08",
-        "escena": "ruta",
-        "t": 32.6,
-        "texto": "Veintidós caracteres escritos. Python lee veinte."
+        "escena": "payoff",
+        "t": 32.8,
+        "texto": "Por eso no es una caja: es una etiqueta que apunta."
       },
       {
         "id": "l09",
-        "escena": "payoff",
-        "t": 35.5,
-        "texto": "La solución: una erre delante de las comillas. Así Python respeta cada barra."
-      },
-      {
-        "id": "l10",
         "escena": "cierre",
-        "t": 40.4,
+        "t": 37.1,
         "texto": "Dale me gusta y seguime para aprender más de Python."
       }
     ]
