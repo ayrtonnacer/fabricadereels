@@ -23,7 +23,7 @@
     },
     {
       "id": "compartida",
-      "d": 23.63
+      "d": 37.39
     },
     {
       "id": "payoff",
@@ -105,24 +105,42 @@
         "id": "l11",
         "escena": "compartida",
         "t": 45.88,
-        "texto": "Si agregás huevos usando pedido, compras también los tiene. Es una sola lista."
+        "texto": "Una lista es mutable. Se puede modificar por dentro, como una lista en papel a la que le sumás un renglón."
       },
       {
         "id": "l12",
         "escena": "compartida",
-        "t": 50.82,
-        "texto": "Con un número es distinto. Sumarle uno crea un número nuevo, y solo esa etiqueta se mueve."
+        "t": 53.58,
+        "texto": "Si agregás huevos usando pedido, compras también los tiene. Es una sola lista."
       },
       {
         "id": "l13",
-        "escena": "payoff",
-        "t": 57.13,
-        "texto": "Por eso, en Python, una variable no guarda el valor. Lo nombra."
+        "escena": "compartida",
+        "t": 58.51,
+        "texto": "Un número, en cambio, es inmutable. El diecinueve nunca cambia."
       },
       {
         "id": "l14",
+        "escena": "compartida",
+        "t": 62.41,
+        "texto": "Si le sumás uno, Python crea otro número, el veinte, y solo esa etiqueta se mueve."
+      },
+      {
+        "id": "l15",
+        "escena": "compartida",
+        "t": 68.37,
+        "texto": "La otra sigue apuntando al diecinueve."
+      },
+      {
+        "id": "l16",
+        "escena": "payoff",
+        "t": 70.89,
+        "texto": "Por eso, en Python, una variable no guarda el valor. Lo nombra."
+      },
+      {
+        "id": "l17",
         "escena": "cierre",
-        "t": 61.72,
+        "t": 75.48,
         "texto": "Dale me gusta y seguime para aprender más de Python."
       }
     ]
