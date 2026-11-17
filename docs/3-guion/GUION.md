@@ -37,6 +37,8 @@ Lo que se aplica siempre. La investigación completa, con fuentes y plantillas p
 - Contar las palabras como se pronuncian: "777" = 3, "SHA-256" = 4–5.
 - **No leer** comandos, rutas ni lo que dice un cartel: la voz explica el porqué, la pantalla muestra el qué. Las advertencias ("se borra todo") van en pantalla.
 - **Palabras que no van en la voz**: "pendrive" (→ memoria), "like" (→ me gusta), "dev", "guardalo", "IA" (Piper lo lee "ya" → "inteligencia artificial"). Lista completa en `engine/audio/pronunciacion.json` → `prohibidas`.
+- **Tono serio y riguroso, sin hacerse el simpático**: nada de personificar a la máquina para caer simpático ("Python no protesta"). Entretenido por la claridad y el ejemplo, no por chistes.
+- **Sin dos puntos (:) en la voz**: se habla con puntos y comas. "El tipo pertenece al valor", no "Lo importante: el tipo…".
 - **Sin muletillas de IA**: "¿Sabías que…?", "En el mundo de…", "Imaginá…", "Sumergite", "Desbloqueá", "Aquí está la clave", "y lo mejor de todo", "No vas a creer…", "Esto cambia todo", "El 99 % no sabe…".
 - Evitar frases con la misma palabra repetida ("con mayúscula, sin mayúscula"): la voz sintética las enreda.
 - **Palabras en inglés o siglas**: fijarse si están en `pronunciacion.json`; si no, agregarlas y ofrecerle a Ayrton variantes de audio en el checkpoint.

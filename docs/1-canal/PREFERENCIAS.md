@@ -52,6 +52,7 @@
 - **Ritmo**: `length_scale` 1,05 y 2,4–2,8 palabras por segundo en total; más de 2,9 es demasiado rápido para quien aprende (11-11).
 - **Cuidar la pronunciación**: ante una palabra en inglés, ofrecer variantes de audio antes de usarla. Cada pronunciación que confirma o corrige va a `pronunciacion.json` en el momento (11-11, 11-12).
 - Confirmadas: "uaifai" (WiFi), "ráuter", "ísernet", "gigaérts", "dos coma cuatro". No le gustó "mashín lérnin": decir "inteligencia artificial". La voz lee "IA" como "ya": escribir "inteligencia artificial".
+- **Tono**: educativo de alta calidad, serio y riguroso, entretenido pero no denso. **Nada de frases canchereras** que buscan hacerse el simpático ("Python no protesta"): suenan naif. **Sin dos puntos** en la voz: la narración es oral, se escribe con puntos y comas (11-17).
 - No decir "pendrive" (memoria), "like" (me gusta). No leer la terminal ni los carteles. Frases con palabras repetidas se entienden mal: simplificar.
 
 ## 7. Sonido y música

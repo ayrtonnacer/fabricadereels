@@ -11,7 +11,7 @@
     },
     {
       "id": "gancho",
-      "d": 3.58
+      "d": 3.23
     },
     {
       "id": "nombre",
@@ -19,19 +19,19 @@
     },
     {
       "id": "tipo",
-      "d": 12.97
+      "d": 13.76
     },
     {
       "id": "compartida",
-      "d": 16.52
+      "d": 18.7
     },
     {
       "id": "payoff",
-      "d": 5.97
+      "d": 4.58
     },
     {
       "id": "cierre",
-      "d": 4.17
+      "d": 4.18
     }
   ],
   "voz": {
@@ -45,66 +45,78 @@
         "id": "l01",
         "escena": "gancho",
         "t": 0.35,
-        "texto": "Una variable no es una caja. Es una etiqueta."
+        "texto": "En Python, una variable no es una caja."
       },
       {
         "id": "l02",
         "escena": "nombre",
-        "t": 3.9,
-        "texto": "En Python, un nombre apunta a un valor que vive en la memoria."
+        "t": 3.56,
+        "texto": "Es un nombre que apunta a un valor guardado en la memoria."
       },
       {
         "id": "l03",
         "escena": "nombre",
-        "t": 8.84,
-        "texto": "Escribís un nombre, el signo igual y un valor. Python crea el valor y le pega tu etiqueta."
+        "t": 8.15,
+        "texto": "Al asignar, Python primero crea el valor en la memoria y después le asocia el nombre."
       },
       {
         "id": "l04",
         "escena": "nombre",
-        "t": 15.49,
-        "texto": "Desde ahí, el nombre se comporta como el valor: edad más uno es diecinueve más uno."
+        "t": 14.11,
+        "texto": "Desde ahí, usar el nombre equivale a usar el valor. Si edad vale diecinueve, edad más uno da veinte."
       },
       {
         "id": "l05",
         "escena": "tipo",
-        "t": 21.46,
-        "texto": "Ese valor tiene un tipo: número, texto, lista. El tipo lo tiene el valor, no la etiqueta."
+        "t": 21.12,
+        "texto": "Cada valor tiene un tipo. Un número, un texto, una lista."
       },
       {
         "id": "l06",
         "escena": "tipo",
-        "t": 27.77,
-        "texto": "Por eso podés mover la etiqueta a otro valor. Aunque sea de otro tipo, Python no protesta."
+        "t": 25.36,
+        "texto": "El tipo pertenece al valor, no al nombre."
       },
       {
         "id": "l07",
-        "escena": "compartida",
-        "t": 34.43,
-        "texto": "Podés pegar otra etiqueta al mismo valor. No se copia: es un solo objeto con dos nombres."
+        "escena": "tipo",
+        "t": 28.57,
+        "texto": "Por eso un mismo nombre puede pasar de un número a un texto."
       },
       {
         "id": "l08",
         "escena": "compartida",
-        "t": 40.74,
-        "texto": "Con un número no se nota. Con una lista, sí."
+        "t": 34.88,
+        "texto": "Dos nombres pueden apuntar al mismo valor."
       },
       {
         "id": "l09",
         "escena": "compartida",
-        "t": 44.64,
-        "texto": "Agregás un elemento con un nombre. El otro también lo ve: miran el mismo objeto."
+        "t": 37.74,
+        "texto": "Asignar uno al otro no copia nada. Es el mismo objeto con dos etiquetas."
       },
       {
         "id": "l10",
-        "escena": "payoff",
-        "t": 50.95,
-        "texto": "Una variable no guarda cosas: las nombra. No es una caja, es una etiqueta que apunta."
+        "escena": "compartida",
+        "t": 43.02,
+        "texto": "Con números no se nota, porque un número no se puede modificar."
       },
       {
         "id": "l11",
+        "escena": "compartida",
+        "t": 47.61,
+        "texto": "Una lista sí. Si le agregás un elemento desde un nombre, el otro también lo ve."
+      },
+      {
+        "id": "l12",
+        "escena": "payoff",
+        "t": 53.58,
+        "texto": "Por eso, en Python, una variable no guarda el valor. Lo nombra."
+      },
+      {
+        "id": "l13",
         "escena": "cierre",
-        "t": 56.92,
+        "t": 58.16,
         "texto": "Dale me gusta y seguime para aprender más de Python."
       }
     ]
