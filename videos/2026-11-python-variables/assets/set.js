@@ -11,7 +11,7 @@ import { plano } from './escena3d.js';
 import { ESC, cuando } from './tiempos.js';
 import { K3 } from './token3d.js';
 
-export const montar = (root, tl, id) => plano(root, tl, id, async (E) => {
+export const montar = (root, tl, id) => plano(root, tl, id, async (E) => {   // tema noir (ver docs/2-estilo/ESTILO.md): la opción va al final de plano()
   const { THREE, V, P } = E, R = E.rotulos(), K = K3(E);
 
   // ---------- 1) estaciones ----------
@@ -25,17 +25,22 @@ export const montar = (root, tl, id) => plano(root, tl, id, async (E) => {
   const valor = (txt, s, x, z = 0) => add(K.ficha({ txt, size: VAL }), s, x, HV / 2, z);
   const etiqueta = (txt, s, x, y, z = 0, back = null) => add(K.ficha({ txt, size: TAG, back }), s, x, y, z);
   // hilo blanco de la etiqueta al valor: un cilindro que se estira entre dos puntos (se mueve por cuadro, no se crea)
-  const hilo = (s) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(0.006, 0.006, 1, 8), E.basic(P.hi)); m.visible = false; G[s].add(m);
+  const hilo = (s) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(0.005, 0.005, 1, 8), E.basic(P.hi)); m.visible = false; G[s].add(m);
+    const halo = new THREE.Mesh(new THREE.CylinderGeometry(0.022, 0.022, 1, 10), new THREE.MeshBasicMaterial({ color: P.hi, transparent: true, opacity: 0.12, depthWrite: false, blending: THREE.AdditiveBlending })); m.add(halo);   // noir: el hilo brilla
+    const b0 = E.brillo(P.hi, 0.09, 0.9), b1 = E.brillo(P.hi, 0.09, 0.9); G[s].add(b0, b1);
     const up = new V(0, 1, 0), d = new V();
-    return { m, set(a, b, p) { if (p <= 0.002) { m.visible = false; return; } const q = new V().lerpVectors(a, b, Math.min(1, p)); d.subVectors(q, a);
-      const L = d.length(); if (L < 1e-4) { m.visible = false; return; } m.visible = true; m.position.copy(a).addScaledVector(d, 0.5); m.scale.set(1, L, 1); m.quaternion.setFromUnitVectors(up, d.normalize()); } };
+    return { m, set(a, b, p) { b0.visible = b1.visible = false; if (p <= 0.002) { m.visible = false; return; } const q = new V().lerpVectors(a, b, Math.min(1, p)); d.subVectors(q, a);
+      const L = d.length(); if (L < 1e-4) { m.visible = false; return; } b0.position.copy(a); b1.position.copy(q); b0.visible = b1.visible = true; m.visible = true; m.position.copy(a).addScaledVector(d, 0.5); m.scale.set(1, L, 1); m.quaternion.setFromUnitVectors(up, d.normalize()); } };
   };
   const bajo = (o) => new V(o.position.x, o.position.y - o.userData.h / 2, o.position.z);    // borde inferior de una placa
   const sobre = (o) => new V(o.position.x, o.position.y + o.userData.h / 2, o.position.z);   // borde superior
 
   // ---------- 2) objetos y rótulos por estación ----------
   // A · gancho: la caja (lo que NO es una variable) y una etiqueta colgada de un valor
-  const caja = new THREE.Group(); { const m = E.caja(0.5, 0.42, 0.5, E.std()); m.position.y = 0.21; caja.add(m); E.contornear(caja); }
+  const caja = new THREE.Group(); { const m = E.caja(0.5, 0.42, 0.5, E.std()); m.position.y = 0.21; caja.add(m); E.contornear(caja);
+    if (E.NOIR) { m.material = new THREE.MeshStandardMaterial({ color: 0x121212, roughness: 0.65, metalness: 0.5 });   // sin el reflejo blanco del techo
+      const e = new THREE.EdgesGeometry(new THREE.BoxGeometry(0.5, 0.42, 0.5)).attributes.position.array, pr = []; for (let i = 0; i < e.length; i += 3) pr.push(new V(e[i], e[i + 1] + 0.21, e[i + 2]));
+      caja.add(E.trazo(pr, P.edge, P.px)); } }
   add(caja, 'A', -0.42, 0, 0); caja.rotation.y = 0.35;
   const vA = valor('19', 'A', 0.42), tA = etiqueta('edad', 'A', 0.42, TY), hA = hilo('A');
   const finHook = ESC.gancho.t1 - 0.35;
@@ -150,4 +155,4 @@ export const montar = (root, tl, id) => plano(root, tl, id, async (E) => {
     if (enc > 0) etiquetas.forEach((t) => t.userData.acento(enc));
     R.dibujar(T);
   };
-});
+}, { estilo: 'noir' });

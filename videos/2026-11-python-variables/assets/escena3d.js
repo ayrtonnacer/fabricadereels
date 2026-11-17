@@ -30,8 +30,12 @@ export const EASE = {
   in: (x) => x * x * x,
 };
 
+let _punto = null;   // textura de punto suave (centro blanco, borde transparente): nodos del piso y brillos del tema noir
+const puntoTex = () => { if (_punto) return _punto; const cv = document.createElement('canvas'); cv.width = cv.height = 64; const x = cv.getContext('2d'), g = x.createRadialGradient(32, 32, 0, 32, 32, 32);
+  g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(0.18, 'rgba(255,255,255,.9)'); g.addColorStop(0.42, 'rgba(255,255,255,.18)'); g.addColorStop(1, 'rgba(255,255,255,0)'); x.fillStyle = g; x.fillRect(0, 0, 64, 64);
+  _punto = new THREE.CanvasTexture(cv); return _punto; };
 export async function crear(root, opts = {}) {
-  const { fov = 40, dy = 170, canvas = root.querySelector('canvas'), piso = true } = opts;
+  const { fov = 40, dy = 170, canvas = root.querySelector('canvas'), piso = true, estilo } = opts;
   try { await document.fonts.load('700 48px "Geist Mono"'); await document.fonts.load('700 48px "Host Grotesk"'); } catch (e) { /* sin fuentes: cae a monospace */ }
   const V = THREE.Vector3;
   const P = {
@@ -39,24 +43,34 @@ export async function crear(root, opts = {}) {
     acc: new THREE.Color(css('--acc', '#FD2B3C')), sky: new THREE.Color(css('--sky', '#F5F6F8')), ok: new THREE.Color(css('--ok', '#2EE08C')),
     warn: new THREE.Color(css('--warn', '#FFB020')), text: new THREE.Color(css('--text', '#E8EEF7')), panel: new THREE.Color(css('--panel', '#111A28')),
   };
-  const LINEA = css('--estilo', 'linea') === 'linea';   // tema "línea": negro + contornos gruesos; "solido": objetos rellenos con entorno
+  const EST = estilo || css('--estilo', 'linea');
+  const LINEA = EST === 'linea';   // tema "línea": negro + contornos grises; "solido": objetos rellenos con entorno (viejo)
+  const NOIR = EST === 'noir';     // tema "noir" (Ayrton 2026-11-17, docs/2-estilo/ESTILO.md): negro, objetos de metal oscuro con brillo blanco de contraluz, trazos blancos finos, puntos que brillan
   P.plate = new THREE.Color(css('--plate', '#0A0D12')); P.hi = new THREE.Color(css('--hi', '#FAFAFA')); P.edge = new THREE.Color(css('--edge', '#A1A1AA')); P.mid = new THREE.Color(css('--mid', '#52525B'));
   P.px = parseFloat(css('--trazo-px', '2.2')); P.trazo = P.edge; P.piso = P.mid; P.muted = P.edge;   // trazo = arista gris; blanco (P.hi / P.sky) solo para resaltar
   if (LINEA) { P.sky = P.hi; P.hondo = P.plate; P.bg = P.plate; }
+  if (NOIR) { P.plate = new THREE.Color('#000000'); P.bg = P.hondo = P.plate; P.hi = new THREE.Color('#FFFFFF'); P.sky = P.hi; P.edge = new THREE.Color('#E6E6E6'); P.trazo = P.edge; P.muted = P.edge; P.mid = new THREE.Color('#5A5A5A'); P.piso = P.mid; P.px = 1.6; }
   const hex = (c) => '#' + c.getHexString();
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setPixelRatio(1); renderer.setSize(1080, 1920, false); renderer.setClearColor(0x000000, 0);
   renderer.toneMapping = THREE.NeutralToneMapping; renderer.toneMappingExposure = 1.0;   // colores de marca exactos
-  const scene = new THREE.Scene(); scene.fog = new THREE.Fog(new THREE.Color(css('--fog', '#' + P.hondo.getHexString())), 9, 34);
+  const scene = new THREE.Scene(); scene.fog = NOIR ? new THREE.Fog(0x000000, 5, 20) : new THREE.Fog(new THREE.Color(css('--fog', '#' + P.hondo.getHexString())), 9, 34);   // noir: más niebla = profundidad que se apaga
   const cam = new THREE.PerspectiveCamera(fov, 1080 / 1920, 0.05, 80);
   cam.setViewOffset(1080, 1920, 0, dy, 1080, 1920);          // sube la imagen dy px (franja de subtítulos y 1120–1320)
   // iluminación: entorno procedural (reflejos y relleno) + key + contraluz celeste que recorta las siluetas
   const pmrem = new THREE.PMREMGenerator(renderer);
-  if (!LINEA) { scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture; scene.environmentIntensity = 0.4; }   // el entorno cuesta ≈ +30 % de render y en línea no se ve
+  if (!LINEA) { scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture; scene.environmentIntensity = NOIR ? 0.3 : 0.4; }   // el entorno cuesta ≈ +30 % de render y en línea no se ve
+  if (NOIR) {   // luz neutra: una principal suave y un CONTRALUZ blanco fuerte que dibuja el borde de los objetos de metal
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x000000, 0.25));
+    const key = new THREE.DirectionalLight(0xffffff, 0.9); key.position.set(3, 2.5, 4); scene.add(key);
+    const rim = new THREE.DirectionalLight(0xffffff, 3.2); rim.position.set(-3, 2.5, -4); scene.add(rim);
+    const rim2 = new THREE.DirectionalLight(0xffffff, 1.6); rim2.position.set(4, 1.5, -3); scene.add(rim2);
+  } else {
   scene.add(new THREE.HemisphereLight(0xcfe0ff, 0x1a2638, 1.1));
   const sun = new THREE.DirectionalLight(0xfff4e6, 2.0); sun.position.set(2.5, 5, 4); scene.add(sun);
   const rim = new THREE.DirectionalLight(0x6ec9ff, 1.5); rim.position.set(-3, 3, -4); scene.add(rim);
-  const E = { THREE, P, LINEA, renderer, scene, cam, EASE, clamp, V };
+  }
+  const E = { THREE, P, LINEA, NOIR, renderer, scene, cam, EASE, clamp, V };
   // ---------- tiempo: rampas 0→1 entre dos instantes (para que algo pase "cuando la voz lo nombra") ----------
   E.st = (a, b, x) => clamp((x - a) / Math.max(1e-6, b - a));                 // lineal
   E.io = (a, b, x) => EASE.io(E.st(a, b, x));                                // arranca y frena suave
@@ -64,7 +78,8 @@ export async function crear(root, opts = {}) {
   E.ventana = (T, a, b, f = 0.25) => E.out(a, a + f, T) * (1 - E.st(b, b + f, T));   // 0→1 al entrar en a, 1→0 al salir en b
   E.pop = (o, T, t0, d = 0.35, s = 1) => { const q = EASE.out(clamp((T - t0) / d)); o.scale.setScalar(Math.max(0.001, s * q)); o.visible = q > 0.002; return q; };   // entrada por escala
   // en línea, el "relleno" es negro puro (tapa lo de atrás) y el objeto se dibuja con su contorno (E.contornear)
-  E.std = (c, r = 0.55, m = 0.15) => { if (!LINEA) return new THREE.MeshStandardMaterial({ color: c, roughness: r, metalness: m });
+  E.std = (c, r = 0.55, m = 0.15) => { if (NOIR) return new THREE.MeshStandardMaterial({ color: 0x121212, roughness: 0.38, metalness: 0.8 });   // metal oscuro: refleja el entorno y el contraluz
+    if (!LINEA) return new THREE.MeshStandardMaterial({ color: c, roughness: r, metalness: m });
     const k = new THREE.MeshBasicMaterial({ color: P.plate, toneMapped: false, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1 }); k.userData.contorno = true; return k; };
   const LM = []; E.trazoMat = (color, w) => { const m = new LineMaterial({ color, linewidth: w, transparent: true, toneMapped: false }); m.resolution.set(1080, 1920); return m; };
   E.trazo = (pts, color = P.edge, w = P.px) => {   // línea gruesa (px) por pares de puntos [a0,a1, b0,b1…]: las líneas de WebGL miden 1 px y en video no se ven
@@ -78,12 +93,28 @@ export async function crear(root, opts = {}) {
   E.caja = (w, h, d, mat, r) => new THREE.Mesh(LINEA ? new THREE.BoxGeometry(w, h, d) : new RoundedBoxGeometry(w, h, d, 3, r === undefined ? Math.min(w, h, d) * 0.25 : r), mat);   // sólido: aristas biseladas; línea: aristas vivas
 
   // piso de líneas en perspectiva: tiras con ancho en metros (las cercanas gruesas, las lejanas finas; convergen al horizonte)
-  if (piso) {
+  if (piso && NOIR) {   // noir: grilla blanca muy tenue + un PUNTO que brilla en cada cruce (se apaga con la niebla)
+    const N = 26, w = 0.0018, pos = [], quad = (x0, z0, x1, z1) => pos.push(x0, 0.001, z0, x1, 0.001, z0, x1, 0.001, z1, x0, 0.001, z0, x1, 0.001, z1, x0, 0.001, z1);
+    const PASO = 0.5;   // grilla de medio metro: más densa, como las referencias
+    for (let i = -N; i <= N; i += PASO) { quad(i - w, -N, i + w, N); quad(-N, i - w, N, i + w); }
+    const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+    const g = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.13, side: THREE.DoubleSide, depthWrite: false })); scene.add(g); E.piso = g;
+    const pts = []; for (let i = -N; i <= N; i += PASO) for (let j = -N; j <= N; j += PASO) pts.push(i, 0.004, j);
+    const pg = new THREE.BufferGeometry(); pg.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
+    E.nodos = new THREE.Points(pg, new THREE.PointsMaterial({ size: 0.06, map: puntoTex(), color: 0xffffff, transparent: true, opacity: 1, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true })); scene.add(E.nodos);
+  }
+  if (piso && !NOIR) {
     const N = 26, w = LINEA ? 0.0035 : 0.006, pos = [], quad = (x0, z0, x1, z1) => pos.push(x0, 0.001, z0, x1, 0.001, z0, x1, 0.001, z1, x0, 0.001, z0, x1, 0.001, z1, x0, 0.001, z1);
     for (let i = -N; i <= N; i++) { quad(i - w, -N, i + w, N); quad(-N, i - w, N, i + w); }
     const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
     const g = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: LINEA ? P.piso : 0x2f4a70, transparent: true, opacity: LINEA ? 0.55 : 0.7, side: THREE.DoubleSide })); scene.add(g); E.piso = g;
   }
+  // brillo (noir): halo suave aditivo sobre un punto; reemplaza al bloom (que es caro): E.brillo(color, tamaño en m, opacidad) → Sprite
+  E.brillo = (color = P.hi, s = 0.12, op = 0.8) => { const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: puntoTex(), color, transparent: true, opacity: op, depthWrite: false, blending: THREE.AdditiveBlending })); sp.scale.setScalar(s); return sp; };
+  // marco de esquinas redondeadas (tarjetas de interfaz): rectángulo w×h con radio r, en el plano z, como trazo fino
+  E.marcoRedondo = (w, h, r, z = 0, color = P.hi, px = P.px, seg = 6) => { const pts = [], x = w / 2 - r, y = h / 2 - r, cs = [[x, y, 0], [-x, y, 1], [-x, -y, 2], [x, -y, 3]];
+    for (const [cx, cy, q] of cs) for (let i = 0; i <= seg; i++) { const a = (q + i / seg) * Math.PI / 2; pts.push(new V(cx + r * Math.cos(a), cy + r * Math.sin(a), z)); }
+    const pares = []; for (let i = 0; i < pts.length; i++) pares.push(pts[i], pts[(i + 1) % pts.length]); return E.trazo(pares, color, px); };
   // sombra de contacto (falsa y barata): mancha suave bajo el objeto; ancla los objetos al piso
   E.sombra = (w, d, op = 0.6) => {
     const cv = document.createElement('canvas'); cv.width = cv.height = 128; const x = cv.getContext('2d'), g = x.createRadialGradient(64, 64, 4, 64, 64, 62);
@@ -93,7 +124,7 @@ export async function crear(root, opts = {}) {
   };
 
   // textura de texto (pantallas): se redibuja solo cuando cambia el texto; admite varias líneas ('\n')
-  E.textoTex = (w, h, fondo = LINEA ? css('--plate', '#0A0D12') : '#070B12') => {
+  E.textoTex = (w, h, fondo = LINEA || NOIR ? css('--plate', '#000000') : '#070B12') => {
     const cv = document.createElement('canvas'); cv.width = w; cv.height = h; const ctx = cv.getContext('2d');
     const tex = new THREE.CanvasTexture(cv); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4; let last = null;
     const api = { tex, texto(str, color = hex(P.acc), size = h * 0.2, alinear = 'left') {

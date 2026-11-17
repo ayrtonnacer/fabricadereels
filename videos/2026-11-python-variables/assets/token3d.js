@@ -23,7 +23,8 @@ export function K3(E) {
 
   K.ficha = ({ txt = '', id = null, back = null, size = 1, img = null } = {}) => {   // img = { tex, uv: [u0, v0, u1, v1] }: ficha cuadrada con un pedazo de foto
     const g = new THREE.Group(), w = img ? H * size : (txt.length * CW + 2 * PAD) * size, h = H * size, d = 0.04 * size;
-    const caja = E.caja(w, h, d, E.std(0)); g.add(caja); E.contornear(g);
+    const caja = E.caja(w, h, d, E.std(0), E.NOIR ? Math.min(w, h, d) * 0.45 : undefined); g.add(caja); E.contornear(g);
+    if (E.NOIR) g.add(E.marcoRedondo(w - 0.004, h - 0.004, Math.min(w, h) * 0.18, d / 2 + 0.002, P.edge));   // noir: tarjeta de metal con borde blanco redondeado
     const lineas = mats(g);
     const fs = (CW / 0.6) * size * PPM;
     const frente = (color) => tex(w, h, (x, W, Hh) => textoMono(x, txt, W / 2, Hh / 2, fs, color, hex(P.mid)));

@@ -65,5 +65,19 @@ Negro puro + piso de líneas grises en perspectiva (automático en `escena3d.js`
 ## Prohibido
 Scanlines · marcos HUD / esquinas en L · "// TUTORIAL", "[ GRATIS ]" · texto de la fuente al final · loops de "flotar" o "respirar" · rebote en interfaz · neón y brillos · colores de fondo · estética roja, Anduril o lima · todo entrando igual.
 
+## Tema "noir" (en prueba desde 2026-11-17, pedido de Ayrton)
+Inspirado en los reels de Instagram que le gustan (medidos en `docs/4-referencias/material/2026-11-17-refs-instagram-dinamismo/`). Se activa por reel con `plano(root, tl, id, armar, { estilo: 'noir' })` en `assets/set.js`; el tema "línea" sigue siendo el de los reels anteriores.
+**Cómo es** (lo que se ve en las referencias):
+- **Negro absoluto y monocromo**: todo es negro, gris y blanco. Nuestro único color sigue siendo el tan de la marca (palabra clave, firma, la etiqueta que se nombra).
+- **Objetos con volumen**: no son dibujos de línea, son piezas de **metal oscuro** (casi negro, semibrillante) que reflejan un entorno suave. Lo que los separa del fondo es un **contraluz blanco** que les dibuja el borde.
+- **Tarjetas de interfaz**: placas con **esquinas redondeadas** y **borde blanco fino**, texto blanco nítido (como las tarjetas de chat o perfil de las referencias). Nuestras fichas (valores, etiquetas) se dibujan así.
+- **La luz es la señal**: los cables o hilos son **blancos y brillan** (halo suave alrededor) y tienen un **punto de luz** en cada extremo. Lo importante brilla; lo demás se apaga.
+- **Piso de puntos**: grilla blanca muy tenue cada medio metro con un **punto brillante en cada cruce**; con la distancia se apaga en la niebla (da profundidad).
+- **Niebla más cerrada** (5–20 m): lo lejano se funde con el negro, lo cercano queda nítido.
+- **Cámara**: la del reel es de movimiento casi continuo (69–88 % de los cuadros en las referencias), ver `CAMARA.md`.
+**Lo que NO tomamos de las referencias**: mayúsculas espaciadas en los rótulos (nuestra tipografía es mejor, dijo Ayrton), bloom de posproceso (caro: el brillo se hace con halos aditivos baratos, `E.brillo`), fondos blancos.
+**Funciones nuevas** (`escena3d.js`): `E.NOIR`, `E.brillo(color, tamaño, opacidad)` (halo de luz), `E.marcoRedondo(w, h, r, z, color, px)` (borde de tarjeta), piso de puntos automático.
+Esto reemplaza, solo en el tema noir, las reglas "objetos de línea gris" y "sin brillos detrás de los objetos" (Ayrton pidió esta estética el 2026-11-17).
+
 ## Temas viejos
 `engine/themes/` (línea roja, cyber/HackTheBox) y los videos de `videos/_archivo/` quedaron como historia. No se usan ni se copian salvo que Ayrton lo pida.

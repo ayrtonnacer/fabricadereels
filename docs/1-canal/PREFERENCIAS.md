@@ -31,6 +31,7 @@
 - Quiere que se le explique lo hecho con **vocabulario de cine** y segundos (`docs/2-estilo/GLOSARIO-EDICION.md`) (11-16).
 
 ## 4. Estética
+- **Tema noir en prueba** (11-17): quiere "una estética como esos videos" (negro, objetos de metal oscuro con contraluz blanco, tarjetas redondeadas de borde blanco, cables que brillan, piso de puntos). Descrito en `ESTILO.md` → Tema noir. Pendiente que apruebe los cuadros para que pase a ser el tema por defecto.
 - **Tema Scale** (por defecto desde 11-14): negro puro, objetos de **línea gris fina y continua**, **un solo acento Foundry Tan**, blanco solo para texto, cables y señal; Host Grotesk + Geist Mono.
 - **El negro no se ensucia**: sin halos, degradés grises ni brillos detrás de los objetos (11-15). Los colores de Scale van de acento, **nunca de fondo** (el verde Evergreen de fondo no le gustó) (11-13).
 - **No**: estética roja o Anduril, lima/HackTheBox (temas viejos), scanlines, HUD/esquinas, mayúsculas espaciadas, "// TUTORIAL", texto de la fuente al final (11-04 a 11-14).
