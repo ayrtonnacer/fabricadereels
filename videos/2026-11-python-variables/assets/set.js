@@ -1,158 +1,142 @@
-/* EL SET — "Qué son las variables en Python". Una variable es una ETIQUETA (placa con hilo blanco) que apunta a un VALOR (bloque gris).
-   Corriente: hacia la DERECHA y al fondo (el reel anterior iba a la izquierda). Estaciones:
-     A gancho: la caja (lo que NO es) y una etiqueta colgada de un valor.
-     B nombre: la etiqueta "edad" apunta al 19; arriba, el código edad = 19 se ilumina en orden (valor, después nombre).
-     C cuenta: edad + 1 → la etiqueta se da vuelta y muestra 19 → = 20.
-     D tipo: tres valores (19, "hola", [1, 2]) con su tipo grabado; la etiqueta pasa del 19 al texto.
-     E compartida: dos etiquetas (precio, total) a un solo valor 250; el fantasma de una copia aparece y se borra.
-   payoff: grúa al plano general; la caja del gancho desaparece y las etiquetas se encienden en tan.
+/* EL SET — "Qué son las variables en Python" (tema noir con OBJETOS 3D, rehecho 2026-11-18).
+   La MEMORIA es una torre de losas de vidrio; un VALOR es un objeto (orbe de cristal, tira de metal, bandeja de cubos); un NOMBRE es un ANILLO de luz
+   que se cierra alrededor del valor. El cajón vacío del gancho es lo que una variable NO es. Cámara continua hacia la derecha y al fondo.
+     A gancho: cajón vacío + orbe 19 con su anillo.   B nombre: la torre; el anillo baja y el 19 aparece adentro; el código se enciende en orden.
+     C cuenta: edad + 1 → nace un orbe 20 en la losa de arriba y el anillo SUBE hasta él.   D tipo: orbe (número), tira (texto), bandeja (lista); el anillo salta de uno a otro.
+     E compartida: dos anillos (precio, total) sobre el MISMO orbe 250; la copia fantasma se asoma y se borra.   payoff: grúa al plano general y vuelta al gancho.
    Todos los tiempos salen de la voz (cuando / ESC). Reglas: docs/2-estilo/CAMARA.md · funciones: docs/5-tecnica/THREEJS.md. */
 import { plano } from './escena3d.js';
 import { ESC, cuando } from './tiempos.js';
-import { K3 } from './token3d.js';
+import { O3D } from './objetos3d.js';
 
-export const montar = (root, tl, id) => plano(root, tl, id, async (E) => {   // tema noir (ver docs/2-estilo/ESTILO.md): la opción va al final de plano()
-  const { THREE, V, P } = E, R = E.rotulos(), K = K3(E);
+export const montar = (root, tl, id) => plano(root, tl, id, async (E) => {
+  const { THREE, V, P } = E, R = E.rotulos(), O = O3D(E);
 
   // ---------- 1) estaciones ----------
-  const S = { A: new V(0, 0, 0), B: new V(1.4, 0, -2.2), C: new V(2.5, 0, -2.0), D: new V(3.6, 0, -4.6), E: new V(5.0, 0, -7.0) };
+  const S = { A: new V(0, 0, 0), B: new V(1.8, 0, -2.6), D: new V(4.2, 0, -5.2), E: new V(6.0, 0, -8.0) };
   const en = (s, x = 0, y = 0, z = 0) => new V(S[s].x + x, y, S[s].z + z);
-  const G = {}; for (const k of 'ABCDE') { G[k] = new THREE.Group(); E.scene.add(G[k]); }   // un grupo por estación: se oculta cuando la cámara está en otra
+  const G = {}; for (const k of 'ABDE') { G[k] = new THREE.Group(); E.scene.add(G[k]); }   // un grupo por estación: se oculta cuando la cámara está en otra
   const add = (o, s, x = 0, y = 0, z = 0) => { o.position.copy(en(s, x, y, z)); G[s].add(o); return o; };
+  const YO = 0.6;   // altura de los objetos que flotan sobre el piso
 
-  // ---------- piezas propias ----------
-  const VAL = 1.3, TAG = 1.0, HV = K.H * VAL, HT = K.H * TAG, TY = HV + 0.36;   // TY = altura de la etiqueta sobre su valor            // valor: placa grande; etiqueta: placa chica
-  const valor = (txt, s, x, z = 0) => add(K.ficha({ txt, size: VAL }), s, x, HV / 2, z);
-  const etiqueta = (txt, s, x, y, z = 0, back = null) => add(K.ficha({ txt, size: TAG, back }), s, x, y, z);
-  // hilo blanco de la etiqueta al valor: un cilindro que se estira entre dos puntos (se mueve por cuadro, no se crea)
-  const hilo = (s) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(0.005, 0.005, 1, 8), E.basic(P.hi)); m.visible = false; G[s].add(m);
-    const halo = new THREE.Mesh(new THREE.CylinderGeometry(0.022, 0.022, 1, 10), new THREE.MeshBasicMaterial({ color: P.hi, transparent: true, opacity: 0.12, depthWrite: false, blending: THREE.AdditiveBlending })); m.add(halo);   // noir: el hilo brilla
-    const b0 = E.brillo(P.hi, 0.09, 0.9), b1 = E.brillo(P.hi, 0.09, 0.9); G[s].add(b0, b1);
-    const up = new V(0, 1, 0), d = new V();
-    return { m, set(a, b, p) { b0.visible = b1.visible = false; if (p <= 0.002) { m.visible = false; return; } const q = new V().lerpVectors(a, b, Math.min(1, p)); d.subVectors(q, a);
-      const L = d.length(); if (L < 1e-4) { m.visible = false; return; } b0.position.copy(a); b1.position.copy(q); b0.visible = b1.visible = true; m.visible = true; m.position.copy(a).addScaledVector(d, 0.5); m.scale.set(1, L, 1); m.quaternion.setFromUnitVectors(up, d.normalize()); } };
-  };
-  const bajo = (o) => new V(o.position.x, o.position.y - o.userData.h / 2, o.position.z);    // borde inferior de una placa
-  const sobre = (o) => new V(o.position.x, o.position.y + o.userData.h / 2, o.position.z);   // borde superior
-
-  // ---------- 2) objetos y rótulos por estación ----------
-  // A · gancho: la caja (lo que NO es una variable) y una etiqueta colgada de un valor
-  const caja = new THREE.Group(); { const m = E.caja(0.5, 0.42, 0.5, E.std()); m.position.y = 0.21; caja.add(m); E.contornear(caja);
-    if (E.NOIR) { m.material = new THREE.MeshStandardMaterial({ color: 0x121212, roughness: 0.65, metalness: 0.5 });   // sin el reflejo blanco del techo
-      const e = new THREE.EdgesGeometry(new THREE.BoxGeometry(0.5, 0.42, 0.5)).attributes.position.array, pr = []; for (let i = 0; i < e.length; i += 3) pr.push(new V(e[i], e[i + 1] + 0.21, e[i + 2]));
-      caja.add(E.trazo(pr, P.edge, P.px)); } }
-  add(caja, 'A', -0.42, 0, 0); caja.rotation.y = 0.35;
-  const vA = valor('19', 'A', 0.42), tA = etiqueta('edad', 'A', 0.42, TY), hA = hilo('A');
+  // ---------- 2) objetos y rótulos ----------
+  // A · gancho: el cajón vacío (lo que NO es) y un orbe 19 con su anillo
+  const caja = add(O.cajon(), 'A', -0.55, 0, 0); caja.rotation.y = 0.35;
+  const vA = add(O.orbe(0.3, '19'), 'A', 0.5, YO, 0), tA = add(O.anillo(0.45), 'A', 0.5, YO, 0); tA.userData.acento(1); add(O.marca(), 'A', 0.5, 0, 0);
   const finHook = ESC.gancho.t1 - 0.35;
   R.fijo('@ayrtonnacer', 'firma', 90, 262, -1, finHook, 'font-size: 60px;');
   R.fijo('Una variable es una <span class="acc">etiqueta</span>', 'titular', 90, 350, -1, finHook, 'width: 900px; font-size: 140px; line-height: .98; letter-spacing: -.03em; text-align: left; text-wrap: balance;');
-  const tCaja = cuando('l01', 'caja');
-  R.anclado('<span class="chip err">✕ caja</span>', '', en('A', -0.42, 0.21, 0.3), tCaja, ESC.gancho.t1 + 0.3);
+  R.anclado('<b>edad</b>', 'rot', en('A', 0.5, YO + 0.62), -1, ESC.gancho.t1 + 0.3, 'font-size: 54px;', 'arriba');
+  R.anclado('<span class="chip err">✕ caja</span>', '', en('A', -0.55, 0.2, 0.3), cuando('l01', 'caja'), ESC.gancho.t1 + 0.3);
 
-  // B · la etiqueta "edad" apunta al 19 (sin soportes: Ayrton 2026-11-17)
-  const vB = valor('19', 'B', 0), tB = etiqueta('edad', 'B', 0, TY), hB = hilo('B');
+  // B · la torre de memoria; el anillo "edad" baja y el 19 aparece adentro
+  const torre = add(O.torre(), 'B'), yB = torre.userData.y(2), yC = torre.userData.y(3);
+  const vB = add(O.orbe(0.3, '19'), 'B', 0, yB, 0), tB = add(O.anillo(0.45), 'B', 0, yB, 0);
   const t02 = { nombre: cuando('l02', 'nombre'), apunta: cuando('l02', 'apunta'), valor: cuando('l02', 'valor'), memoria: cuando('l02', 'memoria') };
   const t03 = { asignar: cuando('l03', 'asignar'), crea: cuando('l03', 'crea'), asocia: cuando('l03', 'asocia') };
-  const cod = R.anclado('edad = 19', 'rot mono', en('B', 0, 1.02), t03.asignar, cuando('l04') - 0.4, 'font-size: 64px;', 'arriba');
+  const lB = R.anclado('<b>edad</b>', 'rot', en('B', 0, yB + 0.62), t02.nombre, cuando('l06') + 0.5, 'font-size: 54px;', 'arriba');
+  const cod = R.anclado('edad = 19', 'rot mono', en('B', 0, yB + 1.02), t03.asignar, cuando('l04') - 0.4, 'font-size: 56px;', 'arriba');
 
-  // C · la cuenta: edad + 1 = 20 (la etiqueta se da vuelta y muestra su valor)
-  const cy = 0.55, CS = 1.4, eC = add(K.ficha({ txt: 'edad', size: CS, back: '19' }), 'C', -0.5175, cy), mas = add(K.ficha({ txt: '+ 1', size: CS }), 'C', 0, cy), igual = add(K.ficha({ txt: '= 20', size: CS }), 'C', 0.5175, cy);
+  // C · la cuenta: nace el 20 en la losa de arriba y el anillo sube hasta él
+  const vC = add(O.orbe(0.3, '20'), 'B', 0, yC, 0);
   const t04 = { nombre: cuando('l04', 'nombre'), valor: cuando('l04', 'valor') }, t05 = { mas: cuando('l05', 'más'), veinte: cuando('l05', 'veinte') };
+  R.anclado('edad + 1', 'rot mono', en('B', -0.85, (yB + yC) / 2), t05.mas, cuando('l06') - 0.2, 'font-size: 46px;', 'centro');
 
-  // D · el tipo vive en el valor: tres valores con su tipo; la etiqueta pasa del número al texto
-  const vN = valor('19', 'D', -1.0), vT = valor('"hola"', 'D', 0.0), vL = valor('[1, 2]', 'D', 1.05);
+  // D · el tipo vive en el valor: orbe (número), tira (texto), bandeja (lista); el anillo salta del número al texto
+  const XD = [-0.85, 0, 0.85];
+  const vN = add(O.orbe(0.3, '19'), 'D', XD[0], YO, 0), vT = add(O.tira(), 'D', XD[1], YO, 0), vL = add(O.lista(), 'D', XD[2], YO, 0);
+  [XD[0], XD[1], XD[2]].forEach((x) => add(O.marca(0.34), 'D', x, 0, 0));
   const t06 = { tipo: cuando('l06', 'tipo'), numero: cuando('l06', 'número'), texto: cuando('l06', 'texto'), lista: cuando('l06', 'lista') };
   const finD = ESC.compartida.t0 + 0.4;
-  R.anclado('int', 'rot mono', en('D', -1.0, 0.03, 0.38), t06.numero, finD, 'color: var(--muted);');
-  R.anclado('str', 'rot mono', en('D', 0.0, 0.03, 0.38), t06.texto, finD, 'color: var(--muted);');
-  R.anclado('list', 'rot mono', en('D', 1.05, 0.03, 0.38), t06.lista, finD, 'color: var(--muted);');
-  const tD = etiqueta('edad', 'D', -1.0, TY), hD = hilo('D');
+  R.anclado('int', 'rot mono', en('D', XD[0], 0.12, 0.45), t06.numero, finD, 'color: var(--muted);');
+  R.anclado('str', 'rot mono', en('D', XD[1], 0.12, 0.45), t06.texto, finD, 'color: var(--muted);');
+  R.anclado('list', 'rot mono', en('D', XD[2], 0.12, 0.45), t06.lista, finD, 'color: var(--muted);');
+  const tD = add(O.anillo(0.5), 'D', XD[0], YO, 0);
+  const lD = R.anclado('<b>edad</b>', 'rot', en('D', XD[0], YO + 0.7), cuando('l07') - 0.1, finD, 'font-size: 54px;', 'arriba');
   const t07 = cuando('l07'), t08 = { pasar: cuando('l08', 'pasar'), texto: cuando('l08', 'texto') };
 
-  // E · dos etiquetas, un solo valor; la copia que NO se hace
-  const vE = valor('250', 'E', 0), e1 = etiqueta('precio', 'E', -0.42, TY), e2 = etiqueta('total', 'E', 0.42, TY), h1 = hilo('E'), h2 = hilo('E');
-  const fantasma = valor('250', 'E', 0.62); fantasma.userData.borde(0.35);
+  // E · dos anillos, un solo valor; la copia que NO se hace
+  const vE = add(O.orbe(0.3, '250'), 'E', 0, YO, 0), e1 = add(O.anillo(0.45, 0.35), 'E', 0, YO, 0), e2 = add(O.anillo(0.6, -0.3), 'E', 0, YO, 0); add(O.marca(), 'E', 0, 0, 0);
+  const fantasma = add(O.orbe(0.3, '250', true), 'E', 0.85, YO, 0);
   const t10 = { dos: cuando('l10', 'dos'), mismo: cuando('l10', 'mismo') }, t11 = { copia: cuando('l11', 'copia'), solo: cuando('l11', 'solo') };
-  R.anclado('total = precio', 'rot mono', en('E', 0, 1.0), cuando('l10'), ESC.payoff.t0, 'font-size: 56px;', 'arriba');
+  const lE1 = R.anclado('<b>precio</b>', 'rot', en('E', -0.4, YO + 0.85), cuando('l10') - 0.6, ESC.payoff.t0, 'font-size: 54px;', 'arriba');
+  const lE2 = R.anclado('<b>total</b>', 'rot', en('E', 0.4, YO + 0.85), t10.dos, ESC.payoff.t0, 'font-size: 54px;', 'arriba');
+  R.anclado('total = precio', 'rot mono', en('E', 0, YO + 1.35), cuando('l10'), ESC.payoff.t0, 'font-size: 50px;', 'arriba');
+  // el nombre reaparece en el gancho al volver (payoff)
+  R.anclado('<b>edad</b>', 'rot', en('A', 0.5, YO + 0.62), ESC.payoff.t0 + 1.0, ESC.payoff.t1 + 0.3, 'font-size: 54px;', 'arriba');
 
   const t12 = { guarda: cuando('l12', 'guarda'), nombra: cuando('l12', 'nombra') };
-  const etiquetas = [tA, tB, eC, tD, e1, e2];
+  const anillos = [tA, tB, tD, e1, e2];
 
   // ---------- 3) cámara ----------
   const Kp = (T, s, p, l, e) => ({ t: T, p: [S[s].x + p[0], p[1], S[s].z + p[2]], l: [S[s].x + l[0], l[1], S[s].z + l[2]], e });
   const v1 = cuando('l02') - 0.85, v2 = cuando('l03') - 0.6, v3 = cuando('l04') - 0.5, v4 = cuando('l06') - 0.55, v5 = cuando('l08') - 0.5,
     v6 = cuando('l09') - 0.5, v7 = cuando('l10') - 0.5, v8 = cuando('l11') - 0.4, v9 = cuando('l12') - 0.5;
-  const CAM = [   // poses calculadas para que lo que se lee caiga entre y 200 y 1100 (fuera de los subtítulos)
-    Kp(0, 'A', [3.59, 3.17, 6.21], [0, 0.84, 0]),                        // portada: medio en tres cuartos, leve picado
-    Kp(v1, 'A', [3.3, 2.95, 5.75], [0, 0.82, 0], 'lin'),                 // gancho: push-in lento
-    Kp(v1 + 0.85, 'B', [0.44, 0.85, 3.1], [0, 0.18, 0], 'io'),           // TRAVELLING A → B: llega de frente a la memoria
-    Kp(v2, 'B', [0.44, 0.85, 3.1], [0, 0.18, 0], 'lin'),                 // retención (l02)
-    Kp(v2 + 0.75, 'B', [1.49, 0.26, 3.19], [0, 0.38, 0], 'out'),         // DOLLY IN en contrapicado: el código y la etiqueta (l03)
-    Kp(v3, 'B', [1.49, 0.26, 3.19], [0, 0.38, 0], 'lin'),
-    Kp(v3 + 0.8, 'C', [0, 0.96, 4.38], [0, 0.34, 0], 'io'),        // TRAVELLING lateral a la cuenta (l04–l05)
-    Kp(v4, 'C', [0, 0.96, 4.38], [0, 0.34, 0], 'lin'),
-    Kp(v4 + 0.85, 'D', [1.26, 3.49, 6.02], [0.2, -0.04, 0], 'io'),         // TRAVELLING + GRÚA a los tipos, en picado (los tres juntos)
-    Kp(v5, 'D', [1.26, 3.49, 6.02], [0.2, -0.04, 0], 'lin'),
-    Kp(v5 + 0.8, 'D', [-0.88, 1.32, 4.39], [-0.5, 0.22, 0], 'io'),      // dolly in: la etiqueta que se mueve (l08)
-    Kp(v6, 'D', [-0.88, 1.32, 4.39], [-0.5, 0.22, 0], 'lin'),
-    Kp(v6 + 0.7, 'D', [1.73, 0.47, 3.86], [-0.5, 0.24, 0], 'out'),       // contrapicado: el 19 quedó solo, el hilo va al texto (l09)
-    Kp(v7, 'D', [1.73, 0.47, 3.86], [-0.5, 0.24, 0], 'lin'),
-    Kp(v7 + 0.85, 'E', [1.14, 1.21, 3.87], [0.1, 0.36, 0], 'io'),        // TRAVELLING a las dos etiquetas (l10)
-    Kp(v8, 'E', [1.14, 1.21, 3.87], [0.1, 0.36, 0], 'lin'),
-    Kp(v8 + 0.8, 'E', [0.6, 3.44, 2.86], [0.1, -0.02, 0], 'out'),        // GRÚA ascendente: los dos hilos llegan al mismo bloque (l11)
-    Kp(v9, 'E', [0.6, 3.44, 2.86], [0.1, -0.02, 0], 'lin'),
-    { t: v9 + 0.7, p: [3.0, 5.5, 2.0], l: [1.5, 0, -2.5], e: 'in' },      // GRÚA: sube por encima del set (se ve todo el recorrido)…
-    Kp(v9 + 1.5, 'A', [1.76, 1.26, 3.76], [0, 0.22, 0], 'out'),           // …y baja de vuelta al gancho: la caja se borra, la etiqueta queda (cierra el loop)
-    Kp(ESC.payoff.t1, 'A', [1.76, 1.26, 3.76], [0, 0.22, 0], 'lin'),
+  const CAM = [
+    Kp(0, 'A', [2.7, 2.3, 4.7], [0, 0.7, 0]),                         // portada: medio en tres cuartos, leve picado
+    Kp(v1, 'A', [2.45, 2.1, 4.25], [0, 0.68, 0], 'lin'),                  // gancho: push-in lento
+    Kp(v1 + 0.9, 'B', [0.9, 1.5, 4.6], [0, 1.65, 0], 'io'),               // TRAVELLING A → B: la torre entera, de frente (l02)
+    Kp(v2, 'B', [0.9, 1.5, 4.6], [0, 1.65, 0], 'lin'),
+    Kp(v2 + 0.8, 'B', [1.5, 1.85, 2.9], [0, 1.9, 0], 'out'),              // DOLLY IN en picado leve: el orbe, el anillo y el código (l03)
+    Kp(v3, 'B', [1.5, 1.85, 2.9], [0, 1.9, 0], 'lin'),
+    Kp(v3 + 0.9, 'B', [-1.0, 2.2, 3.9], [0, 2.05, 0], 'io'),               // PANEO ORBITAL y grúa: la cuenta, del 19 al 20 (l04–l05)
+    Kp(v4, 'B', [-1.0, 2.2, 3.9], [0, 2.05, 0], 'lin'),
+    Kp(v4 + 0.9, 'D', [0.5, 3.0, 5.4], [0, 0.35, 0], 'io'),             // TRAVELLING + GRÚA: los tres tipos juntos, en picado
+    Kp(v5, 'D', [0.5, 3.0, 5.4], [0, 0.35, 0], 'lin'),
+    Kp(v5 + 0.8, 'D', [-0.7, 1.3, 2.9], [-0.55, 0.6, 0], 'io'),           // dolly in: el anillo que salta (l08)
+    Kp(v6, 'D', [-0.7, 1.3, 2.9], [-0.55, 0.6, 0], 'lin'),
+    Kp(v6 + 0.7, 'D', [1.5, 0.45, 3.0], [-0.5, 0.65, 0], 'out'),          // contrapicado: el 19 quedó solo, el anillo envuelve el texto (l09)
+    Kp(v7, 'D', [1.5, 0.45, 3.0], [-0.5, 0.65, 0], 'lin'),
+    Kp(v7 + 0.9, 'E', [1.2, 1.7, 4.2], [0, 0.8, 0], 'io'),                // TRAVELLING a los dos anillos (l10)
+    Kp(v8, 'E', [1.2, 1.7, 4.2], [0, 0.8, 0], 'lin'),
+    Kp(v8 + 0.8, 'E', [0.5, 3.2, 2.6], [0.1, 0.5, 0], 'out'),             // GRÚA ascendente: los dos anillos sobre el mismo orbe (l11)
+    Kp(v9, 'E', [0.5, 3.2, 2.6], [0.1, 0.5, 0], 'lin'),
+    { t: v9 + 0.7, p: [3.4, 6.5, 1.0], l: [2.4, 0.5, -3.5], e: 'in' },    // GRÚA: sube por encima del set (se ve todo el recorrido)…
+    Kp(v9 + 1.5, 'A', [1.9, 1.3, 3.7], [0.2, 0.55, 0], 'out'),            // …y baja de vuelta al gancho: el cajón se borra, el anillo queda (cierra el loop)
+    Kp(ESC.payoff.t1, 'A', [1.9, 1.3, 3.7], [0.2, 0.55, 0], 'lin'),
   ];
-  // Dinamismo (referencia de Ayrton, 11-17): la cámara nunca se congela. Las retenciones son una DERIVA ORBITAL LENTA (≈ 10° y 8 % de acercamiento, < 100 px/s):
-  // el texto sigue quieto y legible, pero el parallax da vida y profundidad. Los viajes salen de la pose ya derivada.
+  // retenciones con DERIVA ORBITAL LENTA (referencia de Ayrton 11-17): la cámara nunca se congela, el texto sigue legible
   const orb = (p, l, g, k) => { const dx = p[0] - l[0], dz = p[2] - l[2], c = Math.cos(g), sn = Math.sin(g); return [l[0] + (dx * c + dz * sn) * k, p[1], l[2] + (-dx * sn + dz * c) * k]; };
-  // los planos altos (picado) derivan alejándose para no recortar los bordes
   let signo = 1;
   for (let i = 1; i < CAM.length; i++) { const a = CAM[i - 1], b = CAM[i];
     if (b.e === 'lin' && a.p.every((x, j) => Math.abs(x - b.p[j]) < 1e-6) && i > 1) { b.p = b.p[1] > 3 ? orb(b.p, b.l, signo * 0.1, 1.12) : orb(b.p, b.l, signo * 0.17, 0.92); signo = -signo; } }
-  const GOLPES = [[v1 + 0.85, 0.006], [v3 + 0.8, 0.006, 2], [v4 + 0.85, 0.006, 3], [v7 + 0.85, 0.006, 4]];
+  const GOLPES = [[v1 + 0.9, 0.006], [v3 + 0.9, 0.006, 2], [v4 + 0.9, 0.006, 3], [v7 + 0.9, 0.006, 4]];
 
   // ---------- 4) un cuadro ----------
-  const vuela = (o, T, t0, dx = 0.5, dy = 0.4, dz = 0.7, d = 0.5) => { if (!o.userData.home) o.userData.home = o.position.clone();
-    const q = E.pop(o, T, t0, d), k = 1 - q; o.position.set(o.userData.home.x + dx * k, o.userData.home.y + dy * k, o.userData.home.z + dz * k); return q; };
   const tmp = new V();
+  const ponerAnillo = (a, p, k = 1) => { a.position.copy(p); a.scale.setScalar(Math.max(0.001, k)); a.visible = k > 0.01; };
   return (T) => {
     E.ruta(T, CAM, GOLPES);
-    // cada estación se ve mientras la cámara está cerca; en el plano general (payoff) se ven todas
     const gen = T > v9;
-    G.A.visible = T < v1 + 1.2 || gen; G.B.visible = (T > v1 - 0.5 && T < v4 + 1.0) || gen; G.C.visible = (T > v3 - 0.6 && T < v4 + 1.0) || gen;
+    G.A.visible = T < v1 + 1.2 || gen; G.B.visible = (T > v1 - 0.5 && T < v4 + 1.0) || gen;
     G.D.visible = T > v4 - 0.6; G.E.visible = T > v7 - 0.6;
-    // A (visible desde el cuadro 0): el hilo ya está tendido. La caja se va en el payoff, cuando la voz dice "guarda".
-    hA.set(bajo(tA), sobre(vA), 1); tA.userData.acento(1);
-    K.quitar(caja, T, t12.guarda, 0.45);
-    // B: aparecen cuando la cámara viaja hacia ellas
-    vuela(tB, T, t02.nombre, 0.8, 0.5, 0.9); tB.userData.acento(E.st(t02.nombre, t02.nombre + 0.2, T) * (1 - E.st(t02.memoria, t02.memoria + 0.3, T)) + E.st(t03.asocia, t03.asocia + 0.2, T) * (1 - E.st(v3, v3 + 0.3, T)));
-    vuela(vB, T, t02.valor, 0, -0.6, 0.6); vB.userData.acento(E.st(t03.crea, t03.crea + 0.2, T) * (1 - E.st(t03.asocia, t03.asocia + 0.2, T)));
-    hB.set(bajo(tB), sobre(vB), E.out(t02.apunta, t02.apunta + 0.45, T));
-    // el código se enciende en orden: primero el valor, después el nombre
+    // A (visible desde el cuadro 0): el orbe ya está dentro de su anillo. El cajón se va en el payoff, cuando la voz dice "guarda".
+    caja.scale.setScalar(Math.max(0.001, 1 - E.st(t12.guarda, t12.guarda + 0.45, T))); caja.visible = T < t12.guarda + 0.46;
+    // B: la torre crece desde su base cuando la cámara llega; el anillo baja y se cierra; el orbe aparece adentro
+    E.pop(torre, T, v1 + 0.25, 0.7);
+    const qa = E.out(t02.nombre, t02.nombre + 0.8, T), yRing = yB + 1.1 * (1 - qa), uno = E.st(t02.nombre, t02.nombre + 0.15, T);
+    const subida = E.io(t05.veinte + 0.1, t05.veinte + 0.9, T);   // C: el anillo sube del 19 al 20
+    tB.position.set(S.B.x, yRing + (yC - yB) * subida, S.B.z); tB.scale.setScalar(Math.max(0.001, uno)); tB.visible = uno > 0.01;
+    tB.userData.acento(E.st(t02.nombre, t02.nombre + 0.2, T) * (1 - E.st(t02.memoria, t02.memoria + 0.3, T)) + E.st(t03.asocia, t03.asocia + 0.2, T) * (1 - E.st(v3, v3 + 0.3, T)) + 0.0);
+    lB.p.set(S.B.x, tB.position.y + 0.62, S.B.z);
+    const q19 = E.pop(vB, T, t02.valor, 0.5); vB.userData.acento(E.st(t03.crea, t03.crea + 0.2, T) * (1 - E.st(t03.asocia, t03.asocia + 0.2, T)));
+    vB.userData.fade(1 - 0.65 * subida);
+    const q20 = E.pop(vC, T, t05.veinte, 0.5); vC.userData.acento(E.st(t05.veinte, t05.veinte + 0.2, T) * (1 - E.st(v4, v4 + 0.3, T)));
     const html = T < t03.crea ? 'edad = 19' : T < t03.asocia ? 'edad = <b>19</b>' : '<b>edad</b> = 19';
     if (cod.d.innerHTML !== html) cod.d.innerHTML = html;
-    // C: edad + 1 = 20
-    vuela(eC, T, t04.nombre, -0.9, 0.4, 0.9); eC.userData.acento(1 - E.st(t04.valor, t04.valor + 0.3, T)); eC.userData.girar(E.st(t04.valor, t04.valor + 0.5, T));
-    vuela(mas, T, t05.mas, 0, 0.6, 0.8); vuela(igual, T, t05.veinte, 0.9, 0.4, 0.9); igual.userData.acento(E.st(t05.veinte, t05.veinte + 0.2, T));
-    // D: tres valores en la palabra que los nombra; la etiqueta pasa del 19 al texto
-    vuela(vN, T, t06.numero, 0, -0.6, 0.5); vuela(vT, T, t06.texto, 0, -0.6, 0.5); vuela(vL, T, t06.lista, 0, -0.6, 0.5);
-    E.pop(tD, T, t07 - 0.1, 0.3);
-    const k = E.io(t08.pasar, t08.texto + 0.1, T);
-    tD.position.copy(en('D', -1.0 + 1.0 * k, TY + 0.22 * Math.sin(Math.PI * k)));
-    tD.userData.acento(E.st(t07 - 0.1, t07 + 0.2, T));
-    hD.set(bajo(tD), sobre(k < 0.5 ? vN : vT), E.out(t07, t07 + 0.4, T) * Math.abs(1 - 2 * k));   // el hilo se despega del 19 y se vuelve a pegar en el texto
-    // E: precio apunta al 250; aparece total y apunta al MISMO; la copia fantasma se asoma y se borra
-    vuela(vE, T, v7 + 0.2, 0, -0.6, 0.5); vuela(e1, T, v7 + 0.3, -0.8, 0.5, 0.8);
-    h1.set(bajo(e1), sobre(vE), E.out(v7 + 0.45, v7 + 0.85, T));
-    vuela(e2, T, t10.dos, 0.9, 0.5, 0.9); h2.set(bajo(e2), sobre(vE), E.out(t10.mismo, t10.mismo + 0.4, T));
-    e2.userData.acento(E.st(t10.dos, t10.dos + 0.2, T));
-    const qf = E.pop(fantasma, T, t11.copia, 0.25) * (1 - E.st(t11.copia + 0.6, t11.copia + 0.9, T)); fantasma.visible = qf > 0.01; fantasma.scale.setScalar(Math.max(0.001, qf));
-    // payoff: todas las etiquetas en tan cuando la voz dice "nombra"
+    // D: los tres valores entran en la palabra que los nombra; el anillo salta del número al texto
+    E.pop(vN, T, t06.numero, 0.4); E.pop(vT, T, t06.texto, 0.4); E.pop(vL, T, t06.lista, 0.4);
+    const k = E.io(t08.pasar, t08.texto + 0.1, T), ent = E.st(t07 - 0.1, t07 + 0.3, T);
+    ponerAnillo(tD, en('D', XD[0] + (XD[1] - XD[0]) * k, YO + 0.4 * Math.sin(Math.PI * k), 0), ent); tD.userData.acento(E.st(t07 - 0.1, t07 + 0.2, T));
+    lD.p.set(S.D.x + XD[0] + (XD[1] - XD[0]) * k, YO + 0.7 + 0.4 * Math.sin(Math.PI * k), S.D.z);
+    // E: precio rodea al 250; aparece total alrededor del MISMO; la copia fantasma se asoma y se borra
+    E.pop(vE, T, v7 + 0.2, 0.5);
+    ponerAnillo(e1, en('E', 0, YO), E.out(v7 + 0.4, v7 + 0.9, T)); e1.userData.acento(1 - E.st(t10.dos, t10.dos + 0.2, T));
+    ponerAnillo(e2, en('E', 0, YO), E.out(t10.dos, t10.dos + 0.6, T)); e2.userData.acento(E.st(t10.dos, t10.dos + 0.2, T));
+    const qf = E.pop(fantasma, T, t11.copia, 0.25) * (1 - E.st(t11.copia + 0.6, t11.copia + 0.9, T)); fantasma.visible = qf > 0.01; fantasma.scale.setScalar(Math.max(0.001, qf)); fantasma.userData.fade(qf);
+    // payoff: todos los anillos en tan cuando la voz dice "nombra"
     const enc = E.st(t12.nombra, t12.nombra + 0.25, T);
-    if (enc > 0) etiquetas.forEach((t) => t.userData.acento(enc));
+    if (enc > 0) anillos.forEach((t) => t.userData.acento(enc));
     R.dibujar(T);
   };
 }, { estilo: 'noir' });

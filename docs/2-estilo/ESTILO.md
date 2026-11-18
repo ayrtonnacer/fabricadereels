@@ -75,6 +75,7 @@ Inspirado en los reels de Instagram que le gustan (medidos en `docs/4-referencia
 - **Piso de puntos**: grilla blanca muy tenue cada medio metro con un **punto brillante en cada cruce**; con la distancia se apaga en la niebla (da profundidad).
 - **Niebla más cerrada** (5–20 m): lo lejano se funde con el negro, lo cercano queda nítido.
 - **Cámara**: la del reel es de movimiento casi continuo (69–88 % de los cuadros en las referencias), ver `CAMARA.md`.
+**Corrección 2026-11-18**: el noir NO es pintar de negro las tarjetas. Los protagonistas son **objetos 3D con volumen** que representan la idea (memoria = torre de losas de vidrio, valor = orbe de cristal, nombre = anillo de luz, lo que no es = cajón vacío) y **se transforman**; el texto es un rótulo mínimo. Molde: `videos/2026-11-python-variables/assets/objetos3d.js`.
 **Lo que NO tomamos de las referencias**: mayúsculas espaciadas en los rótulos (nuestra tipografía es mejor, dijo Ayrton), bloom de posproceso (caro: el brillo se hace con halos aditivos baratos, `E.brillo`), fondos blancos.
 **Funciones nuevas** (`escena3d.js`): `E.NOIR`, `E.brillo(color, tamaño, opacidad)` (halo de luz), `E.marcoRedondo(w, h, r, z, color, px)` (borde de tarjeta), piso de puntos automático.
 Esto reemplaza, solo en el tema noir, las reglas "objetos de línea gris" y "sin brillos detrás de los objetos" (Ayrton pidió esta estética el 2026-11-17).
