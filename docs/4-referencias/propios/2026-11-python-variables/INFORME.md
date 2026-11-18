@@ -3,71 +3,71 @@
 1080×1920 · 30.0 fps · 53.13 s · 1594 cuadros
 
 ## Imagen
-- Brillo medio 0.015 · contraste 0.092 · saturación 0.003
-- Colores dominantes: #000000 (97.0 %), #151515 (0.7 %), #FDFDFD (0.6 %)
+- Brillo medio 0.016 · contraste 0.093 · saturación 0.003
+- Colores dominantes: #000000 (96.9 %), #161616 (0.6 %), #FDFDFD (0.6 %)
 
 ## Cortes y planos
 - 1 cortes (1.1 por minuto); plano medio 26.57 s, mediano 26.57 s, más largo 49.9 s.
 - Tipos: corte seco: 1
 
 - 0.0 % de los cortes llegan después de un movimiento fuerte de cámara (transición); el resto son cortes secos.
-- 100.0 % de los cortes caen a ±0,1 s de un golpe de sonido.
+- 0.0 % de los cortes caen a ±0,1 s de un golpe de sonido.
 
 | # | seg | tipo | vel. cámara antes | plano que sigue | golpe más cercano |
 |---|---|---|---|---|---|
-| 1 | 3.23 | corte seco | 3 px/s | 49.9 s | 0.05 s |
+| 1 | 3.23 | corte seco | 7 px/s | 49.9 s | 0.12 s |
 
 ## Cámara
-- Se mueve en el **44.7 %** de los cuadros (42.6 % con zoom); zoom neto -0.27 % por segundo (+ acerca).
-- Velocidad mediana 5 px/s (media 274, p95 1592); 83.1 % del movimiento es lento (< 100 px/s: deriva casi imperceptible). A 1080 de ancho. 45 movimientos, mediana 0.4 s.
-- **Tirón (jerk)**: mediano 407 px/s³, p95 84335 px/s³ (menos = más suave).
-- **Mover–retener–mover**: 15 movimientos notorios (pico ≥ 100 px/s; 2.8 cada 10 s), pico mediano 1749 px/s, duran 0.7 s; 19 retenciones ≥ 0,5 s (mediana 0.8 s); ataque (10 % → pico) mediano 0.1 s, liberación (pico → 10 %) 0.07 s (parecidos = ease simétrico).
+- Se mueve en el **54.6 %** de los cuadros (52.0 % con zoom); zoom neto -0.18 % por segundo (+ acerca).
+- Velocidad mediana 5 px/s (media 192, p95 1054); 86.3 % del movimiento es lento (< 100 px/s: deriva casi imperceptible). A 1080 de ancho. 50 movimientos, mediana 0.47 s.
+- **Tirón (jerk)**: mediano 299 px/s³, p95 38963 px/s³ (menos = más suave).
+- **Mover–retener–mover**: 12 movimientos notorios (pico ≥ 100 px/s; 2.3 cada 10 s), pico mediano 1916 px/s, duran 1.05 s; 12 retenciones ≥ 0,5 s (mediana 0.67 s); ataque (10 % → pico) mediano 0.23 s, liberación (pico → 10 %) 0.17 s (parecidos = ease simétrico).
 
 | desde | hasta | seg | tipo | desplaz. px | zoom % | vel. máx px/s | ataque s | liberación s |
 |---|---|---|---|---|---|---|---|---|
-| 1.77 | 1.97 | 0.23 | paneo/deriva | [-1, 0] | 0.0 | 12 | 0.1 | 0.1 |
-| 2.77 | 3.13 | 0.4 | acercamiento | [-2, 1] | 1.4 | 54 | 0.2 | 0.17 |
-| 3.33 | 3.6 | 0.3 | acercamiento | [-182, 4] | 5.9 | 1749 | 0.03 | 0.13 |
-| 3.73 | 4.37 | 0.67 | acercamiento | [150, 3] | 7.0 | 4638 | 0.07 | 0.0 |
-| 4.5 | 5.2 | 0.73 | alejamiento | [3, -15] | -5.2 | 188 | 0.07 | 0.07 |
-| 5.33 | 5.57 | 0.27 | paneo/deriva | [0, 0] | 0.1 | 4 | 0.1 | 0.13 |
-| 5.73 | 6.4 | 0.7 | acercamiento | [0, -2] | 0.7 | 6 | 0.03 | 0.63 |
-| 7.57 | 8.23 | 0.7 | alejamiento | [-1, 171] | -19.4 | 662 | 0.07 | 0.43 |
-| 8.37 | 8.67 | 0.33 | paneo/deriva | [0, 0] | 0.3 | 1 | 0.2 | 0.1 |
-| 9.43 | 10.47 | 1.07 | acercamiento | [1, -2] | 0.7 | 17 | 0.43 | 0.6 |
-| 10.6 | 10.8 | 0.23 | paneo/deriva | [0, -1] | 0.2 | 15 | 0.1 | 0.1 |
-| 10.97 | 11.4 | 0.47 | paneo/deriva | [0, -1] | 0.5 | 3 | 0.17 | 0.27 |
-| 11.6 | 11.9 | 0.33 | acercamiento | [0, 0] | 0.8 | 5 | 0.03 | 0.23 |
-| 12.43 | 14.4 | 2.0 | alejamiento | [-92, 530] | -33.4 | 21714 | 0.23 | 0.07 |
-| 15.37 | 15.6 | 0.27 | paneo/deriva | [3, 2] | -0.2 | 43 | 0.1 | 0.13 |
-| 15.77 | 15.9 | 0.17 | paneo/deriva | [209, -1] | -0.0 | 6259 | 0.03 | 0.0 |
-| 16.3 | 16.67 | 0.4 | alejamiento | [1, 2] | -1.2 | 43 | 0.17 | 0.2 |
-| 16.87 | 18.07 | 1.23 | acercamiento | [-2, -2] | 3.2 | 5 | 0.03 | 0.0 |
-| 19.6 | 20.1 | 0.53 | alejamiento | [3, 13] | -1.8 | 150 | 0.13 | 0.23 |
-| 21.07 | 22.1 | 1.07 | alejamiento | [-519, 566] | -14.0 | 10852 | 0.33 | 0.07 |
-| 22.93 | 23.47 | 0.57 | alejamiento | [-95, -4] | -0.6 | 2847 | 0.0 | 0.03 |
-| 23.63 | 24.13 | 0.53 | acercamiento | [0, -7] | 9.6 | 120 | 0.1 | 0.17 |
-| 24.3 | 24.67 | 0.4 | paneo/deriva | [-1, -3] | -0.3 | 38 | 0.33 | 0.03 |
-| 24.93 | 25.27 | 0.37 | alejamiento | [0, 0] | -0.7 | 2 | 0.03 | 0.3 |
-| 25.53 | 25.87 | 0.37 | paneo/deriva | [0, 0] | -0.3 | 2 | 0.27 | 0.07 |
-| 28.6 | 29.3 | 0.73 | acercamiento | [281, 83] | 41.3 | 1245 | 0.23 | 0.13 |
-| 29.43 | 29.6 | 0.2 | paneo/deriva | [1, 0] | 0.3 | 6 | 0.13 | 0.03 |
-| 30.4 | 31.5 | 1.13 | alejamiento | [8, 0] | -1.1 | 19 | 0.13 | 0.07 |
-| 32.03 | 32.2 | 0.2 | alejamiento | [1, 0] | -0.5 | 9 | 0.03 | 0.1 |
-| 32.83 | 32.97 | 0.17 | paneo/deriva | [1, 0] | -0.1 | 9 | 0.1 | 0.03 |
-| 33.37 | 34.03 | 0.7 | alejamiento | [-23, 7] | -5.0 | 96 | 0.23 | 0.33 |
-| 34.2 | 34.6 | 0.43 | acercamiento | [1, 0] | 0.8 | 5 | 0.1 | 0.3 |
-| 34.73 | 35.13 | 0.43 | acercamiento | [1, 0] | 0.9 | 22 | 0.03 | 0.37 |
-| 35.27 | 35.7 | 0.47 | acercamiento | [0, 1] | 0.7 | 4 | 0.3 | 0.13 |
-| 36.07 | 37.77 | 1.73 | paneo/deriva | [-1391, 337] | 9.7 | 8055 | 0.2 | 0.17 |
-| 38.23 | 38.53 | 0.33 | alejamiento | [-2, 2] | -1.5 | 17 | 0.03 | 0.27 |
-| 40.0 | 40.73 | 0.77 | alejamiento | [-2, -189] | -9.6 | 914 | 0.03 | 0.37 |
-| 40.87 | 41.0 | 0.17 | paneo/deriva | [0, 0] | 0.1 | 4 | 0.03 | 0.1 |
-| 43.6 | 45.57 | 2.0 | alejamiento | [703, -438] | -12.0 | 5510 | 0.27 | 0.07 |
-| 45.7 | 45.97 | 0.3 | acercamiento | [0, 1] | 0.7 | 15 | 0.23 | 0.03 |
+| 1.83 | 2.0 | 0.2 | paneo/deriva | [-1, 0] | -0.0 | 12 | 0.03 | 0.13 |
+| 2.73 | 3.17 | 0.47 | acercamiento | [-2, 2] | 1.2 | 59 | 0.3 | 0.13 |
+| 3.3 | 5.2 | 1.93 | acercamiento | [-250, 12] | 32.8 | 2229 | 0.03 | 0.2 |
+| 5.33 | 6.2 | 0.9 | acercamiento | [-1, -1] | 0.8 | 4 | 0.03 | 0.83 |
+| 6.37 | 6.6 | 0.27 | acercamiento | [-1, -1] | 0.5 | 5 | 0.2 | 0.03 |
+| 6.8 | 7.27 | 0.5 | acercamiento | [-1, -2] | 0.5 | 5 | 0.33 | 0.13 |
+| 7.53 | 8.37 | 0.87 | alejamiento | [0, 170] | -20.2 | 671 | 0.1 | 0.47 |
+| 8.57 | 8.97 | 0.43 | paneo/deriva | [0, 0] | 0.1 | 11 | 0.33 | 0.07 |
+| 9.13 | 10.1 | 1.0 | acercamiento | [2, -1] | 0.6 | 17 | 0.7 | 0.27 |
+| 10.27 | 10.5 | 0.27 | paneo/deriva | [1, 0] | 0.3 | 4 | 0.03 | 0.2 |
+| 10.63 | 11.07 | 0.47 | acercamiento | [1, -1] | 0.6 | 14 | 0.23 | 0.2 |
+| 11.2 | 12.23 | 1.07 | acercamiento | [2, 0] | 1.3 | 7 | 0.43 | 0.6 |
+| 12.37 | 14.9 | 2.57 | alejamiento | [-517, -48] | -24.6 | 2252 | 0.27 | 0.13 |
+| 15.03 | 15.17 | 0.17 | paneo/deriva | [0, 0] | -0.3 | 3 | 0.1 | 0.03 |
+| 15.37 | 15.57 | 0.23 | paneo/deriva | [2, 1] | -0.4 | 37 | 0.07 | 0.13 |
+| 16.23 | 16.6 | 0.4 | alejamiento | [0, 3] | -0.5 | 35 | 0.27 | 0.1 |
+| 16.73 | 18.17 | 1.47 | paneo/deriva | [-17, 6] | 0.3 | 17 | 0.23 | 0.07 |
+| 18.37 | 18.6 | 0.27 | alejamiento | [77, 2] | -8.1 | 2328 | 0.0 | 0.03 |
+| 19.57 | 20.03 | 0.5 | alejamiento | [2, 13] | -1.9 | 149 | 0.23 | 0.2 |
+| 20.23 | 20.5 | 0.3 | alejamiento | [-1, 1] | -0.6 | 20 | 0.2 | 0.07 |
+| 21.0 | 21.9 | 0.93 | alejamiento | [-517, 564] | -15.7 | 10915 | 0.33 | 0.07 |
+| 22.27 | 22.43 | 0.2 | paneo/deriva | [0, 0] | 0.0 | 5 | 0.03 | 0.13 |
+| 22.87 | 23.33 | 0.5 | acercamiento | [-1, 0] | 0.6 | 11 | 0.4 | 0.07 |
+| 23.53 | 24.03 | 0.53 | acercamiento | [-1, -6] | 6.8 | 102 | 0.13 | 0.17 |
+| 24.17 | 24.6 | 0.47 | paneo/deriva | [-1, -3] | -0.1 | 33 | 0.2 | 0.23 |
+| 24.73 | 25.43 | 0.73 | alejamiento | [0, 0] | -1.0 | 3 | 0.1 | 0.6 |
+| 25.8 | 26.0 | 0.23 | paneo/deriva | [0, 0] | -0.4 | 5 | 0.03 | 0.17 |
+| 26.77 | 26.93 | 0.2 | acercamiento | [0, 0] | 0.7 | 12 | 0.03 | 0.13 |
+| 27.43 | 27.63 | 0.23 | paneo/deriva | [0, 0] | -0.1 | 3 | 0.17 | 0.03 |
+| 28.3 | 29.27 | 1.0 | acercamiento | [248, 73] | 37.6 | 1229 | 0.23 | 0.1 |
+| 29.47 | 29.67 | 0.23 | paneo/deriva | [1, 0] | 0.3 | 6 | 0.07 | 0.13 |
+| 29.8 | 30.17 | 0.4 | acercamiento | [1, 0] | 0.8 | 9 | 0.07 | 0.3 |
+| 30.3 | 31.57 | 1.3 | paneo/deriva | [8, 0] | -0.3 | 17 | 0.2 | 0.77 |
+| 31.83 | 31.97 | 0.17 | paneo/deriva | [0, 0] | -0.1 | 3 | 0.03 | 0.1 |
+| 32.57 | 32.97 | 0.43 | paneo/deriva | [1, 0] | 0.2 | 7 | 0.23 | 0.17 |
+| 33.47 | 36.5 | 3.07 | alejamiento | [-20, 11] | -1.1 | 97 | 0.2 | 0.33 |
+| 36.63 | 37.8 | 1.2 | paneo/deriva | [-1375, 342] | 18.5 | 8048 | 0.23 | 0.17 |
+| 38.2 | 38.73 | 0.57 | alejamiento | [-2, 3] | -1.3 | 21 | 0.03 | 0.33 |
+| 38.87 | 39.37 | 0.53 | paneo/deriva | [-1, 2] | 0.1 | 9 | 0.23 | 0.27 |
+| 39.5 | 39.7 | 0.23 | paneo/deriva | [0, 1] | -0.1 | 5 | 0.17 | 0.03 |
 
 ## Audio
 - -14.1 LUFS, rango 2.5 LU, pico -1.8 dBTP
 - Silencio 0.2 % (0 silencios > 0,25 s), voz activa 98.4 %
-- 3.16 ataques por segundo; 0 golpes graves; voz activa = tiempo en que se oye hablar
+- 3.46 ataques por segundo; 0 golpes graves; voz activa = tiempo en que se oye hablar
 - Con transcripción: 137 palabras → **2.58 palabras/s** en total, 2.62 mientras se habla (sin transcripción no se puede medir: el ritmo de voz no se estima)
