@@ -80,6 +80,16 @@ Objeto propio: `const g = new THREE.Group(); g.add(malla con E.std()); E.contorn
 Puntos locales a mundo: `obj.updateMatrixWorld(true); obj.localToWorld(obj.userData.puertoLado.clone())`.
 Objetos de otros reels que se pueden copiar a `assets/`: `videos/2026-11-tokens-1-v2/assets/token3d.js` (fichas de texto con número atrás, marcos, cubitos) y `tensor3d.js` (planillas de números, foto suave, bloques).
 
+## Tema claro (`{ estilo: 'claro' }`)
+| | |
+|---|---|
+| `E.std()` | cerámica blanca mate |
+| `E.negro()` | negro brillante (refleja el estudio) |
+| `E.vidrio(opacidad=0.16)` | vidrio barato (transparente, con reflejos) |
+| `E.fondo(k)` | 0 = estudio blanco, 1 = negro (fondo, niebla y piso juntos) |
+| `E.sombra(w, d, op)` | sombra de contacto: obligatoria bajo lo que apoya |
+Colores: `P.papel`, `P.tinta`, `P.blanco`, `P.negro`. Muchas piezas iguales (un campo de esferas): `THREE.InstancedMesh` con `setColorAt` (excepción a "no se usa instancing"). Etiquetas: clase `pild`.
+
 ## Rótulos HTML sobre el 3D
 ```js
 const R = E.rotulos();
@@ -107,7 +117,7 @@ R.dibujar(T);
 **Regla: ≤ 3.** Cada plano arma el set entero, así que el set tiene que ser liviano: decenas de mallas, pocos segmentos, sin sombras reales, sin postproceso (bloom, grano), sin entorno HDRI, `setPixelRatio(1)`. No crear objetos dentro de `dibujar(T)` (se arma todo antes; adentro solo se mueven, muestran u ocultan). Textos en pantallas: `texto()` solo redibuja si cambió.
 
 ## Lo que no se usa
-OrbitControls, React/R3F, WebGPU, instancing, postprocesado, sombras reales, CDN, `Math.random()`. Manim solo para matemática que se transforma (`MANIM.md`).
+OrbitControls, React/R3F, WebGPU, instancing (salvo campos de piezas iguales, tema claro), postprocesado, sombras reales, CDN, `Math.random()`. Manim solo para matemática que se transforma (`MANIM.md`).
 
 ## Checklist del set antes de renderizar
 - ☐ Todos los tiempos con `cuando()` / `ESC` (ningún segundo escrito a mano).

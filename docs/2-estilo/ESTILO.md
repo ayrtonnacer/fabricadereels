@@ -79,5 +79,15 @@ Inspirado en los reels de Instagram que le gustan (medidos en `docs/4-referencia
 **Funciones nuevas** (`escena3d.js`): `E.NOIR`, `E.brillo(color, tamaño, opacidad)` (halo de luz), `E.marcoRedondo(w, h, r, z, color, px)` (borde de tarjeta), piso de puntos automático.
 Esto reemplaza, solo en el tema noir, las reglas "objetos de línea gris" y "sin brillos detrás de los objetos" (Ayrton pidió esta estética el 2026-11-17).
 
+## Tema "claro" (en prueba desde 2026-11-21, pedido de Ayrton)
+Es la otra mitad de las referencias de Instagram: r3, r5 y r7 de `material/2026-11-17-refs-instagram-dinamismo/` y `material/2026-11-21-ref-ig-Df9LK09t9QB/`. Ahí "noir" quiere decir **blanco y negro**, no fondo negro. Se activa con `plano(root, tl, id, armar, { estilo: 'claro' })`. Primer reel con este tema: `videos/2026-11-python-for/`.
+**Cómo es:**
+- **Estudio blanco infinito**: fondo, piso y niebla del mismo blanco cálido (`--claro-papel`), sin horizonte ni grilla. Lo que apoya en el piso se marca con una **sombra de contacto** suave (`E.sombra`).
+- **Objetos de cerámica blanca mate** (`E.std()`) y piezas de **negro brillante** (`E.negro()`) que reflejan el estudio. Vidrio con `E.vidrio()` (transparente con reflejos; sin transmisión real, que es cara).
+- **Un tramo en negro** para "lo que no se ve" (adentro de algo): `E.fondo(k)` pasa fondo, niebla y piso de blanco (0) a negro (1). Se entra **atravesando un objeto**, sin cortar.
+- **Texto**: oscuro (`.claro` cambia `--text`); etiquetas en **píldora negra con texto blanco** (`.pild`, se lee sobre blanco y sobre negro); el tan sigue siendo el único acento.
+- **Escala como recurso**: zoom out = "cuántos hay" (un campo de miles de piezas, `InstancedMesh`); zoom in = "cómo es por dentro".
+**Costo**: el primer reel tardó ≈ 8,5 s de render por segundo de video (campo de ≈ 4900 esferas + entorno). Hay que bajarlo para cumplir la regla de ≤ 3 s.
+
 ## Temas viejos
 `engine/themes/` (línea roja, cyber/HackTheBox) y los videos de `videos/_archivo/` quedaron como historia. No se usan ni se copian salvo que Ayrton lo pida.

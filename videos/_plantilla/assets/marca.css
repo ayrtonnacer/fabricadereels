@@ -83,3 +83,12 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--
 .rot b { color: var(--acc); font-weight: 700; }
 .rot.mono { font-family: var(--mono); font-weight: 500; font-size: 46px; color: var(--muted); letter-spacing: 0; }
 .rot.mono b { font-weight: 700; }
+
+/* ---- Tema "claro" (2026-11-21, docs/2-estilo/ESTILO.md): estudio blanco; escena3d.js pone la clase .claro en el plano ---- */
+:root { --claro-papel: #F3F3F1; --claro-tinta: #0C0C0C; --claro-blanco: #F7F7F5; --claro-gris: #B9B9B6; --claro-medio: #7C7C78; }
+.claro { --text: var(--claro-tinta); --muted: var(--claro-medio); --sombra-txt: none; color: var(--text); }
+.claro .vineta { opacity: .18; }
+/* píldora: etiqueta negra con texto blanco (nombres, valores); se lee sobre blanco y sobre negro (borde gris) */
+.pild { display: inline-block; font-family: var(--mono); font-weight: 600; font-size: 40px; line-height: 1; color: var(--hi); background: var(--claro-tinta); border: 2px solid var(--claro-medio); border-radius: 999px; padding: 14px 28px; }
+.pild b { color: var(--acc); font-weight: 700; }
+.pild.grande { font-size: 52px; padding: 18px 36px; }

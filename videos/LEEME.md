@@ -4,6 +4,7 @@ Un video = una carpeta = un proyecto HyperFrames. Se crea con `python engine/ree
 | Carpeta | Qué es | Estado |
 |---|---|---|
 | `_plantilla/` | Punto de partida: ya cumple todas las reglas (portada, gancho, set de 3 estaciones con cámara continua, cierre) | base |
+| `2026-11-python-for/` | **El bucle for** — primera prueba del **tema claro** (estudio blanco, campo de esferas negras, tramo en negro atravesando el anillo del for), 49 s | hecho (2026-11-21), esperando revisión de Ayrton |
 | `2026-11-python-variables/` | **Qué son las variables en Python** — "una variable es una etiqueta": set de 5 estaciones hacia la derecha, plano secuencia que vuelve al gancho en el payoff (53 s) | hecho (2026-11-17), esperando revisión de Ayrton |
 | `2026-11-tokens-1-v2/` | **Qué son los tokens, parte 1 — "la fábrica"**. **El reel de referencia del estilo aprobado**: un set, 5 estaciones, plano secuencia. Nota: es anterior al refactor (su set se llama `fabrica.js` y tiene los tiempos escritos a mano) | hecho (2026-11-16), esperando revisión de Ayrton |
 | `2026-11-tensores-scale-oscuro/` | **Qué es un tensor**, primera con estética Scale; escenas separadas (estilo anterior al set único) | ✓ **publicado** en Instagram (2026-11-14); feedback en `docs/1-canal/PUBLICO.md` |

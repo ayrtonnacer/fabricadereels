@@ -1,75 +1,187 @@
-/* EL SET DE ESTE REEL — un solo espacio 3D y UNA cámara continua para todo el video (plano secuencia).
-   Es el archivo que se reescribe en cada reel. Todo lo demás (index.html, compositions/<escena>.html, assets/tiempos.js) se genera solo.
-
-   Cómo se lee:
-     1) ESTACIONES: dónde está cada idea en el espacio. En diagonal hacia la izquierda y al fondo → todos los viajes van en la MISMA dirección.
-     2) OBJETOS de cada estación (línea gris; un solo acento tan) y RÓTULOS HTML anclados a puntos 3D.
-     3) CÁMARA: lista de poses en TIEMPO GLOBAL del video. Patrón: viajar (≈ 0,8–0,9 s) → retener QUIETA mientras la voz nombra → viajar.
-     4) dibujar(T): qué hace cada objeto en el segundo T. Los tiempos salen de la voz: cuando('l02', 'palabra'), ESC.<escena>.t0 / .t1.
-   Nunca escribir segundos a mano: si la voz cambia, todo se reacomoda solo. Reglas de cámara: docs/2-estilo/CAMARA.md. Funciones de E: docs/5-tecnica/THREEJS.md. */
+/* EL SET DEL REEL "El bucle for" — tema CLARO (prueba de estética, Ayrton 2026-11-21): estudio blanco infinito, esferas negras brillantes,
+   tarjeta blanca mate, anillo tan (el for). Un tramo en negro ("adentro" del for). Plano secuencia; tiempos SIEMPRE desde la voz.
+   Estaciones:  A (0,0,0) la fila de 5 nombres + la tarjeta de código, dentro de un campo de miles de esferas
+                C (0.6,0,-4.2) adentro del for: tubo de vidrio que entrega una esfera por vez (fondo negro)
+                D (2.7,0,-1.2) range(): una esfera sola que crea números de a uno
+   Reglas: docs/2-estilo/CAMARA.md · funciones de E: docs/5-tecnica/THREEJS.md · tema claro: docs/2-estilo/ESTILO.md */
 import { plano } from './escena3d.js';
-import { ESC, cuando } from './tiempos.js';
+import { ESC, cuando, hasta } from './tiempos.js';
 
 export const montar = (root, tl, id) => plano(root, tl, id, async (E) => {
   const { THREE, V, P } = E, R = E.rotulos();
+  const hex = (c) => '#' + c.getHexString();
+  const S = { A: new V(0, 0, 0), C: new V(0.6, 0, -4.2), D: new V(2.7, 0, -1.2) };
+  const en = (s, x = 0, y = 0, z = 0) => new V(S[s].x + x, y, S[s].z + z);
 
-  // ---------- 1) estaciones (metros; y = altura; z negativo = más al fondo) ----------
-  const S = { A: new V(0, 0, 0), B: new V(-1.8, 0, -3.5), C: new V(-3.6, 0, -7) };
-  const en = (s, x = 0, y = 0, z = 0) => new V(S[s].x + x, y, S[s].z + z);                     // punto relativo a una estación
-  const add = (o, s, x = 0, y = 0, z = 0) => { o.position.copy(en(s, x, y, z)); E.scene.add(o); return o; };
+  // ---------- tiempos (todos de la voz) ----------
+  const tL0 = ESC.lista.t0, tRe0 = ESC.recorre.t0, tA0 = ESC.adentro.t0, tR0 = ESC.rango.t0, tP0 = ESC.payoff.t0;
+  const tCinco = cuando('l02', 'cinco'), tNombres = cuando('l02', 'nombres'), tL03 = cuando('l03'), tEscribir = cuando('l03', 'escribir'), tMil = cuando('l03', 'mil');
+  const tOtra = cuando('l04', 'otra'), tFor = cuando('l04', 'for'), tCada = cuando('l04', 'cada'), tL05 = cuando('l05');
+  const G = [cuando('l05', 'primero'), cuando('l05', 'siguiente')]; for (let k = 2; k < 5; k++) G.push(G[1] + 0.42 * (k - 1));   // saludos: el primero, el siguiente y los demás seguidos
+  const TD = [cuando('l07', 'próximo'), cuando('l07', 'una'), cuando('l07', 'otra'), cuando('l07', 'vez'), cuando('l07', 'cuando')];   // el for pide: cae una esfera
+  const tNing = cuando('l07', 'ninguno'), tFin = cuando('l07', 'termina');
+  const tRango = cuando('l08', 'rango'), tCasi = cuando('l08', 'casi'), tCrean = cuando('l08', 'crean');
+  const tMillon = cuando('l09', 'millón'), tCambia = cuando('l09', 'cambia'), tLista = cuando('l09', 'lista');
 
-  // ---------- 2) objetos y rótulos ----------
-  // A · el objeto protagonista (portada y gancho): un cubo de línea con UN punto tan
-  const cubo = add(E.contornear(E.caja(0.5, 0.5, 0.5, E.std())), 'A', 0, 0.25);
-  add(new THREE.Mesh(new THREE.SphereGeometry(0.035, 20, 14), E.basic(P.acc)), 'A', 0.25, 0.5, 0.25);
-  // Portada + gancho (anatomía fija del media kit): firma arriba a la izquierda, título de 3–5 palabras a 140 px con UNA palabra en tan.
+  // ---------- el campo: miles de esferas negras (una sola malla instanciada) ----------
+  const RAD = 0.065, PASO = 0.3, FILA = [-2, -1, 0, 1, 2];
+  const pos = [];
+  for (let j = 0; j < 80; j++) for (let i = -30; i <= 30; i++) { if (j === 0 && Math.abs(i) <= 2) continue; pos.push([i * PASO, -j * PASO]); }
+  const N = pos.length, dist = pos.map(([x, z]) => Math.hypot(x, z)), dMax = Math.max(...dist);
+  const mCampo = E.negro(); mCampo.color.copy(P.blanco);   // el color real va por esfera (instanceColor)
+  const campo = new THREE.InstancedMesh(new THREE.SphereGeometry(RAD, 12, 8), mCampo, N); E.scene.add(campo);
+  const sh0 = E.sombra(0.26, 0.26, 0.42), shGeo = sh0.geometry.clone().rotateX(-Math.PI / 2);
+  const sombras = new THREE.InstancedMesh(shGeo, sh0.material, N); E.scene.add(sombras);
+  for (let n = 0; n < N; n++) campo.setColorAt(n, P.tinta);
+  const M4 = new THREE.Matrix4(), Q = new THREE.Quaternion(), SC = new V(), PO = new V(), CB = new THREE.Color();
+  // presencia de cada esfera: se hunde y vuelve a salir en ola (cerca → lejos o al revés)
+  const OLAS = [[tCinco, 0, 'in'], [tMil, 1, 'out'], [tOtra, 0, 'in'], [tP0 + 0.15, 1, 'out']];
+  const presencia = (n, T) => { let v = 1; for (const [t, a, dir] of OLAS) { const f = dist[n] / dMax, dl = (dir === 'out' ? f : 1 - f) * 0.7; v += (a - v) * E.io(t + dl, t + dl + 0.45, T); } return v; };
+  let blanco = false;
+  const dibujarCampo = (T) => {
+    for (let n = 0; n < N; n++) { const v = presencia(n, T), s = Math.max(0.0001, v);
+      PO.set(pos[n][0], RAD * s, pos[n][1]); SC.setScalar(s); M4.compose(PO, Q, SC); campo.setMatrixAt(n, M4);
+      PO.y = 0.003; M4.compose(PO, Q, SC); sombras.setMatrixAt(n, M4); }
+    campo.instanceMatrix.needsUpdate = true; sombras.instanceMatrix.needsUpdate = true;
+    const ola = T > tMillon && T < tMillon + 4.5;   // payoff: una onda de luz recorre el campo (blanco = "esta vuelta")
+    if (ola || blanco) { const r = (T - tMillon) * 6;
+      for (let n = 0; n < N; n++) { const w = ola ? Math.exp(-(((dist[n] - r) / 0.7) ** 2)) : 0; campo.setColorAt(n, CB.copy(P.tinta).lerp(P.blanco, w)); }
+      campo.instanceColor.needsUpdate = true; blanco = ola; }
+  };
+
+  // ---------- A · la fila de la lista: 5 esferas con nombre ----------
+  const NOMBRES = ['Ana', 'Beto', 'Caro', 'Dani', 'Eli'];
+  const fila = FILA.map((i) => { const m = new THREE.Mesh(new THREE.SphereGeometry(RAD, 24, 16), E.negro()); m.position.set(i * PASO, RAD, 0); E.scene.add(m);
+    const s = E.sombra(0.26, 0.26, 0.42); s.position.x = i * PASO; E.scene.add(s); return { m, s }; });
+  fila.forEach((f, k) => R.anclado(NOMBRES[k], 'pild', en('A', FILA[k] * PASO, 0.2, 0), tNombres + 0.12 * k, tEscribir + 0.2, 'font-size: 38px;', 'arriba'));
+  const saludos = fila.map((f, k) => R.anclado(NOMBRES[k], 'pild', en('A', FILA[k] * PASO, 0.2, 0), tL05 - 0.2, tA0 - 0.45, 'font-size: 38px;', 'arriba'));
+
+  // la tarjeta de código (blanca, mate): una textura propia con colores de marca
+  const TW = 1152, TH = 720, cv = document.createElement('canvas'); cv.width = TW; cv.height = TH; const cx = cv.getContext('2d');
+  const tex = new THREE.CanvasTexture(cv); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4;
+  const tarjeta = new THREE.Group(); tarjeta.position.copy(en('A', 0, 0.92, -0.7));
+  tarjeta.add(E.caja(1.14, 0.72, 0.03, E.std(), 0.02));
+  const cara = new THREE.Mesh(new THREE.PlaneGeometry(1.1, 0.6875), new THREE.MeshBasicMaterial({ map: tex, toneMapped: false })); cara.position.z = 0.0161; tarjeta.add(cara);
+  E.scene.add(tarjeta); const sombraT = E.sombra(1.1, 0.25, 0.18); sombraT.position.copy(en('A', 0, 0, -0.7)); E.scene.add(sombraT);
+  let ultima = null;
+  const pintar = (lineas, salida = [], pie = '') => {   // lineas: [[texto, color], …] por renglón; se redibuja solo si cambió
+    const clave = JSON.stringify([lineas, salida, pie]); if (clave === ultima) return; ultima = clave;
+    cx.fillStyle = hex(P.blanco); cx.fillRect(0, 0, TW, TH);
+    cx.font = '600 30px "Geist Mono", monospace'; cx.fillStyle = hex(P.mid); cx.textBaseline = 'middle'; cx.fillText('main.py', 64, 62);
+    cx.font = '600 52px "Geist Mono", monospace';
+    lineas.forEach((l, r) => { let x = 64; for (const [t, c] of l) { cx.fillStyle = c; cx.fillText(t, x, 150 + r * 72); x += cx.measureText(t).width; } });
+    if (salida.length) { cx.fillStyle = hex(P.edge); cx.fillRect(64, 386, TW - 128, 3); cx.font = '500 44px "Geist Mono", monospace'; cx.fillStyle = hex(P.mid);
+      salida.forEach((s, r) => cx.fillText(s, 64, 442 + r * 56)); }
+    if (pie) { cx.font = '600 34px "Geist Mono", monospace'; cx.fillStyle = hex(P.mid); cx.textAlign = 'right'; cx.fillText(pie, TW - 64, TH - 54); cx.textAlign = 'left'; }
+    tex.needsUpdate = true; };
+  const tin = hex(P.tinta), med = hex(P.mid), acc = hex(P.acc);
+  const MUCHOS = ['Ana', 'Beto', 'Caro', 'Dani', 'Eli', 'Fede', 'Gabi', 'Hugo', 'Inés', 'Juan', 'Lola', 'Mati', 'Nora', 'Omar', 'Pía', 'Raúl', 'Sofi', 'Tomi'];
+  const linPrint = (nom) => [['print(', tin], ['"Hola"', med], [', ', tin], [`"${nom}"`, med], [')', tin]];
+  const codFor = (lista, accLista) => [[['nombres = ', tin], [lista, accLista ? acc : med]], [['for', accLista ? tin : acc], [' nombre ', tin], ['in', accLista ? tin : acc], [' nombres:', tin]], [['    print(', tin], ['"Hola"', med], [', nombre)', tin]]];
+  const dibujarTarjeta = (T) => {
+    if (T < tOtra) {   // cinco saludos escritos a mano… y después mil
+      if (T < tMil) { const k = Math.floor(E.st(tEscribir, tEscribir + 1.4, T) * 5 + 0.999); pintar(NOMBRES.slice(0, Math.max(1, k)).map(linPrint)); }
+      else { const s = Math.floor(E.io(tMil, tMil + 1.6, T) * 995), L = []; for (let r = 0; r < 5; r++) L.push(linPrint(MUCHOS[(s + r) % MUCHOS.length])); pintar(L, [], `línea ${s + 5} de 1000`); }
+    } else if (T < tLista) {   // el for: tres líneas y la salida que se va llenando
+      const k = G.filter((g) => T >= g).length; pintar(codFor('["Ana", "Beto", …]', false), NOMBRES.slice(0, k).map((n) => `Hola ${n}`).slice(-3));
+    } else {   // payoff: cambia la lista, no el código
+      const n = Math.floor(E.st(tLista + 0.3, ESC.payoff.t1, T) * 999999);
+      pintar(codFor('range(1_000_000)', true), [`Hola ${Math.max(0, n - 2)}`, `Hola ${Math.max(0, n - 1)}`, `Hola ${n}`]);
+    }
+  };
+
+  // el anillo del for (tan): se apoya sobre cada esfera
+  const mFor = new THREE.MeshStandardMaterial({ color: P.acc, roughness: 0.35, metalness: 0.25 });
+  const anillo = new THREE.Mesh(new THREE.TorusGeometry(0.1, 0.013, 12, 48), mFor); E.scene.add(anillo);
+
+  // ---------- C · adentro: tubo de vidrio (la lista) que entrega una esfera por vez al for ----------
+  const gC = new THREE.Group(); gC.position.copy(S.C); gC.position.y = 0.12; E.scene.add(gC);
+  const tubo = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.075, 0.62, 32, 1, true), E.vidrio(0.2)); tubo.position.y = 0.61; gC.add(tubo);
+  for (const y of [0.3, 0.92]) { const b = new THREE.Mesh(new THREE.TorusGeometry(0.075, 0.006, 8, 40), E.std()); b.rotation.x = Math.PI / 2; b.position.y = y; gC.add(b); }
+  const bolasC = NOMBRES.map(() => { const m = new THREE.Mesh(new THREE.SphereGeometry(0.05, 24, 16), E.std()); gC.add(m); return m; });
+  const anilloC = new THREE.Mesh(new THREE.TorusGeometry(0.1, 0.013, 12, 48), mFor); anilloC.rotation.x = Math.PI / 2; anilloC.position.y = 0.22; gC.add(anilloC);
+  R.anclado('próximo', 'pild', en('C', 0.2, 0.62, 0), TD[0], tNing, '', 'izq');
+  R.anclado('<b>fin</b>', 'pild grande', en('C', 0.2, 0.62, 0), tFin, tR0 - 0.1, '', 'izq');
+  const dibujarC = (T) => {
+    bolasC.forEach((b, j) => {
+      const baja = TD.slice(0, j).reduce((a, t) => a + E.io(t + 0.1, t + 0.4, T), 0);   // la pila baja un lugar cada vez que sale una
+      const u1 = E.io(TD[j], TD[j] + 0.35, T), u2 = E.io(TD[j] + 0.35, TD[j] + 0.8, T);
+      const yPila = 0.352 + (j - baja) * 0.105;
+      b.position.set(u2 * (0.24 + (4 - j) * 0.115), yPila + (0.1 - yPila) * u1, 0); });
+    const pulso = [...TD, tNing].reduce((a, t) => a + 0.18 * Math.exp(-(((T - t - 0.05) / 0.12) ** 2)), 0);
+    anilloC.scale.setScalar(1 + pulso);
+  };
+
+  // ---------- D · range(): una esfera sola que crea números de a uno ----------
+  const bolaD = new THREE.Mesh(new THREE.SphereGeometry(0.12, 32, 20), E.negro()); bolaD.position.copy(en('D', 0, 0.12, 0)); E.scene.add(bolaD);
+  const sombraD = E.sombra(0.48, 0.48, 0.5); sombraD.position.copy(en('D')); E.scene.add(sombraD);
+  R.fijo('<span class="pild grande">range(1_000_000_000)</span>', '', 0, 300, tRango, tP0 - 0.1, 'width: 1080px; text-align: center;');
+  R.fijo('<span class="pild grande"><b>48 bytes</b></span>', '', 0, 420, tCasi, tP0 - 0.1, 'width: 1080px; text-align: center;');
+  const numeros = [0, 1, 2, 3, 4, 5, 6].map((n) => { const t = tCrean + 0.32 * n, p = en('D', 0.18, 0.03, 0); return { n, t, p, r: R.anclado(String(n), 'rot mono', p, t, t + 1.2, 'font-size: 54px;') }; });
+  const dibujarD = (T) => { for (const q of numeros) { const u = E.out(q.t, q.t + 1.5, T); q.p.set(S.D.x + 0.18 + 0.55 * u, 0.03, S.D.z + 0.12 * u); } };
+
+  // ---------- portada + gancho: firma y título (una palabra en tan) ----------
   const finHook = ESC.gancho.t1 - 0.35;
   R.fijo('@ayrtonnacer', 'firma', 90, 262, -1, finHook, 'font-size: 60px;');
-  R.fijo('Título de <span class="acc">cuatro</span> palabras', 'titular', 90, 350, -1, finHook, 'width: 900px; font-size: 140px; line-height: .98; letter-spacing: -.03em; text-align: left; text-wrap: balance;');
+  R.fijo('El bucle <span class="acc">for</span>', 'titular', 90, 350, -1, finHook, 'width: 900px; font-size: 150px; line-height: .98; letter-spacing: -.03em; text-align: left;');
 
-  // B · primer concepto: una notebook que escribe
-  const lap = add(E.laptop(), 'B'); lap.updateMatrixWorld(true);
-  const tEscribe = cuando('l02', 'concepto'), BITS = ['10110100', '01101001', '11010010'];
-  R.anclado('primer <b>concepto</b>', 'rot', en('B', 0, 0.3), tEscribe, cuando('l03') - 0.3, '', 'arriba');
-
-  // C · segundo concepto: un router que emite (ondas de radio = anillos)
-  const router = add(E.router(), 'C'); router.updateMatrixWorld(true);
-  const antena = router.localToWorld(router.userData.puntaAntena.clone());
-  const tEmite = cuando('l03', 'segundo'), anillos = [0, 1, 2].map(() => E.anillo(P.acc, new V(0, 1, 0), 0.014));
-  R.anclado('segundo <b>concepto</b>', 'rot', en('C', 0, 0.42), tEmite, ESC.payoff.t0 - 0.2, '', 'arriba');
-
-  // payoff · las dos ideas juntas: un cable las conecta (los cables TOCAN los objetos: salen de un puerto real)
-  const cable = E.cable(lap.localToWorld(new V(-0.17, 0.008, 0)), router.localToWorld(router.userData.puertoLado.clone().negate().setY(0.03)), P.hi);
-  const tJunto = cuando('l04', 'funcionando');
-
-  // ---------- 3) cámara (tiempo global). K(segundo, estación, posición relativa, hacia dónde mira, curva) ----------
-  // curvas: 'io' viaje (arranca y frena suave) · 'out' llegada · 'in' salida que acelera · 'lin' retención o deriva lenta
-  const K = (T, s, p, l, e) => ({ t: T, p: [S[s].x + p[0], p[1], S[s].z + p[2]], l: [S[s].x + l[0], l[1], S[s].z + l[2]], e });
-  const tB = ESC.explica.t0, tC = cuando('l03'), tG = ESC.payoff.t0;
+  // ---------- cámara (tiempo global) ----------
+  const K = (t, p, l, e) => ({ t, p, l, e });
+  const gancho = [0, 0.86, 2.9], ganchoL = [0, 0.1, -2.6];
+  const lista = [0.5, 1.1, 3.9], listaL = [0, 0.14, -0.1];                  // plano medio de la fila, tres cuartos
+  const tarj = [0.15, 0.95, 2.6], tarjL = [0, 0.82, -0.7];                  // la tarjeta de código, de frente y legible
+  const general = [2.2, 2.1, 5.2], generalL = [0, 0.2, -2.4];               // zoom out: "mil"
+  const via = (x) => [x - 0.15, 0.72, 1.6], viaL = (x) => [x + 0.1, 0.12, -0.1];   // travelling lateral con el anillo (x = la esfera que saluda)
+  const frente = [0.6, 0.45, 1.0], frenteL = [0.6, 0.45, 0], cruza = [0.6, 0.45, -0.7], cruzaL = [0.6, 0.45, -2.2];
+  const cC = [S.C.x + 0.9, 0.42, S.C.z + 2.4], cCL = [S.C.x + 0.3, 0.46, S.C.z];   // contrapicado del tubo
+  const orbita = (a, r = 0.62, h = 1.65) => [S.D.x + r * Math.sin(a), h, S.D.z + r * Math.cos(a)], dL = [S.D.x, 0.1, S.D.z];
+  const alto = [0.6, 3.4, 5.6], altoL = [0, 0, -4.5], fin = [0, 1.05, 3.1], finL = [0, 0.42, -1.2];
   const CAM = [
-    K(0, 'A', [1.71, 1.56, 2.98], [0, 0.62, 0]),                                  // cuadro 0 = portada: plano medio en tres cuartos, leve picado
-    K(tB - 0.45, 'A', [1.5, 1.41, 2.63], [0, 0.6, 0], 'lin'),                     // gancho: dolly in lento (único lugar donde la cámara deriva)
-    K(tB + 0.45, 'B', [0.3, 0.42, 1.35], [0, 0.03, 0], 'io'),                     // TRAVELLING A → B (0,9 s; el pico cae en el cambio de escena)
-    K(tC - 0.45, 'B', [0.3, 0.42, 1.35], [0, 0.03, 0], 'lin'),                    // RETENCIÓN: quieta mientras la voz explica
-    K(tC + 0.45, 'C', [0.8, 0.22, 2.3], [0, 0.02, 0], 'io'),                       // TRAVELLING B → C: llega en contrapicado (agranda el router)
-    K(tG, 'C', [0.8, 0.22, 2.3], [0, 0.02, 0], 'lin'),                             // RETENCIÓN
-    { t: tG + 0.9, p: [0, 5, 8], l: [-1, -1, -3.5], e: 'io' },            // GRÚA: sube al plano general en picado (las ideas juntas)
-    { t: ESC.payoff.t1, p: [0, 5, 8], l: [-1, -1, -3.5], e: 'lin' },      // RETENCIÓN ≥ 2,5 s
+    K(0, gancho, ganchoL),
+    K(tL0 - 0.35, [0, 0.8, 2.5], [0, 0.1, -2.6], 'lin'),                     // gancho: push-in lento mientras se lee el título
+    K(tL0 + 0.55, lista, listaL, 'io'),                                       // GRÚA que baja a la fila (0,9 s)
+    K(tL03 - 0.5, [0.42, 1.06, 3.7], listaL, 'lin'),                          // retención con deriva mínima: los cinco nombres
+    K(tL03 + 0.35, tarj, tarjL, 'io'),                                        // dolly out corto: aparece la tarjeta
+    K(tMil - 0.35, [0.15, 0.95, 2.75], tarjL, 'lin'),
+    K(tMil + 0.75, general, generalL, 'io'),                                  // ZOOM OUT: mil nombres = el campo vuelve
+    K(tOtra - 0.4, [2.4, 2.2, 5.5], generalL, 'lin'),
+    K(tFor + 0.3, tarj, tarjL, 'io'),                                         // dolly in: el for (tres líneas)
+    K(tL05 - 0.5, [0.15, 0.95, 2.45], tarjL, 'lin'),
+    K(G[0] - 0.1, via(-0.6), viaL(-0.6), 'io'),                               // baja a la fila (grúa corta)
+    K(G[4] + 0.2, via(0.6), viaL(0.6), 'lin'),                                // TRAVELLING lateral acompañando al anillo
+    K(tA0 - 0.6, via(0.6), viaL(0.6), 'lin'),
+    K(tA0, frente, frenteL, 'io'),                                            // frente al anillo (crece y se para)
+    K(tA0 + 0.5, cruza, cruzaL, 'in'),                                        // lo ATRAVIESA: pasa a negro
+    K(tA0 + 1.3, cC, cCL, 'out'),                                             // llega al tubo en contrapicado
+    K(tFin - 0.3, [cC[0] - 0.08, cC[1] + 0.03, cC[2] - 0.1], cCL, 'lin'),
+    K(tFin + 0.6, [S.C.x + 0.88, 0.43, S.C.z + 2.2], [S.C.x + 0.36, 0.46, S.C.z], 'io'),   // dolly in: termina solo
+    K(tR0 - 0.15, [S.C.x + 0.87, 0.43, S.C.z + 2.16], [S.C.x + 0.36, 0.46, S.C.z], 'lin'),
+    K(tR0 + 0.3, orbita(0), dL, 'io'),                                        // LATIGAZO al cenital de range()
+    ...[1, 2, 3, 4, 5, 6].map((k) => K(tR0 + 0.3 + (tP0 - tR0 - 0.3) * k / 6, orbita(-0.11 * k), dL, 'lin')),   // giro lento
+    K(tP0 + 1.0, alto, altoL, 'io'),                                          // GRÚA arriba: el campo entero
+    K(tCambia - 0.25, [0.5, 3.3, 5.4], altoL, 'lin'),
+    K(tCambia + 0.75, fin, finL, 'io'),                                       // baja a la tarjeta: cambia la lista
+    K(ESC.payoff.t1, [0, 1.02, 2.95], finL, 'lin'),
   ];
-  const GOLPES = [[tB + 0.45, 0.006], [tC + 0.45, 0.006, 2]];                    // temblor chiquito al aterrizar en cada estación
+  const GOLPES = [[tL0 + 0.55, 0.005], [tA0 + 1.3, 0.005, 2], [tP0 + 1.0, 0.005, 3]];
 
-  // ---------- 4) un cuadro: qué se ve en el segundo T ----------
+  // ---------- un cuadro ----------
   return (T) => {
     E.ruta(T, CAM, GOLPES);
-    // B y C aparecen recién cuando la cámara viaja hacia ellas: nada se asoma detrás del título del gancho
-    E.pop(lap, T, tB - 0.4, 0.5); E.pop(router, T, tB - 0.4, 0.5);
-    // B: los unos y ceros se tipean cuando la voz dice "concepto"
-    const n = Math.floor(E.st(tEscribe, tEscribe + 1.2, T) * 24); let resto = n;
-    lap.userData.pantalla.texto(BITS.map((l) => { const k = Math.min(8, Math.max(0, resto)); resto -= 8; return l.slice(0, k); }).join('\n') + (n < 24 ? '_' : ''), undefined, 54);
-    // C: tres anillos se expanden desde la antena cuando la voz dice "segundo"
-    anillos.forEach((a, i) => a.emitir((T - (tEmite + 0.5 * i)) / 1.6, 0.6, antena));
-    // payoff: el cable crece de la notebook al router
-    cable.set(E.io(tJunto - 0.6, tJunto + 0.5, T));
+    E.fondo(E.io(tA0 + 0.2, tA0 + 0.42, T) * (1 - E.io(tR0 - 0.05, tR0 + 0.15, T)));   // negro solo adentro del for
+    const enA = T < tA0 + 0.35 || T > tP0, enC = T > tA0 + 0.2 && T < tR0 + 0.1, enD = T > tR0 - 0.1 && T < tP0 + 0.6;
+    campo.visible = sombras.visible = enA; if (enA) dibujarCampo(T);
+    fila.forEach((f, k) => { f.m.visible = f.s.visible = enA; const w = T < tP0 ? E.out(G[k], G[k] + 0.2, T) : 0; f.m.material.color.copy(P.tinta).lerp(P.blanco, w); });
+    E.pop(tarjeta, T, tEscribir - 0.15, 0.45); if (T > tA0 + 0.3 && T < tP0 + 0.3) tarjeta.visible = false; sombraT.visible = tarjeta.visible; if (tarjeta.visible) dibujarTarjeta(T);
+    // anillo A: aparece con "cada", salta de esfera en esfera y al final se para de frente para atravesarlo
+    const qa = E.pop(anillo, T, tCada, 0.4); if (T > tA0 + 0.35) anillo.visible = false;
+    if (qa > 0 && anillo.visible) { let x = FILA[0] * PASO, salto = 0;
+      for (let k = 1; k < 5; k++) { const u = E.io(G[k] - 0.3, G[k] - 0.02, T); x += (FILA[k] - FILA[k - 1]) * PASO * u; salto += Math.sin(Math.PI * u) * 0.08; }
+      const up = E.io(tA0 - 0.6, tA0, T); anillo.position.set(x, 0.2 + salto + 0.25 * up, 0.15 * up);
+      anillo.rotation.x = Math.PI / 2 * (1 - up); anillo.scale.setScalar(qa * (1 + 1.4 * up)); }
+    saludos.forEach((r, k) => { const h = T >= G[k] ? 'Hola ' + NOMBRES[k] : NOMBRES[k]; if (r.d.textContent !== h) r.d.textContent = h; });
+    gC.visible = enC; if (enC) dibujarC(T);
+    bolaD.visible = sombraD.visible = enD; if (enD) dibujarD(T);
     R.dibujar(T);
   };
-});
+}, { estilo: 'claro' });
