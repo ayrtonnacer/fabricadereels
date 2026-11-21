@@ -1,0 +1,135 @@
+{
+  "titulo": "El bucle for",
+  "tema": "Python",
+  "estado": "guion",
+  "fecha": "2026-11",
+  "fuente": "https://docs.python.org/3/reference/compound_stmts.html#the-for-statement",
+  "scenes": [
+    {
+      "id": "portada",
+      "d": 0.1
+    },
+    {
+      "id": "gancho",
+      "d": 3.4
+    },
+    {
+      "id": "lista",
+      "d": 9.0
+    },
+    {
+      "id": "recorre",
+      "d": 10.4
+    },
+    {
+      "id": "adentro",
+      "d": 8.6
+    },
+    {
+      "id": "rango",
+      "d": 7.4
+    },
+    {
+      "id": "payoff",
+      "d": 5.6
+    },
+    {
+      "id": "cierre",
+      "d": 4.4
+    }
+  ],
+  "voz": {
+    "modelo": "assets/voces/es_AR-daniela-high.onnx",
+    "length_scale": 1.05,
+    "noise_scale": 0.6,
+    "noise_w_scale": 0.7,
+    "efecto": "ninguno",
+    "lineas": [
+      {
+        "id": "l01",
+        "escena": "gancho",
+        "t": 0.4,
+        "texto": "Tres líneas de código. Un millón de repeticiones."
+      },
+      {
+        "id": "l02",
+        "escena": "lista",
+        "t": 3.8,
+        "texto": "Tenés una lista con cinco nombres y querés saludar a cada uno."
+      },
+      {
+        "id": "l03",
+        "escena": "lista",
+        "t": 8.2,
+        "texto": "Podrías escribir cinco veces el saludo. Con mil nombres, ya no."
+      },
+      {
+        "id": "l04",
+        "escena": "recorre",
+        "t": 12.8,
+        "texto": "El bucle for dice otra cosa. Para cada nombre de la lista, saludalo."
+      },
+      {
+        "id": "l05",
+        "escena": "recorre",
+        "t": 17.53,
+        "texto": "Python toma el primero, hace lo que está adentro y pasa al siguiente."
+      },
+      {
+        "id": "l06",
+        "escena": "adentro",
+        "t": 23.2,
+        "texto": "Pero el for no cuenta vueltas."
+      },
+      {
+        "id": "l07",
+        "escena": "adentro",
+        "t": 25.6,
+        "texto": "Le pide a la lista el próximo elemento, una y otra vez. Cuando no queda ninguno, termina solo."
+      },
+      {
+        "id": "l08",
+        "escena": "rango",
+        "t": 32.67,
+        "texto": "Por eso un rango de mil millones de números ocupa casi nada. Los números se crean de a uno."
+      },
+      {
+        "id": "l09",
+        "escena": "payoff",
+        "t": 39.4,
+        "texto": "Así, tres líneas alcanzan para un millón. Cambia la lista, no el código."
+      },
+      {
+        "id": "l10",
+        "escena": "cierre",
+        "t": 44.8,
+        "texto": "Dale me gusta y seguime para aprender más de Python."
+      }
+    ]
+  },
+  "audio": {
+    "musica": "assets/musica/can-you-hear-the-music.mp3",
+    "musica_desde": 0,
+    "musica_fade_in": 0.4,
+    "musica_db": 10,
+    "musica_nivelar": [
+      -32,
+      4
+    ],
+    "musica_duck": 2,
+    "sfx_gain": 1.25,
+    "loudness": -14
+  },
+  "subtitulos": {
+    "fondo": "rgba(0,0,0,.86)"
+  },
+  "publicar": {
+    "fecha": "",
+    "redes": [
+      "instagram",
+      "tiktok",
+      "youtube"
+    ],
+    "links": {}
+  }
+}
