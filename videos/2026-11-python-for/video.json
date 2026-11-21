@@ -1,7 +1,7 @@
 {
   "titulo": "El bucle for",
   "tema": "Python",
-  "estado": "guion",
+  "estado": "listo",
   "fecha": "2026-11",
   "fuente": "https://docs.python.org/3/reference/compound_stmts.html#the-for-statement",
   "scenes": [

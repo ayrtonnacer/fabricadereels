@@ -18,11 +18,29 @@
   "carpeta": "videos/2026-11-ia-aviones"
  },
  {
+  "video": "2026-11-python-for",
+  "titulo": "El bucle for",
+  "estado": "listo",
+  "duracion_s": 48.9,
+  "final_mp4": true,
+  "descripcion": true,
+  "publicar": {
+   "fecha": "",
+   "redes": [
+    "instagram",
+    "tiktok",
+    "youtube"
+   ],
+   "links": {}
+  },
+  "carpeta": "videos/2026-11-python-for"
+ },
+ {
   "video": "2026-11-python-variables",
   "titulo": "Una variable es una etiqueta",
   "estado": "listo",
   "duracion_s": 53.1,
-  "final_mp4": true,
+  "final_mp4": false,
   "descripcion": true,
   "publicar": {
    "fecha": "",
